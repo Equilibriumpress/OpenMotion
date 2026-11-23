@@ -6,6 +6,7 @@ import {
   getFormatDimensions,
   getProjectDurationSec,
 } from '../types/openmotion';
+import { preloadProjectImages } from './imageCache';
 import { renderOpenMotionFrame } from './openMotionRenderer';
 
 const H264_CODEC_CANDIDATES = [
@@ -76,10 +77,11 @@ export async function exportProjectToMp4(
     throw new Error('Kan geen 2D canvas context initialiseren voor video-export.');
   }
 
-  // Ensure web fonts are loaded before rendering frames
+  // Ensure web fonts and documentary photography are fully decoded before rendering frames
   if (document.fonts && document.fonts.ready) {
     await document.fonts.ready;
   }
+  await preloadProjectImages(project);
 
   const h264Config = await pickSupportedH264Config(width, height, fps, bitrate);
 

@@ -29,7 +29,9 @@ export type SceneLayout =
   | 'code-diff-deploy'
   | 'route-map-journey'
   | 'travel-postcard-reel'
-  | 'faceless-explainer';
+  | 'faceless-explainer'
+  | 'paper-map-journey'
+  | 'editorial-cartography';
 
 export type SceneTransition = 'fade' | 'slide-up' | 'wipe-left' | 'zoom';
 
@@ -203,6 +205,126 @@ export interface SceneFacelessExplainer {
   statBadge?: string;
 }
 
+export type PaperLandmarkIcon =
+  | 'canal-house'
+  | 'tower'
+  | 'mountain'
+  | 'arch'
+  | 'temple'
+  | 'lighthouse'
+  | 'building';
+
+export interface ScenePaperMapStop {
+  name: string;
+  x: number;
+  y: number;
+  fact: string;
+  tag?: string;
+  landmark: PaperLandmarkIcon;
+}
+
+export interface ScenePaperMapJourney {
+  mapTitle: string;
+  subtitle: string;
+  routeColor?: string;
+  waterColor?: string;
+  terrainColor?: string;
+  terrainShadeColor?: string;
+  paperColor?: string;
+  stops: ScenePaperMapStop[];
+}
+
+export type GeoCoord = [number, number]; // [lat, lon] in WGS84
+
+export interface EditorialMapStop {
+  number: string;
+  name: string;
+  lat: number;
+  lon: number;
+  /** Offset direction for the map label so markers never collide */
+  labelAlign?: 'top' | 'bottom' | 'left' | 'right';
+  /** Route fraction (0..1) where this stop lies on the Royal Mile */
+  routeFrac: number;
+}
+
+export interface EditorialMapStreet {
+  name?: string;
+  kind: 'major' | 'secondary' | 'lane';
+  coords: GeoCoord[];
+  showLabel?: boolean;
+}
+
+export interface EditorialMapPark {
+  name: string;
+  coords: GeoCoord[];
+  labelCoord?: GeoCoord;
+}
+
+export interface EditorialMapBuilding {
+  coords: GeoCoord[];
+  landmark?: boolean;
+  label?: string;
+}
+
+export interface EditorialMapRelief {
+  lat: number;
+  lon: number;
+  radiusDeg: number;
+  elevationLabel?: string;
+}
+
+export interface EditorialMapCamera {
+  lat: number;
+  lon: number;
+  /** Zoom multiplier where 1.0 fits the full city bounds horizontally */
+  zoom: number;
+  /** Optional subtle oblique bird's-eye tilt (0 = top-down, 0.35 = oblique street follow) */
+  tilt?: number;
+}
+
+export interface EditorialPhotoCredit {
+  author: string;
+  license: string;
+  sourceUrl: string;
+  fileName: string;
+}
+
+export interface SceneEditorialMap {
+  cityLabel: string;
+  coordinatesLabel?: string;
+  distanceLabel?: string;
+  bounds: {
+    minLat: number;
+    maxLat: number;
+    minLon: number;
+    maxLon: number;
+  };
+  routeCoords: GeoCoord[];
+  routeDrawFrom: number;
+  routeDrawTo: number;
+  routeColor?: string;
+  routeHighlightPulse?: boolean;
+  streets: EditorialMapStreet[];
+  parks: EditorialMapPark[];
+  buildings: EditorialMapBuilding[];
+  reliefs?: EditorialMapRelief[];
+  stops: EditorialMapStop[];
+  /** Index of the active landmark stop (0..3) or -1 for overview */
+  activeStopIndex?: number;
+  cameraFrom: EditorialMapCamera;
+  cameraTo: EditorialMapCamera;
+  photoUrl?: string;
+  photoMode?: 'opening-to-map' | 'map-to-photo' | 'none';
+  /** Normalized scene progress (0..1) where the photo begins fading in */
+  photoStartFrac?: number;
+  /** Normalized scene progress (0..1) where the photo finishes fading back to map */
+  photoEndFrac?: number;
+  photoCredit?: EditorialPhotoCredit;
+  titleLayout?: 'centered-opening' | 'lower-left-stop' | 'centered-finale';
+  titleText: string;
+  subtitleText: string;
+}
+
 export interface OpenMotionScene {
   id: string;
   name: string;
@@ -250,6 +372,9 @@ export interface OpenMotionScene {
   routeMap?: SceneRouteMap;
   travelCard?: SceneTravelCard;
   explainer?: SceneFacelessExplainer;
+  paperMap?: ScenePaperMapJourney;
+  editorialMap?: SceneEditorialMap;
+  fullBleed?: boolean;
 }
 
 export interface OpenMotionBrandKit {
@@ -318,6 +443,8 @@ export interface RenderProgressState {
 }
 
 export const ALL_SCENE_LAYOUTS: SceneLayout[] = [
+  'editorial-cartography',
+  'paper-map-journey',
   'route-map-journey',
   'travel-postcard-reel',
   'faceless-explainer',
@@ -359,6 +486,8 @@ export const ALL_BACKDROPS: MotionBackdrop[] = [
 ];
 
 export const LAYOUT_DISPLAY_NAMES: Record<SceneLayout, string> = {
+  'editorial-cartography': 'Editorial Cartography (OSM)',
+  'paper-map-journey': 'Paper Map Journey (Cut-Paper)',
   'route-map-journey': 'Animated Route Map',
   'travel-postcard-reel': 'Reisvideo Postcard',
   'faceless-explainer': 'Faceless Explainer',

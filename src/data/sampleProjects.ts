@@ -1,9 +1,11 @@
 import { OpenMotionProject } from '../types/openmotion';
 import { ADVANCED_OPENMOTION_TEMPLATES } from './advancedTemplates';
+import { EDINBURGH_ON_FOOT_PROJECT } from './edinburghProject';
 import { EXTENDED_OPENDESIGN_TEMPLATES } from './openDesignTemplates';
 import { TRAVEL_AND_EXPLAINER_TEMPLATES } from './travelAndExplainerTemplates';
 
 export const SAMPLE_OPENMOTION_PROJECTS: OpenMotionProject[] = [
+  EDINBURGH_ON_FOOT_PROJECT,
   ...TRAVEL_AND_EXPLAINER_TEMPLATES,
   ...ADVANCED_OPENMOTION_TEMPLATES,
   {

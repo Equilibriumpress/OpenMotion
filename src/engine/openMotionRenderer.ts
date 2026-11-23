@@ -2,8 +2,10 @@ import {
   OpenMotionBrandKit,
   OpenMotionProject,
   OpenMotionScene,
+  ScenePaperMapStop,
   getProjectDurationSec,
 } from '../types/openmotion';
+import { renderEditorialCartographyScene } from './editorialCartographyRenderer';
 
 function clamp(v: number, min = 0, max = 1): number {
   return Math.max(min, Math.min(max, v));
@@ -306,6 +308,13 @@ export function renderOpenMotionFrame(
 
   ctx.save();
   ctx.clearRect(0, 0, w, h);
+
+  // Full-bleed documentary Editorial Cartography layout (no chrome overlay, seamless inter-scene camera)
+  if (scene.layout === 'editorial-cartography' && scene.editorialMap) {
+    renderEditorialCartographyScene(ctx, w, h, scene, localTime, safeTime);
+    ctx.restore();
+    return;
+  }
 
   // 1. Backdrop
   drawBackdrop(ctx, w, h, brand, scene, safeTime);
@@ -3886,6 +3895,570 @@ export function renderOpenMotionFrame(
         wx += item.w + wordGap;
       });
     });
+  } else if (scene.layout === 'paper-map-journey') {
+    // OpenDesign.ai "openmotion-paper-map-journey" — tactile cut-paper map with mint terrain,
+    // pale blue water, soft drop shadows, #D7263D dashed-to-solid route, and pop-up landmarks
+    const pm = scene.paperMap ?? {
+      mapTitle: 'Paper Map Journey',
+      subtitle: 'Cream Paper · Mint Terrain · Cut-Paper Landmarks',
+      routeColor: '#D7263D',
+      waterColor: '#C8E2EC',
+      terrainColor: '#CBE6D0',
+      terrainShadeColor: '#B2D9BC',
+      paperColor: '#F7F2E7',
+      stops: [
+        { name: 'Amsterdam', x: 0.16, y: 0.3, tag: 'STOP 01', fact: '165 grachten en 1.281 bruggen vormen het vertrekpunt.', landmark: 'canal-house' as const },
+        { name: 'Parijs', x: 0.38, y: 0.48, tag: 'STOP 02', fact: '3u18 per hogesnelheidstrein tot hartje Seine.', landmark: 'tower' as const },
+        { name: 'Alpenpas', x: 0.62, y: 0.4, tag: 'STOP 03', fact: '2.100m hoogte tussen besneeuwde bergtoppen.', landmark: 'mountain' as const },
+        { name: 'Rome', x: 0.84, y: 0.68, tag: 'STOP 04', fact: 'Eindbestemming met 2.700 jaar architectuurgeschiedenis.', landmark: 'arch' as const },
+      ],
+    };
+
+    const routeCol = pm.routeColor ?? '#D7263D';
+    const waterCol = pm.waterColor ?? '#C8E2EC';
+    const terrainCol = pm.terrainColor ?? '#CBE6D0';
+    const terrainShade = pm.terrainShadeColor ?? '#B2D9BC';
+    const paperCol = pm.paperColor ?? '#F7F2E7';
+    const inkCol = '#2B2620';
+    const mutedInk = '#6B6258';
+
+    const stops = pm.stops.length >= 2 ? pm.stops : [
+      { name: 'Start', x: 0.2, y: 0.55, fact: 'Beginpunt van de reis.', landmark: 'canal-house' as const },
+      { name: 'Finish', x: 0.8, y: 0.45, fact: 'Eindbestemming bereikt.', landmark: 'arch' as const },
+    ];
+
+    const startY = h * 0.125;
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'top';
+    if (scene.eyebrow) {
+      ctx.font = `600 ${Math.round(19 * scale)}px ${monoFont}`;
+      ctx.fillStyle = routeCol;
+      ctx.fillText(scene.eyebrow, padX, startY, contentW);
+    }
+
+    const headSize = Math.round((isPortrait ? 44 : 46) * scale);
+    ctx.font = `700 ${headSize}px ${displayFont}`;
+    ctx.fillStyle = brand.textColor;
+    const hLines = wrapText(ctx, scene.headline, contentW);
+    hLines.forEach((l, li) => ctx.fillText(l, padX, startY + 30 * scale + li * headSize * 1.12));
+
+    // Main cut-paper map sheet container
+    const sheetX = padX;
+    const sheetY = startY + 48 * scale + hLines.length * headSize * 1.12;
+    const sheetW = contentW;
+    const sheetH = h * 0.875 - sheetY;
+
+    // Outer tactile drop shadow of the paper map sheet
+    ctx.save();
+    ctx.shadowColor = 'rgba(28, 24, 18, 0.18)';
+    ctx.shadowBlur = 28 * scale;
+    ctx.shadowOffsetY = 12 * scale;
+    drawRoundedRect(ctx, sheetX, sheetY, sheetW, sheetH, 20 * scale);
+    ctx.fillStyle = waterCol;
+    ctx.fill();
+    ctx.restore();
+
+    ctx.save();
+    drawRoundedRect(ctx, sheetX, sheetY, sheetW, sheetH, 20 * scale);
+    ctx.clip();
+
+    // 1. Pale blue water base + gentle cut-paper wave lines
+    ctx.fillStyle = waterCol;
+    ctx.fillRect(sheetX, sheetY, sheetW, sheetH);
+
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.45)';
+    ctx.lineWidth = Math.max(1.2, 2 * scale);
+    for (let wy = sheetY + 36 * scale; wy < sheetY + sheetH; wy += 44 * scale) {
+      for (let wx = sheetX + 24 * scale; wx < sheetX + sheetW; wx += 140 * scale) {
+        const shift = ((wy / (44 * scale)) % 2) * 58 * scale + Math.sin(safeTime * 0.9 + wy * 0.02) * 8 * scale;
+        ctx.beginPath();
+        ctx.moveTo(wx + shift, wy);
+        ctx.quadraticCurveTo(wx + shift + 20 * scale, wy - 5 * scale, wx + shift + 40 * scale, wy);
+        ctx.stroke();
+      }
+    }
+
+    // 2. Layered Mint Cut-Paper Terrain Landmasses with soft drop shadows & crisp white cut rims
+    const drawPaperContinent = (
+      points: Array<[number, number]>,
+      fill: string,
+      shadowBlurVal: number,
+      shadowOffsetYVal: number
+    ) => {
+      ctx.save();
+      ctx.shadowColor = 'rgba(34, 52, 42, 0.24)';
+      ctx.shadowBlur = shadowBlurVal * scale;
+      ctx.shadowOffsetX = 0;
+      ctx.shadowOffsetY = shadowOffsetYVal * scale;
+
+      ctx.beginPath();
+      const first = points[0];
+      ctx.moveTo(sheetX + first[0] * sheetW, sheetY + first[1] * sheetH);
+      for (let i = 0; i < points.length; i++) {
+        const cur = points[i];
+        const next = points[(i + 1) % points.length];
+        const cx = sheetX + cur[0] * sheetW;
+        const cy = sheetY + cur[1] * sheetH;
+        const nx = sheetX + next[0] * sheetW;
+        const ny = sheetY + next[1] * sheetH;
+        ctx.quadraticCurveTo(cx, cy, (cx + nx) / 2, (cy + ny) / 2);
+      }
+      ctx.closePath();
+      ctx.fillStyle = fill;
+      ctx.fill();
+      ctx.restore();
+
+      // Cut-paper cream rim edge highlight
+      ctx.strokeStyle = paperCol;
+      ctx.lineWidth = Math.max(1.8, 3 * scale);
+      ctx.stroke();
+    };
+
+    // Base cream-parchment outer shelf
+    drawPaperContinent(
+      [
+        [0.04, 0.08],
+        [0.44, 0.04],
+        [0.92, 0.09],
+        [0.96, 0.48],
+        [0.93, 0.88],
+        [0.52, 0.92],
+        [0.07, 0.86],
+        [0.03, 0.45],
+      ],
+      paperCol,
+      16,
+      7
+    );
+
+    // Primary mint cut-paper terrain island
+    drawPaperContinent(
+      [
+        [0.09, 0.16],
+        [0.36, 0.1],
+        [0.74, 0.14],
+        [0.9, 0.34],
+        [0.88, 0.72],
+        [0.64, 0.78],
+        [0.34, 0.72],
+        [0.12, 0.62],
+      ],
+      terrainCol,
+      20,
+      9
+    );
+
+    // Elevated secondary mint plateau layer
+    drawPaperContinent(
+      [
+        [0.24, 0.24],
+        [0.56, 0.2],
+        [0.78, 0.36],
+        [0.74, 0.62],
+        [0.46, 0.64],
+        [0.22, 0.5],
+      ],
+      terrainShade,
+      14,
+      6
+    );
+
+    // Tactile map fold crease lines across the paper sheet
+    [0.333, 0.666].forEach((foldFrac) => {
+      const fx = sheetX + sheetW * foldFrac;
+      const creaseGrad = ctx.createLinearGradient(fx - 10 * scale, 0, fx + 10 * scale, 0);
+      creaseGrad.addColorStop(0, 'rgba(43, 38, 32, 0)');
+      creaseGrad.addColorStop(0.45, 'rgba(43, 38, 32, 0.075)');
+      creaseGrad.addColorStop(0.55, 'rgba(255, 255, 255, 0.35)');
+      creaseGrad.addColorStop(1, 'rgba(43, 38, 32, 0)');
+      ctx.fillStyle = creaseGrad;
+      ctx.fillRect(fx - 10 * scale, sheetY, 20 * scale, sheetH);
+    });
+
+    // Subtle deterministic paper grain speckles
+    ctx.fillStyle = 'rgba(65, 55, 42, 0.055)';
+    for (let g = 0; g < 65; g++) {
+      const gx = sheetX + (((g * 173 + 29) % 1000) / 1000) * sheetW;
+      const gy = sheetY + (((g * 317 + 71) % 1000) / 1000) * sheetH;
+      ctx.fillRect(gx, gy, 2.2 * scale, 2.2 * scale);
+    }
+
+    // Reserve lower strip for active single-fact paper card
+    const factBarH = (isPortrait ? 132 : 104) * scale;
+    const mapPadX = sheetW * 0.08;
+    const mapPadTop = sheetH * 0.14;
+    const usableW = sheetW - mapPadX * 2;
+    const usableH = Math.max(120 * scale, sheetH - factBarH - mapPadTop - 36 * scale);
+
+    const stopCoords = stops.map((st) => ({
+      ...st,
+      px: sheetX + mapPadX + clamp(st.x, 0.06, 0.94) * usableW,
+      py: sheetY + mapPadTop + clamp(st.y, 0.1, 0.9) * usableH,
+    }));
+
+    // Compute smooth quadratic Bezier segments between consecutive stops
+    const segCount = stopCoords.length - 1;
+    const travelT = easeInOutCubic(clamp(progress * 1.1));
+    const currentLegFloat = travelT * segCount;
+    const activeLegIdx = Math.min(segCount - 1, Math.floor(currentLegFloat));
+    const activeLegFrac = clamp(currentLegFloat - activeLegIdx);
+
+    const getLegControl = (i: number) => {
+      const a = stopCoords[i];
+      const b = stopCoords[i + 1];
+      const dx = b.x - a.x;
+      const dy = b.y - a.y;
+      const sign = i % 2 === 0 ? -1 : 1;
+      return {
+        cx: (a.px + b.px) / 2 - dy * usableH * 0.22 * sign,
+        cy: (a.py + b.py) / 2 + dx * usableW * 0.14 * sign,
+      };
+    };
+
+    const sampleQuadratic = (
+      p0x: number,
+      p0y: number,
+      cx: number,
+      cy: number,
+      p1x: number,
+      p1y: number,
+      t: number
+    ) => {
+      const mt = 1 - t;
+      return {
+        x: mt * mt * p0x + 2 * mt * t * cx + t * t * p1x,
+        y: mt * mt * p0y + 2 * mt * t * cy + t * t * p1y,
+      };
+    };
+
+    // 3. Signature #D7263D route: dashed while travelling / upcoming, SOLID once completed!
+    for (let i = 0; i < segCount; i++) {
+      const a = stopCoords[i];
+      const b = stopCoords[i + 1];
+      const { cx, cy } = getLegControl(i);
+      const isCompleted = i < activeLegIdx || (i === segCount - 1 && travelT >= 0.99);
+      const isTravelling = i === activeLegIdx && !isCompleted;
+
+      if (isCompleted) {
+        // Completed segment turns solid crimson red
+        ctx.save();
+        ctx.shadowColor = 'rgba(215, 38, 61, 0.25)';
+        ctx.shadowBlur = 8 * scale;
+        ctx.shadowOffsetY = 3 * scale;
+        ctx.setLineDash([]);
+        ctx.strokeStyle = routeCol;
+        ctx.lineWidth = Math.max(3.5, 5.5 * scale);
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(a.px, a.py);
+        ctx.quadraticCurveTo(cx, cy, b.px, b.py);
+        ctx.stroke();
+        ctx.restore();
+      } else if (isTravelling) {
+        // Upcoming remainder of active leg (faint dashed)
+        ctx.setLineDash([10 * scale, 9 * scale]);
+        ctx.strokeStyle = hexToRgba(routeCol, 0.28);
+        ctx.lineWidth = Math.max(2.5, 4 * scale);
+        ctx.beginPath();
+        ctx.moveTo(a.px, a.py);
+        ctx.quadraticCurveTo(cx, cy, b.px, b.py);
+        ctx.stroke();
+
+        // Active travelling portion drawn in crisp bold dashed crimson (animated dash offset)
+        ctx.save();
+        ctx.setLineDash([12 * scale, 8 * scale]);
+        ctx.lineDashOffset = -safeTime * 42 * scale;
+        ctx.strokeStyle = routeCol;
+        ctx.lineWidth = Math.max(3.5, 5.2 * scale);
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        const steps = 28;
+        for (let s = 0; s <= steps; s++) {
+          const u = (s / steps) * activeLegFrac;
+          const pt = sampleQuadratic(a.px, a.py, cx, cy, b.px, b.py, u);
+          if (s === 0) ctx.moveTo(pt.x, pt.y);
+          else ctx.lineTo(pt.x, pt.y);
+        }
+        ctx.stroke();
+        ctx.restore();
+        ctx.setLineDash([]);
+      } else {
+        // Future unvisited leg: subtle dashed preview
+        ctx.setLineDash([8 * scale, 10 * scale]);
+        ctx.strokeStyle = hexToRgba(routeCol, 0.24);
+        ctx.lineWidth = Math.max(2, 3.2 * scale);
+        ctx.beginPath();
+        ctx.moveTo(a.px, a.py);
+        ctx.quadraticCurveTo(cx, cy, b.px, b.py);
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
+    }
+
+    // Helper: draw 3D tactile paper-cut pop-up landmark hinging upright at each stop
+    const drawPaperLandmark = (
+      lx: number,
+      ly: number,
+      kind: ScenePaperMapStop['landmark'],
+      popScale: number
+    ) => {
+      if (popScale <= 0.02) return;
+      ctx.save();
+      ctx.translate(lx, ly);
+
+      // Soft angled cast paper shadow on the mint map behind the pop-up cutout
+      ctx.save();
+      ctx.fillStyle = 'rgba(34, 52, 42, 0.18)';
+      ctx.beginPath();
+      ctx.ellipse(10 * scale, -4 * scale, 22 * scale * popScale, 8 * scale, -0.2, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+
+      // Hinge upward from base
+      ctx.scale(1, popScale);
+      ctx.fillStyle = '#FFFFFF';
+      ctx.strokeStyle = inkCol;
+      ctx.lineWidth = Math.max(1.5, 2.2 * scale);
+      ctx.lineJoin = 'round';
+
+      if (kind === 'tower') {
+        // Tapered landmark tower (Eiffel style)
+        ctx.beginPath();
+        ctx.moveTo(0, -64 * scale);
+        ctx.lineTo(6 * scale, -32 * scale);
+        ctx.lineTo(18 * scale, 0);
+        ctx.lineTo(8 * scale, 0);
+        ctx.arc(0, 0, 8 * scale, 0, Math.PI, true);
+        ctx.lineTo(-18 * scale, 0);
+        ctx.lineTo(-6 * scale, -32 * scale);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+      } else if (kind === 'mountain') {
+        // Twin cut-paper alpine peaks
+        ctx.beginPath();
+        ctx.moveTo(-28 * scale, 0);
+        ctx.lineTo(-8 * scale, -46 * scale);
+        ctx.lineTo(6 * scale, -22 * scale);
+        ctx.lineTo(18 * scale, -54 * scale);
+        ctx.lineTo(32 * scale, 0);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+      } else if (kind === 'arch') {
+        // Classical Roman arch / Colosseum cutout
+        ctx.beginPath();
+        ctx.moveTo(-24 * scale, 0);
+        ctx.lineTo(-24 * scale, -38 * scale);
+        ctx.lineTo(24 * scale, -38 * scale);
+        ctx.lineTo(24 * scale, 0);
+        ctx.lineTo(10 * scale, 0);
+        ctx.lineTo(10 * scale, -18 * scale);
+        ctx.arc(0, -18 * scale, 10 * scale, 0, Math.PI, true);
+        ctx.lineTo(-10 * scale, 0);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+      } else if (kind === 'temple') {
+        // Torii gate paper cutout
+        ctx.beginPath();
+        ctx.rect(-26 * scale, -48 * scale, 52 * scale, 8 * scale);
+        ctx.rect(-18 * scale, -34 * scale, 36 * scale, 6 * scale);
+        ctx.rect(-14 * scale, -40 * scale, 7 * scale, 40 * scale);
+        ctx.rect(7 * scale, -40 * scale, 7 * scale, 40 * scale);
+        ctx.fill();
+        ctx.stroke();
+      } else if (kind === 'lighthouse') {
+        ctx.beginPath();
+        ctx.moveTo(-12 * scale, 0);
+        ctx.lineTo(-7 * scale, -48 * scale);
+        ctx.lineTo(7 * scale, -48 * scale);
+        ctx.lineTo(12 * scale, 0);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+        ctx.fillStyle = routeCol;
+        ctx.fillRect(-9 * scale, -32 * scale, 18 * scale, 9 * scale);
+      } else if (kind === 'building') {
+        // Modern stepped HQ / flagship store
+        ctx.beginPath();
+        ctx.moveTo(-22 * scale, 0);
+        ctx.lineTo(-22 * scale, -34 * scale);
+        ctx.lineTo(-8 * scale, -34 * scale);
+        ctx.lineTo(-8 * scale, -54 * scale);
+        ctx.lineTo(14 * scale, -54 * scale);
+        ctx.lineTo(14 * scale, -26 * scale);
+        ctx.lineTo(24 * scale, -26 * scale);
+        ctx.lineTo(24 * scale, 0);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+      } else {
+        // 'canal-house': Dutch stepped gable cutout
+        ctx.beginPath();
+        ctx.moveTo(-20 * scale, 0);
+        ctx.lineTo(-20 * scale, -34 * scale);
+        ctx.lineTo(-13 * scale, -34 * scale);
+        ctx.lineTo(-13 * scale, -44 * scale);
+        ctx.lineTo(-6 * scale, -44 * scale);
+        ctx.lineTo(-6 * scale, -52 * scale);
+        ctx.lineTo(6 * scale, -52 * scale);
+        ctx.lineTo(6 * scale, -44 * scale);
+        ctx.lineTo(13 * scale, -44 * scale);
+        ctx.lineTo(13 * scale, -34 * scale);
+        ctx.lineTo(20 * scale, -34 * scale);
+        ctx.lineTo(20 * scale, 0);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+      }
+      ctx.restore();
+    };
+
+    // 4. Draw stop pins, pop-up landmarks, and crisp cut-paper name labels
+    let activeStopIdx = 0;
+    stopCoords.forEach((st, idx) => {
+      const stopT = idx / Math.max(1, segCount);
+      const reached = travelT >= stopT - 0.015;
+      if (reached) activeStopIdx = idx;
+      const pop = reached ? easeOutExpo(clamp((travelT - stopT + 0.04) * 5.2)) : 0;
+
+      // Pop-up 3D cut-paper landmark just above the stop pin
+      drawPaperLandmark(st.px, st.py - 12 * scale, st.landmark, pop);
+
+      // Stop pin circle
+      ctx.fillStyle = reached ? routeCol : paperCol;
+      ctx.beginPath();
+      ctx.arc(st.px, st.py, 9 * scale, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = reached ? '#FFFFFF' : inkCol;
+      ctx.lineWidth = 2.5 * scale;
+      ctx.stroke();
+
+      // Tactile white paper name pill below pin
+      const nameW = Math.max(108 * scale, st.name.length * 13 * scale + 30 * scale);
+      const nameH = 34 * scale;
+      const nx = clamp(st.px - nameW / 2, sheetX + 16 * scale, sheetX + sheetW - nameW - 16 * scale);
+      const ny = st.py + 16 * scale;
+
+      ctx.save();
+      ctx.shadowColor = 'rgba(28, 24, 18, 0.16)';
+      ctx.shadowBlur = 10 * scale;
+      ctx.shadowOffsetY = 4 * scale;
+      drawRoundedRect(ctx, nx, ny, nameW, nameH, 8 * scale);
+      ctx.fillStyle = idx === activeStopIdx ? routeCol : '#FFFFFF';
+      ctx.fill();
+      ctx.restore();
+
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.font = `700 ${Math.round(18 * scale)}px ${displayFont}`;
+      ctx.fillStyle = idx === activeStopIdx ? '#FFFFFF' : inkCol;
+      ctx.fillText(st.name, nx + nameW / 2, ny + nameH / 2, nameW - 14 * scale);
+    });
+
+    // 5. Traveling crimson pin marker on active segment
+    if (travelT < 0.995) {
+      const a = stopCoords[activeLegIdx];
+      const b = stopCoords[activeLegIdx + 1];
+      const { cx, cy } = getLegControl(activeLegIdx);
+      const curPos = sampleQuadratic(a.px, a.py, cx, cy, b.px, b.py, activeLegFrac);
+
+      ctx.save();
+      ctx.fillStyle = hexToRgba(routeCol, 0.25);
+      ctx.beginPath();
+      ctx.arc(curPos.x, curPos.y, 18 * scale, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = routeCol;
+      ctx.beginPath();
+      ctx.arc(curPos.x, curPos.y, 9 * scale, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = '#FFFFFF';
+      ctx.lineWidth = 2.5 * scale;
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    // 6. Top-left map legend & top-right minimalist compass rose
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'top';
+    ctx.font = `700 ${Math.round(16 * scale)}px ${monoFont}`;
+    ctx.fillStyle = inkCol;
+    ctx.fillText(pm.mapTitle.toUpperCase(), sheetX + 26 * scale, sheetY + 22 * scale);
+    ctx.font = `500 ${Math.round(14 * scale)}px ${monoFont}`;
+    ctx.fillStyle = mutedInk;
+    ctx.fillText(pm.subtitle, sheetX + 26 * scale, sheetY + 44 * scale);
+
+    // Compass rose top-right
+    const compX = sheetX + sheetW - 52 * scale;
+    const compY = sheetY + 48 * scale;
+    ctx.strokeStyle = hexToRgba(inkCol, 0.35);
+    ctx.lineWidth = 1.6 * scale;
+    ctx.beginPath();
+    ctx.arc(compX, compY, 24 * scale, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.fillStyle = routeCol;
+    ctx.beginPath();
+    ctx.moveTo(compX, compY - 18 * scale);
+    ctx.lineTo(compX + 5 * scale, compY);
+    ctx.lineTo(compX - 5 * scale, compY);
+    ctx.closePath();
+    ctx.fill();
+    ctx.fillStyle = inkCol;
+    ctx.beginPath();
+    ctx.moveTo(compX, compY + 18 * scale);
+    ctx.lineTo(compX + 5 * scale, compY);
+    ctx.lineTo(compX - 5 * scale, compY);
+    ctx.closePath();
+    ctx.fill();
+
+    // 7. Bottom Tactile Paper Fact Card for the currently active stop (1 crisp fact per stop)
+    const activeStop = stopCoords[activeStopIdx];
+    const cardPad = 18 * scale;
+    const fX = sheetX + cardPad;
+    const fY = sheetY + sheetH - factBarH - cardPad * 0.7;
+    const fW = sheetW - cardPad * 2;
+    const fH = factBarH;
+
+    ctx.save();
+    ctx.shadowColor = 'rgba(28, 24, 18, 0.16)';
+    ctx.shadowBlur = 18 * scale;
+    ctx.shadowOffsetY = 6 * scale;
+    drawRoundedRect(ctx, fX, fY, fW, fH, 14 * scale);
+    ctx.fillStyle = '#FDFBF6';
+    ctx.fill();
+    ctx.restore();
+
+    // Crisp red top rule on the paper fact card
+    drawRoundedRect(ctx, fX, fY, fW, 5 * scale, 3 * scale);
+    ctx.fillStyle = routeCol;
+    ctx.fill();
+
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'top';
+    ctx.font = `700 ${Math.round(16 * scale)}px ${monoFont}`;
+    ctx.fillStyle = routeCol;
+    const stepLabel = `${activeStop.tag ?? `STOP ${String(activeStopIdx + 1).padStart(2, '0')}`} · ${String(
+      activeStopIdx + 1
+    ).padStart(2, '0')} / ${String(stopCoords.length).padStart(2, '0')}`;
+    ctx.fillText(stepLabel, fX + 24 * scale, fY + 18 * scale);
+
+    ctx.font = `700 ${Math.round((isPortrait ? 24 : 26) * scale)}px ${displayFont}`;
+    ctx.fillStyle = inkCol;
+    ctx.fillText(activeStop.name, fX + 24 * scale, fY + 42 * scale, fW * 0.34);
+
+    // Single stop fact on the right / below
+    const factX = isPortrait ? fX + 24 * scale : fX + fW * 0.36;
+    const factY = isPortrait ? fY + 76 * scale : fY + 34 * scale;
+    const factMaxW = isPortrait ? fW - 48 * scale : fW * 0.6;
+    ctx.font = `500 ${Math.round((isPortrait ? 20 : 22) * scale)}px ${bodyFont}`;
+    ctx.fillStyle = mutedInk;
+    const fLines = wrapText(ctx, activeStop.fact, factMaxW);
+    fLines.slice(0, 2).forEach((fl, fi) => {
+      ctx.fillText(fl, factX, factY + fi * 28 * scale);
+    });
+
+    ctx.restore();
   } else if (scene.layout === 'outro-cta') {
     const centerY = h * 0.47;
     ctx.textAlign = 'center';

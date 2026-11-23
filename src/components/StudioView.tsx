@@ -15,7 +15,10 @@ import {
   RotateCcw,
   Sliders,
   Square,
+  Volume2,
+  VolumeX,
 } from 'lucide-react';
+import { DocumentaryAudioEngine } from '../engine/ambientAudio';
 import { exportProjectToMp4, formatFileSize } from '../engine/mp4Exporter';
 import {
   buildTemplateRemixPrompt,
@@ -65,9 +68,12 @@ export function StudioView({
   onBackToLibrary,
 }: StudioViewProps) {
   const [isPlaying, setIsPlaying] = useState(true);
+  const [audioEnabled, setAudioEnabled] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [inspectorTab, setInspectorTab] = useState<InspectorTab>('export');
   const [selectedSceneIdx, setSelectedSceneIdx] = useState(0);
+
+  const audioEngineRef = useRef<DocumentaryAudioEngine | null>(null);
 
   const [exportOptions, setExportOptions] = useState<RenderExportOptions>({
     resolution: '1080p',
@@ -107,6 +113,33 @@ export function StudioView({
       if (url) URL.revokeObjectURL(url);
     };
   }, [renderState.outputUrl]);
+
+  // Synchronize subtle documentary audio soundtrack & city ambience with playback
+  useEffect(() => {
+    if (!audioEngineRef.current) {
+      audioEngineRef.current = new DocumentaryAudioEngine();
+    }
+    const engine = audioEngineRef.current;
+    if (audioEnabled && isPlaying) {
+      engine.start(currentTime);
+    } else {
+      engine.stop();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [audioEnabled, isPlaying]);
+
+  useEffect(() => {
+    if (audioEnabled && isPlaying) {
+      audioEngineRef.current?.syncTime(currentTime);
+    }
+  }, [audioEnabled, isPlaying, currentTime]);
+
+  useEffect(() => {
+    return () => {
+      audioEngineRef.current?.dispose();
+      audioEngineRef.current = null;
+    };
+  }, []);
 
   const handleStartMp4Export = async () => {
     if (renderState.phase === 'rendering' || renderState.phase === 'muxing') return;
@@ -425,6 +458,20 @@ export function StudioView({
                 >
                   <RotateCcw className="w-4 h-4" />
                 </button>
+                <button
+                  type="button"
+                  onClick={() => setAudioEnabled((prev) => !prev)}
+                  aria-label={audioEnabled ? 'Demp achtergrondmuziek' : 'Zet omgevingsgeluid en muziek aan'}
+                  title={audioEnabled ? 'Achtergrondmuziek & stadsambience actief' : 'Speel rustige documentaire-muziek & stadsambience af'}
+                  className={`inline-flex items-center gap-1.5 px-2.5 h-9 rounded-lg text-xs font-medium transition-colors ${
+                    audioEnabled
+                      ? 'bg-slate-800 text-white border border-slate-700'
+                      : 'text-slate-300 hover:bg-slate-800'
+                  }`}
+                >
+                  {audioEnabled ? <Volume2 className="w-4 h-4 text-blue-400" /> : <VolumeX className="w-4 h-4" />}
+                  <span className="hidden sm:inline">{audioEnabled ? 'Audio aan' : 'Audio'}</span>
+                </button>
               </div>
 
               <div className="flex items-center gap-4 text-xs font-mono tabular-nums text-slate-300">
@@ -487,6 +534,47 @@ export function StudioView({
               })}
             </div>
           </div>
+
+          {/* Photography Attribution & Licenses (when project uses Wikimedia Commons imagery) */}
+          {project.scenes.some((sc) => Boolean(sc.editorialMap?.photoCredit)) && (
+            <div className="bg-white border border-slate-200 rounded-xl p-4 space-y-3">
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-xs font-semibold text-slate-900">
+                  Fotografie Bronnen &amp; Licenties (Wikimedia Commons)
+                </span>
+                <span className="text-xs text-slate-500 font-mono">OpenStreetMap · CC Licenties</span>
+              </div>
+              <ul className="divide-y divide-slate-100 text-xs">
+                {project.scenes
+                  .filter((sc) => Boolean(sc.editorialMap?.photoCredit))
+                  .map((sc) => {
+                    const credit = sc.editorialMap!.photoCredit!;
+                    return (
+                      <li
+                        key={sc.id}
+                        className="py-2 flex flex-col sm:flex-row sm:items-center justify-between gap-1.5"
+                      >
+                        <div className="min-w-0">
+                          <span className="font-medium text-slate-900">{sc.name}</span>
+                          <span className="text-slate-400 mx-1.5">·</span>
+                          <span className="text-slate-600">{credit.author}</span>
+                          <span className="text-slate-400 mx-1.5">·</span>
+                          <span className="font-mono text-slate-500">{credit.license}</span>
+                        </div>
+                        <a
+                          href={credit.sourceUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-blue-700 hover:underline font-mono shrink-0"
+                        >
+                          Wikimedia Commons
+                        </a>
+                      </li>
+                    );
+                  })}
+              </ul>
+            </div>
+          )}
         </div>
 
         {/* Right Inspector Panel: MP4 Export | Brand & Scènes | project.json */}
@@ -917,6 +1005,162 @@ export function StudioView({
                       </select>
                     </div>
                   </div>
+
+                  {activeScene.editorialMap && (
+                    <div className="pt-4 mt-4 border-t border-slate-200 space-y-3">
+                      <p className="text-xs font-semibold text-slate-900">
+                        Cartografie, Camera &amp; Fotografie (Scène {selectedSceneIdx + 1})
+                      </p>
+                      <div>
+                        <label className="block text-xs text-slate-600 mb-1">
+                          Beeldtekst Titel (Engels)
+                        </label>
+                        <input
+                          type="text"
+                          value={activeScene.editorialMap.titleText}
+                          onChange={(e) =>
+                            updateActiveScene({
+                              headline: e.target.value,
+                              editorialMap: {
+                                ...activeScene.editorialMap!,
+                                titleText: e.target.value,
+                              },
+                            })
+                          }
+                          className="w-full px-3 py-1.5 text-sm border border-slate-200 rounded-lg"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs text-slate-600 mb-1">
+                          Beeldtekst Subtitel
+                        </label>
+                        <input
+                          type="text"
+                          value={activeScene.editorialMap.subtitleText}
+                          onChange={(e) =>
+                            updateActiveScene({
+                              subheadline: e.target.value,
+                              editorialMap: {
+                                ...activeScene.editorialMap!,
+                                subtitleText: e.target.value,
+                              },
+                            })
+                          }
+                          className="w-full px-3 py-1.5 text-sm border border-slate-200 rounded-lg"
+                        />
+                      </div>
+                      <div className="grid grid-cols-2 gap-2">
+                        <div>
+                          <label className="block text-xs text-slate-600 mb-1">
+                            Camera Zoom Start
+                          </label>
+                          <input
+                            type="number"
+                            step={0.1}
+                            min={0.7}
+                            max={4}
+                            value={activeScene.editorialMap.cameraFrom.zoom}
+                            onChange={(e) =>
+                              updateActiveScene({
+                                editorialMap: {
+                                  ...activeScene.editorialMap!,
+                                  cameraFrom: {
+                                    ...activeScene.editorialMap!.cameraFrom,
+                                    zoom: parseFloat(e.target.value) || 1.2,
+                                  },
+                                },
+                              })
+                            }
+                            className="w-full px-2.5 py-1.5 text-xs font-mono tabular-nums border border-slate-200 rounded-lg"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-xs text-slate-600 mb-1">
+                            Camera Zoom Eind
+                          </label>
+                          <input
+                            type="number"
+                            step={0.1}
+                            min={0.7}
+                            max={4}
+                            value={activeScene.editorialMap.cameraTo.zoom}
+                            onChange={(e) =>
+                              updateActiveScene({
+                                editorialMap: {
+                                  ...activeScene.editorialMap!,
+                                  cameraTo: {
+                                    ...activeScene.editorialMap!.cameraTo,
+                                    zoom: parseFloat(e.target.value) || 2.0,
+                                  },
+                                },
+                              })
+                            }
+                            className="w-full px-2.5 py-1.5 text-xs font-mono tabular-nums border border-slate-200 rounded-lg"
+                          />
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2">
+                        <div>
+                          <label className="block text-xs text-slate-600 mb-1">Routelijn Kleur</label>
+                          <input
+                            type="color"
+                            value={activeScene.editorialMap.routeColor ?? '#C41E2E'}
+                            onChange={(e) =>
+                              updateActiveScene({
+                                editorialMap: {
+                                  ...activeScene.editorialMap!,
+                                  routeColor: e.target.value,
+                                },
+                              })
+                            }
+                            className="w-full h-9 rounded border border-slate-200 cursor-pointer"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-xs text-slate-600 mb-1">
+                            Vogelperspectief (Tilt)
+                          </label>
+                          <input
+                            type="number"
+                            step={0.04}
+                            min={0}
+                            max={0.45}
+                            value={activeScene.editorialMap.cameraTo.tilt ?? 0}
+                            onChange={(e) =>
+                              updateActiveScene({
+                                editorialMap: {
+                                  ...activeScene.editorialMap!,
+                                  cameraTo: {
+                                    ...activeScene.editorialMap!.cameraTo,
+                                    tilt: parseFloat(e.target.value) || 0,
+                                  },
+                                },
+                              })
+                            }
+                            className="w-full px-2.5 py-1.5 text-xs font-mono tabular-nums border border-slate-200 rounded-lg"
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <label className="block text-xs text-slate-600 mb-1">
+                          Foto URL / Asset Pad
+                        </label>
+                        <input
+                          type="text"
+                          value={activeScene.editorialMap.photoUrl ?? ''}
+                          onChange={(e) =>
+                            updateActiveScene({
+                              editorialMap: {
+                                ...activeScene.editorialMap!,
+                                photoUrl: e.target.value || undefined,
+                              },
+                            })
+                          }
+                          className="w-full px-2.5 py-1.5 text-xs font-mono border border-slate-200 rounded-lg"
+                        />
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             )}

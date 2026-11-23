@@ -147,6 +147,8 @@ export function normalizeOpenMotionProject(
     'route-map-journey',
     'travel-postcard-reel',
     'faceless-explainer',
+    'paper-map-journey',
+    'editorial-cartography',
   ]);
   const validBackdrops = new Set([
     'grid-architectural',
@@ -364,6 +366,15 @@ export function normalizeOpenMotionProject(
         sc.explainer && typeof sc.explainer === 'object'
           ? (sc.explainer as OpenMotionScene['explainer'])
           : undefined,
+      paperMap:
+        sc.paperMap && typeof sc.paperMap === 'object'
+          ? (sc.paperMap as OpenMotionScene['paperMap'])
+          : undefined,
+      editorialMap:
+        sc.editorialMap && typeof sc.editorialMap === 'object'
+          ? (sc.editorialMap as OpenMotionScene['editorialMap'])
+          : undefined,
+      fullBleed: typeof sc.fullBleed === 'boolean' ? sc.fullBleed : undefined,
     };
   });
 
@@ -768,8 +779,10 @@ Geef UITSLUITEND geldige JSON terug die exact voldoet aan dit schema:
   ]
 }
 
-Beschikbare layouts (29): "route-map-journey", "travel-postcard-reel", "faceless-explainer", "3d-wireframe-stage", "live-line-chart", "node-graph-flow", "kinetic-marquee", "code-diff-deploy", "ui-morph", "beat-kinetic", "visual-lesson", "bento-montage", "paper-cutout", "pricing-tiers", "mobile-screens", "poster-editorial", "hero-kinetic", "step-tutorial", "data-rings", "ui-mockup", "before-after", "waveform-captions", "timeline-roadmap", "quote-spotlight", "metric-spotlight", "feature-cards", "code-terminal", "split-showcase", "outro-cta".
+Beschikbare layouts (31): "editorial-cartography", "paper-map-journey", "route-map-journey", "travel-postcard-reel", "faceless-explainer", "3d-wireframe-stage", "live-line-chart", "node-graph-flow", "kinetic-marquee", "code-diff-deploy", "ui-morph", "beat-kinetic", "visual-lesson", "bento-montage", "paper-cutout", "pricing-tiers", "mobile-screens", "poster-editorial", "hero-kinetic", "step-tutorial", "data-rings", "ui-mockup", "before-after", "waveform-captions", "timeline-roadmap", "quote-spotlight", "metric-spotlight", "feature-cards", "code-terminal", "split-showcase", "outro-cta".
 Optionele scène-velden per layout:
+- editorial-cartography: fullBleed (true), editorialMap ({cityLabel, bounds, routeCoords, routeDrawFrom, routeDrawTo, streets, parks, buildings, reliefs, stops, cameraFrom, cameraTo, photoUrl?, photoMode?, photoCredit?, titleLayout?, titleText, subtitleText})
+- paper-map-journey: paperMap ({mapTitle, subtitle, routeColor?: "#D7263D", waterColor?, terrainColor?, paperColor?, stops: [{name, x, y, tag?, fact, landmark: "canal-house"|"tower"|"mountain"|"arch"|"temple"|"lighthouse"|"building"}]})
 - route-map-journey: routeMap ({regionLabel, transport: "plane"|"train"|"car"|"bike"|"hike", totalDistanceKm, durationLabel, waypoints: [{name, x, y, day, highlight, km}]})
 - travel-postcard-reel: travelCard ({destination, country, coordinates, season, landscapeTheme: "alpine"|"coastal"|"desert"|"neon-city", highlights: [{time, spot, note}]})
 - faceless-explainer: explainer ({chapter, visualType: "funnel"|"compounding"|"balance-scale"|"network-ripple"|"iceberg", visualLabels: string[], voiceoverWords: string[], statBadge?})

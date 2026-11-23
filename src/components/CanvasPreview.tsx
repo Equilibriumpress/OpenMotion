@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { preloadProjectImages, subscribeImageLoaded } from '../engine/imageCache';
 import { renderOpenMotionFrame } from '../engine/openMotionRenderer';
 import { OpenMotionProject, getProjectDurationSec } from '../types/openmotion';
 
@@ -35,13 +36,22 @@ export function CanvasPreview({
   const internalWidth = Math.max(320, Math.round(project.width * renderScale));
   const internalHeight = Math.max(320, Math.round(project.height * renderScale));
 
-  // Render single frame whenever project, size, or scrubbed time changes (when paused)
+  // Preload documentary images referenced by the project
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-    renderOpenMotionFrame(ctx, project, timeSec, internalWidth, internalHeight);
+    void preloadProjectImages(project);
+  }, [project]);
+
+  // Render single frame whenever project, size, scrubbed time, or newly loaded photo updates
+  useEffect(() => {
+    const paint = () => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+      renderOpenMotionFrame(ctx, project, timeRef.current, internalWidth, internalHeight);
+    };
+    paint();
+    return subscribeImageLoaded(paint);
   }, [project, timeSec, internalWidth, internalHeight]);
 
   // Real-time deterministic requestAnimationFrame loop when playing

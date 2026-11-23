@@ -40,6 +40,8 @@ const SOURCE_LABELS: Record<ProjectSource, string> = {
 };
 
 const FEATURED_PREVIEW_LAYOUTS: SceneLayout[] = [
+  'editorial-cartography',
+  'paper-map-journey',
   'route-map-journey',
   'travel-postcard-reel',
   'faceless-explainer',
@@ -74,6 +76,10 @@ function getShowcasePreviewTime(project: OpenMotionProject): number {
       // For UI Morph, land on the rich Dynamic Island / Mini Analytics mid-frame
       if (sc.layout === 'ui-morph') {
         return elapsed + sc.durationSec * 0.64;
+      }
+      if (sc.layout === 'editorial-cartography') {
+        // Show the iconic opening panoramic Edinburgh photo with editorial title
+        return elapsed + sc.durationSec * 0.38;
       }
       return elapsed + Math.min(sc.durationSec * 0.62, 1.9);
     }
