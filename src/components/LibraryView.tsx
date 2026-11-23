@@ -40,6 +40,9 @@ const SOURCE_LABELS: Record<ProjectSource, string> = {
 };
 
 const FEATURED_PREVIEW_LAYOUTS: SceneLayout[] = [
+  'route-map-journey',
+  'travel-postcard-reel',
+  'faceless-explainer',
   '3d-wireframe-stage',
   'live-line-chart',
   'node-graph-flow',

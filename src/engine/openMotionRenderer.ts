@@ -2997,6 +2997,895 @@ export function renderOpenMotionFrame(
       ctx.fillStyle = isDone ? '#4ADE80' : brand.mutedColor;
       ctx.fillText(isDone ? st.duration : isRunning ? '...' : '—', pipeX + pipeW - 24 * scale, cy);
     });
+  } else if (scene.layout === 'route-map-journey') {
+    // Stylized vector animated route map with smooth spline, moving vehicle icon, waypoint reveals & distance telemetry
+    const rm = scene.routeMap ?? {
+      regionLabel: 'EUROPA ROUTE',
+      transport: 'train' as const,
+      totalDistanceKm: 1380,
+      durationLabel: '7 Dagen',
+      waypoints: [
+        { name: 'Amsterdam', x: 0.14, y: 0.28, day: 'Dag 1', highlight: 'Vertrek Centraal', km: 0 },
+        { name: 'Keulen', x: 0.34, y: 0.38, day: 'Dag 2', highlight: 'Rijnvallei', km: 265 },
+        { name: 'Zürich', x: 0.56, y: 0.58, day: 'Dag 4', highlight: 'Alpenpas', km: 790 },
+        { name: 'Venetië', x: 0.84, y: 0.72, day: 'Dag 7', highlight: 'Lagune Finale', km: 1380 },
+      ],
+    };
+    const wps = rm.waypoints.length >= 2 ? rm.waypoints : [
+      { name: 'Start', x: 0.15, y: 0.6, km: 0 },
+      { name: 'Finish', x: 0.85, y: 0.35, km: rm.totalDistanceKm },
+    ];
+
+    const startY = h * 0.13;
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'top';
+    if (scene.eyebrow) {
+      ctx.font = `600 ${Math.round(20 * scale)}px ${monoFont}`;
+      ctx.fillStyle = brand.accentColor;
+      ctx.fillText(scene.eyebrow, padX, startY, contentW);
+    }
+    const headSize = Math.round((isPortrait ? 46 : 48) * scale);
+    ctx.font = `700 ${headSize}px ${displayFont}`;
+    ctx.fillStyle = brand.textColor;
+    const hLines = wrapText(ctx, scene.headline, contentW);
+    hLines.forEach((l, li) => ctx.fillText(l, padX, startY + 32 * scale + li * headSize * 1.13));
+
+    const mapY = startY + 52 * scale + hLines.length * headSize * 1.13;
+    const mapH = h * 0.86 - mapY;
+    const mapX = padX;
+    const mapW = contentW;
+
+    // Map viewport container
+    drawRoundedRect(ctx, mapX, mapY, mapW, mapH, 22 * scale);
+    ctx.fillStyle = brand.surfaceColor;
+    ctx.fill();
+    ctx.strokeStyle = hexToRgba(brand.textColor, 0.16);
+    ctx.lineWidth = Math.max(1.5, 2 * scale);
+    ctx.stroke();
+
+    ctx.save();
+    drawRoundedRect(ctx, mapX, mapY, mapW, mapH, 22 * scale);
+    ctx.clip();
+
+    // Cartographic lat/lon graticule
+    const gridStep = Math.round(78 * scale);
+    ctx.strokeStyle = hexToRgba(brand.textColor, 0.06);
+    ctx.lineWidth = Math.max(1, scale);
+    ctx.beginPath();
+    for (let gx = mapX + gridStep; gx < mapX + mapW; gx += gridStep) {
+      ctx.moveTo(gx, mapY);
+      ctx.lineTo(gx, mapY + mapH);
+    }
+    for (let gy = mapY + gridStep; gy < mapY + mapH; gy += gridStep) {
+      ctx.moveTo(mapX, gy);
+      ctx.lineTo(mapX + mapW, gy);
+    }
+    ctx.stroke();
+
+    // Topographic contour isolines (procedural smooth terrain rings)
+    for (let c = 0; c < 5; c++) {
+      ctx.strokeStyle = hexToRgba(brand.primaryColor, 0.07 + c * 0.018);
+      ctx.lineWidth = Math.max(1, 1.4 * scale);
+      ctx.beginPath();
+      const baseY = mapY + mapH * (0.16 + c * 0.16);
+      for (let x = 0; x <= mapW; x += 24 * scale) {
+        const wave =
+          Math.sin(x * 0.0055 + c * 1.3) * 38 * scale +
+          Math.cos(x * 0.011 - c * 0.8) * 18 * scale;
+        if (x === 0) ctx.moveTo(mapX + x, baseY + wave);
+        else ctx.lineTo(mapX + x, baseY + wave);
+      }
+      ctx.stroke();
+    }
+
+    // Inner map bounds reserving bottom telemetry strip
+    const stripH = (isPortrait ? 116 : 86) * scale;
+    const innerPadX = mapW * 0.09;
+    const innerPadTop = mapH * 0.13;
+    const innerW = mapW - innerPadX * 2;
+    const innerH = Math.max(120 * scale, mapH - stripH - innerPadTop - 36 * scale);
+
+    const pts = wps.map((wp) => ({
+      ...wp,
+      px: mapX + innerPadX + clamp(wp.x, 0.05, 0.95) * innerW,
+      py: mapY + innerPadTop + clamp(wp.y, 0.08, 0.92) * innerH,
+    }));
+
+    // Build dense sampled smooth path along quadratic/Catmull curves between waypoints
+    const samplesPerSeg = 32;
+    const pathSamples: Array<{ x: number; y: number; segIndex: number }> = [];
+    for (let i = 0; i < pts.length - 1; i++) {
+      const p0 = pts[i];
+      const p1 = pts[i + 1];
+      const dx = p1.x - p0.x;
+      const dy = p1.y - p0.y;
+      const arcSign = i % 2 === 0 ? -1 : 1;
+      const ctrlX = (p0.x + p1.x) / 2 - dy * 0.18 * arcSign;
+      const ctrlY = (p0.y + p1.y) / 2 + dx * 0.18 * arcSign;
+      for (let s = 0; s < samplesPerSeg; s++) {
+        const t = s / samplesPerSeg;
+        const mt = 1 - t;
+        pathSamples.push({
+          x: mt * mt * p0.x + 2 * mt * t * ctrlX + t * t * p1.x,
+          y: mt * mt * p0.y + 2 * mt * t * ctrlY + t * t * p1.y,
+          segIndex: i,
+        });
+      }
+    }
+    pathSamples.push({ x: pts[pts.length - 1].x, y: pts[pts.length - 1].y, segIndex: pts.length - 1 });
+
+    // Full planned route (dashed)
+    ctx.setLineDash([10 * scale, 9 * scale]);
+    ctx.strokeStyle = hexToRgba(brand.textColor, 0.24);
+    ctx.lineWidth = Math.max(2, 3 * scale);
+    ctx.beginPath();
+    pathSamples.forEach((pt, idx) => {
+      if (idx === 0) ctx.moveTo(pt.x, pt.y);
+      else ctx.lineTo(pt.x, pt.y);
+    });
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Active traveled route (glow + crisp solid accent)
+    const travelProgress = easeInOutCubic(clamp(progress * 1.12));
+    const exactIdx = travelProgress * (pathSamples.length - 1);
+    const maxSample = Math.max(1, Math.floor(exactIdx));
+    const frac = exactIdx - Math.floor(exactIdx);
+    const curA = pathSamples[Math.min(pathSamples.length - 1, Math.floor(exactIdx))];
+    const curB = pathSamples[Math.min(pathSamples.length - 1, Math.floor(exactIdx) + 1)];
+    const travelerX = curA.x + (curB.x - curA.x) * frac;
+    const travelerY = curA.y + (curB.y - curA.y) * frac;
+    const heading = Math.atan2(curB.y - curA.y, curB.x - curA.x);
+
+    // Glow pass
+    ctx.strokeStyle = hexToRgba(brand.primaryColor, 0.34);
+    ctx.lineWidth = Math.max(7, 12 * scale);
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.beginPath();
+    for (let i = 0; i <= maxSample; i++) {
+      if (i === 0) ctx.moveTo(pathSamples[i].x, pathSamples[i].y);
+      else ctx.lineTo(pathSamples[i].x, pathSamples[i].y);
+    }
+    ctx.lineTo(travelerX, travelerY);
+    ctx.stroke();
+
+    // Core path pass
+    ctx.strokeStyle = brand.accentColor;
+    ctx.lineWidth = Math.max(3, 5 * scale);
+    ctx.beginPath();
+    for (let i = 0; i <= maxSample; i++) {
+      if (i === 0) ctx.moveTo(pathSamples[i].x, pathSamples[i].y);
+      else ctx.lineTo(pathSamples[i].x, pathSamples[i].y);
+    }
+    ctx.lineTo(travelerX, travelerY);
+    ctx.stroke();
+
+    // Waypoint pins & animated callout labels
+    let activeStop = pts[0];
+    pts.forEach((wp, idx) => {
+      const stopThreshold = idx / Math.max(1, pts.length - 1);
+      const reached = travelProgress >= stopThreshold - 0.02;
+      if (reached) activeStop = wp;
+      const pop = reached ? easeOutExpo(clamp((travelProgress - stopThreshold + 0.05) * 6)) : 0.45;
+
+      // Outer pulse ring on reached stops
+      if (reached) {
+        const ringPulse = ((safeTime * 1.4 + idx * 0.3) % 1);
+        ctx.strokeStyle = hexToRgba(brand.accentColor, (1 - ringPulse) * 0.55);
+        ctx.lineWidth = 2 * scale;
+        ctx.beginPath();
+        ctx.arc(wp.px, wp.py, (12 + ringPulse * 22) * scale, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+
+      // Pin dot
+      ctx.fillStyle = reached ? brand.accentColor : brand.backgroundColor;
+      ctx.beginPath();
+      ctx.arc(wp.px, wp.py, 9 * scale, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = reached ? '#FFFFFF' : hexToRgba(brand.textColor, 0.55);
+      ctx.lineWidth = 2.5 * scale;
+      ctx.stroke();
+
+      // Label tag
+      const labelAbove = wp.y > 0.45;
+      const tagW = Math.max(124 * scale, wp.name.length * 14 * scale + 36 * scale);
+      const tagH = (wp.day ? 54 : 36) * scale;
+      const tagX = clamp(wp.px - tagW / 2, mapX + 16 * scale, mapX + mapW - tagW - 16 * scale);
+      const tagY = labelAbove ? wp.py - tagH - 18 * scale : wp.py + 18 * scale;
+
+      ctx.save();
+      ctx.globalAlpha = clamp(alpha * (reached ? 0.96 : 0.55));
+      drawRoundedRect(ctx, tagX, tagY + (1 - pop) * 8 * scale, tagW, tagH, 10 * scale);
+      ctx.fillStyle = hexToRgba(brand.backgroundColor, 0.88);
+      ctx.fill();
+      ctx.strokeStyle = reached ? brand.accentColor : hexToRgba(brand.textColor, 0.16);
+      ctx.lineWidth = Math.max(1, 1.5 * scale);
+      ctx.stroke();
+
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.font = `700 ${Math.round(20 * scale)}px ${displayFont}`;
+      ctx.fillStyle = brand.textColor;
+      ctx.fillText(
+        wp.name,
+        tagX + tagW / 2,
+        tagY + (wp.day ? 20 : 18) * scale + (1 - pop) * 8 * scale,
+        tagW - 16 * scale
+      );
+      if (wp.day) {
+        ctx.font = `500 ${Math.round(14 * scale)}px ${monoFont}`;
+        ctx.fillStyle = reached ? brand.accentColor : brand.mutedColor;
+        ctx.fillText(
+          wp.day,
+          tagX + tagW / 2,
+          tagY + 40 * scale + (1 - pop) * 8 * scale,
+          tagW - 16 * scale
+        );
+      }
+      ctx.restore();
+    });
+
+    // Moving transport marker (rotated along heading)
+    ctx.save();
+    ctx.translate(travelerX, travelerY);
+    ctx.fillStyle = hexToRgba(brand.primaryColor, 0.35);
+    ctx.beginPath();
+    ctx.arc(0, 0, 24 * scale, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = brand.primaryColor;
+    ctx.beginPath();
+    ctx.arc(0, 0, 15 * scale, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = '#FFFFFF';
+    ctx.lineWidth = 2.5 * scale;
+    ctx.stroke();
+
+    ctx.rotate(heading);
+    ctx.fillStyle = '#FFFFFF';
+    if (rm.transport === 'plane') {
+      // Crisp vector airplane silhouette
+      ctx.beginPath();
+      ctx.moveTo(10 * scale, 0);
+      ctx.lineTo(2 * scale, -3 * scale);
+      ctx.lineTo(-4 * scale, -10 * scale);
+      ctx.lineTo(-6 * scale, -10 * scale);
+      ctx.lineTo(-3 * scale, -2.5 * scale);
+      ctx.lineTo(-9 * scale, -2 * scale);
+      ctx.lineTo(-11 * scale, -5 * scale);
+      ctx.lineTo(-12.5 * scale, -5 * scale);
+      ctx.lineTo(-11 * scale, 0);
+      ctx.lineTo(-12.5 * scale, 5 * scale);
+      ctx.lineTo(-11 * scale, 5 * scale);
+      ctx.lineTo(-9 * scale, 2 * scale);
+      ctx.lineTo(-3 * scale, 2.5 * scale);
+      ctx.lineTo(-6 * scale, 10 * scale);
+      ctx.lineTo(-4 * scale, 10 * scale);
+      ctx.lineTo(2 * scale, 3 * scale);
+      ctx.closePath();
+      ctx.fill();
+    } else {
+      // Directional chevron arrow for train / car / bike / hike
+      ctx.beginPath();
+      ctx.moveTo(8 * scale, 0);
+      ctx.lineTo(-5 * scale, -6 * scale);
+      ctx.lineTo(-2 * scale, 0);
+      ctx.lineTo(-5 * scale, 6 * scale);
+      ctx.closePath();
+      ctx.fill();
+    }
+    ctx.restore();
+
+    // Top-left map region label
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'top';
+    ctx.font = `600 ${Math.round(17 * scale)}px ${monoFont}`;
+    ctx.fillStyle = brand.mutedColor;
+    const modeLabel =
+      rm.transport === 'plane'
+        ? 'VLUCHTROUTE'
+        : rm.transport === 'train'
+          ? 'TREINROUTE'
+          : rm.transport === 'car'
+            ? 'ROADTRIP'
+            : rm.transport === 'bike'
+              ? 'FIETSROUTE'
+              : 'TREKKING';
+    ctx.fillText(`${rm.regionLabel} · ${modeLabel}`, mapX + 26 * scale, mapY + 22 * scale);
+
+    // Bottom live route telemetry bar
+    const barY = mapY + mapH - stripH;
+    ctx.fillStyle = hexToRgba(brand.backgroundColor, 0.9);
+    ctx.fillRect(mapX, barY, mapW, stripH);
+    ctx.strokeStyle = hexToRgba(brand.textColor, 0.14);
+    ctx.lineWidth = Math.max(1, 1.5 * scale);
+    ctx.beginPath();
+    ctx.moveTo(mapX, barY);
+    ctx.lineTo(mapX + mapW, barY);
+    ctx.stroke();
+
+    const liveKm = Math.round(rm.totalDistanceKm * travelProgress);
+    const cols = 3;
+    const colW = mapW / cols;
+    const stats = [
+      { label: 'AFSTAND', value: `${liveKm.toLocaleString('nl-NL')} / ${rm.totalDistanceKm} km` },
+      { label: 'HUIDIGE STOP', value: `${activeStop.name}${activeStop.highlight ? ` · ${activeStop.highlight}` : ''}` },
+      { label: 'REISDUUR', value: rm.durationLabel },
+    ];
+    stats.forEach((st, idx) => {
+      const sx = mapX + colW * idx + 26 * scale;
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'top';
+      ctx.font = `500 ${Math.round(15 * scale)}px ${monoFont}`;
+      ctx.fillStyle = brand.mutedColor;
+      ctx.fillText(st.label, sx, barY + 18 * scale, colW - 36 * scale);
+      ctx.font = `700 ${Math.round((isPortrait ? 20 : 23) * scale)}px ${idx === 1 ? displayFont : monoFont}`;
+      ctx.fillStyle = idx === 0 ? brand.accentColor : brand.textColor;
+      ctx.fillText(st.value, sx, barY + 44 * scale, colW - 36 * scale);
+    });
+
+    ctx.restore();
+  } else if (scene.layout === 'travel-postcard-reel') {
+    // Cinematic travel video scene with procedural parallax landscape + camera HUD + itinerary highlights
+    const tc = scene.travelCard ?? {
+      destination: 'Amalfikust',
+      country: 'Italië',
+      coordinates: '40.6340° N, 14.6027° E',
+      season: 'Mei – September',
+      landscapeTheme: 'coastal' as const,
+      highlights: [
+        { time: '08:00', spot: 'Positano Klifpad', note: 'Zonsopgang boven de baai' },
+        { time: '13:30', spot: 'Ravello Terrassen', note: 'Uitzicht over de Tyrrheense Zee' },
+        { time: '19:45', spot: 'Amalfi Haven', note: 'Golden hour boottocht' },
+      ],
+    };
+
+    const cardX = padX;
+    const cardY = h * 0.13;
+    const cardW = contentW;
+    const heroH = isPortrait ? h * 0.41 : h * 0.46;
+
+    // 1. Procedural atmospheric landscape frame
+    ctx.save();
+    drawRoundedRect(ctx, cardX, cardY, cardW, heroH, 22 * scale);
+    ctx.clip();
+
+    const skyGrad = ctx.createLinearGradient(0, cardY, 0, cardY + heroH);
+    if (tc.landscapeTheme === 'coastal') {
+      skyGrad.addColorStop(0, '#0C4A6E');
+      skyGrad.addColorStop(0.55, '#0284C7');
+      skyGrad.addColorStop(1, '#F59E0B');
+    } else if (tc.landscapeTheme === 'desert') {
+      skyGrad.addColorStop(0, '#431407');
+      skyGrad.addColorStop(0.5, '#C2410C');
+      skyGrad.addColorStop(1, '#FBBF24');
+    } else if (tc.landscapeTheme === 'neon-city') {
+      skyGrad.addColorStop(0, '#09091A');
+      skyGrad.addColorStop(0.55, '#312E81');
+      skyGrad.addColorStop(1, '#BE185D');
+    } else {
+      // alpine
+      skyGrad.addColorStop(0, '#0F172A');
+      skyGrad.addColorStop(0.55, '#1D4ED8');
+      skyGrad.addColorStop(1, '#93C5FD');
+    }
+    ctx.fillStyle = skyGrad;
+    ctx.fillRect(cardX, cardY, cardW, heroH);
+
+    // Sun / moon glow
+    const sunX = cardX + cardW * (0.72 + Math.sin(safeTime * 0.25) * 0.03);
+    const sunY = cardY + heroH * 0.34;
+    const sunR = 64 * scale;
+    const sunHalo = ctx.createRadialGradient(sunX, sunY, sunR * 0.2, sunX, sunY, sunR * 2.8);
+    sunHalo.addColorStop(0, 'rgba(255, 250, 230, 0.92)');
+    sunHalo.addColorStop(0.45, 'rgba(255, 220, 150, 0.32)');
+    sunHalo.addColorStop(1, 'rgba(255, 220, 150, 0)');
+    ctx.fillStyle = sunHalo;
+    ctx.beginPath();
+    ctx.arc(sunX, sunY, sunR * 2.8, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Parallax terrain layers based on landscapeTheme
+    const drift = safeTime * 22 * scale;
+    if (tc.landscapeTheme === 'neon-city') {
+      // Stylized architectural skyline silhouettes with glowing windows
+      const bCount = 16;
+      const bw = cardW / bCount;
+      for (let i = 0; i < bCount; i++) {
+        const bh = heroH * (0.28 + ((i * 37) % 10) * 0.048);
+        const bx = cardX + i * bw - ((drift * 0.3) % bw);
+        const by = cardY + heroH - bh;
+        ctx.fillStyle = i % 2 === 0 ? '#0F172A' : '#1E1B4B';
+        ctx.fillRect(bx, by, bw + 2, bh);
+        // Illuminated accent windows
+        ctx.fillStyle = i % 3 === 0 ? '#38BDF8' : '#F472B6';
+        for (let wy = by + 16 * scale; wy < cardY + heroH - 20 * scale; wy += 24 * scale) {
+          if (((i + Math.floor(wy)) % 3) === 0) {
+            ctx.fillRect(bx + 10 * scale, wy, bw * 0.32, 6 * scale);
+          }
+        }
+      }
+    } else if (tc.landscapeTheme === 'coastal') {
+      // Cliffs + shimmering sea horizon
+      const seaY = cardY + heroH * 0.64;
+      ctx.fillStyle = '#0369A1';
+      ctx.fillRect(cardX, seaY, cardW, heroH - (seaY - cardY));
+      // Shimmering water lines
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.28)';
+      for (let r = 0; r < 9; r++) {
+        const ry = seaY + 14 * scale + r * 18 * scale;
+        const rw = (90 + (r % 4) * 40) * scale;
+        const rx = sunX - rw / 2 + Math.sin(safeTime * 2 + r) * 18 * scale;
+        drawRoundedRect(ctx, rx, ry, rw, 3 * scale, 2 * scale);
+        ctx.fill();
+      }
+      // Coastal promontory silhouette on left
+      ctx.fillStyle = '#0F172A';
+      ctx.beginPath();
+      ctx.moveTo(cardX, cardY + heroH);
+      ctx.lineTo(cardX, cardY + heroH * 0.42);
+      ctx.quadraticCurveTo(cardX + cardW * 0.22, cardY + heroH * 0.46, cardX + cardW * 0.42, seaY + 12 * scale);
+      ctx.lineTo(cardX + cardW * 0.42, cardY + heroH);
+      ctx.closePath();
+      ctx.fill();
+    } else {
+      // Layered dunes (desert) or mountain peaks (alpine)
+      const layerColors =
+        tc.landscapeTheme === 'desert'
+          ? ['#9A3412', '#7C2D12', '#431407']
+          : ['#1E3A8A', '#1E293B', '#0F172A'];
+      layerColors.forEach((col, li) => {
+        ctx.fillStyle = col;
+        ctx.beginPath();
+        ctx.moveTo(cardX, cardY + heroH);
+        const baseH = cardY + heroH * (0.56 + li * 0.12);
+        const amp = (tc.landscapeTheme === 'desert' ? 28 : 62 - li * 12) * scale;
+        for (let x = 0; x <= cardW + 20; x += 28 * scale) {
+          const phase = (x + drift * (0.4 + li * 0.35)) * (tc.landscapeTheme === 'desert' ? 0.005 : 0.009);
+          const peak =
+            tc.landscapeTheme === 'desert'
+              ? Math.sin(phase + li * 2) * amp
+              : Math.abs(Math.sin(phase + li * 1.4)) * -amp;
+          ctx.lineTo(cardX + x, baseH + peak);
+        }
+        ctx.lineTo(cardX + cardW, cardY + heroH);
+        ctx.closePath();
+        ctx.fill();
+      });
+    }
+
+    // Dark gradient vignette for legible white editorial overlay
+    const vig = ctx.createLinearGradient(0, cardY, 0, cardY + heroH);
+    vig.addColorStop(0, 'rgba(0,0,0,0.42)');
+    vig.addColorStop(0.5, 'rgba(0,0,0,0.12)');
+    vig.addColorStop(1, 'rgba(0,0,0,0.72)');
+    ctx.fillStyle = vig;
+    ctx.fillRect(cardX, cardY, cardW, heroH);
+
+    // Top camera HUD overlay
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'top';
+    ctx.font = `500 ${Math.round(18 * scale)}px ${monoFont}`;
+    ctx.fillStyle = 'rgba(255,255,255,0.82)';
+    ctx.fillText(`REC · 24mm f/2.8 · ${tc.coordinates}`, cardX + 28 * scale, cardY + 24 * scale);
+
+    ctx.textAlign = 'right';
+    ctx.fillText(tc.season.toUpperCase(), cardX + cardW - 28 * scale, cardY + 24 * scale);
+
+    // Bottom-left giant destination title inside postcard
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'bottom';
+    ctx.font = `600 ${Math.round(20 * scale)}px ${monoFont}`;
+    ctx.fillStyle = brand.accentColor;
+    ctx.fillText(tc.country.toUpperCase(), cardX + 32 * scale, cardY + heroH - 84 * scale);
+
+    ctx.font = `700 ${Math.round((isPortrait ? 56 : 64) * scale)}px ${displayFont}`;
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fillText(tc.destination, cardX + 32 * scale, cardY + heroH - 22 * scale, cardW - 200 * scale);
+
+    // Animated circular passport stamp on right
+    const stampReveal = easeOutExpo(clamp((localTime - 0.25) / 0.5));
+    const stampCx = cardX + cardW - 96 * scale;
+    const stampCy = cardY + heroH - 86 * scale;
+    ctx.save();
+    ctx.translate(stampCx, stampCy);
+    ctx.rotate(-0.18 + Math.sin(safeTime * 0.7) * 0.04);
+    ctx.scale(0.85 + stampReveal * 0.15, 0.85 + stampReveal * 0.15);
+    ctx.strokeStyle = 'rgba(255,255,255,0.78)';
+    ctx.lineWidth = 2.5 * scale;
+    ctx.beginPath();
+    ctx.arc(0, 0, 52 * scale, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(0, 0, 44 * scale, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.font = `700 ${Math.round(14 * scale)}px ${monoFont}`;
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fillText('VERIFIED', 0, -10 * scale);
+    ctx.fillText('REISLOG', 0, 12 * scale);
+    ctx.restore();
+
+    ctx.restore();
+
+    // Border around landscape frame
+    drawRoundedRect(ctx, cardX, cardY, cardW, heroH, 22 * scale);
+    ctx.strokeStyle = hexToRgba(brand.textColor, 0.18);
+    ctx.lineWidth = Math.max(1.5, 2 * scale);
+    ctx.stroke();
+
+    // 2. Lower itinerary highlights strip (3 animated moments)
+    const stripY = cardY + heroH + 26 * scale;
+    const stripH = h * 0.86 - stripY;
+    const moments = tc.highlights.slice(0, 3);
+    const activeMoment = Math.min(moments.length - 1, Math.floor(progress * moments.length));
+
+    const gap = 18 * scale;
+    const mW = isPortrait ? cardW : (cardW - gap * (moments.length - 1)) / Math.max(1, moments.length);
+    const mH = isPortrait ? (stripH - gap * (moments.length - 1)) / Math.max(1, moments.length) : stripH;
+
+    moments.forEach((m, idx) => {
+      const reveal = easeOutExpo(clamp((localTime - 0.15 - idx * 0.16) / 0.45));
+      const mx = isPortrait ? cardX : cardX + idx * (mW + gap);
+      const my = (isPortrait ? stripY + idx * (mH + gap) : stripY) + (1 - reveal) * 18 * scale;
+      const isAct = idx === activeMoment;
+
+      ctx.save();
+      ctx.globalAlpha = clamp(alpha * reveal);
+      drawRoundedRect(ctx, mx, my, mW, mH, 16 * scale);
+      ctx.fillStyle = brand.surfaceColor;
+      ctx.fill();
+      ctx.strokeStyle = isAct ? brand.primaryColor : hexToRgba(brand.textColor, 0.14);
+      ctx.lineWidth = Math.max(1.5, (isAct ? 2.6 : 1.5) * scale);
+      ctx.stroke();
+
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'top';
+      ctx.font = `600 ${Math.round(18 * scale)}px ${monoFont}`;
+      ctx.fillStyle = isAct ? brand.accentColor : brand.primaryColor;
+      ctx.fillText(m.time, mx + 22 * scale, my + 20 * scale);
+
+      ctx.font = `700 ${Math.round(25 * scale)}px ${displayFont}`;
+      ctx.fillStyle = brand.textColor;
+      ctx.fillText(m.spot, mx + 22 * scale, my + 50 * scale, mW - 44 * scale);
+
+      ctx.font = `400 ${Math.round(20 * scale)}px ${bodyFont}`;
+      ctx.fillStyle = brand.mutedColor;
+      const nLines = wrapText(ctx, m.note, mW - 44 * scale);
+      nLines.slice(0, 2).forEach((nl, ni) => {
+        ctx.fillText(nl, mx + 22 * scale, my + 86 * scale + ni * 28 * scale);
+      });
+      ctx.restore();
+    });
+  } else if (scene.layout === 'faceless-explainer') {
+    // High-retention Faceless Explainer (YouTube & Shorts) with animated visual metaphor + synchronized karaoke captions
+    const ex = scene.explainer ?? {
+      chapter: 'HOOFDSTUK 01',
+      visualType: 'compounding' as const,
+      visualLabels: ['Dag 1', 'Dag 90', 'Dag 180', 'Dag 365'],
+      voiceoverWords: [
+        'Kleine',
+        'verbeteringen',
+        'van',
+        '1%',
+        'per',
+        'dag',
+        'groeien',
+        'exponentieel',
+        'over',
+        'een',
+        'jaar.',
+      ],
+      statBadge: '37.7× EFFECT',
+    };
+
+    const topY = h * 0.13;
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'top';
+    ctx.font = `600 ${Math.round(20 * scale)}px ${monoFont}`;
+    ctx.fillStyle = brand.accentColor;
+    ctx.fillText(ex.chapter, padX, topY);
+
+    if (ex.statBadge) {
+      ctx.textAlign = 'right';
+      ctx.font = `700 ${Math.round(22 * scale)}px ${monoFont}`;
+      ctx.fillStyle = brand.primaryColor;
+      ctx.fillText(ex.statBadge, padX + contentW, topY);
+    }
+
+    ctx.textAlign = 'left';
+    const headSize = Math.round((isPortrait ? 46 : 48) * scale);
+    ctx.font = `700 ${headSize}px ${displayFont}`;
+    ctx.fillStyle = brand.textColor;
+    const hLines = wrapText(ctx, scene.headline, contentW);
+    hLines.forEach((l, li) => ctx.fillText(l, padX, topY + 34 * scale + li * headSize * 1.13));
+
+    const stageY = topY + 56 * scale + hLines.length * headSize * 1.13;
+    const captionBoxH = (isPortrait ? 210 : 156) * scale;
+    const stageH = Math.max(220 * scale, h * 0.86 - stageY - captionBoxH - 22 * scale);
+
+    // Visual Metaphor Stage
+    drawRoundedRect(ctx, padX, stageY, contentW, stageH, 20 * scale);
+    ctx.fillStyle = brand.surfaceColor;
+    ctx.fill();
+    ctx.strokeStyle = hexToRgba(brand.textColor, 0.14);
+    ctx.lineWidth = Math.max(1.5, 1.8 * scale);
+    ctx.stroke();
+
+    const sCx = padX + contentW / 2;
+    const sCy = stageY + stageH / 2;
+    const animT = easeOutCubic(clamp(progress * 1.35));
+    const labels = ex.visualLabels.length > 0 ? ex.visualLabels : ['A', 'B', 'C', 'D'];
+
+    if (ex.visualType === 'compounding') {
+      // Exponential climbing staircase bars + sweeping upward curve
+      const count = 8;
+      const plotW = contentW * 0.78;
+      const plotX = sCx - plotW / 2;
+      const plotBottom = stageY + stageH - 54 * scale;
+      const maxBarH = stageH * 0.68;
+      const stepW = plotW / count;
+
+      for (let i = 0; i < count; i++) {
+        const expVal = Math.pow((i + 1) / count, 2.35);
+        const barReveal = clamp(animT * count - i * 0.65);
+        const bh = Math.max(12 * scale, maxBarH * expVal * easeOutCubic(barReveal));
+        const bx = plotX + i * stepW + 8 * scale;
+        const bw = stepW - 16 * scale;
+        drawRoundedRect(ctx, bx, plotBottom - bh, bw, bh, 8 * scale);
+        ctx.fillStyle = i >= count - 2 ? brand.accentColor : hexToRgba(brand.primaryColor, 0.45 + (i / count) * 0.55);
+        ctx.fill();
+      }
+
+      // Labels underneath
+      ctx.font = `500 ${Math.round(18 * scale)}px ${monoFont}`;
+      ctx.fillStyle = brand.mutedColor;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'top';
+      labels.slice(0, 4).forEach((lb, idx) => {
+        const lx = plotX + (plotW / Math.max(1, Math.min(4, labels.length) - 1)) * idx;
+        ctx.fillText(lb, lx, plotBottom + 14 * scale);
+      });
+    } else if (ex.visualType === 'iceberg') {
+      // Waterline + visible tip vs submerged deep layers
+      const waterY = stageY + stageH * 0.36;
+      ctx.fillStyle = hexToRgba(brand.primaryColor, 0.14);
+      ctx.fillRect(padX + 2, waterY, contentW - 4, stageY + stageH - waterY - 2);
+      ctx.strokeStyle = brand.accentColor;
+      ctx.lineWidth = 2.5 * scale;
+      ctx.beginPath();
+      ctx.moveTo(padX + 24 * scale, waterY);
+      ctx.lineTo(padX + contentW - 24 * scale, waterY);
+      ctx.stroke();
+
+      // Tip above water
+      const tipX = isPortrait ? sCx : padX + contentW * 0.34;
+      ctx.fillStyle = '#FFFFFF';
+      ctx.beginPath();
+      ctx.moveTo(tipX, stageY + 34 * scale);
+      ctx.lineTo(tipX - 68 * scale, waterY);
+      ctx.lineTo(tipX + 68 * scale, waterY);
+      ctx.closePath();
+      ctx.fill();
+
+      // Deep submerged mass
+      const deepH = (stageY + stageH - waterY - 28 * scale) * animT;
+      ctx.fillStyle = hexToRgba(brand.primaryColor, 0.65);
+      ctx.beginPath();
+      ctx.moveTo(tipX - 68 * scale, waterY);
+      ctx.lineTo(tipX + 68 * scale, waterY);
+      ctx.lineTo(tipX + 130 * scale, waterY + deepH * 0.52);
+      ctx.lineTo(tipX + 24 * scale, waterY + deepH);
+      ctx.lineTo(tipX - 115 * scale, waterY + deepH * 0.64);
+      ctx.closePath();
+      ctx.fill();
+
+      // Callout labels on right
+      const callX = isPortrait ? padX + 28 * scale : padX + contentW * 0.55;
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'middle';
+      labels.slice(0, 4).forEach((lb, idx) => {
+        const ly = stageY + 58 * scale + idx * ((stageH - 96 * scale) / 3.2);
+        const rev = easeOutExpo(clamp((localTime - idx * 0.22) / 0.45));
+        ctx.save();
+        ctx.globalAlpha = clamp(alpha * rev);
+        ctx.font = `600 ${Math.round(21 * scale)}px ${displayFont}`;
+        ctx.fillStyle = idx === 0 ? brand.accentColor : brand.textColor;
+        ctx.fillText(`${String(idx + 1).padStart(2, '0')} · ${lb}`, callX, ly, contentW * 0.42);
+        ctx.restore();
+      });
+    } else if (ex.visualType === 'funnel') {
+      // 4-stage narrowing attention/conversion funnel with animated falling particles
+      const stages = labels.slice(0, 4);
+      const fCount = Math.max(3, stages.length);
+      const topW = contentW * (isPortrait ? 0.8 : 0.62);
+      const botW = contentW * (isPortrait ? 0.28 : 0.2);
+      const fTop = stageY + 34 * scale;
+      const fTotalH = stageH - 68 * scale;
+      const segH = fTotalH / fCount;
+
+      for (let i = 0; i < fCount; i++) {
+        const w1 = topW + ((botW - topW) * i) / fCount;
+        const w2 = topW + ((botW - topW) * (i + 1)) / fCount;
+        const y1 = fTop + i * segH + 4 * scale;
+        const y2 = fTop + (i + 1) * segH - 4 * scale;
+        const active = Math.floor(progress * fCount) === i;
+
+        ctx.beginPath();
+        ctx.moveTo(sCx - w1 / 2, y1);
+        ctx.lineTo(sCx + w1 / 2, y1);
+        ctx.lineTo(sCx + w2 / 2, y2);
+        ctx.lineTo(sCx - w2 / 2, y2);
+        ctx.closePath();
+        ctx.fillStyle = active ? brand.primaryColor : hexToRgba(brand.primaryColor, 0.24 + (i / fCount) * 0.25);
+        ctx.fill();
+        ctx.strokeStyle = active ? brand.accentColor : hexToRgba(brand.textColor, 0.18);
+        ctx.lineWidth = Math.max(1.5, 2 * scale);
+        ctx.stroke();
+
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.font = `700 ${Math.round(22 * scale)}px ${displayFont}`;
+        ctx.fillStyle = active ? '#FFFFFF' : brand.textColor;
+        ctx.fillText(stages[i] ?? `Stap ${i + 1}`, sCx, (y1 + y2) / 2, w2 * 0.92);
+      }
+    } else if (ex.visualType === 'network-ripple') {
+      // Central broadcast node + expanding concentric sonar rings + orbiting satellite nodes
+      const maxR = Math.min(contentW, stageH) * 0.4;
+      for (let r = 0; r < 3; r++) {
+        const phase = (safeTime * 0.55 + r * 0.33) % 1;
+        ctx.strokeStyle = hexToRgba(brand.accentColor, (1 - phase) * 0.55);
+        ctx.lineWidth = 2.5 * scale;
+        ctx.beginPath();
+        ctx.arc(sCx, sCy, 28 * scale + phase * maxR, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+      const satCount = Math.max(3, Math.min(5, labels.length));
+      for (let i = 0; i < satCount; i++) {
+        const ang = (i / satCount) * Math.PI * 2 - Math.PI / 2 + safeTime * 0.22;
+        const sx = sCx + Math.cos(ang) * maxR * 0.82;
+        const sy = sCy + Math.sin(ang) * maxR * 0.72;
+        ctx.strokeStyle = hexToRgba(brand.textColor, 0.22);
+        ctx.lineWidth = 2 * scale;
+        ctx.beginPath();
+        ctx.moveTo(sCx, sCy);
+        ctx.lineTo(sx, sy);
+        ctx.stroke();
+
+        ctx.fillStyle = brand.backgroundColor;
+        ctx.beginPath();
+        ctx.arc(sx, sy, 12 * scale, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = brand.accentColor;
+        ctx.lineWidth = 3 * scale;
+        ctx.stroke();
+
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.font = `600 ${Math.round(19 * scale)}px ${monoFont}`;
+        ctx.fillStyle = brand.textColor;
+        ctx.fillText(labels[i % labels.length], sx, sy + (Math.sin(ang) >= 0 ? 30 : -30) * scale);
+      }
+      ctx.fillStyle = brand.primaryColor;
+      ctx.beginPath();
+      ctx.arc(sCx, sCy, 28 * scale, 0, Math.PI * 2);
+      ctx.fill();
+    } else {
+      // 'balance-scale': animated tipping beam comparing two concepts
+      const tilt = Math.sin(safeTime * 1.4) * 0.14 - 0.08 * animT;
+      const beamW = contentW * 0.58;
+      // Fulcrum triangle
+      ctx.fillStyle = brand.primaryColor;
+      ctx.beginPath();
+      ctx.moveTo(sCx, sCy + 8 * scale);
+      ctx.lineTo(sCx - 34 * scale, sCy + 76 * scale);
+      ctx.lineTo(sCx + 34 * scale, sCy + 76 * scale);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.save();
+      ctx.translate(sCx, sCy);
+      ctx.rotate(tilt);
+      ctx.strokeStyle = brand.accentColor;
+      ctx.lineWidth = 6 * scale;
+      ctx.beginPath();
+      ctx.moveTo(-beamW / 2, 0);
+      ctx.lineTo(beamW / 2, 0);
+      ctx.stroke();
+
+      // Left and right weighted concept blocks
+      [-1, 1].forEach((side, idx) => {
+        const bx = side * (beamW / 2);
+        const boxW = 190 * scale;
+        const boxH = 74 * scale;
+        drawRoundedRect(ctx, bx - boxW / 2, -boxH - 12 * scale, boxW, boxH, 14 * scale);
+        ctx.fillStyle = idx === 1 ? brand.primaryColor : brand.backgroundColor;
+        ctx.fill();
+        ctx.strokeStyle = brand.accentColor;
+        ctx.lineWidth = 2 * scale;
+        ctx.stroke();
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.font = `700 ${Math.round(22 * scale)}px ${displayFont}`;
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillText(labels[idx] ?? (idx === 0 ? 'Korte termijn' : 'Lange termijn'), bx, -boxH / 2 - 12 * scale, boxW - 20 * scale);
+      });
+      ctx.restore();
+    }
+
+    // Synchronized word-by-word karaoke caption box (lower zone)
+    const capY = stageY + stageH + 22 * scale;
+    drawRoundedRect(ctx, padX, capY, contentW, captionBoxH, 18 * scale);
+    ctx.fillStyle = hexToRgba(brand.backgroundColor, 0.92);
+    ctx.fill();
+    ctx.strokeStyle = hexToRgba(brand.primaryColor, 0.45);
+    ctx.lineWidth = Math.max(1.5, 2 * scale);
+    ctx.stroke();
+
+    // Mini animated voiceover equalizer bars at top-left of caption box
+    for (let b = 0; b < 5; b++) {
+      const bh = (8 + Math.abs(Math.sin(safeTime * 9 + b * 1.1)) * 18) * scale;
+      drawRoundedRect(ctx, padX + 26 * scale + b * 9 * scale, capY + 26 * scale - bh / 2, 5 * scale, bh, 2.5 * scale);
+      ctx.fillStyle = brand.accentColor;
+      ctx.fill();
+    }
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    ctx.font = `600 ${Math.round(16 * scale)}px ${monoFont}`;
+    ctx.fillStyle = brand.mutedColor;
+    ctx.fillText('VOICEOVER SCRIPT · SYNC', padX + 82 * scale, capY + 26 * scale);
+
+    // Highlighted karaoke words wrapped across 2 clean lines
+    const words = ex.voiceoverWords.length > 0 ? ex.voiceoverWords : scene.headline.split(/\s+/);
+    const activeWordIdx = Math.min(words.length - 1, Math.floor(progress * words.length));
+    const capFontSize = Math.round((isPortrait ? 32 : 30) * scale);
+    ctx.font = `700 ${capFontSize}px ${displayFont}`;
+
+    const wordGap = 14 * scale;
+    const maxLineW = contentW - 56 * scale;
+    const linesOfWords: Array<Array<{ word: string; idx: number; w: number }>> = [[]];
+    let curW = 0;
+    words.forEach((word, idx) => {
+      const ww = ctx.measureText(word).width + 16 * scale;
+      if (curW > 0 && curW + ww > maxLineW) {
+        linesOfWords.push([]);
+        curW = 0;
+      }
+      linesOfWords[linesOfWords.length - 1].push({ word, idx, w: ww });
+      curW += ww + wordGap;
+    });
+
+    // Show the 2 lines window around activeWordIdx
+    let activeLineIdx = 0;
+    linesOfWords.forEach((ln, li) => {
+      if (ln.some((wItem) => wItem.idx === activeWordIdx)) activeLineIdx = li;
+    });
+    const startLine = Math.max(0, Math.min(linesOfWords.length - 2, activeLineIdx));
+    const visibleWordLines = linesOfWords.slice(startLine, startLine + 2);
+
+    visibleWordLines.forEach((ln, li) => {
+      const totalLnW = ln.reduce((acc, item) => acc + item.w, 0) + Math.max(0, ln.length - 1) * wordGap;
+      let wx = padX + (contentW - totalLnW) / 2;
+      const wy = capY + (isPortrait ? 92 : 82) * scale + li * (capFontSize * 1.55);
+
+      ln.forEach((item) => {
+        const isCurrent = item.idx === activeWordIdx;
+        const isSpoken = item.idx <= activeWordIdx;
+        if (isCurrent) {
+          drawRoundedRect(ctx, wx - 4 * scale, wy - capFontSize * 0.72, item.w + 8 * scale, capFontSize * 1.38, 10 * scale);
+          ctx.fillStyle = brand.primaryColor;
+          ctx.fill();
+        }
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = isCurrent ? '#FFFFFF' : isSpoken ? brand.textColor : hexToRgba(brand.mutedColor, 0.55);
+        ctx.fillText(item.word, wx + item.w / 2, wy);
+        wx += item.w + wordGap;
+      });
+    });
   } else if (scene.layout === 'outro-cta') {
     const centerY = h * 0.47;
     ctx.textAlign = 'center';

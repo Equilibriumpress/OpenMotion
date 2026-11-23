@@ -144,6 +144,9 @@ export function normalizeOpenMotionProject(
     'node-graph-flow',
     'kinetic-marquee',
     'code-diff-deploy',
+    'route-map-journey',
+    'travel-postcard-reel',
+    'faceless-explainer',
   ]);
   const validBackdrops = new Set([
     'grid-architectural',
@@ -349,6 +352,18 @@ export function normalizeOpenMotionProject(
               duration: String(ds.duration ?? '0.5s'),
             }))
         : undefined,
+      routeMap:
+        sc.routeMap && typeof sc.routeMap === 'object'
+          ? (sc.routeMap as OpenMotionScene['routeMap'])
+          : undefined,
+      travelCard:
+        sc.travelCard && typeof sc.travelCard === 'object'
+          ? (sc.travelCard as OpenMotionScene['travelCard'])
+          : undefined,
+      explainer:
+        sc.explainer && typeof sc.explainer === 'object'
+          ? (sc.explainer as OpenMotionScene['explainer'])
+          : undefined,
     };
   });
 
@@ -753,8 +768,11 @@ Geef UITSLUITEND geldige JSON terug die exact voldoet aan dit schema:
   ]
 }
 
-Beschikbare layouts (26): "3d-wireframe-stage", "live-line-chart", "node-graph-flow", "kinetic-marquee", "code-diff-deploy", "ui-morph", "beat-kinetic", "visual-lesson", "bento-montage", "paper-cutout", "pricing-tiers", "mobile-screens", "poster-editorial", "hero-kinetic", "step-tutorial", "data-rings", "ui-mockup", "before-after", "waveform-captions", "timeline-roadmap", "quote-spotlight", "metric-spotlight", "feature-cards", "code-terminal", "split-showcase", "outro-cta".
+Beschikbare layouts (29): "route-map-journey", "travel-postcard-reel", "faceless-explainer", "3d-wireframe-stage", "live-line-chart", "node-graph-flow", "kinetic-marquee", "code-diff-deploy", "ui-morph", "beat-kinetic", "visual-lesson", "bento-montage", "paper-cutout", "pricing-tiers", "mobile-screens", "poster-editorial", "hero-kinetic", "step-tutorial", "data-rings", "ui-mockup", "before-after", "waveform-captions", "timeline-roadmap", "quote-spotlight", "metric-spotlight", "feature-cards", "code-terminal", "split-showcase", "outro-cta".
 Optionele scène-velden per layout:
+- route-map-journey: routeMap ({regionLabel, transport: "plane"|"train"|"car"|"bike"|"hike", totalDistanceKm, durationLabel, waypoints: [{name, x, y, day, highlight, km}]})
+- travel-postcard-reel: travelCard ({destination, country, coordinates, season, landscapeTheme: "alpine"|"coastal"|"desert"|"neon-city", highlights: [{time, spot, note}]})
+- faceless-explainer: explainer ({chapter, visualType: "funnel"|"compounding"|"balance-scale"|"network-ripple"|"iceberg", visualLabels: string[], voiceoverWords: string[], statBadge?})
 - 3d-wireframe-stage: wireframeShape ("cube-stack" | "octahedron" | "iso-layers"), wireframeSpecs ([{label, value}])
 - live-line-chart: chartSeries ({label, unit, points: [{xLabel, value}], secondaryPoints?: number[]})
 - node-graph-flow: graphNodes ([{id, label, sublabel}] — 2 tot 4 verbonden architectuur-nodes)

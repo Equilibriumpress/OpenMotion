@@ -26,7 +26,10 @@ export type SceneLayout =
   | 'live-line-chart'
   | 'node-graph-flow'
   | 'kinetic-marquee'
-  | 'code-diff-deploy';
+  | 'code-diff-deploy'
+  | 'route-map-journey'
+  | 'travel-postcard-reel'
+  | 'faceless-explainer';
 
 export type SceneTransition = 'fade' | 'slide-up' | 'wipe-left' | 'zoom';
 
@@ -160,6 +163,46 @@ export interface SceneDeployStep {
   duration: string;
 }
 
+export interface SceneRouteWaypoint {
+  name: string;
+  x: number;
+  y: number;
+  day?: string;
+  highlight?: string;
+  km?: number;
+}
+
+export interface SceneRouteMap {
+  regionLabel: string;
+  transport: 'plane' | 'train' | 'car' | 'bike' | 'hike';
+  totalDistanceKm: number;
+  durationLabel: string;
+  waypoints: SceneRouteWaypoint[];
+}
+
+export interface SceneTravelHighlight {
+  time: string;
+  spot: string;
+  note: string;
+}
+
+export interface SceneTravelCard {
+  destination: string;
+  country: string;
+  coordinates: string;
+  season: string;
+  landscapeTheme: 'alpine' | 'coastal' | 'desert' | 'neon-city';
+  highlights: SceneTravelHighlight[];
+}
+
+export interface SceneFacelessExplainer {
+  chapter: string;
+  visualType: 'funnel' | 'compounding' | 'balance-scale' | 'network-ripple' | 'iceberg';
+  visualLabels: string[];
+  voiceoverWords: string[];
+  statBadge?: string;
+}
+
 export interface OpenMotionScene {
   id: string;
   name: string;
@@ -203,6 +246,10 @@ export interface OpenMotionScene {
   marqueeRows?: string[];
   diffLines?: SceneDiffLine[];
   deploySteps?: SceneDeployStep[];
+  // Route Maps, Travel Videos & Faceless Explainers
+  routeMap?: SceneRouteMap;
+  travelCard?: SceneTravelCard;
+  explainer?: SceneFacelessExplainer;
 }
 
 export interface OpenMotionBrandKit {
@@ -271,6 +318,9 @@ export interface RenderProgressState {
 }
 
 export const ALL_SCENE_LAYOUTS: SceneLayout[] = [
+  'route-map-journey',
+  'travel-postcard-reel',
+  'faceless-explainer',
   '3d-wireframe-stage',
   'live-line-chart',
   'node-graph-flow',
@@ -309,6 +359,9 @@ export const ALL_BACKDROPS: MotionBackdrop[] = [
 ];
 
 export const LAYOUT_DISPLAY_NAMES: Record<SceneLayout, string> = {
+  'route-map-journey': 'Animated Route Map',
+  'travel-postcard-reel': 'Reisvideo Postcard',
+  'faceless-explainer': 'Faceless Explainer',
   '3d-wireframe-stage': '3D Wireframe Stage',
   'live-line-chart': 'Live Groeicurve & Chart',
   'node-graph-flow': 'Node-Graph Architectuur',
