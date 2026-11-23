@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "1.0",
+  "id": "repo-starter-openmotion-pages",
+  "slug": "openmotion-pages-starter",
+  "title": "GitHub Pages Starter — Live Repo Project",
+  "description": "Voorbeeldproject rechtstreeks uit de map projects/ van deze repository. Vervang of breid uit met ChatGPT-commits om direct op GitHub Pages te tonen.",
+  "category": "OpenMotion Showcase",
+  "author": "GitHub Repository",
+  "source": "github",
+  "createdAt": "2026-11-23",
+  "updatedAt": "2026-11-23",
+  "githubPath": "projects/openmotion-pages-starter/project.json",
+  "format": "16:9",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "brandKit": {
+    "brandName": "OpenMotion Pages",
+    "primaryColor": "#2563EB",
+    "accentColor": "#38BDF8",
+    "backgroundColor": "#080D1A",
+    "surfaceColor": "#111A2E",
+    "textColor": "#F8FAFC",
+    "mutedColor": "#94A3B8",
+    "fontFamily": "Bricolage Grotesque"
+  },
+  "scenes": [
+    {
+      "id": "ghp-1",
+      "name": "3D Engine Opening",
+      "durationSec": 4.2,
+      "layout": "3d-wireframe-stage",
+      "transition": "fade",
+      "backdrop": "grid-architectural",
+      "eyebrow": "projects/openmotion-pages-starter/project.json",
+      "headline": "Live gehost op GitHub Pages met directe MP4-export",
+      "subheadline": "Elke commit in de map projects/ verschijnt automatisch in deze bibliotheek.",
+      "wireframeShape": "cube-stack",
+      "wireframeSpecs": [
+        { "label": "Hosting", "value": "GitHub Pages" },
+        { "label": "Encoder", "value": "WebCodecs H.264" },
+        { "label": "Deep-Link", "value": "#studio/slug" }
+      ]
+    },
+    {
+      "id": "ghp-2",
+      "name": "Pipeline Flow",
+      "durationSec": 4.2,
+      "layout": "node-graph-flow",
+      "transition": "slide-up",
+      "backdrop": "dot-matrix",
+      "eyebrow": "Volledig Geautomatiseerd",
+      "headline": "Van ChatGPT-commit naar afspeelbare MP4 in 4 stappen",
+      "graphNodes": [
+        { "id": "n1", "label": "ChatGPT", "sublabel": "project.json" },
+        { "id": "n2", "label": "GitHub Repo", "sublabel": "projects/**" },
+        { "id": "n3", "label": "GH Actions", "sublabel": "manifest.json" },
+        { "id": "n4", "label": "GitHub Pages", "sublabel": "WebCodecs MP4" }
+      ]
+    },
+    {
+      "id": "ghp-3",
+      "name": "Outro",
+      "durationSec": 2.8,
+      "layout": "outro-cta",
+      "transition": "zoom",
+      "backdrop": "radial-studio",
+      "eyebrow": "OpenMotion Vault",
+      "headline": "Klaar om jouw eerste eigen video te committen",
+      "subheadline": "Push een project.json naar projects/ en bekijk direct het resultaat",
+      "ctaText": "Exporteer MP4"
+    }
+  ]
+}

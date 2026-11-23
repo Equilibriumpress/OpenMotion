@@ -1,0 +1,6 @@
+{
+  "name": "OpenMotion Bibliotheek",
+  "description": "GitHub-gebaseerde OpenMotion videobibliotheek voor ChatGPT-projecten met live studio-preview en directe MP4-export voor GitHub Pages.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
