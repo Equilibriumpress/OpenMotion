@@ -149,6 +149,7 @@ export function normalizeOpenMotionProject(
     'faceless-explainer',
     'paper-map-journey',
     'editorial-cartography',
+    'three-campervan-journey',
   ]);
   const validBackdrops = new Set([
     'grid-architectural',
@@ -373,6 +374,10 @@ export function normalizeOpenMotionProject(
       editorialMap:
         sc.editorialMap && typeof sc.editorialMap === 'object'
           ? (sc.editorialMap as OpenMotionScene['editorialMap'])
+          : undefined,
+      threeCampervan:
+        sc.threeCampervan && typeof sc.threeCampervan === 'object'
+          ? (sc.threeCampervan as OpenMotionScene['threeCampervan'])
           : undefined,
       fullBleed: typeof sc.fullBleed === 'boolean' ? sc.fullBleed : undefined,
     };
@@ -779,8 +784,9 @@ Geef UITSLUITEND geldige JSON terug die exact voldoet aan dit schema:
   ]
 }
 
-Beschikbare layouts (31): "editorial-cartography", "paper-map-journey", "route-map-journey", "travel-postcard-reel", "faceless-explainer", "3d-wireframe-stage", "live-line-chart", "node-graph-flow", "kinetic-marquee", "code-diff-deploy", "ui-morph", "beat-kinetic", "visual-lesson", "bento-montage", "paper-cutout", "pricing-tiers", "mobile-screens", "poster-editorial", "hero-kinetic", "step-tutorial", "data-rings", "ui-mockup", "before-after", "waveform-captions", "timeline-roadmap", "quote-spotlight", "metric-spotlight", "feature-cards", "code-terminal", "split-showcase", "outro-cta".
+Beschikbare layouts (32): "three-campervan-journey", "editorial-cartography", "paper-map-journey", "route-map-journey", "travel-postcard-reel", "faceless-explainer", "3d-wireframe-stage", "live-line-chart", "node-graph-flow", "kinetic-marquee", "code-diff-deploy", "ui-morph", "beat-kinetic", "visual-lesson", "bento-montage", "paper-cutout", "pricing-tiers", "mobile-screens", "poster-editorial", "hero-kinetic", "step-tutorial", "data-rings", "ui-mockup", "before-after", "waveform-captions", "timeline-roadmap", "quote-spotlight", "metric-spotlight", "feature-cards", "code-terminal", "split-showcase", "outro-cta".
 Optionele scène-velden per layout:
+- three-campervan-journey: fullBleed (true), threeCampervan ({vanColor, vanRoofColor, jacketColor, backpackColor, beanieColor, lightingMood: "golden-hour"|"morning-mist"|"alpine-noon", cameraFov?, titleText?, subtitleText?, showTitleOverlay?})
 - editorial-cartography: fullBleed (true), editorialMap ({cityLabel, bounds, routeCoords, routeDrawFrom, routeDrawTo, streets, parks, buildings, reliefs, stops, cameraFrom, cameraTo, photoUrl?, photoMode?, photoCredit?, titleLayout?, titleText, subtitleText})
 - paper-map-journey: paperMap ({mapTitle, subtitle, routeColor?: "#D7263D", waterColor?, terrainColor?, paperColor?, stops: [{name, x, y, tag?, fact, landmark: "canal-house"|"tower"|"mountain"|"arch"|"temple"|"lighthouse"|"building"}]})
 - route-map-journey: routeMap ({regionLabel, transport: "plane"|"train"|"car"|"bike"|"hike", totalDistanceKm, durationLabel, waypoints: [{name, x, y, day, highlight, km}]})

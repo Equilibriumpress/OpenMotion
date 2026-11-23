@@ -40,6 +40,7 @@ const SOURCE_LABELS: Record<ProjectSource, string> = {
 };
 
 const FEATURED_PREVIEW_LAYOUTS: SceneLayout[] = [
+  'three-campervan-journey',
   'editorial-cartography',
   'paper-map-journey',
   'route-map-journey',
@@ -80,6 +81,10 @@ function getShowcasePreviewTime(project: OpenMotionProject): number {
       if (sc.layout === 'editorial-cartography') {
         // Show the iconic opening panoramic Edinburgh photo with editorial title
         return elapsed + sc.durationSec * 0.38;
+      }
+      if (sc.layout === 'three-campervan-journey') {
+        // Land on the warm hero moment: traveler waving at camera beside open campervan
+        return 8.1;
       }
       return elapsed + Math.min(sc.durationSec * 0.62, 1.9);
     }

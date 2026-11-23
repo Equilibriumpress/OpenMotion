@@ -1161,6 +1161,157 @@ export function StudioView({
                       </div>
                     </div>
                   )}
+
+                  {activeScene.threeCampervan && (
+                    <div className="pt-4 mt-4 border-t border-slate-200 space-y-3">
+                      <p className="text-xs font-semibold text-slate-900">
+                        3D Three.js Scène, Karakter &amp; Belichting
+                      </p>
+                      <div className="grid grid-cols-2 gap-2">
+                        <div>
+                          <label className="block text-xs text-slate-600 mb-1">
+                            Lichtstemming
+                          </label>
+                          <select
+                            value={activeScene.threeCampervan.lightingMood}
+                            onChange={(e) => {
+                              const nextMood = e.target.value as
+                                | 'golden-hour'
+                                | 'morning-mist'
+                                | 'alpine-noon';
+                              const nextScenes = project.scenes.map((sc) =>
+                                sc.threeCampervan
+                                  ? {
+                                      ...sc,
+                                      threeCampervan: {
+                                        ...sc.threeCampervan,
+                                        lightingMood: nextMood,
+                                      },
+                                    }
+                                  : sc
+                              );
+                              onUpdateProject({ ...project, scenes: nextScenes });
+                            }}
+                            className="w-full px-2.5 py-1.5 text-xs border border-slate-200 rounded-lg bg-white"
+                          >
+                            <option value="golden-hour">Golden Hour</option>
+                            <option value="morning-mist">Morning Mist</option>
+                            <option value="alpine-noon">Alpine Noon</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-slate-600 mb-1">
+                            Camera FOV (°)
+                          </label>
+                          <input
+                            type="number"
+                            min={30}
+                            max={58}
+                            step={1}
+                            value={activeScene.threeCampervan.cameraFov ?? 42}
+                            onChange={(e) => {
+                              const nextFov = parseInt(e.target.value, 10) || 42;
+                              const nextScenes = project.scenes.map((sc) =>
+                                sc.threeCampervan
+                                  ? {
+                                      ...sc,
+                                      threeCampervan: {
+                                        ...sc.threeCampervan,
+                                        cameraFov: nextFov,
+                                      },
+                                    }
+                                  : sc
+                              );
+                              onUpdateProject({ ...project, scenes: nextScenes });
+                            }}
+                            className="w-full px-2.5 py-1.5 text-xs font-mono tabular-nums border border-slate-200 rounded-lg"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-3 gap-2">
+                        <label className="text-xs text-slate-600 space-y-1">
+                          <span>Campervan</span>
+                          <input
+                            type="color"
+                            value={activeScene.threeCampervan.vanColor}
+                            onChange={(e) => {
+                              const val = e.target.value;
+                              const nextScenes = project.scenes.map((sc) =>
+                                sc.threeCampervan
+                                  ? { ...sc, threeCampervan: { ...sc.threeCampervan, vanColor: val } }
+                                  : sc
+                              );
+                              onUpdateProject({ ...project, scenes: nextScenes });
+                            }}
+                            className="w-full h-9 rounded border border-slate-200 cursor-pointer"
+                          />
+                        </label>
+                        <label className="text-xs text-slate-600 space-y-1">
+                          <span>Jas Reiziger</span>
+                          <input
+                            type="color"
+                            value={activeScene.threeCampervan.jacketColor}
+                            onChange={(e) => {
+                              const val = e.target.value;
+                              const nextScenes = project.scenes.map((sc) =>
+                                sc.threeCampervan
+                                  ? {
+                                      ...sc,
+                                      threeCampervan: { ...sc.threeCampervan, jacketColor: val },
+                                    }
+                                  : sc
+                              );
+                              onUpdateProject({ ...project, scenes: nextScenes });
+                            }}
+                            className="w-full h-9 rounded border border-slate-200 cursor-pointer"
+                          />
+                        </label>
+                        <label className="text-xs text-slate-600 space-y-1">
+                          <span>Rugzak</span>
+                          <input
+                            type="color"
+                            value={activeScene.threeCampervan.backpackColor}
+                            onChange={(e) => {
+                              const val = e.target.value;
+                              const nextScenes = project.scenes.map((sc) =>
+                                sc.threeCampervan
+                                  ? {
+                                      ...sc,
+                                      threeCampervan: { ...sc.threeCampervan, backpackColor: val },
+                                    }
+                                  : sc
+                              );
+                              onUpdateProject({ ...project, scenes: nextScenes });
+                            }}
+                            className="w-full h-9 rounded border border-slate-200 cursor-pointer"
+                          />
+                        </label>
+                      </div>
+
+                      <div>
+                        <label className="block text-xs text-slate-600 mb-1">
+                          Titel Overlay (Scène {selectedSceneIdx + 1})
+                        </label>
+                        <input
+                          type="text"
+                          value={activeScene.threeCampervan.titleText ?? ''}
+                          onChange={(e) =>
+                            updateActiveScene({
+                              headline: e.target.value || activeScene.headline,
+                              threeCampervan: {
+                                ...activeScene.threeCampervan!,
+                                titleText: e.target.value || undefined,
+                                showTitleOverlay: Boolean(e.target.value.trim()),
+                              },
+                            })
+                          }
+                          placeholder="Optionele filmtitel..."
+                          className="w-full px-3 py-1.5 text-sm border border-slate-200 rounded-lg"
+                        />
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             )}

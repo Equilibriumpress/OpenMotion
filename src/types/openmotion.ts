@@ -31,7 +31,8 @@ export type SceneLayout =
   | 'travel-postcard-reel'
   | 'faceless-explainer'
   | 'paper-map-journey'
-  | 'editorial-cartography';
+  | 'editorial-cartography'
+  | 'three-campervan-journey';
 
 export type SceneTransition = 'fade' | 'slide-up' | 'wipe-left' | 'zoom';
 
@@ -325,6 +326,29 @@ export interface SceneEditorialMap {
   subtitleText: string;
 }
 
+export type ThreeLightingMood = 'golden-hour' | 'morning-mist' | 'alpine-noon';
+
+export interface SceneThreeCampervan {
+  /** Primary lower body paint color of the procedural campervan */
+  vanColor: string;
+  /** Upper cabin & pop-top roof color */
+  vanRoofColor: string;
+  /** Traveler's parka jacket color */
+  jacketColor: string;
+  /** Traveler's procedural hiking backpack color */
+  backpackColor: string;
+  /** Traveler's knit beanie color */
+  beanieColor: string;
+  /** Atmospheric lighting preset */
+  lightingMood: ThreeLightingMood;
+  /** Camera vertical field of view in degrees (e.g. 38 - 52) */
+  cameraFov?: number;
+  /** Optional subtle editorial overlay text for opening/closing moments */
+  titleText?: string;
+  subtitleText?: string;
+  showTitleOverlay?: boolean;
+}
+
 export interface OpenMotionScene {
   id: string;
   name: string;
@@ -374,6 +398,7 @@ export interface OpenMotionScene {
   explainer?: SceneFacelessExplainer;
   paperMap?: ScenePaperMapJourney;
   editorialMap?: SceneEditorialMap;
+  threeCampervan?: SceneThreeCampervan;
   fullBleed?: boolean;
 }
 
@@ -443,6 +468,7 @@ export interface RenderProgressState {
 }
 
 export const ALL_SCENE_LAYOUTS: SceneLayout[] = [
+  'three-campervan-journey',
   'editorial-cartography',
   'paper-map-journey',
   'route-map-journey',
@@ -486,6 +512,7 @@ export const ALL_BACKDROPS: MotionBackdrop[] = [
 ];
 
 export const LAYOUT_DISPLAY_NAMES: Record<SceneLayout, string> = {
+  'three-campervan-journey': '3D Three.js Character Journey',
   'editorial-cartography': 'Editorial Cartography (OSM)',
   'paper-map-journey': 'Paper Map Journey (Cut-Paper)',
   'route-map-journey': 'Animated Route Map',

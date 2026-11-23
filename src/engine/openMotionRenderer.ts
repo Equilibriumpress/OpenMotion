@@ -6,6 +6,7 @@ import {
   getProjectDurationSec,
 } from '../types/openmotion';
 import { renderEditorialCartographyScene } from './editorialCartographyRenderer';
+import { renderThreeCampervanScene } from './threeCampervanRenderer';
 
 function clamp(v: number, min = 0, max = 1): number {
   return Math.max(min, Math.min(max, v));
@@ -312,6 +313,13 @@ export function renderOpenMotionFrame(
   // Full-bleed documentary Editorial Cartography layout (no chrome overlay, seamless inter-scene camera)
   if (scene.layout === 'editorial-cartography' && scene.editorialMap) {
     renderEditorialCartographyScene(ctx, w, h, scene, localTime, safeTime);
+    ctx.restore();
+    return;
+  }
+
+  // Full-bleed procedural Three.js 3D Character & Campervan cinematic journey (no chrome overlay)
+  if (scene.layout === 'three-campervan-journey') {
+    renderThreeCampervanScene(ctx, w, h, scene, localTime, safeTime);
     ctx.restore();
     return;
   }
