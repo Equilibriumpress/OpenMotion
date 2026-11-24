@@ -1,0 +1,143 @@
+{
+  "schemaVersion": "1.0",
+  "id": "short-memory-explainer",
+  "slug": "short-memory-explainer",
+  "title": "Explain It in 30 Seconds — Memory",
+  "description": "Psychology explainer in five scenes",
+  "category": "Shorts & Reels",
+  "author": "OpenMotion Studio",
+  "source": "template",
+  "createdAt": "2026-11-24",
+  "updatedAt": "2026-11-24",
+  "githubPath": "projects/short-memory-explainer/project.json",
+  "format": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "brandKit": {
+    "brandName": "MEMORY NOTES",
+    "primaryColor": "#7C63DA",
+    "accentColor": "#F4C76B",
+    "backgroundColor": "#101320",
+    "surfaceColor": "#192333",
+    "textColor": "#FFFFFF",
+    "mutedColor": "#C2CBDF",
+    "fontFamily": "Bricolage Grotesque"
+  },
+  "audioTracks": [],
+  "captions": [
+    {
+      "startSec": 0,
+      "endSec": 3,
+      "text": "Why do we forget?",
+      "style": "karaoke"
+    },
+    {
+      "startSec": 3,
+      "endSec": 10,
+      "text": "Your brain selects what to remember.",
+      "style": "karaoke"
+    },
+    {
+      "startSec": 10,
+      "endSec": 22,
+      "text": "Retrieval strengthens useful connections.",
+      "style": "karaoke"
+    },
+    {
+      "startSec": 22,
+      "endSec": 27,
+      "text": "Practice recalling, not only rereading.",
+      "style": "karaoke"
+    },
+    {
+      "startSec": 27,
+      "endSec": 30,
+      "text": "Try recalling tomorrow.",
+      "style": "karaoke"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "question",
+      "name": "Question",
+      "durationSec": 3,
+      "layout": "hero-kinetic",
+      "transition": "slide-up",
+      "backdrop": "swiss-lines",
+      "headline": "Why do we forget?",
+      "eyebrow": "THE HUMAN MIND"
+    },
+    {
+      "id": "encoding",
+      "name": "Encoding",
+      "durationSec": 7,
+      "layout": "faceless-explainer",
+      "transition": "slide-up",
+      "backdrop": "swiss-lines",
+      "headline": "Your brain selects what to remember.",
+      "explainer": {
+        "chapter": "01 ENCODING",
+        "visualType": "funnel",
+        "visualLabels": [
+          "Attention",
+          "Encoding",
+          "Storage"
+        ],
+        "voiceoverWords": [
+          "01",
+          "encoding"
+        ]
+      }
+    },
+    {
+      "id": "retrieval",
+      "name": "Retrieval",
+      "durationSec": 12,
+      "layout": "faceless-explainer",
+      "transition": "slide-up",
+      "backdrop": "swiss-lines",
+      "headline": "Retrieval strengthens useful connections.",
+      "explainer": {
+        "chapter": "02 RETRIEVAL",
+        "visualType": "network-ripple",
+        "visualLabels": [
+          "Cue",
+          "Recall",
+          "Repeat",
+          "Retain"
+        ],
+        "voiceoverWords": [
+          "02",
+          "retrieval"
+        ]
+      }
+    },
+    {
+      "id": "practice",
+      "name": "Practice",
+      "durationSec": 5,
+      "layout": "metric-spotlight",
+      "transition": "slide-up",
+      "backdrop": "swiss-lines",
+      "headline": "Practice recalling, not only rereading.",
+      "metrics": [
+        {
+          "label": "PRACTICE",
+          "value": "2 min",
+          "delta": "Quick self-test"
+        }
+      ]
+    },
+    {
+      "id": "finale",
+      "name": "Finale",
+      "durationSec": 3,
+      "layout": "outro-cta",
+      "transition": "slide-up",
+      "backdrop": "swiss-lines",
+      "headline": "Try recalling tomorrow.",
+      "ctaText": "Save the tip"
+    }
+  ]
+}

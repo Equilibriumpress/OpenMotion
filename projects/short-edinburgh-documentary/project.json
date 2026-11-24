@@ -1,0 +1,141 @@
+{
+  "schemaVersion": "1.0",
+  "id": "short-edinburgh-documentary",
+  "slug": "short-edinburgh-documentary",
+  "title": "Historical Mini Documentary — Old Town",
+  "description": "Historical editorial story with paper collage and timeline",
+  "category": "Shorts & Reels",
+  "author": "OpenMotion Studio",
+  "source": "template",
+  "createdAt": "2026-11-24",
+  "updatedAt": "2026-11-24",
+  "githubPath": "projects/short-edinburgh-documentary/project.json",
+  "format": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "brandKit": {
+    "brandName": "CITY ARCHIVE",
+    "primaryColor": "#A84E3D",
+    "accentColor": "#B99B71",
+    "backgroundColor": "#F2E9DB",
+    "surfaceColor": "#FFFDF7",
+    "textColor": "#25232B",
+    "mutedColor": "#555965",
+    "fontFamily": "Bricolage Grotesque"
+  },
+  "audioTracks": [],
+  "captions": [
+    {
+      "startSec": 0,
+      "endSec": 4,
+      "text": "EDINBURGH OLD TOWN",
+      "style": "karaoke"
+    },
+    {
+      "startSec": 4,
+      "endSec": 12,
+      "text": "A stronghold above the city.",
+      "style": "karaoke"
+    },
+    {
+      "startSec": 12,
+      "endSec": 20,
+      "text": "The town developed along a ridge.",
+      "style": "karaoke"
+    },
+    {
+      "startSec": 20,
+      "endSec": 26,
+      "text": "Explore the closes and the Royal Mile.",
+      "style": "karaoke"
+    },
+    {
+      "startSec": 26,
+      "endSec": 30,
+      "text": "Explore Edinburgh on foot.",
+      "style": "karaoke"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "opening",
+      "name": "Opening",
+      "durationSec": 4,
+      "layout": "poster-editorial",
+      "transition": "slide-up",
+      "backdrop": "swiss-lines",
+      "headline": "EDINBURGH OLD TOWN",
+      "posterMeta": {
+        "issue": "HERITAGE / 01",
+        "location": "EDINBURGH SCOTLAND",
+        "tagline": "A CITY OF MANY CENTURIES",
+        "accentWord": "OLD TOWN"
+      }
+    },
+    {
+      "id": "castle",
+      "name": "Castle",
+      "durationSec": 8,
+      "layout": "paper-cutout",
+      "transition": "slide-up",
+      "backdrop": "swiss-lines",
+      "headline": "A stronghold above the city.",
+      "paperChapters": [
+        "Castle Rock",
+        "Medieval burgh",
+        "Old Town streets"
+      ]
+    },
+    {
+      "id": "timeline",
+      "name": "Timeline",
+      "durationSec": 8,
+      "layout": "timeline-roadmap",
+      "transition": "slide-up",
+      "backdrop": "swiss-lines",
+      "headline": "The town developed along a ridge.",
+      "timeline": [
+        {
+          "date": "MEDIEVAL",
+          "title": "Castle and burgh",
+          "detail": "Growth around a hilltop stronghold"
+        },
+        {
+          "date": "16–17C",
+          "title": "Dense town",
+          "detail": "Tenements and closes"
+        },
+        {
+          "date": "TODAY",
+          "title": "Heritage",
+          "detail": "UNESCO-listed historic core"
+        }
+      ]
+    },
+    {
+      "id": "details",
+      "name": "Details",
+      "durationSec": 6,
+      "layout": "paper-cutout",
+      "transition": "slide-up",
+      "backdrop": "swiss-lines",
+      "headline": "Explore the closes and the Royal Mile.",
+      "paperChapters": [
+        "Old stone tenements",
+        "St Giles’ Cathedral",
+        "The Royal Mile"
+      ]
+    },
+    {
+      "id": "finale",
+      "name": "Finale",
+      "durationSec": 4,
+      "layout": "outro-cta",
+      "transition": "slide-up",
+      "backdrop": "swiss-lines",
+      "headline": "Explore Edinburgh on foot.",
+      "ctaText": "View city guide"
+    }
+  ]
+}

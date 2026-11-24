@@ -1,0 +1,138 @@
+{
+  "schemaVersion": "1.0",
+  "id": "short-human-mind-book",
+  "slug": "short-human-mind-book",
+  "title": "Book in 30 Seconds — The Human Mind",
+  "description": "Animated editorial book trailer for a psychology title",
+  "category": "Shorts & Reels",
+  "author": "OpenMotion Studio",
+  "source": "template",
+  "createdAt": "2026-11-24",
+  "updatedAt": "2026-11-24",
+  "githubPath": "projects/short-human-mind-book/project.json",
+  "format": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "brandKit": {
+    "brandName": "THE HUMAN MIND",
+    "primaryColor": "#6553B8",
+    "accentColor": "#DFB956",
+    "backgroundColor": "#EAE4D8",
+    "surfaceColor": "#FFFDF7",
+    "textColor": "#25232B",
+    "mutedColor": "#555965",
+    "fontFamily": "Bricolage Grotesque"
+  },
+  "audioTracks": [],
+  "captions": [
+    {
+      "startSec": 0,
+      "endSec": 6,
+      "text": "THE HUMAN MIND",
+      "style": "karaoke"
+    },
+    {
+      "startSec": 6,
+      "endSec": 12,
+      "text": "Memory. Attention. Emotion.",
+      "style": "karaoke"
+    },
+    {
+      "startSec": 12,
+      "endSec": 19,
+      "text": "Attention shapes what we remember.",
+      "style": "karaoke"
+    },
+    {
+      "startSec": 19,
+      "endSec": 26,
+      "text": "What shapes your decisions?",
+      "style": "karaoke"
+    },
+    {
+      "startSec": 26,
+      "endSec": 30,
+      "text": "THE HUMAN MIND",
+      "style": "karaoke"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "cover",
+      "name": "Cover",
+      "durationSec": 6,
+      "layout": "poster-editorial",
+      "transition": "slide-up",
+      "backdrop": "swiss-lines",
+      "headline": "THE HUMAN MIND",
+      "posterMeta": {
+        "issue": "BOOK TRAILER",
+        "location": "PSYCHOLOGY & COGNITION",
+        "tagline": "IDEAS ABOUT HOW YOU THINK",
+        "accentWord": "MIND"
+      }
+    },
+    {
+      "id": "chapters",
+      "name": "Chapters",
+      "durationSec": 6,
+      "layout": "paper-cutout",
+      "transition": "slide-up",
+      "backdrop": "swiss-lines",
+      "headline": "Memory. Attention. Emotion.",
+      "paperChapters": [
+        "Memory & attention",
+        "Emotion & choice",
+        "Habit & behaviour"
+      ]
+    },
+    {
+      "id": "diagram",
+      "name": "Diagram",
+      "durationSec": 7,
+      "layout": "faceless-explainer",
+      "transition": "slide-up",
+      "backdrop": "swiss-lines",
+      "headline": "Attention shapes what we remember.",
+      "explainer": {
+        "chapter": "MEMORY AND FOCUS",
+        "visualType": "funnel",
+        "visualLabels": [
+          "Signals",
+          "Attention",
+          "Memory"
+        ],
+        "voiceoverWords": [
+          "memory",
+          "and",
+          "focus"
+        ]
+      }
+    },
+    {
+      "id": "quote",
+      "name": "Quote",
+      "durationSec": 7,
+      "layout": "quote-spotlight",
+      "transition": "slide-up",
+      "backdrop": "swiss-lines",
+      "headline": "What shapes your decisions?",
+      "quote": {
+        "text": "Understand the questions behind daily choices.",
+        "author": "The Human Mind",
+        "role": "Book introduction"
+      }
+    },
+    {
+      "id": "finale",
+      "name": "Finale",
+      "durationSec": 4,
+      "layout": "outro-cta",
+      "transition": "slide-up",
+      "backdrop": "swiss-lines",
+      "headline": "THE HUMAN MIND",
+      "ctaText": "Read the first chapter"
+    }
+  ]
+}

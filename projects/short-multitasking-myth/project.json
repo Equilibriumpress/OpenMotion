@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "1.0",
+  "id": "short-multitasking-myth",
+  "slug": "short-multitasking-myth",
+  "title": "Myth vs Fact — Multitasking",
+  "description": "Research-based short comparison",
+  "category": "Shorts & Reels",
+  "author": "OpenMotion Studio",
+  "source": "template",
+  "createdAt": "2026-11-24",
+  "updatedAt": "2026-11-24",
+  "githubPath": "projects/short-multitasking-myth/project.json",
+  "format": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "brandKit": {
+    "brandName": "MIND CHECK",
+    "primaryColor": "#E95C73",
+    "accentColor": "#6CD9C7",
+    "backgroundColor": "#151324",
+    "surfaceColor": "#192333",
+    "textColor": "#FFFFFF",
+    "mutedColor": "#C2CBDF",
+    "fontFamily": "Bricolage Grotesque"
+  },
+  "audioTracks": [],
+  "captions": [
+    {
+      "startSec": 0,
+      "endSec": 4,
+      "text": "Multitasking makes you faster?",
+      "style": "karaoke"
+    },
+    {
+      "startSec": 4,
+      "endSec": 10,
+      "text": "Task switching uses mental effort.",
+      "style": "karaoke"
+    },
+    {
+      "startSec": 10,
+      "endSec": 15,
+      "text": "Focus on one demanding task.",
+      "style": "karaoke"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "myth-or-fact",
+      "name": "Myth or Fact",
+      "durationSec": 4,
+      "layout": "before-after",
+      "transition": "slide-up",
+      "backdrop": "swiss-lines",
+      "headline": "Multitasking makes you faster?",
+      "comparison": {
+        "beforeLabel": "MYTH",
+        "beforeTitle": "Do it all at once",
+        "beforePoints": [
+          "Switch rapidly",
+          "Split focus"
+        ],
+        "afterLabel": "FACT",
+        "afterTitle": "Switching takes time",
+        "afterPoints": [
+          "More effort",
+          "More mistakes"
+        ]
+      }
+    },
+    {
+      "id": "explanation",
+      "name": "Explanation",
+      "durationSec": 6,
+      "layout": "faceless-explainer",
+      "transition": "slide-up",
+      "backdrop": "swiss-lines",
+      "headline": "Task switching uses mental effort.",
+      "explainer": {
+        "chapter": "TASK SWITCHING",
+        "visualType": "balance-scale",
+        "visualLabels": [
+          "Task A",
+          "Task B"
+        ],
+        "voiceoverWords": [
+          "task",
+          "switching"
+        ]
+      }
+    },
+    {
+      "id": "finale",
+      "name": "Finale",
+      "durationSec": 5,
+      "layout": "outro-cta",
+      "transition": "slide-up",
+      "backdrop": "swiss-lines",
+      "headline": "Focus on one demanding task.",
+      "ctaText": "Try a focus block"
+    }
+  ]
+}

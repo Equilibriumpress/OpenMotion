@@ -1,0 +1,165 @@
+{
+  "schemaVersion": "1.0",
+  "id": "short-data-story",
+  "slug": "short-data-story",
+  "title": "Animated Data Story — Population Index",
+  "description": "Illustrative numerical dataset, not official population data",
+  "category": "Shorts & Reels",
+  "author": "OpenMotion Studio",
+  "source": "template",
+  "createdAt": "2026-11-24",
+  "updatedAt": "2026-11-24",
+  "githubPath": "projects/short-data-story/project.json",
+  "format": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "brandKit": {
+    "brandName": "DATA STORY",
+    "primaryColor": "#44A9AA",
+    "accentColor": "#F5B763",
+    "backgroundColor": "#0B2130",
+    "surfaceColor": "#192333",
+    "textColor": "#FFFFFF",
+    "mutedColor": "#C2CBDF",
+    "fontFamily": "Bricolage Grotesque"
+  },
+  "audioTracks": [],
+  "captions": [
+    {
+      "startSec": 0,
+      "endSec": 3,
+      "text": "How does a city grow over time?",
+      "style": "karaoke"
+    },
+    {
+      "startSec": 3,
+      "endSec": 14,
+      "text": "Population index example",
+      "style": "karaoke"
+    },
+    {
+      "startSec": 14,
+      "endSec": 23,
+      "text": "Compare periods, not only totals.",
+      "style": "karaoke"
+    },
+    {
+      "startSec": 23,
+      "endSec": 27,
+      "text": "Always verify the original dataset.",
+      "style": "karaoke"
+    },
+    {
+      "startSec": 27,
+      "endSec": 30,
+      "text": "Explore the data.",
+      "style": "karaoke"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "question",
+      "name": "Question",
+      "durationSec": 3,
+      "layout": "hero-kinetic",
+      "transition": "slide-up",
+      "backdrop": "swiss-lines",
+      "headline": "How does a city grow over time?",
+      "eyebrow": "ILLUSTRATIVE DATA"
+    },
+    {
+      "id": "chart",
+      "name": "Chart",
+      "durationSec": 11,
+      "layout": "live-line-chart",
+      "transition": "slide-up",
+      "backdrop": "swiss-lines",
+      "headline": "Population index example",
+      "chartSeries": {
+        "label": "Illustrative population index",
+        "unit": " points",
+        "points": [
+          {
+            "xLabel": "1920",
+            "value": 100
+          },
+          {
+            "xLabel": "1940",
+            "value": 110
+          },
+          {
+            "xLabel": "1960",
+            "value": 139
+          },
+          {
+            "xLabel": "1980",
+            "value": 153
+          },
+          {
+            "xLabel": "2000",
+            "value": 172
+          },
+          {
+            "xLabel": "2020",
+            "value": 201
+          }
+        ]
+      }
+    },
+    {
+      "id": "comparison",
+      "name": "Comparison",
+      "durationSec": 9,
+      "layout": "data-rings",
+      "transition": "slide-up",
+      "backdrop": "swiss-lines",
+      "headline": "Compare periods, not only totals.",
+      "rings": [
+        {
+          "label": "Index growth",
+          "percent": 67,
+          "sublabel": "Illustrative"
+        }
+      ],
+      "bars": [
+        {
+          "label": "1920",
+          "value": 100,
+          "maxValue": 201,
+          "displayValue": "100"
+        },
+        {
+          "label": "2020",
+          "value": 201,
+          "maxValue": 201,
+          "displayValue": "201"
+        }
+      ]
+    },
+    {
+      "id": "source",
+      "name": "Source",
+      "durationSec": 4,
+      "layout": "quote-spotlight",
+      "transition": "slide-up",
+      "backdrop": "swiss-lines",
+      "headline": "Always verify the original dataset.",
+      "quote": {
+        "text": "Replace sample values with sourced observations.",
+        "author": "OpenMotion Data",
+        "role": "Editorial guidance"
+      }
+    },
+    {
+      "id": "finale",
+      "name": "Finale",
+      "durationSec": 3,
+      "layout": "outro-cta",
+      "transition": "slide-up",
+      "backdrop": "swiss-lines",
+      "headline": "Explore the data.",
+      "ctaText": "Edit chart values"
+    }
+  ]
+}
