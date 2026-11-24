@@ -384,6 +384,8 @@ export interface ScenePremiumTravelRoute {
   routeProgressFrom: number;
   routeProgressTo: number;
   roadMatched?: boolean;
+  /** Default dot avoids abrupt turns on winding roads; camper is experimental. */
+  markerStyle?: 'dot' | 'camper';
 }
 export interface SceneWhiteboard {
   /** Normalized SVG-style polylines: [x, y] from 0 to 1. */

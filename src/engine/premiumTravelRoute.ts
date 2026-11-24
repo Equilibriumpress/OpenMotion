@@ -118,6 +118,40 @@ function routeStroke(ctx:CanvasRenderingContext2D,stage:Stage,fraction:number,s:
   ctx.shadowBlur=0;ctx.strokeStyle='#D74936';ctx.lineWidth=8*s;ctx.stroke();
 }
 
+/**
+ * A compact location indicator sits precisely on the projected road line.
+ * Its direction-independent design avoids visible snapping at sharp bends.
+ * The pulse uses scene time rather than timers, keeping exported frames exact.
+ */
+function movingDot(ctx:CanvasRenderingContext2D,x:number,y:number,s:number,time:number){
+  const pulse=.5+.5*Math.sin(time*7.2);
+  const outer=(28+4*pulse)*s;
+  ctx.save();
+  ctx.translate(x,y);
+  ctx.fillStyle='rgba(216,73,54,'+(.12+.07*pulse)+')';
+  ctx.beginPath();ctx.arc(0,0,outer,0,Math.PI*2);ctx.fill();
+  ctx.shadowColor='rgba(30,62,55,.32)';
+  ctx.shadowBlur=12*s;
+  ctx.shadowOffsetY=3*s;
+  ctx.fillStyle='#FFFFFF';
+  ctx.beginPath();ctx.arc(0,0,20*s,0,Math.PI*2);ctx.fill();
+  ctx.shadowBlur=0;ctx.shadowOffsetY=0;
+  ctx.fillStyle='#D74936';
+  ctx.beginPath();ctx.arc(0,0,13*s,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='rgba(255,255,255,.48)';
+  ctx.beginPath();ctx.arc(-4*s,-5*s,3*s,0,Math.PI*2);ctx.fill();
+  ctx.restore();
+}
+
+/** Look-ahead course smoothing for the optional small camper icon. */
+function smoothedScreenBearing(stage:Stage,fraction:number):number {
+  const lookAhead=Math.min(.055,Math.max(.004,35/Math.max(1,stage.total)));
+  const before=sample(stage,Math.max(0,fraction-lookAhead));
+  const after=sample(stage,Math.min(1,fraction+lookAhead));
+  const dx=after.x-before.x,dy=after.y-before.y;
+  return Math.hypot(dx,dy)<.01 ? sample(stage,fraction).angle : Math.atan2(dy,dx);
+}
+
 function vehicle(ctx:CanvasRenderingContext2D,x:number,y:number,angle:number,s:number){
   ctx.save();ctx.translate(x,y);ctx.rotate(angle);ctx.scale(s,s);
   // Scalable camper illustration with high-contrast road silhouette.
@@ -217,7 +251,15 @@ function drawMapScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenM
     ctx.font='800 '+(19*s)+'px "Plus Jakarta Sans",sans-serif';
     ctx.fillText(String(i+1),x,y+1*s);
   });
-  if(!finishing)vehicle(ctx,car.x*s,car.y*s,car.angle,2.1*s);
+  if(!finishing){
+    // The standard premium reel uses a clear route position dot.
+    // A smaller 2D camper remains available for user experimentation.
+    if(p.markerStyle==='camper') {
+      vehicle(ctx,car.x*s,car.y*s,smoothedScreenBearing(stage,fraction),.82*s);
+    } else {
+      movingDot(ctx,car.x*s,car.y*s,s,time);
+    }
+  }
   ctx.restore();
   // Compact hierarchy, leaving the centre clear for the route and camper.
   const m=52*s;
