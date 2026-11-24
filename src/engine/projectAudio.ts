@@ -1,4 +1,5 @@
 import { OpenMotionProject } from '../types/openmotion';
+import { createPremiumTravelAudio } from './premiumTravelAudio';
 
 /** Resolve repository asset paths relative to the deployed Vite Pages base. */
 export function projectAssetUrl(src: string): string {
@@ -10,7 +11,10 @@ export function projectAssetUrl(src: string): string {
 /** Decode and mix project tracks to a deterministic 48kHz stereo timeline. */
 export async function mixProjectAudio(project: OpenMotionProject, durationSec: number): Promise<AudioBuffer | null> {
   const tracks = (project.audioTracks ?? []).filter(t => t.src?.trim());
-  if (!tracks.length) return null;
+  if (!tracks.length) {
+    if (project.scenes.some(scene => scene.layout === 'premium-travel-route')) return createPremiumTravelAudio(durationSec);
+    return null;
+  }
   const rate = 48000;
   const frames = Math.ceil(durationSec * rate);
   const offline = new OfflineAudioContext(2, frames, rate);
