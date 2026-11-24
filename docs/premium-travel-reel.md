@@ -51,6 +51,52 @@ The Shorts media editor now includes inputs for premium stop names, explanatory 
 3. Remote Wikimedia thumbnails still depend on network access and CORS. A failed optional photo is replaced by a scenic illustration without stopping MP4 export.
 4. Stop durations and scene cameras are authored rather than automatically generated from the route.
 5. MapLibre creates static basemap snapshots, so this is 2D/2.5D, not a free-moving 3D terrain camera.
-6. No soundtrack is shipped in the demo. Optional audio tracks remain supported by the studio's existing exporter.
+6. R2 synthesizes an original soundtrack without external samples. Optional audio tracks remain supported and override the built-in score.
 
 No new GitHub Actions test workflow has been added.
+
+
+## Director's cut R2 (30 seconds)
+
+The cinematic edit was rebuilt after visual review of a 30-second browser MP4.
+The earlier video contained ghosted captions, undersized stops and barely perceptible map movement.
+R2 is edited as eight separate moments:
+
+| Seconds | Shot | Presentation |
+| --- | --- | --- |
+| 0–3 | Edinburgh | Full-bleed photograph with strong typographic opening |
+| 3–8 | Driving to Glen Coe | Camera follows a larger camper on a stronger red route |
+| 8–11 | Glen Coe | Full-screen location photograph and one concise explanation |
+| 11–16 | Driving to Eilean Donan | Route line, numbered stops and tracking camera |
+| 16–19 | Eilean Donan | Full-screen castle photograph with a readable image credit |
+| 19–23 | Crossing to Skye | Animated road line and moving camper |
+| 23–26 | Portree | Full-screen harbour photograph and an editorial caption |
+| 26–30 | Route finale | Complete cartographic overview and closing title |
+
+R2 removes the duplicate subtitle track from this particular travel demo. The
+general timed-caption renderer is also fixed to wrap words correctly and draw
+stroke and fill at identical baselines for all other video templates.
+
+### Audio
+
+A short original instrumental soundtrack (soft chords, gentle pulses and subtle
+transition sounds) is synthesized in Web Audio without external music files.
+It is included in the offline audio mix for MP4 and can be heard in the Studio
+when audio preview is enabled. No voice-over is supplied.
+
+### Actual output resolution
+
+The previously inspected video had **512 × 910** encoded pixels although the
+file was named 1080 × 1920. The nominal dimensions requested by the editor
+do not necessarily equal those produced by mobile hardware encoders.
+
+The exporter now probes the encoded video metadata before naming the download
+and displays a warning whenever the browser silently reduces resolution.
+This makes output dimensions truthful but does not guarantee 1080 × 1920 on
+Safari. Test on desktop or choose a supported hardware mode if full HD is required.
+
+### Verification
+
+The R2 changes were committed without invoking GitHub Actions. A new actual
+browser export must still be visually reviewed before describing the revised
+film as production-ready.

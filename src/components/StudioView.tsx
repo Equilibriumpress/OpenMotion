@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { DocumentaryAudioEngine } from '../engine/ambientAudio';
 import { projectAssetUrl } from '../engine/projectAudio';
+import { createPremiumTravelAudio } from '../engine/premiumTravelAudio';
 import { ShortsMediaEditor } from './ShortsMediaEditor';
 import { exportProjectToMp4, formatFileSize } from '../engine/mp4Exporter';
 import {
@@ -76,6 +77,7 @@ export function StudioView({
   const [selectedSceneIdx, setSelectedSceneIdx] = useState(0);
 
   const audioEngineRef = useRef<DocumentaryAudioEngine | null>(null);
+  const premiumAudioRef = useRef<{ context: AudioContext; source: AudioBufferSourceNode } | null>(null);
   const audioPlayersRef = useRef<{ id:string; audio:HTMLAudioElement; start:number; end?:number; volume:number; fadeIn:number; fadeOut:number }[]>([]);
 
   const [exportOptions, setExportOptions] = useState<RenderExportOptions>({
@@ -101,6 +103,7 @@ export function StudioView({
   const totalDuration = Math.max(0.5, getProjectDurationSec(project));
   const totalFrames = Math.max(1, Math.round(totalDuration * project.fps));
   const currentFrame = Math.min(totalFrames, Math.floor(currentTime * project.fps) + 1);
+  const isPremiumTravel = project.scenes.some(scene => scene.layout === 'premium-travel-route');
 
   // Sync JSON editor when project switches
   useEffect(() => {
@@ -142,25 +145,57 @@ export function StudioView({
     }
   },[currentTime,isPlaying,audioEnabled,project.audioTracks]);
 
+
+  // Match the procedural film score between the live preview and the MP4.
+  // Unlike the previous preview-only ambience, this is the exported soundtrack.
+  useEffect(() => {
+    const needsMusic = isPremiumTravel && !(project.audioTracks?.length) && audioEnabled && isPlaying;
+    if (!needsMusic) return;
+
+    const context = new AudioContext();
+    let cancelled = false;
+    let source: AudioBufferSourceNode | null = null;
+    void context.resume().then(() => createPremiumTravelAudio(totalDuration)).then(buffer => {
+      if (cancelled) return;
+      source = context.createBufferSource();
+      source.buffer = buffer;
+      source.loop = true;
+      source.connect(context.destination);
+      source.start(0, currentTime % buffer.duration);
+      premiumAudioRef.current = { context, source };
+    }).catch(error => {
+      console.warn('Premium preview soundtrack unavailable:', error);
+    });
+    return () => {
+      cancelled = true;
+      if (source) { try { source.stop(); } catch { /* Already stopped */ } source.disconnect(); }
+      if (premiumAudioRef.current?.context === context) premiumAudioRef.current = null;
+      void context.close().catch(() => {});
+    };
+    // The audio source follows the video clock from the moment playback begins.
+    // Seeking while paused restarts it at the new timeline position.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isPremiumTravel, audioEnabled, isPlaying, project, totalDuration]);
+
   // Synchronize subtle documentary audio soundtrack & city ambience with playback
   useEffect(() => {
     if (!audioEngineRef.current) {
       audioEngineRef.current = new DocumentaryAudioEngine();
     }
     const engine = audioEngineRef.current;
-    if (audioEnabled && isPlaying && !(project.audioTracks?.length)) {
+    if (audioEnabled && isPlaying && !isPremiumTravel && !(project.audioTracks?.length)) {
       engine.start(currentTime);
     } else {
       engine.stop();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [audioEnabled, isPlaying, project.audioTracks]);
+  }, [audioEnabled, isPlaying, isPremiumTravel, project.audioTracks]);
 
   useEffect(() => {
-    if (audioEnabled && isPlaying && !(project.audioTracks?.length)) {
+    if (audioEnabled && isPlaying && !isPremiumTravel && !(project.audioTracks?.length)) {
       audioEngineRef.current?.syncTime(currentTime);
     }
-  }, [audioEnabled, isPlaying, currentTime, project.audioTracks]);
+  }, [audioEnabled, isPlaying, isPremiumTravel, currentTime, project.audioTracks]);
 
   useEffect(() => {
     return () => {
@@ -817,6 +852,9 @@ export function StudioView({
                         </span>
                       </div>
 
+                      <p className={`text-[11px] leading-5 ${renderState.encoderLabel.includes('browser verlaagde resolutie') ? 'text-amber-700 font-semibold' : 'text-slate-500'}`}>
+                        {renderState.encoderLabel}
+                      </p>
                       <video
                         src={renderState.outputUrl}
                         controls
