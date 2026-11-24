@@ -149,6 +149,8 @@ export function normalizeOpenMotionProject(
     'faceless-explainer',
     'paper-map-journey',
     'editorial-cartography',
+    'geo-route-reel',
+    'whiteboard-science',
     'three-campervan-journey',
   ]);
   const validBackdrops = new Set([
@@ -371,6 +373,10 @@ export function normalizeOpenMotionProject(
         sc.paperMap && typeof sc.paperMap === 'object'
           ? (sc.paperMap as OpenMotionScene['paperMap'])
           : undefined,
+      geoRoute:
+        sc.geoRoute && typeof sc.geoRoute === 'object' ? (sc.geoRoute as OpenMotionScene['geoRoute']) : undefined,
+      whiteboard:
+        sc.whiteboard && typeof sc.whiteboard === 'object' ? (sc.whiteboard as OpenMotionScene['whiteboard']) : undefined,
       editorialMap:
         sc.editorialMap && typeof sc.editorialMap === 'object'
           ? (sc.editorialMap as OpenMotionScene['editorialMap'])
@@ -413,6 +419,8 @@ export function normalizeOpenMotionProject(
     width: typeof obj.width === 'number' ? obj.width : dims.width,
     height: typeof obj.height === 'number' ? obj.height : dims.height,
     fps: typeof obj.fps === 'number' && (obj.fps === 30 || obj.fps === 60) ? obj.fps : 30,
+    captions: Array.isArray(obj.captions) ? (obj.captions as NonNullable<OpenMotionProject['captions']>) : undefined,
+    audioTracks: Array.isArray(obj.audioTracks) ? (obj.audioTracks as NonNullable<OpenMotionProject['audioTracks']>) : undefined,
     brandKit: {
       brandName:
         typeof rawBrand.brandName === 'string' && rawBrand.brandName

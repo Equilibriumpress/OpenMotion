@@ -1,3 +1,5 @@
+import { renderGeoRouteReel, renderWhiteboardScience } from './shortsRenderer';
+import { renderTimedCaptions } from './timedCaptionRenderer';
 import {
   OpenMotionBrandKit,
   OpenMotionProject,
@@ -313,6 +315,7 @@ export function renderOpenMotionFrame(
   // Full-bleed documentary Editorial Cartography layout (no chrome overlay, seamless inter-scene camera)
   if (scene.layout === 'editorial-cartography' && scene.editorialMap) {
     renderEditorialCartographyScene(ctx, w, h, scene, localTime, safeTime);
+    renderTimedCaptions(ctx,w,h,project,safeTime);
     ctx.restore();
     return;
   }
@@ -320,10 +323,21 @@ export function renderOpenMotionFrame(
   // Full-bleed procedural Three.js 3D Character & Campervan cinematic journey (no chrome overlay)
   if (scene.layout === 'three-campervan-journey') {
     renderThreeCampervanScene(ctx, w, h, scene, localTime, safeTime);
+    renderTimedCaptions(ctx,w,h,project,safeTime);
     ctx.restore();
     return;
   }
 
+  if (scene.layout === 'geo-route-reel') {
+    renderGeoRouteReel(ctx,w,h,scene,localTime);
+    renderTimedCaptions(ctx,w,h,project,safeTime);
+    ctx.restore();return;
+  }
+  if (scene.layout === 'whiteboard-science') {
+    renderWhiteboardScience(ctx,w,h,scene,localTime,brand);
+    renderTimedCaptions(ctx,w,h,project,safeTime);
+    ctx.restore();return;
+  }
   // 1. Backdrop
   drawBackdrop(ctx, w, h, brand, scene, safeTime);
 
@@ -4522,6 +4536,7 @@ export function renderOpenMotionFrame(
 
   // 3. Persistent brand header, scene counter, caption, and bottom progress bar
   drawChromeOverlay(ctx, w, h, project, scene, sceneIndex, safeTime);
+  renderTimedCaptions(ctx,w,h,project,safeTime);
 
   ctx.restore();
 }

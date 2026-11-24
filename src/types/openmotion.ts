@@ -31,6 +31,8 @@ export type SceneLayout =
   | 'travel-postcard-reel'
   | 'faceless-explainer'
   | 'paper-map-journey'
+  | 'geo-route-reel'
+  | 'whiteboard-science'
   | 'editorial-cartography'
   | 'three-campervan-journey';
 
@@ -349,6 +351,47 @@ export interface SceneThreeCampervan {
   showTitleOverlay?: boolean;
 }
 
+
+/** Coordinate order follows GeoJSON: [longitude, latitude]. */
+export interface SceneGeoRoute {
+  route: {
+    type: 'Feature';
+    geometry: { type: 'LineString'; coordinates: [number, number][] };
+    properties?: Record<string, unknown>;
+  };
+  waypoints: { name: string; lat: number; lon: number }[];
+  routeProgressFrom?: number;
+  routeProgressTo?: number;
+}
+export interface SceneWhiteboard {
+  /** Normalized SVG-style polylines: [x, y] from 0 to 1. */
+  strokes: number[][][];
+  labels: string[];
+}
+export interface TimedCaptionWord {
+  text: string;
+  startSec: number;
+  endSec: number;
+}
+export interface TimedCaption {
+  text: string;
+  startSec: number;
+  endSec: number;
+  style?: 'karaoke' | 'block' | 'minimal';
+  words?: TimedCaptionWord[];
+  position?: number; // vertical fraction 0.15 ... 0.85
+  color?: string;
+}
+export interface OpenMotionAudioTrack {
+  id: string;
+  kind: 'voiceover' | 'music' | 'effect';
+  src: string;
+  startSec: number;
+  endSec?: number;
+  volume?: number; // linear gain 0..2
+  fadeInSec?: number;
+  fadeOutSec?: number;
+}
 export interface OpenMotionScene {
   id: string;
   name: string;
@@ -398,6 +441,8 @@ export interface OpenMotionScene {
   explainer?: SceneFacelessExplainer;
   paperMap?: ScenePaperMapJourney;
   editorialMap?: SceneEditorialMap;
+  geoRoute?: SceneGeoRoute;
+  whiteboard?: SceneWhiteboard;
   threeCampervan?: SceneThreeCampervan;
   fullBleed?: boolean;
 }
@@ -436,6 +481,8 @@ export interface OpenMotionProject {
   fps: number;
   brandKit: OpenMotionBrandKit;
   scenes: OpenMotionScene[];
+  captions?: TimedCaption[];
+  audioTracks?: OpenMotionAudioTrack[];
 }
 
 export interface GitHubRepoConfig {
@@ -470,6 +517,8 @@ export interface RenderProgressState {
 export const ALL_SCENE_LAYOUTS: SceneLayout[] = [
   'three-campervan-journey',
   'editorial-cartography',
+  'geo-route-reel',
+  'whiteboard-science',
   'paper-map-journey',
   'route-map-journey',
   'travel-postcard-reel',
@@ -514,6 +563,8 @@ export const ALL_BACKDROPS: MotionBackdrop[] = [
 export const LAYOUT_DISPLAY_NAMES: Record<SceneLayout, string> = {
   'three-campervan-journey': '3D Three.js Character Journey',
   'editorial-cartography': 'Editorial Cartography (OSM)',
+  'geo-route-reel': 'GeoJSON / GPX Travel Route',
+  'whiteboard-science': 'Animated Whiteboard Science',
   'paper-map-journey': 'Paper Map Journey (Cut-Paper)',
   'route-map-journey': 'Animated Route Map',
   'travel-postcard-reel': 'Reisvideo Postcard',
