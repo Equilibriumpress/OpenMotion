@@ -23,7 +23,23 @@ export function ShortsMediaEditor({project,activeScene,onUpdateProject,onUpdateS
    const lat=(minLat+maxLat)/2,lon=(minLon+maxLon)/2;
    const latPad=Math.max(.003,(maxLat-minLat)*.12),lonPad=Math.max(.003,(maxLon-minLon)*.12);
    const scenes=project.scenes.map(s=>{
-     if(s.geoRoute){count++;return {...s,geoRoute:{...s.geoRoute,route,waypoints:[{name:'Start',lat:c[0][1],lon:c[0][0]},{name:'Finish',lat:c[c.length-1][1],lon:c[c.length-1][0]}]}};}
+     if(s.premiumTravel){
+     count++;
+     const path=route.geometry.coordinates;
+     let routeLength=0;const cumulative=[0];
+     for(let i=1;i<path.length;i++){const a=path[i-1],b=path[i];routeLength+=Math.hypot((b[0]-a[0])*.55,b[1]-a[1]);cumulative.push(routeLength);}
+     const fractions=s.premiumTravel.stops.map(stop=>{
+       let nearest=0,dist=Infinity;
+       path.forEach(([lon,lat],i)=>{const d=Math.hypot((lon-stop.lon)*.55,lat-stop.lat);if(d<dist){dist=d;nearest=i;}});
+       return routeLength?cumulative[nearest]/routeLength:0;
+     });
+     const pr=s.premiumTravel;
+     const i=Math.max(1,pr.focusStopIndex);
+     const from=pr.chapter==='drive'?(fractions[i-1]??0):0;
+     const to=pr.chapter==='finale'?1:pr.chapter==='opening'?.04:(fractions[i]??1);
+     return {...s,premiumTravel:{...pr,route,roadMatched:true,routeProgressFrom:from,routeProgressTo:to}};
+   }
+   if(s.geoRoute){count++;return {...s,geoRoute:{...s.geoRoute,route,waypoints:[{name:'Start',lat:c[0][1],lon:c[0][0]},{name:'Finish',lat:c[c.length-1][1],lon:c[c.length-1][0]}]}};}
      if(s.editorialMap){count++;return {...s,editorialMap:{...s.editorialMap,routeCoords:c.map(([lon,lat])=>[lat,lon] as [number,number]),bounds:{minLat:minLat-latPad,maxLat:maxLat+latPad,minLon:minLon-lonPad,maxLon:maxLon+lonPad},cameraFrom:{lat,lon,zoom:1},cameraTo:{lat,lon,zoom:1.2},streets:[],parks:[],buildings:[],stops:[]}};}
      return s;
    });
@@ -40,6 +56,25 @@ export function ShortsMediaEditor({project,activeScene,onUpdateProject,onUpdateS
   <label className="block text-xs text-slate-600">Importeer GPX of GeoJSON
    <input className={style} type="file" accept=".gpx,.geojson,.json" onChange={e=>void fileRoute(e)}/>
   </label>
+  {activeScene.premiumTravel&&(()=>{
+     const pr=activeScene.premiumTravel;
+     const index=Math.max(0,pr.focusStopIndex);
+     const stop=pr.stops[index];
+     const changeStop=(field:'note'|'photoUrl'|'name',value:string)=>{
+       onUpdateScene({premiumTravel:{...pr,stops:pr.stops.map((p,i)=>i===index?{...p,[field]:value}:p)}});
+     };
+     return <div className="space-y-2 border border-emerald-200 rounded-xl p-3">
+       <h4 className="text-xs font-bold text-emerald-900">Premium Travel Route</h4>
+       <p className="text-xs text-slate-500">De preview haalt wegen op via OSRM. Importeer een opgenomen GPX-route voor een zelfstandig bewaard traject.</p>
+       <label className="block text-xs">Fotostop<select value={pr.focusStopIndex} className={style} onChange={e=>onUpdateScene({premiumTravel:{...pr,focusStopIndex:Number(e.target.value)}})}>
+         <option value={-1}>Alle stops (overzicht)</option>{pr.stops.map((s,i)=><option key={i} value={i}>{s.name}</option>)}
+       </select></label>
+       {stop&&<><label className="block text-xs">Plaatsnaam<input className={style} value={stop.name} onChange={e=>changeStop('name',e.target.value)}/></label>
+       <label className="block text-xs">Uitleg<textarea rows={3} className={style} value={stop.note} onChange={e=>changeStop('note',e.target.value)}/></label>
+       <label className="block text-xs">Foto URL<input className={style} value={stop.photoUrl} onChange={e=>changeStop('photoUrl',e.target.value)}/></label></>}
+       <label className="block text-xs">Camera zoom<input className={style} type="number" min={3} max={15} step=".1" value={pr.mapZoom} onChange={e=>onUpdateScene({premiumTravel:{...pr,mapZoom:Number(e.target.value)}})}/></label>
+     </div>;
+   })()}
   <div className="flex justify-between items-center"><h4 className="text-xs font-bold">Audio timeline</h4><button type="button" className="text-xs text-blue-700" onClick={()=>setTracks([...tracks,{id:'audio-'+Date.now(),kind:'voiceover',src:'',startSec:0,volume:1}])}>+ Track</button></div>
   {tracks.map((track,i)=><div key={track.id} className="p-2 rounded border space-y-2">
    <div className="flex gap-2"><select className={style} value={track.kind} onChange={e=>updateTrack(i,{kind:e.target.value as OpenMotionAudioTrack['kind']})}><option value="voiceover">Voice-over</option><option value="music">Muziek</option><option value="effect">Effect</option></select><button type="button" className="text-red-700 text-xs" onClick={()=>setTracks(tracks.filter((_,j)=>j!==i))}>Verwijder</button></div>

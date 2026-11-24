@@ -1,9 +1,8 @@
 import type { OpenMotionProject, OpenMotionScene } from '../types/openmotion';
-import { Map as MapLibreMap, setWorkerUrl } from 'maplibre-gl';
+import type { Map as MapLibreMap } from 'maplibre-gl';
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
-setWorkerUrl(workerUrl);
 const STYLE = 'https://tiles.openfreemap.org/styles/bright';
 const ROUTER = 'https://router.project-osrm.org/route/v1/driving/';
 const WIDTH = 1080, HEIGHT = 1920, CSS_W = 720, CSS_H = 1280;
@@ -51,13 +50,15 @@ export function preparePremiumTravelProject(project:OpenMotionProject):Promise<v
   const existing=pending.get(project);if(existing)return existing;
   const job=(async()=>{
     await getRoadGeometry(scenes);
+    const { Map: MapLibreConstructor, setWorkerUrl } = await import('maplibre-gl');
+    setWorkerUrl(workerUrl);
     const div=document.createElement('div');
     div.style.cssText='position:fixed;left:-5000px;top:0;width:720px;height:1280px;pointer-events:none;z-index:-1;';
     document.body.appendChild(div);
     let map:MapLibreMap|undefined;
     try{
       const first=scenes[0].premiumTravel!;
-      map=new MapLibreMap({container:div,style:STYLE,center:first.mapCenter,zoom:first.mapZoom,interactive:false,attributionControl:false,fadeDuration:0,canvasContextAttributes:{preserveDrawingBuffer:true,antialias:false}});
+      map=new MapLibreConstructor({container:div,style:STYLE,center:first.mapCenter,zoom:first.mapZoom,interactive:false,attributionControl:false,fadeDuration:0,canvasContextAttributes:{preserveDrawingBuffer:true,antialias:false}});
       if(!map.loaded())await idle(map,'load');
       for(const scene of scenes){
         const p=scene.premiumTravel!;
@@ -117,7 +118,7 @@ function photoCover(ctx:CanvasRenderingContext2D,img:HTMLImageElement,x:number,y
 export function renderPremiumTravelScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMotionScene,time:number,getPhoto:(url:string)=>HTMLImageElement|null):void{
   const premium=scene.premiumTravel!,stage=stages.get(scene),s=w/WIDTH,t=clamp(time/Math.max(.01,scene.durationSec));
   ctx.fillStyle='#E8E7DC';ctx.fillRect(0,0,w,h);
-  if(!stage||!premium.roadMatched){ctx.textAlign='center';ctx.fillStyle='#254D46';ctx.font=(32*s)+'px sans-serif';ctx.fillText('Loading real roads and map…',w/2,h/2);return;}
+  if(!stage||!premium.roadMatched){ctx.textAlign='center';ctx.fillStyle='#254D46';ctx.font=(32*s)+'px sans-serif';ctx.fillText('Preparing roads and map…',w/2,h/2);return;}
   // Map and projected route share one deterministic camera transform.
   ctx.save();const zoom=1.012+.025*Math.sin(t*Math.PI);
   ctx.translate(w/2,h/2);ctx.scale(zoom,zoom);ctx.translate(-w/2+Math.sin(t*Math.PI)*10*s,-h/2);

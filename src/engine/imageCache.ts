@@ -19,7 +19,7 @@ export function subscribeImageLoaded(cb: () => void): () => void {
   };
 }
 
-function notifyListeners() {
+export function notifyImageRefresh() {
   listeners.forEach((cb) => {
     try {
       cb();
@@ -53,7 +53,7 @@ function ensureEntry(url: string): CacheEntry {
   img.onload = () => {
     entry.loaded = true;
     resolvePromise(img);
-    notifyListeners();
+    notifyImageRefresh();
   };
 
   img.onerror = () => {
@@ -94,7 +94,7 @@ export async function preloadProjectImages(project: OpenMotionProject): Promise<
   }
   const hasPremium = project.scenes.some(scene => scene.premiumTravel);
   if (hasPremium) await preparePremiumTravelProject(project);
-  if (urls.size === 0) { if (hasPremium) notifyListeners(); return; }
+  if (urls.size === 0) { if (hasPremium) notifyImageRefresh(); return; }
 
   await Promise.all(
     Array.from(urls).map(async (url) => {
