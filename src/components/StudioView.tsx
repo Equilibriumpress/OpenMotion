@@ -19,6 +19,8 @@ import {
   VolumeX,
 } from 'lucide-react';
 import { DocumentaryAudioEngine } from '../engine/ambientAudio';
+import { projectAssetUrl } from '../engine/projectAudio';
+import { ShortsMediaEditor } from './ShortsMediaEditor';
 import { exportProjectToMp4, formatFileSize } from '../engine/mp4Exporter';
 import {
   buildTemplateRemixPrompt,
@@ -74,6 +76,7 @@ export function StudioView({
   const [selectedSceneIdx, setSelectedSceneIdx] = useState(0);
 
   const audioEngineRef = useRef<DocumentaryAudioEngine | null>(null);
+  const audioPlayersRef = useRef<{ id:string; audio:HTMLAudioElement; start:number; end?:number; volume:number; fadeIn:number; fadeOut:number }[]>([]);
 
   const [exportOptions, setExportOptions] = useState<RenderExportOptions>({
     resolution: '1080p',
@@ -114,25 +117,50 @@ export function StudioView({
     };
   }, [renderState.outputUrl]);
 
+
+  // Independent preview sources use the same timeline as the offline MP4 audio mixer.
+  useEffect(() => {
+    const players = (project.audioTracks ?? []).filter(t=>t.src?.trim()).map(t=>({
+      id:t.id,audio:new Audio(projectAssetUrl(t.src)),start:Math.max(0,t.startSec),end:t.endSec,
+      volume:Math.max(0,Math.min(1,t.volume??1)),fadeIn:t.fadeInSec??0,fadeOut:t.fadeOutSec??0
+    }));
+    audioPlayersRef.current=players;
+    return ()=>{players.forEach(p=>{p.audio.pause();p.audio.removeAttribute('src');});audioPlayersRef.current=[];};
+  },[project.audioTracks]);
+
+  useEffect(()=>{
+    for(const p of audioPlayersRef.current){
+      const local=currentTime-p.start;
+      const max=p.end===undefined ? Number.POSITIVE_INFINITY : Math.max(0,p.end-p.start);
+      if(!audioEnabled||!isPlaying||local<0||local>=max){p.audio.pause();continue;}
+      if(Number.isFinite(p.audio.duration)&&local>=p.audio.duration){p.audio.pause();continue;}
+      if(Math.abs(p.audio.currentTime-local)>.3) {try{p.audio.currentTime=local;}catch{/* metadata pending */}}
+      const fadeIn=p.fadeIn>0 ? Math.min(1,local/p.fadeIn):1;
+      const fadeOut=p.fadeOut>0 && Number.isFinite(max) ? Math.min(1,(max-local)/p.fadeOut):1;
+      p.audio.volume=Math.max(0,Math.min(1,p.volume*fadeIn*fadeOut));
+      if(p.audio.paused)void p.audio.play().catch(()=>{});
+    }
+  },[currentTime,isPlaying,audioEnabled,project.audioTracks]);
+
   // Synchronize subtle documentary audio soundtrack & city ambience with playback
   useEffect(() => {
     if (!audioEngineRef.current) {
       audioEngineRef.current = new DocumentaryAudioEngine();
     }
     const engine = audioEngineRef.current;
-    if (audioEnabled && isPlaying) {
+    if (audioEnabled && isPlaying && !(project.audioTracks?.length)) {
       engine.start(currentTime);
     } else {
       engine.stop();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [audioEnabled, isPlaying]);
+  }, [audioEnabled, isPlaying, project.audioTracks]);
 
   useEffect(() => {
-    if (audioEnabled && isPlaying) {
+    if (audioEnabled && isPlaying && !(project.audioTracks?.length)) {
       audioEngineRef.current?.syncTime(currentTime);
     }
-  }, [audioEnabled, isPlaying, currentTime]);
+  }, [audioEnabled, isPlaying, currentTime, project.audioTracks]);
 
   useEffect(() => {
     return () => {
@@ -829,6 +857,7 @@ export function StudioView({
 
             {inspectorTab === 'editor' && activeScene && (
               <div className="space-y-4">
+                <ShortsMediaEditor project={project} activeScene={activeScene} onUpdateProject={onUpdateProject} onUpdateScene={updateActiveScene} />
                 <div className="space-y-3 pb-4 border-b border-slate-100">
                   <p className="text-xs font-semibold text-slate-900">Brand Kit</p>
                   <div>

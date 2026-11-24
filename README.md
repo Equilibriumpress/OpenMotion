@@ -31,3 +31,15 @@ npm run dev
 - Directe video-studio: `#studio/<project-slug>`
 - ChatGPT workflow: `#chatgpt`
 - GitHub Pages instellingen: `#github`
+
+## Shorts & Reels (9:16)
+
+Eight 1080×1920 examples live in **Shorts & Reels**. Open a card in Studio to edit text, color, scene duration, image URL, audio tracks, timed captions, and data-driven diagrams. The examples are stored as `projects/short-*/project.json` and share the existing Canvas renderer.
+
+- Import GPX or GeoJSON LineString for geographic routes. The Scotland sample is waypoint geometry, not a verified drivable route. Import a real route for geographic accuracy.
+- Import SRT caption files. Karaoke uses even word timing unless each word has explicit `startSec/endSec` metadata in JSON.
+- Add audio tracks pointing to files in `public/assets/` (e.g. `assets/audio/voice.mp3`) or permitted CORS sources. Adjust volume, clip timing and fades in Studio.
+- The H.264 exporter adds AAC where WebCodecs audio encoding is supported. On other browsers, MediaRecorder chooses MP4 or WebM according to actual availability. Audio encoding and Safari compatibility require device testing.
+- The optional procedural documentary soundtrack is a preview aid and is **not** embedded unless supplied as an audio track.
+
+Full usage notes: [Shorts & Reels guide](docs/shorts-reels.md).

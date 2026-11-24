@@ -1,3 +1,7 @@
+import { renderGeoRouteReel, renderWhiteboardScience } from './shortsRenderer';
+import { renderTimedCaptions } from './timedCaptionRenderer';
+import { getCachedPhoto } from './imageCache';
+import { projectAssetUrl } from './projectAudio';
 import {
   OpenMotionBrandKit,
   OpenMotionProject,
@@ -313,6 +317,7 @@ export function renderOpenMotionFrame(
   // Full-bleed documentary Editorial Cartography layout (no chrome overlay, seamless inter-scene camera)
   if (scene.layout === 'editorial-cartography' && scene.editorialMap) {
     renderEditorialCartographyScene(ctx, w, h, scene, localTime, safeTime);
+    renderTimedCaptions(ctx,w,h,project,safeTime);
     ctx.restore();
     return;
   }
@@ -320,12 +325,34 @@ export function renderOpenMotionFrame(
   // Full-bleed procedural Three.js 3D Character & Campervan cinematic journey (no chrome overlay)
   if (scene.layout === 'three-campervan-journey') {
     renderThreeCampervanScene(ctx, w, h, scene, localTime, safeTime);
+    renderTimedCaptions(ctx,w,h,project,safeTime);
     ctx.restore();
     return;
   }
 
+  if (scene.layout === 'geo-route-reel') {
+    renderGeoRouteReel(ctx,w,h,scene,localTime);
+    renderTimedCaptions(ctx,w,h,project,safeTime);
+    ctx.restore();return;
+  }
+  if (scene.layout === 'whiteboard-science') {
+    renderWhiteboardScience(ctx,w,h,scene,localTime,brand);
+    renderTimedCaptions(ctx,w,h,project,safeTime);
+    ctx.restore();return;
+  }
   // 1. Backdrop
   drawBackdrop(ctx, w, h, brand, scene, safeTime);
+  if (scene.imageUrl) {
+    const img = getCachedPhoto(projectAssetUrl(scene.imageUrl));
+    if(img) {
+      ctx.save();ctx.globalAlpha=0.22;
+      const zoom=Math.max(w/img.naturalWidth,h/img.naturalHeight)*1.04;
+      const iw=img.naturalWidth*zoom,ih=img.naturalHeight*zoom;
+      const drift=Math.sin(safeTime*.3)*Math.min(w*.025,22);
+      ctx.drawImage(img,(w-iw)/2+drift,(h-ih)/2,iw,ih);
+      ctx.restore();
+    }
+  }
 
   // 2. Scene entrance & exit envelope
   const enterT = easeOutExpo(clamp(localTime / 0.55));
@@ -4522,6 +4549,7 @@ export function renderOpenMotionFrame(
 
   // 3. Persistent brand header, scene counter, caption, and bottom progress bar
   drawChromeOverlay(ctx, w, h, project, scene, sceneIndex, safeTime);
+  renderTimedCaptions(ctx,w,h,project,safeTime);
 
   ctx.restore();
 }

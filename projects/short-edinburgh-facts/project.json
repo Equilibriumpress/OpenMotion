@@ -1,0 +1,132 @@
+{
+  "schemaVersion": "1.0",
+  "id": "short-edinburgh-facts",
+  "slug": "short-edinburgh-facts",
+  "title": "3 Surprising Facts — Edinburgh",
+  "description": "City facts in vertical editorial animation",
+  "category": "Shorts & Reels",
+  "author": "OpenMotion Studio",
+  "source": "template",
+  "createdAt": "2026-11-24",
+  "updatedAt": "2026-11-24",
+  "githubPath": "projects/short-edinburgh-facts/project.json",
+  "format": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "brandKit": {
+    "brandName": "EDINBURGH FACTS",
+    "primaryColor": "#EF7351",
+    "accentColor": "#F7CA85",
+    "backgroundColor": "#192434",
+    "surfaceColor": "#192333",
+    "textColor": "#FFFFFF",
+    "mutedColor": "#C2CBDF",
+    "fontFamily": "Bricolage Grotesque"
+  },
+  "audioTracks": [],
+  "captions": [
+    {
+      "startSec": 0,
+      "endSec": 2,
+      "text": "3 Edinburgh facts",
+      "style": "karaoke"
+    },
+    {
+      "startSec": 2,
+      "endSec": 7,
+      "text": "Old and New Towns are UNESCO-listed.",
+      "style": "karaoke"
+    },
+    {
+      "startSec": 7,
+      "endSec": 12,
+      "text": "The Royal Mile links castle and palace.",
+      "style": "karaoke"
+    },
+    {
+      "startSec": 12,
+      "endSec": 17,
+      "text": "Arthur’s Seat is a volcanic hill.",
+      "style": "karaoke"
+    },
+    {
+      "startSec": 17,
+      "endSec": 20,
+      "text": "Which fact surprised you?",
+      "style": "karaoke"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "hook",
+      "name": "Hook",
+      "durationSec": 2,
+      "layout": "hero-kinetic",
+      "transition": "slide-up",
+      "backdrop": "swiss-lines",
+      "headline": "3 Edinburgh facts",
+      "eyebrow": "CITY NOTES"
+    },
+    {
+      "id": "heritage",
+      "name": "Heritage",
+      "durationSec": 5,
+      "layout": "metric-spotlight",
+      "transition": "slide-up",
+      "backdrop": "swiss-lines",
+      "headline": "Old and New Towns are UNESCO-listed.",
+      "metrics": [
+        {
+          "label": "UNESCO INSCRIPTION",
+          "value": "1995"
+        }
+      ]
+    },
+    {
+      "id": "royal-mile",
+      "name": "Royal Mile",
+      "durationSec": 5,
+      "layout": "paper-cutout",
+      "transition": "slide-up",
+      "backdrop": "swiss-lines",
+      "headline": "The Royal Mile links castle and palace.",
+      "paperChapters": [
+        "Edinburgh Castle",
+        "St Giles’ Cathedral",
+        "Holyroodhouse"
+      ],
+      "imageUrl": "assets/edinburgh/01-edinburgh-castle.jpg"
+    },
+    {
+      "id": "volcano",
+      "name": "Volcano",
+      "durationSec": 5,
+      "layout": "feature-cards",
+      "transition": "slide-up",
+      "backdrop": "swiss-lines",
+      "headline": "Arthur’s Seat is a volcanic hill.",
+      "items": [
+        {
+          "title": "Arthur’s Seat",
+          "detail": "A volcanic landscape in Holyrood Park"
+        },
+        {
+          "title": "Hilltop views",
+          "detail": "Look across the city"
+        }
+      ],
+      "imageUrl": "assets/edinburgh/03-canongate-royal-mile.jpg"
+    },
+    {
+      "id": "finale",
+      "name": "Finale",
+      "durationSec": 3,
+      "layout": "outro-cta",
+      "transition": "slide-up",
+      "backdrop": "swiss-lines",
+      "headline": "Which fact surprised you?",
+      "ctaText": "Save for later"
+    }
+  ]
+}

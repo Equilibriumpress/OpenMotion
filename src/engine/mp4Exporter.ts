@@ -8,6 +8,39 @@ import {
 } from '../types/openmotion';
 import { preloadProjectImages } from './imageCache';
 import { renderOpenMotionFrame } from './openMotionRenderer';
+import { mixProjectAudio } from './projectAudio';
+
+
+async function probeAacEncoder(): Promise<AudioEncoderConfig | null> {
+  if (typeof AudioEncoder === 'undefined' || typeof AudioData === 'undefined') return null;
+  const config: AudioEncoderConfig = {codec:'mp4a.40.2', sampleRate:48000, numberOfChannels:2, bitrate:128000};
+  try { return (await AudioEncoder.isConfigSupported(config)).supported ? config : null; }
+  catch { return null; }
+}
+
+async function encodeAacAudio(audio:AudioBuffer, config:AudioEncoderConfig, muxer:Muxer<ArrayBufferTarget>):Promise<void> {
+  let failure: Error | null = null;
+  const encoder = new AudioEncoder({
+    output: (chunk,meta) => muxer.addAudioChunk(chunk,meta),
+    error: error => {failure = error instanceof Error ? error : new Error(String(error));},
+  });
+  encoder.configure(config);
+  try {
+    const blockSize=1024;
+    for(let start=0;start<audio.length;start+=blockSize){
+      if(failure) throw failure;
+      const frames=Math.min(blockSize,audio.length-start);
+      const samples=new Float32Array(frames*2);
+      samples.set(audio.getChannelData(0).subarray(start,start+frames),0);
+      samples.set(audio.getChannelData(1).subarray(start,start+frames),frames);
+      const packet=new AudioData({format:'f32-planar',sampleRate:48000,numberOfFrames:frames,numberOfChannels:2,timestamp:Math.round(start*1000000/48000),data:samples});
+      encoder.encode(packet);packet.close();
+      if(encoder.encodeQueueSize>12) await encoder.flush();
+    }
+    await encoder.flush();
+    if(failure) throw failure;
+  } finally { if(encoder.state!=='closed')encoder.close(); }
+}
 
 const H264_CODEC_CANDIDATES = [
   'avc1.640028', // High Profile Level 4.0 (1080p30/60)
@@ -82,11 +115,15 @@ export async function exportProjectToMp4(
     await document.fonts.ready;
   }
   await preloadProjectImages(project);
+  const mixedAudio = await mixProjectAudio(project, durationSec);
+  const audioConfig = mixedAudio ? await probeAacEncoder() : null;
 
   const h264Config = await pickSupportedH264Config(width, height, fps, bitrate);
 
-  if (h264Config) {
+  if (h264Config && (!mixedAudio || audioConfig)) {
     return encodeWithWebCodecsMp4({
+      mixedAudio,
+      audioConfig,
       canvas,
       ctx,
       project,
@@ -102,6 +139,7 @@ export async function exportProjectToMp4(
   }
 
   return encodeWithMediaRecorderFallback({
+    mixedAudio,
     canvas,
     ctx,
     project,
@@ -117,6 +155,8 @@ export async function exportProjectToMp4(
 }
 
 async function encodeWithWebCodecsMp4(params: {
+  mixedAudio: AudioBuffer | null;
+  audioConfig: AudioEncoderConfig | null;
   canvas: HTMLCanvasElement;
   ctx: CanvasRenderingContext2D;
   project: OpenMotionProject;
@@ -138,6 +178,8 @@ async function encodeWithWebCodecsMp4(params: {
     fps,
     totalFrames,
     h264Config,
+    mixedAudio,
+    audioConfig,
     startedAt,
     onProgress,
     signal,
@@ -153,6 +195,7 @@ async function encodeWithWebCodecsMp4(params: {
       frameRate: fps,
     },
     fastStart: 'in-memory',
+    ...(mixedAudio ? {audio: {codec: 'aac' as const, sampleRate: 48000, numberOfChannels: 2}} : {}),
   });
 
   let encoderError: Error | null = null;
@@ -167,6 +210,7 @@ async function encodeWithWebCodecsMp4(params: {
   });
 
   encoder.configure(h264Config);
+  if (mixedAudio && audioConfig) await encodeAacAudio(mixedAudio, audioConfig, muxer);
 
   const frameDurationUs = Math.round(1_000_000 / fps);
 
@@ -253,6 +297,7 @@ async function encodeWithWebCodecsMp4(params: {
 }
 
 async function encodeWithMediaRecorderFallback(params: {
+  mixedAudio: AudioBuffer | null;
   canvas: HTMLCanvasElement;
   ctx: CanvasRenderingContext2D;
   project: OpenMotionProject;
@@ -274,6 +319,7 @@ async function encodeWithMediaRecorderFallback(params: {
     fps,
     totalFrames,
     bitrate,
+    mixedAudio,
     startedAt,
     onProgress,
     signal,
@@ -293,6 +339,17 @@ async function encodeWithMediaRecorderFallback(params: {
   const container: 'mp4' | 'webm' = isMp4 ? 'mp4' : 'webm';
 
   const stream = canvas.captureStream(fps);
+  let fallbackContext: AudioContext | null = null;
+  let fallbackSource: AudioBufferSourceNode | null = null;
+  if (mixedAudio) {
+    fallbackContext = new AudioContext();
+    const destination = fallbackContext.createMediaStreamDestination();
+    fallbackSource = fallbackContext.createBufferSource();
+    fallbackSource.buffer = mixedAudio;
+    fallbackSource.connect(destination);
+    for (const track of destination.stream.getAudioTracks()) stream.addTrack(track);
+    await fallbackContext.resume();
+  }
   const recorder = new MediaRecorder(stream, {
     mimeType: chosenMime,
     videoBitsPerSecond: bitrate,
@@ -309,6 +366,7 @@ async function encodeWithMediaRecorderFallback(params: {
   });
 
   recorder.start();
+  if(fallbackSource && fallbackContext) fallbackSource.start(fallbackContext.currentTime);
   const frameIntervalMs = 1000 / fps;
 
   for (let frameIdx = 0; frameIdx < totalFrames; frameIdx++) {
@@ -337,6 +395,8 @@ async function encodeWithMediaRecorderFallback(params: {
 
   recorder.stop();
   const blob = await stopPromise;
+  fallbackSource?.disconnect();
+  await fallbackContext?.close();
   const outputUrl = URL.createObjectURL(blob);
   const fileName = `${project.slug}-${width}x${height}-${fps}fps.${container}`;
 
