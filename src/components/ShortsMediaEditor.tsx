@@ -36,7 +36,7 @@ export function ShortsMediaEditor({project,activeScene,onUpdateProject,onUpdateS
      const pr=s.premiumTravel;
      const i=Math.max(1,pr.focusStopIndex);
      const from=pr.chapter==='drive'?(fractions[i-1]??0):0;
-     const to=pr.chapter==='finale'?1:pr.chapter==='opening'?.04:(fractions[i]??1);
+     const to=pr.chapter==='finale'?1:pr.chapter==='opening'?0.04:(fractions[i]??1);
      return {...s,premiumTravel:{...pr,route,roadMatched:true,routeProgressFrom:from,routeProgressTo:to}};
    }
    if(s.geoRoute){count++;return {...s,geoRoute:{...s.geoRoute,route,waypoints:[{name:'Start',lat:c[0][1],lon:c[0][0]},{name:'Finish',lat:c[c.length-1][1],lon:c[c.length-1][0]}]}};}

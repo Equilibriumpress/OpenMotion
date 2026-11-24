@@ -110,5 +110,5 @@ export async function preloadProjectImages(project: OpenMotionProject): Promise<
       }
     })
   );
-  if (hasPremium) notifyListeners();
+  if (hasPremium) notifyImageRefresh();
 }
