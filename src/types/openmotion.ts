@@ -383,6 +383,7 @@ export interface TimedCaption {
   words?: TimedCaptionWord[];
   position?: number; // vertical fraction 0.15 ... 0.85
   color?: string;
+  fontSizePx?: number;
 }
 export interface OpenMotionAudioTrack {
   id: string;

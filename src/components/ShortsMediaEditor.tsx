@@ -69,11 +69,16 @@ export function ShortsMediaEditor({project,activeScene,onUpdateProject,onUpdateS
 
   <div className="flex justify-between items-center"><h4 className="text-xs font-bold">Getimede captions</h4><button type="button" className="text-xs text-blue-700" onClick={()=>onUpdateProject({...project,captions:[...(project.captions??[]),{text:'New caption',startSec:0,endSec:2,style:'karaoke'}]})}>+ Caption</button></div>
   <input className={style} type="file" accept=".srt" aria-label="Import SRT captions" onChange={e=>void fileSubtitles(e)}/>
-  {(project.captions??[]).map((c,i)=><div key={i} className="grid grid-cols-5 gap-1">
+  {(project.captions??[]).map((c,i)=><div key={i} className="space-y-1 border-b border-slate-100 pb-2"><div className="grid grid-cols-5 gap-1">
    <input className={style} type="number" step=".1" aria-label="Start caption" value={c.startSec} onChange={e=>updateCaption(i,{startSec:Number(e.target.value)})}/>
    <input className={style} type="number" step=".1" aria-label="Eind caption" value={c.endSec} onChange={e=>updateCaption(i,{endSec:Number(e.target.value)})}/>
    <input className={style+' col-span-2'} value={c.text} aria-label="Captiontekst" onChange={e=>updateCaption(i,{text:e.target.value})}/>
    <button type="button" className="text-red-700" onClick={()=>onUpdateProject({...project,captions:(project.captions??[]).filter((_,j)=>j!==i)})}>×</button>
-  </div>)}
+  </div><div className="grid grid-cols-4 gap-1">
+    <select aria-label="Caption style" className={style} value={c.style??'karaoke'} onChange={e=>updateCaption(i,{style:e.target.value})}><option value="karaoke">Karaoke</option><option value="block">Block</option><option value="minimal">Minimal</option></select>
+    <input type="color" aria-label="Caption color" className={style} value={c.color??'#FFE69A'} onChange={e=>updateCaption(i,{color:e.target.value})}/>
+    <label className="text-[10px]">Positie<input className={style} type="number" min=".18" max=".82" step=".05" value={c.position??.78} onChange={e=>updateCaption(i,{position:Number(e.target.value)})}/></label>
+    <label className="text-[10px]">Font px<input className={style} type="number" min="18" max="90" value={c.fontSizePx??49} onChange={e=>updateCaption(i,{fontSizePx:Number(e.target.value)})}/></label>
+  </div></div>)}
  </section>;
 }

@@ -5,7 +5,7 @@ export function renderTimedCaptions(ctx: CanvasRenderingContext2D,w:number,h:num
  const cap=project.captions?.find((c):c is TimedCaption=>Number.isFinite(c.startSec)&&Number.isFinite(c.endSec)&&c.startSec<=timeSec&&c.endSec>timeSec);if(!cap)return;
  const tokens=cap.words?.length?cap.words:cap.text.trim().split(/\s+/).map((text,i,words)=>({text,startSec:cap.startSec+(cap.endSec-cap.startSec)*i/words.length,endSec:cap.startSec+(cap.endSec-cap.startSec)*(i+1)/words.length}));
  const scale=w/1080;
- const maxWidth=w*.8;const fontSize=Math.max(19,Math.round(49*scale));
+ const maxWidth=w*.8;const fontSize=Math.max(18,Math.round(Math.min(90,Math.max(18,cap.fontSizePx??49))*scale));
  ctx.save();ctx.textAlign='center';ctx.textBaseline='middle';ctx.font=`800 ${fontSize}px "Bricolage Grotesque",sans-serif`;
  // Single-line groups of up to 5 words, displayed one phrase at a time to fit mobile safe margins.
  const activeIndex=tokens.findIndex(x=>timeSec<x.endSec);
