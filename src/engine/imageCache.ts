@@ -9,6 +9,29 @@ interface CacheEntry {
   promise: Promise<HTMLImageElement | null>;
 }
 
+
+/**
+ * The older premium projects used Commons Special:FilePath redirects.
+ * Those redirects are not dependable for cross-origin Canvas decoding.
+ * Keep published/localStorage projects working after the URL migration.
+ */
+const legacyCommonsThumbs: Record<string, string> = {
+  "Edinburgh_Castle_2000-1.jpg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/Edinburgh_Castle_2000-1.jpg/1280px-Edinburgh_Castle_2000-1.jpg",
+  "Glencoe,_Scotland.jpg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Glencoe%2C_Scotland.jpg/1280px-Glencoe%2C_Scotland.jpg",
+  "Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg/1280px-Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
+  "Portree_harbour.jpg": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/15/Portree_harbour.jpg/1280px-Portree_harbour.jpg"
+};
+function resolvePhotoSource(url: string): string {
+  const match = url.match(/^https:\/\/commons\.wikimedia\.org\/wiki\/Special:FilePath\/([^?#]+)/i);
+  if (!match) return url;
+  try {
+    const name = decodeURIComponent(match[1]).replace(/ /g, '_');
+    return legacyCommonsThumbs[name] ?? url;
+  } catch {
+    return url;
+  }
+}
+
 const cache = new Map<string, CacheEntry>();
 const listeners = new Set<() => void>();
 
@@ -30,11 +53,12 @@ export function notifyImageRefresh() {
 }
 
 function ensureEntry(url: string): CacheEntry {
-  const existing = cache.get(url);
+  const imageUrl = resolvePhotoSource(url);
+  const existing = cache.get(imageUrl);
   if (existing) return existing;
 
   const img = new Image();
-  if (/^https?:\/\//i.test(url)) {
+  if (/^https?:\/\//i.test(imageUrl)) {
     img.crossOrigin = 'anonymous';
   }
 
@@ -59,10 +83,11 @@ function ensureEntry(url: string): CacheEntry {
   img.onerror = () => {
     entry.error = true;
     resolvePromise(null);
+    notifyImageRefresh();
   };
 
-  cache.set(url, entry);
-  img.src = url;
+  cache.set(imageUrl, entry);
+  img.src = imageUrl;
   return entry;
 }
 
@@ -100,7 +125,11 @@ export async function preloadProjectImages(project: OpenMotionProject): Promise<
     Array.from(urls).map(async (url) => {
       const entry = ensureEntry(url);
       const loadedImg = await entry.promise;
-      if (!loadedImg && hasPremium) throw new Error('Required premium photo unavailable: ' + url);
+      if (!loadedImg && hasPremium) {
+        // A photo is optional. Keep map, vehicle and MP4 frames available.
+        console.warn('Premium photo unavailable. Using scenic fallback:', url);
+        return;
+      }
       if (loadedImg && typeof loadedImg.decode === 'function') {
         try {
           await loadedImg.decode();

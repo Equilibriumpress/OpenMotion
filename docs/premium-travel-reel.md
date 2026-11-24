@@ -29,7 +29,7 @@ The MapLibre map requires WebGL and reachable OpenFreeMap vector tiles. The MP4 
 
 ## Photographs
 
-Photos are loaded from Wikimedia Commons at render time. Do not remove these credits when republishing. Creative Commons ShareAlike terms may apply to adapted media.
+Photos use direct 1280-pixel Wikimedia thumbnail URLs rather than Commons Special:FilePath redirect links. The loader also recognizes older redirect URLs saved in localStorage. Do not remove these credits when republishing. Creative Commons ShareAlike terms may apply to adapted media.
 
 | Stop | Author | License | Original |
 | --- | --- | --- | --- |
@@ -48,7 +48,7 @@ The Shorts media editor now includes inputs for premium stop names, explanatory 
 
 1. Actual network and browser render quality remain unverified.
 2. The OSRM demo endpoint requires internet access and reasonable request volume.
-3. Photos rely on the remote Commons redirect and CORS headers.
+3. Remote Wikimedia thumbnails still depend on network access and CORS. A failed optional photo is replaced by a scenic illustration without stopping MP4 export.
 4. Stop durations and scene cameras are authored rather than automatically generated from the route.
 5. MapLibre creates static basemap snapshots, so this is 2D/2.5D, not a free-moving 3D terrain camera.
 6. No soundtrack is shipped in the demo. Optional audio tracks remain supported by the studio's existing exporter.

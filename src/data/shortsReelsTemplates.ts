@@ -771,7 +771,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 55.9486,
               "lon": -3.1999,
               "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
-              "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Edinburgh_Castle_2000-1.jpg?width=1200",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/Edinburgh_Castle_2000-1.jpg/1280px-Edinburgh_Castle_2000-1.jpg",
               "photoAuthor": "Libasstref",
               "photoLicense": "CC0 1.0",
               "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_2000-1.jpg"
@@ -781,7 +781,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 56.681,
               "lon": -5.004,
               "note": "Drive past dramatic mountain walls and a glacial Highland valley.",
-              "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Glencoe%2C_Scotland.jpg?width=1200",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Glencoe%2C_Scotland.jpg/1280px-Glencoe%2C_Scotland.jpg",
               "photoAuthor": "Saadtowheed",
               "photoLicense": "CC BY-SA 4.0",
               "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Glencoe,_Scotland.jpg"
@@ -791,7 +791,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 57.2743,
               "lon": -5.5168,
               "note": "A celebrated island castle stands where three sea lochs meet.",
-              "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg?width=1200",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg/1280px-Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
               "photoAuthor": "Gillfoto",
               "photoLicense": "CC BY-SA 4.0",
               "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg"
@@ -801,7 +801,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 57.4129,
               "lon": -6.1945,
               "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
-              "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Portree_harbour.jpg?width=1200",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/15/Portree_harbour.jpg/1280px-Portree_harbour.jpg",
               "photoAuthor": "Clem_nat",
               "photoLicense": "CC BY-SA 4.0",
               "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Portree_harbour.jpg"
@@ -863,7 +863,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 55.9486,
               "lon": -3.1999,
               "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
-              "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Edinburgh_Castle_2000-1.jpg?width=1200",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/Edinburgh_Castle_2000-1.jpg/1280px-Edinburgh_Castle_2000-1.jpg",
               "photoAuthor": "Libasstref",
               "photoLicense": "CC0 1.0",
               "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_2000-1.jpg"
@@ -873,7 +873,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 56.681,
               "lon": -5.004,
               "note": "Drive past dramatic mountain walls and a glacial Highland valley.",
-              "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Glencoe%2C_Scotland.jpg?width=1200",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Glencoe%2C_Scotland.jpg/1280px-Glencoe%2C_Scotland.jpg",
               "photoAuthor": "Saadtowheed",
               "photoLicense": "CC BY-SA 4.0",
               "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Glencoe,_Scotland.jpg"
@@ -883,7 +883,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 57.2743,
               "lon": -5.5168,
               "note": "A celebrated island castle stands where three sea lochs meet.",
-              "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg?width=1200",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg/1280px-Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
               "photoAuthor": "Gillfoto",
               "photoLicense": "CC BY-SA 4.0",
               "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg"
@@ -893,7 +893,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 57.4129,
               "lon": -6.1945,
               "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
-              "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Portree_harbour.jpg?width=1200",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/15/Portree_harbour.jpg/1280px-Portree_harbour.jpg",
               "photoAuthor": "Clem_nat",
               "photoLicense": "CC BY-SA 4.0",
               "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Portree_harbour.jpg"
@@ -955,7 +955,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 55.9486,
               "lon": -3.1999,
               "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
-              "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Edinburgh_Castle_2000-1.jpg?width=1200",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/Edinburgh_Castle_2000-1.jpg/1280px-Edinburgh_Castle_2000-1.jpg",
               "photoAuthor": "Libasstref",
               "photoLicense": "CC0 1.0",
               "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_2000-1.jpg"
@@ -965,7 +965,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 56.681,
               "lon": -5.004,
               "note": "Drive past dramatic mountain walls and a glacial Highland valley.",
-              "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Glencoe%2C_Scotland.jpg?width=1200",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Glencoe%2C_Scotland.jpg/1280px-Glencoe%2C_Scotland.jpg",
               "photoAuthor": "Saadtowheed",
               "photoLicense": "CC BY-SA 4.0",
               "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Glencoe,_Scotland.jpg"
@@ -975,7 +975,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 57.2743,
               "lon": -5.5168,
               "note": "A celebrated island castle stands where three sea lochs meet.",
-              "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg?width=1200",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg/1280px-Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
               "photoAuthor": "Gillfoto",
               "photoLicense": "CC BY-SA 4.0",
               "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg"
@@ -985,7 +985,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 57.4129,
               "lon": -6.1945,
               "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
-              "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Portree_harbour.jpg?width=1200",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/15/Portree_harbour.jpg/1280px-Portree_harbour.jpg",
               "photoAuthor": "Clem_nat",
               "photoLicense": "CC BY-SA 4.0",
               "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Portree_harbour.jpg"
@@ -1047,7 +1047,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 55.9486,
               "lon": -3.1999,
               "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
-              "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Edinburgh_Castle_2000-1.jpg?width=1200",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/Edinburgh_Castle_2000-1.jpg/1280px-Edinburgh_Castle_2000-1.jpg",
               "photoAuthor": "Libasstref",
               "photoLicense": "CC0 1.0",
               "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_2000-1.jpg"
@@ -1057,7 +1057,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 56.681,
               "lon": -5.004,
               "note": "Drive past dramatic mountain walls and a glacial Highland valley.",
-              "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Glencoe%2C_Scotland.jpg?width=1200",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Glencoe%2C_Scotland.jpg/1280px-Glencoe%2C_Scotland.jpg",
               "photoAuthor": "Saadtowheed",
               "photoLicense": "CC BY-SA 4.0",
               "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Glencoe,_Scotland.jpg"
@@ -1067,7 +1067,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 57.2743,
               "lon": -5.5168,
               "note": "A celebrated island castle stands where three sea lochs meet.",
-              "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg?width=1200",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg/1280px-Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
               "photoAuthor": "Gillfoto",
               "photoLicense": "CC BY-SA 4.0",
               "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg"
@@ -1077,7 +1077,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 57.4129,
               "lon": -6.1945,
               "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
-              "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Portree_harbour.jpg?width=1200",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/15/Portree_harbour.jpg/1280px-Portree_harbour.jpg",
               "photoAuthor": "Clem_nat",
               "photoLicense": "CC BY-SA 4.0",
               "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Portree_harbour.jpg"
@@ -1139,7 +1139,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 55.9486,
               "lon": -3.1999,
               "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
-              "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Edinburgh_Castle_2000-1.jpg?width=1200",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/Edinburgh_Castle_2000-1.jpg/1280px-Edinburgh_Castle_2000-1.jpg",
               "photoAuthor": "Libasstref",
               "photoLicense": "CC0 1.0",
               "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_2000-1.jpg"
@@ -1149,7 +1149,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 56.681,
               "lon": -5.004,
               "note": "Drive past dramatic mountain walls and a glacial Highland valley.",
-              "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Glencoe%2C_Scotland.jpg?width=1200",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Glencoe%2C_Scotland.jpg/1280px-Glencoe%2C_Scotland.jpg",
               "photoAuthor": "Saadtowheed",
               "photoLicense": "CC BY-SA 4.0",
               "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Glencoe,_Scotland.jpg"
@@ -1159,7 +1159,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 57.2743,
               "lon": -5.5168,
               "note": "A celebrated island castle stands where three sea lochs meet.",
-              "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg?width=1200",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg/1280px-Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
               "photoAuthor": "Gillfoto",
               "photoLicense": "CC BY-SA 4.0",
               "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg"
@@ -1169,7 +1169,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 57.4129,
               "lon": -6.1945,
               "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
-              "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Portree_harbour.jpg?width=1200",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/15/Portree_harbour.jpg/1280px-Portree_harbour.jpg",
               "photoAuthor": "Clem_nat",
               "photoLicense": "CC BY-SA 4.0",
               "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Portree_harbour.jpg"

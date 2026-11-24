@@ -115,6 +115,31 @@ function photoCover(ctx:CanvasRenderingContext2D,img:HTMLImageElement,x:number,y
   const rw=img.naturalWidth*z,rh=img.naturalHeight*z;
   ctx.save();ctx.beginPath();ctx.roundRect(x,y,w,h,26);ctx.clip();ctx.drawImage(img,x+(w-rw)/2,y+(h-rh)/2,rw,rh);ctx.restore();
 }
+function scenicPhotoFallback(ctx:CanvasRenderingContext2D,x:number,y:number,w:number,h:number,label:string):void {
+  ctx.save();
+  ctx.beginPath();ctx.roundRect(x,y,w,h,26);ctx.clip();
+  const sky=ctx.createLinearGradient(0,y,0,y+h);
+  sky.addColorStop(0,'#8FA6A4');sky.addColorStop(.6,'#D5D5BD');sky.addColorStop(1,'#EDE4CA');
+  ctx.fillStyle=sky;ctx.fillRect(x,y,w,h);
+  const mountain=(dy:number,offset:number,color:string)=>{
+    ctx.fillStyle=color;ctx.beginPath();ctx.moveTo(x,y+h);
+    ctx.lineTo(x,y+h*dy);
+    for(let i=0;i<=8;i++){
+      const px=x+w*i/8,py=y+h*(dy-.2*Math.abs(Math.sin(i*1.17+offset)));
+      ctx.lineTo(px,py);
+    }
+    ctx.lineTo(x+w,y+h);ctx.closePath();ctx.fill();
+  };
+  mountain(.77,1.3,'#8CA6A0');mountain(.89,2.6,'#527A70');
+  ctx.fillStyle='rgba(20,55,48,.84)';ctx.fillRect(x,y+h*.75,w,h*.25);
+  ctx.fillStyle='#FFF9E9';ctx.textAlign='left';
+  ctx.font='700 '+Math.round(Math.max(18,w*.053))+'px sans-serif';
+  ctx.fillText(label.toUpperCase(),x+w*.05,y+h*.85,w*.9);
+  ctx.font=Math.round(Math.max(12,w*.027))+'px sans-serif';
+  ctx.fillText('HIGHLANDS  /  SCOTLAND',x+w*.05,y+h*.92,w*.9);
+  ctx.restore();
+}
+
 export function renderPremiumTravelScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMotionScene,time:number,getPhoto:(url:string)=>HTMLImageElement|null):void{
   const premium=scene.premiumTravel!,stage=stages.get(scene),s=w/WIDTH,t=clamp(time/Math.max(.01,scene.durationSec));
   ctx.fillStyle='#E8E7DC';ctx.fillRect(0,0,w,h);
@@ -137,7 +162,7 @@ export function renderPremiumTravelScene(ctx:CanvasRenderingContext2D,w:number,h
 
   if(premium.chapter==='opening'){
     const img=getPhoto(premium.stops[0].photoUrl);
-    if(img&&t<.54){ctx.save();ctx.globalAlpha=1-ease((t-.19)/.35);photoCover(ctx,img,m,290*s,w-2*m,940*s,t);ctx.restore();}
+    if(t<.54){ctx.save();ctx.globalAlpha=1-ease((t-.19)/.35);if(img)photoCover(ctx,img,m,290*s,w-2*m,940*s,t);else scenicPhotoFallback(ctx,m,290*s,w-2*m,940*s,premium.stops[0].name);ctx.restore();}
     ctx.textAlign='left';ctx.fillStyle='#173D37';ctx.font='800 '+(74*s)+'px sans-serif';
     ctx.fillText('FROM CITY',m,h-370*s,w-2*m);ctx.fillText('TO HIGHLANDS',m,h-280*s,w-2*m);
     ctx.font=(28*s)+'px sans-serif';ctx.fillText('EDINBURGH  →  GLEN COE  →  SKYE',m,h-205*s,w-2*m);
@@ -149,13 +174,14 @@ export function renderPremiumTravelScene(ctx:CanvasRenderingContext2D,w:number,h
       const x=54*s,y=1025*s,pw=w-108*s,ph=790*s;
       ctx.fillStyle='#183D36';ctx.beginPath();ctx.roundRect(x,y,pw,ph,30*s);ctx.fill();
       if(img)photoCover(ctx,img,x+18*s,y+18*s,pw-36*s,428*s,t);
+      else scenicPhotoFallback(ctx,x+18*s,y+18*s,pw-36*s,428*s,stop.name);
       ctx.textAlign='left';ctx.fillStyle='#E3C795';ctx.font='700 '+(25*s)+'px sans-serif';ctx.fillText('STOP 0'+(premium.focusStopIndex+1)+' / 04',x+40*s,y+502*s);
       ctx.fillStyle='#FFFFFF';ctx.font='800 '+(65*s)+'px sans-serif';ctx.fillText(stop.name.toUpperCase(),x+40*s,y+586*s,pw-80*s);
       ctx.font=(29*s)+'px sans-serif';ctx.fillStyle='#E4EFE6';
       const words=stop.note.split(' ');let lines:string[]=[],line='';
       for(const word of words){const candidate=line?line+' '+word:word;if(line&&ctx.measureText(candidate).width>pw-86*s){lines.push(line);line=word;}else line=candidate;}
       if(line)lines.push(line);lines.slice(0,2).forEach((text,i)=>ctx.fillText(text,x+40*s,y+(650+i*41)*s,pw-80*s));
-      ctx.fillStyle='#BDD2CB';ctx.font=(19*s)+'px sans-serif';ctx.fillText('Photo: '+stop.photoAuthor+' • '+stop.photoLicense,x+40*s,y+757*s,pw-80*s);
+      ctx.fillStyle='#BDD2CB';ctx.font=(19*s)+'px sans-serif';ctx.fillText(img ? 'Photo: '+stop.photoAuthor+' • '+stop.photoLicense : 'Map illustration • photo temporarily unavailable',x+40*s,y+757*s,pw-80*s);
       ctx.restore();
     }
   }
