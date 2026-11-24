@@ -27,7 +27,7 @@ export async function mixProjectAudio(project: OpenMotionProject, durationSec: n
       const source=offline.createBufferSource();
       source.buffer=decoded;
       const gain=offline.createGain();
-      const v=Math.min(2,Math.max(0,track.volume ?? 1));
+      const v=Math.min(1,Math.max(0,track.volume ?? 1));
       const fadeIn=Math.min(len/2,Math.max(0,track.fadeInSec ?? 0));
       const fadeOut=Math.min(len/2,Math.max(0,track.fadeOutSec ?? 0));
       gain.gain.setValueAtTime(fadeIn>0 ? 0 : v,start);

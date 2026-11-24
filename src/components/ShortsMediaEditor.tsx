@@ -46,7 +46,7 @@ export function ShortsMediaEditor({project,activeScene,onUpdateProject,onUpdateS
    <input className={style} value={track.src} placeholder="assets/audio/voice.mp3" onChange={e=>updateTrack(i,{src:e.target.value})}/>
    <div className="grid grid-cols-2 gap-2">{(['startSec','endSec','volume','fadeInSec','fadeOutSec'] as const).map(k=><label key={k} className="text-[11px]">{k}<input type="number" min="0" step=".1" className={style} value={track[k]??''} onChange={e=>updateTrack(i,{[k]:e.target.value===''?undefined:Number(e.target.value)})}/></label>)}</div>
   </div>)}
-  <p className="text-xs text-slate-500">Audiobestanden in public/assets/ of een publiek CORS-geschikt adres.</p>
+  <p className="text-xs text-slate-500">Audiobestanden in public/assets/ of een CORS-geschikt adres. De losse preview-soundscape wordt niet mee geëxporteerd.</p>
   {activeScene.explainer&&<label className="block text-xs text-slate-600">Explainer diagramlabels (één per regel)
     <textarea rows={3} className={style} value={activeScene.explainer.visualLabels.join('\n')}
       onChange={e=>onUpdateScene({explainer:{...activeScene.explainer!,visualLabels:e.target.value.split('\n').filter(Boolean)}})}/>

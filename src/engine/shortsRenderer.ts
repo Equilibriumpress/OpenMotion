@@ -31,6 +31,17 @@ export function renderGeoRouteReel(ctx:CanvasRenderingContext2D,w:number,h:numbe
  const finish=cap(geo.routeProgressTo??1);
  const frac=lerp(start,finish,ease(t/Math.max(.1,scene.durationSec)));
  const dist=total*frac;
+ // Smooth virtual camera follows the advancing position while retaining the full regional context.
+ let headIndex=1;while(headIndex<lengths.length-1&&lengths[headIndex]<dist)headIndex++;
+ const headT=cap((dist-lengths[headIndex-1])/(lengths[headIndex]-lengths[headIndex-1]||1));
+ const headX=lerp(projected[headIndex-1][0],projected[headIndex][0],headT);
+ const headY=lerp(projected[headIndex-1][1],projected[headIndex][1],headT);
+ const cameraT=ease(t/Math.max(.1,scene.durationSec));
+ const zoom=1.05+.16*Math.sin(cameraT*Math.PI);
+ const follow=.13*cameraT;
+ const centerX=lerp(w/2,headX,follow);
+ const centerY=lerp(h*.48,headY,follow);
+ ctx.save();ctx.translate(w/2,h*.48);ctx.scale(zoom,zoom);ctx.translate(-centerX,-centerY);
  const trace=()=>{ctx.beginPath();ctx.moveTo(...projected[0]);for(let i=1;i<projected.length;i++){if(lengths[i]<=dist){ctx.lineTo(...projected[i]);continue;}const portion=cap((dist-lengths[i-1])/(lengths[i]-lengths[i-1]||1));ctx.lineTo(lerp(projected[i-1][0],projected[i][0],portion),lerp(projected[i-1][1],projected[i][1],portion));break;}};
  trace();ctx.lineCap='round';ctx.lineJoin='round';ctx.strokeStyle='#FFFDF6';ctx.lineWidth=Math.max(10,w*.015);ctx.stroke();
  trace();ctx.strokeStyle='#D64B38';ctx.lineWidth=Math.max(5,w*.007);ctx.stroke();
@@ -40,8 +51,9 @@ export function renderGeoRouteReel(ctx:CanvasRenderingContext2D,w:number,h:numbe
  const portion=cap((end-lengths[idx-1])/(lengths[idx]-lengths[idx-1]||1));
  const dotX=lerp(projected[idx-1][0],projected[idx][0],portion),dotY=lerp(projected[idx-1][1],projected[idx][1],portion);
  ctx.beginPath();ctx.arc(dotX,dotY,11,0,Math.PI*2);ctx.fillStyle='#D64B38';ctx.fill();
+ ctx.restore();
  ctx.fillStyle='#233B3D';ctx.font='bold 52px "Bricolage Grotesque",sans-serif';ctx.textAlign='center';ctx.fillText(brand,w/2,h*.095,w*.88);
- ctx.fillStyle='#586365';ctx.font='22px "Plus Jakarta Sans",sans-serif';ctx.fillText('WGS84 route overlay • sample geometry not road-matched',w/2,h*.11+30,w*.9);
+ ctx.fillStyle='#586365';ctx.font='22px "Plus Jakarta Sans",sans-serif';ctx.fillText(geo.route.properties?.source ? String(geo.route.properties.source).slice(0,62) : 'WGS84 geographic route coordinates',w/2,h*.11+30,w*.9);
  ctx.restore();
 }
 export function renderWhiteboardScience(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMotionScene,t:number,brand:OpenMotionBrandKit):void{
