@@ -852,6 +852,9 @@ export function StudioView({
                         </span>
                       </div>
 
+                      <p className={`text-[11px] leading-5 ${renderState.encoderLabel.includes('browser verlaagde resolutie') ? 'text-amber-700 font-semibold' : 'text-slate-500'}`}>
+                        {renderState.encoderLabel}
+                      </p>
                       <video
                         src={renderState.outputUrl}
                         controls
