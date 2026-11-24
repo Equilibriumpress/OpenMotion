@@ -1,4 +1,5 @@
 import { renderGeoRouteReel, renderWhiteboardScience } from './shortsRenderer';
+import { renderPremiumTravelScene, getPremiumError } from './premiumTravelRoute';
 import { renderTimedCaptions } from './timedCaptionRenderer';
 import { getCachedPhoto } from './imageCache';
 import { projectAssetUrl } from './projectAudio';
@@ -330,6 +331,14 @@ export function renderOpenMotionFrame(
     return;
   }
 
+  if (scene.layout === 'premium-travel-route' && scene.premiumTravel) {
+    renderPremiumTravelScene(ctx,w,h,scene,localTime,getCachedPhoto);
+    const error=getPremiumError(project);
+    if(error){ctx.fillStyle='rgba(21,54,50,.97)';ctx.fillRect(0,h*.5,w,h*.25);ctx.font='600 '+Math.round(w*.033)+'px sans-serif';ctx.textAlign='center';ctx.fillStyle='#fff';ctx.fillText('Map cannot be loaded',w/2,h*.59,w*.85);ctx.font=Math.round(w*.018)+'px sans-serif';ctx.fillText(error,w/2,h*.63,w*.85);}
+    renderTimedCaptions(ctx,w,h,project,safeTime);
+    ctx.restore();
+    return;
+  }
   if (scene.layout === 'geo-route-reel') {
     renderGeoRouteReel(ctx,w,h,scene,localTime);
     renderTimedCaptions(ctx,w,h,project,safeTime);

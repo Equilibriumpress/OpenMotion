@@ -43,3 +43,10 @@ Eight 1080×1920 examples live in **Shorts & Reels**. Open a card in Studio to e
 - The optional procedural documentary soundtrack is a preview aid and is **not** embedded unless supplied as an audio track.
 
 Full usage notes: [Shorts & Reels guide](docs/shorts-reels.md).
+
+
+## Premium Travel Route Reel
+
+The Scottish campervan demo now uses MapLibre + OpenFreeMap for real vector basemap snapshots, OSRM for road geometry, a moving camper graphic and licensed photo cards at each stop. Open the **Shorts & Reels** category and choose **Premium Travel Route Reel — Scotland by Campervan**.
+
+Details, credits, GPX import and usage limitations: [Premium travel guide](docs/premium-travel-reel.md).

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { preloadProjectImages, subscribeImageLoaded } from '../engine/imageCache';
+import { preloadProjectImages, subscribeImageLoaded, notifyImageRefresh } from '../engine/imageCache';
 import { renderOpenMotionFrame } from '../engine/openMotionRenderer';
 import { OpenMotionProject, getProjectDurationSec } from '../types/openmotion';
 
@@ -38,7 +38,10 @@ export function CanvasPreview({
 
   // Preload documentary images referenced by the project
   useEffect(() => {
-    void preloadProjectImages(project);
+    void preloadProjectImages(project).catch((error) => {
+      console.warn('Premium map or media preparation failed:', error);
+      notifyImageRefresh();
+    });
   }, [project]);
 
   // Render single frame whenever project, size, scrubbed time, or newly loaded photo updates

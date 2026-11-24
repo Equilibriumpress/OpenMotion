@@ -150,6 +150,7 @@ export function normalizeOpenMotionProject(
     'paper-map-journey',
     'editorial-cartography',
     'geo-route-reel',
+    'premium-travel-route',
     'whiteboard-science',
     'three-campervan-journey',
   ]);
@@ -374,6 +375,8 @@ export function normalizeOpenMotionProject(
         sc.paperMap && typeof sc.paperMap === 'object'
           ? (sc.paperMap as OpenMotionScene['paperMap'])
           : undefined,
+      premiumTravel:
+        sc.premiumTravel && typeof sc.premiumTravel === 'object' ? (sc.premiumTravel as OpenMotionScene['premiumTravel']) : undefined,
       geoRoute:
         sc.geoRoute && typeof sc.geoRoute === 'object' ? (sc.geoRoute as OpenMotionScene['geoRoute']) : undefined,
       whiteboard:

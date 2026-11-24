@@ -1,5 +1,6 @@
 import { OpenMotionProject } from '../types/openmotion';
 import { projectAssetUrl } from './projectAudio';
+import { preparePremiumTravelProject } from './premiumTravelRoute';
 
 interface CacheEntry {
   img: HTMLImageElement;
@@ -18,7 +19,7 @@ export function subscribeImageLoaded(cb: () => void): () => void {
   };
 }
 
-function notifyListeners() {
+export function notifyImageRefresh() {
   listeners.forEach((cb) => {
     try {
       cb();
@@ -52,7 +53,7 @@ function ensureEntry(url: string): CacheEntry {
   img.onload = () => {
     entry.loaded = true;
     resolvePromise(img);
-    notifyListeners();
+    notifyImageRefresh();
   };
 
   img.onerror = () => {
@@ -85,17 +86,21 @@ export function getCachedPhoto(url?: string): HTMLImageElement | null {
 export async function preloadProjectImages(project: OpenMotionProject): Promise<void> {
   const urls = new Set<string>();
   for (const scene of project.scenes) {
+    for (const stop of scene.premiumTravel?.stops ?? []) urls.add(stop.photoUrl);
     if (scene.imageUrl) urls.add(projectAssetUrl(scene.imageUrl));
     if (scene.editorialMap?.photoUrl) {
       urls.add(scene.editorialMap.photoUrl);
     }
   }
-  if (urls.size === 0) return;
+  const hasPremium = project.scenes.some(scene => scene.premiumTravel);
+  if (hasPremium) await preparePremiumTravelProject(project);
+  if (urls.size === 0) { if (hasPremium) notifyImageRefresh(); return; }
 
   await Promise.all(
     Array.from(urls).map(async (url) => {
       const entry = ensureEntry(url);
       const loadedImg = await entry.promise;
+      if (!loadedImg && hasPremium) throw new Error('Required premium photo unavailable: ' + url);
       if (loadedImg && typeof loadedImg.decode === 'function') {
         try {
           await loadedImg.decode();
@@ -105,4 +110,5 @@ export async function preloadProjectImages(project: OpenMotionProject): Promise<
       }
     })
   );
+  if (hasPremium) notifyImageRefresh();
 }
