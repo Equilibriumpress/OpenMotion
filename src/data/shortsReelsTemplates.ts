@@ -1870,5 +1870,686 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
         "ctaText": "Save the explainer"
       }
     ]
+  },
+  {
+    "schemaVersion": "1.0",
+    "id": "short-adhd-sleep-handdrawn-explainer",
+    "slug": "adhd-sleep-handdrawn-explainer",
+    "title": "ADHD & Slaap — Handgetekende Doodle Explainer",
+    "description": "Bewerkbare 62-seconden verticale reconstructie van de stijl en verhaallijn uit een door de gebruiker aangeleverde Nederlandstalige TikTok. 26 getekende scènes: slapen, douche, ochtendstress, brein, executieve functies en tijdsblindheid. Alleen nieuwe Canvas-tekeningen, geen frames of muziek uit de bronvideo.",
+    "category": "Shorts & Reels",
+    "author": "OpenMotion Studio",
+    "source": "template",
+    "templateReferenceUrl": "https://vm.tiktok.com/ZGdXKhodS/",
+    "createdAt": "2026-11-24",
+    "updatedAt": "2026-11-24",
+    "githubPath": "projects/adhd-sleep-handdrawn-explainer/project.json",
+    "format": "9:16",
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "brandKit": {
+      "brandName": "SLAAP & ADHD — DOODLE EXPLAINER",
+      "primaryColor": "#829D58",
+      "accentColor": "#D65C55",
+      "backgroundColor": "#F1E9DE",
+      "surfaceColor": "#DDEBF2",
+      "textColor": "#29282C",
+      "mutedColor": "#8E8A8C",
+      "fontFamily": "Bricolage Grotesque"
+    },
+    "scenes": [
+      {
+        "id": "01-intro-laat-wakker",
+        "name": "Intro: laat wakker",
+        "durationSec": 2,
+        "layout": "doodle-explainer",
+        "transition": "fade",
+        "backdrop": "dot-matrix",
+        "headline": "Waarom blijven mensen met ADHD",
+        "fullBleed": true,
+        "doodle": {
+          "setting": "bed",
+          "palette": "night",
+          "mood": "surprised",
+          "emphasis": [
+            "ADHD"
+          ],
+          "extras": [
+            "phone"
+          ],
+          "clockText": "",
+          "shirtColor": "#829D58",
+          "highlightColor": "#D65C55",
+          "narration": "Waarom blijven mensen met ADHD"
+        }
+      },
+      {
+        "id": "02-tot-drie-uur",
+        "name": "Tot drie uur",
+        "durationSec": 2,
+        "layout": "doodle-explainer",
+        "transition": "fade",
+        "backdrop": "dot-matrix",
+        "headline": "tot 3 uur 's nachts op?",
+        "fullBleed": true,
+        "doodle": {
+          "setting": "bed",
+          "palette": "night",
+          "mood": "surprised",
+          "emphasis": [
+            "3 uur"
+          ],
+          "extras": [
+            "phone"
+          ],
+          "clockText": "3:00",
+          "shirtColor": "#829D58",
+          "highlightColor": "#D65C55",
+          "narration": "tot 3 uur 's nachts op?"
+        }
+      },
+      {
+        "id": "03-uit-bed-komen",
+        "name": "Uit bed komen",
+        "durationSec": 1,
+        "layout": "doodle-explainer",
+        "transition": "fade",
+        "backdrop": "dot-matrix",
+        "headline": "En komen ze moeilijk uit bed?",
+        "fullBleed": true,
+        "doodle": {
+          "setting": "bed",
+          "palette": "morning",
+          "mood": "sleepy",
+          "emphasis": [
+            "moeilijk"
+          ],
+          "extras": [],
+          "clockText": "",
+          "shirtColor": "#829D58",
+          "highlightColor": "#D65C55",
+          "narration": "En komen ze moeilijk uit bed?"
+        }
+      },
+      {
+        "id": "04-douche-vijf-minuten",
+        "name": "Douche: vijf minuten",
+        "durationSec": 3,
+        "layout": "doodle-explainer",
+        "transition": "fade",
+        "backdrop": "dot-matrix",
+        "headline": "En maken ze van een douche",
+        "fullBleed": true,
+        "doodle": {
+          "setting": "shower",
+          "palette": "shower",
+          "mood": "relaxed",
+          "emphasis": [
+            "douche"
+          ],
+          "extras": [],
+          "clockText": "5 min",
+          "shirtColor": "#829D58",
+          "highlightColor": "#D65C55",
+          "narration": "En maken ze van een douche"
+        }
+      },
+      {
+        "id": "05-douche-tijd-verdwijnt",
+        "name": "Douche: tijd verdwijnt",
+        "durationSec": 1,
+        "layout": "doodle-explainer",
+        "transition": "fade",
+        "backdrop": "dot-matrix",
+        "headline": "op de een of andere manier 20 minuten?",
+        "fullBleed": true,
+        "doodle": {
+          "setting": "shower",
+          "palette": "shower",
+          "mood": "surprised",
+          "emphasis": [
+            "20 minuten"
+          ],
+          "extras": [],
+          "clockText": "20 min",
+          "shirtColor": "#829D58",
+          "highlightColor": "#D65C55",
+          "narration": "op de een of andere manier 20 minuten?"
+        }
+      },
+      {
+        "id": "06-het-brein-zoekt-een-reden",
+        "name": "Het brein zoekt een reden",
+        "durationSec": 2,
+        "layout": "doodle-explainer",
+        "transition": "fade",
+        "backdrop": "dot-matrix",
+        "headline": "Daar zit een fascinerende reden achter.",
+        "fullBleed": true,
+        "doodle": {
+          "setting": "brain",
+          "palette": "cream",
+          "mood": "happy",
+          "emphasis": [
+            "fascinerende"
+          ],
+          "extras": [
+            "search"
+          ],
+          "clockText": "",
+          "shirtColor": "#829D58",
+          "highlightColor": "#D65C55",
+          "narration": "Daar zit een fascinerende reden achter."
+        }
+      },
+      {
+        "id": "07-druk-van-overdag",
+        "name": "Druk van overdag",
+        "durationSec": 3,
+        "layout": "doodle-explainer",
+        "transition": "fade",
+        "backdrop": "dot-matrix",
+        "headline": "Voor veel mensen met ADHD",
+        "fullBleed": true,
+        "doodle": {
+          "setting": "standing",
+          "palette": "cream",
+          "mood": "worried",
+          "emphasis": [
+            "ADHD"
+          ],
+          "extras": [
+            "bell",
+            "tasks",
+            "alarm"
+          ],
+          "clockText": "",
+          "shirtColor": "#829D58",
+          "highlightColor": "#D65C55",
+          "narration": "Voor veel mensen met ADHD"
+        }
+      },
+      {
+        "id": "08-de-nacht",
+        "name": "De nacht",
+        "durationSec": 2,
+        "layout": "doodle-explainer",
+        "transition": "fade",
+        "backdrop": "dot-matrix",
+        "headline": "is de nacht het moment",
+        "fullBleed": true,
+        "doodle": {
+          "setting": "standing",
+          "palette": "night",
+          "mood": "relaxed",
+          "emphasis": [
+            "nacht"
+          ],
+          "extras": [
+            "bell",
+            "tasks"
+          ],
+          "clockText": "",
+          "shirtColor": "#829D58",
+          "highlightColor": "#D65C55",
+          "narration": "is de nacht het moment"
+        }
+      },
+      {
+        "id": "09-wereld-eindelijk-stil",
+        "name": "Wereld eindelijk stil",
+        "durationSec": 2,
+        "layout": "doodle-explainer",
+        "transition": "fade",
+        "backdrop": "dot-matrix",
+        "headline": "waarop de wereld eindelijk stil is.",
+        "fullBleed": true,
+        "doodle": {
+          "setting": "standing",
+          "palette": "night",
+          "mood": "relaxed",
+          "emphasis": [
+            "stil"
+          ],
+          "extras": [
+            "bell",
+            "tasks"
+          ],
+          "clockText": "",
+          "shirtColor": "#829D58",
+          "highlightColor": "#D65C55",
+          "narration": "waarop de wereld eindelijk stil is."
+        }
+      },
+      {
+        "id": "10-geen-onderbrekingen",
+        "name": "Geen onderbrekingen",
+        "durationSec": 2,
+        "layout": "doodle-explainer",
+        "transition": "fade",
+        "backdrop": "dot-matrix",
+        "headline": "Geen onderbrekingen. Geen verwachtingen. Geen eisen.",
+        "fullBleed": true,
+        "doodle": {
+          "setting": "standing",
+          "palette": "night",
+          "mood": "relaxed",
+          "emphasis": [
+            "onderbrekingen",
+            "verwachtingen",
+            "eisen"
+          ],
+          "extras": [],
+          "clockText": "",
+          "shirtColor": "#829D58",
+          "highlightColor": "#D65C55",
+          "narration": "Geen onderbrekingen. Geen verwachtingen. Geen eisen."
+        }
+      },
+      {
+        "id": "11-brein-voelt-zich-vrij",
+        "name": "Brein voelt zich vrij",
+        "durationSec": 3,
+        "layout": "doodle-explainer",
+        "transition": "fade",
+        "backdrop": "dot-matrix",
+        "headline": "Hun brein voelt zich eindelijk vrij.",
+        "fullBleed": true,
+        "doodle": {
+          "setting": "standing",
+          "palette": "night",
+          "mood": "happy",
+          "emphasis": [
+            "vrij"
+          ],
+          "extras": [
+            "free"
+          ],
+          "clockText": "",
+          "shirtColor": "#829D58",
+          "highlightColor": "#D65C55",
+          "narration": "Hun brein voelt zich eindelijk vrij."
+        }
+      },
+      {
+        "id": "12-bedtijd-uitstellen",
+        "name": "Bedtijd uitstellen",
+        "durationSec": 2,
+        "layout": "doodle-explainer",
+        "transition": "fade",
+        "backdrop": "dot-matrix",
+        "headline": "Dus stellen ze het slapen uit, zelfs als ze moe zijn.",
+        "fullBleed": true,
+        "doodle": {
+          "setting": "standing",
+          "palette": "night",
+          "mood": "surprised",
+          "emphasis": [
+            "slapen"
+          ],
+          "extras": [
+            "free",
+            "clock"
+          ],
+          "clockText": "3:00",
+          "shirtColor": "#829D58",
+          "highlightColor": "#D65C55",
+          "narration": "Dus stellen ze het slapen uit, zelfs als ze moe zijn."
+        }
+      },
+      {
+        "id": "13-de-ochtend-breekt-aan",
+        "name": "De ochtend breekt aan",
+        "durationSec": 2,
+        "layout": "doodle-explainer",
+        "transition": "fade",
+        "backdrop": "dot-matrix",
+        "headline": "Dan breekt de ochtend aan.",
+        "fullBleed": true,
+        "doodle": {
+          "setting": "bed",
+          "palette": "morning",
+          "mood": "sleepy",
+          "emphasis": [
+            "ochtend"
+          ],
+          "extras": [],
+          "clockText": "",
+          "shirtColor": "#829D58",
+          "highlightColor": "#D65C55",
+          "narration": "Dan breekt de ochtend aan."
+        }
+      },
+      {
+        "id": "14-meerdere-keren-snoozen",
+        "name": "Meerdere keren snoozen",
+        "durationSec": 2,
+        "layout": "doodle-explainer",
+        "transition": "fade",
+        "backdrop": "dot-matrix",
+        "headline": "Ze snoozen meerdere wekkers.",
+        "fullBleed": true,
+        "doodle": {
+          "setting": "bed",
+          "palette": "morning",
+          "mood": "sleepy",
+          "emphasis": [
+            "snoozen"
+          ],
+          "extras": [
+            "alarms"
+          ],
+          "clockText": "",
+          "shirtColor": "#829D58",
+          "highlightColor": "#D65C55",
+          "narration": "Ze snoozen meerdere wekkers."
+        }
+      },
+      {
+        "id": "15-overweldigd-wakker",
+        "name": "Overweldigd wakker",
+        "durationSec": 2,
+        "layout": "doodle-explainer",
+        "transition": "fade",
+        "backdrop": "dot-matrix",
+        "headline": "En worden overweldigd wakker.",
+        "fullBleed": true,
+        "doodle": {
+          "setting": "bed",
+          "palette": "morning",
+          "mood": "overwhelmed",
+          "emphasis": [
+            "overweldigd"
+          ],
+          "extras": [
+            "alarms"
+          ],
+          "clockText": "",
+          "shirtColor": "#829D58",
+          "highlightColor": "#D65C55",
+          "narration": "En worden overweldigd wakker."
+        }
+      },
+      {
+        "id": "16-taken-op-je-schouders",
+        "name": "Taken op je schouders",
+        "durationSec": 2,
+        "layout": "doodle-explainer",
+        "transition": "fade",
+        "backdrop": "dot-matrix",
+        "headline": "En voelen het gewicht van alles wat moet.",
+        "fullBleed": true,
+        "doodle": {
+          "setting": "bed",
+          "palette": "morning",
+          "mood": "worried",
+          "emphasis": [
+            "gewicht"
+          ],
+          "extras": [
+            "tasks"
+          ],
+          "clockText": "",
+          "shirtColor": "#829D58",
+          "highlightColor": "#D65C55",
+          "narration": "En voelen het gewicht van alles wat moet."
+        }
+      },
+      {
+        "id": "17-aha-moment",
+        "name": "Aha-moment",
+        "durationSec": 2,
+        "layout": "doodle-explainer",
+        "transition": "fade",
+        "backdrop": "dot-matrix",
+        "headline": "Maar nu komt het...",
+        "fullBleed": true,
+        "doodle": {
+          "setting": "brain",
+          "palette": "cream",
+          "mood": "happy",
+          "emphasis": [
+            "nu"
+          ],
+          "extras": [
+            "lightbulb"
+          ],
+          "clockText": "",
+          "shirtColor": "#829D58",
+          "highlightColor": "#D65C55",
+          "narration": "Maar nu komt het..."
+        }
+      },
+      {
+        "id": "18-executieve-functies",
+        "name": "Executieve functies",
+        "durationSec": 4,
+        "layout": "doodle-explainer",
+        "transition": "fade",
+        "backdrop": "dot-matrix",
+        "headline": "ADHD heeft invloed op aandacht, executieve functies en tijdsbeleving.",
+        "fullBleed": true,
+        "doodle": {
+          "setting": "checklist",
+          "palette": "cream",
+          "mood": "happy",
+          "emphasis": [
+            "aandacht",
+            "executieve functies",
+            "tijdsbeleving"
+          ],
+          "extras": [
+            "aandacht",
+            "executieve functies",
+            "tijdsbeleving"
+          ],
+          "clockText": "",
+          "shirtColor": "#829D58",
+          "highlightColor": "#D65C55",
+          "narration": "ADHD heeft invloed op aandacht, executieve functies en tijdsbeleving."
+        }
+      },
+      {
+        "id": "19-vijf-minuten-douchen",
+        "name": "Vijf minuten douchen",
+        "durationSec": 3,
+        "layout": "doodle-explainer",
+        "transition": "fade",
+        "backdrop": "dot-matrix",
+        "headline": "Zelfs vijf minuten douchen",
+        "fullBleed": true,
+        "doodle": {
+          "setting": "shower",
+          "palette": "shower",
+          "mood": "relaxed",
+          "emphasis": [
+            "vijf minuten"
+          ],
+          "extras": [],
+          "clockText": "5 min",
+          "shirtColor": "#829D58",
+          "highlightColor": "#D65C55",
+          "narration": "Zelfs vijf minuten douchen"
+        }
+      },
+      {
+        "id": "20-een-afleidingsval",
+        "name": "Een afleidingsval",
+        "durationSec": 3,
+        "layout": "doodle-explainer",
+        "transition": "fade",
+        "backdrop": "dot-matrix",
+        "headline": "kan een afleidingsval worden.",
+        "fullBleed": true,
+        "doodle": {
+          "setting": "shower",
+          "palette": "shower",
+          "mood": "happy",
+          "emphasis": [
+            "afleidingsval"
+          ],
+          "extras": [
+            "music"
+          ],
+          "clockText": "2:07",
+          "shirtColor": "#829D58",
+          "highlightColor": "#D65C55",
+          "narration": "kan een afleidingsval worden."
+        }
+      },
+      {
+        "id": "21-een-willekeurige-gedachte",
+        "name": "Een willekeurige gedachte",
+        "durationSec": 2,
+        "layout": "doodle-explainer",
+        "transition": "fade",
+        "backdrop": "dot-matrix",
+        "headline": "Een liedje of één willekeurige gedachte...",
+        "fullBleed": true,
+        "doodle": {
+          "setting": "shower",
+          "palette": "shower",
+          "mood": "surprised",
+          "emphasis": [
+            "liedje",
+            "gedachte"
+          ],
+          "extras": [
+            "thought"
+          ],
+          "clockText": "3:02",
+          "shirtColor": "#829D58",
+          "highlightColor": "#D65C55",
+          "narration": "Een liedje of één willekeurige gedachte..."
+        }
+      },
+      {
+        "id": "22-twintig-minuten-kwijt",
+        "name": "Twintig minuten kwijt",
+        "durationSec": 4,
+        "layout": "doodle-explainer",
+        "transition": "fade",
+        "backdrop": "dot-matrix",
+        "headline": "En opeens zijn 20 minuten verdwenen.",
+        "fullBleed": true,
+        "doodle": {
+          "setting": "shower",
+          "palette": "shower",
+          "mood": "surprised",
+          "emphasis": [
+            "20 minuten"
+          ],
+          "extras": [
+            "thought"
+          ],
+          "clockText": "19:58",
+          "shirtColor": "#829D58",
+          "highlightColor": "#D65C55",
+          "narration": "En opeens zijn 20 minuten verdwenen."
+        }
+      },
+      {
+        "id": "23-tijdsblindheid",
+        "name": "Tijdsblindheid",
+        "durationSec": 3,
+        "layout": "doodle-explainer",
+        "transition": "fade",
+        "backdrop": "dot-matrix",
+        "headline": "Deze moeite met tijd wordt vaak tijdsblindheid genoemd.",
+        "fullBleed": true,
+        "doodle": {
+          "setting": "clock",
+          "palette": "gray",
+          "mood": "worried",
+          "emphasis": [
+            "tijdsblindheid"
+          ],
+          "extras": [
+            "label"
+          ],
+          "clockText": "",
+          "shirtColor": "#829D58",
+          "highlightColor": "#D65C55",
+          "narration": "Deze moeite met tijd wordt vaak tijdsblindheid genoemd."
+        }
+      },
+      {
+        "id": "24-ochtendroutine",
+        "name": "Ochtendroutine",
+        "durationSec": 2,
+        "layout": "doodle-explainer",
+        "transition": "fade",
+        "backdrop": "dot-matrix",
+        "headline": "Daarom kan 's ochtends klaarmaken",
+        "fullBleed": true,
+        "doodle": {
+          "setting": "standing",
+          "palette": "cream",
+          "mood": "worried",
+          "emphasis": [
+            "klaarmaken"
+          ],
+          "extras": [
+            "essentials"
+          ],
+          "clockText": "",
+          "shirtColor": "#829D58",
+          "highlightColor": "#D65C55",
+          "narration": "Daarom kan 's ochtends klaarmaken"
+        }
+      },
+      {
+        "id": "25-mentale-marathon",
+        "name": "Mentale marathon",
+        "durationSec": 3,
+        "layout": "doodle-explainer",
+        "transition": "fade",
+        "backdrop": "dot-matrix",
+        "headline": "aanvoelen als een mentale marathon,",
+        "fullBleed": true,
+        "doodle": {
+          "setting": "standing",
+          "palette": "cream",
+          "mood": "worried",
+          "emphasis": [
+            "mentale marathon"
+          ],
+          "extras": [
+            "essentials",
+            "start"
+          ],
+          "clockText": "",
+          "shirtColor": "#829D58",
+          "highlightColor": "#D65C55",
+          "narration": "aanvoelen als een mentale marathon,"
+        }
+      },
+      {
+        "id": "26-voordat-de-dag-begint",
+        "name": "Voordat de dag begint",
+        "durationSec": 3,
+        "layout": "doodle-explainer",
+        "transition": "fade",
+        "backdrop": "dot-matrix",
+        "headline": "nog voordat de dag begonnen is.",
+        "fullBleed": true,
+        "doodle": {
+          "setting": "outro",
+          "palette": "morning",
+          "mood": "happy",
+          "emphasis": [
+            "begonnen"
+          ],
+          "extras": [],
+          "clockText": "",
+          "shirtColor": "#829D58",
+          "highlightColor": "#D65C55",
+          "narration": "nog voordat de dag begonnen is."
+        }
+      }
+    ],
+    "captions": [],
+    "audioTracks": []
   }
 ];
