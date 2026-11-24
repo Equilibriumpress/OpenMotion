@@ -1,32 +1,102 @@
-import { OpenMotionProject, TimedCaption } from '../types/openmotion';
-const clamp=(x:number)=>Math.max(0,Math.min(1,x));
-/** Rendered after every layout, including full-bleed maps and 3D. */
-export function renderTimedCaptions(ctx: CanvasRenderingContext2D,w:number,h:number,project:OpenMotionProject,timeSec:number):void {
- const cap=project.captions?.find((c):c is TimedCaption=>Number.isFinite(c.startSec)&&Number.isFinite(c.endSec)&&c.startSec<=timeSec&&c.endSec>timeSec);if(!cap)return;
- const tokens=cap.words?.length?cap.words:cap.text.trim().split(/\s+/).map((text,i,words)=>({text,startSec:cap.startSec+(cap.endSec-cap.startSec)*i/words.length,endSec:cap.startSec+(cap.endSec-cap.startSec)*(i+1)/words.length}));
- const scale=w/1080;
- const maxWidth=w*.8;const fontSize=Math.max(18,Math.round(Math.min(90,Math.max(18,cap.fontSizePx??49))*scale));
- ctx.save();ctx.textAlign='center';ctx.textBaseline='middle';ctx.font=`800 ${fontSize}px "Bricolage Grotesque",sans-serif`;
- // Single-line groups of up to 5 words, displayed one phrase at a time to fit mobile safe margins.
- const activeIndex=tokens.findIndex(x=>timeSec<x.endSec);
- const idx=activeIndex<0 ? tokens.length-1 : activeIndex;
- const groupStart=Math.floor(Math.max(0,idx)/5)*5;
- const group=cap.style==='block' ? tokens : tokens.slice(groupStart,groupStart+5);
- const text=group.map(v=>v.text).join(' ');
- const y=h*Math.max(.18,Math.min(.82,cap.position??.78));
- const measured=ctx.measureText(text).width;
- const fit=Math.min(1,(maxWidth-30*scale)/Math.max(1,measured));
- ctx.font=`800 ${Math.round(fontSize*fit)}px "Bricolage Grotesque",sans-serif`;
- const width=Math.min(maxWidth,ctx.measureText(text).width+48*scale);
- if(cap.style!=='minimal'){
-   ctx.fillStyle='rgba(13,18,28,.86)';ctx.beginPath();ctx.roundRect(w/2-width/2,y-43*scale,width,86*scale,19*scale);ctx.fill();
- }
- let cursor=w/2-ctx.measureText(text).width/2;
- group.forEach(word=>{const str=word.text+' ';const measure=ctx.measureText(str).width;
-   ctx.fillStyle=cap.style==='karaoke' && timeSec>=word.startSec&&timeSec<word.endSec?(cap.color??'#FFE69A'):'#F8FAFC';
-   if(cap.style==='block')ctx.fillStyle=cap.color??'#F8FAFC';
-   if(cap.style==='minimal'){ctx.strokeStyle='rgba(12,19,25,.9)';ctx.lineWidth=5*scale;ctx.strokeText(str,cursor,y);}
-   ctx.textAlign='left';ctx.fillText(str,cursor,y,maxWidth);cursor+=measure;
- });
- ctx.restore();
+import { OpenMotionProject, TimedCaption, TimedCaptionWord } from '../types/openmotion';
+
+/**
+ * Word-accurate caption layout. All stroke and fill operations share a single
+ * left-aligned baseline, avoiding the ghosted / duplicated lettering from r1.
+ */
+export function renderTimedCaptions(
+  ctx: CanvasRenderingContext2D,
+  width: number,
+  height: number,
+  project: OpenMotionProject,
+  timeSec: number
+): void {
+  const caption = project.captions?.find(
+    (c): c is TimedCaption =>
+      c.startSec <= timeSec && timeSec < c.endSec && c.endSec > c.startSec
+  );
+  if (!caption || !caption.text?.trim()) return;
+
+  const words: TimedCaptionWord[] = caption.words?.length
+    ? caption.words
+    : caption.text.trim().split(/\s+/).map((word, i, all) => ({
+        text: word,
+        startSec: caption.startSec + ((caption.endSec - caption.startSec) * i) / all.length,
+        endSec: caption.startSec + ((caption.endSec - caption.startSec) * (i + 1)) / all.length,
+      }));
+
+  const scale = width / 1080;
+  const maxWidth = width * .80;
+  let fontPx = Math.max(20 * scale, Math.min(82 * scale, (caption.fontSizePx ?? 49) * scale));
+  ctx.save();
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'middle';
+  const setFont = () => {
+    ctx.font = '800 ' + Math.round(fontPx) + 'px "Bricolage Grotesque", sans-serif';
+  };
+  setFont();
+
+  const wrap = (): TimedCaptionWord[][] => {
+    const lines: TimedCaptionWord[][] = [];
+    let line: TimedCaptionWord[] = [];
+    for (const word of words) {
+      const next = line.length ? line.map(item => item.text).join(' ') + ' ' + word.text : word.text;
+      if (line.length && ctx.measureText(next).width > maxWidth) {
+        lines.push(line);
+        line = [word];
+      } else {
+        line.push(word);
+      }
+    }
+    if (line.length) lines.push(line);
+    return lines;
+  };
+
+  let lines = wrap();
+  while (lines.length > 3 && fontPx > 21 * scale) {
+    fontPx -= 2 * scale;
+    setFont();
+    lines = wrap();
+  }
+  const lineHeight = fontPx * 1.38;
+  const position = Math.max(.23, Math.min(.78, caption.position ?? .76));
+  const totalHeight = lines.length * lineHeight;
+  const top = height * position - totalHeight / 2;
+  const maxLineWidth = Math.max(...lines.map(line => ctx.measureText(line.map(w => w.text).join(' ')).width));
+  if (caption.style !== 'minimal') {
+    ctx.fillStyle = 'rgba(12, 28, 32, .83)';
+    const padX = 25 * scale, padY = 19 * scale;
+    ctx.beginPath();
+    ctx.roundRect(
+      width / 2 - maxLineWidth / 2 - padX,
+      top - padY,
+      maxLineWidth + padX * 2,
+      totalHeight + padY * 2,
+      19 * scale
+    );
+    ctx.fill();
+  }
+  lines.forEach((line, i) => {
+    const text = line.map(item => item.text).join(' ');
+    let x = width / 2 - ctx.measureText(text).width / 2;
+    const y = top + (i + .5) * lineHeight;
+    line.forEach((word, j) => {
+      const glyph = word.text;
+      const current = timeSec >= word.startSec && timeSec < word.endSec;
+      ctx.textAlign = 'left';
+      if (caption.style === 'minimal') {
+        ctx.strokeStyle = 'rgba(8, 23, 25, .86)';
+        ctx.lineJoin = 'round';
+        ctx.lineWidth = 5.5 * scale;
+        ctx.strokeText(glyph, x, y);
+      }
+      ctx.fillStyle =
+        caption.style === 'karaoke' && current
+          ? (caption.color ?? '#FFE1A0')
+          : caption.style === 'block' ? (caption.color ?? '#FFFFFF') : '#FFFFFF';
+      ctx.fillText(glyph, x, y);
+      x += ctx.measureText(glyph).width + (j < line.length - 1 ? ctx.measureText(' ').width : 0);
+    });
+  });
+  ctx.restore();
 }
