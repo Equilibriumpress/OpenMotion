@@ -215,9 +215,8 @@ export function drawDoodleBrain(
     ctx.beginPath();ctx.moveTo(-6,28);ctx.quadraticCurveTo(2,39,12,28);
     stroke(ctx,2.3);ctx.stroke();
   }else{
-    ctx.beginPath();ctx.arc(-19,14,7,.2,Math.PI-.1);
-    ctx.arc(23,14,7,.2,Math.PI-.1);
-    stroke(ctx,2.2);ctx.stroke();
+    ctx.beginPath();ctx.arc(-19,14,7,.2,Math.PI-.1);stroke(ctx,2.2);ctx.stroke();
+    ctx.beginPath();ctx.arc(23,14,7,.2,Math.PI-.1);ctx.stroke();
     ctx.beginPath();ctx.moveTo(-8,33);ctx.quadraticCurveTo(3,22,13,33);
     stroke(ctx,2.3);ctx.stroke();
   }
