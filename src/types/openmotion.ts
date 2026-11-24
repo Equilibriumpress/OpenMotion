@@ -366,6 +366,8 @@ export interface SceneGeoRoute {
 export interface SceneWhiteboard {
   /** Normalized SVG-style polylines: [x, y] from 0 to 1. */
   strokes: number[][][];
+  /** Optional SVG path commands in a normalized 1000 × 1000 coordinate space. */
+  svgPaths?: {d:string; length:number}[];
   labels: string[];
 }
 export interface TimedCaptionWord {

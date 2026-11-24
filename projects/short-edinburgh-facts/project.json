@@ -95,7 +95,8 @@
         "Edinburgh Castle",
         "St Giles’ Cathedral",
         "Holyroodhouse"
-      ]
+      ],
+      "imageUrl": "assets/edinburgh/01-edinburgh-castle.jpg"
     },
     {
       "id": "volcano",
@@ -114,7 +115,8 @@
           "title": "Hilltop views",
           "detail": "Look across the city"
         }
-      ]
+      ],
+      "imageUrl": "assets/edinburgh/03-canongate-royal-mile.jpg"
     },
     {
       "id": "finale",

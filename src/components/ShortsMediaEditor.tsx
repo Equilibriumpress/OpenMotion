@@ -17,9 +17,14 @@ export function ShortsMediaEditor({project,activeScene,onUpdateProject,onUpdateS
   const f=e.target.files?.[0];if(!f)return;
   try{
    const route=parseRouteFile(await f.text(),f.name);let count=0;
+   const c=route.geometry.coordinates;
+   const minLon=Math.min(...c.map(p=>p[0])),maxLon=Math.max(...c.map(p=>p[0]));
+   const minLat=Math.min(...c.map(p=>p[1])),maxLat=Math.max(...c.map(p=>p[1]));
+   const lat=(minLat+maxLat)/2,lon=(minLon+maxLon)/2;
+   const latPad=Math.max(.003,(maxLat-minLat)*.12),lonPad=Math.max(.003,(maxLon-minLon)*.12);
    const scenes=project.scenes.map(s=>{
-     if(s.geoRoute){count++;return {...s,geoRoute:{...s.geoRoute,route}};}
-     if(s.editorialMap){count++;return {...s,editorialMap:{...s.editorialMap,routeCoords:route.geometry.coordinates.map(([lon,lat])=>[lat,lon] as [number,number]),streets:[],parks:[],buildings:[],stops:[]}};}
+     if(s.geoRoute){count++;return {...s,geoRoute:{...s.geoRoute,route,waypoints:[{name:'Start',lat:c[0][1],lon:c[0][0]},{name:'Finish',lat:c[c.length-1][1],lon:c[c.length-1][0]}]}};}
+     if(s.editorialMap){count++;return {...s,editorialMap:{...s.editorialMap,routeCoords:c.map(([lon,lat])=>[lat,lon] as [number,number]),bounds:{minLat:minLat-latPad,maxLat:maxLat+latPad,minLon:minLon-lonPad,maxLon:maxLon+lonPad},cameraFrom:{lat,lon,zoom:1},cameraTo:{lat,lon,zoom:1.2},streets:[],parks:[],buildings:[],stops:[]}};}
      return s;
    });
    if(!count)throw new Error('Geen kaartscènes in dit project');
@@ -42,6 +47,26 @@ export function ShortsMediaEditor({project,activeScene,onUpdateProject,onUpdateS
    <div className="grid grid-cols-2 gap-2">{(['startSec','endSec','volume','fadeInSec','fadeOutSec'] as const).map(k=><label key={k} className="text-[11px]">{k}<input type="number" min="0" step=".1" className={style} value={track[k]??''} onChange={e=>updateTrack(i,{[k]:e.target.value===''?undefined:Number(e.target.value)})}/></label>)}</div>
   </div>)}
   <p className="text-xs text-slate-500">Audiobestanden in public/assets/ of een publiek CORS-geschikt adres.</p>
+  {activeScene.explainer&&<label className="block text-xs text-slate-600">Explainer diagramlabels (één per regel)
+    <textarea rows={3} className={style} value={activeScene.explainer.visualLabels.join('\n')}
+      onChange={e=>onUpdateScene({explainer:{...activeScene.explainer!,visualLabels:e.target.value.split('\n').filter(Boolean)}})}/>
+  </label>}
+  {activeScene.paperChapters&&<label className="block text-xs text-slate-600">Hoofdstukken / paper cards
+    <textarea rows={3} className={style} value={activeScene.paperChapters.join('\n')}
+      onChange={e=>onUpdateScene({paperChapters:e.target.value.split('\n').filter(Boolean)})}/>
+  </label>}
+  {activeScene.whiteboard&&<label className="block text-xs text-slate-600">Whiteboard labels
+    <textarea rows={2} className={style} value={activeScene.whiteboard.labels.join('\n')}
+      onChange={e=>onUpdateScene({whiteboard:{...activeScene.whiteboard!,labels:e.target.value.split('\n').filter(Boolean)}})}/>
+  </label>}
+  {activeScene.chartSeries&&<label className="block text-xs text-slate-600">Grafiekgegevens: periode,waarde per regel
+    <textarea rows={5} className={style} value={activeScene.chartSeries.points.map(p=>p.xLabel+','+p.value).join('\n')}
+      onChange={e=>{const points=e.target.value.split('\n').map(x=>x.split(',')).filter(x=>x.length===2&&Number.isFinite(Number(x[1]))).map(([xLabel,value])=>({xLabel,value:Number(value)}));onUpdateScene({chartSeries:{...activeScene.chartSeries!,points}});}}/>
+  </label>}
+  {activeScene.quote&&<label className="block text-xs text-slate-600">Citaat
+    <textarea rows={2} className={style} value={activeScene.quote.text} onChange={e=>onUpdateScene({quote:{...activeScene.quote!,text:e.target.value}})}/>
+  </label>}
+
   <div className="flex justify-between items-center"><h4 className="text-xs font-bold">Getimede captions</h4><button type="button" className="text-xs text-blue-700" onClick={()=>onUpdateProject({...project,captions:[...(project.captions??[]),{text:'New caption',startSec:0,endSec:2,style:'karaoke'}]})}>+ Caption</button></div>
   <input className={style} type="file" accept=".srt" aria-label="Import SRT captions" onChange={e=>void fileSubtitles(e)}/>
   {(project.captions??[]).map((c,i)=><div key={i} className="grid grid-cols-5 gap-1">

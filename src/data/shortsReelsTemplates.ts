@@ -242,7 +242,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "Edinburgh Castle",
           "St Giles’ Cathedral",
           "Holyroodhouse"
-        ]
+        ],
+        "imageUrl": "assets/edinburgh/01-edinburgh-castle.jpg"
       },
       {
         "id": "volcano",
@@ -261,7 +262,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
             "title": "Hilltop views",
             "detail": "Look across the city"
           }
-        ]
+        ],
+        "imageUrl": "assets/edinburgh/03-canongate-royal-mile.jpg"
       },
       {
         "id": "finale",
@@ -631,7 +633,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "Castle Rock",
           "Medieval burgh",
           "Old Town streets"
-        ]
+        ],
+        "imageUrl": "assets/edinburgh/01-edinburgh-castle.jpg"
       },
       {
         "id": "timeline",
@@ -657,7 +660,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
             "title": "Heritage",
             "detail": "UNESCO-listed historic core"
           }
-        ]
+        ],
+        "imageUrl": "assets/edinburgh/02-st-giles-cathedral.jpg"
       },
       {
         "id": "details",
@@ -671,7 +675,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "Old stone tenements",
           "St Giles’ Cathedral",
           "The Royal Mile"
-        ]
+        ],
+        "imageUrl": "assets/edinburgh/03-canongate-royal-mile.jpg"
       },
       {
         "id": "finale",
@@ -1471,6 +1476,12 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
                 0.51
               ]
             ]
+          ],
+          "svgPaths": [
+            {
+              "d": "M 160 810 L 360 690 L 650 800",
+              "length": 650
+            }
           ]
         }
       },

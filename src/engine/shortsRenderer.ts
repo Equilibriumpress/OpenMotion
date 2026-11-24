@@ -62,6 +62,18 @@ export function renderWhiteboardScience(ctx:CanvasRenderingContext2D,w:number,h:
  });
  ctx.fillStyle=brand.textColor;ctx.textAlign='center';ctx.font='700 62px "Bricolage Grotesque",sans-serif';
  ctx.fillText(scene.headline,w*.5,h*.17,w*.89);
+
+ // SVG commands are drawn with Path2D and a dash reveal, using the declared path length.
+ board.svgPaths?.forEach((item,i)=>{
+   if(typeof Path2D==='undefined'||!item.d||!Number.isFinite(item.length)||item.length<=0)return;
+   const active=cap(progress*board.svgPaths!.length-i);
+   if(active<=0)return;
+   ctx.save();ctx.scale(w/1000,h/1000);
+   ctx.lineWidth=7;ctx.strokeStyle=brand.accentColor;
+   ctx.setLineDash([item.length*active,item.length+2]);
+   ctx.stroke(new Path2D(item.d));
+   ctx.restore();
+ });
  board.labels.forEach((label,i)=>{const alpha=cap(progress*board.labels.length-i);if(alpha<=0)return;ctx.save();ctx.globalAlpha=alpha;ctx.font='600 28px "Plus Jakarta Sans",sans-serif';ctx.fillStyle=brand.primaryColor;ctx.fillText(label,w*(.2+i*.3),h*.68,w*.3);ctx.restore();});
  ctx.restore();
 }
