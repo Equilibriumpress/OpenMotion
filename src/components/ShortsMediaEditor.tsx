@@ -109,6 +109,15 @@ export function ShortsMediaEditor({project,activeScene,onUpdateProject,onUpdateS
           {(['sleepy','relaxed','happy','worried','surprised','overwhelmed'] as const).map(v=><option key={v} value={v}>{v}</option>)}
         </select>
       </label>
+      <label className="block text-xs text-slate-600">Houding van het personage
+        <select className={style} value={doodle.pose??'neutral'} onChange={e=>update({pose:e.target.value as NonNullable<typeof doodle.pose>})}>
+          <option value="neutral">Neutraal · armen rustig</option>
+          <option value="relieved">Vrij / opgelucht · armen open</option>
+          <option value="alert">Schrik / spanning · armen omhoog</option>
+          <option value="exhausted">Uitgeput · armen laag</option>
+          <option value="point">Wijzen · één arm uit</option>
+        </select>
+      </label>
       <label className="block text-xs text-slate-600">Rode accentwoorden (gescheiden met komma)
         <input className={style} value={(doodle.emphasis??[]).join(', ')}
           onChange={e=>update({emphasis:e.target.value.split(',').map(x=>x.trim()).filter(Boolean)})}/>
