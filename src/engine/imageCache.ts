@@ -1,4 +1,5 @@
 import { OpenMotionProject } from '../types/openmotion';
+import { projectAssetUrl } from './projectAudio';
 
 interface CacheEntry {
   img: HTMLImageElement;
@@ -84,6 +85,7 @@ export function getCachedPhoto(url?: string): HTMLImageElement | null {
 export async function preloadProjectImages(project: OpenMotionProject): Promise<void> {
   const urls = new Set<string>();
   for (const scene of project.scenes) {
+    if (scene.imageUrl) urls.add(projectAssetUrl(scene.imageUrl));
     if (scene.editorialMap?.photoUrl) {
       urls.add(scene.editorialMap.photoUrl);
     }

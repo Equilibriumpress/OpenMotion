@@ -407,6 +407,7 @@ export interface OpenMotionScene {
   codeLines?: string[];
   ctaText?: string;
   caption?: string;
+  imageUrl?: string;
   // Extended OpenMotion & OpenDesign.ai capability fields
   stepNumber?: number;
   totalSteps?: number;

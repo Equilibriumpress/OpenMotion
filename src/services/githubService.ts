@@ -226,6 +226,7 @@ export function normalizeOpenMotionProject(
         : undefined,
       ctaText: typeof sc.ctaText === 'string' ? sc.ctaText : undefined,
       caption: typeof sc.caption === 'string' ? sc.caption : undefined,
+      imageUrl: typeof sc.imageUrl === 'string' ? sc.imageUrl : undefined,
       stepNumber: typeof sc.stepNumber === 'number' ? sc.stepNumber : undefined,
       totalSteps: typeof sc.totalSteps === 'number' ? sc.totalSteps : undefined,
       stepTip: typeof sc.stepTip === 'string' ? sc.stepTip : undefined,

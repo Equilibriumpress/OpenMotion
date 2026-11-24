@@ -1,5 +1,7 @@
 import { renderGeoRouteReel, renderWhiteboardScience } from './shortsRenderer';
 import { renderTimedCaptions } from './timedCaptionRenderer';
+import { getCachedPhoto } from './imageCache';
+import { projectAssetUrl } from './projectAudio';
 import {
   OpenMotionBrandKit,
   OpenMotionProject,
@@ -340,6 +342,17 @@ export function renderOpenMotionFrame(
   }
   // 1. Backdrop
   drawBackdrop(ctx, w, h, brand, scene, safeTime);
+  if (scene.imageUrl) {
+    const img = getCachedPhoto(projectAssetUrl(scene.imageUrl));
+    if(img) {
+      ctx.save();ctx.globalAlpha=0.22;
+      const zoom=Math.max(w/img.naturalWidth,h/img.naturalHeight)*1.04;
+      const iw=img.naturalWidth*zoom,ih=img.naturalHeight*zoom;
+      const drift=Math.sin(safeTime*.3)*Math.min(w*.025,22);
+      ctx.drawImage(img,(w-iw)/2+drift,(h-ih)/2,iw,ih);
+      ctx.restore();
+    }
+  }
 
   // 2. Scene entrance & exit envelope
   const enterT = easeOutExpo(clamp(localTime / 0.55));
