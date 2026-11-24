@@ -1,5 +1,6 @@
 import { OpenMotionProject } from '../types/openmotion';
 import { createPremiumTravelAudio } from './premiumTravelAudio';
+import { createDoodleExplainerAudio } from './doodleExplainerAudio';
 
 /** Resolve repository asset paths relative to the deployed Vite Pages base. */
 export function projectAssetUrl(src: string): string {
@@ -13,6 +14,7 @@ export async function mixProjectAudio(project: OpenMotionProject, durationSec: n
   const tracks = (project.audioTracks ?? []).filter(t => t.src?.trim());
   if (!tracks.length) {
     if (project.scenes.some(scene => scene.layout === 'premium-travel-route')) return createPremiumTravelAudio(durationSec);
+    if (project.scenes.some(scene => scene.layout === 'doodle-explainer')) return createDoodleExplainerAudio(durationSec);
     return null;
   }
   const rate = 48000;
