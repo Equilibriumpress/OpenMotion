@@ -181,7 +181,7 @@ function shower(ctx:CanvasRenderingContext2D,scene:OpenMotionScene,t:number,shir
   for(let i=0;i<5;i++){const x=326+i*7,dy=(t*41+i*25)%110;
     ctx.fillStyle='rgba(70,112,146,.58)';ctx.beginPath();ctx.ellipse(x,325+dy,2,6,.22,0,Math.PI*2);ctx.fill();}
   const mood=scene.doodle?.mood??'relaxed';
-  person(ctx,258,610,.68,mood,t,mood==='surprised',shirt);
+  person(ctx,258,530,.73,mood,t,mood==='surprised',shirt);
   ctx.fillStyle='#C5DCE8';ctx.beginPath();ctx.roundRect(111,490,290,420,13);ctx.fill();outline(ctx,3.5);ctx.stroke();
   line(ctx,[132,520,166,520], '#FFFFFF',3);line(ctx,[132,534,152,534],'#FFFFFF',2);
   pill(ctx,scene.doodle?.clockText??'5 min',45,390,111);

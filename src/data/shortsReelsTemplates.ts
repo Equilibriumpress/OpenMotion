@@ -1,6 +1,6 @@
 import { OpenMotionProject } from '../types/openmotion';
 
-/** Eight data-driven vertical videos. The matching GitHub project JSON is generated from this data. */
+/** Nine data-driven vertical videos; matching project JSON is included in projects/. */
 export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
   {
     "schemaVersion": "1.0",
