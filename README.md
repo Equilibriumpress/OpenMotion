@@ -55,3 +55,8 @@ Details, credits, GPX import and usage limitations: [Premium travel guide](docs/
 ## Handgetekende Doodle Explainer (ADHD & slaap)
 
 Nieuwe bewerkbare videoproef op basis van een aangeleverde Nederlandstalige referentie. In **Shorts & Reels** staat **ADHD & Slaap — Handgetekende Doodle Explainer** met 26 oorspronkelijke Canvas-illustraties, pastelkleuren, handgeschreven tekst, animaties en een eigen zachte soundtrack. Beschikbare instellingen en bronvermelding: [Doodle explainer handleiding](docs/adhd-doodle-explainer.md).
+
+
+### Doodle character redesign R2
+
+The editable ADHD & Slaap hand-drawn video now uses two reusable vector rigs with redesigned expressions and poses, a correctly layered bed and shower character, and a new character-pose selector. [Character redesign notes](docs/doodle-character-redesign.md).

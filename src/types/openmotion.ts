@@ -425,6 +425,8 @@ export interface SceneDoodleExplainer {
   setting: 'bed' | 'shower' | 'brain' | 'standing' | 'checklist' | 'clock' | 'outro';
   palette: 'night' | 'cream' | 'shower' | 'morning' | 'quiet' | 'gray';
   mood: 'sleepy' | 'relaxed' | 'happy' | 'worried' | 'surprised' | 'overwhelmed';
+  /** Keyframed character gesture, independent of facial expression. */
+  pose?: 'neutral' | 'relieved' | 'alert' | 'exhausted' | 'point';
   emphasis?: string[];
   extras?: string[];
   clockText?: string;

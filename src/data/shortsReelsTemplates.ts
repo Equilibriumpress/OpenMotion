@@ -1921,7 +1921,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "clockText": "",
           "shirtColor": "#829D58",
           "highlightColor": "#D65C55",
-          "narration": "Waarom blijven mensen met ADHD"
+          "narration": "Waarom blijven mensen met ADHD",
+          "pose": "alert"
         }
       },
       {
@@ -1946,7 +1947,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "clockText": "3:00",
           "shirtColor": "#829D58",
           "highlightColor": "#D65C55",
-          "narration": "tot 3 uur 's nachts op?"
+          "narration": "tot 3 uur 's nachts op?",
+          "pose": "alert"
         }
       },
       {
@@ -1969,7 +1971,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "clockText": "",
           "shirtColor": "#829D58",
           "highlightColor": "#D65C55",
-          "narration": "En komen ze moeilijk uit bed?"
+          "narration": "En komen ze moeilijk uit bed?",
+          "pose": "exhausted"
         }
       },
       {
@@ -1992,7 +1995,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "clockText": "5 min",
           "shirtColor": "#829D58",
           "highlightColor": "#D65C55",
-          "narration": "En maken ze van een douche"
+          "narration": "En maken ze van een douche",
+          "pose": "neutral"
         }
       },
       {
@@ -2015,7 +2019,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "clockText": "20 min",
           "shirtColor": "#829D58",
           "highlightColor": "#D65C55",
-          "narration": "op de een of andere manier 20 minuten?"
+          "narration": "op de een of andere manier 20 minuten?",
+          "pose": "alert"
         }
       },
       {
@@ -2040,7 +2045,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "clockText": "",
           "shirtColor": "#829D58",
           "highlightColor": "#D65C55",
-          "narration": "Daar zit een fascinerende reden achter."
+          "narration": "Daar zit een fascinerende reden achter.",
+          "pose": "neutral"
         }
       },
       {
@@ -2067,7 +2073,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "clockText": "",
           "shirtColor": "#829D58",
           "highlightColor": "#D65C55",
-          "narration": "Voor veel mensen met ADHD"
+          "narration": "Voor veel mensen met ADHD",
+          "pose": "neutral"
         }
       },
       {
@@ -2093,7 +2100,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "clockText": "",
           "shirtColor": "#829D58",
           "highlightColor": "#D65C55",
-          "narration": "is de nacht het moment"
+          "narration": "is de nacht het moment",
+          "pose": "neutral"
         }
       },
       {
@@ -2119,7 +2127,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "clockText": "",
           "shirtColor": "#829D58",
           "highlightColor": "#D65C55",
-          "narration": "waarop de wereld eindelijk stil is."
+          "narration": "waarop de wereld eindelijk stil is.",
+          "pose": "neutral"
         }
       },
       {
@@ -2144,7 +2153,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "clockText": "",
           "shirtColor": "#829D58",
           "highlightColor": "#D65C55",
-          "narration": "Geen onderbrekingen. Geen verwachtingen. Geen eisen."
+          "narration": "Geen onderbrekingen. Geen verwachtingen. Geen eisen.",
+          "pose": "neutral"
         }
       },
       {
@@ -2169,7 +2179,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "clockText": "",
           "shirtColor": "#829D58",
           "highlightColor": "#D65C55",
-          "narration": "Hun brein voelt zich eindelijk vrij."
+          "narration": "Hun brein voelt zich eindelijk vrij.",
+          "pose": "relieved"
         }
       },
       {
@@ -2195,7 +2206,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "clockText": "3:00",
           "shirtColor": "#829D58",
           "highlightColor": "#D65C55",
-          "narration": "Dus stellen ze het slapen uit, zelfs als ze moe zijn."
+          "narration": "Dus stellen ze het slapen uit, zelfs als ze moe zijn.",
+          "pose": "relieved"
         }
       },
       {
@@ -2218,7 +2230,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "clockText": "",
           "shirtColor": "#829D58",
           "highlightColor": "#D65C55",
-          "narration": "Dan breekt de ochtend aan."
+          "narration": "Dan breekt de ochtend aan.",
+          "pose": "exhausted"
         }
       },
       {
@@ -2243,7 +2256,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "clockText": "",
           "shirtColor": "#829D58",
           "highlightColor": "#D65C55",
-          "narration": "Ze snoozen meerdere wekkers."
+          "narration": "Ze snoozen meerdere wekkers.",
+          "pose": "exhausted"
         }
       },
       {
@@ -2268,7 +2282,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "clockText": "",
           "shirtColor": "#829D58",
           "highlightColor": "#D65C55",
-          "narration": "En worden overweldigd wakker."
+          "narration": "En worden overweldigd wakker.",
+          "pose": "alert"
         }
       },
       {
@@ -2293,7 +2308,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "clockText": "",
           "shirtColor": "#829D58",
           "highlightColor": "#D65C55",
-          "narration": "En voelen het gewicht van alles wat moet."
+          "narration": "En voelen het gewicht van alles wat moet.",
+          "pose": "neutral"
         }
       },
       {
@@ -2318,7 +2334,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "clockText": "",
           "shirtColor": "#829D58",
           "highlightColor": "#D65C55",
-          "narration": "Maar nu komt het..."
+          "narration": "Maar nu komt het...",
+          "pose": "neutral"
         }
       },
       {
@@ -2347,7 +2364,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "clockText": "",
           "shirtColor": "#829D58",
           "highlightColor": "#D65C55",
-          "narration": "ADHD heeft invloed op aandacht, executieve functies en tijdsbeleving."
+          "narration": "ADHD heeft invloed op aandacht, executieve functies en tijdsbeleving.",
+          "pose": "neutral"
         }
       },
       {
@@ -2370,7 +2388,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "clockText": "5 min",
           "shirtColor": "#829D58",
           "highlightColor": "#D65C55",
-          "narration": "Zelfs vijf minuten douchen"
+          "narration": "Zelfs vijf minuten douchen",
+          "pose": "neutral"
         }
       },
       {
@@ -2395,7 +2414,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "clockText": "2:07",
           "shirtColor": "#829D58",
           "highlightColor": "#D65C55",
-          "narration": "kan een afleidingsval worden."
+          "narration": "kan een afleidingsval worden.",
+          "pose": "neutral"
         }
       },
       {
@@ -2421,7 +2441,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "clockText": "3:02",
           "shirtColor": "#829D58",
           "highlightColor": "#D65C55",
-          "narration": "Een liedje of één willekeurige gedachte..."
+          "narration": "Een liedje of één willekeurige gedachte...",
+          "pose": "alert"
         }
       },
       {
@@ -2446,7 +2467,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "clockText": "19:58",
           "shirtColor": "#829D58",
           "highlightColor": "#D65C55",
-          "narration": "En opeens zijn 20 minuten verdwenen."
+          "narration": "En opeens zijn 20 minuten verdwenen.",
+          "pose": "alert"
         }
       },
       {
@@ -2471,7 +2493,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "clockText": "",
           "shirtColor": "#829D58",
           "highlightColor": "#D65C55",
-          "narration": "Deze moeite met tijd wordt vaak tijdsblindheid genoemd."
+          "narration": "Deze moeite met tijd wordt vaak tijdsblindheid genoemd.",
+          "pose": "neutral"
         }
       },
       {
@@ -2496,7 +2519,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "clockText": "",
           "shirtColor": "#829D58",
           "highlightColor": "#D65C55",
-          "narration": "Daarom kan 's ochtends klaarmaken"
+          "narration": "Daarom kan 's ochtends klaarmaken",
+          "pose": "neutral"
         }
       },
       {
@@ -2522,7 +2546,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "clockText": "",
           "shirtColor": "#829D58",
           "highlightColor": "#D65C55",
-          "narration": "aanvoelen als een mentale marathon,"
+          "narration": "aanvoelen als een mentale marathon,",
+          "pose": "point"
         }
       },
       {
@@ -2545,7 +2570,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "clockText": "",
           "shirtColor": "#829D58",
           "highlightColor": "#D65C55",
-          "narration": "nog voordat de dag begonnen is."
+          "narration": "nog voordat de dag begonnen is.",
+          "pose": "neutral"
         }
       }
     ],
