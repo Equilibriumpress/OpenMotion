@@ -1,4 +1,5 @@
 import { renderGeoRouteReel, renderWhiteboardScience } from './shortsRenderer';
+import { renderDoodleExplainerScene } from './doodleExplainerRenderer';
 import { renderPremiumTravelScene, getPremiumError } from './premiumTravelRoute';
 import { renderTimedCaptions } from './timedCaptionRenderer';
 import { getCachedPhoto } from './imageCache';
@@ -338,6 +339,11 @@ export function renderOpenMotionFrame(
     renderTimedCaptions(ctx,w,h,project,safeTime);
     ctx.restore();
     return;
+  }
+  if (scene.layout === 'doodle-explainer' && scene.doodle) {
+    renderDoodleExplainerScene(ctx,w,h,scene,localTime,brand);
+    renderTimedCaptions(ctx,w,h,project,safeTime);
+    ctx.restore();return;
   }
   if (scene.layout === 'geo-route-reel') {
     renderGeoRouteReel(ctx,w,h,scene,localTime);

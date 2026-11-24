@@ -34,6 +34,7 @@ export type SceneLayout =
   | 'geo-route-reel'
   | 'premium-travel-route'
   | 'whiteboard-science'
+  | 'doodle-explainer'
   | 'editorial-cartography'
   | 'three-campervan-journey';
 
@@ -419,6 +420,19 @@ export interface OpenMotionAudioTrack {
   fadeInSec?: number;
   fadeOutSec?: number;
 }
+/** Reusable doodle explainer: editable script and illustrations. */
+export interface SceneDoodleExplainer {
+  setting: 'bed' | 'shower' | 'brain' | 'standing' | 'checklist' | 'clock' | 'outro';
+  palette: 'night' | 'cream' | 'shower' | 'morning' | 'quiet' | 'gray';
+  mood: 'sleepy' | 'relaxed' | 'happy' | 'worried' | 'surprised' | 'overwhelmed';
+  emphasis?: string[];
+  extras?: string[];
+  clockText?: string;
+  shirtColor?: string;
+  highlightColor?: string;
+  /** Editable narration script. Not synthesized automatically. */
+  narration?: string;
+}
 export interface OpenMotionScene {
   id: string;
   name: string;
@@ -472,6 +486,7 @@ export interface OpenMotionScene {
   geoRoute?: SceneGeoRoute;
   premiumTravel?: ScenePremiumTravelRoute;
   whiteboard?: SceneWhiteboard;
+  doodle?: SceneDoodleExplainer;
   threeCampervan?: SceneThreeCampervan;
   fullBleed?: boolean;
 }
@@ -549,6 +564,7 @@ export const ALL_SCENE_LAYOUTS: SceneLayout[] = [
   'geo-route-reel',
   'premium-travel-route',
   'whiteboard-science',
+  'doodle-explainer',
   'paper-map-journey',
   'route-map-journey',
   'travel-postcard-reel',
@@ -596,6 +612,7 @@ export const LAYOUT_DISPLAY_NAMES: Record<SceneLayout, string> = {
   'geo-route-reel': 'GeoJSON / GPX Travel Route',
   'premium-travel-route': 'Premium Roadtrip Map & Photo Stops',
   'whiteboard-science': 'Animated Whiteboard Science',
+  'doodle-explainer': 'Hand-drawn Pastel Explainer',
   'paper-map-journey': 'Paper Map Journey (Cut-Paper)',
   'route-map-journey': 'Animated Route Map',
   'travel-postcard-reel': 'Reisvideo Postcard',

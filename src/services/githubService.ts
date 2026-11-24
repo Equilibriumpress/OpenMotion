@@ -152,6 +152,7 @@ export function normalizeOpenMotionProject(
     'geo-route-reel',
     'premium-travel-route',
     'whiteboard-science',
+    'doodle-explainer',
     'three-campervan-journey',
   ]);
   const validBackdrops = new Set([
@@ -379,6 +380,8 @@ export function normalizeOpenMotionProject(
         sc.premiumTravel && typeof sc.premiumTravel === 'object' ? (sc.premiumTravel as OpenMotionScene['premiumTravel']) : undefined,
       geoRoute:
         sc.geoRoute && typeof sc.geoRoute === 'object' ? (sc.geoRoute as OpenMotionScene['geoRoute']) : undefined,
+      doodle: sc.doodle && typeof sc.doodle === 'object'
+        ? (sc.doodle as OpenMotionScene['doodle']) : undefined,
       whiteboard:
         sc.whiteboard && typeof sc.whiteboard === 'object' ? (sc.whiteboard as OpenMotionScene['whiteboard']) : undefined,
       editorialMap:

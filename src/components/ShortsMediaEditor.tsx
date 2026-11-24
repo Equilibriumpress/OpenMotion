@@ -88,6 +88,51 @@ export function ShortsMediaEditor({project,activeScene,onUpdateProject,onUpdateS
    <div className="grid grid-cols-2 gap-2">{(['startSec','endSec','volume','fadeInSec','fadeOutSec'] as const).map(k=><label key={k} className="text-[11px]">{k}<input type="number" min="0" step=".1" className={style} value={track[k]??''} onChange={e=>updateTrack(i,{[k]:e.target.value===''?undefined:Number(e.target.value)})}/></label>)}</div>
   </div>)}
   <p className="text-xs text-slate-500">Audiobestanden in public/assets/ of een CORS-geschikt adres. De losse preview-soundscape wordt niet mee geëxporteerd.</p>
+
+  {activeScene.doodle&&(()=>{
+    const doodle=activeScene.doodle;
+    const update=(patch:Partial<NonNullable<OpenMotionScene['doodle']>>)=>onUpdateScene({doodle:{...doodle,...patch}});
+    return <div className="space-y-3 rounded-xl border border-rose-200 p-3">
+      <h4 className="font-semibold text-sm text-rose-900">Doodle explainer · Illustraties</h4>
+      <label className="block text-xs text-slate-600">Scène
+        <select className={style} value={doodle.setting} onChange={e=>update({setting:e.target.value as typeof doodle.setting})}>
+          {(['bed','shower','brain','standing','checklist','clock','outro'] as const).map(v=><option key={v} value={v}>{v}</option>)}
+        </select>
+      </label>
+      <label className="block text-xs text-slate-600">Achtergrond
+        <select className={style} value={doodle.palette} onChange={e=>update({palette:e.target.value as typeof doodle.palette})}>
+          {(['night','cream','shower','morning','quiet','gray'] as const).map(v=><option key={v} value={v}>{v}</option>)}
+        </select>
+      </label>
+      <label className="block text-xs text-slate-600">Gezichtsuitdrukking
+        <select className={style} value={doodle.mood} onChange={e=>update({mood:e.target.value as typeof doodle.mood})}>
+          {(['sleepy','relaxed','happy','worried','surprised','overwhelmed'] as const).map(v=><option key={v} value={v}>{v}</option>)}
+        </select>
+      </label>
+      <label className="block text-xs text-slate-600">Rode accentwoorden (gescheiden met komma)
+        <input className={style} value={(doodle.emphasis??[]).join(', ')}
+          onChange={e=>update({emphasis:e.target.value.split(',').map(x=>x.trim()).filter(Boolean)})}/>
+      </label>
+      <label className="block text-xs text-slate-600">Illustratie-elementen (één per regel)
+        <textarea rows={3} className={style} value={(doodle.extras??[]).join('\n')}
+          onChange={e=>update({extras:e.target.value.split('\n').map(x=>x.trim()).filter(Boolean)})}/>
+      </label>
+      <label className="block text-xs text-slate-600">Kloklabel (optioneel)
+        <input className={style} value={doodle.clockText??''} onChange={e=>update({clockText:e.target.value})}/>
+      </label>
+      <div className="grid grid-cols-2 gap-2">
+        <label className="block text-xs">Truikleur<input type="color" className={style} value={doodle.shirtColor??'#829D58'}
+          onChange={e=>update({shirtColor:e.target.value})}/></label>
+        <label className="block text-xs">Accentkleur<input type="color" className={style} value={doodle.highlightColor??'#D65C55'}
+          onChange={e=>update({highlightColor:e.target.value})}/></label>
+      </div>
+      <label className="block text-xs text-slate-600">Verteltekst voor voice-over
+        <textarea className={style} rows={3} value={doodle.narration??activeScene.headline}
+          onChange={e=>update({narration:e.target.value})}/>
+      </label>
+      <p className="text-xs text-slate-500">Alle figuren zijn vectoranimaties. Neem een eigen voice-over op en voeg het audiobestand via de audiotracks toe.</p>
+    </div>;
+  })()}
   {activeScene.explainer&&<label className="block text-xs text-slate-600">Explainer diagramlabels (één per regel)
     <textarea rows={3} className={style} value={activeScene.explainer.visualLabels.join('\n')}
       onChange={e=>onUpdateScene({explainer:{...activeScene.explainer!,visualLabels:e.target.value.split('\n').filter(Boolean)}})}/>

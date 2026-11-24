@@ -50,3 +50,8 @@ Full usage notes: [Shorts & Reels guide](docs/shorts-reels.md).
 The Scottish campervan demo now uses MapLibre + OpenFreeMap for real vector basemap snapshots, OSRM for road geometry, a moving camper graphic and licensed photo cards at each stop. Open the **Shorts & Reels** category and choose **Premium Travel Route Reel — Scotland by Campervan**.
 
 Details, credits, GPX import and usage limitations: [Premium travel guide](docs/premium-travel-reel.md).
+
+
+## Handgetekende Doodle Explainer (ADHD & slaap)
+
+Nieuwe bewerkbare videoproef op basis van een aangeleverde Nederlandstalige referentie. In **Shorts & Reels** staat **ADHD & Slaap — Handgetekende Doodle Explainer** met 26 oorspronkelijke Canvas-illustraties, pastelkleuren, handgeschreven tekst, animaties en een eigen zachte soundtrack. Beschikbare instellingen en bronvermelding: [Doodle explainer handleiding](docs/adhd-doodle-explainer.md).
