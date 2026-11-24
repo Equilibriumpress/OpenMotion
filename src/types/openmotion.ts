@@ -377,7 +377,7 @@ export interface PremiumTravelStop {
 export interface ScenePremiumTravelRoute {
   stops: PremiumTravelStop[];
   route: SceneGeoRoute['route'];
-  chapter: 'opening' | 'drive' | 'finale';
+  chapter: 'opening' | 'drive' | 'photo' | 'finale';
   focusStopIndex: number;
   mapCenter: [number, number];
   mapZoom: number;
