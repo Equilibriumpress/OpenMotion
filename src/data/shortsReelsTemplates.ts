@@ -808,7 +808,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "mapZoom": 7.1,
           "routeProgressFrom": 0,
           "routeProgressTo": 1,
-          "roadMatched": false
+          "roadMatched": false,
+          "markerStyle": "dot"
         }
       },
       {
@@ -900,7 +901,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "mapZoom": 7.15,
           "routeProgressFrom": 0,
           "routeProgressTo": 1,
-          "roadMatched": false
+          "roadMatched": false,
+          "markerStyle": "dot"
         }
       },
       {
@@ -992,7 +994,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "mapZoom": 7.15,
           "routeProgressFrom": 0,
           "routeProgressTo": 1,
-          "roadMatched": false
+          "roadMatched": false,
+          "markerStyle": "dot"
         }
       },
       {
@@ -1084,7 +1087,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "mapZoom": 7.7,
           "routeProgressFrom": 0,
           "routeProgressTo": 1,
-          "roadMatched": false
+          "roadMatched": false,
+          "markerStyle": "dot"
         }
       },
       {
@@ -1176,7 +1180,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "mapZoom": 7.7,
           "routeProgressFrom": 0,
           "routeProgressTo": 1,
-          "roadMatched": false
+          "roadMatched": false,
+          "markerStyle": "dot"
         }
       },
       {
@@ -1268,7 +1273,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "mapZoom": 8,
           "routeProgressFrom": 0,
           "routeProgressTo": 1,
-          "roadMatched": false
+          "roadMatched": false,
+          "markerStyle": "dot"
         }
       },
       {
@@ -1360,7 +1366,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "mapZoom": 8,
           "routeProgressFrom": 0,
           "routeProgressTo": 1,
-          "roadMatched": false
+          "roadMatched": false,
+          "markerStyle": "dot"
         }
       },
       {
@@ -1452,7 +1459,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "mapZoom": 6.85,
           "routeProgressFrom": 0,
           "routeProgressTo": 1,
-          "roadMatched": false
+          "roadMatched": false,
+          "markerStyle": "dot"
         }
       }
     ]

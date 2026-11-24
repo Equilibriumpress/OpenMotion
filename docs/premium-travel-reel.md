@@ -100,3 +100,10 @@ Safari. Test on desktop or choose a supported hardware mode if full HD is requir
 The R2 changes were committed without invoking GitHub Actions. A new actual
 browser export must still be visually reviewed before describing the revised
 film as production-ready.
+
+
+## R3 — Smooth route marker
+
+The primary travel animation now uses a small red location dot with a white rim and a subtle, time-based halo instead of the oversized illustrated camper. The dot follows the exact projected road geometry, without angle changes at sharp road bends. Preview and MP4 use the same frame time for the pulse.
+
+An optional small top-down camper remains in the Studio's **Route-markering** selector for experiments. Its on-screen heading is computed from a short path look-ahead, avoiding immediate rotation on every tiny polyline segment. This is still a 2D icon, not a photorealistic 3D camper. A realistic vehicle would need consistent top-down assets, scale, stabilized heading and correct occlusion. The dot is the recommended default for readable vertical map reels.

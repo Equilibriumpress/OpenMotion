@@ -72,6 +72,12 @@ export function ShortsMediaEditor({project,activeScene,onUpdateProject,onUpdateS
        {stop&&<><label className="block text-xs">Plaatsnaam<input className={style} value={stop.name} onChange={e=>changeStop('name',e.target.value)}/></label>
        <label className="block text-xs">Uitleg<textarea rows={3} className={style} value={stop.note} onChange={e=>changeStop('note',e.target.value)}/></label>
        <label className="block text-xs">Foto URL<input className={style} value={stop.photoUrl} onChange={e=>changeStop('photoUrl',e.target.value)}/></label></>}
+       <label className="block text-xs">Route-markering
+         <select className={style} value={pr.markerStyle??'dot'} onChange={e=>onUpdateScene({premiumTravel:{...pr,markerStyle:e.target.value as 'dot' | 'camper'}})}>
+           <option value="dot">Bewegende stip (aanbevolen)</option>
+           <option value="camper">Kleine camper (experimenteel)</option>
+         </select>
+       </label>
        <label className="block text-xs">Camera zoom<input className={style} type="number" min={3} max={15} step=".1" value={pr.mapZoom} onChange={e=>onUpdateScene({premiumTravel:{...pr,mapZoom:Number(e.target.value)}})}/></label>
      </div>;
    })()}
