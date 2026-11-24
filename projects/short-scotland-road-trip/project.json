@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "id": "short-scotland-road-trip",
   "slug": "short-scotland-road-trip",
-  "title": "Travel Route Reel — Scottish Highlands",
-  "description": "WGS84 waypoint concept. Import road-matched GPX or GeoJSON for real road routes.",
+  "title": "Premium Travel Route Reel — Scotland by Campervan",
+  "description": "30-second premium Scottish Highlands route movie with OpenFreeMap vector basemap, OSRM road routing, animated campervan, cinematic camera and licensed Wikimedia Commons photography.",
   "category": "Shorts & Reels",
   "author": "OpenMotion Studio",
   "source": "template",
@@ -15,502 +15,512 @@
   "height": 1920,
   "fps": 30,
   "brandKit": {
-    "brandName": "SCOTLAND ROAD TRIP",
-    "primaryColor": "#D64B38",
-    "accentColor": "#397D67",
-    "backgroundColor": "#EBE7DD",
-    "surfaceColor": "#FFFDF7",
-    "textColor": "#25232B",
-    "mutedColor": "#555965",
+    "brandName": "SCOTLAND / THE OPEN ROAD",
+    "primaryColor": "#D74936",
+    "accentColor": "#E2C48F",
+    "backgroundColor": "#E7E8DE",
+    "surfaceColor": "#173D37",
+    "textColor": "#F8F7EF",
+    "mutedColor": "#AFC9BE",
     "fontFamily": "Bricolage Grotesque"
   },
   "audioTracks": [],
   "captions": [
     {
       "startSec": 0,
-      "endSec": 5,
-      "text": "SCOTLAND BY CAMPERVAN",
-      "style": "karaoke"
+      "endSec": 4,
+      "text": "Scotland by campervan",
+      "style": "minimal",
+      "position": 0.85
     },
     {
-      "startSec": 5,
-      "endSec": 13,
-      "text": "Edinburgh to Glencoe",
-      "style": "karaoke"
+      "startSec": 4,
+      "endSec": 12,
+      "text": "Glen Coe. Beneath towering mountains.",
+      "style": "minimal",
+      "position": 0.42
     },
     {
-      "startSec": 13,
-      "endSec": 21,
-      "text": "Coast and Isle of Skye",
-      "style": "karaoke"
+      "startSec": 12,
+      "endSec": 19,
+      "text": "Eilean Donan. Where three sea lochs meet.",
+      "style": "minimal",
+      "position": 0.42
     },
     {
-      "startSec": 21,
+      "startSec": 19,
       "endSec": 26,
-      "text": "Toward Inverness",
-      "style": "karaoke"
+      "text": "Portree. The harbour at the edge of Skye.",
+      "style": "minimal",
+      "position": 0.42
     },
     {
       "startSec": 26,
       "endSec": 30,
-      "text": "THE OPEN ROAD",
-      "style": "karaoke"
+      "text": "Explore the Highlands.",
+      "style": "minimal",
+      "position": 0.48
     }
   ],
   "scenes": [
     {
       "id": "opening",
-      "name": "Opening",
-      "durationSec": 5,
-      "layout": "geo-route-reel",
-      "transition": "slide-up",
-      "backdrop": "swiss-lines",
-      "headline": "SCOTLAND BY CAMPERVAN",
-      "geoRoute": {
-        "route": {
-          "type": "Feature",
-          "geometry": {
-            "type": "LineString",
-            "coordinates": [
-              [
-                -3.19,
-                55.953
-              ],
-              [
-                -3.43,
-                56.391
-              ],
-              [
-                -3.48,
-                56.683
-              ],
-              [
-                -4.967,
-                56.725
-              ],
-              [
-                -5.517,
-                57.274
-              ],
-              [
-                -6.194,
-                57.413
-              ],
-              [
-                -5.354,
-                57.589
-              ],
-              [
-                -5.357,
-                57.815
-              ],
-              [
-                -4.06,
-                57.96
-              ],
-              [
-                -4.225,
-                57.478
-              ]
-            ]
-          },
-          "properties": {
-            "source": "Illustrative waypoints, not road-matched"
-          }
-        },
-        "waypoints": [
-          {
-            "name": "Edinburgh",
-            "lat": 55.953,
-            "lon": -3.19
-          },
-          {
-            "name": "Glencoe",
-            "lat": 56.725,
-            "lon": -4.967
-          },
-          {
-            "name": "Skye",
-            "lat": 57.413,
-            "lon": -6.194
-          },
-          {
-            "name": "Ullapool",
-            "lat": 57.815,
-            "lon": -5.357
-          },
-          {
-            "name": "Inverness",
-            "lat": 57.478,
-            "lon": -4.225
-          }
-        ],
-        "routeProgressFrom": 0,
-        "routeProgressTo": 0.15
-      }
-    },
-    {
-      "id": "south",
-      "name": "South",
-      "durationSec": 8,
-      "layout": "geo-route-reel",
-      "transition": "slide-up",
-      "backdrop": "swiss-lines",
-      "headline": "Edinburgh to Glencoe",
-      "geoRoute": {
-        "route": {
-          "type": "Feature",
-          "geometry": {
-            "type": "LineString",
-            "coordinates": [
-              [
-                -3.19,
-                55.953
-              ],
-              [
-                -3.43,
-                56.391
-              ],
-              [
-                -3.48,
-                56.683
-              ],
-              [
-                -4.967,
-                56.725
-              ],
-              [
-                -5.517,
-                57.274
-              ],
-              [
-                -6.194,
-                57.413
-              ],
-              [
-                -5.354,
-                57.589
-              ],
-              [
-                -5.357,
-                57.815
-              ],
-              [
-                -4.06,
-                57.96
-              ],
-              [
-                -4.225,
-                57.478
-              ]
-            ]
-          },
-          "properties": {
-            "source": "Illustrative waypoints, not road-matched"
-          }
-        },
-        "waypoints": [
-          {
-            "name": "Edinburgh",
-            "lat": 55.953,
-            "lon": -3.19
-          },
-          {
-            "name": "Glencoe",
-            "lat": 56.725,
-            "lon": -4.967
-          },
-          {
-            "name": "Skye",
-            "lat": 57.413,
-            "lon": -6.194
-          },
-          {
-            "name": "Ullapool",
-            "lat": 57.815,
-            "lon": -5.357
-          },
-          {
-            "name": "Inverness",
-            "lat": 57.478,
-            "lon": -4.225
-          }
-        ],
-        "routeProgressFrom": 0,
-        "routeProgressTo": 0.35
-      }
-    },
-    {
-      "id": "west",
-      "name": "West",
-      "durationSec": 8,
-      "layout": "geo-route-reel",
-      "transition": "slide-up",
-      "backdrop": "swiss-lines",
-      "headline": "Coast and Isle of Skye",
-      "geoRoute": {
-        "route": {
-          "type": "Feature",
-          "geometry": {
-            "type": "LineString",
-            "coordinates": [
-              [
-                -3.19,
-                55.953
-              ],
-              [
-                -3.43,
-                56.391
-              ],
-              [
-                -3.48,
-                56.683
-              ],
-              [
-                -4.967,
-                56.725
-              ],
-              [
-                -5.517,
-                57.274
-              ],
-              [
-                -6.194,
-                57.413
-              ],
-              [
-                -5.354,
-                57.589
-              ],
-              [
-                -5.357,
-                57.815
-              ],
-              [
-                -4.06,
-                57.96
-              ],
-              [
-                -4.225,
-                57.478
-              ]
-            ]
-          },
-          "properties": {
-            "source": "Illustrative waypoints, not road-matched"
-          }
-        },
-        "waypoints": [
-          {
-            "name": "Edinburgh",
-            "lat": 55.953,
-            "lon": -3.19
-          },
-          {
-            "name": "Glencoe",
-            "lat": 56.725,
-            "lon": -4.967
-          },
-          {
-            "name": "Skye",
-            "lat": 57.413,
-            "lon": -6.194
-          },
-          {
-            "name": "Ullapool",
-            "lat": 57.815,
-            "lon": -5.357
-          },
-          {
-            "name": "Inverness",
-            "lat": 57.478,
-            "lon": -4.225
-          }
-        ],
-        "routeProgressFrom": 0,
-        "routeProgressTo": 0.75
-      }
-    },
-    {
-      "id": "north",
-      "name": "North",
-      "durationSec": 5,
-      "layout": "geo-route-reel",
-      "transition": "slide-up",
-      "backdrop": "swiss-lines",
-      "headline": "Toward Inverness",
-      "geoRoute": {
-        "route": {
-          "type": "Feature",
-          "geometry": {
-            "type": "LineString",
-            "coordinates": [
-              [
-                -3.19,
-                55.953
-              ],
-              [
-                -3.43,
-                56.391
-              ],
-              [
-                -3.48,
-                56.683
-              ],
-              [
-                -4.967,
-                56.725
-              ],
-              [
-                -5.517,
-                57.274
-              ],
-              [
-                -6.194,
-                57.413
-              ],
-              [
-                -5.354,
-                57.589
-              ],
-              [
-                -5.357,
-                57.815
-              ],
-              [
-                -4.06,
-                57.96
-              ],
-              [
-                -4.225,
-                57.478
-              ]
-            ]
-          },
-          "properties": {
-            "source": "Illustrative waypoints, not road-matched"
-          }
-        },
-        "waypoints": [
-          {
-            "name": "Edinburgh",
-            "lat": 55.953,
-            "lon": -3.19
-          },
-          {
-            "name": "Glencoe",
-            "lat": 56.725,
-            "lon": -4.967
-          },
-          {
-            "name": "Skye",
-            "lat": 57.413,
-            "lon": -6.194
-          },
-          {
-            "name": "Ullapool",
-            "lat": 57.815,
-            "lon": -5.357
-          },
-          {
-            "name": "Inverness",
-            "lat": 57.478,
-            "lon": -4.225
-          }
-        ],
-        "routeProgressFrom": 0,
-        "routeProgressTo": 1
-      }
-    },
-    {
-      "id": "overview",
-      "name": "Overview",
+      "name": "01 / Edinburgh opening",
       "durationSec": 4,
-      "layout": "geo-route-reel",
-      "transition": "slide-up",
+      "layout": "premium-travel-route",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "FROM CITY TO HIGHLANDS",
+      "fullBleed": true,
+      "premiumTravel": {
+        "stops": [
+          {
+            "name": "Edinburgh",
+            "lat": 55.9486,
+            "lon": -3.1999,
+            "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
+            "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Edinburgh_Castle_2000-1.jpg?width=1200",
+            "photoAuthor": "Libasstref",
+            "photoLicense": "CC0 1.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_2000-1.jpg"
+          },
+          {
+            "name": "Glen Coe",
+            "lat": 56.681,
+            "lon": -5.004,
+            "note": "Drive past dramatic mountain walls and a glacial Highland valley.",
+            "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Glencoe%2C_Scotland.jpg?width=1200",
+            "photoAuthor": "Saadtowheed",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Glencoe,_Scotland.jpg"
+          },
+          {
+            "name": "Eilean Donan",
+            "lat": 57.2743,
+            "lon": -5.5168,
+            "note": "A celebrated island castle stands where three sea lochs meet.",
+            "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg?width=1200",
+            "photoAuthor": "Gillfoto",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg"
+          },
+          {
+            "name": "Portree",
+            "lat": 57.4129,
+            "lon": -6.1945,
+            "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
+            "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Portree_harbour.jpg?width=1200",
+            "photoAuthor": "Clem_nat",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Portree_harbour.jpg"
+          }
+        ],
+        "route": {
+          "type": "Feature",
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                -3.1999,
+                55.9486
+              ],
+              [
+                -5.004,
+                56.681
+              ],
+              [
+                -5.5168,
+                57.2743
+              ],
+              [
+                -6.1945,
+                57.4129
+              ]
+            ]
+          },
+          "properties": {
+            "status": "routing-needed",
+            "source": "Illustrative stop positions, NOT the driving route"
+          }
+        },
+        "chapter": "opening",
+        "focusStopIndex": 0,
+        "mapCenter": [
+          -4.6,
+          56.75
+        ],
+        "mapZoom": 7,
+        "routeProgressFrom": 0,
+        "routeProgressTo": 0.04,
+        "roadMatched": false
+      }
+    },
+    {
+      "id": "glencoe",
+      "name": "02 / Glen Coe arrival",
+      "durationSec": 8,
+      "layout": "premium-travel-route",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "GLEN COE / A82",
+      "fullBleed": true,
+      "premiumTravel": {
+        "stops": [
+          {
+            "name": "Edinburgh",
+            "lat": 55.9486,
+            "lon": -3.1999,
+            "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
+            "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Edinburgh_Castle_2000-1.jpg?width=1200",
+            "photoAuthor": "Libasstref",
+            "photoLicense": "CC0 1.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_2000-1.jpg"
+          },
+          {
+            "name": "Glen Coe",
+            "lat": 56.681,
+            "lon": -5.004,
+            "note": "Drive past dramatic mountain walls and a glacial Highland valley.",
+            "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Glencoe%2C_Scotland.jpg?width=1200",
+            "photoAuthor": "Saadtowheed",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Glencoe,_Scotland.jpg"
+          },
+          {
+            "name": "Eilean Donan",
+            "lat": 57.2743,
+            "lon": -5.5168,
+            "note": "A celebrated island castle stands where three sea lochs meet.",
+            "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg?width=1200",
+            "photoAuthor": "Gillfoto",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg"
+          },
+          {
+            "name": "Portree",
+            "lat": 57.4129,
+            "lon": -6.1945,
+            "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
+            "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Portree_harbour.jpg?width=1200",
+            "photoAuthor": "Clem_nat",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Portree_harbour.jpg"
+          }
+        ],
+        "route": {
+          "type": "Feature",
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                -3.1999,
+                55.9486
+              ],
+              [
+                -5.004,
+                56.681
+              ],
+              [
+                -5.5168,
+                57.2743
+              ],
+              [
+                -6.1945,
+                57.4129
+              ]
+            ]
+          },
+          "properties": {
+            "status": "routing-needed",
+            "source": "Illustrative stop positions, NOT the driving route"
+          }
+        },
+        "chapter": "drive",
+        "focusStopIndex": 1,
+        "mapCenter": [
+          -4.68,
+          56.66
+        ],
+        "mapZoom": 8,
+        "routeProgressFrom": 0,
+        "routeProgressTo": 0.43,
+        "roadMatched": false
+      }
+    },
+    {
+      "id": "eilean-donan",
+      "name": "03 / Eilean Donan",
+      "durationSec": 7,
+      "layout": "premium-travel-route",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "EILEAN DONAN / A87",
+      "fullBleed": true,
+      "premiumTravel": {
+        "stops": [
+          {
+            "name": "Edinburgh",
+            "lat": 55.9486,
+            "lon": -3.1999,
+            "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
+            "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Edinburgh_Castle_2000-1.jpg?width=1200",
+            "photoAuthor": "Libasstref",
+            "photoLicense": "CC0 1.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_2000-1.jpg"
+          },
+          {
+            "name": "Glen Coe",
+            "lat": 56.681,
+            "lon": -5.004,
+            "note": "Drive past dramatic mountain walls and a glacial Highland valley.",
+            "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Glencoe%2C_Scotland.jpg?width=1200",
+            "photoAuthor": "Saadtowheed",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Glencoe,_Scotland.jpg"
+          },
+          {
+            "name": "Eilean Donan",
+            "lat": 57.2743,
+            "lon": -5.5168,
+            "note": "A celebrated island castle stands where three sea lochs meet.",
+            "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg?width=1200",
+            "photoAuthor": "Gillfoto",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg"
+          },
+          {
+            "name": "Portree",
+            "lat": 57.4129,
+            "lon": -6.1945,
+            "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
+            "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Portree_harbour.jpg?width=1200",
+            "photoAuthor": "Clem_nat",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Portree_harbour.jpg"
+          }
+        ],
+        "route": {
+          "type": "Feature",
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                -3.1999,
+                55.9486
+              ],
+              [
+                -5.004,
+                56.681
+              ],
+              [
+                -5.5168,
+                57.2743
+              ],
+              [
+                -6.1945,
+                57.4129
+              ]
+            ]
+          },
+          "properties": {
+            "status": "routing-needed",
+            "source": "Illustrative stop positions, NOT the driving route"
+          }
+        },
+        "chapter": "drive",
+        "focusStopIndex": 2,
+        "mapCenter": [
+          -5.4,
+          57.14
+        ],
+        "mapZoom": 8.4,
+        "routeProgressFrom": 0.43,
+        "routeProgressTo": 0.79,
+        "roadMatched": false
+      }
+    },
+    {
+      "id": "portree",
+      "name": "04 / Portree on Skye",
+      "durationSec": 7,
+      "layout": "premium-travel-route",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "PORTREE / ISLE OF SKYE",
+      "fullBleed": true,
+      "premiumTravel": {
+        "stops": [
+          {
+            "name": "Edinburgh",
+            "lat": 55.9486,
+            "lon": -3.1999,
+            "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
+            "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Edinburgh_Castle_2000-1.jpg?width=1200",
+            "photoAuthor": "Libasstref",
+            "photoLicense": "CC0 1.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_2000-1.jpg"
+          },
+          {
+            "name": "Glen Coe",
+            "lat": 56.681,
+            "lon": -5.004,
+            "note": "Drive past dramatic mountain walls and a glacial Highland valley.",
+            "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Glencoe%2C_Scotland.jpg?width=1200",
+            "photoAuthor": "Saadtowheed",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Glencoe,_Scotland.jpg"
+          },
+          {
+            "name": "Eilean Donan",
+            "lat": 57.2743,
+            "lon": -5.5168,
+            "note": "A celebrated island castle stands where three sea lochs meet.",
+            "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg?width=1200",
+            "photoAuthor": "Gillfoto",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg"
+          },
+          {
+            "name": "Portree",
+            "lat": 57.4129,
+            "lon": -6.1945,
+            "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
+            "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Portree_harbour.jpg?width=1200",
+            "photoAuthor": "Clem_nat",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Portree_harbour.jpg"
+          }
+        ],
+        "route": {
+          "type": "Feature",
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                -3.1999,
+                55.9486
+              ],
+              [
+                -5.004,
+                56.681
+              ],
+              [
+                -5.5168,
+                57.2743
+              ],
+              [
+                -6.1945,
+                57.4129
+              ]
+            ]
+          },
+          "properties": {
+            "status": "routing-needed",
+            "source": "Illustrative stop positions, NOT the driving route"
+          }
+        },
+        "chapter": "drive",
+        "focusStopIndex": 3,
+        "mapCenter": [
+          -6.02,
+          57.39
+        ],
+        "mapZoom": 8.5,
+        "routeProgressFrom": 0.79,
+        "routeProgressTo": 1,
+        "roadMatched": false
+      }
+    },
+    {
+      "id": "finale",
+      "name": "05 / Complete road trip",
+      "durationSec": 4,
+      "layout": "premium-travel-route",
+      "transition": "fade",
       "backdrop": "swiss-lines",
       "headline": "THE OPEN ROAD",
-      "geoRoute": {
+      "fullBleed": true,
+      "premiumTravel": {
+        "stops": [
+          {
+            "name": "Edinburgh",
+            "lat": 55.9486,
+            "lon": -3.1999,
+            "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
+            "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Edinburgh_Castle_2000-1.jpg?width=1200",
+            "photoAuthor": "Libasstref",
+            "photoLicense": "CC0 1.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_2000-1.jpg"
+          },
+          {
+            "name": "Glen Coe",
+            "lat": 56.681,
+            "lon": -5.004,
+            "note": "Drive past dramatic mountain walls and a glacial Highland valley.",
+            "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Glencoe%2C_Scotland.jpg?width=1200",
+            "photoAuthor": "Saadtowheed",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Glencoe,_Scotland.jpg"
+          },
+          {
+            "name": "Eilean Donan",
+            "lat": 57.2743,
+            "lon": -5.5168,
+            "note": "A celebrated island castle stands where three sea lochs meet.",
+            "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg?width=1200",
+            "photoAuthor": "Gillfoto",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg"
+          },
+          {
+            "name": "Portree",
+            "lat": 57.4129,
+            "lon": -6.1945,
+            "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
+            "photoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Portree_harbour.jpg?width=1200",
+            "photoAuthor": "Clem_nat",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Portree_harbour.jpg"
+          }
+        ],
         "route": {
           "type": "Feature",
           "geometry": {
             "type": "LineString",
             "coordinates": [
               [
-                -3.19,
-                55.953
+                -3.1999,
+                55.9486
               ],
               [
-                -3.43,
-                56.391
+                -5.004,
+                56.681
               ],
               [
-                -3.48,
-                56.683
+                -5.5168,
+                57.2743
               ],
               [
-                -4.967,
-                56.725
-              ],
-              [
-                -5.517,
-                57.274
-              ],
-              [
-                -6.194,
-                57.413
-              ],
-              [
-                -5.354,
-                57.589
-              ],
-              [
-                -5.357,
-                57.815
-              ],
-              [
-                -4.06,
-                57.96
-              ],
-              [
-                -4.225,
-                57.478
+                -6.1945,
+                57.4129
               ]
             ]
           },
           "properties": {
-            "source": "Illustrative waypoints, not road-matched"
+            "status": "routing-needed",
+            "source": "Illustrative stop positions, NOT the driving route"
           }
         },
-        "waypoints": [
-          {
-            "name": "Edinburgh",
-            "lat": 55.953,
-            "lon": -3.19
-          },
-          {
-            "name": "Glencoe",
-            "lat": 56.725,
-            "lon": -4.967
-          },
-          {
-            "name": "Skye",
-            "lat": 57.413,
-            "lon": -6.194
-          },
-          {
-            "name": "Ullapool",
-            "lat": 57.815,
-            "lon": -5.357
-          },
-          {
-            "name": "Inverness",
-            "lat": 57.478,
-            "lon": -4.225
-          }
+        "chapter": "finale",
+        "focusStopIndex": -1,
+        "mapCenter": [
+          -4.88,
+          56.88
         ],
+        "mapZoom": 7,
         "routeProgressFrom": 0,
-        "routeProgressTo": 1
+        "routeProgressTo": 1,
+        "roadMatched": false
       }
     }
   ]
