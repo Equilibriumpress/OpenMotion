@@ -1,4 +1,5 @@
 import { renderGeoRouteReel, renderWhiteboardScience } from './shortsRenderer';
+import { renderPremiumTravelScene } from './premiumTravelRoute';
 import { renderTimedCaptions } from './timedCaptionRenderer';
 import { getCachedPhoto } from './imageCache';
 import { projectAssetUrl } from './projectAudio';
@@ -330,6 +331,12 @@ export function renderOpenMotionFrame(
     return;
   }
 
+  if (scene.layout === 'premium-travel-route' && scene.premiumTravel) {
+    renderPremiumTravelScene(ctx,w,h,scene,localTime,getCachedPhoto);
+    renderTimedCaptions(ctx,w,h,project,safeTime);
+    ctx.restore();
+    return;
+  }
   if (scene.layout === 'geo-route-reel') {
     renderGeoRouteReel(ctx,w,h,scene,localTime);
     renderTimedCaptions(ctx,w,h,project,safeTime);

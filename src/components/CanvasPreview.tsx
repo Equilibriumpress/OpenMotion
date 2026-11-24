@@ -38,7 +38,9 @@ export function CanvasPreview({
 
   // Preload documentary images referenced by the project
   useEffect(() => {
-    void preloadProjectImages(project);
+    void preloadProjectImages(project).catch((error) => {
+      console.warn('Premium map or media preparation failed:', error);
+    });
   }, [project]);
 
   // Render single frame whenever project, size, scrubbed time, or newly loaded photo updates

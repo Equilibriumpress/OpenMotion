@@ -32,6 +32,7 @@ export type SceneLayout =
   | 'faceless-explainer'
   | 'paper-map-journey'
   | 'geo-route-reel'
+  | 'premium-travel-route'
   | 'whiteboard-science'
   | 'editorial-cartography'
   | 'three-campervan-journey';
@@ -363,6 +364,27 @@ export interface SceneGeoRoute {
   routeProgressFrom?: number;
   routeProgressTo?: number;
 }
+export interface PremiumTravelStop {
+  name: string;
+  lat: number;
+  lon: number;
+  note: string;
+  photoUrl: string;
+  photoAuthor: string;
+  photoLicense: string;
+  photoSourceUrl: string;
+}
+export interface ScenePremiumTravelRoute {
+  stops: PremiumTravelStop[];
+  route: SceneGeoRoute['route'];
+  chapter: 'opening' | 'drive' | 'finale';
+  focusStopIndex: number;
+  mapCenter: [number, number];
+  mapZoom: number;
+  routeProgressFrom: number;
+  routeProgressTo: number;
+  roadMatched?: boolean;
+}
 export interface SceneWhiteboard {
   /** Normalized SVG-style polylines: [x, y] from 0 to 1. */
   strokes: number[][][];
@@ -446,6 +468,7 @@ export interface OpenMotionScene {
   paperMap?: ScenePaperMapJourney;
   editorialMap?: SceneEditorialMap;
   geoRoute?: SceneGeoRoute;
+  premiumTravel?: ScenePremiumTravelRoute;
   whiteboard?: SceneWhiteboard;
   threeCampervan?: SceneThreeCampervan;
   fullBleed?: boolean;
@@ -522,6 +545,7 @@ export const ALL_SCENE_LAYOUTS: SceneLayout[] = [
   'three-campervan-journey',
   'editorial-cartography',
   'geo-route-reel',
+  'premium-travel-route',
   'whiteboard-science',
   'paper-map-journey',
   'route-map-journey',
@@ -568,6 +592,7 @@ export const LAYOUT_DISPLAY_NAMES: Record<SceneLayout, string> = {
   'three-campervan-journey': '3D Three.js Character Journey',
   'editorial-cartography': 'Editorial Cartography (OSM)',
   'geo-route-reel': 'GeoJSON / GPX Travel Route',
+  'premium-travel-route': 'Premium Roadtrip Map & Photo Stops',
   'whiteboard-science': 'Animated Whiteboard Science',
   'paper-map-journey': 'Paper Map Journey (Cut-Paper)',
   'route-map-journey': 'Animated Route Map',
