@@ -80,6 +80,55 @@ async function pickSupportedH264Config(
   return null;
 }
 
+/**
+ * The iPad MediaRecorder encoder may silently reduce canvas.captureStream()
+ * resolution. Inspect the encoded file before giving it a download filename.
+ * Never promise 1080×1920 when the actual stream is 512×910.
+ */
+async function actualVideoSize(blob: Blob): Promise<{ width: number; height: number } | null> {
+  const video = document.createElement('video');
+  const url = URL.createObjectURL(blob);
+  video.preload = 'metadata';
+  video.muted = true;
+  video.playsInline = true;
+  try {
+    return await new Promise(resolve => {
+      let done = false;
+      const finish = (value: { width: number; height: number } | null) => {
+        if (done) return;
+        done = true;
+        clearTimeout(timeout);
+        resolve(value);
+      };
+      const timeout = setTimeout(() => finish(null), 7000);
+      video.onloadedmetadata = () =>
+        finish(video.videoWidth && video.videoHeight ? {width: video.videoWidth, height: video.videoHeight} : null);
+      video.onerror = () => finish(null);
+      video.src = url;
+      video.load();
+    });
+  } finally {
+    video.removeAttribute('src');
+    video.load();
+    URL.revokeObjectURL(url);
+  }
+}
+function describeOutput(
+  actual: {width: number; height: number} | null,
+  intendedWidth: number,
+  intendedHeight: number,
+  encoder: string
+) {
+  const w = actual?.width ?? intendedWidth, h = actual?.height ?? intendedHeight;
+  const resolution = w + 'x' + h;
+  const warning = actual
+    ? w !== intendedWidth || h !== intendedHeight
+      ? ' · Let op: browser verlaagde resolutie tot ' + resolution + ' (gevraagd ' + intendedWidth + 'x' + intendedHeight + ')'
+      : ' · gecontroleerd: ' + resolution
+    : ' · bestandsresolutie niet geverifieerd';
+  return {w,h,encoderLabel:encoder+warning};
+}
+
 export function formatFileSize(bytes: number): string {
   if (bytes < 1024) return `${bytes} B`;
   if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
@@ -269,8 +318,9 @@ async function encodeWithWebCodecsMp4(params: {
     muxer.finalize();
 
     const mp4Blob = new Blob([target.buffer], { type: 'video/mp4' });
+    const inspected = describeOutput(await actualVideoSize(mp4Blob),width,height,`WebCodecs H.264 (${h264Config.codec})`);
     const outputUrl = URL.createObjectURL(mp4Blob);
-    const fileName = `${project.slug}-${width}x${height}-${fps}fps.mp4`;
+    const fileName = `${project.slug}-${inspected.w}x${inspected.h}-${fps}fps.mp4`;
 
     const finalState: RenderProgressState = {
       phase: 'done',
@@ -278,7 +328,7 @@ async function encodeWithWebCodecsMp4(params: {
       totalFrames,
       percent: 100,
       container: 'mp4',
-      encoderLabel: `WebCodecs H.264 (${h264Config.codec})`,
+      encoderLabel: inspected.encoderLabel,
       outputUrl,
       fileName,
       fileSizeBytes: mp4Blob.size,
@@ -397,8 +447,9 @@ async function encodeWithMediaRecorderFallback(params: {
   const blob = await stopPromise;
   fallbackSource?.disconnect();
   await fallbackContext?.close();
+  const inspected = describeOutput(await actualVideoSize(blob),width,height,`MediaRecorder (${chosenMime})`);
   const outputUrl = URL.createObjectURL(blob);
-  const fileName = `${project.slug}-${width}x${height}-${fps}fps.${container}`;
+  const fileName = `${project.slug}-${inspected.w}x${inspected.h}-${fps}fps.${container}`;
 
   const finalState: RenderProgressState = {
     phase: 'done',
@@ -406,7 +457,7 @@ async function encodeWithMediaRecorderFallback(params: {
     totalFrames,
     percent: 100,
     container,
-    encoderLabel: `MediaRecorder (${chosenMime})`,
+    encoderLabel: inspected.encoderLabel,
     outputUrl,
     fileName,
     fileSizeBytes: blob.size,
