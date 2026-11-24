@@ -38,6 +38,7 @@ async function getRoadGeometry(scenes:OpenMotionScene[]) {
     pr.roadMatched=true;
     if(pr.chapter==='opening'){pr.routeProgressFrom=0;pr.routeProgressTo=Math.min(.045,fractions[1]);}
     else if(pr.chapter==='finale'){pr.routeProgressFrom=0;pr.routeProgressTo=1;}
+    else if(pr.chapter==='photo'){pr.routeProgressFrom=0;pr.routeProgressTo=0;}
     else {const idx=Math.max(1,Math.min(fractions.length-1,pr.focusStopIndex));pr.routeProgressFrom=fractions[idx-1];pr.routeProgressTo=fractions[idx];}
   }
 }
@@ -62,6 +63,7 @@ export function preparePremiumTravelProject(project:OpenMotionProject):Promise<v
       if(!map.loaded())await idle(map,'load');
       for(const scene of scenes){
         const p=scene.premiumTravel!;
+        if(p.chapter==='photo')continue;
         const loaded=idle(map,'idle');
         map.jumpTo({center:p.mapCenter,zoom:p.mapZoom,bearing:0,pitch:0});
         map.resize();map.triggerRepaint();
@@ -74,6 +76,21 @@ export function preparePremiumTravelProject(project:OpenMotionProject):Promise<v
         const stops=p.stops.map(s=>point(s.lon,s.lat));
         const distances=[0];let total=0;
         for(let i=1;i<path.length;i++){total+=Math.hypot(path[i].x-path[i-1].x,path[i].y-path[i-1].y);distances.push(total);}
+        // Use the same projected arclength as animation, so the vehicle arrives
+        // exactly at each pin rather than finishing short of the destination.
+        const stopFractions=stops.map(point=>{
+          let nearest=0,best=Number.POSITIVE_INFINITY;
+          for(let j=0;j<path.length;j++){
+            const d=(path[j].x-point.x)**2+(path[j].y-point.y)**2;
+            if(d<best){best=d;nearest=j;}
+          }
+          return total>0?distances[nearest]/total:0;
+        });
+        if(p.chapter==='drive'){
+          const i=Math.max(1,Math.min(stops.length-1,p.focusStopIndex));
+          p.routeProgressFrom=stopFractions[i-1];
+          p.routeProgressTo=stopFractions[i];
+        }
         stages.set(scene,{image,path,stops,distances,total});
       }
     }finally{map?.remove();div.remove();}
@@ -100,98 +117,144 @@ function routeStroke(ctx:CanvasRenderingContext2D,stage:Stage,fraction:number,s:
   ctx.strokeStyle='#FFFCF5';ctx.lineWidth=17*s;ctx.stroke();
   ctx.shadowBlur=0;ctx.strokeStyle='#D74936';ctx.lineWidth=8*s;ctx.stroke();
 }
-function vehicle(ctx:CanvasRenderingContext2D,x:number,y:number,heading:number,s:number){
-  ctx.save();ctx.translate(x,y);ctx.rotate(heading);ctx.scale(s,s);
-  ctx.shadowColor='rgba(0,0,0,.3)';ctx.shadowBlur=16;
-  ctx.fillStyle='#FCFAF0';ctx.strokeStyle='#1D3E36';ctx.lineWidth=3;
-  ctx.beginPath();ctx.roundRect(-33,-17,67,34,9);ctx.fill();ctx.stroke();
-  ctx.shadowBlur=0;ctx.fillStyle='#3B806C';ctx.beginPath();ctx.roundRect(-32,-17,64,14,7);ctx.fill();
-  ctx.fillStyle='#D7EDE4';ctx.fillRect(6,-15,16,11);ctx.fillRect(-22,-15,16,11);
-  ctx.fillStyle='#1D3E36';for(const wx of [-18,21]){ctx.beginPath();ctx.arc(wx,17,6,0,Math.PI*2);ctx.fill();}
-  ctx.restore();
-}
-function photoCover(ctx:CanvasRenderingContext2D,img:HTMLImageElement,x:number,y:number,w:number,h:number,t:number){
-  const z=Math.max(w/img.naturalWidth,h/img.naturalHeight)*(1.04+.05*t);
-  const rw=img.naturalWidth*z,rh=img.naturalHeight*z;
-  ctx.save();ctx.beginPath();ctx.roundRect(x,y,w,h,26);ctx.clip();ctx.drawImage(img,x+(w-rw)/2,y+(h-rh)/2,rw,rh);ctx.restore();
-}
-function scenicPhotoFallback(ctx:CanvasRenderingContext2D,x:number,y:number,w:number,h:number,label:string):void {
-  ctx.save();
-  ctx.beginPath();ctx.roundRect(x,y,w,h,26);ctx.clip();
-  const sky=ctx.createLinearGradient(0,y,0,y+h);
-  sky.addColorStop(0,'#8FA6A4');sky.addColorStop(.6,'#D5D5BD');sky.addColorStop(1,'#EDE4CA');
-  ctx.fillStyle=sky;ctx.fillRect(x,y,w,h);
-  const mountain=(dy:number,offset:number,color:string)=>{
-    ctx.fillStyle=color;ctx.beginPath();ctx.moveTo(x,y+h);
-    ctx.lineTo(x,y+h*dy);
-    for(let i=0;i<=8;i++){
-      const px=x+w*i/8,py=y+h*(dy-.2*Math.abs(Math.sin(i*1.17+offset)));
-      ctx.lineTo(px,py);
-    }
-    ctx.lineTo(x+w,y+h);ctx.closePath();ctx.fill();
-  };
-  mountain(.77,1.3,'#8CA6A0');mountain(.89,2.6,'#527A70');
-  ctx.fillStyle='rgba(20,55,48,.84)';ctx.fillRect(x,y+h*.75,w,h*.25);
-  ctx.fillStyle='#FFF9E9';ctx.textAlign='left';
-  ctx.font='700 '+Math.round(Math.max(18,w*.053))+'px sans-serif';
-  ctx.fillText(label.toUpperCase(),x+w*.05,y+h*.85,w*.9);
-  ctx.font=Math.round(Math.max(12,w*.027))+'px sans-serif';
-  ctx.fillText('HIGHLANDS  /  SCOTLAND',x+w*.05,y+h*.92,w*.9);
-  ctx.restore();
-}
 
-export function renderPremiumTravelScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMotionScene,time:number,getPhoto:(url:string)=>HTMLImageElement|null):void{
-  const premium=scene.premiumTravel!,stage=stages.get(scene),s=w/WIDTH,t=clamp(time/Math.max(.01,scene.durationSec));
-  ctx.fillStyle='#E8E7DC';ctx.fillRect(0,0,w,h);
-  if(!stage||!premium.roadMatched){ctx.textAlign='center';ctx.fillStyle='#254D46';ctx.font=(32*s)+'px sans-serif';ctx.fillText('Preparing roads and map…',w/2,h/2);return;}
-  // Map and projected route share one deterministic camera transform.
-  ctx.save();const zoom=1.012+.025*Math.sin(t*Math.PI);
-  ctx.translate(w/2,h/2);ctx.scale(zoom,zoom);ctx.translate(-w/2+Math.sin(t*Math.PI)*10*s,-h/2);
+function vehicle(ctx:CanvasRenderingContext2D,x:number,y:number,angle:number,s:number){
+  ctx.save();ctx.translate(x,y);ctx.rotate(angle);ctx.scale(s,s);
+  // Scalable camper illustration with high-contrast road silhouette.
+  ctx.shadowColor='rgba(0,0,0,.28)';ctx.shadowBlur=13;ctx.shadowOffsetY=5;
+  ctx.fillStyle='#FDF9EF';ctx.strokeStyle='#1E3A37';ctx.lineWidth=3;
+  ctx.beginPath();ctx.roundRect(-40,-22,80,44,11);ctx.fill();ctx.stroke();
+  ctx.shadowBlur=0;ctx.shadowOffsetY=0;
+  ctx.fillStyle='#287363';ctx.beginPath();ctx.roundRect(-38,-20,75,18,9);ctx.fill();
+  ctx.fillStyle='#C8EBE8';ctx.fillRect(-27,-18,21,14);ctx.fillRect(13,-18,18,14);
+  ctx.fillStyle='#1E3533';for(const dx of [-23,25]){ctx.beginPath();ctx.arc(dx,23,8,0,Math.PI*2);ctx.fill();}
+  ctx.fillStyle='#F7BC72';ctx.fillRect(36,-9,6,15);
+  ctx.restore();
+}
+function cover(ctx:CanvasRenderingContext2D,img:HTMLImageElement,x:number,y:number,w:number,h:number,t:number){
+  const k=Math.max(w/img.naturalWidth,h/img.naturalHeight)*(1.04+.07*t);
+  const pw=img.naturalWidth*k,ph=img.naturalHeight*k;
+  const pan=(t-.5)*Math.min(40,w*.06);
+  ctx.drawImage(img,x+(w-pw)/2+pan,y+(h-ph)/2,pw,ph);
+}
+function scenicFallback(ctx:CanvasRenderingContext2D,w:number,h:number){
+  const sky=ctx.createLinearGradient(0,0,0,h);
+  sky.addColorStop(0,'#7FA1A6');sky.addColorStop(.5,'#CED1B9');sky.addColorStop(1,'#77968B');
+  ctx.fillStyle=sky;ctx.fillRect(0,0,w,h);
+  for(const [y,color,shift] of [[.57,'#98B3A9',.3],[.72,'#597D70',1.2],[.86,'#2C534B',2.1]] as const){
+    ctx.fillStyle=color;ctx.beginPath();ctx.moveTo(0,h);
+    ctx.lineTo(0,h*y);
+    for(let i=0;i<=12;i++)ctx.lineTo(w*i/12,h*(y-.13*Math.abs(Math.sin(i*.81+shift))));
+    ctx.lineTo(w,h);ctx.closePath();ctx.fill();
+  }
+}
+function labelLines(ctx:CanvasRenderingContext2D,text:string,x:number,y:number,width:number,lineHeight:number,maxLines=3){
+  const words=text.split(/\s+/);let line='';const lines:string[]=[];
+  for(const word of words){
+    const next=line?line+' '+word:word;
+    if(line&&ctx.measureText(next).width>width){lines.push(line);line=word;}else line=next;
+  }
+  if(line)lines.push(line);
+  lines.slice(0,maxLines).forEach((v,i)=>ctx.fillText(v,x,y+i*lineHeight,width));
+}
+function photoScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMotionScene,time:number,getPhoto:(url:string)=>HTMLImageElement|null){
+  const p=scene.premiumTravel!,t=clamp(time/Math.max(.1,scene.durationSec)),s=w/WIDTH;
+  const index=p.chapter==='opening'?0:Math.max(0,p.focusStopIndex);
+  const stop=p.stops[index],img=getPhoto(stop.photoUrl);
+  if(img)cover(ctx,img,0,0,w,h,t);else scenicFallback(ctx,w,h);
+  const gradient=ctx.createLinearGradient(0,h*.22,0,h);
+  gradient.addColorStop(0,'rgba(9,29,29,0)');
+  gradient.addColorStop(.38,'rgba(9,29,29,.20)');
+  gradient.addColorStop(1,'rgba(7,25,26,.94)');
+  ctx.fillStyle=gradient;ctx.fillRect(0,0,w,h);
+  ctx.fillStyle='#F8F4E8';ctx.textAlign='left';
+  ctx.font='700 '+(29*s)+'px "Plus Jakarta Sans",sans-serif';
+  ctx.fillText('SCOTLAND  /  THE OPEN ROAD',66*s,112*s,w-135*s);
+  ctx.fillStyle='#E0C99C';ctx.font='700 '+(25*s)+'px "Plus Jakarta Sans",sans-serif';
+  const lead=p.chapter==='opening'?'A JOURNEY BEGINS':'STOP '+String(index+1).padStart(2,'0')+' / '+String(p.stops.length).padStart(2,'0');
+  ctx.fillText(lead,66*s,h-490*s,w-134*s);
+  ctx.fillStyle='#FFFFFF';
+  const headline=p.chapter==='opening'?'FROM CITY\nTO HIGHLANDS':stop.name.toUpperCase();
+  ctx.font='800 '+(p.chapter==='opening'?104:100)*s+'px "Bricolage Grotesque",sans-serif';
+  headline.split('\n').forEach((line,i)=>ctx.fillText(line,66*s,h-(385-i*115)*s,w-128*s));
+  ctx.font='500 '+(38*s)+'px "Plus Jakarta Sans",sans-serif';
+  ctx.fillStyle='#F3F3E9';
+  const tagline=p.chapter==='opening'?'EDINBURGH TO THE ISLE OF SKYE':stop.note;
+  labelLines(ctx,tagline,70*s,h-(p.chapter==='opening'?135:235)*s,w-143*s,56*s,p.chapter==='opening'?1:3);
+  ctx.font='500 '+(19*s)+'px "Plus Jakarta Sans",sans-serif';ctx.fillStyle='#DAE1DB';
+  ctx.fillText(img?'PHOTO  '+stop.photoAuthor+'  •  '+stop.photoLicense:'ILLUSTRATED LANDSCAPE / PHOTO UNAVAILABLE',70*s,h-103*s,w-140*s);
+}
+function drawMapScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMotionScene,time:number){
+  const p=scene.premiumTravel!,stage=stages.get(scene),s=w/WIDTH,t=clamp(time/Math.max(.1,scene.durationSec));
+  if(!stage||!p.roadMatched){
+    ctx.fillStyle='#E6E9DF';ctx.fillRect(0,0,w,h);
+    ctx.textAlign='center';ctx.fillStyle='#21493F';ctx.font='600 '+(36*s)+'px sans-serif';
+    ctx.fillText('Preparing road map…',w/2,h/2);return;
+  }
+  const driving=p.chapter==='drive',finishing=p.chapter==='finale';
+  const fraction=finishing?1:lerp(p.routeProgressFrom,p.routeProgressTo,ease(t));
+  const car=sample(stage,fraction);
+  const zoom=driving?1.66:finishing?1.02:1.28;
+  // Camera follows the vehicle through the centre of the visible map,
+  // constrained to the raster bounds so no empty map edges appear.
+  const desiredX=driving?w*.49:w*.5;
+  const desiredY=driving?h*.49:h*.5;
+  const panX=Math.max(w-w*zoom,Math.min(0,desiredX-car.x*s*zoom));
+  const panY=Math.max(h-h*zoom,Math.min(0,desiredY-car.y*s*zoom));
+  ctx.save();ctx.translate(panX,panY);ctx.scale(zoom,zoom);
   ctx.drawImage(stage.image,0,0,w,h);
-  const driveT=premium.chapter==='drive'?ease(t/.57):ease(t);
-  const frac=premium.chapter==='finale'?1:lerp(premium.routeProgressFrom,premium.routeProgressTo,driveT);
-  routeStroke(ctx,stage,frac,s);
-  stage.stops.forEach((p,i)=>{ctx.beginPath();ctx.arc(p.x*s,p.y*s,11*s,0,Math.PI*2);ctx.fillStyle=i===premium.focusStopIndex?'#E05243':'#FFF';ctx.fill();ctx.strokeStyle='#274D43';ctx.lineWidth=3*s;ctx.stroke();});
-  if(premium.chapter!=='finale'){const car=sample(stage,frac);vehicle(ctx,car.x*s,car.y*s,car.angle,s*1.25);}
+  // Muted base trace, followed by the much bolder travelled section.
+  ctx.save();ctx.beginPath();
+  stage.path.forEach((pt,i)=>i===0?ctx.moveTo(pt.x*s,pt.y*s):ctx.lineTo(pt.x*s,pt.y*s));
+  ctx.strokeStyle='rgba(37,66,61,.40)';ctx.lineWidth=12*s;ctx.lineCap='round';ctx.lineJoin='round';ctx.stroke();ctx.restore();
+  routeStroke(ctx,stage,fraction,s);
+  stage.stops.forEach((pt,i)=>{
+    const x=pt.x*s,y=pt.y*s;
+    ctx.fillStyle=i===p.focusStopIndex?'#D74735':'#173D37';
+    ctx.strokeStyle='#FFFDF7';ctx.lineWidth=3*s;
+    ctx.beginPath();ctx.arc(x,y,19*s,0,Math.PI*2);ctx.fill();ctx.stroke();
+    ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle='#FFFFFF';
+    ctx.font='800 '+(19*s)+'px "Plus Jakarta Sans",sans-serif';
+    ctx.fillText(String(i+1),x,y+1*s);
+  });
+  if(!finishing)vehicle(ctx,car.x*s,car.y*s,car.angle,2.1*s);
   ctx.restore();
+  // Compact hierarchy, leaving the centre clear for the route and camper.
+  const m=52*s;
+  ctx.fillStyle='rgba(18,54,48,.94)';ctx.beginPath();ctx.roundRect(m,65*s,w-2*m,105*s,19*s);ctx.fill();
+  ctx.textAlign='left';ctx.fillStyle='#FFFFFF';
+  ctx.font='700 '+(29*s)+'px "Plus Jakarta Sans",sans-serif';
+  ctx.fillText('SCOTLAND / THE OPEN ROAD',m+27*s,114*s,w-2*m-54*s);
+  ctx.font='500 '+(23*s)+'px "Plus Jakarta Sans",sans-serif';ctx.fillStyle='#D5E0D9';
+  ctx.fillText(finishing?'THE COMPLETE ROUTE':'ON THE ROAD · '+String(p.focusStopIndex+1).padStart(2,'0')+' / '+p.stops.length,m+27*s,147*s,w-2*m-54*s);
 
-  const m=54*s;
-  ctx.fillStyle='#173D37';ctx.beginPath();ctx.roundRect(m,74*s,w-2*m,110*s,18*s);ctx.fill();
-  ctx.fillStyle='#FFF9EE';ctx.textAlign='left';ctx.font='700 '+(28*s)+'px sans-serif';ctx.fillText('SCOTLAND  /  THE OPEN ROAD',m+27*s,120*s,w-2*m-54*s);
-  ctx.fillStyle='#CADDD0';ctx.font=(20*s)+'px sans-serif';ctx.fillText('REAL ROADS  •  A82 & A87  •  FILM 01',m+27*s,154*s);
-
-  if(premium.chapter==='opening'){
-    const img=getPhoto(premium.stops[0].photoUrl);
-    if(t<.54){ctx.save();ctx.globalAlpha=1-ease((t-.19)/.35);if(img)photoCover(ctx,img,m,290*s,w-2*m,940*s,t);else scenicPhotoFallback(ctx,m,290*s,w-2*m,940*s,premium.stops[0].name);ctx.restore();}
-    ctx.textAlign='left';ctx.fillStyle='#173D37';ctx.font='800 '+(74*s)+'px sans-serif';
-    ctx.fillText('FROM CITY',m,h-370*s,w-2*m);ctx.fillText('TO HIGHLANDS',m,h-280*s,w-2*m);
-    ctx.font=(28*s)+'px sans-serif';ctx.fillText('EDINBURGH  →  GLEN COE  →  SKYE',m,h-205*s,w-2*m);
+  // Clear lower third with a single strong heading, no competing captions.
+  const lower=ctx.createLinearGradient(0,h-525*s,0,h);
+  lower.addColorStop(0,'rgba(11,34,32,0)');lower.addColorStop(1,'rgba(12,43,37,.92)');
+  ctx.fillStyle=lower;ctx.fillRect(0,h-525*s,w,525*s);
+  ctx.fillStyle='#E5C48B';ctx.font='700 '+(27*s)+'px "Plus Jakarta Sans",sans-serif';
+  ctx.fillText(finishing?'ROUTE COMPLETE':'NEXT STOP',m,h-335*s);
+  ctx.fillStyle='#FFFFFF';
+  const name=finishing?'THE OPEN ROAD':p.stops[p.focusStopIndex]?.name.toUpperCase()??'HIGHLANDS';
+  ctx.font='800 '+(finishing?92:90)*s+'px "Bricolage Grotesque",sans-serif';
+  ctx.fillText(name,m,h-230*s,w-2*m);
+  ctx.fillStyle='#E6F0E8';ctx.font='500 '+(30*s)+'px "Plus Jakarta Sans",sans-serif';
+  ctx.fillText(finishing?'Edinburgh · Glen Coe · Eilean Donan · Skye':'A SCENIC DRIVE THROUGH THE HIGHLANDS',m,h-155*s,w-2*m);
+  ctx.fillStyle='rgba(251,250,245,.93)';ctx.fillRect(0,h-61*s,w,61*s);
+  ctx.textAlign='center';ctx.font='500 '+(21*s)+'px "Plus Jakarta Sans",sans-serif';ctx.fillStyle='#244C44';
+  ctx.fillText('Map: OpenFreeMap / OpenMapTiles · © OpenStreetMap contributors',w/2,h-24*s,w-54*s);
+}
+export function renderPremiumTravelScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMotionScene,time:number,getPhoto:(url:string)=>HTMLImageElement|null):void{
+  const p=scene.premiumTravel!,t=clamp(time/Math.max(.1,scene.durationSec));
+  ctx.save();
+  if(p.chapter==='opening'||p.chapter==='photo')photoScene(ctx,w,h,scene,time,getPhoto);
+  else drawMapScene(ctx,w,h,scene,time);
+  // Very brief editorial dip at cuts, without prolonged black frames.
+  const fadeIn=clamp((.065-t)/.065);
+  const fadeOut=clamp((t-.965)/.035);
+  const alpha=Math.max(fadeIn,fadeOut);
+  if(alpha>0){
+    ctx.fillStyle='rgba(13,36,32,'+(alpha*.66)+')';ctx.fillRect(0,0,w,h);
   }
-  if(premium.chapter==='drive'&&premium.focusStopIndex>=0){
-    const stop=premium.stops[premium.focusStopIndex],img=getPhoto(stop.photoUrl),alpha=ease((t-.48)/.18);
-    if(alpha>0){
-      ctx.save();ctx.globalAlpha=alpha;
-      const x=54*s,y=1025*s,pw=w-108*s,ph=790*s;
-      ctx.fillStyle='#183D36';ctx.beginPath();ctx.roundRect(x,y,pw,ph,30*s);ctx.fill();
-      if(img)photoCover(ctx,img,x+18*s,y+18*s,pw-36*s,428*s,t);
-      else scenicPhotoFallback(ctx,x+18*s,y+18*s,pw-36*s,428*s,stop.name);
-      ctx.textAlign='left';ctx.fillStyle='#E3C795';ctx.font='700 '+(25*s)+'px sans-serif';ctx.fillText('STOP 0'+(premium.focusStopIndex+1)+' / 04',x+40*s,y+502*s);
-      ctx.fillStyle='#FFFFFF';ctx.font='800 '+(65*s)+'px sans-serif';ctx.fillText(stop.name.toUpperCase(),x+40*s,y+586*s,pw-80*s);
-      ctx.font=(29*s)+'px sans-serif';ctx.fillStyle='#E4EFE6';
-      const words=stop.note.split(' ');let lines:string[]=[],line='';
-      for(const word of words){const candidate=line?line+' '+word:word;if(line&&ctx.measureText(candidate).width>pw-86*s){lines.push(line);line=word;}else line=candidate;}
-      if(line)lines.push(line);lines.slice(0,2).forEach((text,i)=>ctx.fillText(text,x+40*s,y+(650+i*41)*s,pw-80*s));
-      ctx.fillStyle='#BDD2CB';ctx.font=(19*s)+'px sans-serif';ctx.fillText(img ? 'Photo: '+stop.photoAuthor+' • '+stop.photoLicense : 'Map illustration • photo temporarily unavailable',x+40*s,y+757*s,pw-80*s);
-      ctx.restore();
-    }
-  }
-  if(premium.chapter==='finale'){
-    ctx.fillStyle='#173D37';ctx.beginPath();ctx.roundRect(m,h-425*s,w-2*m,300*s,30*s);ctx.fill();
-    ctx.textAlign='center';ctx.fillStyle='#FFF9ED';ctx.font='800 '+(78*s)+'px sans-serif';ctx.fillText('THE OPEN ROAD',w/2,h-322*s,w-2*m-24*s);
-    ctx.font=(28*s)+'px sans-serif';ctx.fillText('Four stops. One Highland journey.',w/2,h-235*s,w-2*m-24*s);
-    ctx.fillStyle='#CDDACC';ctx.fillText('EDINBURGH  →  ISLE OF SKYE',w/2,h-181*s);
-  }
-  ctx.fillStyle='rgba(250,248,242,.96)';ctx.fillRect(0,h-58*s,w,58*s);
-  ctx.fillStyle='#234940';ctx.font=(19*s)+'px sans-serif';ctx.textAlign='center';
-  ctx.fillText('OpenFreeMap © OpenMapTiles • © OpenStreetMap contributors',w/2,h-22*s,w-30*s);
+  ctx.restore();
 }
