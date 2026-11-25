@@ -4,3 +4,6 @@ Reusable vertical meme format. Each episode is a project.json with catOffice sho
 Episode 001: six scenes, 18 seconds, 1080 frames. Photographic cutout collage rather than fully generative photorealistic video. Cat vocalizations are synthesized, not natural recordings. Mouth shapes are illustrative, not tracked facial rigging. No additional workflow.
  
 Local build: CAT_OFFICE_ASSETS=1 npm run build. To generate publication master locally also set WORLD_RENDER=1; requires Python 3, FFmpeg and Chromium. Photo availability and visual appearance require review before publishing to social channels.
+
+## Studio import compatibility
+The project normalizer must retain the `catOffice` scene object and intentionally empty headlines. Without this, Studio preview and browser export fall back to the generic paper-cutout renderer while the direct publication master still uses the original scene JSON. Verify that all six imported scenes retain their shot, cue and event definitions.
