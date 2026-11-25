@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { spawnSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 
 const rootDir = process.cwd();
 const projectsDir = path.join(rootDir, 'projects');
@@ -10,11 +11,25 @@ const outFile = path.join(outDir, 'manifest.json');
 // The existing GitHub Pages build generates documentary audio without a
 // second workflow. Local developers may opt in with DOCUMENTARY_AUDIO=1.
 if (process.env.GITHUB_ACTIONS === 'true' || process.env.DOCUMENTARY_AUDIO === '1') {
+  const terrain = spawnSync('python3', ['scripts/build-documentary-terrain.py'], { stdio: 'inherit', timeout: 180000 });
+  if (terrain.status !== 0) console.warn('[documentary] Optional DEM contour generation unavailable.');
   const result = spawnSync('python3', ['scripts/build-documentary-audio.py'], { stdio: 'inherit', timeout: 420000 });
   if (result.status !== 0) console.warn('[documentary] Audio generation failed; publishing visual projects without missing audio tracks.');
 }
 function prepareProject(p) {
   if (!p.scenes?.some(s => s.bucketList?.documentary)) return p;
+  const contour = 'assets/maps/'+p.slug+'-contours.geojson';
+  for (const scene of p.scenes) {
+    const doc=scene.bucketList?.documentary;
+    if (doc?.relief && fs.existsSync(path.join(rootDir,'public',contour))) doc.contourUrl=contour;
+    // Direct Commons thumbnail avoids the cross-origin Special:FilePath redirect.
+    if(scene.imageUrl?.startsWith('https://commons.wikimedia.org/wiki/Special:FilePath/')){
+      const name=decodeURIComponent(scene.imageUrl.split('/Special:FilePath/')[1].split('?')[0]).replaceAll(' ','_');
+      const hash=createHash('md5').update(name).digest('hex');
+      const encoded=encodeURIComponent(name);
+      scene.imageUrl='https://upload.wikimedia.org/wikipedia/commons/thumb/'+hash[0]+'/'+hash.slice(0,2)+'/'+encoded+'/1280px-'+encoded;
+    }
+  }
   const audioDir = path.join(rootDir,'public','assets','audio');
   const cueFile = path.join(audioDir,p.slug+'-captions.json');
   if (fs.existsSync(cueFile)) p.captions=JSON.parse(fs.readFileSync(cueFile,'utf8'));
