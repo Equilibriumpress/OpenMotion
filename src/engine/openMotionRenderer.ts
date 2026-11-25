@@ -368,9 +368,10 @@ export function renderOpenMotionFrame(
     const previous=sceneIndex>0 ? project.scenes[sceneIndex-1] : undefined;
     // Film grammar: cinematic reveal after the map, brisk cut between
     // reason cards, and a slower transition to the coastal finale.
-    const dissolveTarget=previous?.bucketList?.chapter==='zoom' ? .78
+    const dissolveTarget=scene.bucketList.documentary ? .8 : previous?.bucketList?.chapter==='zoom' ? .78
       : scene.bucketList.chapter==='outro' ? .60 : .36;
-    const dissolve=previous?.layout==='bucket-list-zoom'&&previous.bucketList&&scene.transition==='fade'
+    const continuousDocMap=previous?.bucketList?.documentary?.mode==='map'&&scene.bucketList.documentary?.mode==='map';
+    const dissolve=previous?.layout==='bucket-list-zoom'&&previous.bucketList&&scene.transition==='fade'&&!continuousDocMap
       ? Math.min(dissolveTarget,previous.durationSec*.23,scene.durationSec*.23)
       : 0;
     if(previous?.bucketList&&dissolve>0&&localTime<dissolve){
