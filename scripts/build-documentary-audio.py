@@ -1,7 +1,9 @@
-"""Build the documentary voice and original instrumental bed during Pages publication.
-No API key required. Source JSON remains untouched; generated media stays in dist.
+"""Produce chapter-length neural narration, measured-duration caption estimates,
+an original musical score and separate synthesized environmental sound beds.
+No paid API or external sound recordings. All outputs are publication assets.
 """
-import json, math, os, pathlib, re, shutil, subprocess, sys, tempfile, wave
+import json, math, pathlib, re, subprocess, sys, tempfile, wave
+from itertools import groupby
 ROOT=pathlib.Path(__file__).resolve().parent.parent
 OUT=ROOT/"public/assets/audio"
 MODEL="en_US-libritts_r-medium"
@@ -10,60 +12,91 @@ def run(args, **kw):
     return subprocess.run([str(a) for a in args],check=True,timeout=240,**kw)
 def ff(*args):
     run(["ffmpeg","-hide_banner","-loglevel","error","-y",*args])
+def concat(files, target, work, codec="libmp3lame", bitrate="128k", norm=False):
+    listing=work/(target.stem+"-concat.txt")
+    listing.write_text("".join("file '"+str(p)+"'\n" for p in files))
+    extra=["-af","loudnorm=I=-18:TP=-2:LRA=7"] if norm else []
+    ff("-f","concat","-safe","0","-i",listing,*extra,"-ar","48000","-c:a",codec,"-b:a",bitrate,target)
+def fmt_time(seconds):
+    ms=max(0,round(seconds*1000))
+    return f"{ms//3600000:02}:{ms//60000%60:02}:{ms//1000%60:02},{ms%1000:03}"
+def music(ch,duration,out):
+    # Harmonic changes, soft overtone texture, and subtle pulses.
+    roots=[55,65.406,49,55,46.249,58.27,65.406,55]
+    r=roots[(ch-1)%len(roots)]
+    third=1.189207 if ch in (1,3,5,6) else 1.259921
+    expr=f"0.025*sin(2*PI*{r}*t)*(0.65+0.35*sin(2*PI*t/12))+0.016*sin(2*PI*{r*1.5}*t)*(0.7+0.3*sin(2*PI*t/9))+0.012*sin(2*PI*{r*third*2}*t)*(0.55+0.45*sin(2*PI*t/17))+0.007*sin(2*PI*{r*4}*t)*(0.5+0.5*sin(2*PI*t/7))"
+    if ch in (1,3,5): expr+=f"+0.008*sin(2*PI*{r/2}*t)*(0.5+0.5*sin(2*PI*t/2.8))"
+    fade=min(1.25,duration/4)
+    ff("-f","lavfi","-i",f"aevalsrc={expr}:s=48000:d={duration}","-af",f"afade=t=in:d={fade},afade=t=out:st={duration-fade}:d={fade}","-ac","1","-c:a","pcm_s16le",out)
+def ambience(ch,duration,out):
+    # Synthetic approximations of coast/wind, geothermal hiss, and rain.
+    # These are deliberately subtle and are not field recordings.
+    filters={1:"lowpass=f=420,tremolo=f=0.22:d=0.75",2:"lowpass=f=180,tremolo=f=0.12:d=0.5",3:"lowpass=f=280,tremolo=f=0.17:d=0.65",4:"lowpass=f=950,tremolo=f=0.35:d=0.4",5:"lowpass=f=650,tremolo=f=0.2:d=0.5",6:"highpass=f=650,lowpass=f=2800,tremolo=f=0.7:d=0.45",7:"highpass=f=450,lowpass=f=3600,tremolo=f=0.4:d=0.3",8:"lowpass=f=450,tremolo=f=0.22:d=0.7"}
+    filt=filters.get(ch,filters[1])
+    fade=min(1.5,duration/4)
+    ff("-f","lavfi","-i",f"anoisesrc=color=pink:amplitude=0.09:r=48000:d={duration}:seed={42+ch}","-af",f"{filt},volume=0.6,afade=t=in:d={fade},afade=t=out:st={duration-fade}:d={fade}","-ac","1","-c:a","pcm_s16le",out)
+def build(p,work,python):
+    slug=p["slug"]
+    if not re.fullmatch(r"[a-z0-9-]+",slug): raise ValueError("Invalid slug")
+    chapters=[(k,list(v)) for k,v in groupby(p["scenes"],key=lambda s:s.get("bucketList",{}).get("documentary",{}).get("chapter",1))]
+    voicefiles=[];musicfiles=[];ambfiles=[];captions=[];offset=0.0
+    for ch,scenes in chapters:
+        duration=sum(float(s["durationSec"]) for s in scenes)
+        narration=" ".join(s.get("bucketList",{}).get("documentary",{}).get("narration","").strip() for s in scenes).strip()
+        raw=work/f"{ch}-raw.wav";fitted=work/f"{ch}-voice.wav"
+        if narration:
+            # One uninterrupted synthesis per chapter: no restart on every cut.
+            run([python,"-m","piper","-m",work/(MODEL+".onnx"),"-f",raw],input=narration+"\n",text=True)
+            with wave.open(str(raw)) as w: seconds=w.getnframes()/w.getframerate()
+            lead=.3;tail=.45;window=max(.5,duration-lead-tail)
+            rate=max(.93,seconds/window)
+            remaining=rate;factors=[]
+            while remaining>2:
+                factors.append("atempo=2");remaining/=2
+            if abs(remaining-1)>.001:factors.append(f"atempo={remaining:.7f}")
+            speech=min(seconds/rate,window)
+            ff("-i",raw,"-af",",".join(factors+["adelay=300:all=1","apad"]),"-t",str(duration),"-ar","48000","-ac","1","-c:a","pcm_s16le",fitted)
+            # Sentence/phrase cues estimated within actual measured chapter audio.
+            # This is not forced word alignment, and is documented as approximate.
+            phrases=re.split(r"(?<=[.!?])\s+",narration)
+            chunks=[]
+            for phrase in phrases:
+                words=phrase.split()
+                while words:
+                    take=min(10,len(words))
+                    if len(words)>10 and len(words)-take<4:take=max(5,len(words)-4)
+                    chunks.append(" ".join(words[:take]));words=words[take:]
+            weights=[max(1,len(re.sub(r"\s+","",c)))+4 for c in chunks]
+            total=sum(weights);elapsed=0
+            for chunk,weight in zip(chunks,weights):
+                a=offset+lead+speech*elapsed/total;elapsed+=weight
+                b=offset+lead+speech*elapsed/total
+                captions.append({"text":chunk,"startSec":round(a,3),"endSec":round(b,3),"style":"minimal","position":.85})
+            print(f"[narration] chapter {ch}: {seconds:.2f}s synthesized; {speech:.2f}s placed in {duration:.2f}s")
+        else:ff("-f","lavfi","-i","anullsrc=r=48000:cl=mono","-t",str(duration),"-c:a","pcm_s16le",fitted)
+        score=work/f"{ch}-score.wav";amb=work/f"{ch}-amb.wav"
+        music(ch,duration,score);ambience(ch,duration,amb)
+        voicefiles.append(fitted);musicfiles.append(score);ambfiles.append(amb);offset+=duration
+    concat(voicefiles,OUT/(slug+"-voice.mp3"),work,norm=True)
+    concat(musicfiles,OUT/(slug+"-score.mp3"),work,bitrate="96k")
+    concat(ambfiles,OUT/(slug+"-ambience.mp3"),work,bitrate="96k")
+    (OUT/(slug+"-captions.json")).write_text(json.dumps(captions,ensure_ascii=False))
+    (OUT/(slug+"-captions.srt")).write_text("".join(f"{i+1}\n{fmt_time(c['startSec'])} --> {fmt_time(c['endSec'])}\n{c['text']}\n\n" for i,c in enumerate(captions)))
+    print(f"[documentary] {slug}: {offset:.0f}s, {len(chapters)} narrated chapters, {len(captions)} cues, three audio tracks")
 def main():
     OUT.mkdir(parents=True,exist_ok=True)
     projects=[]
     for path in (ROOT/"projects").glob("*/project.json"):
         p=json.loads(path.read_text())
-        if any(s.get("bucketList",{}).get("documentary") for s in p.get("scenes",[])): projects.append(p)
-    if not projects: return
+        if any(s.get("bucketList",{}).get("documentary") for s in p.get("scenes",[])):projects.append(p)
+    if not projects:return
     with tempfile.TemporaryDirectory() as tmp:
         work=pathlib.Path(tmp)
-        # Reuse a single model installation for all episodes.
         run([sys.executable,"-m","venv",work/"venv"])
         python=work/"venv/bin/python"
         run([python,"-m","pip","install","--disable-pip-version-check","piper-tts==1.3.0"])
         for suffix in [".onnx",".onnx.json"]:
             run(["curl","-fL","--retry","2","--max-time","180","-o",work/(MODEL+suffix),MODEL_BASE+MODEL+suffix])
-        for p in projects:
-            slug=p["slug"]
-            if not re.fullmatch(r"[a-z0-9-]+",slug): raise ValueError("Invalid project slug")
-            wavs=[]; captions=[]; offset=0.0
-            for i,s in enumerate(p["scenes"]):
-                duration=float(s["durationSec"])
-                narration=s.get("bucketList",{}).get("documentary",{}).get("narration","")
-                raw=work/f"{i:03d}-raw.wav"; fitted=work/f"{i:03d}-fit.wav"
-                if narration:
-                    # One clip per shot; compress only when the measured speech
-                    # exceeds its allotted window. Preserve all narration.
-                    run([python,"-m","piper","-m",work/(MODEL+".onnx"),"-f",raw],input=narration+"\n",text=True)
-                    with wave.open(str(raw)) as w: seconds=w.getnframes()/w.getframerate()
-                    rate=max(1.0,seconds/max(.5,duration-1.0))
-                    factors=[]
-                    while rate>2:
-                        factors.append("atempo=2");rate/=2
-                    if rate>1.001: factors.append(f"atempo={rate:.6f}")
-                    speech=min(seconds/max(1.0,seconds/max(.5,duration-1.0)),duration-1.0)
-                    filters=",".join(factors+["adelay=350:all=1","apad"])
-                    ff("-i",raw,"-af",filters,"-t",str(duration),"-ar","48000","-ac","1","-c:a","pcm_s16le",fitted)
-                    # Approximate cue boundaries within measured speech; not forced alignment.
-                    words=narration.split(); groups=[words[j:j+10] for j in range(0,len(words),10)]
-                    count=0
-                    for group in groups:
-                        a=offset+.35+speech*count/len(words);count+=len(group)
-                        b=offset+.35+speech*count/len(words)
-                        captions.append({"text":" ".join(group),"startSec":round(a,3),"endSec":round(b,3),"style":"minimal","position":.85})
-                else:
-                    ff("-f","lavfi","-i","anullsrc=r=48000:cl=mono","-t",str(duration),"-c:a","pcm_s16le",fitted)
-                wavs.append(fitted);offset+=duration
-            listing=work/"concat.txt"
-            listing.write_text("".join("file '"+str(w)+"'\n" for w in wavs))
-            voice=OUT/(slug+"-voice.mp3")
-            ff("-f","concat","-safe","0","-i",listing,"-c:a","libmp3lame","-b:a","128k",voice)
-            # Original synthesized score, no external samples. Quiet sustained
-            # tones and slow variation; voice remains the foreground.
-            expr="0.035*(sin(2*PI*55*t)+0.45*sin(2*PI*82.4069*t)+0.26*sin(2*PI*110*t))*(0.62+0.38*sin(2*PI*t/31))+0.009*sin(2*PI*164.8138*t)*(0.5+0.5*sin(2*PI*t/17))"
-            ff("-f","lavfi","-i",f"aevalsrc={expr}:s=44100:d={offset}","-af",f"afade=t=in:d=4,afade=t=out:st={offset-6}:d=6","-ac","2","-c:a","libmp3lame","-b:a","96k",OUT/(slug+"-score.mp3"))
-            (OUT/(slug+"-captions.json")).write_text(json.dumps(captions,ensure_ascii=False))
-            print(f"[documentary] {slug}: {offset:.0f}s, {len(captions)} captions, voice and score generated")
-if __name__=="__main__": main()
+        for p in projects:build(p,work,python)
+if __name__=="__main__":main()

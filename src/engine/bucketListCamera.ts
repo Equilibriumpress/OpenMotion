@@ -24,6 +24,8 @@ interface Controller {
   exporting:boolean;
   lastPreviewTime:number;
   disposed:boolean;
+  points: {lon:number;lat:number}[];
+  projected: Map<string,{x:number;y:number}>;
 }
 const controllers=new WeakMap<OpenMotionProject,Controller>();
 const loading=new WeakMap<OpenMotionProject,Promise<void>>();
@@ -34,6 +36,9 @@ export function getBucketListMapError(project:OpenMotionProject):string|undefine
 export function getBucketListCanvas(project:OpenMotionProject):HTMLCanvasElement|null{
   const controller=controllers.get(project);
   return controller?.loaded?controller.image:null;
+}
+export function getDocumentaryProjectedPoint(project:OpenMotionProject,lon:number,lat:number):{x:number;y:number}|undefined {
+  return controllers.get(project)?.projected.get(lon+','+lat);
 }
 export function subscribeBucketListMap(fn:()=>void):()=>void{
   subscribers.add(fn);return()=>subscribers.delete(fn);
@@ -119,6 +124,8 @@ function waitForEvent(map:MapLibreMap,event:'load'|'idle'|'render',timeoutMs:num
 function snapshot(state:Controller){
   if(state.disposed)return;
   state.ctx.drawImage(state.map.getCanvas(),0,0,state.image.width,state.image.height);
+  state.projected.clear();
+  for(const p of state.points){const q=state.map.project([p.lon,p.lat]);state.projected.set(p.lon+','+p.lat,{x:q.x/state.host.clientWidth,y:q.y/state.host.clientHeight});}
   state.loaded=true;
 }
 function setCamera(state:Controller,camera:Camera){
@@ -161,11 +168,25 @@ export async function prepareBucketListProject(project:OpenMotionProject):Promis
       image.width=mapW;image.height=mapH;
       const ctx=image.getContext('2d',{alpha:false});
       if(!ctx)throw new Error('Kaartcanvas niet beschikbaar.');
-      state={map,host,image,ctx,loaded:false,exporting:false,lastPreviewTime:-1,disposed:false};
+      const points=project.scenes.flatMap(s=>s.bucketList?.documentary?.markers??[]);
+      state={map,host,image,ctx,loaded:false,exporting:false,lastPreviewTime:-1,disposed:false,points,projected:new Map()};
       controllers.set(project,state);
       if(!map.loaded())await waitForEvent(map,'load',30000);
       for(const layer of map.getStyle().layers??[]){
         if(layer.type==='symbol'&&!intro.bucketList?.documentary)map.setLayoutProperty(layer.id,'visibility','none');
+      }
+      if(intro.bucketList?.documentary){
+        // Actual Terrarium elevations, not decorative contour geometry.
+        try{
+          const before=map.getStyle().layers?.find(l=>l.type==='symbol')?.id;
+          map.addSource('documentary-dem',{type:'raster-dem',tiles:['https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png'],encoding:'terrarium',tileSize:256,maxzoom:15,attribution:'AWS Open Data elevation tiles'});
+          map.addLayer({id:'documentary-relief',type:'hillshade',source:'documentary-dem',minzoom:8,paint:{'hillshade-exaggeration':.48,'hillshade-shadow-color':'#354c4b','hillshade-highlight-color':'#f5f1dc','hillshade-accent-color':'#55796a'}},before);
+          const contour=project.scenes.find(s=>s.bucketList?.documentary?.contourUrl)?.bucketList?.documentary?.contourUrl;
+          if(contour){
+            map.addSource('documentary-contours',{type:'geojson',data:new URL(contour,document.baseURI).href});
+            map.addLayer({id:'documentary-contour-lines',type:'line',source:'documentary-contours',minzoom:10,paint:{'line-color':'#526c60','line-opacity':.42,'line-width':['interpolate',['linear'],['zoom'],10,.45,13,.9]}},before);
+          }
+        }catch(error){console.warn('Optional documentary elevation layers unavailable',error);}
       }
       // A live MapLibre scene responds to arbitrary time positions, even
       // between previously known keyframes. Tile changes repaint the view.
@@ -236,6 +257,13 @@ export async function beginBucketListExport(project:OpenMotionProject,signal?:Ab
       // export only waits for the render event, not hundreds of idle calls.
       try{await waitForEvent(state.map,'idle',11000,signal);}
       catch(error){if(signal?.aborted)throw error;console.warn('Map tiles still loading at zoom',part);}
+    }
+    if(intro.bucketList?.documentary){
+      for(const shot of project.scenes.filter(s=>s!==intro&&s.bucketList?.documentary?.mode==='map')){
+        if(signal?.aborted)throw new Error('Video-export geannuleerd.');
+        setCamera(state,introCamera(shot,shot.durationSec));
+        if(!state.map.areTilesLoaded())try{await waitForEvent(state.map,'idle',3500,signal);}catch(error){if(signal?.aborted)throw error;}
+      }
     }
     const previous=waitForEvent(state.map,'render',9000,signal);
     setCamera(state,introCamera(intro,0));
