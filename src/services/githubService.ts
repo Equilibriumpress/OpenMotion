@@ -203,7 +203,7 @@ export function normalizeOpenMotionProject(
       backdrop,
       eyebrow: typeof sc.eyebrow === 'string' ? sc.eyebrow : undefined,
       headline:
-        typeof sc.headline === 'string' && sc.headline.trim()
+        typeof sc.headline === 'string' && (sc.headline.trim() || sc.catOffice)
           ? sc.headline.trim()
           : title,
       subheadline: typeof sc.subheadline === 'string' ? sc.subheadline : undefined,
@@ -395,6 +395,8 @@ export function normalizeOpenMotionProject(
         sc.threeCampervan && typeof sc.threeCampervan === 'object'
           ? (sc.threeCampervan as OpenMotionScene['threeCampervan'])
           : undefined,
+      catOffice: sc.catOffice && typeof sc.catOffice === 'object'
+        ? (sc.catOffice as OpenMotionScene['catOffice']) : undefined,
       worldStory: sc.worldStory && typeof sc.worldStory === 'object' ? (sc.worldStory as OpenMotionScene['worldStory']) : undefined,
       fullBleed: typeof sc.fullBleed === 'boolean' ? sc.fullBleed : undefined,
     };
