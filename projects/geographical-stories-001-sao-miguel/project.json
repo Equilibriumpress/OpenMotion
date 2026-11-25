@@ -290,7 +290,7 @@
           "chapter": 2,
           "narration": "North American, Eurasian and African plates move relative to each other.",
           "composition": "diagram",
-          "phase": 1
+          "phase": 0
         }
       }
     },
@@ -317,7 +317,7 @@
           "chapter": 2,
           "narration": "Extension and mantle melting help explain the region's widespread volcanism.",
           "composition": "diagram",
-          "phase": 0
+          "phase": 1
         }
       }
     },
@@ -446,7 +446,7 @@
           "chapter": 3,
           "narration": "Magma reached the seabed repeatedly, building volcanic mountains until some rose above the waves.",
           "composition": "diagram",
-          "phase": 0
+          "phase": 1
         }
       }
     },
@@ -473,7 +473,7 @@
           "chapter": 3,
           "narration": "Fluid lava builds flows, while explosive eruptions scatter ash and pumice across surrounding land.",
           "composition": "diagram",
-          "phase": 1
+          "phase": 0
         }
       }
     },
@@ -683,7 +683,7 @@
           "chapter": 4,
           "narration": "During major eruptions, magma is withdrawn from a reservoir, reducing support beneath the summit.",
           "composition": "diagram",
-          "phase": 1
+          "phase": 0
         }
       }
     },
@@ -710,7 +710,7 @@
           "chapter": 4,
           "narration": "The overlying rock subsides. Rain and runoff accumulate in the depression over time.",
           "composition": "diagram",
-          "phase": 0
+          "phase": 1
         }
       }
     },
@@ -936,7 +936,7 @@
           "chapter": 5,
           "narration": "Ash and pumice from explosive eruptions leave deposits that record previous volcanic events.",
           "composition": "diagram",
-          "phase": 0
+          "phase": 1
         }
       }
     },
@@ -1038,7 +1038,7 @@
           "chapter": 6,
           "narration": "Rainwater enters cracks in the rock. Heat from below warms water circulating underground.",
           "composition": "diagram",
-          "phase": 1
+          "phase": 0
         }
       }
     },
@@ -1065,7 +1065,7 @@
           "chapter": 6,
           "narration": "Hot water and gases rise toward the surface through permeable rock and fractures.",
           "composition": "diagram",
-          "phase": 0
+          "phase": 1
         }
       }
     },
@@ -1532,5 +1532,14 @@
       "endSec": 300,
       "volume": 0.38
     }
-  ]
+  ],
+  "documentaryTerrain": {
+    "bounds": [
+      -25.94,
+      37.66,
+      -25.12,
+      37.94
+    ],
+    "interval": 100
+  }
 }
