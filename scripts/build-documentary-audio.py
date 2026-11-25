@@ -36,18 +36,19 @@ def ambience(ch,duration,out):
     filt=filters.get(ch,filters[1])
     fade=min(1.5,duration/4)
     ff("-f","lavfi","-i",f"anoisesrc=color=pink:amplitude=0.09:r=48000:d={duration}:seed={42+ch}","-af",f"{filt},volume=0.6,afade=t=in:d={fade},afade=t=out:st={duration-fade}:d={fade}","-ac","1","-c:a","pcm_s16le",out)
-def build(p,work,python):
+def build(p,work,python,model=MODEL):
     slug=p["slug"]
     if not re.fullmatch(r"[a-z0-9-]+",slug): raise ValueError("Invalid slug")
-    chapters=[(k,list(v)) for k,v in groupby(p["scenes"],key=lambda s:s.get("bucketList",{}).get("documentary",{}).get("chapter",1))]
+    chapters=[(k,list(v)) for k,v in groupby(p["scenes"],key=lambda s:s["id"] if s.get("worldStory") else s.get("bucketList",{}).get("documentary",{}).get("chapter",1))]
     voicefiles=[];musicfiles=[];ambfiles=[];captions=[];offset=0.0
-    for ch,scenes in chapters:
+    for ch_index,(chapter_key,scenes) in enumerate(chapters,1):
+        ch=ch_index
         duration=sum(float(s["durationSec"]) for s in scenes)
-        narration=" ".join(s.get("bucketList",{}).get("documentary",{}).get("narration","").strip() for s in scenes).strip()
+        narration=" ".join((s.get("worldStory",{}).get("narration") or s.get("bucketList",{}).get("documentary",{}).get("narration","")).strip() for s in scenes).strip()
         raw=work/f"{ch}-raw.wav";fitted=work/f"{ch}-voice.wav"
         if narration:
             # One uninterrupted synthesis per chapter: no restart on every cut.
-            run([python,"-m","piper","-m",work/(MODEL+".onnx"),"-f",raw],input=narration+"\n",text=True)
+            run([python,"-m","piper","-m",work/(model+".onnx"),"-f",raw],input=narration+"\n",text=True)
             with wave.open(str(raw)) as w: seconds=w.getnframes()/w.getframerate()
             lead=.3;tail=.45;window=max(.5,duration-lead-tail)
             rate=max(.93,seconds/window)
@@ -89,14 +90,24 @@ def main():
     projects=[]
     for path in (ROOT/"projects").glob("*/project.json"):
         p=json.loads(path.read_text())
-        if any(s.get("bucketList",{}).get("documentary") for s in p.get("scenes",[])):projects.append(p)
+        if any(s.get("bucketList",{}).get("documentary") or s.get("worldStory") for s in p.get("scenes",[])):projects.append(p)
     if not projects:return
     with tempfile.TemporaryDirectory() as tmp:
         work=pathlib.Path(tmp)
         run([sys.executable,"-m","venv",work/"venv"])
         python=work/"venv/bin/python"
         run([python,"-m","pip","install","--disable-pip-version-check","piper-tts==1.3.0"])
-        for suffix in [".onnx",".onnx.json"]:
-            run(["curl","-fL","--retry","2","--max-time","180","-o",work/(MODEL+suffix),MODEL_BASE+MODEL+suffix])
-        for p in projects:build(p,work,python)
+        models=set()
+        for p in projects:
+            dutch=any(s.get("worldStory") for s in p.get("scenes",[]))
+            model="nl_NL-mls-medium" if dutch else MODEL
+            base="https://huggingface.co/rhasspy/piper-voices/resolve/v1.0.0/nl/nl_NL/mls/medium/" if dutch else MODEL_BASE
+            try:
+                if model not in models:
+                    for suffix in [".onnx",".onnx.json"]:
+                        run(["curl","-fL","--retry","2","--max-time","180","-o",work/(model+suffix),base+model+suffix])
+                    models.add(model)
+                build(p,work,python,model)
+            except Exception as exc:
+                print(f"[audio] {p['slug']}: {exc}",file=sys.stderr)
 if __name__=="__main__":main()

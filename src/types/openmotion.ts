@@ -472,7 +472,16 @@ export interface SceneBucketList {
   /** Horizontal center of the image crop, range 0..1. */
   imageFocusX?: number;
 }
+export interface WorldStoryScene {
+  visual: 'airport' | 'traveler' | 'ticket' | 'runway' | 'money' | 'shop' | 'coffee' | 'parking' | 'cars' | 'estate' | 'chart' | 'end';
+  narration: string;
+  source?: string;
+  episode: number;
+  data?: {label:string; value:number; color:string}[];
+}
+
 export interface OpenMotionScene {
+  worldStory?: WorldStoryScene;
   id: string;
   name: string;
   durationSec: number;
