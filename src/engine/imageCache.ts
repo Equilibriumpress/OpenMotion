@@ -1,7 +1,7 @@
 import { OpenMotionProject } from '../types/openmotion';
 import { projectAssetUrl } from './projectAudio';
 import { preparePremiumTravelProject } from './premiumTravelRoute';
-import { prepareBucketListProject } from './bucketListRenderer';
+import { prepareBucketListProject } from './bucketListCamera';
 
 interface CacheEntry {
   img: HTMLImageElement;

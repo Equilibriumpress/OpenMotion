@@ -124,6 +124,10 @@ export function StudioView({
     };
   }, [renderState.outputUrl]);
 
+  useEffect(() => {
+    const url=renderState.audioSidecarUrl;
+    return ()=>{if(url)URL.revokeObjectURL(url);};
+  },[renderState.audioSidecarUrl]);
 
   // Independent preview sources use the same timeline as the offline MP4 audio mixer.
   useEffect(() => {
@@ -268,6 +272,14 @@ export function StudioView({
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
+  };
+
+  const handleDownloadSidecar=()=>{
+    if(!renderState.audioSidecarUrl||!renderState.audioSidecarName)return;
+    const a=document.createElement('a');
+    a.href=renderState.audioSidecarUrl;
+    a.download=renderState.audioSidecarName;
+    document.body.appendChild(a);a.click();a.remove();
   };
 
   const handleStepFrame = (delta: number) => {
@@ -874,6 +886,15 @@ export function StudioView({
                         <Download className="w-4 h-4" />
                         <span>Download {renderState.fileName}</span>
                       </button>
+                      {renderState.audioSidecarUrl && (
+                        <div className="space-y-2 rounded-lg border border-amber-300 bg-amber-50 p-3">
+                          <p className="text-xs text-amber-900">Safari kon de muziek niet betrouwbaar in de video opnemen. Download het originele geluid apart als WAV om dit in je video-editor aan de MP4 toe te voegen.</p>
+                          <button type="button" onClick={handleDownloadSidecar}
+                            className="w-full inline-flex justify-center items-center gap-2 rounded-lg bg-amber-900 px-3 py-2 text-xs font-semibold text-white">
+                            <Download className="w-4 h-4"/>Download soundtrack (WAV)
+                          </button>
+                        </div>
+                      )}
                     </div>
                   )}
 

@@ -9,6 +9,7 @@ import {
 import { preloadProjectImages } from './imageCache';
 import { renderOpenMotionFrame } from './openMotionRenderer';
 import { mixProjectAudio } from './projectAudio';
+import {beginBucketListExport,captureBucketListExportFrame,endBucketListExport} from './bucketListCamera';
 
 
 async function probeAacEncoder(): Promise<AudioEncoderConfig | null> {
@@ -136,6 +137,69 @@ async function containsMp4AudioTrack(blob:Blob):Promise<boolean|null>{
   return sawHandler?false:null;
 }
 
+/**
+ * Read the video track's mdhd/stts atoms instead of trusting the selected
+ * FPS. Safari has been observed recording 30 fps when captureStream(60) was
+ * requested. A missing or fragmented sample table yields null, not a guess.
+ */
+async function actualMp4FrameRate(blob:Blob):Promise<number|null>{
+  if(!blob.type.startsWith('video/mp4'))return null;
+  const extent=2*1024*1024;
+  const parts=[new Uint8Array(await blob.slice(0,Math.min(blob.size,extent)).arrayBuffer())];
+  if(blob.size>extent)parts.push(new Uint8Array(await blob.slice(Math.max(0,blob.size-extent)).arrayBuffer()));
+  type Atom={start:number;end:number;type:string};
+  for(const bytes of parts){
+    const read=(i:number)=>bytes[i]*16777216+bytes[i+1]*65536+bytes[i+2]*256+bytes[i+3];
+    const label=(i:number)=>String.fromCharCode(bytes[i],bytes[i+1],bytes[i+2],bytes[i+3]);
+    const children=(start:number,end:number):Atom[]=>{
+      const found:Atom[]=[];let i=start;
+      while(i+8<=end){
+        const length=read(i);
+        if(length<8||i+length>end)break;
+        found.push({start:i,end:i+length,type:label(i+4)});
+        i+=length;
+      }
+      return found;
+    };
+    // A moov atom can reside at either end of the MP4. A tail chunk may
+    // begin in the middle of mdat, so search validated moov boundaries.
+    for(let pos=4;pos+8<bytes.length;pos++){
+      if(label(pos)!=='moov')continue;
+      const start=pos-4,size=read(start);
+      if(size<16||start+size>bytes.length)continue;
+      for(const trak of children(start+8,start+size).filter(b=>b.type==='trak')){
+        const mdia=children(trak.start+8,trak.end).find(b=>b.type==='mdia');
+        if(!mdia)continue;
+        const mdiaBoxes=children(mdia.start+8,mdia.end);
+        const hdlr=mdiaBoxes.find(b=>b.type==='hdlr');
+        const mdhd=mdiaBoxes.find(b=>b.type==='mdhd');
+        const minf=mdiaBoxes.find(b=>b.type==='minf');
+        if(!hdlr||!mdhd||!minf||label(hdlr.start+16)!=='vide')continue;
+        const isV1=bytes[mdhd.start+8]===1;
+        const scaleAt=mdhd.start+(isV1?28:20);
+        if(scaleAt+4>mdhd.end)continue;
+        const timescale=read(scaleAt);
+        const stbl=children(minf.start+8,minf.end).find(b=>b.type==='stbl');
+        const stts=stbl&&children(stbl.start+8,stbl.end).find(b=>b.type==='stts');
+        if(!stts||!timescale)continue;
+        const entries=read(stts.start+12);
+        let samples=0,ticks=0;
+        for(let j=0;j<entries;j++){
+          const at=stts.start+16+j*8;
+          if(at+8>stts.end)break;
+          const count=read(at),delta=read(at+4);
+          samples+=count;ticks+=count*delta;
+        }
+        if(samples&&ticks){
+          const fps=samples*timescale/ticks;
+          if(fps>0&&fps<=240)return Math.round(fps*100)/100;
+        }
+      }
+    }
+  }
+  return null;
+}
+
 function describeOutput(
   actual: {width: number; height: number} | null,
   intendedWidth: number,
@@ -150,6 +214,33 @@ function describeOutput(
       : ' · gecontroleerd: ' + resolution
     : ' · bestandsresolutie niet geverifieerd';
   return {w,h,encoderLabel:encoder+warning};
+}
+
+/** Lossless-in-time stereo PCM 16-bit WAV for iPad browsers unable to
+ * include Web Audio in MediaRecorder MP4. This is a standalone file, not a
+ * claim that the MP4 contains audio. It can be imported in a video editor.
+ */
+function pcmWav(audio:AudioBuffer):Blob{
+  const channels=2,rate=audio.sampleRate,frames=audio.length;
+  const buffer=new ArrayBuffer(44+frames*channels*2);
+  const view=new DataView(buffer);
+  const ascii=(at:number,value:string)=>{
+    for(let i=0;i<value.length;i++)view.setUint8(at+i,value.charCodeAt(i));
+  };
+  ascii(0,'RIFF');view.setUint32(4,36+frames*channels*2,true);
+  ascii(8,'WAVE');ascii(12,'fmt ');
+  view.setUint32(16,16,true);view.setUint16(20,1,true);
+  view.setUint16(22,channels,true);view.setUint32(24,rate,true);
+  view.setUint32(28,rate*channels*2,true);view.setUint16(32,channels*2,true);
+  view.setUint16(34,16,true);ascii(36,'data');
+  view.setUint32(40,frames*channels*2,true);
+  const left=audio.getChannelData(0),right=audio.getChannelData(audio.numberOfChannels>1?1:0);
+  for(let i=0;i<frames;i++){
+    const a=Math.max(-1,Math.min(1,left[i])),b=Math.max(-1,Math.min(1,right[i]));
+    view.setInt16(44+i*4,a<0?a*32768:a*32767,true);
+    view.setInt16(46+i*4,b<0?b*32768:b*32767,true);
+  }
+  return new Blob([buffer],{type:'audio/wav'});
 }
 
 export function formatFileSize(bytes: number): string {
@@ -207,10 +298,30 @@ export async function exportProjectToMp4(
     }
   }
 
-  if (h264Config && (!mixedAudio || audioConfig)) {
-    return encodeWithWebCodecsMp4({
+  const isBucketList=project.scenes.some(scene=>scene.layout==='bucket-list-zoom');
+  if(isBucketList)await beginBucketListExport(project,signal);
+  try{
+    if (h264Config && (!mixedAudio || audioConfig)) {
+      return await encodeWithWebCodecsMp4({
+        mixedAudio,
+        audioConfig,
+        canvas,
+        ctx,
+        project,
+        width,
+        height,
+        fps,
+        totalFrames,
+        h264Config,
+        encoderNote,
+        startedAt,
+        onProgress,
+        signal,
+      });
+    }
+
+    return await encodeWithMediaRecorderFallback({
       mixedAudio,
-      audioConfig,
       canvas,
       ctx,
       project,
@@ -218,28 +329,14 @@ export async function exportProjectToMp4(
       height,
       fps,
       totalFrames,
-      h264Config,
-      encoderNote,
+      bitrate,
       startedAt,
       onProgress,
       signal,
     });
+  }finally{
+    if(isBucketList)endBucketListExport(project);
   }
-
-  return encodeWithMediaRecorderFallback({
-    mixedAudio,
-    canvas,
-    ctx,
-    project,
-    width,
-    height,
-    fps,
-    totalFrames,
-    bitrate,
-    startedAt,
-    onProgress,
-    signal,
-  });
 }
 
 async function encodeWithWebCodecsMp4(params: {
@@ -315,6 +412,7 @@ async function encodeWithWebCodecsMp4(params: {
       }
 
       const timeSec = frameIdx / fps;
+      await captureBucketListExportFrame(project,timeSec,signal);
       renderOpenMotionFrame(ctx, project, timeSec, width, height);
 
       const videoFrame = new VideoFrame(canvas, {
@@ -493,6 +591,7 @@ async function encodeWithMediaRecorderFallback(params: {
       throw new Error('Export geannuleerd door gebruiker.');
     }
     const frameStart = performance.now();
+    await captureBucketListExportFrame(project,frameIdx/fps,signal);
     renderOpenMotionFrame(ctx, project, frameIdx / fps, width, height);
 
     if (frameIdx % 3 === 0 || frameIdx === totalFrames - 1) {
@@ -521,10 +620,21 @@ async function encodeWithMediaRecorderFallback(params: {
   const audioStatus = mixedAudio && audioTrackFound===false
     ? ' · WAARSCHUWING: deze Safari-export mist een audiospoor. Exporteer op een browser met AAC/WebCodecs-ondersteuning.'
     : mixedAudio && audioTrackFound===true ? ' · AAC-audiospoor gecontroleerd' : '';
-  const inspected = describeOutput(await actualVideoSize(blob),width,height,`MediaRecorder (${chosenMime})`+audioStatus);
+  const measuredFps=await actualMp4FrameRate(blob);
+  const fpsStatus=measuredFps===null
+    ? ' · Werkelijke framerate niet meetbaar in dit bestand'
+    : Math.abs(measuredFps-fps)>.5
+      ? ' · LET OP: feitelijk '+measuredFps+' fps (gevraagd '+fps+')'
+      : ' · framerate gecontroleerd: '+measuredFps+' fps';
+  const inspected = describeOutput(await actualVideoSize(blob),width,height,`MediaRecorder (${chosenMime})`+audioStatus+fpsStatus);
   const outputUrl = URL.createObjectURL(blob);
-  const fileName = `${project.slug}-${inspected.w}x${inspected.h}-${fps}fps.${container}`;
+  const fpsLabel=measuredFps===null?'fps-onbekend':measuredFps+'fps';
+  const fileName = `${project.slug}-${inspected.w}x${inspected.h}-${fpsLabel}.${container}`;
 
+  // Safari sometimes omits the music track even when input tracks exist.
+  // Supply an accurately timed WAV as a separate editing fallback.
+  const audioSidecarUrl=mixedAudio && audioTrackFound!==true
+    ? URL.createObjectURL(pcmWav(mixedAudio)) : undefined;
   const finalState: RenderProgressState = {
     phase: 'done',
     currentFrame: totalFrames,
@@ -534,6 +644,8 @@ async function encodeWithMediaRecorderFallback(params: {
     encoderLabel: inspected.encoderLabel,
     outputUrl,
     fileName,
+    audioSidecarUrl,
+    audioSidecarName:audioSidecarUrl?project.slug+'-soundtrack.wav':undefined,
     fileSizeBytes: blob.size,
     elapsedMs: Math.round(performance.now() - startedAt),
   };

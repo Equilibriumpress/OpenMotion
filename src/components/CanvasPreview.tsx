@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { preloadProjectImages, subscribeImageLoaded, notifyImageRefresh } from '../engine/imageCache';
 import { renderOpenMotionFrame } from '../engine/openMotionRenderer';
+import {seekBucketListPreview,subscribeBucketListMap,disposeBucketListProject} from '../engine/bucketListCamera';
 import { OpenMotionProject, getProjectDurationSec } from '../types/openmotion';
 
 interface CanvasPreviewProps {
@@ -32,6 +33,10 @@ export function CanvasPreview({
     timeRef.current = timeSec;
   }, [timeSec]);
 
+  // Release the offscreen WebGL context when switching projects. Especially
+  // important on iPad, where simultaneous MapLibre contexts are limited.
+  useEffect(()=>()=>disposeBucketListProject(project),[project]);
+
   // Compute crisp internal canvas pixel dimensions proportional to aspect format
   const internalWidth = Math.max(320, Math.round(project.width * renderScale));
   const internalHeight = Math.max(320, Math.round(project.height * renderScale));
@@ -51,10 +56,13 @@ export function CanvasPreview({
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
       if (!ctx) return;
+      seekBucketListPreview(project,timeRef.current);
       renderOpenMotionFrame(ctx, project, timeRef.current, internalWidth, internalHeight);
     };
     paint();
-    return subscribeImageLoaded(paint);
+    const unsubscribeImages=subscribeImageLoaded(paint);
+    const unsubscribeMap=subscribeBucketListMap(paint);
+    return ()=>{unsubscribeImages();unsubscribeMap();};
   }, [project, timeSec, internalWidth, internalHeight]);
 
   // Real-time deterministic requestAnimationFrame loop when playing
@@ -75,6 +83,7 @@ export function CanvasPreview({
       const nextTime = (timeRef.current + dt) % totalDur;
       timeRef.current = nextTime;
 
+      seekBucketListPreview(project,nextTime);
       renderOpenMotionFrame(ctx, project, nextTime, internalWidth, internalHeight);
       if (onTimeUpdateRef.current) {
         onTimeUpdateRef.current(nextTime);
