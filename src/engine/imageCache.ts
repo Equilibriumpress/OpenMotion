@@ -1,6 +1,7 @@
 import { OpenMotionProject } from '../types/openmotion';
 import { projectAssetUrl } from './projectAudio';
 import { preparePremiumTravelProject } from './premiumTravelRoute';
+import { prepareBucketListProject } from './bucketListRenderer';
 
 interface CacheEntry {
   img: HTMLImageElement;
@@ -118,14 +119,16 @@ export async function preloadProjectImages(project: OpenMotionProject): Promise<
     }
   }
   const hasPremium = project.scenes.some(scene => scene.premiumTravel);
+  const hasBucketList = project.scenes.some(scene => scene.layout === 'bucket-list-zoom');
   if (hasPremium) await preparePremiumTravelProject(project);
-  if (urls.size === 0) { if (hasPremium) notifyImageRefresh(); return; }
+  if (hasBucketList) await prepareBucketListProject(project);
+  if (urls.size === 0) { if (hasPremium || hasBucketList) notifyImageRefresh(); return; }
 
   await Promise.all(
     Array.from(urls).map(async (url) => {
       const entry = ensureEntry(url);
       const loadedImg = await entry.promise;
-      if (!loadedImg && hasPremium) {
+      if (!loadedImg && (hasPremium || hasBucketList)) {
         // A photo is optional. Keep map, vehicle and MP4 frames available.
         console.warn('Premium photo unavailable. Using scenic fallback:', url);
         return;
@@ -139,5 +142,5 @@ export async function preloadProjectImages(project: OpenMotionProject): Promise<
       }
     })
   );
-  if (hasPremium) notifyImageRefresh();
+  if (hasPremium || hasBucketList) notifyImageRefresh();
 }

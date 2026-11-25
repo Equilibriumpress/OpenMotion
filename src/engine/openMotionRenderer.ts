@@ -1,6 +1,7 @@
 import { renderGeoRouteReel, renderWhiteboardScience } from './shortsRenderer';
 import { renderDoodleExplainerScene } from './doodleExplainerRenderer';
 import { renderPremiumTravelScene, getPremiumError } from './premiumTravelRoute';
+import { renderBucketListScene, getBucketListMapError } from './bucketListRenderer';
 import { renderTimedCaptions } from './timedCaptionRenderer';
 import { getCachedPhoto } from './imageCache';
 import { projectAssetUrl } from './projectAudio';
@@ -358,6 +359,34 @@ export function renderOpenMotionFrame(
     renderTimedCaptions(ctx,w,h,project,safeTime);
     ctx.restore();
     return;
+  }
+  if (scene.layout === 'bucket-list-zoom' && scene.bucketList) {
+    // The entire bucket-list scene is a deterministic Canvas render.
+    // Crossfade from the previous map/photo shot for 0.65s without pausing
+    // the new scene's timeline. Image and map resources are preloaded.
+    const previous=sceneIndex>0 ? project.scenes[sceneIndex-1] : undefined;
+    const dissolve=previous?.layout==='bucket-list-zoom'&&previous.bucketList&&scene.transition==='fade'
+      ? Math.min(.65,previous.durationSec*.23,scene.durationSec*.23)
+      : 0;
+    if(previous?.bucketList&&dissolve>0&&localTime<dissolve){
+      const finalPreviousTime=Math.max(0,previous.durationSec-1/Math.max(1,project.fps));
+      renderBucketListScene(ctx,w,h,previous,finalPreviousTime,project,url=>getCachedPhoto(projectAssetUrl(url)));
+      const t=clamp(localTime/dissolve),opacity=t*t*(3-2*t);
+      ctx.save();ctx.globalAlpha*=opacity;
+      renderBucketListScene(ctx,w,h,scene,localTime,project,url=>getCachedPhoto(projectAssetUrl(url)));
+      ctx.restore();
+    }else{
+      renderBucketListScene(ctx,w,h,scene,localTime,project,url=>getCachedPhoto(projectAssetUrl(url)));
+    }
+    const error=getBucketListMapError(project);
+    if(error&&scene.bucketList.chapter==='zoom'){
+      ctx.save();ctx.textAlign='center';ctx.fillStyle='rgba(13,29,41,.9)';
+      ctx.font='500 '+Math.max(14,Math.round(w*.016))+'px "Plus Jakarta Sans",sans-serif';
+      ctx.fillText('Map unavailable: check WebGL and OpenFreeMap tiles',w/2,h*.66,w*.85);
+      ctx.restore();
+    }
+    renderTimedCaptions(ctx,w,h,project,safeTime);
+    ctx.restore();return;
   }
   if (scene.layout === 'doodle-explainer' && scene.doodle) {
     renderDoodleExplainerScene(ctx,w,h,scene,localTime,brand);

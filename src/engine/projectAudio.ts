@@ -1,6 +1,7 @@
 import { OpenMotionProject } from '../types/openmotion';
 import { createPremiumTravelAudio } from './premiumTravelAudio';
 import { createDoodleExplainerAudio } from './doodleExplainerAudio';
+import { createBucketListAudio } from './bucketListAudio';
 
 /** Resolve repository asset paths relative to the deployed Vite Pages base. */
 export function projectAssetUrl(src: string): string {
@@ -15,6 +16,7 @@ export async function mixProjectAudio(project: OpenMotionProject, durationSec: n
   if (!tracks.length) {
     if (project.scenes.some(scene => scene.layout === 'premium-travel-route')) return createPremiumTravelAudio(durationSec);
     if (project.scenes.some(scene => scene.layout === 'doodle-explainer')) return createDoodleExplainerAudio(durationSec);
+    if (project.scenes.some(scene => scene.layout === 'bucket-list-zoom')) return createBucketListAudio(durationSec);
     return null;
   }
   const rate = 48000;

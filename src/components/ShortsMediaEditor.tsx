@@ -81,6 +81,41 @@ export function ShortsMediaEditor({project,activeScene,onUpdateProject,onUpdateS
        <label className="block text-xs">Camera zoom<input className={style} type="number" min={3} max={15} step=".1" value={pr.mapZoom} onChange={e=>onUpdateScene({premiumTravel:{...pr,mapZoom:Number(e.target.value)}})}/></label>
      </div>;
    })()}
+
+  {activeScene.bucketList&&(()=>{
+    const data=activeScene.bucketList;
+    const patchScene=(update:Partial<typeof data>)=>onUpdateScene({bucketList:{...data,...update}});
+    const globalField=(field:'destination'|'country'|'region'|'episode'|'latitude'|'longitude'|'startLongitude'|'startLatitude',value:string|number)=>{
+      onUpdateProject({...project,scenes:project.scenes.map(scene=>scene.bucketList?{
+        ...scene,bucketList:{...scene.bucketList,[field]:value}
+      }:scene)});
+    };
+    return <div className="space-y-2 border border-amber-200 rounded-xl p-3">
+      <h4 className="text-sm font-semibold text-amber-900">My Bucket List · Bestemming</h4>
+      <p className="text-xs text-slate-500">De bestemming en startcoördinaten wijzigen voor de hele film. Kaartbeelden worden opnieuw opgebouwd na een wijziging.</p>
+      <div className="grid grid-cols-2 gap-2">
+        <label className="text-xs">Aflevering<input className={style} type="number" min={1} value={data.episode} onChange={e=>globalField('episode',Math.max(1,Number(e.target.value)))}/></label>
+        <label className="text-xs">Bestemming<input className={style} value={data.destination} onChange={e=>globalField('destination',e.target.value)}/></label>
+        <label className="text-xs">Regio<input className={style} value={data.region} onChange={e=>globalField('region',e.target.value)}/></label>
+        <label className="text-xs">Land<input className={style} value={data.country} onChange={e=>globalField('country',e.target.value)}/></label>
+        <label className="text-xs">Breedtegraad<input className={style} type="number" step=".0001" min="-85" max="85" value={data.latitude} onChange={e=>globalField('latitude',Number(e.target.value))}/></label>
+        <label className="text-xs">Lengtegraad<input className={style} type="number" step=".0001" min="-180" max="180" value={data.longitude} onChange={e=>globalField('longitude',Number(e.target.value))}/></label>
+        <label className="text-xs">Start lengtegraad<input className={style} type="number" step=".1" value={data.startLongitude??0} onChange={e=>globalField('startLongitude',Number(e.target.value))}/></label>
+        <label className="text-xs">Start breedtegraad<input className={style} type="number" step=".1" value={data.startLatitude??0} onChange={e=>globalField('startLatitude',Number(e.target.value))}/></label>
+      </div>
+      {data.chapter!=='zoom'&&<div className="space-y-2 border-t border-amber-100 pt-2">
+        {data.chapter==='reason'&&<>
+          <label className="block text-xs">Reden nummer<input type="number" min={1} max={3} className={style} value={data.reasonNumber??1} onChange={e=>patchScene({reasonNumber:Number(e.target.value)})}/></label>
+          <label className="block text-xs">Reden titel<textarea rows={2} className={style} value={data.reasonTitle??''} onChange={e=>patchScene({reasonTitle:e.target.value})}/></label>
+          <label className="block text-xs">Korte toelichting<input className={style} value={data.reasonCopy??''} onChange={e=>patchScene({reasonCopy:e.target.value})}/></label>
+        </>}
+        <label className="block text-xs">Fotograaf<input className={style} value={data.imageAuthor??''} onChange={e=>patchScene({imageAuthor:e.target.value})}/></label>
+        <label className="block text-xs">Licentie<input className={style} value={data.imageLicense??''} onChange={e=>patchScene({imageLicense:e.target.value})}/></label>
+        <label className="block text-xs">Bronfoto URL<input className={style} value={data.imageSourceUrl??''} onChange={e=>patchScene({imageSourceUrl:e.target.value})}/></label>
+        <p className="text-xs text-slate-500">Bewerk de foto via het veld Scène-afbeelding bovenaan. Vergeet de juiste licentiegegevens niet.</p>
+      </div>}
+    </div>;
+  })()}
   <div className="flex justify-between items-center"><h4 className="text-xs font-bold">Audio timeline</h4><button type="button" className="text-xs text-blue-700" onClick={()=>setTracks([...tracks,{id:'audio-'+Date.now(),kind:'voiceover',src:'',startSec:0,volume:1}])}>+ Track</button></div>
   {tracks.map((track,i)=><div key={track.id} className="p-2 rounded border space-y-2">
    <div className="flex gap-2"><select className={style} value={track.kind} onChange={e=>updateTrack(i,{kind:e.target.value as OpenMotionAudioTrack['kind']})}><option value="voiceover">Voice-over</option><option value="music">Muziek</option><option value="effect">Effect</option></select><button type="button" className="text-red-700 text-xs" onClick={()=>setTracks(tracks.filter((_,j)=>j!==i))}>Verwijder</button></div>
