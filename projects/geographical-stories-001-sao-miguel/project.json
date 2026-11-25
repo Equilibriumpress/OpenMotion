@@ -1,0 +1,780 @@
+{
+  "schemaVersion": "1.0",
+  "id": "geographical-stories-001-sao-miguel",
+  "slug": "geographical-stories-001-sao-miguel",
+  "title": "GEOGRAPHICAL STORIES #001 · São Miguel: Island of Fire and Water",
+  "description": "Five-minute landscape documentary · 24 editable shots, continuous geographic camera, original schematic animations and English narration generated for publication.",
+  "category": "Documentaries",
+  "author": "OpenMotion Studio",
+  "source": "github",
+  "createdAt": "2026-11-25",
+  "updatedAt": "2026-11-25",
+  "githubPath": "projects/geographical-stories-001-sao-miguel/project.json",
+  "format": "16:9",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "brandKit": {
+    "brandName": "GEOGRAPHICAL STORIES",
+    "primaryColor": "#0B1724",
+    "accentColor": "#C69B61",
+    "backgroundColor": "#0B1724",
+    "surfaceColor": "#192B36",
+    "textColor": "#F0EDE4",
+    "mutedColor": "#A4B4B8",
+    "fontFamily": "Plus Jakarta Sans"
+  },
+  "scenes": [
+    {
+      "id": "shot-01",
+      "name": "01 · A volcanic island",
+      "durationSec": 8,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "A volcanic island",
+      "fullBleed": true,
+      "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/30/Aerial_view_of_Mosteiros%2C_S%C3%A3o_Miguel_Island%2C_Azores%2C_Portugal_%28PPL1-Corrected%29.jpg/1280px-Aerial_view_of_Mosteiros%2C_S%C3%A3o_Miguel_Island%2C_Azores%2C_Portugal_%28PPL1-Corrected%29.jpg",
+      "bucketList": {
+        "episode": 1,
+        "destination": "São Miguel",
+        "region": "Azores",
+        "country": "Portugal",
+        "latitude": 37.78,
+        "longitude": -25.5,
+        "chapter": "reason",
+        "reasonTitle": "A volcanic island",
+        "imageAuthor": "Jules Verne Times Two / julesvernex2.com",
+        "imageLicense": "CC BY-SA 4.0",
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Aerial_view_of_Mosteiros,_S%C3%A3o_Miguel_Island,_Azores,_Portugal_(PPL1-Corrected).jpg",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 1,
+          "narration": "Far out in the Atlantic Ocean lies an island shaped by forces beneath the Earth's surface."
+        }
+      }
+    },
+    {
+      "id": "shot-02",
+      "name": "01 · Heat beneath the surface",
+      "durationSec": 8,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Heat beneath the surface",
+      "fullBleed": true,
+      "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/29/Fumaroles_of_Furnas_Lake_1.jpg/1280px-Fumaroles_of_Furnas_Lake_1.jpg",
+      "bucketList": {
+        "episode": 1,
+        "destination": "São Miguel",
+        "region": "Azores",
+        "country": "Portugal",
+        "latitude": 37.78,
+        "longitude": -25.5,
+        "chapter": "reason",
+        "reasonTitle": "Heat beneath the surface",
+        "imageAuthor": "Simiprof",
+        "imageLicense": "CC0 1.0",
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Fumaroles_of_Furnas_Lake_1.jpg",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 1,
+          "narration": "Steam rises from the ground, while volcanic craters hold deep freshwater lakes."
+        }
+      }
+    },
+    {
+      "id": "shot-03",
+      "name": "01 · São Miguel",
+      "durationSec": 9,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "São Miguel",
+      "fullBleed": true,
+      "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/77/Miradouro_da_Boca_do_Inferno%2C_Lagoa_das_Sete_Cidades%2C_ilha_de_S%C3%A3o_Miguel%2C_A%C3%A7ores.JPG/1280px-Miradouro_da_Boca_do_Inferno%2C_Lagoa_das_Sete_Cidades%2C_ilha_de_S%C3%A3o_Miguel%2C_A%C3%A7ores.JPG",
+      "bucketList": {
+        "episode": 1,
+        "destination": "São Miguel",
+        "region": "Azores",
+        "country": "Portugal",
+        "latitude": 37.78,
+        "longitude": -25.5,
+        "chapter": "reason",
+        "reasonTitle": "São Miguel",
+        "imageAuthor": "José Luís Ávila Silveira / Pedro Noronha e Costa",
+        "imageLicense": "Public domain",
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Miradouro_da_Boca_do_Inferno,_Lagoa_das_Sete_Cidades,_ilha_de_São_Miguel,_Açores.JPG",
+        "documentary": {
+          "mode": "title",
+          "chapter": 1,
+          "narration": "Green mountains meet the Atlantic. This is São Miguel, the largest island of the Azores."
+        }
+      }
+    },
+    {
+      "id": "shot-04",
+      "name": "02 · The Atlantic Ocean",
+      "durationSec": 12,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "The Atlantic Ocean",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "São Miguel",
+        "region": "Azores",
+        "country": "Portugal",
+        "latitude": 37.78,
+        "longitude": -25.5,
+        "chapter": "zoom",
+        "reasonTitle": "The Atlantic Ocean",
+        "documentary": {
+          "mode": "map",
+          "chapter": 2,
+          "narration": "Between Europe and North America, nine volcanic islands rise above the Atlantic Ocean.",
+          "from": [
+            -38,
+            34,
+            1.5
+          ],
+          "to": [
+            -25.5,
+            38,
+            5.1
+          ]
+        }
+      }
+    },
+    {
+      "id": "shot-05",
+      "name": "02 · The Azores · Portugal",
+      "durationSec": 12,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "The Azores · Portugal",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "São Miguel",
+        "region": "Azores",
+        "country": "Portugal",
+        "latitude": 37.78,
+        "longitude": -25.5,
+        "chapter": "zoom",
+        "reasonTitle": "The Azores · Portugal",
+        "documentary": {
+          "mode": "map",
+          "chapter": 2,
+          "narration": "Together, they form the Azores, an autonomous region of Portugal. São Miguel lies in the eastern group.",
+          "from": [
+            -28,
+            38.3,
+            5.7
+          ],
+          "to": [
+            -25.5,
+            37.78,
+            7.5
+          ]
+        }
+      }
+    },
+    {
+      "id": "shot-06",
+      "name": "02 · 62 kilometres from east to west",
+      "durationSec": 11,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "62 kilometres from east to west",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "São Miguel",
+        "region": "Azores",
+        "country": "Portugal",
+        "latitude": 37.78,
+        "longitude": -25.5,
+        "chapter": "zoom",
+        "reasonTitle": "62 kilometres from east to west",
+        "documentary": {
+          "mode": "map",
+          "chapter": 2,
+          "narration": "Across approximately sixty-two kilometres, the island contains volcanic mountains, deep valleys and fertile plains.",
+          "from": [
+            -25.5,
+            37.78,
+            7.6
+          ],
+          "to": [
+            -25.5,
+            37.78,
+            9.1
+          ]
+        }
+      }
+    },
+    {
+      "id": "shot-07",
+      "name": "03 · Born from volcanoes",
+      "durationSec": 15,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Born from volcanoes",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "São Miguel",
+        "region": "Azores",
+        "country": "Portugal",
+        "latitude": 37.78,
+        "longitude": -25.5,
+        "chapter": "reason",
+        "reasonTitle": "Born from volcanoes",
+        "documentary": {
+          "mode": "formation",
+          "chapter": 3,
+          "narration": "The island's volcanic history extends back roughly three to four million years. Eruptions gradually built the island above the ocean."
+        }
+      }
+    },
+    {
+      "id": "shot-08",
+      "name": "03 · Lava, ash and pumice",
+      "durationSec": 15,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Lava, ash and pumice",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "São Miguel",
+        "region": "Azores",
+        "country": "Portugal",
+        "latitude": 37.78,
+        "longitude": -25.5,
+        "chapter": "reason",
+        "reasonTitle": "Lava, ash and pumice",
+        "documentary": {
+          "mode": "formation",
+          "chapter": 3,
+          "narration": "Some eruptions produced vast quantities of ash and pumice. Others released lava through fractures in the Earth's crust."
+        }
+      }
+    },
+    {
+      "id": "shot-09",
+      "name": "03 · Three active central volcanoes",
+      "durationSec": 15,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Three active central volcanoes",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "São Miguel",
+        "region": "Azores",
+        "country": "Portugal",
+        "latitude": 37.78,
+        "longitude": -25.5,
+        "chapter": "zoom",
+        "reasonTitle": "Three active central volcanoes",
+        "documentary": {
+          "mode": "map",
+          "chapter": 3,
+          "narration": "Three active central volcanoes dominate much of the island: Sete Cidades, Fogo and Furnas. Fissure systems lie between them.",
+          "from": [
+            -25.5,
+            37.78,
+            9
+          ],
+          "to": [
+            -25.5,
+            37.78,
+            9.4
+          ]
+        }
+      }
+    },
+    {
+      "id": "shot-10",
+      "name": "04 · Sete Cidades · Western São Miguel",
+      "durationSec": 12,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Sete Cidades · Western São Miguel",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "São Miguel",
+        "region": "Azores",
+        "country": "Portugal",
+        "latitude": 37.78,
+        "longitude": -25.5,
+        "chapter": "zoom",
+        "reasonTitle": "Sete Cidades · Western São Miguel",
+        "documentary": {
+          "mode": "map",
+          "chapter": 4,
+          "narration": "In western São Miguel lies Sete Cidades, a landscape formed by repeated volcanic eruptions.",
+          "from": [
+            -25.5,
+            37.78,
+            9.1
+          ],
+          "to": [
+            -25.78,
+            37.85,
+            11.5
+          ]
+        }
+      }
+    },
+    {
+      "id": "shot-11",
+      "name": "04 · How a caldera forms",
+      "durationSec": 16,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "How a caldera forms",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "São Miguel",
+        "region": "Azores",
+        "country": "Portugal",
+        "latitude": 37.78,
+        "longitude": -25.5,
+        "chapter": "reason",
+        "reasonTitle": "How a caldera forms",
+        "documentary": {
+          "mode": "caldera",
+          "chapter": 4,
+          "narration": "After a large eruption, the ground above a partially emptied magma reservoir can collapse. This forms a broad depression called a caldera."
+        }
+      }
+    },
+    {
+      "id": "shot-12",
+      "name": "04 · Lagoa Azul and Lagoa Verde",
+      "durationSec": 17,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Lagoa Azul and Lagoa Verde",
+      "fullBleed": true,
+      "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/Lagoa_das_Sete_Cidades%2C_S%C3%A3o_Miguel.jpg/1280px-Lagoa_das_Sete_Cidades%2C_S%C3%A3o_Miguel.jpg",
+      "bucketList": {
+        "episode": 1,
+        "destination": "São Miguel",
+        "region": "Azores",
+        "country": "Portugal",
+        "latitude": 37.78,
+        "longitude": -25.5,
+        "chapter": "reason",
+        "reasonTitle": "Lagoa Azul and Lagoa Verde",
+        "imageAuthor": "Samuel Monteiro Domingues",
+        "imageLicense": "CC BY-SA 4.0",
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Lagoa_das_Sete_Cidades,_São_Miguel.jpg",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 4,
+          "narration": "Rainwater gradually collected in the depression. Today the two lake sections, Lagoa Azul and Lagoa Verde, sit beside a village on the caldera floor."
+        }
+      }
+    },
+    {
+      "id": "shot-13",
+      "name": "05 · Fogo · Central São Miguel",
+      "durationSec": 12,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Fogo · Central São Miguel",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "São Miguel",
+        "region": "Azores",
+        "country": "Portugal",
+        "latitude": 37.78,
+        "longitude": -25.5,
+        "chapter": "zoom",
+        "reasonTitle": "Fogo · Central São Miguel",
+        "documentary": {
+          "mode": "map",
+          "chapter": 5,
+          "narration": "Further east the land rises towards the central mountains. Here lies Lagoa do Fogo, the Lake of Fire.",
+          "from": [
+            -25.78,
+            37.85,
+            10.5
+          ],
+          "to": [
+            -25.47,
+            37.76,
+            11.2
+          ]
+        }
+      }
+    },
+    {
+      "id": "shot-14",
+      "name": "05 · The Lake of Fire",
+      "durationSec": 14,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "The Lake of Fire",
+      "fullBleed": true,
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Lagoa_do_Fogo%2C_Miradouro_da_Serra_da_Barrosa%2C_Vila_Franca_do_Campo%2C_ilha_de_S%C3%A3o_Miguel%2C_A%C3%A7ores.JPG?width=1280",
+      "bucketList": {
+        "episode": 1,
+        "destination": "São Miguel",
+        "region": "Azores",
+        "country": "Portugal",
+        "latitude": 37.78,
+        "longitude": -25.5,
+        "chapter": "reason",
+        "reasonTitle": "The Lake of Fire",
+        "imageAuthor": "José Luís Ávila Silveira / Pedro Noronha e Costa",
+        "imageLicense": "Public domain",
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Lagoa_do_Fogo%2C_Miradouro_da_Serra_da_Barrosa%2C_Vila_Franca_do_Campo%2C_ilha_de_S%C3%A3o_Miguel%2C_A%C3%A7ores.JPG",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 5,
+          "narration": "Despite its name, the lake occupies a quiet volcanic basin surrounded by steep slopes and vegetation."
+        }
+      }
+    },
+    {
+      "id": "shot-15",
+      "name": "05 · 1563 · A major eruption",
+      "durationSec": 14,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "1563 · A major eruption",
+      "fullBleed": true,
+      "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Lagoa_do_Fogo%2C_Miradouro_da_Serra_da_Barrosa%2C_Vila_Franca_do_Campo%2C_ilha_de_S%C3%A3o_Miguel%2C_A%C3%A7ores.JPG?width=1280",
+      "bucketList": {
+        "episode": 1,
+        "destination": "São Miguel",
+        "region": "Azores",
+        "country": "Portugal",
+        "latitude": 37.78,
+        "longitude": -25.5,
+        "chapter": "reason",
+        "reasonTitle": "1563 · A major eruption",
+        "imageAuthor": "José Luís Ávila Silveira / Pedro Noronha e Costa",
+        "imageLicense": "Public domain",
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Lagoa_do_Fogo%2C_Miradouro_da_Serra_da_Barrosa%2C_Vila_Franca_do_Campo%2C_ilha_de_S%C3%A3o_Miguel%2C_A%C3%A7ores.JPG",
+        "documentary": {
+          "mode": "timeline",
+          "chapter": 5,
+          "narration": "Fogo experienced a major eruption in fifteen sixty-three, during the early centuries of settlement. Its history reminds us how recently volcanic events transformed the island."
+        }
+      }
+    },
+    {
+      "id": "shot-16",
+      "name": "06 · Furnas · Eastern São Miguel",
+      "durationSec": 13,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Furnas · Eastern São Miguel",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "São Miguel",
+        "region": "Azores",
+        "country": "Portugal",
+        "latitude": 37.78,
+        "longitude": -25.5,
+        "chapter": "zoom",
+        "reasonTitle": "Furnas · Eastern São Miguel",
+        "documentary": {
+          "mode": "map",
+          "chapter": 6,
+          "narration": "In the eastern part of São Miguel, at Furnas, volcanic activity becomes visible in everyday life.",
+          "from": [
+            -25.47,
+            37.76,
+            10.8
+          ],
+          "to": [
+            -25.31,
+            37.77,
+            11.5
+          ]
+        }
+      }
+    },
+    {
+      "id": "shot-17",
+      "name": "06 · Water heated underground",
+      "durationSec": 16,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Water heated underground",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "São Miguel",
+        "region": "Azores",
+        "country": "Portugal",
+        "latitude": 37.78,
+        "longitude": -25.5,
+        "chapter": "reason",
+        "reasonTitle": "Water heated underground",
+        "documentary": {
+          "mode": "geothermal",
+          "chapter": 6,
+          "narration": "Rainwater moves through cracks in underground rock, where geothermal heat raises its temperature. Hot water and gases return to the surface."
+        }
+      }
+    },
+    {
+      "id": "shot-18",
+      "name": "06 · Living with geothermal heat",
+      "durationSec": 16,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Living with geothermal heat",
+      "fullBleed": true,
+      "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/29/Fumaroles_of_Furnas_Lake_1.jpg/1280px-Fumaroles_of_Furnas_Lake_1.jpg",
+      "bucketList": {
+        "episode": 1,
+        "destination": "São Miguel",
+        "region": "Azores",
+        "country": "Portugal",
+        "latitude": 37.78,
+        "longitude": -25.5,
+        "chapter": "reason",
+        "reasonTitle": "Living with geothermal heat",
+        "imageAuthor": "Simiprof",
+        "imageLicense": "CC0 1.0",
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Fumaroles_of_Furnas_Lake_1.jpg",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 6,
+          "narration": "Steam escapes through openings in the ground. Local communities have adapted to these conditions, even cooking traditional meals using heat from beneath their feet."
+        }
+      }
+    },
+    {
+      "id": "shot-19",
+      "name": "07 · Oceanic climate",
+      "durationSec": 13,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Oceanic climate",
+      "fullBleed": true,
+      "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d4/Acesso_%C3%A0_Lagoa_Do_Congro_S%C3%A3o_Miguel.jpg/960px-Acesso_%C3%A0_Lagoa_Do_Congro_S%C3%A3o_Miguel.jpg",
+      "bucketList": {
+        "episode": 1,
+        "destination": "São Miguel",
+        "region": "Azores",
+        "country": "Portugal",
+        "latitude": 37.78,
+        "longitude": -25.5,
+        "chapter": "reason",
+        "reasonTitle": "Oceanic climate",
+        "imageAuthor": "Órvil Fernando de Aragão Russo",
+        "imageLicense": "CC BY-SA 4.0",
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Acesso_%C3%A0_Lagoa_Do_Congro_S%C3%A3o_Miguel.jpg",
+        "documentary": {
+          "mode": "climate",
+          "chapter": 7,
+          "narration": "São Miguel's green appearance reflects its oceanic climate, abundant rainfall and volcanic soils. Clouds often form as moist air rises over the mountains."
+        }
+      }
+    },
+    {
+      "id": "shot-20",
+      "name": "07 · Tea on the northern coast",
+      "durationSec": 14,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Tea on the northern coast",
+      "fullBleed": true,
+      "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/76/Gorreana_tea_estate.jpg/1280px-Gorreana_tea_estate.jpg",
+      "bucketList": {
+        "episode": 1,
+        "destination": "São Miguel",
+        "region": "Azores",
+        "country": "Portugal",
+        "latitude": 37.78,
+        "longitude": -25.5,
+        "chapter": "reason",
+        "reasonTitle": "Tea on the northern coast",
+        "imageAuthor": "Navin75",
+        "imageLicense": "CC BY-SA 2.0",
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Gorreana_tea_estate.jpg",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 7,
+          "narration": "Agriculture has transformed parts of the island into fields, pastures and plantations. Tea grows along the northern coast."
+        }
+      }
+    },
+    {
+      "id": "shot-21",
+      "name": "07 · Settlement follows geography",
+      "durationSec": 13,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Settlement follows geography",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "São Miguel",
+        "region": "Azores",
+        "country": "Portugal",
+        "latitude": 37.78,
+        "longitude": -25.5,
+        "chapter": "zoom",
+        "reasonTitle": "Settlement follows geography",
+        "documentary": {
+          "mode": "map",
+          "chapter": 7,
+          "narration": "Towns and villages occupy coastal plains and sheltered valleys. Ponta Delgada developed on the southern coast.",
+          "from": [
+            -25.45,
+            37.82,
+            9.7
+          ],
+          "to": [
+            -25.67,
+            37.74,
+            10.8
+          ]
+        }
+      }
+    },
+    {
+      "id": "shot-22",
+      "name": "08 · Land shaped by water",
+      "durationSec": 8,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Land shaped by water",
+      "fullBleed": true,
+      "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/77/Miradouro_da_Boca_do_Inferno%2C_Lagoa_das_Sete_Cidades%2C_ilha_de_S%C3%A3o_Miguel%2C_A%C3%A7ores.JPG/1280px-Miradouro_da_Boca_do_Inferno%2C_Lagoa_das_Sete_Cidades%2C_ilha_de_S%C3%A3o_Miguel%2C_A%C3%A7ores.JPG",
+      "bucketList": {
+        "episode": 1,
+        "destination": "São Miguel",
+        "region": "Azores",
+        "country": "Portugal",
+        "latitude": 37.78,
+        "longitude": -25.5,
+        "chapter": "reason",
+        "reasonTitle": "Land shaped by water",
+        "imageAuthor": "José Luís Ávila Silveira / Pedro Noronha e Costa",
+        "imageLicense": "Public domain",
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Miradouro_da_Boca_do_Inferno,_Lagoa_das_Sete_Cidades,_ilha_de_São_Miguel,_Açores.JPG",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 8,
+          "narration": "The island's lakes, mountains, soils and settlements reveal the relationship between volcanic activity, climate and human life."
+        }
+      }
+    },
+    {
+      "id": "shot-23",
+      "name": "08 · Millions of years in the making",
+      "durationSec": 10,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Millions of years in the making",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "São Miguel",
+        "region": "Azores",
+        "country": "Portugal",
+        "latitude": 37.78,
+        "longitude": -25.5,
+        "chapter": "zoom",
+        "reasonTitle": "Millions of years in the making",
+        "documentary": {
+          "mode": "map",
+          "chapter": 8,
+          "narration": "Millions of years of geological history have shaped the island we see today. And its geological story continues.",
+          "from": [
+            -25.5,
+            37.78,
+            9.2
+          ],
+          "to": [
+            -27,
+            38.1,
+            5.9
+          ]
+        }
+      }
+    },
+    {
+      "id": "shot-24",
+      "name": "08 · Geographical Stories",
+      "durationSec": 7,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Geographical Stories",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "São Miguel",
+        "region": "Azores",
+        "country": "Portugal",
+        "latitude": 37.78,
+        "longitude": -25.5,
+        "chapter": "reason",
+        "reasonTitle": "Geographical Stories",
+        "documentary": {
+          "mode": "end",
+          "chapter": 8,
+          "narration": "Understanding our planet, one place at a time."
+        }
+      }
+    }
+  ],
+  "captions": [],
+  "audioTracks": [
+    {
+      "id": "narration",
+      "kind": "voiceover",
+      "src": "assets/audio/geographical-stories-001-sao-miguel-voice.mp3",
+      "startSec": 0,
+      "endSec": 300,
+      "volume": 1
+    },
+    {
+      "id": "score",
+      "kind": "music",
+      "src": "assets/audio/geographical-stories-001-sao-miguel-score.mp3",
+      "startSec": 0,
+      "endSec": 300,
+      "volume": 0.28,
+      "fadeInSec": 2,
+      "fadeOutSec": 4
+    }
+  ]
+}
