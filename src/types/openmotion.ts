@@ -437,7 +437,16 @@ export interface SceneDoodleExplainer {
   narration?: string;
 }
 /** Editable destination and scene contents for vertical bucket-list reels. */
+export interface DocumentaryShot {
+  mode: 'photo' | 'title' | 'map' | 'formation' | 'caldera' | 'timeline' | 'geothermal' | 'climate' | 'end';
+  chapter: number;
+  narration: string;
+  /** Geographic camera keyframes: longitude, latitude, native MapLibre zoom. */
+  from?: [number, number, number];
+  to?: [number, number, number];
+}
 export interface SceneBucketList {
+  documentary?: DocumentaryShot;
   chapter: 'zoom' | 'reason' | 'outro';
   episode: number;
   destination: string;

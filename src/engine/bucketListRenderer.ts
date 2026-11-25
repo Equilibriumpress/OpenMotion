@@ -1,5 +1,6 @@
 import type { OpenMotionProject, OpenMotionScene } from '../types/openmotion';
 import {getBucketListCanvas,bucketListOutroReveal} from './bucketListCamera';
+import {renderDocumentaryShot} from './documentaryRenderer';
 
 const PAPER = '#F5F1E8';
 const GOLD = '#D9B77A';
@@ -208,6 +209,7 @@ export function renderBucketListScene(
 ):void{
   ctx.save();
   const draw=(mode:'image'|'text')=>{
+    if(scene.bucketList?.documentary){renderDocumentaryShot(ctx,w,h,scene,time,project,getPhoto,mode);return;}
     if(scene.bucketList?.chapter==='zoom')zoomScene(ctx,w,h,scene,time,project,mode);
     else photoScene(ctx,w,h,scene,time,project,getPhoto,mode);
   };

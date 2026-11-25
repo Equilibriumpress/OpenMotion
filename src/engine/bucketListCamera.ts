@@ -47,6 +47,11 @@ function announce(){for(const cb of subscribers)try{cb();}catch{/* Disposed prev
  */
 function introCamera(scene:OpenMotionScene,timeSec:number):Camera{
   const d=scene.bucketList!,u=clamp(timeSec/Math.max(.1,scene.durationSec));
+  const doc=d.documentary;
+  if(doc?.from && doc.to){
+    const t=smooth(clamp(u/.94)), a=doc.from,b=doc.to;
+    return {center:[lerp(a[0],b[0],t),lerp(a[1],b[1],t)],zoom:lerp(a[2],b[2],t),bearing:0,pitch:0};
+  }
   // Director's curve: accelerate through the ocean, then reach the
   // destination early enough for a short, steady hero-map hold before
   // the volcanic crater photograph fades in.
@@ -113,7 +118,7 @@ function waitForEvent(map:MapLibreMap,event:'load'|'idle'|'render',timeoutMs:num
 }
 function snapshot(state:Controller){
   if(state.disposed)return;
-  state.ctx.drawImage(state.map.getCanvas(),0,0,MAP_WIDTH,MAP_HEIGHT);
+  state.ctx.drawImage(state.map.getCanvas(),0,0,state.image.width,state.image.height);
   state.loaded=true;
 }
 function setCamera(state:Controller,camera:Camera){
@@ -138,7 +143,9 @@ export async function prepareBucketListProject(project:OpenMotionProject):Promis
     const {Map:MapLibre,setWorkerUrl}=await import('maplibre-gl');
     setWorkerUrl(workerUrl);
     const host=document.createElement('div');
-    host.style.cssText='position:fixed;left:-7000px;top:0;width:720px;height:1280px;pointer-events:none;z-index:-1';
+    const mapW=project.format==='16:9'?1280:MAP_WIDTH;
+    const mapH=project.format==='16:9'?720:MAP_HEIGHT;
+    host.style.cssText='position:fixed;left:-7000px;top:0;width:'+mapW+'px;height:'+mapH+'px;pointer-events:none;z-index:-1';
     document.body.appendChild(host);
     let state:Controller|undefined;
     try{
@@ -151,14 +158,14 @@ export async function prepareBucketListProject(project:OpenMotionProject):Promis
         canvasContextAttributes:{preserveDrawingBuffer:true,antialias:false},
       });
       const image=document.createElement('canvas');
-      image.width=MAP_WIDTH;image.height=MAP_HEIGHT;
+      image.width=mapW;image.height=mapH;
       const ctx=image.getContext('2d',{alpha:false});
       if(!ctx)throw new Error('Kaartcanvas niet beschikbaar.');
       state={map,host,image,ctx,loaded:false,exporting:false,lastPreviewTime:-1,disposed:false};
       controllers.set(project,state);
       if(!map.loaded())await waitForEvent(map,'load',30000);
       for(const layer of map.getStyle().layers??[]){
-        if(layer.type==='symbol')map.setLayoutProperty(layer.id,'visibility','none');
+        if(layer.type==='symbol'&&!intro.bucketList?.documentary)map.setLayoutProperty(layer.id,'visibility','none');
       }
       // A live MapLibre scene responds to arbitrary time positions, even
       // between previously known keyframes. Tile changes repaint the view.
