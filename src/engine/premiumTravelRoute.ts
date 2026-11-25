@@ -104,6 +104,21 @@ function sample(stage:Stage,fraction:number){
   const t=clamp((target-stage.distances[i-1])/Math.max(.001,stage.distances[i]-stage.distances[i-1]));
   return{x:lerp(from.x,to.x,t),y:lerp(from.y,to.y,t),angle:Math.atan2(to.y-from.y,to.x-from.x)};
 }
+/**
+ * Stabilized tracking point. Average nearby road samples on either side
+ * of the indicator instead of following every OSRM vertex with the camera.
+ * The moving dot itself always stays on the exact road geometry.
+ */
+function smoothRouteFocus(stage:Stage,fraction:number):Pt{
+  const half=Math.min(.018,Math.max(.003,55/Math.max(1,stage.total)));
+  const weights=[1,2,3,2,1];
+  let x=0,y=0,n=0;
+  weights.forEach((weight,index)=>{
+    const point=sample(stage,clamp(fraction+(index-2)*half*.5));
+    x+=point.x*weight;y+=point.y*weight;n+=weight;
+  });
+  return {x:x/n,y:y/n};
+}
 function routeStroke(ctx:CanvasRenderingContext2D,stage:Stage,fraction:number,s:number){
   const target=clamp(fraction)*stage.total;
   ctx.beginPath();ctx.moveTo(stage.path[0].x*s,stage.path[0].y*s);
@@ -196,6 +211,11 @@ function photoScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMot
   const index=p.chapter==='opening'?0:Math.max(0,p.focusStopIndex);
   const stop=p.stops[index],img=getPhoto(stop.photoUrl);
   if(img)cover(ctx,img,0,0,w,h,t);else scenicFallback(ctx,w,h);
+  // A title fades in after the image appears and fades out before the next
+  // shot. The underlying photo stays visible during the cross-dissolve.
+  const titleIn=ease((time-.18)/.42);
+  const titleOut=1-ease((time-(scene.durationSec-.42))/.42);
+  ctx.save();ctx.globalAlpha*=titleIn*titleOut;
   const gradient=ctx.createLinearGradient(0,h*.22,0,h);
   gradient.addColorStop(0,'rgba(9,29,29,0)');
   gradient.addColorStop(.38,'rgba(9,29,29,.20)');
@@ -217,6 +237,7 @@ function photoScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMot
   labelLines(ctx,tagline,70*s,h-(p.chapter==='opening'?135:235)*s,w-143*s,56*s,p.chapter==='opening'?1:3);
   ctx.font='500 '+(19*s)+'px "Plus Jakarta Sans",sans-serif';ctx.fillStyle='#DAE1DB';
   ctx.fillText(img?'PHOTO  '+stop.photoAuthor+'  •  '+stop.photoLicense:'ILLUSTRATED LANDSCAPE / PHOTO UNAVAILABLE',70*s,h-103*s,w-140*s);
+  ctx.restore();
 }
 function drawMapScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMotionScene,time:number){
   const p=scene.premiumTravel!,stage=stages.get(scene),s=w/WIDTH,t=clamp(time/Math.max(.1,scene.durationSec));
@@ -228,13 +249,26 @@ function drawMapScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenM
   const driving=p.chapter==='drive',finishing=p.chapter==='finale';
   const fraction=finishing?1:lerp(p.routeProgressFrom,p.routeProgressTo,ease(t));
   const car=sample(stage,fraction);
-  const zoom=driving?1.66:finishing?1.02:1.28;
-  // Camera follows the vehicle through the centre of the visible map,
-  // constrained to the raster bounds so no empty map edges appear.
-  const desiredX=driving?w*.49:w*.5;
-  const desiredY=driving?h*.49:h*.5;
-  const panX=Math.max(w-w*zoom,Math.min(0,desiredX-car.x*s*zoom));
-  const panY=Math.max(h-h*zoom,Math.min(0,desiredY-car.y*s*zoom));
+
+  // Lead the moving dot gently through bends and return to the destination
+  // before the following photo. All positions are pure functions of time.
+  const legSize=Math.max(0,p.routeProgressTo-p.routeProgressFrom);
+  const ahead=driving ? legSize*.065*ease(t/.33)*(1-ease((t-.75)/.22)) : 0;
+  const roadFocus=smoothRouteFocus(stage,clamp(fraction+ahead));
+  const reveal=ease(t/.86);
+  const lastStop=stage.stops[stage.stops.length-1];
+  const cameraFocus=finishing
+    ? {x:lerp(lastStop.x,WIDTH/2,reveal),y:lerp(lastStop.y,HEIGHT/2,reveal)}
+    : roadFocus;
+  // Finale opens on the Portree stop and pulls back to the complete map.
+  // Driving scenes start at the previous stop, track the road and ease back
+  // slightly at arrival. Limit zoom to avoid blurry 2x raster enlargement.
+  const zoom=finishing
+    ? lerp(1.72,1,reveal)
+    : 1.24+.29*ease(t/.19)-.20*ease((t-.76)/.23);
+  const desiredX=w*.5,desiredY=h*.485;
+  const panX=Math.max(w-w*zoom,Math.min(0,desiredX-cameraFocus.x*s*zoom));
+  const panY=Math.max(h-h*zoom,Math.min(0,desiredY-cameraFocus.y*s*zoom));
   ctx.save();ctx.translate(panX,panY);ctx.scale(zoom,zoom);
   ctx.drawImage(stage.image,0,0,w,h);
   // Muted base trace, followed by the much bolder travelled section.
@@ -261,7 +295,12 @@ function drawMapScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenM
     }
   }
   ctx.restore();
-  // Compact hierarchy, leaving the centre clear for the route and camper.
+  // Scene titles are eased independently of the cartographic layer so two
+  // captions do not stack over one another during an incoming cross-fade.
+  const titlesIn=finishing?ease((time-.9)/.85):ease((time-.23)/.40);
+  const titlesOut=finishing?1:1-ease((time-(scene.durationSec-.42))/.42);
+  ctx.save();ctx.globalAlpha*=titlesIn*titlesOut;
+  // Compact hierarchy, leaving the centre clear for the route and marker.
   const m=52*s;
   ctx.fillStyle='rgba(18,54,48,.94)';ctx.beginPath();ctx.roundRect(m,65*s,w-2*m,105*s,19*s);ctx.fill();
   ctx.textAlign='left';ctx.fillStyle='#FFFFFF';
@@ -282,21 +321,17 @@ function drawMapScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenM
   ctx.fillText(name,m,h-230*s,w-2*m);
   ctx.fillStyle='#E6F0E8';ctx.font='500 '+(30*s)+'px "Plus Jakarta Sans",sans-serif';
   ctx.fillText(finishing?'Edinburgh · Glen Coe · Eilean Donan · Skye':'A SCENIC DRIVE THROUGH THE HIGHLANDS',m,h-155*s,w-2*m);
+  ctx.restore();
   ctx.fillStyle='rgba(251,250,245,.93)';ctx.fillRect(0,h-61*s,w,61*s);
   ctx.textAlign='center';ctx.font='500 '+(21*s)+'px "Plus Jakarta Sans",sans-serif';ctx.fillStyle='#244C44';
   ctx.fillText('Map: OpenFreeMap / OpenMapTiles · © OpenStreetMap contributors',w/2,h-24*s,w-54*s);
 }
 export function renderPremiumTravelScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMotionScene,time:number,getPhoto:(url:string)=>HTMLImageElement|null):void{
-  const p=scene.premiumTravel!,t=clamp(time/Math.max(.1,scene.durationSec));
+  const p=scene.premiumTravel!;
   ctx.save();
   if(p.chapter==='opening'||p.chapter==='photo')photoScene(ctx,w,h,scene,time,getPhoto);
   else drawMapScene(ctx,w,h,scene,time);
-  // Very brief editorial dip at cuts, without prolonged black frames.
-  const fadeIn=clamp((.065-t)/.065);
-  const fadeOut=clamp((t-.965)/.035);
-  const alpha=Math.max(fadeIn,fadeOut);
-  if(alpha>0){
-    ctx.fillStyle='rgba(13,36,32,'+(alpha*.66)+')';ctx.fillRect(0,0,w,h);
-  }
+  // Frame boundaries are blended in the shared OpenMotion renderer.
+  // Never darken this shot at its start or end.
   ctx.restore();
 }

@@ -700,7 +700,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
     "author": "OpenMotion Studio",
     "source": "template",
     "createdAt": "2026-11-24",
-    "updatedAt": "2026-11-24",
+    "updatedAt": "2026-11-25",
     "githubPath": "projects/short-scotland-road-trip/project.json",
     "format": "9:16",
     "width": 1080,
@@ -735,10 +735,10 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 55.9486,
               "lon": -3.1999,
               "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/Edinburgh_Castle_2000-1.jpg/1280px-Edinburgh_Castle_2000-1.jpg",
-              "photoAuthor": "Libasstref",
-              "photoLicense": "CC0 1.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_2000-1.jpg"
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Edinburgh_Castle_from_Princes_Street_%282026%29.jpg/1280px-Edinburgh_Castle_from_Princes_Street_%282026%29.jpg",
+              "photoAuthor": "LibKat17",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_from_Princes_Street_(2026).jpg"
             },
             {
               "name": "Glen Coe",
@@ -765,10 +765,10 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 57.4129,
               "lon": -6.1945,
               "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/15/Portree_harbour.jpg/1280px-Portree_harbour.jpg",
-              "photoAuthor": "Clem_nat",
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
+              "photoAuthor": "Bewahrerderwerte",
               "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Portree_harbour.jpg"
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg"
             }
           ],
           "route": {
@@ -828,10 +828,10 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 55.9486,
               "lon": -3.1999,
               "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/Edinburgh_Castle_2000-1.jpg/1280px-Edinburgh_Castle_2000-1.jpg",
-              "photoAuthor": "Libasstref",
-              "photoLicense": "CC0 1.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_2000-1.jpg"
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Edinburgh_Castle_from_Princes_Street_%282026%29.jpg/1280px-Edinburgh_Castle_from_Princes_Street_%282026%29.jpg",
+              "photoAuthor": "LibKat17",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_from_Princes_Street_(2026).jpg"
             },
             {
               "name": "Glen Coe",
@@ -858,10 +858,10 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 57.4129,
               "lon": -6.1945,
               "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/15/Portree_harbour.jpg/1280px-Portree_harbour.jpg",
-              "photoAuthor": "Clem_nat",
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
+              "photoAuthor": "Bewahrerderwerte",
               "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Portree_harbour.jpg"
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg"
             }
           ],
           "route": {
@@ -921,10 +921,10 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 55.9486,
               "lon": -3.1999,
               "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/Edinburgh_Castle_2000-1.jpg/1280px-Edinburgh_Castle_2000-1.jpg",
-              "photoAuthor": "Libasstref",
-              "photoLicense": "CC0 1.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_2000-1.jpg"
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Edinburgh_Castle_from_Princes_Street_%282026%29.jpg/1280px-Edinburgh_Castle_from_Princes_Street_%282026%29.jpg",
+              "photoAuthor": "LibKat17",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_from_Princes_Street_(2026).jpg"
             },
             {
               "name": "Glen Coe",
@@ -951,10 +951,10 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 57.4129,
               "lon": -6.1945,
               "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/15/Portree_harbour.jpg/1280px-Portree_harbour.jpg",
-              "photoAuthor": "Clem_nat",
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
+              "photoAuthor": "Bewahrerderwerte",
               "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Portree_harbour.jpg"
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg"
             }
           ],
           "route": {
@@ -1014,10 +1014,10 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 55.9486,
               "lon": -3.1999,
               "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/Edinburgh_Castle_2000-1.jpg/1280px-Edinburgh_Castle_2000-1.jpg",
-              "photoAuthor": "Libasstref",
-              "photoLicense": "CC0 1.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_2000-1.jpg"
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Edinburgh_Castle_from_Princes_Street_%282026%29.jpg/1280px-Edinburgh_Castle_from_Princes_Street_%282026%29.jpg",
+              "photoAuthor": "LibKat17",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_from_Princes_Street_(2026).jpg"
             },
             {
               "name": "Glen Coe",
@@ -1044,10 +1044,10 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 57.4129,
               "lon": -6.1945,
               "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/15/Portree_harbour.jpg/1280px-Portree_harbour.jpg",
-              "photoAuthor": "Clem_nat",
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
+              "photoAuthor": "Bewahrerderwerte",
               "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Portree_harbour.jpg"
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg"
             }
           ],
           "route": {
@@ -1107,10 +1107,10 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 55.9486,
               "lon": -3.1999,
               "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/Edinburgh_Castle_2000-1.jpg/1280px-Edinburgh_Castle_2000-1.jpg",
-              "photoAuthor": "Libasstref",
-              "photoLicense": "CC0 1.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_2000-1.jpg"
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Edinburgh_Castle_from_Princes_Street_%282026%29.jpg/1280px-Edinburgh_Castle_from_Princes_Street_%282026%29.jpg",
+              "photoAuthor": "LibKat17",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_from_Princes_Street_(2026).jpg"
             },
             {
               "name": "Glen Coe",
@@ -1137,10 +1137,10 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 57.4129,
               "lon": -6.1945,
               "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/15/Portree_harbour.jpg/1280px-Portree_harbour.jpg",
-              "photoAuthor": "Clem_nat",
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
+              "photoAuthor": "Bewahrerderwerte",
               "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Portree_harbour.jpg"
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg"
             }
           ],
           "route": {
@@ -1200,10 +1200,10 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 55.9486,
               "lon": -3.1999,
               "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/Edinburgh_Castle_2000-1.jpg/1280px-Edinburgh_Castle_2000-1.jpg",
-              "photoAuthor": "Libasstref",
-              "photoLicense": "CC0 1.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_2000-1.jpg"
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Edinburgh_Castle_from_Princes_Street_%282026%29.jpg/1280px-Edinburgh_Castle_from_Princes_Street_%282026%29.jpg",
+              "photoAuthor": "LibKat17",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_from_Princes_Street_(2026).jpg"
             },
             {
               "name": "Glen Coe",
@@ -1230,10 +1230,10 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 57.4129,
               "lon": -6.1945,
               "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/15/Portree_harbour.jpg/1280px-Portree_harbour.jpg",
-              "photoAuthor": "Clem_nat",
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
+              "photoAuthor": "Bewahrerderwerte",
               "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Portree_harbour.jpg"
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg"
             }
           ],
           "route": {
@@ -1293,10 +1293,10 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 55.9486,
               "lon": -3.1999,
               "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/Edinburgh_Castle_2000-1.jpg/1280px-Edinburgh_Castle_2000-1.jpg",
-              "photoAuthor": "Libasstref",
-              "photoLicense": "CC0 1.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_2000-1.jpg"
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Edinburgh_Castle_from_Princes_Street_%282026%29.jpg/1280px-Edinburgh_Castle_from_Princes_Street_%282026%29.jpg",
+              "photoAuthor": "LibKat17",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_from_Princes_Street_(2026).jpg"
             },
             {
               "name": "Glen Coe",
@@ -1323,10 +1323,10 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 57.4129,
               "lon": -6.1945,
               "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/15/Portree_harbour.jpg/1280px-Portree_harbour.jpg",
-              "photoAuthor": "Clem_nat",
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
+              "photoAuthor": "Bewahrerderwerte",
               "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Portree_harbour.jpg"
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg"
             }
           ],
           "route": {
@@ -1386,10 +1386,10 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 55.9486,
               "lon": -3.1999,
               "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/Edinburgh_Castle_2000-1.jpg/1280px-Edinburgh_Castle_2000-1.jpg",
-              "photoAuthor": "Libasstref",
-              "photoLicense": "CC0 1.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_2000-1.jpg"
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Edinburgh_Castle_from_Princes_Street_%282026%29.jpg/1280px-Edinburgh_Castle_from_Princes_Street_%282026%29.jpg",
+              "photoAuthor": "LibKat17",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_from_Princes_Street_(2026).jpg"
             },
             {
               "name": "Glen Coe",
@@ -1416,10 +1416,10 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 57.4129,
               "lon": -6.1945,
               "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/15/Portree_harbour.jpg/1280px-Portree_harbour.jpg",
-              "photoAuthor": "Clem_nat",
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
+              "photoAuthor": "Bewahrerderwerte",
               "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Portree_harbour.jpg"
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg"
             }
           ],
           "route": {
