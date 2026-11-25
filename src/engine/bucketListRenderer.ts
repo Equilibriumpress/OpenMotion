@@ -1,144 +1,10 @@
 import type { OpenMotionProject, OpenMotionScene } from '../types/openmotion';
-import type { Map as MapLibreMap } from 'maplibre-gl';
-import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
-import 'maplibre-gl/dist/maplibre-gl.css';
+import {getBucketListCanvas,bucketListOutroReveal} from './bucketListCamera';
 
-const MAP_STYLE = 'https://tiles.openfreemap.org/styles/bright';
-const BASE_WIDTH = 720;
-const BASE_HEIGHT = 1280;
-const INK = '#111F30';
 const PAPER = '#F5F1E8';
 const GOLD = '#D9B77A';
-const clamp = (v: number) => Math.max(0, Math.min(1, v));
-const smooth = (v: number) => { const t = clamp(v); return t*t*(3-2*t); };
-const lerp = (a: number, b: number, t: number) => a+(b-a)*t;
-
-interface ZoomKey {
-  time: number;
-  zoom: number;
-  center: [number,number];
-  globe: boolean;
-}
-
-interface MapFrame extends ZoomKey {
-  image: HTMLCanvasElement;
-}
-const framesByProject = new WeakMap<OpenMotionProject, MapFrame[]>();
-const pending = new WeakMap<OpenMotionProject, Promise<void>>();
-const errors = new WeakMap<OpenMotionProject, string>();
-export function getBucketListMapError(project: OpenMotionProject): string | undefined {
-  return errors.get(project);
-}
-
-/**
- * Each snapshot comes from a real MapLibre globe or Mercator camera, including
- * true OSM-backed coastlines and roads. At export time the camera movement is
- * deterministic and has no WebGL tile/network requests per video frame.
- *
- * The keyframes are relative to the chosen destination, so this format can be
- * reused for destinations other than São Miguel via editable coordinates.
- */
-function zoomKeys(scene: OpenMotionScene): ZoomKey[] {
-  const destination = scene.bucketList!;
-  const latitude = destination.latitude, longitude = destination.longitude;
-  const startLon = destination.startLongitude ?? longitude + 16;
-  const startLat = destination.startLatitude ?? latitude + 5;
-  const seconds = Math.max(1,scene.durationSec);
-  const key = (fraction:number, zoom:number, longitudeProgress:number, globe:boolean):ZoomKey=>({
-    time:seconds*fraction,
-    zoom,
-    center:[
-      lerp(startLon,longitude,smooth(longitudeProgress)),
-      lerp(startLat,latitude,smooth(longitudeProgress))
-    ],
-    globe
-  });
-  // Compress the ocean crossing into the middle third of the intro.
-  // Each geographic keyframe is a real MapLibre camera position.
-  return [
-    key(0,1.1,0,true),
-    key(.15,2.15,.28,true),
-    key(.30,3.55,.66,true),
-    key(.41,5.1,.86,false),
-    key(.53,6.7,.98,false),
-    key(.66,8.55,1,false),
-    key(.81,10.3,1,false),
-    key(1,12.15,1,false)
-  ];
-}
-
-async function awaitIdle(map:MapLibreMap): Promise<void> {
-  await Promise.race([
-    new Promise<void>(resolve=>map.once('idle',()=>resolve())),
-    new Promise<never>((_,reject)=>setTimeout(()=>reject(new Error('Map tiles timed out')),20000))
-  ]);
-}
-
-export function prepareBucketListProject(project:OpenMotionProject):Promise<void>{
-  const scene=project.scenes.find(s=>s.layout==='bucket-list-zoom'&&s.bucketList?.chapter==='zoom');
-  if(!scene)return Promise.resolve();
-  const active=pending.get(project);
-  if(active)return active;
-  const work=(async()=>{
-    const {Map: MapLibre, setWorkerUrl}=await import('maplibre-gl');
-    setWorkerUrl(workerUrl);
-    const host=document.createElement('div');
-    host.style.cssText='position:fixed;left:-5000px;top:0;width:720px;height:1280px;pointer-events:none;z-index:-1';
-    document.body.appendChild(host);
-    let map:MapLibreMap|undefined;
-    try{
-      const keys=zoomKeys(scene);
-      map=new MapLibre({
-        container:host,
-        style:MAP_STYLE,
-        center:keys[0].center,
-        zoom:keys[0].zoom,
-        projection:{type:'globe'},
-        interactive:false,
-        attributionControl:false,
-        fadeDuration:0,
-        canvasContextAttributes:{preserveDrawingBuffer:true,antialias:false},
-      });
-      if(!map.loaded())await Promise.race([
-        new Promise<void>(resolve=>map!.once('load',()=>resolve())),
-        new Promise<never>((_,reject)=>setTimeout(()=>reject(new Error('Globe map did not load')),30000))
-      ]);
-      // Bright cartography is a base layer, not a street atlas. Hiding
-      // MapLibre's symbols removes large city names from the early globe,
-      // while retaining real OSM landforms, water and road geometry.
-      for(const layer of map.getStyle().layers??[]) {
-        if(layer.type==='symbol') map.setLayoutProperty(layer.id,'visibility','none');
-      }
-      const captured:MapFrame[]=[];
-      for(const key of keys) {
-        const loaded=awaitIdle(map);
-        map.setProjection({type:key.globe?'globe':'mercator'});
-        map.jumpTo({center:key.center,zoom:key.zoom,bearing:0,pitch:0});
-        map.resize();
-        map.triggerRepaint();
-        await loaded;
-        const image=document.createElement('canvas');
-        image.width=BASE_WIDTH;image.height=BASE_HEIGHT;
-        const context=image.getContext('2d');
-        if(!context)throw new Error('Map snapshot canvas unavailable');
-        context.drawImage(map.getCanvas(),0,0,BASE_WIDTH,BASE_HEIGHT);
-        captured.push({...key,image});
-      }
-      framesByProject.set(project,captured);
-      errors.delete(project);
-    } finally {
-      map?.remove();
-      host.remove();
-    }
-  })().catch(error=>{
-    errors.set(project,String(error));
-    // Keep the rest of the video playable. The missing-map state is labelled,
-    // never replaced with an invented geographic image.
-    console.warn('Bucket-list map unavailable:',error);
-  });
-  pending.set(project,work);
-  return work;
-}
+const clamp = (v:number) => Math.max(0,Math.min(1,v));
+const smooth = (v:number) => {const t=clamp(v);return t*t*(3-2*t);};
 
 function fitPhoto(ctx:CanvasRenderingContext2D,img:HTMLImageElement,w:number,h:number,t:number,focusX=.5){
   const aspect=Math.max(w/img.naturalWidth,h/img.naturalHeight);
@@ -177,46 +43,30 @@ function drawBackdrop(ctx:CanvasRenderingContext2D,w:number,h:number) {
   }
 }
 
+/** Reads MapLibre's most recently painted true geographic frame. The
+ * camera is set by the preview clock or awaited by the export encoder.
+ * No snapshot interpolation or overlayed coastline silhouettes remain.
+ */
 function zoomFrame(ctx:CanvasRenderingContext2D,w:number,h:number,project:OpenMotionProject,time:number,scene:OpenMotionScene){
   drawBackdrop(ctx,w,h);
-  const frames=framesByProject.get(project);
-  if(!frames?.length){
+  const frame=getBucketListCanvas(project);
+  if(!frame) {
     ctx.textAlign='center';ctx.fillStyle=PAPER;
-    ctx.font='600 '+Math.round(w*.031)+'px "Plus Jakarta Sans",sans-serif';
+    ctx.font='600 '+Math.round(w*.03)+'px "Plus Jakarta Sans",sans-serif';
     ctx.fillText('MAP PREVIEW UNAVAILABLE',w/2,h*.53,w*.83);
-    ctx.font='400 '+Math.round(w*.020)+'px "Plus Jakarta Sans",sans-serif';
-    ctx.fillText('The globe requires map tiles and WebGL',w/2,h*.57,w*.87);
     return;
   }
-  const t=Math.max(0,Math.min(scene.durationSec,time));
-  let index=0;
-  while(index<frames.length-2&&frames[index+1].time<t)index++;
-  const a=frames[index],b=frames[Math.min(index+1,frames.length-1)];
-  const u=clamp((t-a.time)/Math.max(.001,b.time-a.time));
-  const alpha=smooth((u-.17)/.66);
-  const targetZoom=lerp(a.zoom,b.zoom,smooth(u));
-  const renderSnapshot=(f:MapFrame,opacity:number)=>{
-    if(opacity<=0)return;
-    ctx.save();ctx.globalAlpha*=opacity;
-    // A small real-camera zoom between cached map keyframes.
-    // More than 1.8x enlargement is avoided to preserve crisp coastlines.
-    const scale=Math.max(.7,Math.min(1.8,Math.pow(2,targetZoom-f.zoom)));
-    const sw=w*scale,sh=h*scale;
-    ctx.drawImage(f.image,(w-sw)/2,(h-sh)/2,sw,sh);
-    ctx.restore();
-  };
-  renderSnapshot(a,1);
-  if(b!==a)renderSnapshot(b,alpha);
-  // No fake coastlines: the destination indicator only appears once the
-  // camera is close enough for the point to be geographically meaningful.
-  const approach=smooth((t/scene.durationSec-.57)/.23);
+  ctx.drawImage(frame,0,0,w,h);
+  const t=clamp(time/Math.max(.1,scene.durationSec));
+  const approach=smooth((t-.69)/.22);
   if(approach>0){
-    const x=w*.5,y=h*.49,pulse=.5+.5*Math.sin(t*6.4);
+    const x=w*.5,y=h*.50,pulse=.5+.5*Math.sin(time*6.4);
     ctx.save();ctx.globalAlpha*=approach;
     ctx.fillStyle='rgba(217,183,122,.22)';
-    ctx.beginPath();ctx.arc(x,y,w*(.025+.004*pulse),0,Math.PI*2);ctx.fill();
+    ctx.beginPath();ctx.arc(x,y,w*(.027+.004*pulse),0,Math.PI*2);ctx.fill();
     ctx.fillStyle=GOLD;ctx.strokeStyle=PAPER;ctx.lineWidth=w*.004;
-    ctx.beginPath();ctx.arc(x,y,w*.012,0,Math.PI*2);ctx.fill();ctx.stroke();ctx.restore();
+    ctx.beginPath();ctx.arc(x,y,w*.012,0,Math.PI*2);ctx.fill();ctx.stroke();
+    ctx.restore();
   }
 }
 
@@ -231,7 +81,9 @@ function footer(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMotionS
   ctx.font='500 '+Math.round(21*s)+'px "Plus Jakarta Sans",sans-serif';
   const label=data.chapter==='zoom'
     ? 'MAP  OpenFreeMap / OpenMapTiles · © OpenStreetMap contributors'
-    : 'PHOTO  '+(data.imageAuthor??'Wikimedia Commons')+'  ·  '+(data.imageLicense??'');
+    : data.chapter==='outro'
+      ? 'PHOTO  '+(data.imageAuthor??'Wikimedia Commons')+' · '+(data.imageLicense??'')+'  /  MAP © OSM'
+      : 'PHOTO  '+(data.imageAuthor??'Wikimedia Commons')+'  ·  '+(data.imageLicense??'');
   ctx.fillText(label,69*s,h-72*s,w-139*s);
   ctx.restore();
 }
@@ -275,11 +127,17 @@ function zoomScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMoti
   footer(ctx,w,h,scene);
 }
 
-function photoScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMotionScene,time:number,getPhoto:(url:string)=>HTMLImageElement|null,layer:'image'|'text'){
+function photoScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMotionScene,time:number,project:OpenMotionProject,getPhoto:(url:string)=>HTMLImageElement|null,layer:'image'|'text'){
   const d=scene.bucketList!,t=clamp(time/Math.max(.01,scene.durationSec)),s=w/1080;
   if(layer==='image'){
     const img=scene.imageUrl?getPhoto(scene.imageUrl):null;
     if(img)fitPhoto(ctx,img,w,h,t,d.imageFocusX??.5);else fallbackPhoto(ctx,w,h);
+    if(d.chapter==='outro'){
+      const frame=getBucketListCanvas(project),reveal=bucketListOutroReveal(scene,time);
+      if(frame && reveal>0) {
+        ctx.save();ctx.globalAlpha*=reveal;ctx.drawImage(frame,0,0,w,h);ctx.restore();
+      }
+    }
     return;
   }
   const shade=ctx.createLinearGradient(0,h*.25,0,h);
@@ -325,7 +183,7 @@ export function renderBucketListScene(
   ctx.save();
   const draw=(mode:'image'|'text')=>{
     if(scene.bucketList?.chapter==='zoom')zoomScene(ctx,w,h,scene,time,project,mode);
-    else photoScene(ctx,w,h,scene,time,getPhoto,mode);
+    else photoScene(ctx,w,h,scene,time,project,getPhoto,mode);
   };
   if(layer==='all'){draw('image');draw('text');}
   else draw(layer);
