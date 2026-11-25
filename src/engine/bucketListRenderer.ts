@@ -221,14 +221,19 @@ function zoomFrame(ctx:CanvasRenderingContext2D,w:number,h:number,project:OpenMo
 }
 
 function footer(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMotionScene){
-  const data=scene.bucketList!;
-  const scale=w/1080;
-  ctx.fillStyle='rgba(250,250,244,.88)';
-  ctx.fillRect(0,h-69*scale,w,69*scale);
-  ctx.fillStyle='#315152';ctx.textAlign='center';
-  ctx.font='500 '+Math.round(18*scale)+'px "Plus Jakarta Sans",sans-serif';
-  if(data.chapter==='zoom') ctx.fillText('OpenFreeMap / OpenMapTiles · © OpenStreetMap contributors',w/2,h-26*scale,w-50*scale);
-  else ctx.fillText('PHOTO '+(data.imageAuthor??'Wikimedia Commons')+' · '+(data.imageLicense??''),w/2,h-25*scale,w-50*scale);
+  const data=scene.bucketList!,s=w/1080;
+  // Small editorial credit over the picture instead of a bright full-width
+  // strip. Keep attribution present on every exported frame.
+  ctx.save();
+  ctx.fillStyle='rgba(8,23,31,.77)';
+  ctx.beginPath();ctx.roundRect(55*s,h-104*s,w-110*s,49*s,12*s);ctx.fill();
+  ctx.fillStyle='#E6E8E0';ctx.textAlign='left';
+  ctx.font='500 '+Math.round(21*s)+'px "Plus Jakarta Sans",sans-serif';
+  const label=data.chapter==='zoom'
+    ? 'MAP  OpenFreeMap / OpenMapTiles · © OpenStreetMap contributors'
+    : 'PHOTO  '+(data.imageAuthor??'Wikimedia Commons')+'  ·  '+(data.imageLicense??'');
+  ctx.fillText(label,69*s,h-72*s,w-139*s);
+  ctx.restore();
 }
 
 function zoomScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMotionScene,time:number,project:OpenMotionProject,layer:'image'|'text'){
@@ -302,7 +307,7 @@ function photoScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMot
   lines.slice(0,3).forEach((str,i)=>ctx.fillText(str,70*s,titleY+i*100*s,w-140*s));
   ctx.fillStyle='#E9E6D8';
   ctx.font='500 '+Math.round(36*s)+'px "Plus Jakarta Sans",sans-serif';
-  const copy=d.chapter==='outro'?'THE AZORES  /  PORTUGAL':d.reasonCopy??'';
+  const copy=d.chapter==='outro'?d.region.toUpperCase()+'  /  '+d.country.toUpperCase():d.reasonCopy??'';
   ctx.fillText(copy,74*s,h-153*s,w-148*s);
   if(d.chapter==='outro'){
     ctx.font='700 '+Math.round(27*s)+'px "Plus Jakarta Sans",sans-serif';
