@@ -438,9 +438,15 @@ export interface SceneDoodleExplainer {
 }
 /** Editable destination and scene contents for vertical bucket-list reels. */
 export interface DocumentaryShot {
-  mode: 'photo' | 'title' | 'map' | 'formation' | 'caldera' | 'timeline' | 'geothermal' | 'climate' | 'end';
+  mode: 'photo' | 'title' | 'map' | 'formation' | 'caldera' | 'timeline' | 'geothermal' | 'climate' | 'tectonic' | 'eruption' | 'end';
   chapter: number;
   narration: string;
+  composition?: 'clean' | 'title' | 'map' | 'diagram' | 'lower' | 'pan' | 'stat' | 'end';
+  phase?: number;
+  photoMotion?: 'pan' | 'pull' | 'push' | 'hold';
+  markers?: { label: string; lon: number; lat: number }[];
+  relief?: boolean;
+  contourUrl?: string;
   /** Geographic camera keyframes: longitude, latitude, native MapLibre zoom. */
   from?: [number, number, number];
   to?: [number, number, number];
@@ -561,6 +567,8 @@ export interface OpenMotionProject {
   scenes: OpenMotionScene[];
   captions?: TimedCaption[];
   audioTracks?: OpenMotionAudioTrack[];
+  /** Optional real DEM extent and contour interval for documentary publication. */
+  documentaryTerrain?: { bounds: [number, number, number, number]; interval: number };
 }
 
 export interface GitHubRepoConfig {
