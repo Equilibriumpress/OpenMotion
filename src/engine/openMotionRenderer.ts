@@ -368,7 +368,9 @@ export function renderOpenMotionFrame(
     const previous=sceneIndex>0 ? project.scenes[sceneIndex-1] : undefined;
     // Film grammar: cinematic reveal after the map, brisk cut between
     // reason cards, and a slower transition to the coastal finale.
-    const dissolveTarget=scene.bucketList.documentary ? (scene.bucketList.documentary.chapter===1?.18:scene.bucketList.documentary.mode==='map'||previous?.bucketList?.documentary?.mode==='map'?.65:.4) : previous?.bucketList?.chapter==='zoom' ? .78
+    const documentary = scene.bucketList.documentary;
+    const documentaryMapCut = documentary?.mode === 'map' || previous?.bucketList?.documentary?.mode === 'map';
+    const dissolveTarget = documentary ? (documentary.chapter === 1 ? .18 : documentaryMapCut ? .65 : .4) : previous?.bucketList?.chapter==='zoom' ? .78
       : scene.bucketList.chapter==='outro' ? .60 : .36;
     const continuousDocMap=previous?.bucketList?.documentary?.mode==='map'&&scene.bucketList.documentary?.mode==='map';
     const dissolve=previous?.layout==='bucket-list-zoom'&&previous.bucketList&&scene.transition==='fade'&&!continuousDocMap
