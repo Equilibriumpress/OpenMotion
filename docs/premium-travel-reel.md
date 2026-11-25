@@ -1,10 +1,10 @@
-# Premium Travel Route Reel — Scotland by Campervan
+# Premium Travel Route Reel — Scotland / The Open Road
 
 ## Example
 
-Open `Shorts & Reels → Premium Travel Route Reel — Scotland by Campervan` in the existing OpenMotion Studio. Format: **1080×1920, 30 seconds, 30 fps**. All map and stop scenes use the existing deterministic Canvas preview and MP4 export pipeline.
+Open `Shorts & Reels → Premium Travel Route Reel — Scotland / The Open Road` in the existing OpenMotion Studio. Format: **1080×1920, 30 seconds, 30 fps**. All map and stop scenes use the existing deterministic Canvas preview and MP4 export pipeline.
 
-Storyboard: **Edinburgh** (0–4s), **Glen Coe** (4–12s), **Eilean Donan Castle** (12–19s), **Portree** (19–26s), **full route finale** (26–30s). The camper graphic rotates to the bearing of the road path. Stop cards display a photograph, editorial caption and image attribution.
+Storyboard: Edinburgh opening (0–3s), drive to Glen Coe (3–8s), Glen Coe photo (8–11s), drive to Eilean Donan (11–16s), castle photo (16–19s), drive to Skye (19–23s), Portree photo (23–26s), animated route overview (26–30s). The default road position marker is a moving dot. Each photo is full-screen with its own caption and attribution.
 
 ## Genuine basemap and route
 
@@ -33,10 +33,10 @@ Photos use direct 1280-pixel Wikimedia thumbnail URLs rather than Commons Specia
 
 | Stop | Author | License | Original |
 | --- | --- | --- | --- |
-| Edinburgh Castle | Libasstref | CC0 1.0 | https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_2000-1.jpg |
+| Edinburgh Castle | LibKat17 | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_from_Princes_Street_(2026).jpg |
 | Glen Coe | Saadtowheed | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Glencoe,_Scotland.jpg |
 | Eilean Donan Castle | Gillfoto | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg |
-| Portree harbour | Clem_nat | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Portree_harbour.jpg |
+| Portree harbour | Bewahrerderwerte | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg |
 
 License: https://creativecommons.org/licenses/by-sa/4.0/
 
