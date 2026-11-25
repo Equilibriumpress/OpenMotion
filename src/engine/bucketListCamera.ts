@@ -47,14 +47,17 @@ function announce(){for(const cb of subscribers)try{cb();}catch{/* Disposed prev
  */
 function introCamera(scene:OpenMotionScene,timeSec:number):Camera{
   const d=scene.bucketList!,u=clamp(timeSec/Math.max(.1,scene.durationSec));
-  const speed=smooth(u);
+  // Director's curve: accelerate through the ocean, then reach the
+  // destination early enough for a short, steady hero-map hold before
+  // the volcanic crater photograph fades in.
+  const speed=smooth(clamp(u/.92));
   const move=smooth(clamp(u/.77));
   const lon0=d.startLongitude??d.longitude+16;
   const lat0=d.startLatitude??d.latitude+5;
   return {
     center:[lerp(lon0,d.longitude,move),lerp(lat0,d.latitude,move)],
     zoom:lerp(1.1,12.0,speed),
-    bearing:lerp(-12,0,smooth(u/.62)),
+    bearing:lerp(-9,0,smooth(clamp(u/.72))),
     pitch:0,
   };
 }
