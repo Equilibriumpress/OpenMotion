@@ -60,3 +60,8 @@ Nieuwe bewerkbare videoproef op basis van een aangeleverde Nederlandstalige refe
 ### Doodle character redesign R2
 
 The editable ADHD & Slaap hand-drawn video now uses two reusable vector rigs with redesigned expressions and poses, a correctly layered bed and shower character, and a new character-pose selector. [Character redesign notes](docs/doodle-character-redesign.md).
+
+
+### MY BUCKET LIST — Globe Zoom Reels
+
+The new Shorts & Reels template offers a 25-second globe-to-São-Miguel fly-in with three photographic reasons to visit, a save-this-place outro, editable destination coordinates and an original score. See [the bucket-list guide](docs/bucket-list-zoom.md).
