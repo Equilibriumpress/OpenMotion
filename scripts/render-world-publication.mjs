@@ -13,6 +13,7 @@ const { createServer }=await import('vite');
 const tmp=path.join(root,'world-render-preview.html');
 const run=(cmd,args)=>{const x=spawnSync(cmd,args,{stdio:'inherit',timeout:600000});if(x.status!==0)throw Error(cmd+' failed: '+x.status)};
 let server,browser;
+const requiresCatMaster=projects.some(p=>p.scenes.some(s=>s.catOffice));
 try {
   let executablePath=['/usr/bin/google-chrome','/usr/bin/google-chrome-stable','/usr/bin/chromium'].find(p=>fs.existsSync(p));
   if(!executablePath){run('npx',['playwright','install','chromium']);}
@@ -72,8 +73,8 @@ try {
       p.prebuiltMp4Url='renders/'+p.slug+'.mp4';
       fs.writeFileSync(manifestPath,JSON.stringify(manifest,null,2));
       console.log('[world-render] verified master:',p.slug,width,height,fps,duration,a.codec_name);
-    }catch(e){console.error('[world-render] master unavailable:',p.slug,e);if(fs.existsSync(target))fs.unlinkSync(target);}
+    }catch(e){console.error('[world-render] master unavailable:',p.slug,e);if(fs.existsSync(target))fs.unlinkSync(target);if(p.scenes.some(s=>s.catOffice))throw e;}
     finally{if(encoder&&encoder.exitCode===null)encoder.kill('SIGTERM');if(page)await page.close();if(fs.existsSync(silent))fs.unlinkSync(silent);}
   }
-}catch(e){console.error('[world-render] optional publication export failed:',e);}
+}catch(e){console.error('[world-render] publication export failed:',e);if(requiresCatMaster)process.exitCode=1;}
 finally{if(browser)await browser.close();if(server)await server.close();if(fs.existsSync(tmp))fs.unlinkSync(tmp);}
