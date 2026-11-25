@@ -473,7 +473,9 @@ export interface SceneBucketList {
   imageFocusX?: number;
 }
 export interface WorldStoryScene {
-  visual: 'airport' | 'traveler' | 'ticket' | 'runway' | 'money' | 'shop' | 'coffee' | 'parking' | 'cars' | 'estate' | 'chart' | 'end';
+  chapter?: number;
+  composition?: 'stat' | 'lower' | 'left' | 'top';
+  visual: 'hook' | 'map' | 'terminal' | 'security' | 'payment' | 'donut' | 'airport' | 'traveler' | 'ticket' | 'runway' | 'money' | 'shop' | 'coffee' | 'parking' | 'cars' | 'estate' | 'chart' | 'end';
   narration: string;
   source?: string;
   episode: number;

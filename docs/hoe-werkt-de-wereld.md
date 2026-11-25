@@ -56,3 +56,8 @@ Bestaande publicatiebouw probeert Nederlandse Piper-stem nl_NL-mls-medium, score
 13 · 8 sec · Ruim twee derde van de omzet komt uit havengelden. De rest komt uit commerciële en andere activiteiten. Omzet is geen winst.
 
 14 · 5 sec · Volgende keer: waarom verkoopt IKEA gehaktballetjes?
+
+## Revisie 2
+27 shots, 72 seconden. Hoofdstukvoice-over doorlopend over korte beeldwisselingen. Afwisselende typografie, 4 personagevarianten, diepte in gebouwen, nieuwe terminal-, betaal- en securityshots, geanimeerde donut en echte runway-ligging. LVNL bron: https://eaip.lvnl.nl/AIRAC%20AMDT%2011-2026_2026_10_29/eAIP/EH-AD%202%20EHAM%201-en-GB.html (AD 2.12). Alleen de baanassen zijn geografisch gebaseerd; ondergrond en overige gebouwen illustratief. Nederlandse Piper MLS spreker 29, modelkaart https://huggingface.co/rhasspy/piper-voices/blob/main/nl/nl_NL/mls/medium/MODEL_CARD (CC BY 4.0, MLS). eSpeak NG als terugval indien geïnstalleerd. Captions geschat op gesproken hoofdstuklengte. 
+
+Nieuwe scène-indeling en voice-over staan in project.json; versie 1-timing hierboven is historisch.

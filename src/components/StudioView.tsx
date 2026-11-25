@@ -109,6 +109,8 @@ export function StudioView({
   const isDoodleExplainer = project.scenes.some(scene => scene.layout === 'doodle-explainer');
   const isBucketList = project.scenes.some(scene => scene.layout === 'bucket-list-zoom');
 
+  useEffect(()=>{setExportOptions(o=>({...o,resolution:'1080p',fps:project.fps===60?60:30}));},[project.id,project.fps]);
+
   // Sync JSON editor when project switches
   useEffect(() => {
     setJsonDraft(JSON.stringify(project, null, 2));

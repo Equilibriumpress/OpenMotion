@@ -321,9 +321,9 @@ export function renderOpenMotionFrame(
 
   if (scene.worldStory) {
     const previous = sceneIndex > 0 ? project.scenes[sceneIndex-1] : undefined;
-    if (previous?.worldStory && localTime < .38) {
+    if (previous?.worldStory && scene.transition === 'fade' && localTime < .18) {
       renderWorldStory(ctx,w,h,previous,previous.durationSec,project,safeTime);
-      ctx.save();ctx.globalAlpha=Math.max(0,Math.min(1,localTime/.38));
+      ctx.save();ctx.globalAlpha=Math.max(0,Math.min(1,localTime/.18));
       renderWorldStory(ctx,w,h,scene,localTime,project,safeTime);ctx.restore();
     } else renderWorldStory(ctx,w,h,scene,localTime,project,safeTime);
     renderTimedCaptions(ctx,w,h,project,safeTime);ctx.restore();return;
