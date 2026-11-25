@@ -137,6 +137,69 @@ async function containsMp4AudioTrack(blob:Blob):Promise<boolean|null>{
   return sawHandler?false:null;
 }
 
+/**
+ * Read the video track's mdhd/stts atoms instead of trusting the selected
+ * FPS. Safari has been observed recording 30 fps when captureStream(60) was
+ * requested. A missing or fragmented sample table yields null, not a guess.
+ */
+async function actualMp4FrameRate(blob:Blob):Promise<number|null>{
+  if(!blob.type.startsWith('video/mp4'))return null;
+  const extent=2*1024*1024;
+  const parts=[new Uint8Array(await blob.slice(0,Math.min(blob.size,extent)).arrayBuffer())];
+  if(blob.size>extent)parts.push(new Uint8Array(await blob.slice(Math.max(0,blob.size-extent)).arrayBuffer()));
+  type Atom={start:number;end:number;type:string};
+  for(const bytes of parts){
+    const read=(i:number)=>bytes[i]*16777216+bytes[i+1]*65536+bytes[i+2]*256+bytes[i+3];
+    const label=(i:number)=>String.fromCharCode(bytes[i],bytes[i+1],bytes[i+2],bytes[i+3]);
+    const children=(start:number,end:number):Atom[]=>{
+      const found:Atom[]=[];let i=start;
+      while(i+8<=end){
+        const length=read(i);
+        if(length<8||i+length>end)break;
+        found.push({start:i,end:i+length,type:label(i+4)});
+        i+=length;
+      }
+      return found;
+    };
+    // A moov atom can reside at either end of the MP4. A tail chunk may
+    // begin in the middle of mdat, so search validated moov boundaries.
+    for(let pos=4;pos+8<bytes.length;pos++){
+      if(label(pos)!=='moov')continue;
+      const start=pos-4,size=read(start);
+      if(size<16||start+size>bytes.length)continue;
+      for(const trak of children(start+8,start+size).filter(b=>b.type==='trak')){
+        const mdia=children(trak.start+8,trak.end).find(b=>b.type==='mdia');
+        if(!mdia)continue;
+        const mdiaBoxes=children(mdia.start+8,mdia.end);
+        const hdlr=mdiaBoxes.find(b=>b.type==='hdlr');
+        const mdhd=mdiaBoxes.find(b=>b.type==='mdhd');
+        const minf=mdiaBoxes.find(b=>b.type==='minf');
+        if(!hdlr||!mdhd||!minf||label(hdlr.start+16)!=='vide')continue;
+        const isV1=bytes[mdhd.start+8]===1;
+        const scaleAt=mdhd.start+(isV1?28:20);
+        if(scaleAt+4>mdhd.end)continue;
+        const timescale=read(scaleAt);
+        const stbl=children(minf.start+8,minf.end).find(b=>b.type==='stbl');
+        const stts=stbl&&children(stbl.start+8,stbl.end).find(b=>b.type==='stts');
+        if(!stts||!timescale)continue;
+        const entries=read(stts.start+12);
+        let samples=0,ticks=0;
+        for(let j=0;j<entries;j++){
+          const at=stts.start+16+j*8;
+          if(at+8>stts.end)break;
+          const count=read(at),delta=read(at+4);
+          samples+=count;ticks+=count*delta;
+        }
+        if(samples&&ticks){
+          const fps=samples*timescale/ticks;
+          if(fps>0&&fps<=240)return Math.round(fps*100)/100;
+        }
+      }
+    }
+  }
+  return null;
+}
+
 function describeOutput(
   actual: {width: number; height: number} | null,
   intendedWidth: number,
@@ -530,9 +593,16 @@ async function encodeWithMediaRecorderFallback(params: {
   const audioStatus = mixedAudio && audioTrackFound===false
     ? ' · WAARSCHUWING: deze Safari-export mist een audiospoor. Exporteer op een browser met AAC/WebCodecs-ondersteuning.'
     : mixedAudio && audioTrackFound===true ? ' · AAC-audiospoor gecontroleerd' : '';
-  const inspected = describeOutput(await actualVideoSize(blob),width,height,`MediaRecorder (${chosenMime})`+audioStatus);
+  const measuredFps=await actualMp4FrameRate(blob);
+  const fpsStatus=measuredFps===null
+    ? ' · Werkelijke framerate niet meetbaar in dit bestand'
+    : Math.abs(measuredFps-fps)>.5
+      ? ' · LET OP: feitelijk '+measuredFps+' fps (gevraagd '+fps+')'
+      : ' · framerate gecontroleerd: '+measuredFps+' fps';
+  const inspected = describeOutput(await actualVideoSize(blob),width,height,`MediaRecorder (${chosenMime})`+audioStatus+fpsStatus);
   const outputUrl = URL.createObjectURL(blob);
-  const fileName = `${project.slug}-${inspected.w}x${inspected.h}-${fps}fps.${container}`;
+  const fpsLabel=measuredFps===null?'fps-onbekend':measuredFps+'fps';
+  const fileName = `${project.slug}-${inspected.w}x${inspected.h}-${fpsLabel}.${container}`;
 
   const finalState: RenderProgressState = {
     phase: 'done',
