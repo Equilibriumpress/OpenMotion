@@ -366,8 +366,12 @@ export function renderOpenMotionFrame(
     // Crossfade from the previous map/photo shot for 0.65s without pausing
     // the new scene's timeline. Image and map resources are preloaded.
     const previous=sceneIndex>0 ? project.scenes[sceneIndex-1] : undefined;
+    // Film grammar: cinematic reveal after the map, brisk cut between
+    // reason cards, and a slower transition to the coastal finale.
+    const dissolveTarget=previous?.bucketList?.chapter==='zoom' ? .78
+      : scene.bucketList.chapter==='outro' ? .60 : .36;
     const dissolve=previous?.layout==='bucket-list-zoom'&&previous.bucketList&&scene.transition==='fade'
-      ? Math.min(.65,previous.durationSec*.23,scene.durationSec*.23)
+      ? Math.min(dissolveTarget,previous.durationSec*.23,scene.durationSec*.23)
       : 0;
     if(previous?.bucketList&&dissolve>0&&localTime<dissolve){
       const finalPreviousTime=Math.max(0,previous.durationSec-1/Math.max(1,project.fps));
