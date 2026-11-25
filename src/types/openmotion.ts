@@ -33,6 +33,7 @@ export type SceneLayout =
   | 'paper-map-journey'
   | 'geo-route-reel'
   | 'premium-travel-route'
+  | 'bucket-list-zoom'
   | 'whiteboard-science'
   | 'doodle-explainer'
   | 'editorial-cartography'
@@ -435,6 +436,25 @@ export interface SceneDoodleExplainer {
   /** Editable narration script. Not synthesized automatically. */
   narration?: string;
 }
+/** Editable destination and scene contents for vertical bucket-list reels. */
+export interface SceneBucketList {
+  chapter: 'zoom' | 'reason' | 'outro';
+  episode: number;
+  destination: string;
+  region: string;
+  country: string;
+  latitude: number;
+  longitude: number;
+  /** First wide-view camera, GeoJSON longitude / latitude ordering. */
+  startLongitude?: number;
+  startLatitude?: number;
+  reasonNumber?: number;
+  reasonTitle?: string;
+  reasonCopy?: string;
+  imageAuthor?: string;
+  imageLicense?: string;
+  imageSourceUrl?: string;
+}
 export interface OpenMotionScene {
   id: string;
   name: string;
@@ -487,6 +507,7 @@ export interface OpenMotionScene {
   editorialMap?: SceneEditorialMap;
   geoRoute?: SceneGeoRoute;
   premiumTravel?: ScenePremiumTravelRoute;
+  bucketList?: SceneBucketList;
   whiteboard?: SceneWhiteboard;
   doodle?: SceneDoodleExplainer;
   threeCampervan?: SceneThreeCampervan;
@@ -565,6 +586,7 @@ export const ALL_SCENE_LAYOUTS: SceneLayout[] = [
   'editorial-cartography',
   'geo-route-reel',
   'premium-travel-route',
+  'bucket-list-zoom',
   'whiteboard-science',
   'doodle-explainer',
   'paper-map-journey',
@@ -613,6 +635,7 @@ export const LAYOUT_DISPLAY_NAMES: Record<SceneLayout, string> = {
   'editorial-cartography': 'Editorial Cartography (OSM)',
   'geo-route-reel': 'GeoJSON / GPX Travel Route',
   'premium-travel-route': 'Premium Roadtrip Map & Photo Stops',
+  'bucket-list-zoom': 'Bucket List · Globe-to-Location Reel',
   'whiteboard-science': 'Animated Whiteboard Science',
   'doodle-explainer': 'Hand-drawn Pastel Explainer',
   'paper-map-journey': 'Paper Map Journey (Cut-Paper)',

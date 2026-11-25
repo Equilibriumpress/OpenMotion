@@ -151,6 +151,7 @@ export function normalizeOpenMotionProject(
     'editorial-cartography',
     'geo-route-reel',
     'premium-travel-route',
+    'bucket-list-zoom',
     'whiteboard-science',
     'doodle-explainer',
     'three-campervan-journey',
@@ -378,6 +379,8 @@ export function normalizeOpenMotionProject(
           : undefined,
       premiumTravel:
         sc.premiumTravel && typeof sc.premiumTravel === 'object' ? (sc.premiumTravel as OpenMotionScene['premiumTravel']) : undefined,
+      bucketList:
+        sc.bucketList && typeof sc.bucketList === 'object' ? (sc.bucketList as OpenMotionScene['bucketList']) : undefined,
       geoRoute:
         sc.geoRoute && typeof sc.geoRoute === 'object' ? (sc.geoRoute as OpenMotionScene['geoRoute']) : undefined,
       doodle: sc.doodle && typeof sc.doodle === 'object'
