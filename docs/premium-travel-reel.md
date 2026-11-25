@@ -107,3 +107,42 @@ film as production-ready.
 The primary travel animation now uses a small red location dot with a white rim and a subtle, time-based halo instead of the oversized illustrated camper. The dot follows the exact projected road geometry, without angle changes at sharp road bends. Preview and MP4 use the same frame time for the pulse.
 
 An optional small top-down camper remains in the Studio's **Route-markering** selector for experiments. Its on-screen heading is computed from a short path look-ahead, avoiding immediate rotation on every tiny polyline segment. This is still a 2D icon, not a photorealistic 3D camper. A realistic vehicle would need consistent top-down assets, scale, stabilized heading and correct occlusion. The dot is the recommended default for readable vertical map reels.
+
+
+## R4 — Cinematic transitions and continuous journey
+
+All eight Scotland scenes remain at exactly 30 seconds. The actual frame renderer
+now mixes outgoing and incoming scene artwork for up to 0.7 seconds using a
+smoothstep cross-dissolve. This includes map-to-photo, photo-to-map and
+Portree-to-final-map cuts. The previous artificial dark overlays have been
+removed. The dissolve is rendered frame by frame and works in the browser
+preview and deterministic MP4 exporter without a new video engine.
+
+During driving shots, camera focus is stabilized over neighboring points on
+the actual routed geometry. The location dot itself stays directly on the
+route. The camera briefly looks ahead, settles near each stop, and eases
+between zoom levels. At 26 seconds the finale begins close to Portree and
+pulls back to the complete route with the closing title appearing later.
+
+Incoming and outgoing scene titles fade separately from the photographs
+and basemap, reducing stacked captions during a cross-dissolve.
+
+### Photography revision
+
+The opening replaces a dark Edinburgh frame with a daytime castle photo.
+The Portree stop replaces the previous harbour shot with a verified
+Wikimedia Commons view that clearly contains the colourful waterfront houses.
+
+- Edinburgh: LibKat17, CC BY 4.0:
+  https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_from_Princes_Street_(2026).jpg
+- Portree: Bewahrerderwerte, CC BY-SA 4.0:
+  https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg
+
+The original image authors and license details are also stored on every
+stop for on-frame attribution. See the source pages for the license terms.
+
+### Verification
+
+Source consistency checks verify every scene uses the same photo set and
+the template catalog matches its standalone project JSON. No GitHub Actions
+have been started. Live Safari/iPad MP4 exports still need visual inspection.
