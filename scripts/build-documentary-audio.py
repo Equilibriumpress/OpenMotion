@@ -52,7 +52,7 @@ def main():
                     for group in groups:
                         a=offset+.35+speech*count/len(words);count+=len(group)
                         b=offset+.35+speech*count/len(words)
-                        captions.append({"text":" ".join(group),"startSec":round(a,3),"endSec":round(b,3),"style":"minimal","position":.87})
+                        captions.append({"text":" ".join(group),"startSec":round(a,3),"endSec":round(b,3),"style":"minimal","position":.85})
                 else:
                     ff("-f","lavfi","-i","anullsrc=r=48000:cl=mono","-t",str(duration),"-c:a","pcm_s16le",fitted)
                 wavs.append(fitted);offset+=duration
