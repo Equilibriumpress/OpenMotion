@@ -3,7 +3,7 @@
   "id": "hoe-werkt-de-wereld-001-schiphol",
   "slug": "hoe-werkt-de-wereld-001-schiphol",
   "title": "Hoe werkt de wereld? 01 · Hoe verdient Schiphol geld aan jou?",
-  "description": "Nederlandstalige geïllustreerde economische minidocumentaire. Jaarcijfers 2025, 14 shots, bewerkbare scèneconfiguratie.",
+  "description": "Versie 2 · 27 shots · 72 sec · economische minidocumentaire met Nederlandse audio en LVNL-baankaart.",
   "category": "Shorts & Reels",
   "author": "OpenMotion Studio",
   "source": "template",
@@ -27,250 +27,382 @@
   "scenes": [
     {
       "id": "world-01",
-      "name": "Hoe verdient Schiphol",
-      "durationSec": 6,
+      "name": "Bijna",
+      "durationSec": 3,
       "layout": "paper-cutout",
       "transition": "fade",
       "backdrop": "grid-architectural",
-      "eyebrow": "Hoe verdient Schiphol",
-      "headline": "GELD AAN JOU?",
+      "eyebrow": "Bijna",
+      "headline": "€ 2,8 miljard",
       "fullBleed": true,
       "worldStory": {
-        "visual": "airport",
-        "narration": "Je koopt een vliegticket. Maar hoe verdient Schiphol eigenlijk geld aan jouw reis?",
-        "source": "",
-        "episode": 1
+        "visual": "hook",
+        "chapter": 1,
+        "narration": "In 2025 draaide de Schiphol Group bijna 2,8 miljard euro omzet. Waar komt dat geld vandaan?",
+        "source": "Schiphol Group · 2025",
+        "episode": 1,
+        "composition": "stat"
       }
     },
     {
       "id": "world-02",
-      "name": "In 2025 reisden via Schiphol",
-      "durationSec": 6,
+      "name": "Hoe verdient Schiphol",
+      "durationSec": 3,
       "layout": "paper-cutout",
-      "transition": "fade",
+      "transition": "wipe-left",
       "backdrop": "grid-architectural",
-      "eyebrow": "In 2025 reisden via Schiphol",
-      "headline": "68,8 MILJOEN",
+      "eyebrow": "Hoe verdient Schiphol",
+      "headline": "geld aan jou?",
       "fullBleed": true,
       "worldStory": {
-        "visual": "traveler",
-        "narration": "In 2025 reisden 68,8 miljoen passagiers van, via of naar Schiphol.",
-        "source": "Amsterdam Airport Schiphol · 2025",
-        "episode": 1
+        "visual": "airport",
+        "chapter": 1,
+        "narration": "",
+        "source": "",
+        "episode": 1,
+        "composition": "top"
       }
     },
     {
       "id": "world-03",
-      "name": "Je vliegticket koop je bij",
-      "durationSec": 5,
+      "name": "Amsterdam Airport",
+      "durationSec": 2.5,
       "layout": "paper-cutout",
       "transition": "fade",
       "backdrop": "grid-architectural",
-      "eyebrow": "Je vliegticket koop je bij",
-      "headline": "DE AIRLINE",
+      "eyebrow": "Amsterdam Airport",
+      "headline": "Schiphol",
       "fullBleed": true,
       "worldStory": {
-        "visual": "ticket",
-        "narration": "Je ticket koop je bij een luchtvaartmaatschappij. Die betaalt voor het gebruik van de luchthaven.",
-        "source": "",
-        "episode": 1
+        "visual": "map",
+        "chapter": 2,
+        "narration": "Op Schiphol zelf reisden dat jaar 68,8 miljoen passagiers.",
+        "source": "LVNL eAIP · EHAM",
+        "episode": 1,
+        "composition": "lower"
       }
     },
     {
       "id": "world-04",
-      "name": "De belangrijkste inkomstenbron",
-      "durationSec": 8,
+      "name": "In 2025",
+      "durationSec": 3,
       "layout": "paper-cutout",
-      "transition": "fade",
+      "transition": "wipe-left",
       "backdrop": "grid-architectural",
-      "eyebrow": "De belangrijkste inkomstenbron",
-      "headline": "HAVENGELDEN",
+      "eyebrow": "In 2025",
+      "headline": "68,8 miljoen",
       "fullBleed": true,
       "worldStory": {
-        "visual": "runway",
-        "narration": "Voor landingen, passagiersvoorzieningen en beveiliging betaalt de maatschappij havengelden. Die kosten spelen mee in je ticketprijs.",
-        "source": "",
-        "episode": 1
+        "visual": "traveler",
+        "chapter": 2,
+        "narration": "",
+        "source": "Amsterdam Airport Schiphol · 2025",
+        "episode": 1,
+        "composition": "left"
       }
     },
     {
       "id": "world-05",
-      "name": "Havengelden in 2025",
-      "durationSec": 7,
+      "name": "Jouw ticket",
+      "durationSec": 2.5,
       "layout": "paper-cutout",
       "transition": "fade",
       "backdrop": "grid-architectural",
-      "eyebrow": "Havengelden in 2025",
-      "headline": "€ 1,888 MILJARD",
+      "eyebrow": "Jouw ticket",
+      "headline": "De airline",
       "fullBleed": true,
       "worldStory": {
-        "visual": "money",
-        "narration": "Bij de hele Schiphol Group leverden de havengelden in 2025 bijna 1,9 miljard euro op.",
-        "source": "Schiphol Group · 2025",
-        "episode": 1
+        "visual": "ticket",
+        "chapter": 3,
+        "narration": "Je koopt je ticket bij een airline. Die betaalt voor het gebruik van de luchthaven.",
+        "source": "",
+        "episode": 1,
+        "composition": "top"
       }
     },
     {
       "id": "world-06",
-      "name": "Na de beveiliging begint",
-      "durationSec": 7,
+      "name": "Van airline",
+      "durationSec": 2.5,
       "layout": "paper-cutout",
-      "transition": "fade",
+      "transition": "wipe-left",
       "backdrop": "grid-architectural",
-      "eyebrow": "Na de beveiliging begint",
-      "headline": "DE WINKELSTRAAT",
+      "eyebrow": "Van airline",
+      "headline": "naar luchthaven",
       "fullBleed": true,
       "worldStory": {
-        "visual": "shop",
-        "narration": "Je koopt koffie of parfum. De winkelier krijgt je betaling. Schiphol ontvangt inkomsten uit commerciële afspraken.",
+        "visual": "money",
+        "chapter": 3,
+        "narration": "",
         "source": "",
-        "episode": 1
+        "episode": 1,
+        "composition": "lower"
       }
     },
     {
       "id": "world-07",
-      "name": "Commerciële concessies",
-      "durationSec": 7,
+      "name": "01 / Havengelden",
+      "durationSec": 2.5,
       "layout": "paper-cutout",
       "transition": "fade",
       "backdrop": "grid-architectural",
-      "eyebrow": "Commerciële concessies",
-      "headline": "€ 254 MILJOEN",
+      "eyebrow": "01 / Havengelden",
+      "headline": "Landingen",
       "fullBleed": true,
       "worldStory": {
-        "visual": "coffee",
-        "narration": "De groep boekte 254 miljoen euro aan concessie-inkomsten. Dat is iets anders dan de totale winkelomzet.",
-        "source": "Schiphol Group · 2025",
-        "episode": 1
+        "visual": "runway",
+        "chapter": 4,
+        "narration": "Voor landingen, passagiersvoorzieningen en beveiliging betalen airlines havengelden.",
+        "source": "",
+        "episode": 1,
+        "composition": "left"
       }
     },
     {
       "id": "world-08",
-      "name": "Kom je met de auto?",
-      "durationSec": 6,
+      "name": "01 / Havengelden",
+      "durationSec": 2.5,
       "layout": "paper-cutout",
-      "transition": "fade",
+      "transition": "wipe-left",
       "backdrop": "grid-architectural",
-      "eyebrow": "Kom je met de auto?",
-      "headline": "PARKEREN",
+      "eyebrow": "01 / Havengelden",
+      "headline": "Passagiers",
       "fullBleed": true,
       "worldStory": {
-        "visual": "parking",
-        "narration": "Ook voordat je de terminal binnenloopt, verdient de luchthaven geld. Bijvoorbeeld aan parkeerplaatsen.",
+        "visual": "terminal",
+        "chapter": 4,
+        "narration": "",
         "source": "",
-        "episode": 1
+        "episode": 1,
+        "composition": "top"
       }
     },
     {
       "id": "world-09",
-      "name": "Parkeerinkomsten",
-      "durationSec": 5,
+      "name": "01 / Havengelden",
+      "durationSec": 2.5,
       "layout": "paper-cutout",
-      "transition": "fade",
+      "transition": "wipe-left",
       "backdrop": "grid-architectural",
-      "eyebrow": "Parkeerinkomsten",
-      "headline": "€ 182 MILJOEN",
+      "eyebrow": "01 / Havengelden",
+      "headline": "Beveiliging",
       "fullBleed": true,
       "worldStory": {
-        "visual": "cars",
-        "narration": "De parkeerinkomsten bedroegen voor de groep 182 miljoen euro.",
-        "source": "Schiphol Group · 2025",
-        "episode": 1
+        "visual": "security",
+        "chapter": 4,
+        "narration": "",
+        "source": "",
+        "episode": 1,
+        "composition": "lower"
       }
     },
     {
       "id": "world-10",
-      "name": "Rond de terminal ligt",
-      "durationSec": 8,
+      "name": "Havengelden",
+      "durationSec": 3,
       "layout": "paper-cutout",
       "transition": "fade",
       "backdrop": "grid-architectural",
-      "eyebrow": "Rond de terminal ligt",
-      "headline": "EEN ZAKENDISTRICT",
+      "eyebrow": "Havengelden",
+      "headline": "€ 1,888 miljard",
       "fullBleed": true,
       "worldStory": {
-        "visual": "estate",
-        "narration": "Rond de luchthaven liggen kantoren, hotels en logistieke gebouwen. Schiphol ontvangt huur en lease-inkomsten.",
-        "source": "Schematische illustratie",
-        "episode": 1
+        "visual": "money",
+        "chapter": 5,
+        "narration": "Voor de hele groep samen was dat bijna 1,9 miljard euro.",
+        "source": "Schiphol Group · 2025",
+        "episode": 1,
+        "composition": "left"
       }
     },
     {
       "id": "world-11",
-      "name": "Huur en lease",
-      "durationSec": 6,
+      "name": "02 / Concessies",
+      "durationSec": 2.5,
       "layout": "paper-cutout",
       "transition": "fade",
       "backdrop": "grid-architectural",
-      "eyebrow": "Huur en lease",
-      "headline": "€ 234 MILJOEN",
+      "eyebrow": "02 / Concessies",
+      "headline": "Winkels en horeca",
       "fullBleed": true,
       "worldStory": {
-        "visual": "estate",
-        "narration": "In 2025 was dat voor de hele groep 234 miljoen euro.",
-        "source": "Schiphol Group · 2025",
-        "episode": 1
+        "visual": "shop",
+        "chapter": 6,
+        "narration": "Na de beveiliging koop je koffie of parfum. De winkelier ontvangt je betaling.",
+        "source": "",
+        "episode": 1,
+        "composition": "top"
       }
     },
     {
       "id": "world-12",
-      "name": "Waar komt het geld vandaan?",
-      "durationSec": 6,
+      "name": "Een koffie",
+      "durationSec": 2.5,
       "layout": "paper-cutout",
-      "transition": "fade",
+      "transition": "wipe-left",
       "backdrop": "grid-architectural",
-      "eyebrow": "Waar komt het geld vandaan?",
-      "headline": "€ 2,761 MILJARD",
+      "eyebrow": "Een koffie",
+      "headline": "Betalen",
       "fullBleed": true,
       "worldStory": {
-        "visual": "chart",
-        "narration": "Met nog 203 miljoen euro aan overige inkomsten komt de groepsomzet uit op ruim 2,7 miljard euro.",
-        "source": "Schiphol Group · 2025",
+        "visual": "coffee",
+        "chapter": 6,
+        "narration": "",
+        "source": "",
         "episode": 1,
-        "data": [
-          {
-            "label": "Havengelden",
-            "value": 1888,
-            "color": "#2457cc"
-          },
-          {
-            "label": "Concessies",
-            "value": 254,
-            "color": "#d5a23e"
-          },
-          {
-            "label": "Huur en lease",
-            "value": 234,
-            "color": "#547a67"
-          },
-          {
-            "label": "Parkeren",
-            "value": 182,
-            "color": "#c36a55"
-          },
-          {
-            "label": "Overig",
-            "value": 203,
-            "color": "#9299a0"
-          }
-        ]
+        "composition": "lower"
       }
     },
     {
       "id": "world-13",
-      "name": "Het grootste deel komt uit",
-      "durationSec": 8,
+      "name": "Van winkelier",
+      "durationSec": 2.5,
       "layout": "paper-cutout",
       "transition": "fade",
       "backdrop": "grid-architectural",
-      "eyebrow": "Het grootste deel komt uit",
-      "headline": "68% HAVENGELDEN",
+      "eyebrow": "Van winkelier",
+      "headline": "naar Schiphol",
+      "fullBleed": true,
+      "worldStory": {
+        "visual": "payment",
+        "chapter": 7,
+        "narration": "Schiphol ontvangt inkomsten uit commerciële afspraken. Voor de groep was dat 254 miljoen euro.",
+        "source": "",
+        "episode": 1,
+        "composition": "left"
+      }
+    },
+    {
+      "id": "world-14",
+      "name": "Concessies",
+      "durationSec": 3,
+      "layout": "paper-cutout",
+      "transition": "wipe-left",
+      "backdrop": "grid-architectural",
+      "eyebrow": "Concessies",
+      "headline": "€ 254 miljoen",
+      "fullBleed": true,
+      "worldStory": {
+        "visual": "coffee",
+        "chapter": 7,
+        "narration": "",
+        "source": "Schiphol Group · 2025",
+        "episode": 1,
+        "composition": "top"
+      }
+    },
+    {
+      "id": "world-15",
+      "name": "03 / Parkeren",
+      "durationSec": 2.5,
+      "layout": "paper-cutout",
+      "transition": "fade",
+      "backdrop": "grid-architectural",
+      "eyebrow": "03 / Parkeren",
+      "headline": "Slagboom open",
+      "fullBleed": true,
+      "worldStory": {
+        "visual": "parking",
+        "chapter": 8,
+        "narration": "Ook parkeren levert geld op. De groepsinkomsten bedroegen 182 miljoen euro.",
+        "source": "",
+        "episode": 1,
+        "composition": "lower"
+      }
+    },
+    {
+      "id": "world-16",
+      "name": "Parkeerinkomsten",
+      "durationSec": 2.5,
+      "layout": "paper-cutout",
+      "transition": "wipe-left",
+      "backdrop": "grid-architectural",
+      "eyebrow": "Parkeerinkomsten",
+      "headline": "€ 182 miljoen",
+      "fullBleed": true,
+      "worldStory": {
+        "visual": "cars",
+        "chapter": 8,
+        "narration": "",
+        "source": "Schiphol Group · 2025",
+        "episode": 1,
+        "composition": "left"
+      }
+    },
+    {
+      "id": "world-17",
+      "name": "04 / Vastgoed",
+      "durationSec": 2.5,
+      "layout": "paper-cutout",
+      "transition": "fade",
+      "backdrop": "grid-architectural",
+      "eyebrow": "04 / Vastgoed",
+      "headline": "Schiphol en omgeving",
+      "fullBleed": true,
+      "worldStory": {
+        "visual": "map",
+        "chapter": 9,
+        "narration": "Rond de luchthaven vind je kantoren, hotels en logistieke gebouwen.",
+        "source": "LVNL eAIP · EHAM",
+        "episode": 1,
+        "composition": "top"
+      }
+    },
+    {
+      "id": "world-18",
+      "name": "04 / Vastgoed",
+      "durationSec": 2.5,
+      "layout": "paper-cutout",
+      "transition": "wipe-left",
+      "backdrop": "grid-architectural",
+      "eyebrow": "04 / Vastgoed",
+      "headline": "Kantoren en hotels",
+      "fullBleed": true,
+      "worldStory": {
+        "visual": "estate",
+        "chapter": 9,
+        "narration": "",
+        "source": "",
+        "episode": 1,
+        "composition": "lower"
+      }
+    },
+    {
+      "id": "world-19",
+      "name": "Huur en lease",
+      "durationSec": 3,
+      "layout": "paper-cutout",
+      "transition": "fade",
+      "backdrop": "grid-architectural",
+      "eyebrow": "Huur en lease",
+      "headline": "€ 234 miljoen",
+      "fullBleed": true,
+      "worldStory": {
+        "visual": "estate",
+        "chapter": 10,
+        "narration": "De groep ontving 234 miljoen euro aan huur en lease.",
+        "source": "Schiphol Group · 2025",
+        "episode": 1,
+        "composition": "left"
+      }
+    },
+    {
+      "id": "world-20",
+      "name": "Overige inkomsten",
+      "durationSec": 2.5,
+      "layout": "paper-cutout",
+      "transition": "fade",
+      "backdrop": "grid-architectural",
+      "eyebrow": "Overige inkomsten",
+      "headline": "€ 203 miljoen",
       "fullBleed": true,
       "worldStory": {
         "visual": "chart",
-        "narration": "Ruim twee derde van de omzet komt uit havengelden. De rest komt uit commerciële en andere activiteiten. Omzet is geen winst.",
+        "chapter": 11,
+        "narration": "Met 203 miljoen aan overige inkomsten komt de omzet uit op 2,761 miljard euro.",
         "source": "Schiphol Group · 2025",
         "episode": 1,
+        "composition": "stat",
         "data": [
           {
             "label": "Havengelden",
@@ -301,255 +433,452 @@
       }
     },
     {
-      "id": "world-14",
-      "name": "Hoe werkt de wereld?",
-      "durationSec": 5,
+      "id": "world-21",
+      "name": "Totale groepsomzet",
+      "durationSec": 3,
+      "layout": "paper-cutout",
+      "transition": "wipe-left",
+      "backdrop": "grid-architectural",
+      "eyebrow": "Totale groepsomzet",
+      "headline": "€ 2,761 miljard",
+      "fullBleed": true,
+      "worldStory": {
+        "visual": "chart",
+        "chapter": 11,
+        "narration": "",
+        "source": "Schiphol Group · 2025",
+        "episode": 1,
+        "composition": "stat",
+        "data": [
+          {
+            "label": "Havengelden",
+            "value": 1888,
+            "color": "#2457cc"
+          },
+          {
+            "label": "Concessies",
+            "value": 254,
+            "color": "#d5a23e"
+          },
+          {
+            "label": "Huur en lease",
+            "value": 234,
+            "color": "#547a67"
+          },
+          {
+            "label": "Parkeren",
+            "value": 182,
+            "color": "#c36a55"
+          },
+          {
+            "label": "Overig",
+            "value": 203,
+            "color": "#9299a0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "world-22",
+      "name": "Het grootste aandeel",
+      "durationSec": 3,
       "layout": "paper-cutout",
       "transition": "fade",
       "backdrop": "grid-architectural",
-      "eyebrow": "Hoe werkt de wereld?",
-      "headline": "VOLGENDE: IKEA",
+      "eyebrow": "Het grootste aandeel",
+      "headline": "68%",
+      "fullBleed": true,
+      "worldStory": {
+        "visual": "donut",
+        "chapter": 12,
+        "narration": "Ruim twee derde komt uit havengelden. De rest uit commerciële en andere activiteiten.",
+        "source": "Schiphol Group · 2025",
+        "episode": 1,
+        "composition": "stat",
+        "data": [
+          {
+            "label": "Havengelden",
+            "value": 1888,
+            "color": "#2457cc"
+          },
+          {
+            "label": "Concessies",
+            "value": 254,
+            "color": "#d5a23e"
+          },
+          {
+            "label": "Huur en lease",
+            "value": 234,
+            "color": "#547a67"
+          },
+          {
+            "label": "Parkeren",
+            "value": 182,
+            "color": "#c36a55"
+          },
+          {
+            "label": "Overig",
+            "value": 203,
+            "color": "#9299a0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "world-23",
+      "name": "De overige inkomsten",
+      "durationSec": 3,
+      "layout": "paper-cutout",
+      "transition": "wipe-left",
+      "backdrop": "grid-architectural",
+      "eyebrow": "De overige inkomsten",
+      "headline": "32%",
+      "fullBleed": true,
+      "worldStory": {
+        "visual": "chart",
+        "chapter": 12,
+        "narration": "",
+        "source": "",
+        "episode": 1,
+        "composition": "stat",
+        "data": [
+          {
+            "label": "Havengelden",
+            "value": 1888,
+            "color": "#2457cc"
+          },
+          {
+            "label": "Concessies",
+            "value": 254,
+            "color": "#d5a23e"
+          },
+          {
+            "label": "Huur en lease",
+            "value": 234,
+            "color": "#547a67"
+          },
+          {
+            "label": "Parkeren",
+            "value": 182,
+            "color": "#c36a55"
+          },
+          {
+            "label": "Overig",
+            "value": 203,
+            "color": "#9299a0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "world-24",
+      "name": "Omzet is",
+      "durationSec": 2.5,
+      "layout": "paper-cutout",
+      "transition": "fade",
+      "backdrop": "grid-architectural",
+      "eyebrow": "Omzet is",
+      "headline": "geen winst",
+      "fullBleed": true,
+      "worldStory": {
+        "visual": "money",
+        "chapter": 13,
+        "narration": "Omzet is geen winst. Je betaalt direct én indirect mee aan de luchthaven.",
+        "source": "",
+        "episode": 1,
+        "composition": "lower"
+      }
+    },
+    {
+      "id": "world-25",
+      "name": "Je reis betaalt mee",
+      "durationSec": 2.5,
+      "layout": "paper-cutout",
+      "transition": "wipe-left",
+      "backdrop": "grid-architectural",
+      "eyebrow": "Je reis betaalt mee",
+      "headline": "direct én indirect",
+      "fullBleed": true,
+      "worldStory": {
+        "visual": "airport",
+        "chapter": 13,
+        "narration": "",
+        "source": "",
+        "episode": 1,
+        "composition": "left"
+      }
+    },
+    {
+      "id": "world-26",
+      "name": "Volgende aflevering",
+      "durationSec": 2.5,
+      "layout": "paper-cutout",
+      "transition": "fade",
+      "backdrop": "grid-architectural",
+      "eyebrow": "Volgende aflevering",
+      "headline": "IKEA",
       "fullBleed": true,
       "worldStory": {
         "visual": "end",
+        "chapter": 14,
         "narration": "Volgende keer: waarom verkoopt IKEA gehaktballetjes?",
-        "source": "Aflevering 01",
-        "episode": 1
+        "source": "",
+        "episode": 1,
+        "composition": "stat"
+      }
+    },
+    {
+      "id": "world-27",
+      "name": "Hoe werkt de wereld?",
+      "durationSec": 2.5,
+      "layout": "paper-cutout",
+      "transition": "wipe-left",
+      "backdrop": "grid-architectural",
+      "eyebrow": "Hoe werkt de wereld?",
+      "headline": "Waarom gehaktballetjes?",
+      "fullBleed": true,
+      "worldStory": {
+        "visual": "end",
+        "chapter": 14,
+        "narration": "",
+        "source": "",
+        "episode": 1,
+        "composition": "stat"
       }
     }
   ],
   "captions": [
     {
-      "text": "Je koopt een vliegticket. Maar hoe verdient Schiphol",
-      "startSec": 0.25,
-      "endSec": 3.635,
+      "text": "In 2025 draaide de Schiphol Group bijna",
+      "startSec": 0.18,
+      "endSec": 2.63,
       "style": "minimal",
-      "position": 0.77,
-      "fontSizePx": 44
+      "position": 0.78,
+      "fontSizePx": 47
     },
     {
-      "text": "eigenlijk geld aan jouw reis?",
-      "startSec": 3.635,
-      "endSec": 5.75,
+      "text": "2,8 miljard euro omzet. Waar komt dat",
+      "startSec": 2.63,
+      "endSec": 5.08,
       "style": "minimal",
-      "position": 0.77,
-      "fontSizePx": 44
+      "position": 0.78,
+      "fontSizePx": 47
     },
     {
-      "text": "In 2025 reisden 68,8 miljoen passagiers van, via",
-      "startSec": 6.25,
-      "endSec": 10.25,
+      "text": "geld vandaan?",
+      "startSec": 5.08,
+      "endSec": 5.78,
       "style": "minimal",
-      "position": 0.77,
-      "fontSizePx": 44
+      "position": 0.78,
+      "fontSizePx": 47
     },
     {
-      "text": "of naar Schiphol.",
-      "startSec": 10.25,
-      "endSec": 11.75,
+      "text": "Op Schiphol zelf reisden dat jaar 68,8",
+      "startSec": 6.18,
+      "endSec": 10.147,
       "style": "minimal",
-      "position": 0.77,
-      "fontSizePx": 44
+      "position": 0.78,
+      "fontSizePx": 47
     },
     {
-      "text": "Je ticket koop je bij een luchtvaartmaatschappij. Die",
-      "startSec": 12.25,
-      "endSec": 14.65,
+      "text": "miljoen passagiers.",
+      "startSec": 10.147,
+      "endSec": 11.28,
       "style": "minimal",
-      "position": 0.77,
-      "fontSizePx": 44
+      "position": 0.78,
+      "fontSizePx": 47
     },
     {
-      "text": "betaalt voor het gebruik van de luchthaven.",
-      "startSec": 14.65,
-      "endSec": 16.75,
+      "text": "Je koopt je ticket bij een airline.",
+      "startSec": 11.68,
+      "endSec": 13.827,
       "style": "minimal",
-      "position": 0.77,
-      "fontSizePx": 44
+      "position": 0.78,
+      "fontSizePx": 47
     },
     {
-      "text": "Voor landingen, passagiersvoorzieningen en beveiliging betaalt de maatschappij",
-      "startSec": 17.25,
-      "endSec": 21,
+      "text": "Die betaalt voor het gebruik van de",
+      "startSec": 13.827,
+      "endSec": 15.973,
       "style": "minimal",
-      "position": 0.77,
-      "fontSizePx": 44
+      "position": 0.78,
+      "fontSizePx": 47
     },
     {
-      "text": "havengelden. Die kosten spelen mee in je ticketprijs.",
-      "startSec": 21,
-      "endSec": 24.75,
+      "text": "luchthaven.",
+      "startSec": 15.973,
+      "endSec": 16.28,
       "style": "minimal",
-      "position": 0.77,
-      "fontSizePx": 44
+      "position": 0.78,
+      "fontSizePx": 47
     },
     {
-      "text": "Bij de hele Schiphol Group leverden de havengelden",
-      "startSec": 25.25,
-      "endSec": 28.717,
+      "text": "Voor landingen, passagiersvoorzieningen en beveiliging betalen airlines",
+      "startSec": 16.68,
+      "endSec": 22.892,
       "style": "minimal",
-      "position": 0.77,
-      "fontSizePx": 44
+      "position": 0.78,
+      "fontSizePx": 47
     },
     {
-      "text": "in 2025 bijna 1,9 miljard euro op.",
-      "startSec": 28.717,
-      "endSec": 31.75,
+      "text": "havengelden.",
+      "startSec": 22.892,
+      "endSec": 23.78,
       "style": "minimal",
-      "position": 0.77,
-      "fontSizePx": 44
+      "position": 0.78,
+      "fontSizePx": 47
     },
     {
-      "text": "Je koopt koffie of parfum. De winkelier krijgt",
-      "startSec": 32.25,
-      "endSec": 35.5,
+      "text": "Voor de hele groep samen was dat",
+      "startSec": 24.18,
+      "endSec": 25.835,
       "style": "minimal",
-      "position": 0.77,
-      "fontSizePx": 44
+      "position": 0.78,
+      "fontSizePx": 47
     },
     {
-      "text": "je betaling. Schiphol ontvangt inkomsten uit commerciële afspraken.",
-      "startSec": 35.5,
-      "endSec": 38.75,
+      "text": "bijna 1,9 miljard euro.",
+      "startSec": 25.835,
+      "endSec": 26.78,
       "style": "minimal",
-      "position": 0.77,
-      "fontSizePx": 44
+      "position": 0.78,
+      "fontSizePx": 47
     },
     {
-      "text": "De groep boekte 254 miljoen euro aan concessie-inkomsten.",
-      "startSec": 39.25,
-      "endSec": 42.5,
+      "text": "Na de beveiliging koop je koffie of",
+      "startSec": 27.18,
+      "endSec": 29.657,
       "style": "minimal",
-      "position": 0.77,
-      "fontSizePx": 44
+      "position": 0.78,
+      "fontSizePx": 47
     },
     {
-      "text": "Dat is iets anders dan de totale winkelomzet.",
-      "startSec": 42.5,
-      "endSec": 45.75,
+      "text": "parfum. De winkelier ontvangt je betaling.",
+      "startSec": 29.657,
+      "endSec": 31.78,
       "style": "minimal",
-      "position": 0.77,
-      "fontSizePx": 44
+      "position": 0.78,
+      "fontSizePx": 47
     },
     {
-      "text": "Ook voordat je de terminal binnenloopt, verdient de",
-      "startSec": 46.25,
-      "endSec": 49.635,
+      "text": "Schiphol ontvangt inkomsten uit commerciële afspraken. Voor",
+      "startSec": 32.18,
+      "endSec": 34.73,
       "style": "minimal",
-      "position": 0.77,
-      "fontSizePx": 44
+      "position": 0.78,
+      "fontSizePx": 47
     },
     {
-      "text": "luchthaven geld. Bijvoorbeeld aan parkeerplaatsen.",
-      "startSec": 49.635,
-      "endSec": 51.75,
+      "text": "de groep was dat 254 miljoen euro.",
+      "startSec": 34.73,
+      "endSec": 37.28,
       "style": "minimal",
-      "position": 0.77,
-      "fontSizePx": 44
+      "position": 0.78,
+      "fontSizePx": 47
     },
     {
-      "text": "De parkeerinkomsten bedroegen voor de groep 182 miljoen",
-      "startSec": 52.25,
-      "endSec": 56.25,
+      "text": "Ook parkeren levert geld op. De groepsinkomsten",
+      "startSec": 37.68,
+      "endSec": 40.607,
       "style": "minimal",
-      "position": 0.77,
-      "fontSizePx": 44
+      "position": 0.78,
+      "fontSizePx": 47
     },
     {
-      "text": "euro.",
-      "startSec": 56.25,
-      "endSec": 56.75,
+      "text": "bedroegen 182 miljoen euro.",
+      "startSec": 40.607,
+      "endSec": 42.28,
       "style": "minimal",
-      "position": 0.77,
-      "fontSizePx": 44
+      "position": 0.78,
+      "fontSizePx": 47
     },
     {
-      "text": "Rond de luchthaven liggen kantoren, hotels en logistieke",
-      "startSec": 57.25,
-      "endSec": 61.536,
+      "text": "Rond de luchthaven vind je kantoren, hotels",
+      "startSec": 42.68,
+      "endSec": 45.9,
       "style": "minimal",
-      "position": 0.77,
-      "fontSizePx": 44
+      "position": 0.78,
+      "fontSizePx": 47
     },
     {
-      "text": "gebouwen. Schiphol ontvangt huur en lease-inkomsten.",
-      "startSec": 61.536,
-      "endSec": 64.75,
+      "text": "en logistieke gebouwen.",
+      "startSec": 45.9,
+      "endSec": 47.28,
       "style": "minimal",
-      "position": 0.77,
-      "fontSizePx": 44
+      "position": 0.78,
+      "fontSizePx": 47
     },
     {
-      "text": "In 2025 was dat voor de hele groep",
-      "startSec": 65.25,
-      "endSec": 69.25,
+      "text": "De groep ontving 234 miljoen euro aan",
+      "startSec": 47.68,
+      "endSec": 49.5,
       "style": "minimal",
-      "position": 0.77,
-      "fontSizePx": 44
+      "position": 0.78,
+      "fontSizePx": 47
     },
     {
-      "text": "234 miljoen euro.",
-      "startSec": 69.25,
-      "endSec": 70.75,
+      "text": "huur en lease.",
+      "startSec": 49.5,
+      "endSec": 50.28,
       "style": "minimal",
-      "position": 0.77,
-      "fontSizePx": 44
+      "position": 0.78,
+      "fontSizePx": 47
     },
     {
-      "text": "Met nog 203 miljoen euro aan overige inkomsten",
-      "startSec": 71.25,
-      "endSec": 73.838,
+      "text": "Met 203 miljoen aan overige inkomsten komt",
+      "startSec": 50.68,
+      "endSec": 53.23,
       "style": "minimal",
-      "position": 0.77,
-      "fontSizePx": 44
+      "position": 0.78,
+      "fontSizePx": 47
     },
     {
-      "text": "komt de groepsomzet uit op ruim 2,7 miljard",
-      "startSec": 73.838,
-      "endSec": 76.426,
+      "text": "de omzet uit op 2,761 miljard euro.",
+      "startSec": 53.23,
+      "endSec": 55.78,
       "style": "minimal",
-      "position": 0.77,
-      "fontSizePx": 44
+      "position": 0.78,
+      "fontSizePx": 47
     },
     {
-      "text": "euro.",
-      "startSec": 76.426,
-      "endSec": 76.75,
+      "text": "Ruim twee derde komt uit havengelden. De",
+      "startSec": 56.18,
+      "endSec": 59.195,
       "style": "minimal",
-      "position": 0.77,
-      "fontSizePx": 44
+      "position": 0.78,
+      "fontSizePx": 47
     },
     {
-      "text": "Ruim twee derde van de omzet komt uit",
-      "startSec": 77.25,
-      "endSec": 80.107,
+      "text": "rest uit commerciële en andere activiteiten.",
+      "startSec": 59.195,
+      "endSec": 61.78,
       "style": "minimal",
-      "position": 0.77,
-      "fontSizePx": 44
+      "position": 0.78,
+      "fontSizePx": 47
     },
     {
-      "text": "havengelden. De rest komt uit commerciële en andere",
-      "startSec": 80.107,
-      "endSec": 82.964,
+      "text": "Omzet is geen winst. Je betaalt direct",
+      "startSec": 62.18,
+      "endSec": 64.657,
       "style": "minimal",
-      "position": 0.77,
-      "fontSizePx": 44
+      "position": 0.78,
+      "fontSizePx": 47
     },
     {
-      "text": "activiteiten. Omzet is geen winst.",
-      "startSec": 82.964,
-      "endSec": 84.75,
+      "text": "én indirect mee aan de luchthaven.",
+      "startSec": 64.657,
+      "endSec": 66.78,
       "style": "minimal",
-      "position": 0.77,
-      "fontSizePx": 44
+      "position": 0.78,
+      "fontSizePx": 47
     },
     {
       "text": "Volgende keer: waarom verkoopt IKEA gehaktballetjes?",
-      "startSec": 85.25,
-      "endSec": 89.75,
+      "startSec": 67.18,
+      "endSec": 71.78,
       "style": "minimal",
-      "position": 0.77,
-      "fontSizePx": 44
+      "position": 0.78,
+      "fontSizePx": 47
     }
   ],
   "audioTracks": [
@@ -558,7 +887,7 @@
       "kind": "voiceover",
       "src": "assets/audio/hoe-werkt-de-wereld-001-schiphol-voice.mp3",
       "startSec": 0,
-      "endSec": 90,
+      "endSec": 72,
       "volume": 1
     },
     {
@@ -566,7 +895,7 @@
       "kind": "music",
       "src": "assets/audio/hoe-werkt-de-wereld-001-schiphol-score.mp3",
       "startSec": 0,
-      "endSec": 90,
+      "endSec": 72,
       "volume": 0.25
     },
     {
@@ -574,7 +903,7 @@
       "kind": "effect",
       "src": "assets/audio/hoe-werkt-de-wereld-001-schiphol-ambience.mp3",
       "startSec": 0,
-      "endSec": 90,
+      "endSec": 72,
       "volume": 0.12
     }
   ]

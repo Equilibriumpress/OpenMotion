@@ -109,6 +109,8 @@ export function StudioView({
   const isDoodleExplainer = project.scenes.some(scene => scene.layout === 'doodle-explainer');
   const isBucketList = project.scenes.some(scene => scene.layout === 'bucket-list-zoom');
 
+  useEffect(()=>{setExportOptions(o=>({...o,resolution:'1080p',fps:project.fps===60?60:30}));},[project.id,project.fps]);
+
   // Sync JSON editor when project switches
   useEffect(() => {
     setJsonDraft(JSON.stringify(project, null, 2));
@@ -888,7 +890,7 @@ export function StudioView({
                       </button>
                       {renderState.audioSidecarUrl && (
                         <div className="space-y-2 rounded-lg border border-amber-300 bg-amber-50 p-3">
-                          <p className="text-xs text-amber-900">Safari kon de muziek niet betrouwbaar in de video opnemen. Download het originele geluid apart als WAV om dit in je video-editor aan de MP4 toe te voegen.</p>
+                          <p className="text-xs text-amber-900">Safari kon de audiotrack niet betrouwbaar in de video opnemen. Download het originele geluid apart als WAV om dit in je video-editor aan de MP4 toe te voegen.</p>
                           <button type="button" onClick={handleDownloadSidecar}
                             className="w-full inline-flex justify-center items-center gap-2 rounded-lg bg-amber-900 px-3 py-2 text-xs font-semibold text-white">
                             <Download className="w-4 h-4"/>Download soundtrack (WAV)
@@ -902,10 +904,10 @@ export function StudioView({
                   {project.prebuiltMp4Url && (
                     <div className="pt-4 border-t border-slate-100 space-y-1.5">
                       <p className="text-xs font-medium text-slate-700">
-                        GitHub Pages MP4-pad (Actions artifact)
+                        Publicatiemaster · MP4
                       </p>
                       <a
-                        href={project.prebuiltMp4Url}
+                        href={projectAssetUrl(project.prebuiltMp4Url)}
                         target="_blank"
                         rel="noreferrer"
                         className="block text-xs font-mono text-blue-700 hover:underline truncate"

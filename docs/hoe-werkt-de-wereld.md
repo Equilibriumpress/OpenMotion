@@ -56,3 +56,11 @@ Bestaande publicatiebouw probeert Nederlandse Piper-stem nl_NL-mls-medium, score
 13 · 8 sec · Ruim twee derde van de omzet komt uit havengelden. De rest komt uit commerciële en andere activiteiten. Omzet is geen winst.
 
 14 · 5 sec · Volgende keer: waarom verkoopt IKEA gehaktballetjes?
+
+## Revisie 2
+27 shots, 72 seconden. Hoofdstukvoice-over doorlopend over korte beeldwisselingen. Afwisselende typografie, 4 personagevarianten, diepte in gebouwen, nieuwe terminal-, betaal- en securityshots, geanimeerde donut en echte runway-ligging. LVNL bron: https://eaip.lvnl.nl/AIRAC%20AMDT%2011-2026_2026_10_29/eAIP/EH-AD%202%20EHAM%201-en-GB.html (AD 2.12). Alleen de baanassen zijn geografisch gebaseerd; ondergrond en overige gebouwen illustratief. Nederlandse Piper MLS spreker 29, modelkaart https://huggingface.co/rhasspy/piper-voices/blob/main/nl/nl_NL/mls/medium/MODEL_CARD (CC BY 4.0, MLS). eSpeak NG als terugval indien geïnstalleerd. Captions geschat op gesproken hoofdstuklengte. 
+
+Nieuwe scène-indeling en voice-over staan in project.json; versie 1-timing hierboven is historisch.
+
+### Publicatiemaster
+De bestaande Pages-build rendert de wereldserie na de Vite-build met Chromium en FFmpeg. Publiceert alleen een master wanneer ffprobe 1080×1920, 60 fps, juiste duur en een audiotrack bevestigt. Nederlandse voice-over is verplicht voor de master. Bij falen blijft het bewerkbare project beschikbaar; de masterlink verschijnt niet. Handmatig lokaal: WORLD_RENDER=1 npm run build (audio: DOCUMENTARY_AUDIO=1). Deze route vereist Chromium, FFmpeg en FFprobe. Geen aparte Actions-workflow.

@@ -2,7 +2,7 @@
 an original musical score and separate synthesized environmental sound beds.
 No paid API or external sound recordings. All outputs are publication assets.
 """
-import json, math, pathlib, re, subprocess, sys, tempfile, wave
+import json, math, pathlib, re, subprocess, sys, tempfile, wave, shutil
 from itertools import groupby
 ROOT=pathlib.Path(__file__).resolve().parent.parent
 OUT=ROOT/"public/assets/audio"
@@ -39,7 +39,7 @@ def ambience(ch,duration,out):
 def build(p,work,python,model=MODEL):
     slug=p["slug"]
     if not re.fullmatch(r"[a-z0-9-]+",slug): raise ValueError("Invalid slug")
-    chapters=[(k,list(v)) for k,v in groupby(p["scenes"],key=lambda s:s["id"] if s.get("worldStory") else s.get("bucketList",{}).get("documentary",{}).get("chapter",1))]
+    chapters=[(k,list(v)) for k,v in groupby(p["scenes"],key=lambda s:s["worldStory"].get("chapter",s["id"]) if s.get("worldStory") else s.get("bucketList",{}).get("documentary",{}).get("chapter",1))]
     voicefiles=[];musicfiles=[];ambfiles=[];captions=[];offset=0.0
     for ch_index,(chapter_key,scenes) in enumerate(chapters,1):
         ch=ch_index
@@ -48,7 +48,12 @@ def build(p,work,python,model=MODEL):
         raw=work/f"{ch}-raw.wav";fitted=work/f"{ch}-voice.wav"
         if narration:
             # One uninterrupted synthesis per chapter: no restart on every cut.
-            run([python,"-m","piper","-m",work/(model+".onnx"),"-f",raw],input=narration+"\n",text=True)
+            if model=="espeak-nl":
+                run([shutil.which("espeak-ng") or shutil.which("espeak") or "espeak-ng","-v","nl","-s","155","-w",raw,narration])
+            else:
+                args=[python,"-m","piper","-m",work/(model+".onnx"),"-f",raw]
+                if model.startswith("nl_"): args+=["--speaker","29"]
+                run(args,input=narration+"\n",text=True)
             with wave.open(str(raw)) as w: seconds=w.getnframes()/w.getframerate()
             lead=.3;tail=.45;window=max(.5,duration-lead-tail)
             rate=max(.93,seconds/window)
@@ -91,17 +96,19 @@ def main():
     for path in (ROOT/"projects").glob("*/project.json"):
         p=json.loads(path.read_text())
         if any(s.get("bucketList",{}).get("documentary") or s.get("worldStory") for s in p.get("scenes",[])):projects.append(p)
+    projects.sort(key=lambda p:not any(s.get("worldStory") for s in p["scenes"]))
     if not projects:return
     with tempfile.TemporaryDirectory() as tmp:
         work=pathlib.Path(tmp)
         run([sys.executable,"-m","venv",work/"venv"])
         python=work/"venv/bin/python"
-        run([python,"-m","pip","install","--disable-pip-version-check","piper-tts==1.3.0"])
+        try: run([python,"-m","pip","install","--disable-pip-version-check","piper-tts==1.3.0"])
+        except Exception as exc: print(f"[piper] {exc}",file=sys.stderr)
         models=set()
         for p in projects:
             dutch=any(s.get("worldStory") for s in p.get("scenes",[]))
             model="nl_NL-mls-medium" if dutch else MODEL
-            base="https://huggingface.co/rhasspy/piper-voices/resolve/v1.0.0/nl/nl_NL/mls/medium/" if dutch else MODEL_BASE
+            base="https://huggingface.co/rhasspy/piper-voices/resolve/main/nl/nl_NL/mls/medium/" if dutch else MODEL_BASE
             try:
                 if model not in models:
                     for suffix in [".onnx",".onnx.json"]:
@@ -110,4 +117,11 @@ def main():
                 build(p,work,python,model)
             except Exception as exc:
                 print(f"[audio] {p['slug']}: {exc}",file=sys.stderr)
+                if dutch:
+                    if not (shutil.which("espeak-ng") or shutil.which("espeak")) and __import__("os").environ.get("GITHUB_ACTIONS")=="true":
+                        try: run(["sudo","apt-get","install","-y","espeak-ng"])
+                        except Exception as fallback_error: print(f"[espeak] {fallback_error}",file=sys.stderr)
+                    if not (shutil.which("espeak-ng") or shutil.which("espeak")): continue
+                    print("[audio] Using Dutch fallback voice",file=sys.stderr)
+                    build(p,work,python,"espeak-nl")
 if __name__=="__main__":main()
