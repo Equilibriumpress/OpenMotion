@@ -9,16 +9,28 @@ Canvas renderer: src/engine/bucketListRenderer.ts
 Original music: src/engine/bucketListAudio.ts
 Layout identifier: bucket-list-zoom
 
-## Storyboard
+## R4 Director's Cut — final timeline
 
-| Time | Sequence | Visual |
+| Video time | Camera / edit | On-screen direction |
 | --- | --- | --- |
-| 0–2 s | Opening | Unlabeled MapLibre globe, Places Worth The Journey |
-| 2–6 s | Geographic zoom | Faster Atlantic → Azores → São Miguel → Sete Cidades |
-| 6–9 s | Reason 1 | Crater lakes, Two Lakes. One Volcanic Crater. |
-| 9–12 s | Reason 2 | Lagoa do Congro forest trail, Walk Into The Wild. |
-| 12–16 s | Reason 3 | Boca do Inferno viewpoint, Views You Won't Forget. |
-| 16–20 s | Outro | Different aerial photo of Mosteiros coast, Save This Place |
+| 0–1 s | Earth emerges with a continuous globe camera | Immediate **BUCKET LIST #001** hook, no generic slogan |
+| 1–4.5 s | Geographic zoom over Atlantic to Sete Cidades | Fastest movement mid-flight, then hold the real map for ~0.36 s |
+| 4.5–9 s | Crater lakes and caldera | 0.78 s image dissolve, first 0.88 s of the photograph without headline, **TWO LAKES. ONE VOLCANIC CRATER.** |
+| 9–12 s | Forest trail to Lagoa do Congro | 0.36 s image dissolve, faster title **FOREST TRAILS TO HIDDEN LAKES.** |
+| 12–16 s | Miradouro da Boca do Inferno | Longer photo hold (0.92 s), then **SEE SETE CIDADES FROM ABOVE.** |
+| 16–20 s | Mosteiros coastal aerial, then the mapped island | 0.60 s image dissolve, **SÃO MIGUEL / SAVE THIS PLACE**, native map zoom-out in final 1.8 s |
+
+The first reason is the central reveal: the photo appears before typography and its image dissolves from a settled geographic camera position. The forest shot accelerates the edit, and Boca do Inferno becomes the unhurried scenic high point.
+
+Photographic grade: one mild Canvas contrast/saturation/brightness correction across all photographic shots, plus a restrained green-blue tint. Camera moves vary by subject rather than repeating one Ken Burns animation. Authors and licenses remain visible.
+
+The transition engine composites only geographic/photo image layers during each dissolve. The next shot's heading is drawn separately. No superimposed old/new titles.
+
+### R4 original audio direction
+
+Original offline Web Audio score is retimed to the current 20-second cut. A filtered musical lift builds toward the crater reveal at 4.5 seconds. A short synthesized sweep and low-frequency landing accent coincide with that transition. Three restrained cut accents follow at 9, 12 and 16 seconds; a final soft sweep introduces the map outro at about 18.2 seconds. The audio uses seeded procedural noise and oscillators only, with no copyrighted samples.
+
+The procedural soundtrack is already connected to Studio preview and the browser export. Safari may omit its MP4 audio stream; in that case OpenMotion offers an independently downloadable stereo WAV. Embedded audio and high-resolution 60fps are not guaranteed without checking the actual MP4.
 
 ## R3 — True continuous geographic camera
 
@@ -28,7 +40,7 @@ R3 replaces that technique with one **persistent MapLibre GL JS instance** using
 
 During WebCodecs MP4 export, each geographic frame is rendered by MapLibre at its actual timestamp and awaited before encoding. Six representative camera positions prewarm map tiles, without reusing those positions as static animation frames. Export is more computationally demanding than R2 but does not fake a geographic interpolation.
 
-The globe intro remains 6 seconds. The final **1.8 seconds** return from the Mosteiros coast photograph to a real zoomed-out MapLibre map of São Miguel. A deterministic fade provides the photo-to-cartography transition, ending around native zoom 7.3. Both scenes retain OpenStreetMap and photo attribution.
+The R4 Director's Cut shortens the globe intro to 4.5 seconds and holds the final camera for roughly 0.36 seconds. The final **1.8 seconds** return from the Mosteiros coast photograph to a real zoomed-out MapLibre map of São Miguel. A deterministic fade provides the photo-to-cartography transition, ending around native zoom 7.3. Both scenes retain OpenStreetMap and photo attribution.
 
 A live map needs WebGL and a network connection for OpenFreeMap tiles. Offline playback after preparation still needs the existing map to stay alive. Preview performance varies by device and the browser's WebGL limits.
 
@@ -64,13 +76,13 @@ Under the Studio's Bewerken tab, the My Bucket List controls let you change the 
 
 Editing the destination triggers another geographic camera preparation run. Replace the images and credit metadata when reusing the template for another place.
 
-The original music builds during the shortened 6-second zoom and accents cut points at 6, 9, 12 and 16 seconds. It is generated with Web Audio offline, and is sent to the browser's MP4 encoder when no external audio tracks are supplied. Users can substitute their own licensed audio.
+The R4 original score builds toward the crater-lake reveal at 4.5 seconds and accents cuts at 4.5, 9, 12 and 16 seconds. It is generated with Web Audio offline, and is sent to the browser's MP4 encoder when no external audio tracks are supplied. Users can substitute their own licensed audio.
 
 ## Export and verification
 
 The export probes H.264 and AAC WebCodecs support and tries 720×1280 when the original 1080×1920 configuration is unavailable, before falling back to Safari MediaRecorder. MediaRecorder now requests an explicit H.264/AAC MIME where supported and preactivates the Web Audio stream. After an MP4 export, the browser reads the MP4's track handlers to detect an audio track and warns if Safari silently stripped it. Safari can still downscale the video, and not every browser supports AAC recording. The actual output resolution is reported by the existing encoded-size probe.
 
-The previously reviewed iPad MP4 contained only video at 512×910. The updated pipeline has not yet been verified by an actual iPad recording. This revision is a compatibility improvement, not a confirmed 1080p/audio guarantee. No separate GitHub Actions test workflows have been added. The main-branch deployment will run using the existing publication workflow.
+The previously reviewed iPad MP4 contained only video at 512×910. R4 still requires a new iPad MP4 review to confirm the continuous camera, timing and audio output. This revision is a compatibility improvement, not a confirmed 1080p/audio guarantee. No separate GitHub Actions test workflows have been added. The main-branch deployment will run using the existing publication workflow.
 
 References:
 - https://maplibre.org/maplibre-gl-js/docs/examples/display-a-globe-with-a-vector-map/

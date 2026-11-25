@@ -6,15 +6,19 @@ const GOLD = '#D9B77A';
 const clamp = (v:number) => Math.max(0,Math.min(1,v));
 const smooth = (v:number) => {const t=clamp(v);return t*t*(3-2*t);};
 
-function fitPhoto(ctx:CanvasRenderingContext2D,img:HTMLImageElement,w:number,h:number,t:number,focusX=.5){
-  const aspect=Math.max(w/img.naturalWidth,h/img.naturalHeight);
-  const zoom=1.04+.14*smooth(t);
-  const imageW=img.naturalWidth*aspect*zoom, imageH=img.naturalHeight*aspect*zoom;
-  // A configurable center of interest keeps the coastal foreground in frame
-  // on wide images and retains more visible motion across a short photo shot.
-  const pan=w*.036*(2*smooth(t)-1);
+function fitPhoto(ctx:CanvasRenderingContext2D,img:HTMLImageElement,w:number,h:number,t:number,focusX=.5,mode:'crater'|'trail'|'view'|'coast'='crater'){
+  const progress=smooth(t),scale=Math.max(w/img.naturalWidth,h/img.naturalHeight);
+  // Different camera intentions per shot: slow reveal, walking momentum,
+  // long scenic hold, then a gentle pullback before the mapped outro.
+  const zoom=mode==='crater' ? 1.03+.09*progress
+    : mode==='trail' ? 1.055+.11*progress
+    : mode==='view' ? 1.035+.045*progress
+    : 1.12-.07*progress;
+  const imageW=img.naturalWidth*scale*zoom,imageH=img.naturalHeight*scale*zoom;
+  const drift=mode==='view'?.008:mode==='trail'?.022:.016;
+  const pan=w*drift*(2*progress-1);
   const x=Math.max(w-imageW,Math.min(0,w*.5-focusX*imageW+pan));
-  const y=(h-imageH)/2+h*.016*(2*smooth(t)-1);
+  const y=Math.max(h-imageH,Math.min(0,(h-imageH)/2+h*.008*(2*progress-1)));
   ctx.drawImage(img,x,y,imageW,imageH);
 }
 function fallbackPhoto(ctx:CanvasRenderingContext2D,w:number,h:number){
@@ -100,24 +104,27 @@ function zoomScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMoti
   shade.addColorStop(1,'rgba(10,22,35,.60)');
   ctx.fillStyle=shade;ctx.fillRect(0,0,w,h);
   ctx.textAlign='left';
-  ctx.fillStyle=PAPER;ctx.font='700 '+Math.round(33*s)+'px "Plus Jakarta Sans",sans-serif';
+  ctx.fillStyle=PAPER;ctx.font='700 '+Math.round(32*s)+'px "Plus Jakarta Sans",sans-serif';
   ctx.fillText('MY BUCKET LIST',70*s,123*s,w-140*s);
-  ctx.fillStyle=GOLD;ctx.font='700 '+Math.round(24*s)+'px "Plus Jakarta Sans",sans-serif';
-  ctx.fillText('#'+String(d.episode).padStart(3,'0')+'    /    '+d.region.toUpperCase(),70*s,172*s,w-140*s);
+  ctx.fillStyle=GOLD;ctx.font='700 '+Math.round(25*s)+'px "Plus Jakarta Sans",sans-serif';
+  ctx.fillText(d.region.toUpperCase()+'  /  '+d.country.toUpperCase(),70*s,174*s,w-140*s);
 
-  const launch=1-smooth((t-.19)/.12);
+  // The first second must communicate the episode immediately. The large
+  // typography yields before the accelerated geographic approach begins.
+  const launch=1-smooth((time-.72)/.32);
   if(launch>0){
     ctx.save();ctx.globalAlpha*=launch;
-    ctx.fillStyle=PAPER;ctx.font='800 '+Math.round(78*s)+'px "Bricolage Grotesque",sans-serif';
-    ctx.fillText('PLACES WORTH',70*s,h-420*s,w-140*s);
-    ctx.fillText('THE JOURNEY',70*s,h-325*s,w-140*s);
+    ctx.fillStyle=PAPER;ctx.font='800 '+Math.round(94*s)+'px "Bricolage Grotesque",sans-serif';
+    ctx.fillText('BUCKET LIST',70*s,h-490*s,w-140*s);
+    ctx.fillStyle=GOLD;ctx.font='800 '+Math.round(165*s)+'px "Bricolage Grotesque",sans-serif';
+    ctx.fillText('#'+String(d.episode).padStart(3,'0'),67*s,h-310*s,w-140*s);
     ctx.restore();
   }
-  const arrive=smooth((t-.69)/.23);
+  const arrive=smooth((t-.78)/.16);
   if(arrive>0){
     ctx.save();ctx.globalAlpha*=arrive;
     ctx.fillStyle=GOLD;ctx.font='700 '+Math.round(29*s)+'px "Plus Jakarta Sans",sans-serif';
-    ctx.fillText('DESTINATION REACHED',72*s,h-432*s,w-150*s);
+    ctx.fillText('WELCOME TO '+d.region.toUpperCase(),72*s,h-432*s,w-150*s);
     ctx.fillStyle=PAPER;ctx.font='800 '+Math.round(102*s)+'px "Bricolage Grotesque",sans-serif';
     ctx.fillText(d.destination.toUpperCase(),70*s,h-326*s,w-140*s);
     ctx.font='500 '+Math.round(30*s)+'px "Plus Jakarta Sans",sans-serif';
@@ -131,7 +138,18 @@ function photoScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMot
   const d=scene.bucketList!,t=clamp(time/Math.max(.01,scene.durationSec)),s=w/1080;
   if(layer==='image'){
     const img=scene.imageUrl?getPhoto(scene.imageUrl):null;
-    if(img)fitPhoto(ctx,img,w,h,t,d.imageFocusX??.5);else fallbackPhoto(ctx,w,h);
+    if(img){
+      const mode=d.chapter==='outro'?'coast':d.reasonNumber===2?'trail':d.reasonNumber===3?'view':'crater';
+      ctx.save();
+      // Mild grade is shared by all four photographs. The different shots
+      // keep their local detail while matching contrast and saturation.
+      ctx.filter='contrast(1.06) saturate(.94) brightness(.98)';
+      fitPhoto(ctx,img,w,h,t,d.imageFocusX??.5,mode);
+      ctx.restore();
+      ctx.save();
+      ctx.fillStyle='#102F31';ctx.globalAlpha=.045;ctx.fillRect(0,0,w,h);
+      ctx.restore();
+    }else fallbackPhoto(ctx,w,h);
     if(d.chapter==='outro'){
       const frame=getBucketListCanvas(project),reveal=bucketListOutroReveal(scene,time);
       if(frame && reveal>0) {
@@ -140,13 +158,21 @@ function photoScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMot
     }
     return;
   }
+  // Give the flagship crater and the Boca do Inferno viewpoint a clean
+  // photo-only hold. The fast forest shot cuts to its text earlier.
+  const hold=d.chapter==='outro'?.42:d.reasonNumber===1?.88:d.reasonNumber===3?.92:.20;
+  const appear=smooth((time-hold)/.48);
+  const depart=d.chapter==='outro'?1:1-smooth((time-(scene.durationSec-.26))/.26);
   const shade=ctx.createLinearGradient(0,h*.25,0,h);
   shade.addColorStop(0,'rgba(11,26,26,0)');
-  shade.addColorStop(.48,'rgba(11,26,26,.35)');
-  shade.addColorStop(1,'rgba(7,22,25,.95)');
+  shade.addColorStop(.48,'rgba(11,26,26,.28)');
+  shade.addColorStop(1,'rgba(7,22,25,.93)');
+  ctx.save();
+  ctx.globalAlpha*=.28+.72*appear;
   ctx.fillStyle=shade;ctx.fillRect(0,h*.25,w,h*.75);
-  const appear=smooth((time-.08)/.36),depart=1-smooth((time-(scene.durationSec-.32))/.32);
+  ctx.restore();
   ctx.save();ctx.globalAlpha*=appear*depart;
+  ctx.translate(0,(1-appear)*28*s);
   ctx.textAlign='left';ctx.fillStyle=GOLD;
   ctx.font='700 '+Math.round(26*s)+'px "Plus Jakarta Sans",sans-serif';
   ctx.fillText(d.chapter==='outro'?'MY BUCKET LIST  /  #'+String(d.episode).padStart(3,'0'):'WHY '+d.reasonNumber+' / 03',70*s,h-490*s,w-140*s);
@@ -161,7 +187,7 @@ function photoScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMot
     else line=candidate;
   }
   if(line)lines.push(line);
-  const titleY=h-(d.chapter==='outro'?392:580)*s;
+  const titleY=h-(d.chapter==='outro'?392:d.reasonNumber===3?540:d.reasonNumber===2?520:580)*s;
   lines.slice(0,3).forEach((str,i)=>ctx.fillText(str,70*s,titleY+i*100*s,w-140*s));
   ctx.fillStyle='#E9E6D8';
   ctx.font='500 '+Math.round(36*s)+'px "Plus Jakarta Sans",sans-serif';
