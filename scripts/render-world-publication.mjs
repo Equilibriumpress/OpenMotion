@@ -6,7 +6,7 @@ import { once } from 'node:events';
 if(process.env.GITHUB_ACTIONS!=='true' && process.env.WORLD_RENDER!=='1') process.exit(0);
 const root=process.cwd(),dist=path.join(root,'dist'),manifestPath=path.join(dist,'projects','manifest.json');
 const manifest=JSON.parse(fs.readFileSync(manifestPath,'utf8'));
-const projects=manifest.projects.filter(p=>p.scenes.some(s=>s.worldStory));
+const projects=manifest.projects.filter(p=>p.scenes.some(s=>s.worldStory || s.catOffice));
 if(!projects.length)process.exit(0);
 const { chromium }=await import('playwright');
 const { createServer }=await import('vite');
@@ -27,7 +27,11 @@ try {
     try{
       const duration=p.scenes.reduce((sum,s)=>sum+s.durationSec,0),fps=60,width=1080,height=1920;
       const tracks=(p.audioTracks??[]).filter(t=>fs.existsSync(path.join(dist,t.src)));
-      if(!tracks.some(t=>t.kind==='voiceover'))throw Error('No narration available; not publishing a silent master.');
+      const isCat=p.scenes.some(s=>s.catOffice);
+      if(isCat){
+        if(!tracks.length)throw Error('Cat soundtrack missing.');
+        for(const id of ['oliver','boss','luna','bob']) if(!fs.existsSync(path.join(dist,'assets','cat-office',id+'.jpg')))throw Error('Cat photo missing: '+id);
+      }else if(!tracks.some(t=>t.kind==='voiceover'))throw Error('No narration available; not publishing a silent master.');
       page=await browser.newPage({viewport:{width,height}});
       await page.goto('http://127.0.0.1:4179/world-render-preview.html');
       await page.evaluate(async ({p,width,height})=>{
@@ -35,6 +39,12 @@ try {
         const c=document.querySelector('canvas');c.width=width;c.height=height;
         const ctx=c.getContext('2d',{alpha:false});
         await document.fonts.ready;
+        if(p.scenes.some(s=>s.catOffice)){
+          const {preloadProjectImages,getCachedPhoto}=await import('/src/engine/imageCache.ts');
+          const {projectAssetUrl}=await import('/src/engine/projectAudio.ts');
+          await preloadProjectImages(p);
+          for(const id of ['oliver','boss','luna','bob']) if(!getCachedPhoto(projectAssetUrl('assets/cat-office/'+id+'.jpg')))throw Error('Photo did not decode: '+id);
+        }
         window.renderWorldFrames=(start,count,fps)=>Array.from({length:count},(_,i)=>{
           renderOpenMotionFrame(ctx,p,(start+i)/fps,width,height);
           return c.toDataURL('image/jpeg',.94).split(',')[1];

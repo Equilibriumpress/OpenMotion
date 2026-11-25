@@ -482,7 +482,13 @@ export interface WorldStoryScene {
   data?: {label:string; value:number; color:string}[];
 }
 
+export interface CatOfficeScene {
+  shot: 'desk' | 'reaction' | 'meeting' | 'boss' | 'scream' | 'loop';
+  cues?: { start: number; end: number; text: string }[];
+  events?: { at: number; duration: number; kind: 'typing' | 'ping' | 'meow' | 'scratch' | 'bass' | 'tick' | 'snore' | 'scream' }[];
+}
 export interface OpenMotionScene {
+  catOffice?: CatOfficeScene;
   worldStory?: WorldStoryScene;
   id: string;
   name: string;

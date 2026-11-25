@@ -1,3 +1,4 @@
+import { renderCatOffice } from './catOfficeRenderer';
 import { renderGeoRouteReel, renderWhiteboardScience } from './shortsRenderer';
 import { renderDoodleExplainerScene } from './doodleExplainerRenderer';
 import { renderPremiumTravelScene, getPremiumError } from './premiumTravelRoute';
@@ -319,6 +320,10 @@ export function renderOpenMotionFrame(
   ctx.save();
   ctx.clearRect(0, 0, w, h);
 
+  if (scene.catOffice) {
+    renderCatOffice(ctx,w,h,scene,localTime);
+    ctx.restore();return;
+  }
   if (scene.worldStory) {
     const previous = sceneIndex > 0 ? project.scenes[sceneIndex-1] : undefined;
     if (previous?.worldStory && scene.transition === 'fade' && localTime < .18) {

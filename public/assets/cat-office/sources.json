@@ -1,0 +1,26 @@
+[
+  {
+    "id": "oliver",
+    "file": "Orange tabby cat closeup.jpg",
+    "license": "CC0-1.0",
+    "author": "Miscellaneous contributor"
+  },
+  {
+    "id": "boss",
+    "file": "Grey cat looking up at camera.jpg",
+    "license": "CC0-1.0",
+    "author": "Aleenamustlive"
+  },
+  {
+    "id": "luna",
+    "file": "A white cat facing.jpg",
+    "license": "CC-BY-4.0",
+    "author": "Maryam AlAkini"
+  },
+  {
+    "id": "bob",
+    "file": "BAPhoto-Portrait.jpg",
+    "license": "CC0-1.0",
+    "author": "BAPhoto-Portrait file contributor"
+  }
+]
