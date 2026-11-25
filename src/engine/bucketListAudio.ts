@@ -46,7 +46,7 @@ function synthesize(durationSec:number):Promise<AudioBuffer>{
       const oscillator=ctx.createOscillator();
       oscillator.type=index===0?'sine':'triangle';
       oscillator.frequency.setValueAtTime(chord.freqs[index],start);
-      const envelope=ctx.createGain(),volume=index===0?.075:.040;
+      const envelope=ctx.createGain(),volume=index===0 ? .075 : .040;
       const rise=Math.min(.9,length*.24),fade=Math.min(.8,length*.22);
       envelope.gain.setValueAtTime(.0001,start);
       envelope.gain.linearRampToValueAtTime(volume,start+rise);
@@ -59,7 +59,7 @@ function synthesize(durationSec:number):Promise<AudioBuffer>{
 
   // Restrained cinematic pulse that accelerates through the map journey
   // and becomes calmer after the first real landscape appears.
-  for(let second=0;second<duration-.35;second+=at(second<at(4.5)?.83:1.0)){
+  for(let second=0;second<duration-.35;second+=at(second < at(4.5) ? .83 : 1.0)){
     const oscillator=ctx.createOscillator();oscillator.type='sine';
     oscillator.frequency.setValueAtTime(82,second);
     oscillator.frequency.exponentialRampToValueAtTime(47,second+.29);

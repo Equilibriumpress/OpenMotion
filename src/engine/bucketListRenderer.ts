@@ -124,7 +124,7 @@ function zoomScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMoti
   if(arrive>0){
     ctx.save();ctx.globalAlpha*=arrive;
     ctx.fillStyle=GOLD;ctx.font='700 '+Math.round(29*s)+'px "Plus Jakarta Sans",sans-serif';
-    ctx.fillText('WELCOME TO THE AZORES',72*s,h-432*s,w-150*s);
+    ctx.fillText('WELCOME TO '+d.region.toUpperCase(),72*s,h-432*s,w-150*s);
     ctx.fillStyle=PAPER;ctx.font='800 '+Math.round(102*s)+'px "Bricolage Grotesque",sans-serif';
     ctx.fillText(d.destination.toUpperCase(),70*s,h-326*s,w-140*s);
     ctx.font='500 '+Math.round(30*s)+'px "Plus Jakarta Sans",sans-serif';
