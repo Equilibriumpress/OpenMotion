@@ -9,6 +9,7 @@ import {
 import { preloadProjectImages } from './imageCache';
 import { renderOpenMotionFrame } from './openMotionRenderer';
 import { mixProjectAudio } from './projectAudio';
+import {beginBucketListExport,captureBucketListExportFrame,endBucketListExport} from './bucketListCamera';
 
 
 async function probeAacEncoder(): Promise<AudioEncoderConfig | null> {
@@ -207,10 +208,30 @@ export async function exportProjectToMp4(
     }
   }
 
-  if (h264Config && (!mixedAudio || audioConfig)) {
-    return encodeWithWebCodecsMp4({
+  const isBucketList=project.scenes.some(scene=>scene.layout==='bucket-list-zoom');
+  if(isBucketList)await beginBucketListExport(project,signal);
+  try{
+    if (h264Config && (!mixedAudio || audioConfig)) {
+      return await encodeWithWebCodecsMp4({
+        mixedAudio,
+        audioConfig,
+        canvas,
+        ctx,
+        project,
+        width,
+        height,
+        fps,
+        totalFrames,
+        h264Config,
+        encoderNote,
+        startedAt,
+        onProgress,
+        signal,
+      });
+    }
+
+    return await encodeWithMediaRecorderFallback({
       mixedAudio,
-      audioConfig,
       canvas,
       ctx,
       project,
@@ -218,28 +239,14 @@ export async function exportProjectToMp4(
       height,
       fps,
       totalFrames,
-      h264Config,
-      encoderNote,
+      bitrate,
       startedAt,
       onProgress,
       signal,
     });
+  }finally{
+    if(isBucketList)endBucketListExport(project);
   }
-
-  return encodeWithMediaRecorderFallback({
-    mixedAudio,
-    canvas,
-    ctx,
-    project,
-    width,
-    height,
-    fps,
-    totalFrames,
-    bitrate,
-    startedAt,
-    onProgress,
-    signal,
-  });
 }
 
 async function encodeWithWebCodecsMp4(params: {
@@ -315,6 +322,7 @@ async function encodeWithWebCodecsMp4(params: {
       }
 
       const timeSec = frameIdx / fps;
+      await captureBucketListExportFrame(project,timeSec,signal);
       renderOpenMotionFrame(ctx, project, timeSec, width, height);
 
       const videoFrame = new VideoFrame(canvas, {
@@ -493,6 +501,7 @@ async function encodeWithMediaRecorderFallback(params: {
       throw new Error('Export geannuleerd door gebruiker.');
     }
     const frameStart = performance.now();
+    await captureBucketListExportFrame(project,frameIdx/fps,signal);
     renderOpenMotionFrame(ctx, project, frameIdx / fps, width, height);
 
     if (frameIdx % 3 === 0 || frameIdx === totalFrames - 1) {
