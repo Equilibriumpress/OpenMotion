@@ -167,8 +167,8 @@ export async function exportProjectToMp4(
   const startedAt = performance.now();
   const dims = getFormatDimensions(project.format, options.resolution);
   // H.264 requires even dimensions
-  const width = dims.width % 2 === 0 ? dims.width : dims.width - 1;
-  const height = dims.height % 2 === 0 ? dims.height : dims.height - 1;
+  let width = dims.width % 2 === 0 ? dims.width : dims.width - 1;
+  let height = dims.height % 2 === 0 ? dims.height : dims.height - 1;
   const fps = options.fps;
   const durationSec = Math.max(0.5, getProjectDurationSec(project));
   const totalFrames = Math.max(1, Math.ceil(durationSec * fps));
@@ -190,7 +190,22 @@ export async function exportProjectToMp4(
   const mixedAudio = await mixProjectAudio(project, durationSec);
   const audioConfig = mixedAudio ? await probeAacEncoder() : null;
 
-  const h264Config = await pickSupportedH264Config(width, height, fps, bitrate);
+  let h264Config = await pickSupportedH264Config(width, height, fps, bitrate);
+  let encoderNote = '';
+  // A browser may decline 1080×1920 while supporting 720×1280 H.264
+  // with AAC. Prefer that encoded-and-muxed result to the Safari
+  // MediaRecorder fallback observed to shrink exports to 512×910.
+  if(!h264Config && audioConfig && Math.max(width,height)>1280) {
+    const factor=1280/Math.max(width,height);
+    const w=Math.max(2,Math.floor(width*factor/2)*2);
+    const h=Math.max(2,Math.floor(height*factor/2)*2);
+    const supported=await pickSupportedH264Config(w,h,fps,Math.min(bitrate,6_000_000));
+    if(supported){
+      width=w;height=h;canvas.width=w;canvas.height=h;
+      h264Config=supported;
+      encoderNote=' · 720p AAC-fallback: browser ondersteunt geen 1080p WebCodecs';
+    }
+  }
 
   if (h264Config && (!mixedAudio || audioConfig)) {
     return encodeWithWebCodecsMp4({
@@ -204,6 +219,7 @@ export async function exportProjectToMp4(
       fps,
       totalFrames,
       h264Config,
+      encoderNote,
       startedAt,
       onProgress,
       signal,
@@ -237,6 +253,7 @@ async function encodeWithWebCodecsMp4(params: {
   fps: number;
   totalFrames: number;
   h264Config: VideoEncoderConfig;
+  encoderNote: string;
   startedAt: number;
   onProgress: (state: RenderProgressState) => void;
   signal?: AbortSignal;
@@ -252,6 +269,7 @@ async function encodeWithWebCodecsMp4(params: {
     h264Config,
     mixedAudio,
     audioConfig,
+    encoderNote,
     startedAt,
     onProgress,
     signal,
@@ -341,7 +359,7 @@ async function encodeWithWebCodecsMp4(params: {
     muxer.finalize();
 
     const mp4Blob = new Blob([target.buffer], { type: 'video/mp4' });
-    const inspected = describeOutput(await actualVideoSize(mp4Blob),width,height,`WebCodecs H.264 (${h264Config.codec})`);
+    const inspected = describeOutput(await actualVideoSize(mp4Blob),width,height,`WebCodecs H.264 (${h264Config.codec})`+encoderNote);
     const outputUrl = URL.createObjectURL(mp4Blob);
     const fileName = `${project.slug}-${inspected.w}x${inspected.h}-${fps}fps.mp4`;
 
