@@ -1,0 +1,1032 @@
+{
+  "schemaVersion": "1.0",
+  "id": "short-adhd-ik-heb-adhd",
+  "slug": "adhd-ik-heb-adhd",
+  "title": "Ik heb ADHD — Handgetekende Doodle Explainer",
+  "description": "Bewerkbare reconstructie van de aangeleverde 70,45 seconden TikTok-referentie. 66,2 seconden inhoud zonder platform-outro, 38 getekende tekstbeats, eigen Canvas-vectorillustraties en tijdgestuurde animaties.",
+  "category": "Shorts & Reels",
+  "author": "OpenMotion Studio",
+  "source": "template",
+  "createdAt": "2026-11-25",
+  "updatedAt": "2026-11-25",
+  "githubPath": "projects/adhd-ik-heb-adhd/project.json",
+  "format": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "brandKit": {
+    "brandName": "IK HEB ADHD",
+    "primaryColor": "#D9574C",
+    "accentColor": "#C95B4F",
+    "backgroundColor": "#E5DDD0",
+    "surfaceColor": "#DDEBF2",
+    "textColor": "#29282C",
+    "mutedColor": "#8E8A8C",
+    "fontFamily": "Bricolage Grotesque"
+  },
+  "scenes": [
+    {
+      "id": "experience-01",
+      "name": "Ik heb ADHD.",
+      "durationSec": 1.85,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Ik heb ADHD.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "happy",
+        "emphasis": [
+          "ADHD"
+        ],
+        "extras": [
+          "experience-v1",
+          "intro"
+        ],
+        "clockText": "18:00",
+        "shirtColor": "#D9574C",
+        "highlightColor": "#C95B4F",
+        "narration": "Ik heb ADHD.",
+        "pose": "point"
+      }
+    },
+    {
+      "id": "experience-02",
+      "name": "Als ik iets bereik,",
+      "durationSec": 1.15,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Als ik iets bereik,",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "morning",
+        "mood": "surprised",
+        "emphasis": [],
+        "extras": [
+          "experience-v1",
+          "trophy"
+        ],
+        "clockText": "18:00",
+        "shirtColor": "#D9574C",
+        "highlightColor": "#C95B4F",
+        "narration": "Als ik iets bereik,",
+        "pose": "alert"
+      }
+    },
+    {
+      "id": "experience-03",
+      "name": "voel ik geen voldoening.",
+      "durationSec": 1.8,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "voel ik geen voldoening.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "morning",
+        "mood": "worried",
+        "emphasis": [
+          "geen",
+          "voldoening"
+        ],
+        "extras": [
+          "experience-v1",
+          "trophy"
+        ],
+        "clockText": "18:00",
+        "shirtColor": "#D9574C",
+        "highlightColor": "#C95B4F",
+        "narration": "voel ik geen voldoening.",
+        "pose": "alert"
+      }
+    },
+    {
+      "id": "experience-04",
+      "name": "Ik voel alleen een beetje opluchting",
+      "durationSec": 1.4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Ik voel alleen een beetje opluchting",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "relaxed",
+        "emphasis": [
+          "opluchting"
+        ],
+        "extras": [
+          "experience-v1",
+          "trophy"
+        ],
+        "clockText": "18:00",
+        "shirtColor": "#D9574C",
+        "highlightColor": "#C95B4F",
+        "narration": "Ik voel alleen een beetje opluchting",
+        "pose": "alert"
+      }
+    },
+    {
+      "id": "experience-05",
+      "name": "dat het achter de rug is.",
+      "durationSec": 1.65,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "dat het achter de rug is.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "relaxed",
+        "emphasis": [],
+        "extras": [
+          "experience-v1",
+          "relief"
+        ],
+        "clockText": "18:00",
+        "shirtColor": "#D9574C",
+        "highlightColor": "#C95B4F",
+        "narration": "dat het achter de rug is.",
+        "pose": "neutral"
+      }
+    },
+    {
+      "id": "experience-06",
+      "name": "Ik kan helemaal geobsedeerd raken",
+      "durationSec": 2,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Ik kan helemaal geobsedeerd raken",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "morning",
+        "mood": "surprised",
+        "emphasis": [
+          "geobsedeerd"
+        ],
+        "extras": [
+          "experience-v1",
+          "star"
+        ],
+        "clockText": "18:00",
+        "shirtColor": "#D9574C",
+        "highlightColor": "#C95B4F",
+        "narration": "Ik kan helemaal geobsedeerd raken",
+        "pose": "point"
+      }
+    },
+    {
+      "id": "experience-07",
+      "name": "door iemand of iets",
+      "durationSec": 1.25,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "door iemand of iets",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "morning",
+        "mood": "surprised",
+        "emphasis": [],
+        "extras": [
+          "experience-v1",
+          "star"
+        ],
+        "clockText": "18:00",
+        "shirtColor": "#D9574C",
+        "highlightColor": "#C95B4F",
+        "narration": "door iemand of iets",
+        "pose": "point"
+      }
+    },
+    {
+      "id": "experience-08",
+      "name": "en maandenlang niets laten horen",
+      "durationSec": 1.95,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "en maandenlang niets laten horen",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "morning",
+        "mood": "surprised",
+        "emphasis": [
+          "niets",
+          "laten",
+          "horen"
+        ],
+        "extras": [
+          "experience-v1",
+          "messages"
+        ],
+        "clockText": "18:00",
+        "shirtColor": "#D9574C",
+        "highlightColor": "#C95B4F",
+        "narration": "en maandenlang niets laten horen",
+        "pose": "point"
+      }
+    },
+    {
+      "id": "experience-09",
+      "name": "aan mijn vrienden.",
+      "durationSec": 1.2,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "aan mijn vrienden.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "morning",
+        "mood": "surprised",
+        "emphasis": [],
+        "extras": [
+          "experience-v1",
+          "messages"
+        ],
+        "clockText": "18:00",
+        "shirtColor": "#D9574C",
+        "highlightColor": "#C95B4F",
+        "narration": "aan mijn vrienden.",
+        "pose": "point"
+      }
+    },
+    {
+      "id": "experience-10",
+      "name": "Als ik 's avonds een kleine afspraak heb,",
+      "durationSec": 2,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Als ik 's avonds een kleine afspraak heb,",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "shower",
+        "mood": "worried",
+        "emphasis": [],
+        "extras": [
+          "experience-v1",
+          "clock"
+        ],
+        "clockText": "18:00",
+        "shirtColor": "#D9574C",
+        "highlightColor": "#C95B4F",
+        "narration": "Als ik 's avonds een kleine afspraak heb,",
+        "pose": "neutral"
+      }
+    },
+    {
+      "id": "experience-11",
+      "name": "kan ik me de hele dag",
+      "durationSec": 1.5,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "kan ik me de hele dag",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "shower",
+        "mood": "worried",
+        "emphasis": [
+          "de",
+          "hele",
+          "dag"
+        ],
+        "extras": [
+          "experience-v1",
+          "clock"
+        ],
+        "clockText": "18:00",
+        "shirtColor": "#D9574C",
+        "highlightColor": "#C95B4F",
+        "narration": "kan ik me de hele dag",
+        "pose": "neutral"
+      }
+    },
+    {
+      "id": "experience-12",
+      "name": "niet ontspannen.",
+      "durationSec": 1,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "niet ontspannen.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "shower",
+        "mood": "worried",
+        "emphasis": [],
+        "extras": [
+          "experience-v1",
+          "clock"
+        ],
+        "clockText": "18:00",
+        "shirtColor": "#D9574C",
+        "highlightColor": "#C95B4F",
+        "narration": "niet ontspannen.",
+        "pose": "neutral"
+      }
+    },
+    {
+      "id": "experience-13",
+      "name": "Ik heb een heel, heel sterk rechtvaardigheidsgevoel.",
+      "durationSec": 2.8,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Ik heb een heel, heel sterk rechtvaardigheidsgevoel.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "happy",
+        "emphasis": [
+          "rechtvaardigheidsgevoel"
+        ],
+        "extras": [
+          "experience-v1",
+          "justice"
+        ],
+        "clockText": "18:00",
+        "shirtColor": "#D9574C",
+        "highlightColor": "#C95B4F",
+        "narration": "Ik heb een heel, heel sterk rechtvaardigheidsgevoel.",
+        "pose": "neutral"
+      }
+    },
+    {
+      "id": "experience-14",
+      "name": "Daarom reageer ik zo heftig",
+      "durationSec": 2,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Daarom reageer ik zo heftig",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "morning",
+        "mood": "overwhelmed",
+        "emphasis": [
+          "heftig"
+        ],
+        "extras": [
+          "experience-v1",
+          "anger"
+        ],
+        "clockText": "18:00",
+        "shirtColor": "#D9574C",
+        "highlightColor": "#C95B4F",
+        "narration": "Daarom reageer ik zo heftig",
+        "pose": "alert"
+      }
+    },
+    {
+      "id": "experience-15",
+      "name": "als iemand zich gemeen gedraagt.",
+      "durationSec": 2.3,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "als iemand zich gemeen gedraagt.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "morning",
+        "mood": "overwhelmed",
+        "emphasis": [
+          "gemeen"
+        ],
+        "extras": [
+          "experience-v1",
+          "anger"
+        ],
+        "clockText": "18:00",
+        "shirtColor": "#D9574C",
+        "highlightColor": "#C95B4F",
+        "narration": "als iemand zich gemeen gedraagt.",
+        "pose": "alert"
+      }
+    },
+    {
+      "id": "experience-16",
+      "name": "Mijn hyperactiviteit",
+      "durationSec": 1.1,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Mijn hyperactiviteit",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "emphasis": [],
+        "extras": [
+          "experience-v1",
+          "close"
+        ],
+        "clockText": "18:00",
+        "shirtColor": "#D9574C",
+        "highlightColor": "#C95B4F",
+        "narration": "Mijn hyperactiviteit",
+        "pose": "neutral"
+      }
+    },
+    {
+      "id": "experience-17",
+      "name": "zit in mijn hoofd.",
+      "durationSec": 1.05,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "zit in mijn hoofd.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "emphasis": [
+          "in",
+          "mijn",
+          "hoofd"
+        ],
+        "extras": [
+          "experience-v1",
+          "close"
+        ],
+        "clockText": "18:00",
+        "shirtColor": "#D9574C",
+        "highlightColor": "#C95B4F",
+        "narration": "zit in mijn hoofd.",
+        "pose": "neutral"
+      }
+    },
+    {
+      "id": "experience-18",
+      "name": "Die is gediagnosticeerd.",
+      "durationSec": 1.9,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Die is gediagnosticeerd.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "worried",
+        "emphasis": [],
+        "extras": [
+          "experience-v1",
+          "diagnosis"
+        ],
+        "clockText": "18:00",
+        "shirtColor": "#D9574C",
+        "highlightColor": "#C95B4F",
+        "narration": "Die is gediagnosticeerd.",
+        "pose": "neutral"
+      }
+    },
+    {
+      "id": "experience-19",
+      "name": "Het is alsof er vijf opgefokte eekhoorns",
+      "durationSec": 2.1,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Het is alsof er vijf opgefokte eekhoorns",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "morning",
+        "mood": "worried",
+        "emphasis": [
+          "vijf",
+          "eekhoorns"
+        ],
+        "extras": [
+          "experience-v1",
+          "squirrels"
+        ],
+        "clockText": "18:00",
+        "shirtColor": "#D9574C",
+        "highlightColor": "#C95B4F",
+        "narration": "Het is alsof er vijf opgefokte eekhoorns",
+        "pose": "neutral"
+      }
+    },
+    {
+      "id": "experience-20",
+      "name": "door mijn hoofd rennen.",
+      "durationSec": 1.85,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "door mijn hoofd rennen.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "morning",
+        "mood": "worried",
+        "emphasis": [],
+        "extras": [
+          "experience-v1",
+          "squirrels"
+        ],
+        "clockText": "18:00",
+        "shirtColor": "#D9574C",
+        "highlightColor": "#C95B4F",
+        "narration": "door mijn hoofd rennen.",
+        "pose": "neutral"
+      }
+    },
+    {
+      "id": "experience-21",
+      "name": "Wachten tot iemand",
+      "durationSec": 1.15,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Wachten tot iemand",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "happy",
+        "emphasis": [],
+        "extras": [
+          "experience-v1",
+          "talk"
+        ],
+        "clockText": "18:00",
+        "shirtColor": "#D9574C",
+        "highlightColor": "#C95B4F",
+        "narration": "Wachten tot iemand",
+        "pose": "neutral"
+      }
+    },
+    {
+      "id": "experience-22",
+      "name": "die langzaam praat",
+      "durationSec": 1,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "die langzaam praat",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "happy",
+        "emphasis": [],
+        "extras": [
+          "experience-v1",
+          "talk"
+        ],
+        "clockText": "18:00",
+        "shirtColor": "#D9574C",
+        "highlightColor": "#C95B4F",
+        "narration": "die langzaam praat",
+        "pose": "neutral"
+      }
+    },
+    {
+      "id": "experience-23",
+      "name": "zijn zin afmaakt,",
+      "durationSec": 1.15,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "zijn zin afmaakt,",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "worried",
+        "emphasis": [],
+        "extras": [
+          "experience-v1",
+          "talk"
+        ],
+        "clockText": "18:00",
+        "shirtColor": "#D9574C",
+        "highlightColor": "#C95B4F",
+        "narration": "zijn zin afmaakt,",
+        "pose": "neutral"
+      }
+    },
+    {
+      "id": "experience-24",
+      "name": "is voor mij een echte kwelling.",
+      "durationSec": 1.85,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "is voor mij een echte kwelling.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "shower",
+        "mood": "worried",
+        "emphasis": [
+          "kwelling"
+        ],
+        "extras": [
+          "experience-v1",
+          "talk"
+        ],
+        "clockText": "18:00",
+        "shirtColor": "#D9574C",
+        "highlightColor": "#C95B4F",
+        "narration": "is voor mij een echte kwelling.",
+        "pose": "neutral"
+      }
+    },
+    {
+      "id": "experience-25",
+      "name": "Ik ben enorm gedreven",
+      "durationSec": 1.95,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Ik ben enorm gedreven",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "morning",
+        "mood": "happy",
+        "emphasis": [
+          "gedreven"
+        ],
+        "extras": [
+          "experience-v1",
+          "rocket"
+        ],
+        "clockText": "18:00",
+        "shirtColor": "#D9574C",
+        "highlightColor": "#C95B4F",
+        "narration": "Ik ben enorm gedreven",
+        "pose": "point"
+      }
+    },
+    {
+      "id": "experience-26",
+      "name": "en wil steeds meer bereiken,",
+      "durationSec": 1.8,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "en wil steeds meer bereiken,",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "morning",
+        "mood": "happy",
+        "emphasis": [
+          "meer"
+        ],
+        "extras": [
+          "experience-v1",
+          "rocket"
+        ],
+        "clockText": "18:00",
+        "shirtColor": "#D9574C",
+        "highlightColor": "#C95B4F",
+        "narration": "en wil steeds meer bereiken,",
+        "pose": "point"
+      }
+    },
+    {
+      "id": "experience-27",
+      "name": "maar ik ben chronisch moe",
+      "durationSec": 1.4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "maar ik ben chronisch moe",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "relaxed",
+        "emphasis": [
+          "moe"
+        ],
+        "extras": [
+          "experience-v1",
+          "battery"
+        ],
+        "clockText": "18:00",
+        "shirtColor": "#D9574C",
+        "highlightColor": "#C95B4F",
+        "narration": "maar ik ben chronisch moe",
+        "pose": "neutral"
+      }
+    },
+    {
+      "id": "experience-28",
+      "name": "en zit altijd tegen een burn-out aan.",
+      "durationSec": 2.65,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "en zit altijd tegen een burn-out aan.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "shower",
+        "mood": "overwhelmed",
+        "emphasis": [
+          "burn-out"
+        ],
+        "extras": [
+          "experience-v1",
+          "empty"
+        ],
+        "clockText": "18:00",
+        "shirtColor": "#D9574C",
+        "highlightColor": "#C95B4F",
+        "narration": "en zit altijd tegen een burn-out aan.",
+        "pose": "neutral"
+      }
+    },
+    {
+      "id": "experience-29",
+      "name": "Ik bel mensen vol enthousiasme op",
+      "durationSec": 2.05,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Ik bel mensen vol enthousiasme op",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "morning",
+        "mood": "happy",
+        "emphasis": [
+          "enthousiasme"
+        ],
+        "extras": [
+          "experience-v1",
+          "call"
+        ],
+        "clockText": "18:00",
+        "shirtColor": "#D9574C",
+        "highlightColor": "#C95B4F",
+        "narration": "Ik bel mensen vol enthousiasme op",
+        "pose": "point"
+      }
+    },
+    {
+      "id": "experience-30",
+      "name": "en neem dan niet op",
+      "durationSec": 1.15,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "en neem dan niet op",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "worried",
+        "emphasis": [
+          "niet"
+        ],
+        "extras": [
+          "experience-v1",
+          "missed"
+        ],
+        "clockText": "18:00",
+        "shirtColor": "#D9574C",
+        "highlightColor": "#C95B4F",
+        "narration": "en neem dan niet op",
+        "pose": "neutral"
+      }
+    },
+    {
+      "id": "experience-31",
+      "name": "als ze terugbellen.",
+      "durationSec": 1.35,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "als ze terugbellen.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "worried",
+        "emphasis": [],
+        "extras": [
+          "experience-v1",
+          "missed"
+        ],
+        "clockText": "18:00",
+        "shirtColor": "#D9574C",
+        "highlightColor": "#C95B4F",
+        "narration": "als ze terugbellen.",
+        "pose": "neutral"
+      }
+    },
+    {
+      "id": "experience-32",
+      "name": "De dopamine is dan alweer gezakt.",
+      "durationSec": 1.75,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "De dopamine is dan alweer gezakt.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "shower",
+        "mood": "worried",
+        "emphasis": [
+          "dopamine"
+        ],
+        "extras": [
+          "experience-v1",
+          "low"
+        ],
+        "clockText": "18:00",
+        "shirtColor": "#D9574C",
+        "highlightColor": "#C95B4F",
+        "narration": "De dopamine is dan alweer gezakt.",
+        "pose": "neutral"
+      }
+    },
+    {
+      "id": "experience-33",
+      "name": "Ik wil vaak iets googelen,",
+      "durationSec": 1.75,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Ik wil vaak iets googelen,",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "emphasis": [],
+        "extras": [
+          "experience-v1",
+          "search"
+        ],
+        "clockText": "18:00",
+        "shirtColor": "#D9574C",
+        "highlightColor": "#C95B4F",
+        "narration": "Ik wil vaak iets googelen,",
+        "pose": "neutral"
+      }
+    },
+    {
+      "id": "experience-34",
+      "name": "maar vergeet wat ik wilde zoeken.",
+      "durationSec": 2.2,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "maar vergeet wat ik wilde zoeken.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "worried",
+        "emphasis": [
+          "vergeet"
+        ],
+        "extras": [
+          "experience-v1",
+          "search"
+        ],
+        "clockText": "18:00",
+        "shirtColor": "#D9574C",
+        "highlightColor": "#C95B4F",
+        "narration": "maar vergeet wat ik wilde zoeken.",
+        "pose": "neutral"
+      }
+    },
+    {
+      "id": "experience-35",
+      "name": "Dus loop ik de laatst gebruikte apps langs",
+      "durationSec": 2.55,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Dus loop ik de laatst gebruikte apps langs",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "worried",
+        "emphasis": [],
+        "extras": [
+          "experience-v1",
+          "apps"
+        ],
+        "clockText": "18:00",
+        "shirtColor": "#D9574C",
+        "highlightColor": "#C95B4F",
+        "narration": "Dus loop ik de laatst gebruikte apps langs",
+        "pose": "point"
+      }
+    },
+    {
+      "id": "experience-36",
+      "name": "wat me op het idee bracht.",
+      "durationSec": 2.2,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "wat me op het idee bracht.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "worried",
+        "emphasis": [],
+        "extras": [
+          "experience-v1",
+          "apps"
+        ],
+        "clockText": "18:00",
+        "shirtColor": "#D9574C",
+        "highlightColor": "#C95B4F",
+        "narration": "wat me op het idee bracht.",
+        "pose": "point"
+      }
+    },
+    {
+      "id": "experience-37",
+      "name": "Dan word ik daar door iets afgeleid",
+      "durationSec": 2.3,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Dan word ik daar door iets afgeleid",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "morning",
+        "mood": "happy",
+        "emphasis": [
+          "afgeleid"
+        ],
+        "extras": [
+          "experience-v1",
+          "distract"
+        ],
+        "clockText": "18:00",
+        "shirtColor": "#D9574C",
+        "highlightColor": "#C95B4F",
+        "narration": "Dan word ik daar door iets afgeleid",
+        "pose": "point"
+      }
+    },
+    {
+      "id": "experience-38",
+      "name": "en vergeet ik Google helemaal.",
+      "durationSec": 2.1,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "en vergeet ik Google helemaal.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "morning",
+        "mood": "happy",
+        "emphasis": [
+          "vergeet"
+        ],
+        "extras": [
+          "experience-v1",
+          "distract"
+        ],
+        "clockText": "18:00",
+        "shirtColor": "#D9574C",
+        "highlightColor": "#C95B4F",
+        "narration": "en vergeet ik Google helemaal.",
+        "pose": "point"
+      }
+    }
+  ],
+  "captions": []
+}
