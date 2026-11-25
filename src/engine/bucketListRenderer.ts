@@ -253,7 +253,7 @@ function zoomScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMoti
     ctx.fillStyle=PAPER;ctx.font='800 '+Math.round(102*s)+'px "Bricolage Grotesque",sans-serif';
     ctx.fillText(d.destination.toUpperCase(),70*s,h-326*s,w-140*s);
     ctx.font='500 '+Math.round(30*s)+'px "Plus Jakarta Sans",sans-serif';
-    ctx.fillText(d.country.toUpperCase()+'  ·  '+d.latitude.toFixed(3)+'° N  '+Math.abs(d.longitude).toFixed(3)+'° W',72*s,h-258*s,w-140*s);
+    ctx.fillText(d.country.toUpperCase()+'  ·  '+Math.abs(d.latitude).toFixed(3)+'° '+(d.latitude>=0?'N':'S')+'  '+Math.abs(d.longitude).toFixed(3)+'° '+(d.longitude>=0?'E':'W'),72*s,h-258*s,w-140*s);
     ctx.restore();
   }
   footer(ctx,w,h,scene);
@@ -284,12 +284,12 @@ function photoScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMot
     else line=candidate;
   }
   if(line)lines.push(line);
-  const titleY=h-(d.chapter==='outro'?377:360)*s;
+  const titleY=h-(d.chapter==='outro'?392:580)*s;
   lines.slice(0,3).forEach((str,i)=>ctx.fillText(str,70*s,titleY+i*100*s,w-140*s));
   ctx.fillStyle='#E9E6D8';
   ctx.font='500 '+Math.round(36*s)+'px "Plus Jakarta Sans",sans-serif';
   const copy=d.chapter==='outro'?'THE AZORES  /  PORTUGAL':d.reasonCopy??'';
-  ctx.fillText(copy,74*s,h-135*s,w-148*s);
+  ctx.fillText(copy,74*s,h-153*s,w-148*s);
   if(d.chapter==='outro'){
     ctx.font='700 '+Math.round(27*s)+'px "Plus Jakarta Sans",sans-serif';
     ctx.fillStyle=GOLD;ctx.fillText('SAVE THIS PLACE',74*s,h-194*s,w-148*s);
