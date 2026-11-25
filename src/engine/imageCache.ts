@@ -1,4 +1,5 @@
 import { OpenMotionProject } from '../types/openmotion';
+import { CAT_OFFICE_ASSETS } from './catOfficeAssets';
 import { projectAssetUrl } from './projectAudio';
 import { preparePremiumTravelProject } from './premiumTravelRoute';
 import { prepareBucketListProject } from './bucketListCamera';
@@ -118,6 +119,7 @@ export async function preloadProjectImages(project: OpenMotionProject): Promise<
       urls.add(scene.editorialMap.photoUrl);
     }
   }
+  if (project.scenes.some(scene => scene.catOffice)) for (const src of CAT_OFFICE_ASSETS) urls.add(projectAssetUrl(src));
   const hasPremium = project.scenes.some(scene => scene.premiumTravel);
   const hasBucketList = project.scenes.some(scene => scene.layout === 'bucket-list-zoom');
   if (hasPremium) await preparePremiumTravelProject(project);

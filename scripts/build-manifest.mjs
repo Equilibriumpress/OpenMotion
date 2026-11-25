@@ -16,7 +16,15 @@ if (process.env.GITHUB_ACTIONS === 'true' || process.env.DOCUMENTARY_AUDIO === '
   const result = spawnSync('python3', ['scripts/build-documentary-audio.py'], { stdio: 'inherit', timeout: 900000 });
   if (result.status !== 0) console.warn('[documentary] Audio generation failed; publishing visual projects without missing audio tracks.');
 }
+if (process.env.GITHUB_ACTIONS === 'true' || process.env.CAT_OFFICE_ASSETS === '1') {
+  const cat = spawnSync('python3',['scripts/build-cat-office.py'],{stdio:'inherit',timeout:300000});
+  if (cat.status !== 0) console.warn('[cat-office] Asset preparation did not complete.');
+}
 function prepareProject(p) {
+  if(p.scenes?.some(s=>s.catOffice)){
+    p.audioTracks=(p.audioTracks??[]).filter(t=>fs.existsSync(path.join(rootDir,'public',t.src)));
+    return p;
+  }
   if (p.scenes?.some(s => s.worldStory)) {
     const cueFile=path.join(rootDir,'public','assets','audio',p.slug+'-captions.json');
     if(fs.existsSync(cueFile)) p.captions=JSON.parse(fs.readFileSync(cueFile,'utf8')).map(c=>({...c,position:.78,fontSizePx:47}));
