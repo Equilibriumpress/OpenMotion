@@ -75,9 +75,9 @@ export function renderDocumentaryShot(ctx:C,w:number,h:number,scene:OpenMotionSc
  const a=smooth(time/.8);ctx.globalAlpha*=a;
  const isDiagram=['formation','caldera','geothermal'].includes(mode);
  if(!isDiagram&&mode!=='end')shade(ctx);
- text(ctx,'GEOGRAPHICAL STORIES',100,100,28,gold);text(ctx,'EPISODE 01  /  AZORES',100,142,20,paper);
+ text(ctx,'GEOGRAPHICAL STORIES',100,100,28,gold);text(ctx,'EPISODE '+String(scene.bucketList?.episode??1).padStart(2,'0')+'  /  '+(scene.bucketList?.region??'').toUpperCase(),100,142,20,paper);
  if(mode==='title'){
-  text(ctx,'São Miguel',100,730,110,paper,true);text(ctx,'Island of Fire and Water',105,810,47,gold,true);
+  text(ctx,scene.headline,100,730,110,paper,true);text(ctx,scene.subheadline??'Island of Fire and Water',105,810,47,gold,true);
  }else if(mode==='end'){
   text(ctx,'Geographical Stories',100,480,84,paper,true);text(ctx,'Understanding our planet, one place at a time.',105,570,33,gold);
  }else if(mode==='timeline'){
