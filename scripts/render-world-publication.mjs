@@ -10,7 +10,7 @@ const projects=manifest.projects.filter(p=>p.scenes.some(s=>s.worldStory));
 if(!projects.length)process.exit(0);
 const { chromium }=await import('playwright');
 const { createServer }=await import('vite');
-const tmp=path.join(root,'.world-render.html');
+const tmp=path.join(root,'world-render-preview.html');
 const run=(cmd,args)=>{const x=spawnSync(cmd,args,{stdio:'inherit',timeout:600000});if(x.status!==0)throw Error(cmd+' failed: '+x.status)};
 let server,browser;
 try {
@@ -29,7 +29,7 @@ try {
       const tracks=(p.audioTracks??[]).filter(t=>fs.existsSync(path.join(dist,t.src)));
       if(!tracks.some(t=>t.kind==='voiceover'))throw Error('No narration available; not publishing a silent master.');
       page=await browser.newPage({viewport:{width,height}});
-      await page.goto('http://127.0.0.1:4179/.world-render.html');
+      await page.goto('http://127.0.0.1:4179/world-render-preview.html');
       await page.evaluate(async ({p,width,height})=>{
         const {renderOpenMotionFrame}=await import('/src/engine/openMotionRenderer.ts');
         const c=document.querySelector('canvas');c.width=width;c.height=height;
