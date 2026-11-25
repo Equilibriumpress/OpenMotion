@@ -216,6 +216,33 @@ function describeOutput(
   return {w,h,encoderLabel:encoder+warning};
 }
 
+/** Lossless-in-time stereo PCM 16-bit WAV for iPad browsers unable to
+ * include Web Audio in MediaRecorder MP4. This is a standalone file, not a
+ * claim that the MP4 contains audio. It can be imported in a video editor.
+ */
+function pcmWav(audio:AudioBuffer):Blob{
+  const channels=2,rate=audio.sampleRate,frames=audio.length;
+  const buffer=new ArrayBuffer(44+frames*channels*2);
+  const view=new DataView(buffer);
+  const ascii=(at:number,value:string)=>{
+    for(let i=0;i<value.length;i++)view.setUint8(at+i,value.charCodeAt(i));
+  };
+  ascii(0,'RIFF');view.setUint32(4,36+frames*channels*2,true);
+  ascii(8,'WAVE');ascii(12,'fmt ');
+  view.setUint32(16,16,true);view.setUint16(20,1,true);
+  view.setUint16(22,channels,true);view.setUint32(24,rate,true);
+  view.setUint32(28,rate*channels*2,true);view.setUint16(32,channels*2,true);
+  view.setUint16(34,16,true);ascii(36,'data');
+  view.setUint32(40,frames*channels*2,true);
+  const left=audio.getChannelData(0),right=audio.getChannelData(audio.numberOfChannels>1?1:0);
+  for(let i=0;i<frames;i++){
+    const a=Math.max(-1,Math.min(1,left[i])),b=Math.max(-1,Math.min(1,right[i]));
+    view.setInt16(44+i*4,a<0?a*32768:a*32767,true);
+    view.setInt16(46+i*4,b<0?b*32768:b*32767,true);
+  }
+  return new Blob([buffer],{type:'audio/wav'});
+}
+
 export function formatFileSize(bytes: number): string {
   if (bytes < 1024) return `${bytes} B`;
   if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
@@ -604,6 +631,10 @@ async function encodeWithMediaRecorderFallback(params: {
   const fpsLabel=measuredFps===null?'fps-onbekend':measuredFps+'fps';
   const fileName = `${project.slug}-${inspected.w}x${inspected.h}-${fpsLabel}.${container}`;
 
+  // Safari sometimes omits the music track even when input tracks exist.
+  // Supply an accurately timed WAV as a separate editing fallback.
+  const audioSidecarUrl=mixedAudio && audioTrackFound!==true
+    ? URL.createObjectURL(pcmWav(mixedAudio)) : undefined;
   const finalState: RenderProgressState = {
     phase: 'done',
     currentFrame: totalFrames,
@@ -613,6 +644,8 @@ async function encodeWithMediaRecorderFallback(params: {
     encoderLabel: inspected.encoderLabel,
     outputUrl,
     fileName,
+    audioSidecarUrl,
+    audioSidecarName:audioSidecarUrl?project.slug+'-soundtrack.wav':undefined,
     fileSizeBytes: blob.size,
     elapsedMs: Math.round(performance.now() - startedAt),
   };

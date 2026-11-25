@@ -578,6 +578,9 @@ export interface RenderProgressState {
   encoderLabel: string;
   outputUrl?: string;
   fileName?: string;
+  /** Standalone soundtrack when Safari fails to mux a browser MP4 audio track. */
+  audioSidecarUrl?: string;
+  audioSidecarName?: string;
   fileSizeBytes?: number;
   elapsedMs?: number;
   errorMessage?: string;
