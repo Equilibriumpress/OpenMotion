@@ -395,6 +395,7 @@ export function normalizeOpenMotionProject(
         sc.threeCampervan && typeof sc.threeCampervan === 'object'
           ? (sc.threeCampervan as OpenMotionScene['threeCampervan'])
           : undefined,
+      worldStory: sc.worldStory && typeof sc.worldStory === 'object' ? (sc.worldStory as OpenMotionScene['worldStory']) : undefined,
       fullBleed: typeof sc.fullBleed === 'boolean' ? sc.fullBleed : undefined,
     };
   });
