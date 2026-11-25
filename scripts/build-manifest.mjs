@@ -17,6 +17,13 @@ if (process.env.GITHUB_ACTIONS === 'true' || process.env.DOCUMENTARY_AUDIO === '
   if (result.status !== 0) console.warn('[documentary] Audio generation failed; publishing visual projects without missing audio tracks.');
 }
 function prepareProject(p) {
+  if (p.scenes?.some(s => s.worldStory)) {
+    const cueFile=path.join(rootDir,'public','assets','audio',p.slug+'-captions.json');
+    if(fs.existsSync(cueFile)) p.captions=JSON.parse(fs.readFileSync(cueFile,'utf8')).map(c=>({...c,position:.77,fontSizePx:44}));
+    p.audioTracks=(p.audioTracks??[]).filter(t=>fs.existsSync(path.join(rootDir,'public',t.src)));
+    if(!p.audioTracks.some(t=>t.kind==='voiceover')) p.description+=' | Voice-over niet beschikbaar in deze build.';
+    return p;
+  }
   if (!p.scenes?.some(s => s.bucketList?.documentary)) return p;
   const contour = 'assets/maps/'+p.slug+'-contours.geojson';
   for (const scene of p.scenes) {

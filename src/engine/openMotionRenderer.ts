@@ -3,6 +3,7 @@ import { renderDoodleExplainerScene } from './doodleExplainerRenderer';
 import { renderPremiumTravelScene, getPremiumError } from './premiumTravelRoute';
 import { renderBucketListScene } from './bucketListRenderer';
 import { getBucketListMapError } from './bucketListCamera';
+import { renderWorldStory } from './worldStoryRenderer';
 import { renderTimedCaptions } from './timedCaptionRenderer';
 import { getCachedPhoto } from './imageCache';
 import { projectAssetUrl } from './projectAudio';
@@ -318,6 +319,15 @@ export function renderOpenMotionFrame(
   ctx.save();
   ctx.clearRect(0, 0, w, h);
 
+  if (scene.worldStory) {
+    const previous = sceneIndex > 0 ? project.scenes[sceneIndex-1] : undefined;
+    if (previous?.worldStory && localTime < .38) {
+      renderWorldStory(ctx,w,h,previous,previous.durationSec,project,safeTime);
+      ctx.save();ctx.globalAlpha=Math.max(0,Math.min(1,localTime/.38));
+      renderWorldStory(ctx,w,h,scene,localTime,project,safeTime);ctx.restore();
+    } else renderWorldStory(ctx,w,h,scene,localTime,project,safeTime);
+    renderTimedCaptions(ctx,w,h,project,safeTime);ctx.restore();return;
+  }
   // Full-bleed documentary Editorial Cartography layout (no chrome overlay, seamless inter-scene camera)
   if (scene.layout === 'editorial-cartography' && scene.editorialMap) {
     renderEditorialCartographyScene(ctx, w, h, scene, localTime, safeTime);
