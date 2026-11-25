@@ -64,4 +64,4 @@ The editable ADHD & Slaap hand-drawn video now uses two reusable vector rigs wit
 
 ### MY BUCKET LIST — Globe Zoom Reels
 
-The new Shorts & Reels template offers a 25-second globe-to-São-Miguel fly-in with three photographic reasons to visit, a save-this-place outro, editable destination coordinates and an original score. See [the bucket-list guide](docs/bucket-list-zoom.md).
+The new Shorts & Reels template offers a 20-second globe-to-São-Miguel fly-in with three photographic reasons to visit, a save-this-place outro, editable destination coordinates and an original score. See [the bucket-list guide](docs/bucket-list-zoom.md).
