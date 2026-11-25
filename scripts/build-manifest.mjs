@@ -13,7 +13,7 @@ const outFile = path.join(outDir, 'manifest.json');
 if (process.env.GITHUB_ACTIONS === 'true' || process.env.DOCUMENTARY_AUDIO === '1') {
   const terrain = spawnSync('python3', ['scripts/build-documentary-terrain.py'], { stdio: 'inherit', timeout: 180000 });
   if (terrain.status !== 0) console.warn('[documentary] Optional DEM contour generation unavailable.');
-  const result = spawnSync('python3', ['scripts/build-documentary-audio.py'], { stdio: 'inherit', timeout: 720000 });
+  const result = spawnSync('python3', ['scripts/build-documentary-audio.py'], { stdio: 'inherit', timeout: 900000 });
   if (result.status !== 0) console.warn('[documentary] Audio generation failed; publishing visual projects without missing audio tracks.');
 }
 function prepareProject(p) {

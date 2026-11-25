@@ -49,7 +49,7 @@ def build(p,work,python,model=MODEL):
         if narration:
             # One uninterrupted synthesis per chapter: no restart on every cut.
             if model=="espeak-nl":
-                run(["espeak-ng","-v","nl","-s","155","-w",raw,narration])
+                run([shutil.which("espeak-ng") or shutil.which("espeak") or "espeak-ng","-v","nl","-s","155","-w",raw,narration])
             else:
                 args=[python,"-m","piper","-m",work/(model+".onnx"),"-f",raw]
                 if model.startswith("nl_"): args+=["--speaker","29"]
@@ -117,7 +117,11 @@ def main():
                 build(p,work,python,model)
             except Exception as exc:
                 print(f"[audio] {p['slug']}: {exc}",file=sys.stderr)
-                if dutch and shutil.which("espeak-ng"):
+                if dutch:
+                    if not (shutil.which("espeak-ng") or shutil.which("espeak")) and __import__("os").environ.get("GITHUB_ACTIONS")=="true":
+                        try: run(["sudo","apt-get","install","-y","espeak-ng"])
+                        except Exception as fallback_error: print(f"[espeak] {fallback_error}",file=sys.stderr)
+                    if not (shutil.which("espeak-ng") or shutil.which("espeak")): continue
                     print("[audio] Using Dutch fallback voice",file=sys.stderr)
                     build(p,work,python,"espeak-nl")
 if __name__=="__main__":main()
