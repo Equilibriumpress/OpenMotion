@@ -109,6 +109,10 @@ export function ShortsMediaEditor({project,activeScene,onUpdateProject,onUpdateS
           <label className="block text-xs">Reden titel<textarea rows={2} className={style} value={data.reasonTitle??''} onChange={e=>patchScene({reasonTitle:e.target.value})}/></label>
           <label className="block text-xs">Korte toelichting<input className={style} value={data.reasonCopy??''} onChange={e=>patchScene({reasonCopy:e.target.value})}/></label>
         </>}
+        <label className="block text-xs">Uitsnede foto (horizontaal 0–1)
+          <input className={style} type="number" min="0" max="1" step=".05" value={data.imageFocusX??.5}
+            onChange={e=>patchScene({imageFocusX:Math.max(0,Math.min(1,Number(e.target.value)))})}/>
+        </label>
         <label className="block text-xs">Fotograaf<input className={style} value={data.imageAuthor??''} onChange={e=>patchScene({imageAuthor:e.target.value})}/></label>
         <label className="block text-xs">Licentie<input className={style} value={data.imageLicense??''} onChange={e=>patchScene({imageLicense:e.target.value})}/></label>
         <label className="block text-xs">Bronfoto URL<input className={style} value={data.imageSourceUrl??''} onChange={e=>patchScene({imageSourceUrl:e.target.value})}/></label>

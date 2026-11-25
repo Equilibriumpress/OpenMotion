@@ -2583,7 +2583,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
     "id": "bucket-list-001-sao-miguel",
     "slug": "bucket-list-001-sao-miguel",
     "title": "MY BUCKET LIST #001 · São Miguel, Azores",
-    "description": "25-second cinematic vertical destination reel: genuine MapLibre globe and map zoom towards São Miguel, followed by three photographic reasons to visit and a save-this-place finale. Five editable scenes, original ambient music and Wikimedia photo credits.",
+    "description": "Bucket List R2: 20-second vertical film with a shorter unlabeled MapLibre globe zoom, three striking visual reasons, different coast finale, clean title transitions and original ambient audio. Export audio/resolution are checked for browser compatibility.",
     "category": "Shorts & Reels",
     "author": "OpenMotion Studio",
     "source": "template",
@@ -2608,7 +2608,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
       {
         "id": "zoom",
         "name": "01 / Earth to São Miguel",
-        "durationSec": 9,
+        "durationSec": 6,
         "layout": "bucket-list-zoom",
         "transition": "fade",
         "backdrop": "swiss-lines",
@@ -2629,7 +2629,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
       {
         "id": "reason-crater",
         "name": "02 / Volcanic crater lakes",
-        "durationSec": 4,
+        "durationSec": 3,
         "layout": "bucket-list-zoom",
         "transition": "fade",
         "backdrop": "swiss-lines",
@@ -2656,14 +2656,14 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
       },
       {
         "id": "reason-forest",
-        "name": "03 / Forest trail",
-        "durationSec": 4,
+        "name": "03 / Forest trail to Lagoa do Congro",
+        "durationSec": 3,
         "layout": "bucket-list-zoom",
         "transition": "fade",
         "backdrop": "swiss-lines",
-        "headline": "FOLLOW THE HIDDEN FOREST TRAILS.",
+        "headline": "WALK INTO THE WILD.",
         "fullBleed": true,
-        "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b7/2019-05-25_14-53-45_PT_Sao_Miguel_JHe_N_%2854547823905%29.jpg/1280px-2019-05-25_14-53-45_PT_Sao_Miguel_JHe_N_%2854547823905%29.jpg",
+        "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d4/Acesso_%C3%A0_Lagoa_Do_Congro_S%C3%A3o_Miguel.jpg/960px-Acesso_%C3%A0_Lagoa_Do_Congro_S%C3%A3o_Miguel.jpg",
         "bucketList": {
           "episode": 1,
           "destination": "São Miguel",
@@ -2675,11 +2675,12 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "startLatitude": 43,
           "chapter": "reason",
           "reasonNumber": 2,
-          "reasonTitle": "FOLLOW THE HIDDEN FOREST TRAILS.",
-          "reasonCopy": "WALK INTO THE AZORES",
-          "imageAuthor": "Jan Helebrant",
-          "imageLicense": "CC0 1.0",
-          "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:2019-05-25_14-53-45_PT_Sao_Miguel_JHe_N_(54547823905).jpg"
+          "reasonTitle": "WALK INTO THE WILD.",
+          "reasonCopy": "LAGOA DO CONGRO FOREST TRAIL",
+          "imageAuthor": "Órvil Fernando de Aragão Russo",
+          "imageLicense": "CC BY-SA 4.0",
+          "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Acesso_%C3%A0_Lagoa_Do_Congro_S%C3%A3o_Miguel.jpg",
+          "imageFocusX": 0.55
         }
       },
       {
@@ -2712,14 +2713,14 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
       },
       {
         "id": "outro",
-        "name": "05 / Save São Miguel",
+        "name": "05 / São Miguel coast · Save this place",
         "durationSec": 4,
         "layout": "bucket-list-zoom",
         "transition": "fade",
         "backdrop": "swiss-lines",
         "headline": "SÃO MIGUEL · SAVE THIS PLACE",
         "fullBleed": true,
-        "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/Lagoa_das_Sete_Cidades%2C_S%C3%A3o_Miguel.jpg/1280px-Lagoa_das_Sete_Cidades%2C_S%C3%A3o_Miguel.jpg",
+        "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/30/Aerial_view_of_Mosteiros%2C_S%C3%A3o_Miguel_Island%2C_Azores%2C_Portugal_%28PPL1-Corrected%29.jpg/1280px-Aerial_view_of_Mosteiros%2C_S%C3%A3o_Miguel_Island%2C_Azores%2C_Portugal_%28PPL1-Corrected%29.jpg",
         "bucketList": {
           "episode": 1,
           "destination": "São Miguel",
@@ -2730,9 +2731,10 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "startLongitude": -11,
           "startLatitude": 43,
           "chapter": "outro",
-          "imageAuthor": "Samuel Monteiro Domingues",
+          "imageAuthor": "Jules Verne Times Two / julesvernex2.com",
           "imageLicense": "CC BY-SA 4.0",
-          "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Lagoa_das_Sete_Cidades,_São_Miguel.jpg"
+          "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Aerial_view_of_Mosteiros,_S%C3%A3o_Miguel_Island,_Azores,_Portugal_(PPL1-Corrected).jpg",
+          "imageFocusX": 0.36
         }
       }
     ],

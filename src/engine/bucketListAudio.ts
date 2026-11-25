@@ -9,21 +9,21 @@ function synthesize(durationSec:number):Promise<AudioBuffer>{
   const ctx=new OfflineAudioContext(2,Math.ceil(duration*RATE),RATE);
   const bus=ctx.createGain();
   bus.gain.setValueAtTime(.0001,0);
-  bus.gain.linearRampToValueAtTime(.32,2.3);
-  bus.gain.linearRampToValueAtTime(.62,8.7);
-  bus.gain.setValueAtTime(.49,Math.min(duration,9.9));
-  bus.gain.setValueAtTime(.49,Math.max(9.9,duration-2.3));
+  bus.gain.linearRampToValueAtTime(.36,1.4);
+  bus.gain.linearRampToValueAtTime(.60,5.8);
+  bus.gain.setValueAtTime(.49,Math.min(duration,6.5));
+  bus.gain.setValueAtTime(.49,Math.max(6.5,duration-2.3));
   bus.gain.linearRampToValueAtTime(.0001,duration);
   bus.connect(ctx.destination);
   const lowpass=ctx.createBiquadFilter();
   lowpass.type='lowpass';lowpass.frequency.value=1120;
   lowpass.connect(bus);
   const chords=[
-    {at:0,end:9,freqs:[130.81,196,261.63]},
-    {at:9,end:13,freqs:[146.83,220,293.66]},
-    {at:13,end:17,freqs:[174.61,261.63,349.23]},
-    {at:17,end:21,freqs:[130.81,196,329.63]},
-    {at:21,end:25,freqs:[146.83,220,349.23]}
+    {at:0,end:6,freqs:[130.81,196,261.63]},
+    {at:6,end:9,freqs:[146.83,220,293.66]},
+    {at:9,end:12,freqs:[174.61,261.63,349.23]},
+    {at:12,end:16,freqs:[130.81,196,329.63]},
+    {at:16,end:20,freqs:[146.83,220,349.23]}
   ];
   for(const chord of chords){
     if(chord.at>=duration)continue;
@@ -56,7 +56,7 @@ function synthesize(durationSec:number):Promise<AudioBuffer>{
     o.connect(g);g.connect(bus);o.start(second);o.stop(second+.33);
   }
   // Light landing/section markers.
-  for(const at of [8.88,12.98,16.98,20.98]){
+  for(const at of [5.88,8.88,11.88,15.88]){
     if(at>=duration)continue;
     for(const partial of [523.25,784]){
       const o=ctx.createOscillator();o.type='sine';
