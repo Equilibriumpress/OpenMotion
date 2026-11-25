@@ -165,7 +165,7 @@ export async function prepareBucketListProject(project:OpenMotionProject):Promis
       controllers.set(project,state);
       if(!map.loaded())await waitForEvent(map,'load',30000);
       for(const layer of map.getStyle().layers??[]){
-        if(layer.type==='symbol')map.setLayoutProperty(layer.id,'visibility','none');
+        if(layer.type==='symbol'&&!intro.bucketList?.documentary)map.setLayoutProperty(layer.id,'visibility','none');
       }
       // A live MapLibre scene responds to arbitrary time positions, even
       // between previously known keyframes. Tile changes repaint the view.
