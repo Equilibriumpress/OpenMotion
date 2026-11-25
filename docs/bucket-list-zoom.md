@@ -20,11 +20,25 @@ Layout identifier: bucket-list-zoom
 | 12–16 s | Reason 3 | Boca do Inferno viewpoint, Views You Won't Forget. |
 | 16–20 s | Outro | Different aerial photo of Mosteiros coast, Save This Place |
 
-## Geographic rendering
+## R3 — True continuous geographic camera
 
-The MapLibre GL JS globe and Mercator views are rendered using OpenFreeMap Bright vector tiles backed by OpenStreetMap. A hidden 720 × 1280 MapLibre canvas captures eight geographic snapshots from a broad Atlantic globe view around 43° N 11° W to approximately 37.8533° N 25.7791° W. Canvas recomposes and zooms these snapshots through deterministic keyframe interpolation during playback and MP4 export. The result is a staged globe-to-2D-map camera animation, not a true 3D terrain flight.
+The previously reviewed MP4 revealed visible jerks and double coastlines. R2 mixed eight static MapLibre screenshots, which was not a real camera move.
 
-A 0.65-second cross-dissolve blends the outgoing and incoming map/photo images, with only the incoming text layer visible. The early globe hides map symbol labels while retaining real OpenStreetMap geography. Photographic shots use restrained movement and an editorial lower-third. A missing map is identified rather than replaced with fabricated geography. Media and map tiles require a supported WebGL browser and online services during preparation.
+R3 replaces that technique with one **persistent MapLibre GL JS instance** using native `projection:{type:'globe'}` throughout. MapLibre automatically approaches the Mercator view at high zoom. The editor updates the actual WGS84 map center, native logarithmic map zoom and bearing on every preview frame. The Canvas compositor draws the latest native WebGL map canvas instead of resizing or blending geographic screenshots.
+
+During WebCodecs MP4 export, each geographic frame is rendered by MapLibre at its actual timestamp and awaited before encoding. Six representative camera positions prewarm map tiles, without reusing those positions as static animation frames. Export is more computationally demanding than R2 but does not fake a geographic interpolation.
+
+The globe intro remains 6 seconds. The final **1.8 seconds** return from the Mosteiros coast photograph to a real zoomed-out MapLibre map of São Miguel. A deterministic fade provides the photo-to-cartography transition, ending around native zoom 7.3. Both scenes retain OpenStreetMap and photo attribution.
+
+A live map needs WebGL and a network connection for OpenFreeMap tiles. Offline playback after preparation still needs the existing map to stay alive. Preview performance varies by device and the browser's WebGL limits.
+
+## Export integrity — R3
+
+The reviewed R2 iPad video was labelled 60 fps but was actually 30 fps at 512×910, with no audio. For MediaRecorder MP4 exports, R3 now reads the video track's MP4 `mdhd` timescale and `stts` sample timing to report the **actual** encoded framerate. If the MP4 track data is missing or fragmented, the label states that frame rate could not be verified instead of assuming the requested setting. The encoded resolution remains probed.
+
+Safari may still lower output resolution or omit Web Audio when muxing MP4. The app does not claim a fix it cannot verify. When a reliable MP4 audio track is not detected, the exporter additionally creates an original, synchronously timed stereo **16-bit WAV** for download so the soundtrack can be added with an external video editor. This is a separate asset and does not mean that the MP4 contains audio. Full-HD, 60fps and embedded sound remain dependent on browser support.
+
+The WebCodecs path uses per-frame map capture with explicit timestamps. MediaRecorder uses the same live camera but remains subject to real-time encoder and captureStream limitations. Audio and framerate must be checked in an actual exported file.
 
 ## Wikimedia Commons image credits
 
