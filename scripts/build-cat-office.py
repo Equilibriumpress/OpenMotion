@@ -21,6 +21,9 @@ for item in json.loads((out/'sources.json').read_text()):
             target.unlink(missing_ok=True)
             time.sleep(2+attempt)
         finally: tmp.unlink(missing_ok=True)
+    if not target.exists() or target.stat().st_size<=1000:
+        raise RuntimeError('Missing required photo: '+item['id'])
+    print('[cat-office] ready',item['id'],target.stat().st_size,'bytes')
 rate=48000
 for source in (root/'projects').glob('*/project.json'):
     p=json.loads(source.read_text())

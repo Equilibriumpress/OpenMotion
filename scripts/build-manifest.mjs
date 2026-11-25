@@ -8,6 +8,16 @@ const projectsDir = path.join(rootDir, 'projects');
 const outDir = path.join(rootDir, 'public', 'projects');
 const outFile = path.join(outDir, 'manifest.json');
 
+// Required for both the photo preparation and the MP4/audio encoders.
+if (process.env.GITHUB_ACTIONS === 'true') {
+  const ready = () => ['ffmpeg','ffprobe'].every(cmd => spawnSync(cmd,['-version'],{stdio:'ignore'}).status === 0);
+  if (!ready()) {
+    const update=spawnSync('sudo',['apt-get','update'],{stdio:'inherit',timeout:180000});
+    if(update.status !== 0) throw new Error('Unable to update package list for FFmpeg');
+    const install=spawnSync('sudo',['apt-get','install','-y','ffmpeg'],{stdio:'inherit',timeout:300000});
+    if(install.status !== 0 || !ready()) throw new Error('FFmpeg / FFprobe installation failed');
+  }
+}
 // The existing GitHub Pages build generates documentary audio without a
 // second workflow. Local developers may opt in with DOCUMENTARY_AUDIO=1.
 if (process.env.GITHUB_ACTIONS === 'true' || process.env.DOCUMENTARY_AUDIO === '1') {
@@ -18,7 +28,7 @@ if (process.env.GITHUB_ACTIONS === 'true' || process.env.DOCUMENTARY_AUDIO === '
 }
 if (process.env.GITHUB_ACTIONS === 'true' || process.env.CAT_OFFICE_ASSETS === '1') {
   const cat = spawnSync('python3',['scripts/build-cat-office.py'],{stdio:'inherit',timeout:300000});
-  if (cat.status !== 0) console.warn('[cat-office] Asset preparation did not complete.');
+  if (cat.status !== 0) throw new Error('[cat-office] Asset preparation failed; refusing to publish missing cats.');
 }
 function prepareProject(p) {
   if(p.scenes?.some(s=>s.catOffice)){
