@@ -1,7 +1,8 @@
 import { renderGeoRouteReel, renderWhiteboardScience } from './shortsRenderer';
 import { renderDoodleExplainerScene } from './doodleExplainerRenderer';
 import { renderPremiumTravelScene, getPremiumError } from './premiumTravelRoute';
-import { renderBucketListScene, getBucketListMapError } from './bucketListRenderer';
+import { renderBucketListScene } from './bucketListRenderer';
+import { getBucketListMapError } from './bucketListCamera';
 import { renderTimedCaptions } from './timedCaptionRenderer';
 import { getCachedPhoto } from './imageCache';
 import { projectAssetUrl } from './projectAudio';
