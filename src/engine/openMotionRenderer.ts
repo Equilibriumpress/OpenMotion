@@ -370,11 +370,15 @@ export function renderOpenMotionFrame(
       : 0;
     if(previous?.bucketList&&dissolve>0&&localTime<dissolve){
       const finalPreviousTime=Math.max(0,previous.durationSec-1/Math.max(1,project.fps));
-      renderBucketListScene(ctx,w,h,previous,finalPreviousTime,project,url=>getCachedPhoto(projectAssetUrl(url)));
+      const getPhoto=(url:string)=>getCachedPhoto(projectAssetUrl(url));
+      // Dissolve photographs/map frames only. Then paint ONE typographic
+      // layer belonging to the incoming scene: no ghosted double titles.
+      renderBucketListScene(ctx,w,h,previous,finalPreviousTime,project,getPhoto,'image');
       const t=clamp(localTime/dissolve),opacity=t*t*(3-2*t);
       ctx.save();ctx.globalAlpha*=opacity;
-      renderBucketListScene(ctx,w,h,scene,localTime,project,url=>getCachedPhoto(projectAssetUrl(url)));
+      renderBucketListScene(ctx,w,h,scene,localTime,project,getPhoto,'image');
       ctx.restore();
+      renderBucketListScene(ctx,w,h,scene,localTime,project,getPhoto,'text');
     }else{
       renderBucketListScene(ctx,w,h,scene,localTime,project,url=>getCachedPhoto(projectAssetUrl(url)));
     }

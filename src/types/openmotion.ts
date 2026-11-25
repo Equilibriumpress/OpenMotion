@@ -454,6 +454,8 @@ export interface SceneBucketList {
   imageAuthor?: string;
   imageLicense?: string;
   imageSourceUrl?: string;
+  /** Horizontal center of the image crop, range 0..1. */
+  imageFocusX?: number;
 }
 export interface OpenMotionScene {
   id: string;

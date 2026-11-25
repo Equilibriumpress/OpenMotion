@@ -113,6 +113,29 @@ async function actualVideoSize(blob: Blob): Promise<{ width: number; height: num
     URL.revokeObjectURL(url);
   }
 }
+/**
+ * Inspect the MP4 track handlers in the file's trailing/leading metadata.
+ * Safari MediaRecorder has been seen to silently drop the Web Audio track.
+ * This is a post-encode check, not an assumption based on the input stream.
+ */
+async function containsMp4AudioTrack(blob:Blob):Promise<boolean|null>{
+  if(!blob.type.startsWith('video/mp4'))return null;
+  const read=async(start:number,end:number)=>new Uint8Array(await blob.slice(start,end).arrayBuffer());
+  const chunk=2*1024*1024;
+  const sections=[await read(0,Math.min(blob.size,chunk))];
+  if(blob.size>chunk)sections.push(await read(Math.max(0,blob.size-chunk),blob.size));
+  let sawHandler=false;
+  for(const bytes of sections) {
+    for(let i=0;i+16<bytes.length;i++){
+      if(bytes[i]===104&&bytes[i+1]===100&&bytes[i+2]===108&&bytes[i+3]===114){
+        sawHandler=true;
+        if(bytes[i+12]===115&&bytes[i+13]===111&&bytes[i+14]===117&&bytes[i+15]===110)return true;
+      }
+    }
+  }
+  return sawHandler?false:null;
+}
+
 function describeOutput(
   actual: {width: number; height: number} | null,
   intendedWidth: number,
@@ -144,8 +167,8 @@ export async function exportProjectToMp4(
   const startedAt = performance.now();
   const dims = getFormatDimensions(project.format, options.resolution);
   // H.264 requires even dimensions
-  const width = dims.width % 2 === 0 ? dims.width : dims.width - 1;
-  const height = dims.height % 2 === 0 ? dims.height : dims.height - 1;
+  let width = dims.width % 2 === 0 ? dims.width : dims.width - 1;
+  let height = dims.height % 2 === 0 ? dims.height : dims.height - 1;
   const fps = options.fps;
   const durationSec = Math.max(0.5, getProjectDurationSec(project));
   const totalFrames = Math.max(1, Math.ceil(durationSec * fps));
@@ -167,7 +190,22 @@ export async function exportProjectToMp4(
   const mixedAudio = await mixProjectAudio(project, durationSec);
   const audioConfig = mixedAudio ? await probeAacEncoder() : null;
 
-  const h264Config = await pickSupportedH264Config(width, height, fps, bitrate);
+  let h264Config = await pickSupportedH264Config(width, height, fps, bitrate);
+  let encoderNote = '';
+  // A browser may decline 1080×1920 while supporting 720×1280 H.264
+  // with AAC. Prefer that encoded-and-muxed result to the Safari
+  // MediaRecorder fallback observed to shrink exports to 512×910.
+  if(!h264Config && audioConfig && Math.max(width,height)>1280) {
+    const factor=1280/Math.max(width,height);
+    const w=Math.max(2,Math.floor(width*factor/2)*2);
+    const h=Math.max(2,Math.floor(height*factor/2)*2);
+    const supported=await pickSupportedH264Config(w,h,fps,Math.min(bitrate,6_000_000));
+    if(supported){
+      width=w;height=h;canvas.width=w;canvas.height=h;
+      h264Config=supported;
+      encoderNote=' · 720p AAC-fallback: browser ondersteunt geen 1080p WebCodecs';
+    }
+  }
 
   if (h264Config && (!mixedAudio || audioConfig)) {
     return encodeWithWebCodecsMp4({
@@ -181,6 +219,7 @@ export async function exportProjectToMp4(
       fps,
       totalFrames,
       h264Config,
+      encoderNote,
       startedAt,
       onProgress,
       signal,
@@ -214,6 +253,7 @@ async function encodeWithWebCodecsMp4(params: {
   fps: number;
   totalFrames: number;
   h264Config: VideoEncoderConfig;
+  encoderNote: string;
   startedAt: number;
   onProgress: (state: RenderProgressState) => void;
   signal?: AbortSignal;
@@ -229,6 +269,7 @@ async function encodeWithWebCodecsMp4(params: {
     h264Config,
     mixedAudio,
     audioConfig,
+    encoderNote,
     startedAt,
     onProgress,
     signal,
@@ -318,7 +359,7 @@ async function encodeWithWebCodecsMp4(params: {
     muxer.finalize();
 
     const mp4Blob = new Blob([target.buffer], { type: 'video/mp4' });
-    const inspected = describeOutput(await actualVideoSize(mp4Blob),width,height,`WebCodecs H.264 (${h264Config.codec})`);
+    const inspected = describeOutput(await actualVideoSize(mp4Blob),width,height,`WebCodecs H.264 (${h264Config.codec})`+encoderNote);
     const outputUrl = URL.createObjectURL(mp4Blob);
     const fileName = `${project.slug}-${inspected.w}x${inspected.h}-${fps}fps.mp4`;
 
@@ -376,9 +417,16 @@ async function encodeWithMediaRecorderFallback(params: {
   } = params;
 
   const mimeCandidates = [
+    // Ask explicitly for the AAC audio track in MP4 when supported.
+    ...(mixedAudio ? [
+      'video/mp4;codecs="avc1.42E01E,mp4a.40.2"',
+      'video/mp4;codecs=avc1.42E01E,mp4a.40.2'
+    ] : []),
     'video/mp4;codecs=avc1.42E01E',
     'video/mp4',
+    'video/webm;codecs=vp9,opus',
     'video/webm;codecs=vp9',
+    'video/webm;codecs=vp8,opus',
     'video/webm;codecs=vp8',
     'video/webm',
   ];
@@ -388,17 +436,37 @@ async function encodeWithMediaRecorderFallback(params: {
   const isMp4 = chosenMime.startsWith('video/mp4');
   const container: 'mp4' | 'webm' = isMp4 ? 'mp4' : 'webm';
 
-  const stream = canvas.captureStream(fps);
+  const videoStream = canvas.captureStream(fps);
+  const stream = new MediaStream(videoStream.getVideoTracks());
   let fallbackContext: AudioContext | null = null;
   let fallbackSource: AudioBufferSourceNode | null = null;
+  let warmup: OscillatorNode | null = null;
   if (mixedAudio) {
     fallbackContext = new AudioContext();
     const destination = fallbackContext.createMediaStreamDestination();
     fallbackSource = fallbackContext.createBufferSource();
     fallbackSource.buffer = mixedAudio;
-    fallbackSource.connect(destination);
-    for (const track of destination.stream.getAudioTracks()) stream.addTrack(track);
+    const recordGain = fallbackContext.createGain();
+    recordGain.gain.value=.95;
+    fallbackSource.connect(recordGain);
+    recordGain.connect(destination);
+
+    // Keep the graph active on Safari before MediaRecorder starts, even
+    // though the soundtrack begins a moment later. No audible warm-up.
+    warmup=fallbackContext.createOscillator();
+    warmup.frequency.value=19;
+    const quiet=fallbackContext.createGain();
+    quiet.gain.value=.00001;
+    warmup.connect(quiet);
+    quiet.connect(destination);
+    const silentMonitor=fallbackContext.createGain();
+    silentMonitor.gain.value=0;
+    recordGain.connect(silentMonitor);
+    silentMonitor.connect(fallbackContext.destination);
     await fallbackContext.resume();
+    warmup.start();
+    for (const track of destination.stream.getAudioTracks()) stream.addTrack(track);
+    if(!stream.getAudioTracks().length)throw new Error('Geen audiospoor beschikbaar in Safari MediaStream.');
   }
   const recorder = new MediaRecorder(stream, {
     mimeType: chosenMime,
@@ -416,7 +484,7 @@ async function encodeWithMediaRecorderFallback(params: {
   });
 
   recorder.start();
-  if(fallbackSource && fallbackContext) fallbackSource.start(fallbackContext.currentTime);
+  if(fallbackSource && fallbackContext) fallbackSource.start(fallbackContext.currentTime+.03);
   const frameIntervalMs = 1000 / fps;
 
   for (let frameIdx = 0; frameIdx < totalFrames; frameIdx++) {
@@ -445,9 +513,15 @@ async function encodeWithMediaRecorderFallback(params: {
 
   recorder.stop();
   const blob = await stopPromise;
+  try{warmup?.stop();}catch{/* oscillator may have already stopped */}
+  warmup?.disconnect();
   fallbackSource?.disconnect();
   await fallbackContext?.close();
-  const inspected = describeOutput(await actualVideoSize(blob),width,height,`MediaRecorder (${chosenMime})`);
+  const audioTrackFound = mixedAudio && isMp4 ? await containsMp4AudioTrack(blob) : null;
+  const audioStatus = mixedAudio && audioTrackFound===false
+    ? ' · WAARSCHUWING: deze Safari-export mist een audiospoor. Exporteer op een browser met AAC/WebCodecs-ondersteuning.'
+    : mixedAudio && audioTrackFound===true ? ' · AAC-audiospoor gecontroleerd' : '';
+  const inspected = describeOutput(await actualVideoSize(blob),width,height,`MediaRecorder (${chosenMime})`+audioStatus);
   const outputUrl = URL.createObjectURL(blob);
   const fileName = `${project.slug}-${inspected.w}x${inspected.h}-${fps}fps.${container}`;
 

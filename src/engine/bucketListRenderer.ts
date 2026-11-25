@@ -4,8 +4,8 @@ import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
 const MAP_STYLE = 'https://tiles.openfreemap.org/styles/bright';
-const BASE_WIDTH = 540;
-const BASE_HEIGHT = 960;
+const BASE_WIDTH = 720;
+const BASE_HEIGHT = 1280;
 const INK = '#111F30';
 const PAPER = '#F5F1E8';
 const GOLD = '#D9B77A';
@@ -53,16 +53,17 @@ function zoomKeys(scene: OpenMotionScene): ZoomKey[] {
     ],
     globe
   });
+  // Compress the ocean crossing into the middle third of the intro.
+  // Each geographic keyframe is a real MapLibre camera position.
   return [
-    key(0,1.05,0,true),
-    key(.13,1.75,.25,true),
-    key(.25,2.55,.49,true),
-    key(.38,3.8,.68,false),
-    key(.50,5.0,.83,false),
-    key(.62,6.6,.93,false),
-    key(.74,8.5,.985,false),
-    key(.85,10.4,1,false),
-    key(1,12.2,1,false)
+    key(0,1.1,0,true),
+    key(.15,2.15,.28,true),
+    key(.30,3.55,.66,true),
+    key(.41,5.1,.86,false),
+    key(.53,6.7,.98,false),
+    key(.66,8.55,1,false),
+    key(.81,10.3,1,false),
+    key(1,12.15,1,false)
   ];
 }
 
@@ -82,7 +83,7 @@ export function prepareBucketListProject(project:OpenMotionProject):Promise<void
     const {Map: MapLibre, setWorkerUrl}=await import('maplibre-gl');
     setWorkerUrl(workerUrl);
     const host=document.createElement('div');
-    host.style.cssText='position:fixed;left:-5000px;top:0;width:540px;height:960px;pointer-events:none;z-index:-1';
+    host.style.cssText='position:fixed;left:-5000px;top:0;width:720px;height:1280px;pointer-events:none;z-index:-1';
     document.body.appendChild(host);
     let map:MapLibreMap|undefined;
     try{
@@ -102,6 +103,12 @@ export function prepareBucketListProject(project:OpenMotionProject):Promise<void
         new Promise<void>(resolve=>map!.once('load',()=>resolve())),
         new Promise<never>((_,reject)=>setTimeout(()=>reject(new Error('Globe map did not load')),30000))
       ]);
+      // Bright cartography is a base layer, not a street atlas. Hiding
+      // MapLibre's symbols removes large city names from the early globe,
+      // while retaining real OSM landforms, water and road geometry.
+      for(const layer of map.getStyle().layers??[]) {
+        if(layer.type==='symbol') map.setLayoutProperty(layer.id,'visibility','none');
+      }
       const captured:MapFrame[]=[];
       for(const key of keys) {
         const loaded=awaitIdle(map);
@@ -133,13 +140,16 @@ export function prepareBucketListProject(project:OpenMotionProject):Promise<void
   return work;
 }
 
-function fitPhoto(ctx:CanvasRenderingContext2D,img:HTMLImageElement,w:number,h:number,t:number){
+function fitPhoto(ctx:CanvasRenderingContext2D,img:HTMLImageElement,w:number,h:number,t:number,focusX=.5){
   const aspect=Math.max(w/img.naturalWidth,h/img.naturalHeight);
-  const zoom=1.07+.09*smooth(t);
+  const zoom=1.04+.14*smooth(t);
   const imageW=img.naturalWidth*aspect*zoom, imageH=img.naturalHeight*aspect*zoom;
-  const dx=Math.sin(t*Math.PI)*w*.015;
-  const dy=Math.cos(t*Math.PI)*h*.018;
-  ctx.drawImage(img,(w-imageW)/2+dx,(h-imageH)/2+dy,imageW,imageH);
+  // A configurable center of interest keeps the coastal foreground in frame
+  // on wide images and retains more visible motion across a short photo shot.
+  const pan=w*.036*(2*smooth(t)-1);
+  const x=Math.max(w-imageW,Math.min(0,w*.5-focusX*imageW+pan));
+  const y=(h-imageH)/2+h*.016*(2*smooth(t)-1);
+  ctx.drawImage(img,x,y,imageW,imageH);
 }
 function fallbackPhoto(ctx:CanvasRenderingContext2D,w:number,h:number){
   const sky=ctx.createLinearGradient(0,0,0,h);
@@ -211,20 +221,26 @@ function zoomFrame(ctx:CanvasRenderingContext2D,w:number,h:number,project:OpenMo
 }
 
 function footer(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMotionScene){
-  const data=scene.bucketList!;
-  const scale=w/1080;
-  ctx.fillStyle='rgba(250,250,244,.88)';
-  ctx.fillRect(0,h-69*scale,w,69*scale);
-  ctx.fillStyle='#315152';ctx.textAlign='center';
-  ctx.font='500 '+Math.round(18*scale)+'px "Plus Jakarta Sans",sans-serif';
-  if(data.chapter==='zoom') ctx.fillText('OpenFreeMap / OpenMapTiles · © OpenStreetMap contributors',w/2,h-26*scale,w-50*scale);
-  else ctx.fillText('PHOTO '+(data.imageAuthor??'Wikimedia Commons')+' · '+(data.imageLicense??''),w/2,h-25*scale,w-50*scale);
+  const data=scene.bucketList!,s=w/1080;
+  // Small editorial credit over the picture instead of a bright full-width
+  // strip. Keep attribution present on every exported frame.
+  ctx.save();
+  ctx.fillStyle='rgba(8,23,31,.77)';
+  ctx.beginPath();ctx.roundRect(55*s,h-104*s,w-110*s,49*s,12*s);ctx.fill();
+  ctx.fillStyle='#E6E8E0';ctx.textAlign='left';
+  ctx.font='500 '+Math.round(21*s)+'px "Plus Jakarta Sans",sans-serif';
+  const label=data.chapter==='zoom'
+    ? 'MAP  OpenFreeMap / OpenMapTiles · © OpenStreetMap contributors'
+    : 'PHOTO  '+(data.imageAuthor??'Wikimedia Commons')+'  ·  '+(data.imageLicense??'');
+  ctx.fillText(label,69*s,h-72*s,w-139*s);
+  ctx.restore();
 }
 
-function zoomScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMotionScene,time:number,project:OpenMotionProject){
+function zoomScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMotionScene,time:number,project:OpenMotionProject,layer:'image'|'text'){
+  if(layer==='image') {zoomFrame(ctx,w,h,project,time,scene);return;}
   const d=scene.bucketList!,s=w/1080,t=clamp(time/Math.max(.01,scene.durationSec));
-  zoomFrame(ctx,w,h,project,time,scene);
-  // Documentary-style UI overlay, kept away from the TikTok safe zone.
+  // Text/UI are drawn once AFTER imagery has been dissolved in the shared
+  // renderer. No duplicate outgoing place names during the incoming shot.
   const shade=ctx.createLinearGradient(0,0,0,h);
   shade.addColorStop(0,'rgba(10,22,35,.68)');
   shade.addColorStop(.24,'rgba(10,22,35,.10)');
@@ -237,7 +253,7 @@ function zoomScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMoti
   ctx.fillStyle=GOLD;ctx.font='700 '+Math.round(24*s)+'px "Plus Jakarta Sans",sans-serif';
   ctx.fillText('#'+String(d.episode).padStart(3,'0')+'    /    '+d.region.toUpperCase(),70*s,172*s,w-140*s);
 
-  const launch=1-smooth((t-.25)/.12);
+  const launch=1-smooth((t-.19)/.12);
   if(launch>0){
     ctx.save();ctx.globalAlpha*=launch;
     ctx.fillStyle=PAPER;ctx.font='800 '+Math.round(78*s)+'px "Bricolage Grotesque",sans-serif';
@@ -245,7 +261,7 @@ function zoomScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMoti
     ctx.fillText('THE JOURNEY',70*s,h-325*s,w-140*s);
     ctx.restore();
   }
-  const arrive=smooth((t-.70)/.22);
+  const arrive=smooth((t-.69)/.23);
   if(arrive>0){
     ctx.save();ctx.globalAlpha*=arrive;
     ctx.fillStyle=GOLD;ctx.font='700 '+Math.round(29*s)+'px "Plus Jakarta Sans",sans-serif';
@@ -259,16 +275,19 @@ function zoomScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMoti
   footer(ctx,w,h,scene);
 }
 
-function photoScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMotionScene,time:number,getPhoto:(url:string)=>HTMLImageElement|null){
+function photoScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMotionScene,time:number,getPhoto:(url:string)=>HTMLImageElement|null,layer:'image'|'text'){
   const d=scene.bucketList!,t=clamp(time/Math.max(.01,scene.durationSec)),s=w/1080;
-  const img=scene.imageUrl?getPhoto(scene.imageUrl):null;
-  if(img)fitPhoto(ctx,img,w,h,t);else fallbackPhoto(ctx,w,h);
+  if(layer==='image'){
+    const img=scene.imageUrl?getPhoto(scene.imageUrl):null;
+    if(img)fitPhoto(ctx,img,w,h,t,d.imageFocusX??.5);else fallbackPhoto(ctx,w,h);
+    return;
+  }
   const shade=ctx.createLinearGradient(0,h*.25,0,h);
   shade.addColorStop(0,'rgba(11,26,26,0)');
   shade.addColorStop(.48,'rgba(11,26,26,.35)');
   shade.addColorStop(1,'rgba(7,22,25,.95)');
   ctx.fillStyle=shade;ctx.fillRect(0,h*.25,w,h*.75);
-  const appear=smooth((time-.20)/.52),depart=1-smooth((time-(scene.durationSec-.5))/.5);
+  const appear=smooth((time-.08)/.36),depart=1-smooth((time-(scene.durationSec-.32))/.32);
   ctx.save();ctx.globalAlpha*=appear*depart;
   ctx.textAlign='left';ctx.fillStyle=GOLD;
   ctx.font='700 '+Math.round(26*s)+'px "Plus Jakarta Sans",sans-serif';
@@ -288,7 +307,7 @@ function photoScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMot
   lines.slice(0,3).forEach((str,i)=>ctx.fillText(str,70*s,titleY+i*100*s,w-140*s));
   ctx.fillStyle='#E9E6D8';
   ctx.font='500 '+Math.round(36*s)+'px "Plus Jakarta Sans",sans-serif';
-  const copy=d.chapter==='outro'?'THE AZORES  /  PORTUGAL':d.reasonCopy??'';
+  const copy=d.chapter==='outro'?d.region.toUpperCase()+'  /  '+d.country.toUpperCase():d.reasonCopy??'';
   ctx.fillText(copy,74*s,h-153*s,w-148*s);
   if(d.chapter==='outro'){
     ctx.font='700 '+Math.round(27*s)+'px "Plus Jakarta Sans",sans-serif';
@@ -300,10 +319,15 @@ function photoScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMot
 export function renderBucketListScene(
  ctx:CanvasRenderingContext2D,w:number,h:number,
  scene:OpenMotionScene,time:number,project:OpenMotionProject,
- getPhoto:(url:string)=>HTMLImageElement|null
+ getPhoto:(url:string)=>HTMLImageElement|null,
+ layer:'all'|'image'|'text'='all'
 ):void{
   ctx.save();
-  if(scene.bucketList?.chapter==='zoom')zoomScene(ctx,w,h,scene,time,project);
-  else photoScene(ctx,w,h,scene,time,getPhoto);
+  const draw=(mode:'image'|'text')=>{
+    if(scene.bucketList?.chapter==='zoom')zoomScene(ctx,w,h,scene,time,project,mode);
+    else photoScene(ctx,w,h,scene,time,getPhoto,mode);
+  };
+  if(layer==='all'){draw('image');draw('text');}
+  else draw(layer);
   ctx.restore();
 }
