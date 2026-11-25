@@ -110,7 +110,8 @@
           "chapter": 1,
           "narration": "Green mountains meet the Atlantic. This is São Miguel, the largest island of the Azores."
         }
-      }
+      },
+      "subheadline": "Island of Fire and Water"
     },
     {
       "id": "shot-04",
@@ -170,9 +171,9 @@
           "chapter": 2,
           "narration": "Together, they form the Azores, an autonomous region of Portugal. São Miguel lies in the eastern group.",
           "from": [
-            -28,
-            38.3,
-            5.7
+            -25.5,
+            38,
+            5.1
           ],
           "to": [
             -25.5,
@@ -207,7 +208,7 @@
           "from": [
             -25.5,
             37.78,
-            7.6
+            7.5
           ],
           "to": [
             -25.5,
@@ -327,7 +328,7 @@
           "from": [
             -25.5,
             37.78,
-            9.1
+            9.4
           ],
           "to": [
             -25.78,
