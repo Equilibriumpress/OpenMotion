@@ -11,8 +11,7 @@ The four motion excerpts are sampled into 20fps frame atlases (640×360 cells)
 for deterministic canvas playback; the other non-map shots use animated photos.
 No extra GitHub workflow is introduced. The existing Pages build prepares
 the image files, attribution, thumbnail, Piper narration, score, ambience and
-estimated SRT timing. The existing in-browser MP4 export is the master export
-path; prebuilt server MP4 is not enabled for this episode. Source file pages
+estimated SRT timing. The existing Pages publication renderer also exports a prebuilt H.264/AAC master using the same Canvas renderer and awaited MapLibre camera. The Studio browser export remains available. Publication verifies the resulting duration, dimensions, audio and frame rate. Source file pages
 are researched, but image decoding, excerpt framing, pronunciation, final
 audio balance and the finished film must be checked in the deployed Studio.
  
@@ -24,8 +23,7 @@ SRT: assets/audio/places-worth-exploring-001-okinawa-captions.srt
  
 For future episodes copy the project and travel-assets manifest into a new slug,
 set the new title, destinations, map cameras, episode number, scene and audio
-paths. Keep the series key. The thumbnail builder currently uses the fourth
-shot and Okinawa title, so adapt that before producing another episode.
+paths. Keep the series key. The thumbnail builder uses the first title scene and its text.
  
 Rights: source media retain their listed licenses. The rendered compilation
 must carry appropriate attribution and satisfy each applicable ShareAlike

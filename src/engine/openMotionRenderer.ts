@@ -385,7 +385,8 @@ export function renderOpenMotionFrame(
     // reason cards, and a slower transition to the coastal finale.
     const documentary = scene.bucketList.documentary;
     const documentaryMapCut = documentary?.mode === 'map' || previous?.bucketList?.documentary?.mode === 'map';
-    const dissolveTarget = documentary ? (documentary.chapter === 1 ? .18 : documentaryMapCut ? .65 : .4) : previous?.bucketList?.chapter==='zoom' ? .78
+     const travelMapCut = documentary?.series==='places-worth-exploring' && documentaryMapCut;
+    const dissolveTarget = travelMapCut ? 0 : documentary ? (documentary.chapter === 1 ? .18 : documentaryMapCut ? .65 : .4) : previous?.bucketList?.chapter==='zoom' ? .78
       : scene.bucketList.chapter==='outro' ? .60 : .36;
     const continuousDocMap=previous?.bucketList?.documentary?.mode==='map'&&scene.bucketList.documentary?.mode==='map';
     const dissolve=previous?.layout==='bucket-list-zoom'&&previous.bucketList&&scene.transition==='fade'&&!continuousDocMap

@@ -29,7 +29,7 @@ def metadata(file):
     get=lambda key:clean(ext.get(key,{}).get("value",""))
     license=get("LicenseShortName"); author=get("Artist") or get("Credit")
     if file.startswith("Japan, Okinawa, Kerama islands"): author="Cool2ikou"
-    if not author or not re.search(r"^(CC BY(?:-SA)? [1-4]\\.[05]|CC0|Public domain|PDM)",license,re.I):
+    if not author or not re.search(r"^(CC BY(?:-SA)? [1-4][.][05]|CC0|Public domain|PDM)",license,re.I):
         raise RuntimeError("Unsupported or missing license/author: "+file+" "+license)
     return i,{"author":author,"license":license,"licenseUrl":get("LicenseUrl"),"sourceUrl":i["descriptionurl"],"title":file}
 def build(manifest):
@@ -64,7 +64,7 @@ def build(manifest):
                 fps=20; cols=10; count=int(asset["duration"]*fps); rows=(count+cols-1)//cols
                 # 640x360 frame cells keep the atlas under common browser image limits.
                 vf=f"fps={fps},scale=640:360:force_original_aspect_ratio=increase,crop=640:360,tile={cols}x{rows}:nb_frames={count}"
-                ff("-ss",asset["start"],"-i",source,"-t",asset["duration"],"-an","-vf",vf,"-frames:v","1","-q:v","2",target)
+                ff("-ss",asset["start"],"-i",source,"-an","-vf",vf,"-frames:v","1","-q:v","2",target)
                 row["videoGrid"]={"fps":fps,"cols":cols,"rows":rows,"frameWidth":640,"frameHeight":360,"frames":count}
                 row["changes"]=f"Silent excerpt at {asset['start']} s, sampled at {fps} fps and resized."
             else:
@@ -76,8 +76,14 @@ def build(manifest):
     (out/"credits.json").write_text(json.dumps(credits,ensure_ascii=False,indent=2))
     entries="".join("<li>"+html.escape(k+" · "+v["location"]+" · "+v["author"]+" · "+v["license"])+ " — <a href='"+html.escape(v["sourceUrl"],quote=True)+"'>source</a> "+("<a href='"+html.escape(v["licenseUrl"],quote=True)+"'>license</a>" if v["licenseUrl"] else "")+" · "+html.escape(v["changes"])+"</li>" for k,v in credits.items())
     (out/"credits.html").write_text("<!doctype html><meta charset=utf-8><title>Travel documentary credits</title><h1>Media credits</h1><p>Source media and their respective licenses. Adapted CC BY-SA source excerpts retain their applicable licenses; no endorsement is implied.</p><ol>"+entries+"</ol>")
-    title=out/"shot-04.jpg"
+    project=json.loads((manifest.parent/"project.json").read_text())
+    title_shot=next((s for s in project["scenes"] if s.get("bucketList",{}).get("documentary",{}).get("mode")=="title"),None)
+    title=out/(title_shot["id"]+".jpg") if title_shot else out/"missing.jpg"
     if title.exists():
-        ff("-i",title,"-vf","scale=1280:720:force_original_aspect_ratio=increase,crop=1280:720,drawbox=x=0:y=450:w=1280:h=270:color=0x102B3B@0.77:t=fill,drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf:text=OKINAWA:x=65:y=485:fontsize=104:fontcolor=white,drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf:text='JAPAN BEYOND THE MAINLAND':x=70:y=610:fontsize=33:fontcolor=0x80D7D0","-frames:v","1","-q:v","2",out/"thumbnail.jpg")
+        with tempfile.TemporaryDirectory() as temp:
+            headline=pathlib.Path(temp)/"headline.txt"; subtitle=pathlib.Path(temp)/"subtitle.txt"
+            headline.write_text(title_shot["headline"].upper()); subtitle.write_text(title_shot.get("subheadline","").upper())
+            vf="scale=1280:720:force_original_aspect_ratio=increase,crop=1280:720,drawbox=x=0:y=450:w=1280:h=270:color=0x102B3B@0.77:t=fill,drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf:textfile="+str(headline)+":x=65:y=485:fontsize=104:fontcolor=white,drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf:textfile="+str(subtitle)+":x=70:y=610:fontsize=33:fontcolor=0x80D7D0"
+            ff("-i",title,"-vf",vf,"-frames:v","1","-q:v","2",out/"thumbnail.jpg")
 if __name__=="__main__":
     for manifest in sorted((ROOT/"projects").glob("*/travel-assets.json")): build(manifest)
