@@ -6,18 +6,18 @@ import { once } from 'node:events';
 if(process.env.GITHUB_ACTIONS!=='true' && process.env.WORLD_RENDER!=='1') process.exit(0);
 const root=process.cwd(),dist=path.join(root,'dist'),manifestPath=path.join(dist,'projects','manifest.json');
 const manifest=JSON.parse(fs.readFileSync(manifestPath,'utf8'));
-const projects=manifest.projects.filter(p=>p.scenes.some(s=>s.worldStory || s.catOffice));
+const projects=manifest.projects.filter(p=>p.scenes.some(s=>s.worldStory || s.catOffice || s.bucketList?.documentary?.series==='places-worth-exploring'));
 if(!projects.length)process.exit(0);
 const { chromium }=await import('playwright');
 const { createServer }=await import('vite');
 const tmp=path.join(root,'world-render-preview.html');
 const run=(cmd,args)=>{const x=spawnSync(cmd,args,{stdio:'inherit',timeout:600000});if(x.status!==0)throw Error(cmd+' failed: '+x.status)};
 let server,browser;
-const requiresCatMaster=projects.some(p=>p.scenes.some(s=>s.catOffice));
+const requiresCatMaster=projects.some(p=>p.scenes.some(s=>s.catOffice || s.bucketList?.documentary?.series==='places-worth-exploring'));
 try {
   let executablePath=['/usr/bin/google-chrome','/usr/bin/google-chrome-stable','/usr/bin/chromium'].find(p=>fs.existsSync(p));
   if(!executablePath){run('npx',['playwright','install','chromium']);}
-  browser=await chromium.launch({headless:true,executablePath,args:['--no-sandbox','--disable-dev-shm-usage']});
+  browser=await chromium.launch({headless:true,executablePath,args:['--no-sandbox','--disable-dev-shm-usage','--enable-webgl','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
   fs.writeFileSync(tmp,'<!doctype html><html><head><meta charset="utf-8"><style>body{margin:0}canvas{display:block}</style></head><body><canvas></canvas></body></html>');
   server=await createServer({server:{host:'127.0.0.1',port:4179,strictPort:true},logLevel:'error'});
   await server.listen();
@@ -26,9 +26,11 @@ try {
     const target=path.join(dist,'renders',p.slug+'.mp4'),silent=target+'.video.mp4';
     let page,encoder;
     try{
-      const duration=p.scenes.reduce((sum,s)=>sum+s.durationSec,0),fps=60,width=1080,height=1920;
+      const travel=p.scenes.some(s=>s.bucketList?.documentary?.series==='places-worth-exploring');
+      const duration=p.scenes.reduce((sum,s)=>sum+s.durationSec,0),fps=travel?p.fps:60,width=travel?p.width:1080,height=travel?p.height:1920;
       const tracks=(p.audioTracks??[]).filter(t=>fs.existsSync(path.join(dist,t.src)));
       const isCat=p.scenes.some(s=>s.catOffice);
+      const isTravel=p.scenes.some(s=>s.bucketList?.documentary?.series==='places-worth-exploring');
       if(isCat){
         if(!tracks.length)throw Error('Cat soundtrack missing.');
         for(const id of ['oliver','boss','luna','bob']) if(!fs.existsSync(path.join(dist,'assets','cat-office',id+'.jpg')))throw Error('Cat photo missing: '+id);
@@ -46,10 +48,27 @@ try {
           await preloadProjectImages(p);
           for(const id of ['oliver','boss','luna','bob']) if(!getCachedPhoto(projectAssetUrl('assets/cat-office/'+id+'.jpg')))throw Error('Photo did not decode: '+id);
         }
-        window.renderWorldFrames=(start,count,fps)=>Array.from({length:count},(_,i)=>{
-          renderOpenMotionFrame(ctx,p,(start+i)/fps,width,height);
-          return c.toDataURL('image/jpeg',.94).split(',')[1];
-        });
+        const isTravel=p.scenes.some(s=>s.bucketList?.documentary?.series==='places-worth-exploring');
+        let capture;
+        if(isTravel){
+          const {preloadProjectImages,getCachedPhoto}=await import('/src/engine/imageCache.ts');
+          const {projectAssetUrl}=await import('/src/engine/projectAudio.ts');
+          const {beginBucketListExport,captureBucketListExportFrame}=await import('/src/engine/bucketListCamera.ts');
+          await preloadProjectImages(p);
+          for(const s of p.scenes)if(s.imageUrl&&!getCachedPhoto(projectAssetUrl(s.imageUrl)))throw Error('Travel photo did not decode: '+s.id);
+          await beginBucketListExport(p);
+          capture=captureBucketListExportFrame;
+        }
+        window.renderWorldFrames=async(start,count,fps)=>{
+          const out=[];
+          for(let i=0;i<count;i++){
+            const t=(start+i)/fps;
+            if(capture)await capture(p,t);
+            renderOpenMotionFrame(ctx,p,t,width,height);
+            out.push(c.toDataURL('image/jpeg',.94).split(',')[1]);
+          }
+          return out;
+        };
       },{p,width,height});
       const frames=Math.round(duration*fps);
       encoder=spawn('ffmpeg',['-hide_banner','-loglevel','error','-y','-f','image2pipe','-framerate',String(fps),'-vcodec','mjpeg','-i','pipe:0','-an','-c:v','libx264','-preset','fast','-crf','19','-pix_fmt','yuv420p','-movflags','+faststart',silent],{stdio:['pipe','inherit','inherit']});
@@ -69,11 +88,11 @@ try {
       const probe=spawnSync('ffprobe',['-v','error','-show_streams','-show_format','-of','json',target],{encoding:'utf8'});
       if(probe.status!==0)throw Error('ffprobe failed');
       const info=JSON.parse(probe.stdout),v=info.streams.find(s=>s.codec_type==='video'),a=info.streams.find(s=>s.codec_type==='audio');
-      if(v?.width!==width||v?.height!==height||v?.avg_frame_rate!=='60/1'||!a||Math.abs(Number(info.format.duration)-duration)>.15)throw Error('Output does not match 1080x1920 / 60 fps / audio / duration');
+      if(v?.width!==width||v?.height!==height||v?.avg_frame_rate!==fps+'/1'||!a||Math.abs(Number(info.format.duration)-duration)>.15)throw Error('Output does not match requested resolution / fps / audio / duration');
       p.prebuiltMp4Url='renders/'+p.slug+'.mp4';
       fs.writeFileSync(manifestPath,JSON.stringify(manifest,null,2));
       console.log('[world-render] verified master:',p.slug,width,height,fps,duration,a.codec_name);
-    }catch(e){console.error('[world-render] master unavailable:',p.slug,e);if(fs.existsSync(target))fs.unlinkSync(target);if(p.scenes.some(s=>s.catOffice))throw e;}
+    }catch(e){console.error('[world-render] master unavailable:',p.slug,e);if(fs.existsSync(target))fs.unlinkSync(target);if(p.scenes.some(s=>s.catOffice || s.bucketList?.documentary?.series==='places-worth-exploring'))throw e;}
     finally{if(encoder&&encoder.exitCode===null)encoder.kill('SIGTERM');if(page)await page.close();if(fs.existsSync(silent))fs.unlinkSync(silent);}
   }
 }catch(e){console.error('[world-render] publication export failed:',e);if(requiresCatMaster)process.exitCode=1;}

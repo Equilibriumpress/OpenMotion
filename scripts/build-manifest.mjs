@@ -30,7 +30,31 @@ if (process.env.GITHUB_ACTIONS === 'true' || process.env.CAT_OFFICE_ASSETS === '
   const cat = spawnSync('python3',['scripts/build-cat-office.py'],{stdio:'inherit',timeout:300000});
   if (cat.status !== 0) throw new Error('[cat-office] Asset preparation failed; refusing to publish missing cats.');
 }
+// Travel source assets are materialized into public/ during the same Pages build.
+if (process.env.GITHUB_ACTIONS === 'true' || process.env.TRAVEL_ASSETS === '1') {
+  const result=spawnSync('python3',['scripts/build-travel-assets.py'],{stdio:'inherit',timeout:900000});
+  if(result.status!==0)throw Error('[travel] Source media preparation failed; refusing to publish an incomplete episode.');
+}
 function prepareProject(p) {
+  if(p.scenes?.some(s=>s.bucketList?.documentary?.series==='places-worth-exploring')){
+    const base='assets/places-worth-exploring/'+p.slug+'/';
+    const creditPath=path.join(rootDir,'public',base,'credits.json');
+    if(fs.existsSync(creditPath)){
+      const credits=JSON.parse(fs.readFileSync(creditPath,'utf8'));
+      for(const s of p.scenes){
+        if(!s.imageUrl)continue;
+        const c=credits[s.id];
+        if(!c||!fs.existsSync(path.join(rootDir,'public',s.imageUrl)))throw Error('Missing travel source '+s.id);
+        s.bucketList.imageAuthor=c.author;
+        s.bucketList.imageLicense=c.license;
+        s.bucketList.imageSourceUrl=c.sourceUrl;
+        if(c.videoGrid)s.bucketList.documentary.videoGrid=c.videoGrid;
+      }
+      p.description+=' | Full source credits: '+base+'credits.html';
+    }else {
+      p.description+=' | Media not prepared. Run TRAVEL_ASSETS=1 npm run build:manifest.';
+    }
+  }
   if(p.scenes?.some(s=>s.catOffice)){
     p.audioTracks=(p.audioTracks??[]).filter(t=>fs.existsSync(path.join(rootDir,'public',t.src)));
     return p;
