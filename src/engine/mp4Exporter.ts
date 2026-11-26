@@ -6,7 +6,8 @@ import {
   getFormatDimensions,
   getProjectDurationSec,
 } from '../types/openmotion';
-import { preloadProjectImages } from './imageCache';
+import { preloadProjectImages, assertTravelMediaReady } from './imageCache';
+import { isTravelDocumentary } from './travelProject';
 import { renderOpenMotionFrame } from './openMotionRenderer';
 import { mixProjectAudio } from './projectAudio';
 import {beginBucketListExport,captureBucketListExportFrame,endBucketListExport} from './bucketListCamera';
@@ -44,7 +45,8 @@ async function encodeAacAudio(audio:AudioBuffer, config:AudioEncoderConfig, muxe
 }
 
 const H264_CODEC_CANDIDATES = [
-  'avc1.640028', // High Profile Level 4.0 (1080p30/60)
+  'avc1.64002a', // High Profile Level 4.2 (1080p60)
+  'avc1.640028', // High Profile Level 4.0 (1080p30)
   'avc1.64001f', // High Profile Level 3.1 (720p30)
   'avc1.4d002a', // Main Profile Level 4.2
   'avc1.42001f', // Baseline Profile Level 3.1
@@ -264,6 +266,11 @@ export async function exportProjectToMp4(
   const durationSec = Math.max(0.5, getProjectDurationSec(project));
   const totalFrames = Math.max(1, Math.ceil(durationSec * fps));
   const bitrate = Math.round(options.bitrateMbps * 1_000_000);
+  const strictTravel=isTravelDocumentary(project);
+  const strictError='Deze browser ondersteunt geen betrouwbare H.264/AAC-export op de gekozen resolutie en framerate. Gebruik de handmatige GitHub-master voor dit project.';
+  if(strictTravel && !project.audioTracks?.some(t=>t.kind==='voiceover'&&t.src?.trim()))throw new Error('Voice-over ontbreekt in het project. Open de gepubliceerde Studio opnieuw.');
+  const travelVideoConfig=strictTravel?await pickSupportedH264Config(width,height,fps,bitrate):null;
+  if(strictTravel&&(!travelVideoConfig||!await probeAacEncoder()))throw new Error(strictError);
 
   const canvas = document.createElement('canvas');
   canvas.width = width;
@@ -278,15 +285,17 @@ export async function exportProjectToMp4(
     await document.fonts.ready;
   }
   await preloadProjectImages(project);
+  assertTravelMediaReady(project);
   const mixedAudio = await mixProjectAudio(project, durationSec);
   const audioConfig = mixedAudio ? await probeAacEncoder() : null;
 
-  let h264Config = await pickSupportedH264Config(width, height, fps, bitrate);
+  if(strictTravel&&(!mixedAudio||!audioConfig))throw new Error(strictError);
+  let h264Config = travelVideoConfig ?? await pickSupportedH264Config(width, height, fps, bitrate);
   let encoderNote = '';
   // A browser may decline 1080×1920 while supporting 720×1280 H.264
   // with AAC. Prefer that encoded-and-muxed result to the Safari
   // MediaRecorder fallback observed to shrink exports to 512×910.
-  if(!h264Config && audioConfig && Math.max(width,height)>1280) {
+  if(!strictTravel && !h264Config && audioConfig && Math.max(width,height)>1280) {
     const factor=1280/Math.max(width,height);
     const w=Math.max(2,Math.floor(width*factor/2)*2);
     const h=Math.max(2,Math.floor(height*factor/2)*2);
@@ -320,6 +329,7 @@ export async function exportProjectToMp4(
       });
     }
 
+    if(strictTravel)throw new Error(strictError);
     return await encodeWithMediaRecorderFallback({
       mixedAudio,
       canvas,
@@ -457,9 +467,14 @@ async function encodeWithWebCodecsMp4(params: {
     muxer.finalize();
 
     const mp4Blob = new Blob([target.buffer], { type: 'video/mp4' });
-    const inspected = describeOutput(await actualVideoSize(mp4Blob),width,height,`WebCodecs H.264 (${h264Config.codec})`+encoderNote);
+    const actual=await actualVideoSize(mp4Blob);
+    const measuredFps=await actualMp4FrameRate(mp4Blob);
+    const audioTrack=mixedAudio?await containsMp4AudioTrack(mp4Blob):null;
+    if(isTravelDocumentary(project)&&(!actual||actual.width!==width||actual.height!==height||measuredFps===null||Math.abs(measuredFps-fps)>.05||audioTrack!==true))throw new Error('Mastercontrole mislukt: resolutie, framerate of AAC-audiospoor niet bevestigd. Gebruik de handmatige GitHub-master.');
+    const verified=measuredFps===null?' · framerate niet geverifieerd':' · gemeten '+measuredFps+' fps';
+    const inspected = describeOutput(actual,width,height,`WebCodecs H.264 (${h264Config.codec})`+encoderNote+verified+(audioTrack===true?' · audiotrack gecontroleerd':''));
     const outputUrl = URL.createObjectURL(mp4Blob);
-    const fileName = `${project.slug}-${inspected.w}x${inspected.h}-${fps}fps.mp4`;
+    const fileName = `${project.slug}-${actual?inspected.w+'x'+inspected.h:'res-onbekend'}-${measuredFps===null?'fps-onbekend':measuredFps+'fps'}.mp4`;
 
     const finalState: RenderProgressState = {
       phase: 'done',

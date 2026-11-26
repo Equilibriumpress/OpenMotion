@@ -48,7 +48,11 @@ function prepareProject(p) {
         s.bucketList.imageAuthor=c.author;
         s.bucketList.imageLicense=c.license;
         s.bucketList.imageSourceUrl=c.sourceUrl;
-        if(c.videoGrid)s.bucketList.documentary.videoGrid=c.videoGrid;
+        if(c.videoGrid){
+          const declared=s.bucketList.documentary.videoGrid;
+          if(declared&&Object.keys(c.videoGrid).some(k=>declared[k]!==c.videoGrid[k]))throw Error('Travel frame atlas differs from project declaration: '+s.id);
+          s.bucketList.documentary.videoGrid=c.videoGrid;
+        }else if(s.bucketList.documentary.videoGrid)throw Error('Missing generated video atlas: '+s.id);
       }
       p.description+=' | Full source credits: '+base+'credits.html';
     }else {

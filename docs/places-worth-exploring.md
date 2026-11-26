@@ -30,3 +30,6 @@ Rights: source media retain their listed licenses. The rendered compilation
 must carry appropriate attribution and satisfy each applicable ShareAlike
 obligation; do not assume the episode is exclusively owned or eligible for
 YouTube's standard license. Audio environments are synthesized, not recordings.
+
+## R2: Studio and master integrity
+The four clip grids are declared in project.json as well as generated credits. The build compares the declarations. Studio uses the travel series identity even when older imported metadata lacks the series key, rejects malformed clip grids and checks decoded atlas dimensions before exporting. Travel exports require WebCodecs H.264/AAC at the selected dimensions and fps, then validate actual dimensions, sample timing and presence of an audio track. Safari without these capabilities uses the explicit manual GitHub master workflow, not a silent MediaRecorder fallback. Refresh the deployed Studio before exporting. This is not a guarantee of browser codec availability; no forced server render on normal deployment.

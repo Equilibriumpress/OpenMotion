@@ -1,3 +1,4 @@
+import {isTravelDocumentary,isTravelClip,travelFrameGrid,matchingTravelAtlas} from './travelProject';
 import type {OpenMotionProject,OpenMotionScene,DocumentaryShot} from '../types/openmotion';
 import {getBucketListCanvas,getDocumentaryProjectedPoint} from './bucketListCamera';
 
@@ -171,10 +172,12 @@ function travelShot(ctx:C,w:number,h:number,scene:OpenMotionScene,time:number,pr
   }else if(scene.imageUrl){
    const im=getPhoto(scene.imageUrl);
    if(im&&im.naturalWidth){
-    const g=d.videoGrid;
-    if(g){
-     const n=Math.min(g.frames-1,Math.floor(time*g.fps));
-     ctx.drawImage(im,(n%g.cols)*g.frameWidth,Math.floor(n/g.cols)*g.frameHeight,g.frameWidth,g.frameHeight,0,0,1920,1080);
+    const g=travelFrameGrid(scene);
+    if(isTravelClip(scene)){
+     if(g&&matchingTravelAtlas(scene,im)){
+      const n=Math.max(0,Math.min(g.frames-1,Math.floor(time*g.fps)));
+      ctx.drawImage(im,(n%g.cols)*g.frameWidth,Math.floor(n/g.cols)*g.frameHeight,g.frameWidth,g.frameHeight,0,0,1920,1080);
+     }else txt(ctx,'VIDEO SOURCE NOT PREPARED',100,535,30,accent);
     }else photo(ctx,im,t,d);
    }else txt(ctx,'MEDIA UNAVAILABLE',100,535,30,accent);
   }
@@ -183,7 +186,7 @@ function travelShot(ctx:C,w:number,h:number,scene:OpenMotionScene,time:number,pr
  const a=smooth(time/.6);
  if(d.mode==='title'||d.mode==='end'){
   shade(ctx,.83);ctx.save();ctx.globalAlpha*=a;
-  txt(ctx,kit.brandName.toUpperCase()+'  /  '+String(scene.bucketList!.episode).padStart(3,'0'),100,105,28,accent);
+  txt(ctx,'PLACES WORTH EXPLORING  /  '+String(scene.bucketList!.episode).padStart(3,'0'),100,105,28,accent);
   txt(ctx,scene.headline,95,755,d.mode==='title'?126:86,kit.textColor,false);
   if(scene.subheadline)txt(ctx,scene.subheadline,104,826,48,kit.textColor,false);
   ctx.restore();
@@ -202,7 +205,7 @@ function travelShot(ctx:C,w:number,h:number,scene:OpenMotionScene,time:number,pr
 }
 export function renderDocumentaryShot(ctx:C,w:number,h:number,scene:OpenMotionScene,time:number,project:OpenMotionProject,getPhoto:(url:string)=>HTMLImageElement|null,layer:'image'|'text'){
  const d=scene.bucketList?.documentary;if(!d)return;
- if(d.series==='places-worth-exploring'){travelShot(ctx,w,h,scene,time,project,getPhoto,layer);return;}
+ if(d.series==='places-worth-exploring'||isTravelDocumentary(project)){travelShot(ctx,w,h,scene,time,project,getPhoto,layer);return;}
  const t=clamp(time/Math.max(.1,scene.durationSec)),mode=d.mode,diagram=diagramModes.has(mode)&&!(mode==='climate'&&scene.imageUrl);
  ctx.save();ctx.scale(w/1920,h/1080);
  if(layer==='image'){

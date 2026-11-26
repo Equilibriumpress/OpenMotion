@@ -25,6 +25,7 @@ import { createDoodleExplainerAudio } from '../engine/doodleExplainerAudio';
 import { createBucketListAudio } from '../engine/bucketListAudio';
 import { ShortsMediaEditor } from './ShortsMediaEditor';
 import { exportProjectToMp4, formatFileSize } from '../engine/mp4Exporter';
+import { isTravelDocumentary } from '../engine/travelProject';
 import {
   buildTemplateRemixPrompt,
   commitProjectToGitHub,
@@ -722,6 +723,14 @@ export function StudioView({
                   </p>
                 </div>
 
+                {isTravelDocumentary(project) && (
+                  <div className="space-y-2 rounded-lg border border-slate-200 p-3 text-xs text-slate-700">
+                    <p className="font-semibold">Places Worth Exploring · gecontroleerde export R2</p>
+                    <p>De browserexport vereist H.264 en AAC op de gekozen resolutie en framerate. Geen stille of verkleinde master. Werkt dit niet op jouw toestel, gebruik dan de handmatige serverrender.</p>
+                    <a className="block text-blue-700 underline" href={`https://github.com/${encodeURIComponent(repoConfig.owner)}/${encodeURIComponent(repoConfig.repo)}/actions/workflows/render-openmotion-master.yml`} target="_blank" rel="noreferrer">Open GitHub masterworkflow</a>
+                    <p>Run workflow · project: <code className="break-all">{project.slug}</code>. Download de MP4 bij Artifacts. Alleen opgeslagen GitHub-versies worden gerenderd.</p>
+                  </div>
+                )}
                 {/* Export Controls */}
                 <div className="space-y-4">
                   <div>
