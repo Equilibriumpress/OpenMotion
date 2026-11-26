@@ -161,8 +161,48 @@ function footer(c:C,scene:OpenMotionScene,d:DocumentaryShot){
  const credit=d.mode==='map'?'MAP · OpenFreeMap / OpenMapTiles · © OpenStreetMap contributors'+(d.relief?' · AWS Open Data DEM':''):scene.imageUrl?'PHOTO · '+(scene.bucketList?.imageAuthor??'')+' · '+(scene.bucketList?.imageLicense??''):'ILLUSTRATION · OpenMotion Studio';
  c.fillStyle='rgba(11,23,36,.73)';c.fillRect(0,1004,1920,76);txt(c,credit,80,1045,20,'#D2D6D3',false,1760);
 }
+function travelShot(ctx:C,w:number,h:number,scene:OpenMotionScene,time:number,project:OpenMotionProject,getPhoto:(url:string)=>HTMLImageElement|null,layer:'image'|'text'){
+ const d=scene.bucketList!.documentary!,t=clamp(time/Math.max(.1,scene.durationSec)),kit=project.brandKit,accent=kit.accentColor;
+ ctx.save();ctx.scale(w/1920,h/1080);
+ if(layer==='image'){
+  backdrop(ctx);
+  if(d.mode==='map'){
+   const map=getBucketListCanvas(project);if(map)ctx.drawImage(map,0,0,1920,1080);else txt(ctx,'GEOGRAPHIC MAP UNAVAILABLE',100,535,30,accent);
+  }else if(scene.imageUrl){
+   const im=getPhoto(scene.imageUrl);
+   if(im&&im.naturalWidth){
+    const g=d.videoGrid;
+    if(g){
+     const n=Math.min(g.frames-1,Math.floor(time*g.fps));
+     ctx.drawImage(im,(n%g.cols)*g.frameWidth,Math.floor(n/g.cols)*g.frameHeight,g.frameWidth,g.frameHeight,0,0,1920,1080);
+    }else photo(ctx,im,t,d);
+   }else txt(ctx,'MEDIA UNAVAILABLE',100,535,30,accent);
+  }
+  ctx.restore();return;
+ }
+ const a=smooth(time/.6);
+ if(d.mode==='title'||d.mode==='end'){
+  shade(ctx,.83);ctx.save();ctx.globalAlpha*=a;
+  txt(ctx,kit.brandName.toUpperCase()+'  /  '+String(scene.bucketList!.episode).padStart(3,'0'),100,105,28,accent);
+  txt(ctx,scene.headline,95,755,d.mode==='title'?126:86,kit.textColor,false);
+  if(scene.subheadline)txt(ctx,scene.subheadline,104,826,48,kit.textColor,false);
+  ctx.restore();
+ }else if(d.mode==='map'||d.composition==='lower'){
+  shade(ctx,.72);ctx.save();ctx.globalAlpha*=a;
+  txt(ctx,scene.bucketList!.country.toUpperCase()+'  /  '+String(d.chapter).padStart(2,'0'),100,765,24,accent);
+  txt(ctx,scene.headline,100,835,64,kit.textColor);
+  if(d.mode==='map')markers(ctx,project,d,t);
+  ctx.restore();
+ }
+ // Discreet source credit; full license links and edit details in credits.html.
+ const credit=d.mode==='map'?'MAP · OpenFreeMap / OpenMapTiles · © OpenStreetMap contributors':
+  (d.videoGrid?'FOOTAGE · ':'PHOTO · ')+(scene.bucketList?.imageAuthor??'Wikimedia Commons')+' · '+(scene.bucketList?.imageLicense??'');
+ ctx.fillStyle='rgba(16,43,59,.68)';ctx.fillRect(0,1030,1920,50);txt(ctx,credit,70,1062,19,'#FAFAF7',false,1780);
+ ctx.restore();
+}
 export function renderDocumentaryShot(ctx:C,w:number,h:number,scene:OpenMotionScene,time:number,project:OpenMotionProject,getPhoto:(url:string)=>HTMLImageElement|null,layer:'image'|'text'){
  const d=scene.bucketList?.documentary;if(!d)return;
+ if(d.series==='places-worth-exploring'){travelShot(ctx,w,h,scene,time,project,getPhoto,layer);return;}
  const t=clamp(time/Math.max(.1,scene.durationSec)),mode=d.mode,diagram=diagramModes.has(mode)&&!(mode==='climate'&&scene.imageUrl);
  ctx.save();ctx.scale(w/1920,h/1080);
  if(layer==='image'){

@@ -1,0 +1,220 @@
+[
+  {
+    "id": "shot-01",
+    "file": "Drone flyover video of the Haneji Inland Sea, Okinawa Prefecture.webm",
+    "location": "Haneji Inland Sea",
+    "kind": "clip",
+    "start": 10,
+    "duration": 3
+  },
+  {
+    "id": "shot-02",
+    "file": "Coral reef life near Akajima 01.jpg",
+    "location": "Beneath the surface",
+    "kind": "photo"
+  },
+  {
+    "id": "shot-03",
+    "file": "Furuzamami beach Okinawa Zamami.jpg",
+    "location": "Kerama coast",
+    "kind": "photo"
+  },
+  {
+    "id": "shot-04",
+    "file": "Yonaha Bay in Miyako Island.jpg",
+    "location": "OKINAWA",
+    "kind": "photo"
+  },
+  {
+    "id": "shot-07",
+    "file": "Onna Okinawa Japan Cape-Manzamo-01.jpg",
+    "location": "Cape Manzamo",
+    "kind": "photo"
+  },
+  {
+    "id": "shot-08",
+    "file": "Cape Manzamo, Onna, Okinawa - Feb 17, 2019.jpg",
+    "location": "Limestone coast",
+    "kind": "photo"
+  },
+  {
+    "id": "shot-09",
+    "file": "Naha Shuri-jo View over Naha 02.jpg",
+    "location": "Naha",
+    "kind": "photo"
+  },
+  {
+    "id": "shot-10",
+    "file": "Kokusai Dori 01.JPG",
+    "location": "Kokusai-dori",
+    "kind": "photo"
+  },
+  {
+    "id": "shot-11",
+    "file": "Drone flyover video of the Haneji Inland Sea, Okinawa Prefecture.webm",
+    "location": "Haneji Inland Sea",
+    "kind": "clip",
+    "start": 55,
+    "duration": 5
+  },
+  {
+    "id": "shot-13",
+    "file": "Japan, Okinawa, Kerama islands - view from Zamami island 2018.webm",
+    "location": "Zamami",
+    "kind": "clip",
+    "start": 14,
+    "duration": 6
+  },
+  {
+    "id": "shot-14",
+    "file": "Aharen Beach On Tokashiki Island 2009 (7384).jpg",
+    "location": "Aharen Beach",
+    "kind": "photo"
+  },
+  {
+    "id": "shot-15",
+    "file": "Ri Island viewed from Tokashiki, Okinawa; January 2020.jpg",
+    "location": "Ri Island",
+    "kind": "photo"
+  },
+  {
+    "id": "shot-16",
+    "file": "JAP Zamami Furuzamami Beach.jpg",
+    "location": "Furuzamami",
+    "kind": "photo"
+  },
+  {
+    "id": "shot-18",
+    "file": "Yonahamaehama Miyakojima Okinawa Japan03bs3s4500.jpg",
+    "location": "Yonaha Maehama",
+    "kind": "photo"
+  },
+  {
+    "id": "shot-19",
+    "file": "Yonahamaehama Miyakojima Okinawa Japan06s3s4592.jpg",
+    "location": "Miyako coast",
+    "kind": "photo"
+  },
+  {
+    "id": "shot-20",
+    "file": "Irabu Bridge connecting Miyako and Irabu islands (52204289208).jpg",
+    "location": "Irabu Bridge",
+    "kind": "photo"
+  },
+  {
+    "id": "shot-21",
+    "file": "Sunayama Beach in Miyako Island , Okinawa Pref. - panoramio.jpg",
+    "location": "Sunayama",
+    "kind": "photo"
+  },
+  {
+    "id": "shot-23",
+    "file": "Kabira Bay Ishigaki Island47n3750.jpg",
+    "location": "Kabira Bay",
+    "kind": "photo"
+  },
+  {
+    "id": "shot-24",
+    "file": "Kabira Bay Ishigaki Island40bs3s4592.jpg",
+    "location": "Kabira lagoon",
+    "kind": "photo"
+  },
+  {
+    "id": "shot-25",
+    "file": "Kabira Bay Ishigaki Island41s3s4500.jpg",
+    "location": "Boats in Kabira",
+    "kind": "photo"
+  },
+  {
+    "id": "shot-26",
+    "file": "Ishigaki's Sunset beach (52116054672).jpg",
+    "location": "Ishigaki coast",
+    "kind": "photo"
+  },
+  {
+    "id": "shot-27",
+    "file": "Coral reef of Tonaki Island 202407.jpg",
+    "location": "Coral reefs",
+    "kind": "photo"
+  },
+  {
+    "id": "shot-28",
+    "file": "Coral reef life near Akajima 10.jpg",
+    "location": "Reef life",
+    "kind": "photo"
+  },
+  {
+    "id": "shot-29",
+    "file": "Cheilinus fasciatus.jpg",
+    "location": "A redbreast wrasse",
+    "kind": "photo"
+  },
+  {
+    "id": "shot-30",
+    "file": "Hawksbill sea turtle, Iriomote Island, Okinawa, Japan.jpg",
+    "location": "Hawksbill turtle",
+    "kind": "photo"
+  },
+  {
+    "id": "shot-31",
+    "file": "Coral reef life near Akajima 08.jpg",
+    "location": "Kerama reef",
+    "kind": "photo"
+  },
+  {
+    "id": "shot-32",
+    "file": "Naha Shuri Castle02s5s3200.jpg",
+    "location": "Ryukyu heritage",
+    "kind": "photo"
+  },
+  {
+    "id": "shot-33",
+    "file": "Taketomi asatoya.jpg",
+    "location": "Taketomi",
+    "kind": "photo"
+  },
+  {
+    "id": "shot-34",
+    "file": "Village in Taketomi Island - located at southwest Japan.jpg",
+    "location": "Village houses",
+    "kind": "photo"
+  },
+  {
+    "id": "shot-35",
+    "file": "2013-07-23 Shisa on roof at Taketomijima.jpg",
+    "location": "Shisa",
+    "kind": "photo"
+  },
+  {
+    "id": "shot-36",
+    "file": "Soki Soba at Takenoko.jpg",
+    "location": "Soki soba",
+    "kind": "photo"
+  },
+  {
+    "id": "shot-37",
+    "file": "Sunset in Okinawa (51924272929).jpg",
+    "location": "Miyako at dusk",
+    "kind": "photo"
+  },
+  {
+    "id": "shot-38",
+    "file": "Sunset beach at Okinawa.jpg",
+    "location": "Okinawa sunset",
+    "kind": "photo"
+  },
+  {
+    "id": "shot-39",
+    "file": "Japan, Okinawa, Kerama islands - view from Zamami island 2018.webm",
+    "location": "Kerama from Zamami",
+    "kind": "clip",
+    "start": 43,
+    "duration": 6
+  },
+  {
+    "id": "shot-40",
+    "file": "Sunset - panoramio (334).jpg",
+    "location": "OKINAWA · JAPAN",
+    "kind": "photo"
+  }
+]

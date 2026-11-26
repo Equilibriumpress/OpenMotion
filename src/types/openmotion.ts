@@ -438,6 +438,8 @@ export interface SceneDoodleExplainer {
 }
 /** Editable destination and scene contents for vertical bucket-list reels. */
 export interface DocumentaryShot {
+  series?: 'places-worth-exploring';
+  videoGrid?: { fps:number; cols:number; rows:number; frameWidth:number; frameHeight:number; frames:number };
   mode: 'photo' | 'title' | 'map' | 'formation' | 'caldera' | 'timeline' | 'geothermal' | 'climate' | 'tectonic' | 'eruption' | 'end';
   chapter: number;
   narration: string;
