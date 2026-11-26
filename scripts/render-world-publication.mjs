@@ -1,23 +1,32 @@
-// Production export only: no separate GitHub workflow, no browser device dependency.
+// Explicit single-project master export. Never called by the normal Pages build.
 import fs from 'node:fs';
 import path from 'node:path';
 import { spawn, spawnSync } from 'node:child_process';
 import { once } from 'node:events';
-if(process.env.GITHUB_ACTIONS!=='true' && process.env.WORLD_RENDER!=='1') process.exit(0);
+const slug=(process.env.WORLD_RENDER_PROJECT||'').trim();
+if(!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
+  console.error('Select one project using WORLD_RENDER_PROJECT=<project-slug> npm run render:master');
+  process.exit(1);
+}
 const root=process.cwd(),dist=path.join(root,'dist'),manifestPath=path.join(dist,'projects','manifest.json');
 const manifest=JSON.parse(fs.readFileSync(manifestPath,'utf8'));
-const projects=manifest.projects.filter(p=>p.scenes.some(s=>s.worldStory || s.catOffice || s.bucketList?.documentary?.series==='places-worth-exploring'));
-if(!projects.length)process.exit(0);
+const projects=manifest.projects.filter(p=>p.slug===slug && p.scenes.some(s=>s.worldStory || s.catOffice || s.bucketList?.documentary?.series==='places-worth-exploring'));
+if(projects.length!==1)throw Error('No unique supported master project: '+slug);
+const needsMap=projects[0].scenes.some(s=>s.bucketList?.documentary?.series==='places-worth-exploring' && s.bucketList?.chapter==='zoom');
 const { chromium }=await import('playwright');
 const { createServer }=await import('vite');
 const tmp=path.join(root,'world-render-preview.html');
 const run=(cmd,args)=>{const x=spawnSync(cmd,args,{stdio:'inherit',timeout:600000});if(x.status!==0)throw Error(cmd+' failed: '+x.status)};
 let server,browser;
-const requiresCatMaster=projects.some(p=>p.scenes.some(s=>s.catOffice || s.bucketList?.documentary?.series==='places-worth-exploring'));
+
 try {
   let executablePath=['/usr/bin/google-chrome','/usr/bin/google-chrome-stable','/usr/bin/chromium'].find(p=>fs.existsSync(p));
   if(!executablePath){run('npx',['playwright','install','chromium']);}
-  browser=await chromium.launch({headless:true,executablePath,args:['--no-sandbox','--disable-dev-shm-usage','--enable-webgl','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+  const args=['--no-sandbox','--disable-dev-shm-usage'];
+  // Only the explicitly selected geographic master needs CPU WebGL.
+  if(needsMap)args.push('--enable-webgl','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader');
+  console.log('[world-render] selected',slug,'software WebGL:',needsMap);
+  browser=await chromium.launch({headless:true,executablePath,args});
   fs.writeFileSync(tmp,'<!doctype html><html><head><meta charset="utf-8"><style>body{margin:0}canvas{display:block}</style></head><body><canvas></canvas></body></html>');
   server=await createServer({server:{host:'127.0.0.1',port:4179,strictPort:true},logLevel:'error'});
   await server.listen();
@@ -59,6 +68,14 @@ try {
           await beginBucketListExport(p);
           capture=captureBucketListExportFrame;
         }
+        // Keep the original synchronous batch path for non-map videos.
+        if(!capture){
+          window.renderWorldFrames=(start,count,fps)=>Array.from({length:count},(_,i)=>{
+            renderOpenMotionFrame(ctx,p,(start+i)/fps,width,height);
+            return c.toDataURL('image/jpeg',.94).split(',')[1];
+          });
+          return;
+        }
         window.renderWorldFrames=async(start,count,fps)=>{
           const out=[];
           for(let i=0;i<count;i++){
@@ -92,8 +109,8 @@ try {
       p.prebuiltMp4Url='renders/'+p.slug+'.mp4';
       fs.writeFileSync(manifestPath,JSON.stringify(manifest,null,2));
       console.log('[world-render] verified master:',p.slug,width,height,fps,duration,a.codec_name);
-    }catch(e){console.error('[world-render] master unavailable:',p.slug,e);if(fs.existsSync(target))fs.unlinkSync(target);if(p.scenes.some(s=>s.catOffice || s.bucketList?.documentary?.series==='places-worth-exploring'))throw e;}
+    }catch(e){console.error('[world-render] master unavailable:',p.slug,e);if(fs.existsSync(target))fs.unlinkSync(target);throw e;}
     finally{if(encoder&&encoder.exitCode===null)encoder.kill('SIGTERM');if(page)await page.close();if(fs.existsSync(silent))fs.unlinkSync(silent);}
   }
-}catch(e){console.error('[world-render] publication export failed:',e);if(requiresCatMaster)process.exitCode=1;}
+}catch(e){console.error('[world-render] publication export failed:',e);process.exitCode=1;}
 finally{if(browser)await browser.close();if(server)await server.close();if(fs.existsSync(tmp))fs.unlinkSync(tmp);}

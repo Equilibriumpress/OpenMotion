@@ -6,10 +6,11 @@
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
     "build:manifest": "node scripts/build-manifest.mjs",
-    "build": "node scripts/build-manifest.mjs && vite build && node scripts/render-world-publication.mjs",
+    "build": "node scripts/build-manifest.mjs && vite build",
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "render:master": "node scripts/render-world-publication.mjs"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",
