@@ -1,3 +1,4 @@
+import {isTravelDocumentary,isTravelClip,matchingTravelAtlas} from './travelProject';
 import { OpenMotionProject } from '../types/openmotion';
 import { CAT_OFFICE_ASSETS } from './catOfficeAssets';
 import { projectAssetUrl } from './projectAudio';
@@ -145,4 +146,15 @@ export async function preloadProjectImages(project: OpenMotionProject): Promise<
     })
   );
   if (hasPremium || hasBucketList) notifyImageRefresh();
+}
+
+/** Fail before exporting a travel master with missing images or broken atlases. */
+export function assertTravelMediaReady(project: OpenMotionProject): void {
+  if(!isTravelDocumentary(project))return;
+  for(const scene of project.scenes){
+    if(scene.bucketList?.documentary?.mode==='map')continue;
+    const img=scene.imageUrl?getCachedPhoto(projectAssetUrl(scene.imageUrl)):null;
+    if(!img)throw new Error('Beeld ontbreekt: '+scene.id+'. Open de gepubliceerde Studio opnieuw.');
+    if(isTravelClip(scene)&&!matchingTravelAtlas(scene,img))throw new Error('Video-atlas ontbreekt of heeft onjuiste afmetingen: '+scene.id+'. Open de gepubliceerde Studio opnieuw.');
+  }
 }

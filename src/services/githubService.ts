@@ -402,6 +402,11 @@ export function normalizeOpenMotionProject(
     };
   });
 
+  // Recover the explicit series identity in saved/imported travel projects.
+  if (slugBase.startsWith('places-worth-exploring-')) {
+    for (const scene of scenes) if (scene.bucketList?.documentary) scene.bucketList.documentary = {...scene.bucketList.documentary, series:'places-worth-exploring'};
+  }
+
   const today = new Date().toISOString().slice(0, 10);
 
   const project: OpenMotionProject = {

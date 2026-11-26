@@ -49,7 +49,15 @@
           "narration": "Japan is often associated with crowded cities, mountain temples and cherry blossoms. Far to the south, Okinawa offers a different view of the country.",
           "composition": "clean",
           "photoMotion": "push",
-          "series": "places-worth-exploring"
+          "series": "places-worth-exploring",
+          "videoGrid": {
+            "fps": 20,
+            "cols": 10,
+            "rows": 6,
+            "frameWidth": 640,
+            "frameHeight": 360,
+            "frames": 60
+          }
         },
         "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Drone_flyover_video_of_the_Haneji_Inland_Sea%2C_Okinawa_Prefecture.webm"
       },
@@ -405,7 +413,15 @@
           "narration": "",
           "composition": "lower",
           "photoMotion": "pull",
-          "series": "places-worth-exploring"
+          "series": "places-worth-exploring",
+          "videoGrid": {
+            "fps": 20,
+            "cols": 10,
+            "rows": 10,
+            "frameWidth": 640,
+            "frameHeight": 360,
+            "frames": 100
+          }
         },
         "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Drone_flyover_video_of_the_Haneji_Inland_Sea%2C_Okinawa_Prefecture.webm"
       },
@@ -485,7 +501,15 @@
           "narration": "",
           "composition": "lower",
           "photoMotion": "push",
-          "series": "places-worth-exploring"
+          "series": "places-worth-exploring",
+          "videoGrid": {
+            "fps": 20,
+            "cols": 10,
+            "rows": 12,
+            "frameWidth": 640,
+            "frameHeight": 360,
+            "frames": 120
+          }
         },
         "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Japan%2C_Okinawa%2C_Kerama_islands_-_view_from_Zamami_island_2018.webm"
       },
@@ -1310,7 +1334,15 @@
           "narration": "",
           "composition": "clean",
           "photoMotion": "pull",
-          "series": "places-worth-exploring"
+          "series": "places-worth-exploring",
+          "videoGrid": {
+            "fps": 20,
+            "cols": 10,
+            "rows": 12,
+            "frameWidth": 640,
+            "frameHeight": 360,
+            "frames": 120
+          }
         },
         "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Japan%2C_Okinawa%2C_Kerama_islands_-_view_from_Zamami_island_2018.webm"
       },
