@@ -17,7 +17,7 @@ const requiresCatMaster=projects.some(p=>p.scenes.some(s=>s.catOffice || s.bucke
 try {
   let executablePath=['/usr/bin/google-chrome','/usr/bin/google-chrome-stable','/usr/bin/chromium'].find(p=>fs.existsSync(p));
   if(!executablePath){run('npx',['playwright','install','chromium']);}
-  browser=await chromium.launch({headless:true,executablePath,args:['--no-sandbox','--disable-dev-shm-usage']});
+  browser=await chromium.launch({headless:true,executablePath,args:['--no-sandbox','--disable-dev-shm-usage','--enable-webgl','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
   fs.writeFileSync(tmp,'<!doctype html><html><head><meta charset="utf-8"><style>body{margin:0}canvas{display:block}</style></head><body><canvas></canvas></body></html>');
   server=await createServer({server:{host:'127.0.0.1',port:4179,strictPort:true},logLevel:'error'});
   await server.listen();
@@ -26,7 +26,8 @@ try {
     const target=path.join(dist,'renders',p.slug+'.mp4'),silent=target+'.video.mp4';
     let page,encoder;
     try{
-      const duration=p.scenes.reduce((sum,s)=>sum+s.durationSec,0),fps=p.fps||60,width=p.width||1080,height=p.height||1920;
+      const travel=p.scenes.some(s=>s.bucketList?.documentary?.series==='places-worth-exploring');
+      const duration=p.scenes.reduce((sum,s)=>sum+s.durationSec,0),fps=travel?p.fps:60,width=travel?p.width:1080,height=travel?p.height:1920;
       const tracks=(p.audioTracks??[]).filter(t=>fs.existsSync(path.join(dist,t.src)));
       const isCat=p.scenes.some(s=>s.catOffice);
       const isTravel=p.scenes.some(s=>s.bucketList?.documentary?.series==='places-worth-exploring');
