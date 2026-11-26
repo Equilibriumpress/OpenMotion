@@ -536,10 +536,8 @@ export async function fetchProjectsFromGitHub(
         project.source = 'github';
         project.githubPath = fileMeta.path ?? `${dir}/${sub.name}/project.json`;
         project.commitSha = fileMeta.sha?.slice(0, 7);
-        if (config.pagesBaseUrl.trim()) {
-          const cleanBase = config.pagesBaseUrl.trim().replace(/\/$/, '');
-          project.prebuiltMp4Url = `${cleanBase}/renders/${project.slug}.mp4`;
-        }
+        // Only use a prebuilt URL explicitly supplied by a project or the
+        // deployed manifest. Normal Pages builds no longer publish masters.
         loaded.push(project);
       }
     } catch {

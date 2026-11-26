@@ -9,12 +9,31 @@ Een volledig statische, GitHub Pages-klare **OpenMotion** videobibliotheek (geï
 3. **Automatische GitHub Pages deploy**: de meegeleverde workflow `.github/workflows/openmotion-pages.yml` indexeert alle `projects/*/project.json` in `public/projects/manifest.json`, bouwt de statische app met relatieve paden (`base: './'`) en publiceert direct op GitHub Pages.
 4. **Directe H.264 MP4-output op GitHub Pages**: elke bezoeker rendert 720p/1080p (30 of 60 fps) `.mp4`-bestanden 100% client-side via **WebCodecs (`VideoEncoder`) + `mp4-muxer`** (met automatische `MediaRecorder`-fallback).
 
+## Publicatie en optionele serverrender
+
+Normale pushes naar main publiceren alleen de Studio, projectconfiguraties,
+media, audio en ondertiteling. Geen automatische MP4-serverrendering.
+Gebruik **Render MP4** in Studio voor de browserexport.
+
+Voor een servermaster met H.264/AAC (bijvoorbeeld als Safari geen betrouwbare
+AAC-export ondersteunt): ga naar GitHub Actions → **Render OpenMotion MP4
+(manual)** → Run workflow. Vul één project-slug in. Ondersteund: Cat Office,
+Hoe werkt de wereld? en Places Worth Exploring. Download de MP4 uit de artifacts
+van die handmatige run (30 dagen bewaard). De handmatige workflow publiceert de
+website niet en rendert geen andere video's. Normale Pages-deploys bevatten
+geen vooraf gerenderde MP4-bestanden meer; bewaar gewenste masters lokaal.
+
+Lokaal: bereid media en audio voor via de toepasselijke build-opties, voer
+`npm run build` uit en daarna
+`WORLD_RENDER_PROJECT=<slug> npm run render:master`.
+Chromium en FFmpeg zijn nodig voor deze optionele export.
+
 ## Direct deployen naar GitHub Pages
 
 1. Push deze repository naar GitHub op branch `main`.
 2. Ga in GitHub naar **Settings → Pages**.
 3. Kies bij **Build and deployment → Source** voor **GitHub Actions**.
-4. Na ~45 seconden staat jouw bibliotheek live op `https://<jouw-naam>.github.io/<repo-naam>/`.
+4. Na een geslaagde publicatie staat jouw bibliotheek live op `https://<jouw-naam>.github.io/<repo-naam>/`.
 5. De app herkent op `*.github.io` automatisch je repository-eigenaar, repo-naam en Pages-URL.
 
 ## Lokaal ontwikkelen
