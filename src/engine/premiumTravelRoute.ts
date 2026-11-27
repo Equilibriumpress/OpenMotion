@@ -62,6 +62,14 @@ export function preparePremiumTravelProject(project:OpenMotionProject):Promise<v
       const first=scenes[0].premiumTravel!;
       map=new MapLibreConstructor({container:div,style:STYLE,center:first.mapCenter,zoom:first.mapZoom,interactive:false,attributionControl:false,fadeDuration:0,canvasContextAttributes:{preserveDrawingBuffer:true,antialias:false}});
       if(!map.loaded())await idle(map,'load');
+      if(scenes.some(scene=>scene.premiumTravel?.editorial)){
+        // Keep geographic place names, hide navigation clutter and POI icons.
+        for(const layer of map.getStyle().layers??[]){
+          if(layer.type!=='symbol')continue;
+          const sourceLayer='source-layer' in layer?String(layer['source-layer']):'';
+          if(!/place/i.test(sourceLayer+' '+layer.id))map.setLayoutProperty(layer.id,'visibility','none');
+        }
+      }
       for(const scene of scenes){
         const p=scene.premiumTravel!;
         if(p.chapter==='photo'||p.chapter==='opening')continue;
@@ -221,7 +229,7 @@ function labelLines(ctx:CanvasRenderingContext2D,text:string,x:number,y:number,w
 }
 function photoScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMotionScene,time:number,getPhoto:(url:string)=>HTMLImageElement|null){
   const p=scene.premiumTravel!,t=clamp(time/Math.max(.1,scene.durationSec)),s=w/WIDTH;
-  const index=Math.max(0,Math.min(p.stops.length-1,p.focusStopIndex));
+  const index=!p.editorial&&p.chapter==='opening'?0:Math.max(0,Math.min(p.stops.length-1,p.focusStopIndex));
   const stop=p.stops[index];
   const alternate=stop.secondaryPhoto;
   const useAlternate=!!alternate&&(p.openingSecondary||(p.editorial&&p.chapter==='photo'&&t>=.52));
@@ -319,7 +327,7 @@ function drawMapScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenM
   ctx.restore();
   // Scene titles are eased independently of the cartographic layer so two
   // captions do not stack over one another during an incoming cross-fade.
-  const titlesIn=finishing?ease((time-(p.mapIntro?.15:.45))/.42):ease((time-.15)/.28);
+  const titlesIn=finishing?ease((time-(p.mapIntro ? .15 : .45))/.42):ease((time-.15)/.28);
   const titlesOut=finishing?1:1-ease((time-(scene.durationSec-.42))/.42);
   ctx.save();ctx.globalAlpha*=titlesIn*titlesOut;
   // Compact hierarchy, leaving the centre clear for the route and marker.

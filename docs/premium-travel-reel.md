@@ -159,3 +159,6 @@ Additional photographs (cropped or contained, attribution on frame; original ter
 - The Quiraing · Isle of Skye: Squirrel1113, CC BY 4.0, https://commons.wikimedia.org/wiki/File:Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg
 
 The Quiraing is a nearby Skye excursion, not a fifth routed stop. No new server rendering or test workflow is required. Existing Pages deploy remains the publication mechanism.
+
+### Optional verified master (R5)
+In the existing manual Render OpenMotion MP4 workflow choose `short-scotland-road-trip`. It prepares the actual OSRM road and five map snapshots once, checks that the eight photographs decode, synthesizes the same score used in Studio, and encodes the selected 1080 × 1920 / 60 fps / AAC master with FFmpeg. FFprobe verifies output properties before the artifact is published. This workflow is manual only; it has not been run as part of this revision. The normal Pages build stays unchanged.
