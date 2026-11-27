@@ -97,7 +97,7 @@ function footer(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMotionS
   ctx.fillStyle='#E6E8E0';ctx.textAlign='left';
   ctx.font='500 '+Math.round(21*s)+'px "Plus Jakarta Sans",sans-serif';
   const label=data.chapter==='zoom'
-    ? 'MAP  OpenFreeMap / OpenMapTiles · © OpenStreetMap contributors'
+    ? 'MAP  OpenFreeMap / OpenMapTiles · © OpenStreetMap contributors'+(data.regionalFlight?.relief?' · AWS elevation':'')
     : data.chapter==='outro'
       ? 'PHOTO  '+(data.imageAuthor??'Wikimedia Commons')+' · '+(data.imageLicense??'')+'  /  MAP © OSM'
       : 'PHOTO  '+(data.imageAuthor??'Wikimedia Commons')+'  ·  '+(data.imageLicense??'');
