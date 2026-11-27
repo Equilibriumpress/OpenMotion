@@ -107,7 +107,8 @@ function landscape(c:C,t:number,warm:boolean){
  for(let i=0;i<8;i++){const z=(i/8+t*.13)%1,y=515+z*z*320,x=270+(i%2?-1:1)*(70+z*270),sz=2+z*7;stroke(c,'M '+x+' '+y+' v '+(-sz*6),warm?'#544A40':'#23313B',sz);stroke(c,'M '+(x-sz*3)+' '+(y-sz*5)+' h '+(sz*6),warm?'#544A40':'#23313B',2);}
 }
 function rearCar(c:C,x:number,y:number,s:number,t:number){c.save();c.translate(x,y+Math.sin(t*3)*1.1);c.scale(s,s);oval(c,0,30,106,17,'rgba(5,12,20,.55)');shape(c,'M -100 0 L -77 -43 Q -68 -55 -48 -58 H 48 Q 65 -56 78 -42 L 100 0 L 93 29 H -93 Z','#5F3939');shape(c,'M -65 -39 Q -56 -48 -44 -48 H 44 Q 55 -48 65 -39 L 74 -13 H -74 Z','#27343D');stroke(c,'M -80 -7 H 80 M -84 19 H 84','#A6795E',3);box(c,-90,26,23,17,'#121D28');box(c,67,26,23,17,'#121D28');glow(c,-75,4,31,'rgba(248,94,66,.42)');glow(c,75,4,31,'rgba(248,94,66,.42)');box(c,-87,-2,30,10,'#E87958');box(c,57,-2,30,10,'#E87958');box(c,-14,9,28,12,'#B5A78B');c.restore();}
-function drive(c:C,t:number,u:number,hero=false){
+function carYaw(angle:string,fallback:number){return angle==='front'?2.48:angle==='side'?Math.PI/2:angle==='rear' ? .62 : fallback;}
+function drive(c:C,t:number,u:number,hero=false,carAngle='auto'){
  landscape(c,t,true);
  // Windshield reflection, dashboard, passing lights; protagonist is now in the passenger seat.
  shape(c,'M 0 0 H 540 V 68 L 470 126 H 62 L 0 98 Z','#202A34');
@@ -124,17 +125,17 @@ function drive(c:C,t:number,u:number,hero=false){
   c.save();
   // Motivated opaque cut between passenger and exterior views.
   landscape(c,t,true);
-  drawHeroCar(c,270+Math.sin((t-1.05)*1.1)*12,655,.97,t,.63+.15*ease((t-1.05)/2.6),true);
+  drawHeroCar(c,270+Math.sin((t-1.05)*1.1)*12,655,.97,t,carYaw(carAngle,.63+.15*ease((t-1.05)/2.6)),true);
   c.restore();
  }
  if(u<.13){c.globalAlpha=1-ease(u/.13);box(c,0,0,W,H,'#19242E');oval(c,270,370,126,126,'#BCA477');oval(c,270,370,104,104,'#333B43');for(let i=0;i<5;i++){let a=t*3+i*2*Math.PI/5;stroke(c,'M 270 370 L '+(270+Math.cos(a)*97)+' '+(370+Math.sin(a)*97),'#BCA477',10);}oval(c,270,370,19,19,'#BCA477');c.globalAlpha=1;}
 }
 function finalRoad(c:C,t:number,u:number,hero=false){landscape(c,t,false);if(hero)drawHeroCar(c,270,mix(700,539,ease(u)),mix(.86,.12,ease(u)),t,mix(.48,.08,ease(u)),false);else rearCar(c,270, mix(700,539,ease(u)),mix(.86,.12,ease(u)),t);if(u>.65){const a=ease((u-.65)/.35);c.globalAlpha=a*.30;shape(c,'M 0 0 H 540 V 960 H 0Z','#172534');c.globalAlpha=1;}}
-function sceneArt(c:C,shot:string,t:number,u:number,mode:string,hero=false){
+function sceneArt(c:C,shot:string,t:number,u:number,mode:string,hero=false,carAngle='auto'){
  // Overscan prevents blank edges during camera motion. All transforms derive from time.
  const z=mode==='pull'?mix(1.13,1.02,ease(u)):mode==='track'?1.06:mix(1.02,1.09,ease(u));
  c.save();c.translate(270+(mode==='track'?Math.sin(u*Math.PI)*-8:0),480);c.scale(z,z);c.translate(-270,-480);
- if(shot==='shop')store(c,t,u,hero);else if(shot==='drive')drive(c,t,u,hero);else if(shot==='return')windowShot(c,t,u,true,hero);else if(shot==='reflection')finalRoad(c,t,u,hero);else if(shot==='road'||shot==='night'){landscape(c,t,shot==='road');if(hero)drawHeroCar(c,270,645,.64,t,.58,shot==='road');else rearCar(c,270,645,.64,t);}else if(shot==='symbol'){landscape(c,t,false);oval(c,270,370,135,135,'#202932');oval(c,270,370,50,50,'#A76C50');oval(c,270,370,6,6,'#D6BA95');}else windowShot(c,t,u,false,hero);
+ if(shot==='shop')store(c,t,u,hero);else if(shot==='drive')drive(c,t,u,hero,carAngle);else if(shot==='return')windowShot(c,t,u,true,hero);else if(shot==='reflection')finalRoad(c,t,u,hero);else if(shot==='road'||shot==='night'){landscape(c,t,shot==='road');if(hero)drawHeroCar(c,270,645,.64,t,carYaw(carAngle,.58),shot==='road');else rearCar(c,270,645,.64,t);}else if(shot==='symbol'){landscape(c,t,false);oval(c,270,370,135,135,'#202932');oval(c,270,370,50,50,'#A76C50');oval(c,270,370,6,6,'#D6BA95');}else windowShot(c,t,u,false,hero);
  c.restore();
 }
 export function renderCinematicSongCover(c:C,w:number,h:number,s:OpenMotionScene,_b:OpenMotionBrandKit){
@@ -150,7 +151,7 @@ export function renderCinematicSongCover(c:C,w:number,h:number,s:OpenMotionScene
 export function renderCinematicSong(c:C,w:number,h:number,s:OpenMotionScene,time:number,b:OpenMotionBrandKit){
  const t=Math.max(0,Math.min(s.durationSec,time)),u=t/Math.max(.01,s.durationSec),shot=field(s,'shot','longing');
  const cover=!!field(s,'cover-title');if(cover&&t<.85){renderCinematicSongCover(c,w,h,s,b);return;}
- c.save();c.scale(w/W,h/H);sceneArt(c,shot,t,u,field(s,'camera','push'),!!s.doodle?.extras?.includes('song-hero-rigs-v21'));finish(c);
+ c.save();c.scale(w/W,h/H);sceneArt(c,shot,t,u,field(s,'camera','push'),!!s.doodle?.extras?.includes('song-hero-rigs-v21'),field(s,'car-angle','auto'));finish(c);
  // Restrained typography. No repeated title card. Caption renderer handles narration.
  if(cover){const a=ease((t-.85)/.55)*(1-ease((t-3.5)/.9));c.globalAlpha=a;text(c,field(s,'artist',''),270,153,16,'#EAD0AA','center',600);c.globalAlpha=1;}
  if(shot==='reflection'&&s.headline){const a=ease((u-.40)/.22);c.globalAlpha=a;s.headline.split('|').slice(0,2).forEach((v,i)=>text(c,v,270,218+i*41,34,'#F5E6CD','center',800));c.globalAlpha=1;}
