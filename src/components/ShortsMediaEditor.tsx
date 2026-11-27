@@ -173,6 +173,22 @@ export function ShortsMediaEditor({project,activeScene,onUpdateProject,onUpdateS
       const extras=doodle.extras??[];
       const get=(key:string,fallback='')=>extras.find(x=>x.startsWith(key+':'))?.slice(key.length+1)??fallback;
       const set=(key:string,value:string)=>update({extras:[...extras.filter(x=>!x.startsWith(key+':')),key+':'+value]});
+      if(extras.includes('human-side-v22')){
+        return <div className="space-y-3 rounded-xl border border-purple-200 p-3">
+          <h4 className="font-semibold text-sm text-purple-900">The Human Side · cinematografie 2.2</h4>
+          <label className="block text-xs">Actieshot<select className={style} value={get('action','scroll')} onChange={e=>set('action',e.target.value)}>
+            {['scroll','time','repeat','realize','place','sit'].map(v=><option key={v}>{v}</option>)}
+          </select></label>
+          <label className="block text-xs">Tekst in herhaling<input className={style} value={get('prop-title')} onChange={e=>set('prop-title',e.target.value)}/></label>
+          {activeScene.id===project.scenes[0]?.id&&<>
+            <label className="block text-xs">Covertekst (twee regels met |)<input className={style} value={get('cover-title')} onChange={e=>set('cover-title',e.target.value)}/></label>
+            <label className="block text-xs">Korte hook<input className={style} value={get('cover-hook')} onChange={e=>set('cover-hook',e.target.value)}/></label>
+          </>}
+          <label className="block text-xs">Afsluitende tekst<input className={style} value={activeScene.headline} onChange={e=>onUpdateScene({headline:e.target.value})}/></label>
+          <label className="block text-xs">Engelse voice-over<textarea className={style} rows={3} value={doodle.narration??''} onChange={e=>update({narration:e.target.value})}/></label>
+          <p className="text-xs text-slate-500">De animatie en camerahoeken volgen het actieshot. Herpubliceer voor bijgewerkte audio.</p>
+        </div>;
+      }
       if(extras.includes('human-side-v21')){
         const theme=get('theme','rest'),shot=get('shot','setup');
         const fields=theme==='rest'?['prop-tasks','prop-next']:theme==='load'?['prop-tasks']:theme==='loop'?['prop-title','prop-next']:theme==='mask'?['label-a']:['label-b'];

@@ -470,7 +470,140 @@ function renderHumanV21(c:C,width:number,height:number,scene:OpenMotionScene,t:n
  c.restore();
 }
 
+
+/** Cinematic action rig: explicit joint coordinates in one continuous stage.
+ * The phone follows the gripping hand until contact with the table. */
+export function isHumanSideV22(s:OpenMotionScene|undefined):boolean{
+ return !!s?.doodle?.extras?.includes('human-side-v22');
+}
+export const HUMAN_ACTION_SHOTS=['scroll','time','repeat','realize','place','sit'] as const;
+function actionCamera(c:C,x:number,y:number,scale:number,draw:()=>void){
+ c.save();c.translate(270,441);c.scale(scale,scale);c.translate(-x,-y);draw();c.restore();
+}
+function actionClock(c:C,p:Palette,x:number,y:number,value:string,scale=1){
+ c.save();c.translate(x,y);c.scale(scale,scale);
+ rounded(c,-111,-45,222,90,17,p,'#FFFFFF');
+ text(c,value,0,0,52,p.ink,850);c.restore();
+}
+function actionPhone(c:C,p:Palette,x:number,y:number,scroll:number,lit=true,scale=1){
+ c.save();c.translate(x,y);c.scale(scale,scale);
+ rounded(c,-37,-65,74,130,12,p,'#FFFFFF');
+ rounded(c,-30,-54,60,106,7,p,lit?p.light:p.shadow);
+ if(lit){
+  const shift=scroll%27;
+  // Card coordinates stay within the screen without using a clipping API.
+  for(let i=0;i<5;i++){
+   const yy=-50+i*27-shift;
+   if(yy>=-48&&yy+20<=48){
+    rounded(c,-25,yy,50,20,3,p,'#FFFFFF');
+    storyLine(c,p,-17,yy+7,17,yy+7,1.4);
+    storyLine(c,p,-17,yy+13,5,yy+13,1.2);
+   }
+  }
+ }
+ ellipse(c,0,58,3,3,p.ink);c.restore();
+}
+function actionLimb(c:C,p:Palette,ax:number,ay:number,bx:number,by:number,cx:number,cy:number,w=6){
+ curve(c,()=>{c.moveTo(ax,ay);c.quadraticCurveTo(bx,by,cx,cy);},p.ink,w);
+}
+function actionHero(c:C,p:Palette,x:number,floor:number,t:number,mode:string,emotion:Face,phoneOn:boolean,gripX=100,gripY=-190,amount=1,phoneRotation=0){
+ const walking=mode==='walk',sitting=mode==='sit';
+ const u=sitting?smooth(amount):0,step=walking?Math.sin(t*TAU_ACTION*1.7):0;
+ const bob=walking?-Math.abs(step)*9:Math.sin(t*2.7)*2;
+ const lean=mode==='shock'?-16:walking?13:mode==='reach'?24:0;
+ const hx=lean-12*u,hy=-250+u*80+bob,hipX=-lean*.5,hipY=-91+u*30;
+ const shoulderX=hx*.65,shoulderY=hy+58;
+ c.save();c.translate(x,floor);
+ ellipse(c,0,8,66,9,p.shadow);
+ for(const side of [-1,1]){
+  const footX=side*(walking?step*48:30)+u*38,footY=walking?-Math.max(0,side*step)*24:0;
+  const kneeX=mix(footX+side*12,side===-1?66:92,u),kneeY=mix(-45,-59,u);
+  actionLimb(c,p,hipX,hipY,kneeX,kneeY,footX,footY,6);
+  storyLine(c,p,footX,footY,footX+17,footY,6);
+ }
+ actionLimb(c,p,hx,hy+42,hx-24,hipY-39,hipX,hipY,7);
+ const leftX=mode==='shock'?-63:walking?-55-step*25:-58,leftY=mode==='shock'?-210:walking?-112:-115+40*u;
+ actionLimb(c,p,shoulderX,shoulderY,-66,shoulderY+52,leftX,leftY,6);
+ hand(c,leftX,leftY,-1,false,p);
+ const rx=phoneOn?gripX:mode==='reach'?gripX:mode==='shock'?77:walking?55+step*25:60;
+ const ry=phoneOn?gripY:mode==='reach'?gripY:mode==='shock'?-206:-112+43*u;
+ actionLimb(c,p,shoulderX,shoulderY,rx*.74,shoulderY+55,rx,ry,6);
+ if(phoneOn){c.save();c.translate(rx,ry);c.rotate(phoneRotation);actionPhone(c,p,6,-36,t*45,phoneRotation<.6,.7);c.restore();}
+ hand(c,rx,ry,1,ry<shoulderY,p);
+ c.save();c.translate(hx,hy);c.rotate(lean/160);
+ const squish=emotion==='surprise' ? .06:emotion==='worry' ? -.025:0;
+ c.scale(1+squish,1-squish);drawFace(c,emotion,t,p,.7);c.restore();
+ c.restore();
+}
+const TAU_ACTION=Math.PI*2;
+function actionTable(c:C,p:Palette,x:number,floor:number){
+ rounded(c,x-71,floor-118,142,18,6,p,p.light);
+ storyLine(c,p,x-55,floor-100,x-55,floor,5);
+ storyLine(c,p,x+55,floor-100,x+55,floor,5);
+}
+function scrollCloseup(c:C,p:Palette,t:number,interval:number){
+ const phase=(t%interval)/interval,swipe=smooth((phase-.12)/.65);
+ actionPhone(c,p,270,420,Math.floor(t/interval)*27+swipe*27,true,3.05);
+ // Palm, thumb and curved finger remain attached to the forearm.
+ curve(c,()=>{c.moveTo(474,670);c.bezierCurveTo(395,663,379,574,367,525);
+ c.quadraticCurveTo(348,485,327,503);c.quadraticCurveTo(306,515,323,543);
+ c.lineTo(339,580);c.quadraticCurveTo(302,565,290,582);
+ c.quadraticCurveTo(274,614,328,654);c.lineTo(392,697);c.closePath();},p.ink,5,'#FFFFFF');
+ const fy=520-112*swipe;
+ curve(c,()=>{c.moveTo(341,582);c.quadraticCurveTo(326,fy+44,307,fy);c.quadraticCurveTo(300,fy-13,311,fy-20);},p.ink,7);
+ ellipse(c,307,fy,9,9,p.ink);
+}
+function renderHumanV22(c:C,width:number,height:number,scene:OpenMotionScene,t:number,brand:OpenMotionBrandKit,cover=false){
+ const p:Palette={ink:brand.textColor||INK,bg:brand.backgroundColor||PAPER,light:brand.surfaceColor||LIGHT,shadow:brand.mutedColor||SHADOW};
+ const shot=coverValue(scene,'action','scroll'),d=Math.max(.1,scene.durationSec-humanSideCoverDuration(scene));
+ const time=cover?1.1:Math.max(0,t-humanSideCoverDuration(scene)),u=clamp(time/d);
+ const floor=694;
+ c.save();c.scale(width/W,height/H);background(c,p,270,shot==='realize' ? .36:.9);
+ if(cover){
+  rounded(c,130,180,280,38,19,p,p.ink);text(c,'THE HUMAN SIDE  /  '+coverValue(scene,'episode','08'),270,199,17,'#FFFFFF',800);
+  coverValue(scene,'cover-title').split('|').filter(Boolean).slice(0,2).forEach((v,i)=>fitText(c,v,270,258+i*55,450,54,p,900));
+  const hook=coverValue(scene,'cover-hook');if(hook){rounded(c,83,345,374,39,14,p,'#FFFFFF');fitText(c,hook,270,364,348,22,p,650);}
+  // Large face and phone form the thumbnail, not a miniature full stage.
+  c.save();c.translate(169,538);c.scale(2.7,2.7);drawFace(c,'worry',.3,p,.7);c.restore();
+  actionPhone(c,p,378,568,22,true,2.05);actionClock(c,p,168,713,'23:30',.72);
+  c.restore();return;
+ }
+ text(c,'THE HUMAN SIDE  /  '+coverValue(scene,'episode','08'),270,102,17,p.ink,750);
+ if(shot==='scroll'){
+  scrollCloseup(c,p,time,1.05);
+ }else if(shot==='time'){
+  const minute=Math.min(90,Math.floor(u*105/15)*15),hh=22+Math.floor(minute/60),mm=String(minute%60).padStart(2,'0');
+  actionClock(c,p,270,225,hh+':'+mm,1.36);
+  actionCamera(c,270,470,1.18,()=>actionHero(c,p,235,floor,time,'stand','neutral',true,105,-191));
+ }else if(shot==='repeat'){
+  const cut=u<.41?0:u<.74?1:2,local=(u-[0,.41,.74][cut])*d;
+  if(cut===1){actionClock(c,p,270,225,'23:30',1.36);actionCamera(c,270,470,1.18,()=>actionHero(c,p,235,floor,local,'stand','worry',true,105,-191));}
+  else {scrollCloseup(c,p,local,cut===0 ? .8 : .43);storyCard(c,p,270,186,coverValue(scene,'prop-title','JUST ONE MORE'),220);}
+ }else if(shot==='realize'){
+  actionClock(c,p,270,252,'23:30',1.33);
+  c.save();c.translate(270,491);c.scale(2.65+.13*smooth(time),2.65+.13*smooth(time));drawFace(c,'surprise',time,p,.5);c.restore();
+  stress(c,270,491,time,p);
+ }else if(shot==='place'){
+  const walk=clamp(time/2.1),reach=smooth((time-2.1)/.9),release=smooth((time-3)/.45);
+  const x=mix(106,269,walk),gx=mix(79,76,reach),gy=mix(-190,-150,reach);
+  actionTable(c,p,403,floor);
+  if(time<3.0)actionHero(c,p,x,floor,time,time<2.1?'walk':'reach','determined',true,gx,gy,1,reach*Math.PI/2);
+  else{
+   actionHero(c,p,269,floor,time,'reach','relief',false,mix(76,55,release),mix(-150,-112,release));
+   c.save();c.translate(381,floor-144);c.rotate(Math.PI/2);actionPhone(c,p,0,0,0,false,.7);c.restore();
+  }
+ }else{
+  const settle=smooth(time/.9);
+  actionTable(c,p,403,floor);c.save();c.translate(381,floor-144);c.rotate(Math.PI/2);actionPhone(c,p,0,0,0,false,.7);c.restore();
+  storyChair(c,p,161,floor);
+  actionHero(c,p,151,floor,time,'sit','relief',false,0,0,settle);
+  if(time>1.3){c.save();c.globalAlpha=smooth((time-1.3)/.35);fitText(c,scene.headline||'Change the cue.',270,226,448,42,p,850);c.restore();}
+ }
+ c.restore();
+}
+
 export function renderHumanSideCover(c:C,width:number,height:number,scene:OpenMotionScene,brand:OpenMotionBrandKit,localTime=.3){
+ if(isHumanSideV22(scene)){renderHumanV22(c,width,height,scene,localTime,brand,true);return;}
  const p:Palette={ink:brand.textColor||INK,bg:brand.backgroundColor||PAPER,light:brand.surfaceColor||LIGHT,shadow:brand.mutedColor||SHADOW};
  c.save();c.scale(width/W,height/H);background(c,p,370,.95);
  if(isHumanSideV21(scene)){
@@ -519,6 +652,7 @@ export function renderHumanSideCover(c:C,width:number,height:number,scene:OpenMo
 export function renderHumanSide(c:C,width:number,height:number,scene:OpenMotionScene,localTime:number,brand:OpenMotionBrandKit){
  const t=Math.max(0,Math.min(scene.durationSec,localTime));
  if(t<humanSideCoverDuration(scene)){renderHumanSideCover(c,width,height,scene,brand,t);return;}
+ if(isHumanSideV22(scene)){renderHumanV22(c,width,height,scene,t,brand);return;}
  if(isHumanSideV21(scene)){renderHumanV21(c,width,height,scene,t,brand);return;}
  if(isHumanSideV2(scene)){renderHumanV2(c,width,height,scene,t,brand);return;}
  const extras=scene.doodle?.extras??[];

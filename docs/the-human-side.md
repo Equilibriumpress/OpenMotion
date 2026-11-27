@@ -68,3 +68,24 @@ Episodes 06–10 move from two contrasting responses to a single protagonist's s
 For every 2.1 scene include human-side-v1, mind-series-v1, human-side-v2, human-side-v21, episode:NN, theme:<module>, shot:<setup/build/turn/change/resolve>. Edit these in the new story panel. Use a short final headline in resolve only. Use cover-title and cover-hook only in the opening scene. Covers automatically use theme-specific acting instead of the two-figure cover poses. Relevant prop controls: rest uses prop-tasks and prop-next; mask uses label-a; loop uses prop-title and prop-next; load uses prop-tasks; crowd uses label-b. Optional pose-a/b and face-a/b override applicable actor defaults; seated and mask animation have dedicated body geometry. Audio scripts generate narration, score, original synthesized foley and publication-time approximate phrase captions through the existing build. No new dependency or workflow. Fictional scripts do not diagnose or promise psychological outcomes.
 
 Run the manual Canvas regression in scripts/check-human-side-canvas.ts if desired. The strict command mock checks finite coordinates, draw method signatures, cover labels and state balance. Real Safari/Chromium playback, synthesized narration, sound mix and MP4 export require visual/auditory review. All new projects remain in review status.
+
+
+## Cinematic action pilot — template 2.2
+
+Episode 08 only is migrated from 29 to 25 seconds. The other nine episodes keep their current templates until the new acting style is reviewed. Template 2.2 adds a reusable six-shot action rig for phone-habit stories, not a fully generic character animation system.
+
+| Time | Action |
+| --- | --- |
+| 0–1.5 | Large facial close-up, phone and recognizable series cover |
+| 1.5–5 | Hand and screen close-up, repeated scrolling |
+| 5–9 | Digital clock advances from 22:00 to 23:30 |
+| 9–13 | Accelerating close-up cuts and repeated swipes |
+| 13–17 | Expression of recognition, face close-up |
+| 17–21 | Alternating walking steps, phone attached to hand, rotation and table contact |
+| 21–25 | Sitting motion and short final takeaway |
+
+Keep human-side-v1, mind-series-v1, human-side-v2, human-side-v21 and human-side-v22 on all cinematic scenes; use theme:loop, the existing shot markers and action:scroll/time/repeat/realize/place/sit. The new action selector is editable in Studio. The larger caption chunks (64 px at 1080 width, up to four words) survive manifest caption generation. Sound effects are synthesized from the new action timing. No new dependency or animation engine.
+
+Export investigation: the supplied file was 512 x 910, 30 fps, 29 seconds, H.264 with no audio stream. The existing browser fallback explicitly allows downscaled or silent output; this is a plausible cause, not proof of the particular export path. Human Side now requires a voiceover source, disallows automatic resolution downgrade, and rejects browser MP4 outputs that fail dimension, frame-rate or audio-track validation. A browser without working encoders may therefore fail instead of producing a defective MP4. The existing manual GitHub master workflow supports Human Side, uses the project dimensions and fps, mixes project audio and validates H.264, AAC, duration and frame count with ffprobe. No additional automatic master rendering or test Actions.
+
+QA: the fetched renderer code was executed with TypeScript annotations removed against a strict Canvas command mock at all 750 frame times; cover labels, clock range, template consistency, and a 25-second non-silent unclipped synthesized PCM effects track were checked. This does not constitute a native browser render, a full TypeScript build, audible Piper review, or actual MP4 verification. The supplied old MP4 was inspected with ffprobe. Keep productionStatus review until the new deployed export is reviewed.

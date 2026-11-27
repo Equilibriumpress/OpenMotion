@@ -16,6 +16,16 @@ export function prepareHumanSideSound(p,root){
   const duration=Number(s.durationSec);
   if(!Number.isFinite(duration)||duration<=0)throw Error('Invalid Human Side scene duration');
   const add=(dt,type,vol)=>{if(dt>=0&&dt+.25<duration)cues.push(cue(at+dt,type,vol));};
+  if(s.doodle?.extras?.includes('human-side-v22')){
+   const action=value('action');
+   if(action==='scroll')for(let t=1.5+.32;t<duration-.25;t+=1.05)add(t,'swipe',.65);
+   if(action==='time')for(let t=.25;t<duration-.25;t+=.65)add(t,'tick',.43);
+   if(action==='repeat'){for(const t of [.2,1.0,3.04,3.47])add(t,'swipe',.68);add(1.7,'tick',.55);}
+   if(action==='realize'){add(.2,'tap',.38);add(.65,'breath',.55);}
+   if(action==='place'){for(let t=.18;t<2.1;t+=.294)add(t,'step',.52);add(3.0,'thud',.65);}
+   if(action==='sit'){add(.5,'cloth',.5);add(1.05,'breath',.5);}
+   at+=duration;continue;
+  }
   if(s.doodle?.extras?.includes('human-side-v21')){
    if(theme==='rest'){
     if(shot==='setup')add(1.65,'cloth',.55);

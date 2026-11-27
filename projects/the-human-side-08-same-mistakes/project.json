@@ -3,7 +3,7 @@
   "id": "the-human-side-08-same-mistakes",
   "slug": "the-human-side-08-same-mistakes",
   "title": "The Human Side 08 — Why We Keep Making the Same Mistakes",
-  "description": "Original fictional story about everyday human experiences. No diagnosis or universal psychological claim.",
+  "description": "Original short about repeated phone scrolling and changing environmental cues. Cinematic six-shot pilot, not a diagnosis.",
   "category": "Shorts & Reels",
   "author": "OpenMotion Studio",
   "source": "template",
@@ -26,13 +26,13 @@
   },
   "scenes": [
     {
-      "id": "ths-08-1",
-      "name": "Opening situation",
-      "durationSec": 4.5,
+      "id": "ths-08-v22-1",
+      "name": "One more scroll",
+      "durationSec": 5,
       "layout": "doodle-explainer",
       "transition": "fade",
       "backdrop": "dot-matrix",
-      "headline": "",
+      "headline": "One more scroll",
       "caption": "",
       "fullBleed": true,
       "doodle": {
@@ -46,9 +46,11 @@
           "human-side-v1",
           "human-side-v2",
           "human-side-v21",
+          "human-side-v22",
           "episode:08",
           "theme:loop",
           "shot:setup",
+          "action:scroll",
           "prop-title:JUST ONE MORE",
           "prop-next:PHONE AWAY",
           "cover-title:SAME MISTAKE|AGAIN?",
@@ -56,23 +58,23 @@
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "One more scroll. Again."
+        "narration": "One more scroll. Five minutes, you tell yourself."
       }
     },
     {
-      "id": "ths-08-2",
-      "name": "The pattern builds",
-      "durationSec": 5.5,
+      "id": "ths-08-v22-2",
+      "name": "The clock advances",
+      "durationSec": 4,
       "layout": "doodle-explainer",
       "transition": "fade",
       "backdrop": "dot-matrix",
-      "headline": "",
+      "headline": "The clock advances",
       "caption": "",
       "fullBleed": true,
       "doodle": {
         "setting": "standing",
         "palette": "cream",
-        "mood": "worried",
+        "mood": "surprised",
         "pose": "neutral",
         "emphasis": [],
         "extras": [
@@ -80,31 +82,33 @@
           "human-side-v1",
           "human-side-v2",
           "human-side-v21",
+          "human-side-v22",
           "episode:08",
           "theme:loop",
           "shot:build",
+          "action:time",
           "prop-title:JUST ONE MORE",
           "prop-next:PHONE AWAY"
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "You promised yourself five minutes. Now the same loop has started again."
+        "narration": "Five minutes become ninety. You're still scrolling."
       }
     },
     {
-      "id": "ths-08-3",
-      "name": "Emotional turning point",
-      "durationSec": 6,
+      "id": "ths-08-v22-3",
+      "name": "The repeated action",
+      "durationSec": 4,
       "layout": "doodle-explainer",
       "transition": "fade",
       "backdrop": "dot-matrix",
-      "headline": "",
+      "headline": "The repeated action",
       "caption": "",
       "fullBleed": true,
       "doodle": {
         "setting": "standing",
         "palette": "cream",
-        "mood": "relaxed",
+        "mood": "surprised",
         "pose": "neutral",
         "emphasis": [],
         "extras": [
@@ -112,31 +116,67 @@
           "human-side-v1",
           "human-side-v2",
           "human-side-v21",
+          "human-side-v22",
+          "episode:08",
+          "theme:loop",
+          "shot:build",
+          "action:repeat",
+          "prop-title:JUST ONE MORE",
+          "prop-next:PHONE AWAY"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "One more video. One more swipe. Again."
+      }
+    },
+    {
+      "id": "ths-08-v22-4",
+      "name": "Recognizing the loop",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Recognizing the loop",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
           "episode:08",
           "theme:loop",
           "shot:turn",
+          "action:realize",
           "prop-title:JUST ONE MORE",
           "prop-next:PHONE AWAY"
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "Familiar habits are easy to repeat, even when the outcome disappoints you."
+        "narration": "The clock says eleven thirty. You notice the pattern."
       }
     },
     {
-      "id": "ths-08-4",
-      "name": "One small change",
-      "durationSec": 6,
+      "id": "ths-08-v22-5",
+      "name": "Change the environment",
+      "durationSec": 4,
       "layout": "doodle-explainer",
       "transition": "fade",
       "backdrop": "dot-matrix",
-      "headline": "",
+      "headline": "Change the environment",
       "caption": "",
       "fullBleed": true,
       "doodle": {
         "setting": "standing",
         "palette": "cream",
-        "mood": "worried",
+        "mood": "surprised",
         "pose": "neutral",
         "emphasis": [],
         "extras": [
@@ -144,21 +184,23 @@
           "human-side-v1",
           "human-side-v2",
           "human-side-v21",
+          "human-side-v22",
           "episode:08",
           "theme:loop",
           "shot:change",
+          "action:place",
           "prop-title:JUST ONE MORE",
           "prop-next:PHONE AWAY"
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "Put the phone somewhere harder to reach. Give yourself a different starting point."
+        "narration": "Move the phone somewhere harder to reach."
       }
     },
     {
-      "id": "ths-08-5",
-      "name": "Reflection",
-      "durationSec": 7,
+      "id": "ths-08-v22-6",
+      "name": "A different cue",
+      "durationSec": 4,
       "layout": "doodle-explainer",
       "transition": "fade",
       "backdrop": "dot-matrix",
@@ -168,7 +210,7 @@
       "doodle": {
         "setting": "standing",
         "palette": "cream",
-        "mood": "happy",
+        "mood": "surprised",
         "pose": "neutral",
         "emphasis": [],
         "extras": [
@@ -176,114 +218,132 @@
           "human-side-v1",
           "human-side-v2",
           "human-side-v21",
+          "human-side-v22",
           "episode:08",
           "theme:loop",
           "shot:resolve",
+          "action:sit",
           "prop-title:JUST ONE MORE",
           "prop-next:PHONE AWAY"
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "A different setup gives you a different chance to act."
+        "narration": "Change the cue. Give yourself a different starting point."
       }
     }
   ],
   "captions": [
     {
-      "text": "One more scroll. Again.",
+      "text": "One more scroll. Five",
       "startSec": 1.5,
-      "endSec": 4.05,
+      "endSec": 2.425,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "You promised yourself five minutes.",
-      "startSec": 4.8,
-      "endSec": 6.779,
+      "text": "minutes, you tell yourself.",
+      "startSec": 2.425,
+      "endSec": 4.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "Now the same loop has",
-      "startSec": 6.779,
-      "endSec": 8.758,
+      "text": "Five minutes become ninety.",
+      "startSec": 5.3,
+      "endSec": 7.157,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "started again.",
-      "startSec": 8.758,
-      "endSec": 9.55,
+      "text": "You're still scrolling.",
+      "startSec": 7.157,
+      "endSec": 8.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "Familiar habits are easy to",
-      "startSec": 10.3,
-      "endSec": 12.488,
+      "text": "One more video. One",
+      "startSec": 9.3,
+      "endSec": 11.157,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "repeat, even when the outcome",
-      "startSec": 12.488,
-      "endSec": 14.675,
+      "text": "more swipe. Again.",
+      "startSec": 11.157,
+      "endSec": 12.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "disappoints you.",
-      "startSec": 14.675,
-      "endSec": 15.55,
+      "text": "The clock says eleven",
+      "startSec": 13.3,
+      "endSec": 14.744,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "Put the phone somewhere harder",
-      "startSec": 16.3,
-      "endSec": 18.319,
+      "text": "thirty. You notice the",
+      "startSec": 14.744,
+      "endSec": 16.189,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "to reach. Give yourself a",
-      "startSec": 18.319,
-      "endSec": 20.338,
+      "text": "pattern.",
+      "startSec": 16.189,
+      "endSec": 16.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "different starting point.",
-      "startSec": 20.338,
-      "endSec": 21.55,
+      "text": "Move the phone somewhere",
+      "startSec": 17.3,
+      "endSec": 19.157,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "A different setup gives you",
-      "startSec": 22.3,
-      "endSec": 25.425,
+      "text": "harder to reach.",
+      "startSec": 19.157,
+      "endSec": 20.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "a different chance to act.",
-      "startSec": 25.425,
-      "endSec": 28.55,
+      "text": "Change the cue. Give",
+      "startSec": 21.3,
+      "endSec": 22.744,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
+    },
+    {
+      "text": "yourself a different starting",
+      "startSec": 22.744,
+      "endSec": 24.189,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 64
+    },
+    {
+      "text": "point.",
+      "startSec": 24.189,
+      "endSec": 24.55,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 64
     }
   ],
   "audioTracks": [
@@ -292,7 +352,7 @@
       "kind": "voiceover",
       "src": "assets/audio/the-human-side-08-same-mistakes-voice.mp3",
       "startSec": 0,
-      "endSec": 29,
+      "endSec": 25,
       "volume": 1
     },
     {
@@ -300,7 +360,7 @@
       "kind": "music",
       "src": "assets/audio/the-human-side-08-same-mistakes-score.mp3",
       "startSec": 0,
-      "endSec": 29,
+      "endSec": 25,
       "volume": 0.13,
       "fadeInSec": 0.3,
       "fadeOutSec": 1
@@ -310,7 +370,7 @@
       "kind": "effect",
       "src": "assets/audio/the-human-side-08-same-mistakes-human-sfx.wav",
       "startSec": 0,
-      "endSec": 29,
+      "endSec": 25,
       "volume": 0.48
     }
   ],
@@ -318,7 +378,7 @@
   "seriesId": "the-human-side",
   "season": 1,
   "episodeNumber": 8,
-  "templateVersion": "2.1",
+  "templateVersion": "2.2",
   "productionStatus": "review",
-  "thumbnailUrl": "assets/the-human-side/v21/the-human-side-08-same-mistakes.svg"
+  "thumbnailUrl": "assets/the-human-side/v22/the-human-side-08-same-mistakes.svg"
 }

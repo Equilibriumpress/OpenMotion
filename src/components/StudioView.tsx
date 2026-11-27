@@ -733,6 +733,7 @@ export function StudioView({
                   <div className="space-y-2 rounded-lg border border-purple-200 p-3 text-xs">
                     <p className="font-semibold text-purple-900">Shorts / TikTok cover</p>
                     <p className="text-slate-600">Kies bij upload een frame rond 0,3 seconde. De cover zit in de video zelf, zonder extra speelduur.</p>
+                    {project.seriesId==='the-human-side'&&<p className="text-xs text-slate-600">De video wordt alleen geaccepteerd met de gekozen resolutie, framerate en audiospoor. Lukt dit niet in Safari? <a className="underline" href="https://github.com/Equilibriumpress/OpenMotion/actions/workflows/render-openmotion-master.yml" target="_blank" rel="noreferrer">Handmatige H.264/AAC-masterexport</a> (project: {project.slug}).</p>}
                     {hasHumanSideCover(project.scenes[0])&&<button type="button" className="w-full rounded-lg bg-purple-100 px-3 py-2 font-semibold text-purple-900" onClick={()=>{setIsPlaying(false);setCurrentTime(.3);}}>Toon openingscover in preview</button>}
                     <button type="button" className="w-full rounded-lg border border-purple-300 px-3 py-2 font-semibold text-purple-900" onClick={()=>{
                       const canvas=document.createElement('canvas');canvas.width=1080;canvas.height=1920;

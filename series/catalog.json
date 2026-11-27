@@ -381,7 +381,7 @@
       "id": "the-human-side",
       "title": "The Human Side",
       "description": "Herkenbare menselijke emoties, gewoontes en innerlijke conflicten. Handgetekende stickfiguren op lila papier.",
-      "activeVersion": "2.1",
+      "activeVersion": "2.2",
       "versions": [
         {
           "version": "1.0",
@@ -448,6 +448,25 @@
           "referenceProject": "the-human-side-06-resting-guilt",
           "templatePath": "series/the-human-side/template-v2.1.json",
           "instructions": "Create original 25–35s English narrative episodes with one protagonist, optionally supporting characters. Use human-side-v1, mind-series-v1, human-side-v2 and human-side-v21 on every scene. Choose one theme: rest (chair, unfinished tasks, rest), mask (removable smile), loop (phone and repeated action), load (accumulating responsibilities and shared weight), crowd (background people and connection). Set shot:setup/build/turn/change/resolve, use short visual-first narration and one final headline. Optional face-a/b and pose-a/b override automatic acting where relevant. Editable props: prop-tasks, prop-next, prop-title, label-a, label-b depending on module. First scene only: cover-title (two short lines separated by |), cover-hook. The 1.5s cover uses the chosen module's own artwork. Export PNG via Studio or choose frame .3s. Use estimated phrase captions replaced by Piper timings at publication, quiet music and generated original -human-sfx.wav track. Create individual illustrated library poster. Keep claims cautious and non-diagnostic. See docs/the-human-side.md.",
+          "brandKit": {
+            "brandName": "THE HUMAN SIDE",
+            "primaryColor": "#C5A8D0",
+            "accentColor": "#E6D8ED",
+            "backgroundColor": "#C5A8D0",
+            "surfaceColor": "#E6D8ED",
+            "textColor": "#191619",
+            "mutedColor": "#806D87",
+            "fontFamily": "system-ui"
+          }
+        },
+        {
+          "version": "2.2",
+          "format": "9:16",
+          "fps": 30,
+          "durationSec": 25,
+          "referenceProject": "the-human-side-08-same-mistakes",
+          "templatePath": "series/the-human-side/template-v2.2.json",
+          "instructions": "Cinematic action pilot. Use mind-series-v1, human-side-v1, human-side-v2, human-side-v21 and human-side-v22 on all pilot scenes. Keep lilac paper, black curved strokes and white faces. Action shots: scroll (hand close-up), time (clock and phone), repeat (accelerating cuts), realize (face close-up), place (walk and hand-to-table transfer), sit (seated resolution). Use theme:loop and shot:setup/build/turn/change/resolve plus action:<shot>. Use 1.5s selectable cover in opening scene only, short narration and larger four-word captions, original synchronized effects. The 2.2 action module is designed for phone-habit stories; use 2.1 modules for other topics until adapted. Existing episodes retain their versions. Native-size H.264/AAC master export is available through the existing manual workflow. See docs/the-human-side.md.",
           "brandKit": {
             "brandName": "THE HUMAN SIDE",
             "primaryColor": "#C5A8D0",
