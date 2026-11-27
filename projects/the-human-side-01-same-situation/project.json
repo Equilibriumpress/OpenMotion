@@ -26,13 +26,13 @@
   },
   "scenes": [
     {
-      "id": "ths-01-1",
-      "name": "One message",
-      "durationSec": 4,
+      "id": "ths-01-v23-1",
+      "name": "Opening event",
+      "durationSec": 5,
       "layout": "doodle-explainer",
       "transition": "fade",
       "backdrop": "dot-matrix",
-      "headline": "Same message.",
+      "headline": "Opening event",
       "caption": "",
       "fullBleed": true,
       "doodle": {
@@ -44,132 +44,178 @@
         "extras": [
           "mind-series-v1",
           "human-side-v1",
-          "shot:message",
-          "episode:01",
-          "message:We need to talk.",
-          "pose-a:phone",
-          "pose-b:phone",
-          "face-a:surprise",
-          "face-b:neutral",
-          "cover-pose-a:kneel",
-          "cover-pose-b:joy",
-          "cover-face-a:panic",
-          "cover-face-b:joy",
           "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
+          "episode:01",
           "theme:message",
+          "film:event",
+          "shot:setup",
           "cover-title:SAME MESSAGE|DIFFERENT MINDS",
-          "cover-hook:We need to talk."
-        ],
-        "shirtColor": "#C5A8D0",
-        "highlightColor": "#191619",
-        "narration": "Same message. Two reactions."
-      }
-    },
-    {
-      "id": "ths-01-2",
-      "name": "A imagines a threat",
-      "durationSec": 6,
-      "layout": "doodle-explainer",
-      "transition": "fade",
-      "backdrop": "dot-matrix",
-      "headline": "What if something is wrong?",
-      "caption": "",
-      "fullBleed": true,
-      "doodle": {
-        "setting": "standing",
-        "palette": "cream",
-        "mood": "worried",
-        "pose": "neutral",
-        "emphasis": [],
-        "extras": [
-          "mind-series-v1",
-          "human-side-v1",
-          "shot:worry",
-          "episode:01",
+          "cover-hook:We need to talk.",
+          "message:We need to talk.",
           "label-a:What did I do?",
-          "pose-a:kneel",
-          "face-a:panic",
-          "human-side-v2",
-          "theme:message",
-          "detail-a:What if I messed up?",
-          "detail-b:Are they upset?"
-        ],
-        "shirtColor": "#C5A8D0",
-        "highlightColor": "#191619",
-        "narration": "One reads it as bad news. What did I do? Are they upset?"
-      }
-    },
-    {
-      "id": "ths-01-3",
-      "name": "B waits for context",
-      "durationSec": 6,
-      "layout": "doodle-explainer",
-      "transition": "fade",
-      "backdrop": "dot-matrix",
-      "headline": "I'll find out later.",
-      "caption": "",
-      "fullBleed": true,
-      "doodle": {
-        "setting": "standing",
-        "palette": "cream",
-        "mood": "relaxed",
-        "pose": "neutral",
-        "emphasis": [],
-        "extras": [
-          "mind-series-v1",
-          "human-side-v1",
-          "shot:calm",
-          "episode:01",
           "label-b:We will talk later.",
-          "pose-b:calm",
-          "face-b:smile",
-          "human-side-v2",
-          "theme:message"
+          "reply:What time works for dinner?"
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "The other sees an unanswered question and waits for more context."
+        "narration": "Two people receive the same message."
       }
     },
     {
-      "id": "ths-01-4",
-      "name": "Two interpretations",
-      "durationSec": 6,
+      "id": "ths-01-v23-2",
+      "name": "Emotional reaction",
+      "durationSec": 4,
       "layout": "doodle-explainer",
       "transition": "fade",
       "backdrop": "dot-matrix",
-      "headline": "Same situation. Different minds.",
+      "headline": "Emotional reaction",
       "caption": "",
       "fullBleed": true,
       "doodle": {
         "setting": "standing",
         "palette": "cream",
-        "mood": "worried",
+        "mood": "surprised",
         "pose": "neutral",
         "emphasis": [],
         "extras": [
           "mind-series-v1",
           "human-side-v1",
-          "shot:contrast",
-          "episode:01",
-          "label-a:Something is wrong.",
-          "label-b:Let's find out.",
-          "pose-a:kneel",
-          "pose-b:joy",
-          "face-a:panic",
-          "face-b:joy",
           "human-side-v2",
-          "theme:message"
+          "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
+          "episode:01",
+          "theme:message",
+          "film:reaction",
+          "shot:build",
+          "message:We need to talk.",
+          "label-a:What did I do?",
+          "label-b:We will talk later.",
+          "reply:What time works for dinner?"
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "The words are identical. The meanings they give them are different."
+        "narration": "One reads it as bad news. What did I do?"
       }
     },
     {
-      "id": "ths-01-5",
-      "name": "More context",
-      "durationSec": 6,
+      "id": "ths-01-v23-3",
+      "name": "Physical action",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Physical action",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
+          "episode:01",
+          "theme:message",
+          "film:action",
+          "shot:build",
+          "message:We need to talk.",
+          "label-a:What did I do?",
+          "label-b:We will talk later.",
+          "reply:What time works for dinner?"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "The other waits to find out what the message means."
+      }
+    },
+    {
+      "id": "ths-01-v23-4",
+      "name": "Turning point",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Turning point",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
+          "episode:01",
+          "theme:message",
+          "film:turn",
+          "shot:turn",
+          "message:We need to talk.",
+          "label-a:What did I do?",
+          "label-b:We will talk later.",
+          "reply:What time works for dinner?"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "Same words. Different interpretations."
+      }
+    },
+    {
+      "id": "ths-01-v23-5",
+      "name": "A different response",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "A different response",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
+          "episode:01",
+          "theme:message",
+          "film:change",
+          "shot:change",
+          "message:We need to talk.",
+          "label-a:What did I do?",
+          "label-b:We will talk later.",
+          "reply:What time works for dinner?"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "Then the reply arrives. Dinner plans."
+      }
+    },
+    {
+      "id": "ths-01-v23-6",
+      "name": "Final reflection",
+      "durationSec": 4,
       "layout": "doodle-explainer",
       "transition": "fade",
       "backdrop": "dot-matrix",
@@ -179,124 +225,135 @@
       "doodle": {
         "setting": "standing",
         "palette": "cream",
-        "mood": "happy",
+        "mood": "surprised",
         "pose": "neutral",
         "emphasis": [],
         "extras": [
           "mind-series-v1",
           "human-side-v1",
-          "shot:reveal",
-          "episode:01",
-          "message:What time works for dinner?",
-          "pose-a:relief",
-          "pose-b:calm",
-          "face-a:relief",
-          "face-b:smile",
           "human-side-v2",
-          "theme:message"
+          "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
+          "episode:01",
+          "theme:message",
+          "film:ending",
+          "shot:resolve",
+          "message:We need to talk.",
+          "label-a:What did I do?",
+          "label-b:We will talk later.",
+          "reply:What time works for dinner?"
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "Dinner plans. Ask what someone means before assuming the worst."
+        "narration": "Ask before assuming the worst."
       }
     }
   ],
   "captions": [
     {
-      "text": "Same message. Two reactions.",
+      "text": "Two people receive the",
       "startSec": 1.5,
-      "endSec": 3.55,
+      "endSec": 3.133,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "One reads it as bad",
-      "startSec": 4.3,
-      "endSec": 6.319,
+      "text": "same message.",
+      "startSec": 3.133,
+      "endSec": 4.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "news. What did I do?",
-      "startSec": 6.319,
-      "endSec": 8.338,
+      "text": "One reads it as",
+      "startSec": 5.3,
+      "endSec": 6.6,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "Are they upset?",
-      "startSec": 8.338,
-      "endSec": 9.55,
+      "text": "bad news. What did",
+      "startSec": 6.6,
+      "endSec": 7.9,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "The other sees an unanswered",
-      "startSec": 10.3,
-      "endSec": 12.686,
+      "text": "I do?",
+      "startSec": 7.9,
+      "endSec": 8.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "question and waits for more",
-      "startSec": 12.686,
-      "endSec": 15.073,
+      "text": "The other waits to",
+      "startSec": 9.3,
+      "endSec": 10.6,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "context.",
-      "startSec": 15.073,
-      "endSec": 15.55,
+      "text": "find out what the",
+      "startSec": 10.6,
+      "endSec": 11.9,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "The words are identical. The",
-      "startSec": 16.3,
-      "endSec": 18.686,
+      "text": "message means.",
+      "startSec": 11.9,
+      "endSec": 12.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "meanings they give them are",
-      "startSec": 18.686,
-      "endSec": 21.073,
+      "text": "Same words. Different interpretations.",
+      "startSec": 13.3,
+      "endSec": 16.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "different.",
-      "startSec": 21.073,
-      "endSec": 21.55,
+      "text": "Then the reply arrives.",
+      "startSec": 17.3,
+      "endSec": 19.467,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "Dinner plans. Ask what someone",
-      "startSec": 22.3,
-      "endSec": 24.925,
+      "text": "Dinner plans.",
+      "startSec": 19.467,
+      "endSec": 20.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "means before assuming the worst.",
-      "startSec": 24.925,
-      "endSec": 27.55,
+      "text": "Ask before assuming the",
+      "startSec": 21.3,
+      "endSec": 23.9,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
+    },
+    {
+      "text": "worst.",
+      "startSec": 23.9,
+      "endSec": 24.55,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 64
     }
   ],
   "audioTracks": [
@@ -305,7 +362,7 @@
       "kind": "voiceover",
       "src": "assets/audio/the-human-side-01-same-situation-voice.mp3",
       "startSec": 0,
-      "endSec": 28,
+      "endSec": 25,
       "volume": 1
     },
     {
@@ -313,7 +370,7 @@
       "kind": "music",
       "src": "assets/audio/the-human-side-01-same-situation-score.mp3",
       "startSec": 0,
-      "endSec": 28,
+      "endSec": 25,
       "volume": 0.15,
       "fadeInSec": 0.3,
       "fadeOutSec": 1
@@ -323,7 +380,7 @@
       "kind": "effect",
       "src": "assets/audio/the-human-side-01-same-situation-human-sfx.wav",
       "startSec": 0,
-      "endSec": 28,
+      "endSec": 25,
       "volume": 0.48
     }
   ],
@@ -331,7 +388,7 @@
   "seriesId": "the-human-side",
   "season": 1,
   "episodeNumber": 1,
-  "templateVersion": "2.0",
+  "templateVersion": "2.3",
   "productionStatus": "review",
-  "thumbnailUrl": "assets/the-human-side/v2/the-human-side-01-same-situation.svg"
+  "thumbnailUrl": "assets/the-human-side/v23/the-human-side-01-same-situation.svg"
 }
