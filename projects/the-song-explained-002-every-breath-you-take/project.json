@@ -1,0 +1,344 @@
+{
+  "schemaVersion": "1.0",
+  "id": "the-song-explained-002-every-breath-you-take",
+  "slug": "the-song-explained-002-every-breath-you-take",
+  "title": "The Song Explained 02 — Every Breath You Take",
+  "description": "Original visual interpretation of The Police's Every Breath You Take (1983), contrasting its gentle sound with themes of possession, surveillance and control. Sources: Sting interview, Los Angeles Times, 11 August 1985, https://www.latimes.com/archives/la-xpm-1985-08-11-ca-2719-story.html ; official Sting album notes, https://sting.com/blogs/news/sting-my-songs-album-out-today . Fictional characters and the final statement are editorial interpretation, not biography. No lyrics, original recording or album art.",
+  "category": "Shorts & Reels",
+  "author": "OpenMotion Studio",
+  "source": "template",
+  "createdAt": "2026-11-27",
+  "updatedAt": "2026-11-27",
+  "githubPath": "projects/the-song-explained-002-every-breath-you-take/project.json",
+  "format": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 60,
+  "brandKit": {
+    "brandName": "THE SONG EXPLAINED",
+    "primaryColor": "#D3A99A",
+    "accentColor": "#A84F50",
+    "backgroundColor": "#192735",
+    "surfaceColor": "#465A68",
+    "textColor": "#F2E2CF",
+    "mutedColor": "#9E8286",
+    "fontFamily": "system-ui"
+  },
+  "scenes": [
+    {
+      "id": "tse-002-1",
+      "name": "Romance",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "neutral",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "song-explainer-v1",
+          "song-cinematic-v2",
+          "song-breath-v1",
+          "shot:breath-romance",
+          "camera:push",
+          "episode:02",
+          "artist:THE POLICE · 1983",
+          "cover-title:EVERY BREATH|YOU TAKE",
+          "cover-hook:Love or obsession?",
+          "symbol:heart"
+        ],
+        "shirtColor": "#A84F50",
+        "highlightColor": "#D3A99A",
+        "narration": "Every Breath You Take sounds like a love song. But Sting had something darker in mind."
+      }
+    },
+    {
+      "id": "tse-002-2",
+      "name": "The gaze",
+      "durationSec": 8,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "neutral",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "song-explainer-v1",
+          "song-cinematic-v2",
+          "song-breath-v1",
+          "shot:breath-gaze",
+          "camera:track",
+          "episode:02",
+          "artist:THE POLICE · 1983"
+        ],
+        "shirtColor": "#A84F50",
+        "highlightColor": "#D3A99A",
+        "narration": "Released by The Police in nineteen eighty-three, the song places us inside the mind of a possessive lover."
+      }
+    },
+    {
+      "id": "tse-002-3",
+      "name": "Control",
+      "durationSec": 8,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "neutral",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "song-explainer-v1",
+          "song-cinematic-v2",
+          "song-breath-v1",
+          "shot:breath-enclosure",
+          "camera:push",
+          "episode:02",
+          "artist:THE POLICE · 1983"
+        ],
+        "shirtColor": "#A84F50",
+        "highlightColor": "#D3A99A",
+        "narration": "Attention becomes surveillance. Affection becomes a demand for control. The gentle melody hides the tension in the words."
+      }
+    },
+    {
+      "id": "tse-002-4",
+      "name": "Separation",
+      "durationSec": 8,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "neutral",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "song-explainer-v1",
+          "song-cinematic-v2",
+          "song-breath-v1",
+          "shot:breath-separation",
+          "camera:pull",
+          "episode:02",
+          "artist:THE POLICE · 1983"
+        ],
+        "shirtColor": "#A84F50",
+        "highlightColor": "#D3A99A",
+        "narration": "In a nineteen eighty-five interview, Sting described the song in terms of possession, control and surveillance."
+      }
+    },
+    {
+      "id": "tse-002-5",
+      "name": "Release",
+      "durationSec": 10,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "LOVE IS NOT|OWNERSHIP.",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "neutral",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "song-explainer-v1",
+          "song-cinematic-v2",
+          "song-breath-v1",
+          "shot:breath-release",
+          "camera:pull",
+          "episode:02",
+          "artist:THE POLICE · 1983"
+        ],
+        "shirtColor": "#A84F50",
+        "highlightColor": "#D3A99A",
+        "narration": "The unsettling contrast is what makes the song so compelling. One way to hear its story is as a warning: love is not ownership."
+      }
+    }
+  ],
+  "captions": [
+    {
+      "text": "Every Breath You Take sounds like a",
+      "startSec": 0.85,
+      "endSec": 2.928,
+      "style": "minimal",
+      "position": 0.75,
+      "fontSizePx": 43
+    },
+    {
+      "text": "love song. But Sting had something darker",
+      "startSec": 2.928,
+      "endSec": 5.006,
+      "style": "minimal",
+      "position": 0.75,
+      "fontSizePx": 43
+    },
+    {
+      "text": "in mind.",
+      "startSec": 5.006,
+      "endSec": 5.6,
+      "style": "minimal",
+      "position": 0.75,
+      "fontSizePx": 43
+    },
+    {
+      "text": "Released by The Police in nineteen eighty-three,",
+      "startSec": 6.3,
+      "endSec": 9.139,
+      "style": "minimal",
+      "position": 0.75,
+      "fontSizePx": 43
+    },
+    {
+      "text": "the song places us inside the mind",
+      "startSec": 9.139,
+      "endSec": 11.978,
+      "style": "minimal",
+      "position": 0.75,
+      "fontSizePx": 43
+    },
+    {
+      "text": "of a possessive lover.",
+      "startSec": 11.978,
+      "endSec": 13.6,
+      "style": "minimal",
+      "position": 0.75,
+      "fontSizePx": 43
+    },
+    {
+      "text": "Attention becomes surveillance. Affection becomes a demand",
+      "startSec": 14.3,
+      "endSec": 17.139,
+      "style": "minimal",
+      "position": 0.75,
+      "fontSizePx": 43
+    },
+    {
+      "text": "for control. The gentle melody hides the",
+      "startSec": 17.139,
+      "endSec": 19.978,
+      "style": "minimal",
+      "position": 0.75,
+      "fontSizePx": 43
+    },
+    {
+      "text": "tension in the words.",
+      "startSec": 19.978,
+      "endSec": 21.6,
+      "style": "minimal",
+      "position": 0.75,
+      "fontSizePx": 43
+    },
+    {
+      "text": "In a nineteen eighty-five interview, Sting described",
+      "startSec": 22.3,
+      "endSec": 25.494,
+      "style": "minimal",
+      "position": 0.75,
+      "fontSizePx": 43
+    },
+    {
+      "text": "the song in terms of possession, control",
+      "startSec": 25.494,
+      "endSec": 28.688,
+      "style": "minimal",
+      "position": 0.75,
+      "fontSizePx": 43
+    },
+    {
+      "text": "and surveillance.",
+      "startSec": 28.688,
+      "endSec": 29.6,
+      "style": "minimal",
+      "position": 0.75,
+      "fontSizePx": 43
+    },
+    {
+      "text": "The unsettling contrast is what makes the",
+      "startSec": 30.3,
+      "endSec": 33.013,
+      "style": "minimal",
+      "position": 0.75,
+      "fontSizePx": 43
+    },
+    {
+      "text": "song so compelling. One way to hear",
+      "startSec": 33.013,
+      "endSec": 35.725,
+      "style": "minimal",
+      "position": 0.75,
+      "fontSizePx": 43
+    },
+    {
+      "text": "its story is as a warning: love",
+      "startSec": 35.725,
+      "endSec": 38.438,
+      "style": "minimal",
+      "position": 0.75,
+      "fontSizePx": 43
+    },
+    {
+      "text": "is not ownership.",
+      "startSec": 38.438,
+      "endSec": 39.6,
+      "style": "minimal",
+      "position": 0.75,
+      "fontSizePx": 43
+    }
+  ],
+  "audioTracks": [
+    {
+      "id": "voice",
+      "kind": "voiceover",
+      "src": "assets/audio/the-song-explained-002-every-breath-you-take-voice.mp3",
+      "startSec": 0,
+      "endSec": 40,
+      "volume": 1
+    },
+    {
+      "id": "cinematic-sound",
+      "kind": "music",
+      "src": "assets/the-song-explained/the-song-explained-002-every-breath-you-take-sound.wav",
+      "startSec": 0,
+      "endSec": 40,
+      "volume": 0.6,
+      "fadeInSec": 0,
+      "fadeOutSec": 0
+    }
+  ],
+  "kind": "video",
+  "seriesId": "the-song-explained",
+  "season": 1,
+  "episodeNumber": 2,
+  "templateVersion": "2.1",
+  "productionStatus": "review",
+  "thumbnailUrl": "assets/the-song-explained/every-breath-cover.svg"
+}
