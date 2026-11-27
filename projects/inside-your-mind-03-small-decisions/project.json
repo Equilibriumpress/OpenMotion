@@ -1,0 +1,185 @@
+{
+  "schemaVersion": "1.0",
+  "id": "short-inside-your-mind-03-small-decisions",
+  "slug": "inside-your-mind-03-small-decisions",
+  "title": "Inside Your Mind 03 — Why Small Decisions Feel Exhausting",
+  "description": "Original short animated psychology explainer. Source: https://doi.org/10.1016/j.jcps.2014.08.002",
+  "category": "Shorts & Reels",
+  "author": "OpenMotion Studio",
+  "source": "template",
+  "createdAt": "2026-11-27",
+  "updatedAt": "2026-11-27",
+  "githubPath": "projects/inside-your-mind-03-small-decisions/project.json",
+  "format": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "brandKit": {
+    "brandName": "INSIDE YOUR MIND",
+    "primaryColor": "#518D89",
+    "accentColor": "#B94D41",
+    "backgroundColor": "#EFE3D0",
+    "surfaceColor": "#DCE8EB",
+    "textColor": "#49392F",
+    "mutedColor": "#79685B",
+    "fontFamily": "Kalam"
+  },
+  "scenes": [
+    {
+      "id": "iym-03-1",
+      "name": "Hook",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Why does choosing dinner sometimes feel like a huge task?",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "shower",
+        "mood": "confused",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "inside-your-mind",
+          "choices",
+          "03",
+          "Pasta|Rice|Soup|Salad"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "Why does choosing dinner sometimes feel like a huge task?"
+      }
+    },
+    {
+      "id": "iym-03-2",
+      "name": "Recognition",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Comparing options takes attention, especially when your preferences are unclear.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "shower",
+        "mood": "overwhelmed",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "inside-your-mind",
+          "choices",
+          "03",
+          "Quick?|Cheap?|Healthy?|Easy?|Tasty?|Enough?"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "Comparing options takes attention, especially when your preferences are unclear."
+      }
+    },
+    {
+      "id": "iym-03-3",
+      "name": "Explanation",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Research suggests choice overload depends on the difficulty of the decision.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "shower",
+        "mood": "worried",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "inside-your-mind",
+          "thoughts",
+          "03",
+          "Too many trade-offs"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "Research suggests choice overload depends on the difficulty of the decision."
+      }
+    },
+    {
+      "id": "iym-03-4",
+      "name": "Reframe",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Make the decision simpler. Choose two options before comparing them.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "focused",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "inside-your-mind",
+          "focus",
+          "03",
+          "Pasta or soup?"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "Make the decision simpler. Choose two options before comparing them."
+      }
+    },
+    {
+      "id": "iym-03-5",
+      "name": "Payoff",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "A good enough choice is often all you need for dinner.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "relieved",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "inside-your-mind",
+          "resolve",
+          "03",
+          "Good enough"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "A good enough choice is often all you need for dinner."
+      }
+    }
+  ],
+  "captions": [],
+  "audioTracks": [
+    {
+      "id": "voice",
+      "kind": "voiceover",
+      "src": "assets/audio/inside-your-mind-03-small-decisions-voice.mp3",
+      "startSec": 0,
+      "endSec": 28,
+      "volume": 1
+    },
+    {
+      "id": "score",
+      "kind": "music",
+      "src": "assets/audio/inside-your-mind-03-small-decisions-score.mp3",
+      "startSec": 0,
+      "endSec": 28,
+      "volume": 0.22,
+      "fadeInSec": 0.3,
+      "fadeOutSec": 1
+    }
+  ]
+}
