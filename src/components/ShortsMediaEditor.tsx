@@ -142,6 +142,17 @@ export function ShortsMediaEditor({project,activeScene,onUpdateProject,onUpdateS
       const faceA=shot==='message'?'neutral':shot==='worry'?'panic':shot==='reveal'?'relief':'worry';
       return <div className="space-y-3 rounded-xl border border-purple-200 p-3">
         <h4 className="font-semibold text-sm text-purple-900">The Human Side · stickfiguren</h4>
+        {activeScene.id===project.scenes[0]?.id&&<div className="space-y-2 border-b border-purple-100 pb-3">
+          <h5 className="text-xs font-semibold">Shorts / TikTok cover</h5>
+          <label className="block text-xs">Covertekst (max. twee regels, scheiding |)<input className={style} value={get('cover-title')} placeholder="SAME MESSAGE|DIFFERENT MINDS" onChange={e=>set('cover-title',e.target.value)}/></label>
+          <label className="block text-xs">Korte hook<input className={style} value={get('cover-hook',get('message'))} onChange={e=>set('cover-hook',e.target.value)}/></label>
+          {(['a','b'] as const).map(side=><div key={side} className="grid grid-cols-2 gap-2">
+            <label className="block text-xs">Coverhouding {side.toUpperCase()}<select className={style} value={get('cover-pose-'+side,side==='a'?'kneel':'joy')} onChange={e=>set('cover-pose-'+side,e.target.value)}>{Object.keys(HUMAN_POSES).map(v=><option key={v}>{v}</option>)}</select></label>
+            <label className="block text-xs">Covergezicht {side.toUpperCase()}<select className={style} value={get('cover-face-'+side,side==='a'?'panic':'joy')} onChange={e=>set('cover-face-'+side,e.target.value)}>{HUMAN_FACES.map(v=><option key={v}>{v}</option>)}</select></label>
+          </div>)}
+          <p className="text-xs text-slate-500">Lege covertekst schakelt de cover uit. Kies bij upload het frame rond 0,3 seconde.</p>
+        </div>}
+
         <label className="block text-xs">Scène<select className={style} value={shot} onChange={e=>set('shot',e.target.value)}>
           {['message','worry','calm','contrast','reveal'].map(v=><option key={v}>{v}</option>)}
         </select></label>

@@ -1,3 +1,4 @@
+import { hasHumanSideCover, renderHumanSideCover } from '../engine/humanSideRenderer';
 import { useEffect, useRef, useState } from 'react';
 import {
   ArrowLeft,
@@ -723,6 +724,20 @@ export function StudioView({
                   </p>
                 </div>
 
+                {project.format==='9:16'&&hasHumanSideCover(project.scenes[0])&&(
+                  <div className="space-y-2 rounded-lg border border-purple-200 p-3 text-xs">
+                    <p className="font-semibold text-purple-900">Shorts / TikTok cover</p>
+                    <p className="text-slate-600">Kies bij upload een frame rond 0,3 seconde. De cover zit in de video zelf, zonder extra speelduur.</p>
+                    <button type="button" className="w-full rounded-lg border border-purple-300 px-3 py-2 font-semibold text-purple-900" onClick={()=>{
+                      const canvas=document.createElement('canvas');canvas.width=1080;canvas.height=1920;
+                      const ctx=canvas.getContext('2d');if(!ctx){setJsonError('Cover kon niet worden gerenderd.');return;}
+                      renderHumanSideCover(ctx,1080,1920,project.scenes[0],project.brandKit);
+                      canvas.toBlob(blob=>{if(!blob){setJsonError('PNG-export mislukt.');return;}
+                        const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=project.slug+'-shorts-cover.png';a.click();setTimeout(()=>URL.revokeObjectURL(url),30000);
+                      },'image/png');
+                    }}>Download cover PNG · 1080 × 1920</button>
+                  </div>
+                )}
                 {isTravelDocumentary(project) && (
                   <div className="space-y-2 rounded-lg border border-slate-200 p-3 text-xs text-slate-700">
                     <p className="font-semibold">Places Worth Exploring · gecontroleerde export R2</p>
