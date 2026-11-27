@@ -1,0 +1,263 @@
+{
+  "version": "2.3",
+  "format": "9:16",
+  "fps": 30,
+  "durationSec": 25,
+  "referenceProject": "the-human-side-01-same-situation",
+  "templatePath": "series/the-human-side/template-v2.3.json",
+  "instructions": "Six-shot cinematic stories, 25 seconds, 1080x1920, 30 fps. Use mind-series-v1, human-side-v1, human-side-v2, human-side-v21, human-side-v22, human-side-v23 on each scene. Select theme:message/waiting/calendar/boundaries/feedback/rest/mask/load/crowd, film:event/reaction/action/turn/change/ending and shot:setup/build/build/turn/change/resolve. First scene only: cover-title (two lines separated by |), cover-hook. Theme props message, reply, label-a, label-b, prop-tasks are editable. Large topic-specific covers, physical object actions, close-ups, original foley, 64px short captions and strict verified export. Episode 08 retains its approved 2.2 phone-habit action rig. Use the existing manual master workflow if browser export fails. See docs/the-human-side.md.",
+  "brandKit": {
+    "brandName": "THE HUMAN SIDE",
+    "primaryColor": "#C5A8D0",
+    "accentColor": "#E6D8ED",
+    "backgroundColor": "#C5A8D0",
+    "surfaceColor": "#E6D8ED",
+    "textColor": "#191619",
+    "mutedColor": "#806D87",
+    "fontFamily": "system-ui"
+  },
+  "seriesId": "the-human-side",
+  "exampleScenes": [
+    {
+      "id": "ths-01-v23-1",
+      "name": "Opening event",
+      "durationSec": 5,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Opening event",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
+          "episode:01",
+          "theme:message",
+          "film:event",
+          "shot:setup",
+          "cover-title:SAME MESSAGE|DIFFERENT MINDS",
+          "cover-hook:We need to talk.",
+          "message:We need to talk.",
+          "label-a:What did I do?",
+          "label-b:We will talk later.",
+          "reply:What time works for dinner?"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "Two people receive the same message."
+      }
+    },
+    {
+      "id": "ths-01-v23-2",
+      "name": "Emotional reaction",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Emotional reaction",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
+          "episode:01",
+          "theme:message",
+          "film:reaction",
+          "shot:build",
+          "message:We need to talk.",
+          "label-a:What did I do?",
+          "label-b:We will talk later.",
+          "reply:What time works for dinner?"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "One reads it as bad news. What did I do?"
+      }
+    },
+    {
+      "id": "ths-01-v23-3",
+      "name": "Physical action",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Physical action",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
+          "episode:01",
+          "theme:message",
+          "film:action",
+          "shot:build",
+          "message:We need to talk.",
+          "label-a:What did I do?",
+          "label-b:We will talk later.",
+          "reply:What time works for dinner?"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "The other waits to find out what the message means."
+      }
+    },
+    {
+      "id": "ths-01-v23-4",
+      "name": "Turning point",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Turning point",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
+          "episode:01",
+          "theme:message",
+          "film:turn",
+          "shot:turn",
+          "message:We need to talk.",
+          "label-a:What did I do?",
+          "label-b:We will talk later.",
+          "reply:What time works for dinner?"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "Same words. Different interpretations."
+      }
+    },
+    {
+      "id": "ths-01-v23-5",
+      "name": "A different response",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "A different response",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
+          "episode:01",
+          "theme:message",
+          "film:change",
+          "shot:change",
+          "message:We need to talk.",
+          "label-a:What did I do?",
+          "label-b:We will talk later.",
+          "reply:What time works for dinner?"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "Then the reply arrives. Dinner plans."
+      }
+    },
+    {
+      "id": "ths-01-v23-6",
+      "name": "Final reflection",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Ask before assuming.",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
+          "episode:01",
+          "theme:message",
+          "film:ending",
+          "shot:resolve",
+          "message:We need to talk.",
+          "label-a:What did I do?",
+          "label-b:We will talk later.",
+          "reply:What time works for dinner?"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "Ask before assuming the worst."
+      }
+    }
+  ],
+  "exampleCaptionStyle": "minimal",
+  "exampleAudioTracks": [
+    {
+      "kind": "voiceover",
+      "volume": 1
+    },
+    {
+      "kind": "music",
+      "volume": 0.15,
+      "fadeInSec": 0.3,
+      "fadeOutSec": 1
+    },
+    {
+      "kind": "effect",
+      "volume": 0.48
+    }
+  ]
+}
