@@ -1,3 +1,4 @@
+import { isBreathStory, renderBreathStory, renderBreathCover } from './songBreathRenderer';
 import type { OpenMotionBrandKit, OpenMotionScene } from '../types/openmotion';
 import { drawHeroFace, type FaceAngle } from './songHeroFace';
 import { drawHeroCar } from './songHeroCar';
@@ -139,6 +140,7 @@ function sceneArt(c:C,shot:string,t:number,u:number,mode:string,hero=false,carAn
  c.restore();
 }
 export function renderCinematicSongCover(c:C,w:number,h:number,s:OpenMotionScene,_b:OpenMotionBrandKit){
+ if(isBreathStory(s)){renderBreathCover(c,w,h,s);return;}
  const hero=!!s.doodle?.extras?.includes('song-hero-rigs-v21');
  c.save();c.scale(w/W,h/H);landscape(c,0,true);if(hero){portrait(c,126,482,1.11,0,'look','warm',false,true,'three-quarter');drawHeroCar(c,354,662,.69,0,.68,true);}else{rearCar(c,264,659,.83,0);portrait(c,139,446,1.37,0,'look','warm');}finish(c);
  box(c,0,0,W,340,grad(c,0,0,0,340,[[0,'rgba(11,19,29,.92)'],[1,'rgba(11,19,29,0)']]));
@@ -149,6 +151,7 @@ export function renderCinematicSongCover(c:C,w:number,h:number,s:OpenMotionScene
  c.restore();
 }
 export function renderCinematicSong(c:C,w:number,h:number,s:OpenMotionScene,time:number,b:OpenMotionBrandKit){
+ if(isBreathStory(s)){renderBreathStory(c,w,h,s,time);return;}
  const t=Math.max(0,Math.min(s.durationSec,time)),u=t/Math.max(.01,s.durationSec),shot=field(s,'shot','longing');
  const cover=!!field(s,'cover-title');if(cover&&t<.85){renderCinematicSongCover(c,w,h,s,b);return;}
  c.save();c.scale(w/W,h/H);sceneArt(c,shot,t,u,field(s,'camera','push'),!!s.doodle?.extras?.includes('song-hero-rigs-v21'),field(s,'car-angle','auto'));finish(c);
