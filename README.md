@@ -84,3 +84,12 @@ The editable ADHD & Slaap hand-drawn video now uses two reusable vector rigs wit
 ### MY BUCKET LIST — Globe Zoom Reels
 
 The Shorts & Reels R4 Director's Cut offers a 20-second continuous MapLibre globe-to-São-Miguel fly-in, a stronger 4.5-second arrival and custom per-scene photo timing, with three photographic reasons to visit, a save-this-place outro, editable destination coordinates and an original score. See [the bucket-list guide](docs/bucket-list-zoom.md).
+
+
+## OpenMotion Studio · Series
+
+De startpagina is nu een productie-dashboard. Series, alle video's, templates en
+archief hebben afzonderlijke weergaven. De bestaande #studio/<slug>-links blijven geldig.
+Een serie heeft een vaste ID, genummerde afleveringen, een huisstijl en versiegebonden
+productietemplate. Zie [SERIES_WORKFLOW.md](docs/SERIES_WORKFLOW.md).
+De manifestgenerator maakt lichte statische SVG-titelkaarten zonder video-rendering.

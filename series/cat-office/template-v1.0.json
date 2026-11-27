@@ -1,0 +1,214 @@
+{
+  "version": "1.0",
+  "format": "9:16",
+  "fps": 60,
+  "durationSec": 18,
+  "referenceProject": "cat-office-001-quick-meeting",
+  "templatePath": "series/cat-office/template-v1.0.json",
+  "instructions": "Gebruik dezelfde katten-assets, kantooromgeving, snelle reacties, geluidseffecten en loop. Controleer dat de katten zichtbaar zijn.",
+  "brandKit": {
+    "brandName": "THE CAT OFFICE",
+    "primaryColor": "#f4b45e",
+    "accentColor": "#e8e4df",
+    "backgroundColor": "#292c32",
+    "surfaceColor": "#353b42",
+    "textColor": "#ffffff",
+    "mutedColor": "#b4b7b9",
+    "fontFamily": "Plus Jakarta Sans"
+  },
+  "seriesId": "cat-office",
+  "exampleScenes": [
+    {
+      "id": "cat-01",
+      "name": "The interruption",
+      "durationSec": 3,
+      "layout": "paper-cutout",
+      "transition": "fade",
+      "backdrop": "grid-architectural",
+      "headline": "When your boss says “quick meeting”",
+      "fullBleed": true,
+      "catOffice": {
+        "shot": "desk",
+        "cues": [
+          {
+            "start": 0.65,
+            "end": 2.7,
+            "text": "Quick meeting?"
+          }
+        ],
+        "events": [
+          {
+            "at": 0.05,
+            "kind": "typing",
+            "duration": 0.55
+          },
+          {
+            "at": 0.59,
+            "kind": "ping",
+            "duration": 0.24
+          },
+          {
+            "at": 0.85,
+            "kind": "meow",
+            "duration": 0.65
+          }
+        ]
+      }
+    },
+    {
+      "id": "cat-02",
+      "name": "The realization",
+      "durationSec": 2,
+      "layout": "paper-cutout",
+      "transition": "fade",
+      "backdrop": "grid-architectural",
+      "headline": "",
+      "fullBleed": true,
+      "catOffice": {
+        "shot": "reaction",
+        "cues": [
+          {
+            "start": 0.3,
+            "end": 1.85,
+            "text": "…"
+          }
+        ],
+        "events": [
+          {
+            "at": 0,
+            "kind": "scratch",
+            "duration": 0.27
+          },
+          {
+            "at": 0.29,
+            "kind": "bass",
+            "duration": 0.5
+          }
+        ]
+      }
+    },
+    {
+      "id": "cat-03",
+      "name": "The meeting",
+      "durationSec": 4,
+      "layout": "paper-cutout",
+      "transition": "fade",
+      "backdrop": "grid-architectural",
+      "headline": "47 minutes later…",
+      "fullBleed": true,
+      "catOffice": {
+        "shot": "meeting",
+        "cues": [],
+        "events": [
+          {
+            "at": 0.1,
+            "kind": "tick",
+            "duration": 3.7
+          },
+          {
+            "at": 2.2,
+            "kind": "snore",
+            "duration": 1.1
+          }
+        ]
+      }
+    },
+    {
+      "id": "cat-04",
+      "name": "The punchline",
+      "durationSec": 4,
+      "layout": "paper-cutout",
+      "transition": "fade",
+      "backdrop": "grid-architectural",
+      "headline": "",
+      "fullBleed": true,
+      "catOffice": {
+        "shot": "boss",
+        "cues": [
+          {
+            "start": 0.15,
+            "end": 1.45,
+            "text": "Great discussion, everyone."
+          },
+          {
+            "start": 1.85,
+            "end": 3.85,
+            "text": "Let's schedule another meeting."
+          }
+        ],
+        "events": [
+          {
+            "at": 0.18,
+            "kind": "meow",
+            "duration": 1
+          },
+          {
+            "at": 1.9,
+            "kind": "meow",
+            "duration": 1.65
+          }
+        ]
+      }
+    },
+    {
+      "id": "cat-05",
+      "name": "The breakdown",
+      "durationSec": 3,
+      "layout": "paper-cutout",
+      "transition": "fade",
+      "backdrop": "grid-architectural",
+      "headline": "",
+      "fullBleed": true,
+      "catOffice": {
+        "shot": "scream",
+        "cues": [],
+        "events": [
+          {
+            "at": 0.08,
+            "kind": "scream",
+            "duration": 2.4
+          }
+        ]
+      }
+    },
+    {
+      "id": "cat-06",
+      "name": "Back to the office",
+      "durationSec": 2,
+      "layout": "paper-cutout",
+      "transition": "fade",
+      "backdrop": "grid-architectural",
+      "headline": "When your boss says “quick meeting”",
+      "fullBleed": true,
+      "catOffice": {
+        "shot": "loop",
+        "cues": [
+          {
+            "start": 0.2,
+            "end": 1.6,
+            "text": "Quick meeting?"
+          }
+        ],
+        "events": [
+          {
+            "at": 0.2,
+            "kind": "ping",
+            "duration": 0.23
+          },
+          {
+            "at": 0.4,
+            "kind": "meow",
+            "duration": 0.62
+          }
+        ]
+      }
+    }
+  ],
+  "exampleCaptionStyle": null,
+  "exampleAudioTracks": [
+    {
+      "kind": "effect",
+      "volume": 1
+    }
+  ]
+}

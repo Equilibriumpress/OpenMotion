@@ -7,6 +7,43 @@ const rootDir = process.cwd();
 const projectsDir = path.join(rootDir, 'projects');
 const outDir = path.join(rootDir, 'public', 'projects');
 const outFile = path.join(outDir, 'manifest.json');
+const catalog = JSON.parse(fs.readFileSync(path.join(rootDir,'series','catalog.json'),'utf8'));
+const legacyEpisodes = new Map(catalog.series.flatMap(s=>s.episodes.map(e=>[e.slug,{seriesId:s.id,season:e.season,episodeNumber:e.episodeNumber,templateVersion:e.templateVersion}])));
+const seriesIds = new Set(catalog.series.map(s=>s.id));
+if(seriesIds.size!==catalog.series.length)throw Error('Duplicate series ID');
+for(const s of catalog.series){
+  if(!s.versions.some(v=>v.version===s.activeVersion))throw Error('Missing active template '+s.id);
+  for(const v of s.versions){
+    const t=JSON.parse(fs.readFileSync(path.join(rootDir,v.templatePath),'utf8'));
+    if(t.seriesId!==s.id||t.version!==v.version)throw Error('Template identity mismatch '+v.templatePath);
+  }
+}
+function enrichCatalog(p){
+  const legacy=legacyEpisodes.get(p.slug);
+  if(legacy&&!p.seriesId)Object.assign(p,legacy);
+  p.kind??=p.seriesId||catalog.standaloneVideos.includes(p.slug)?'video':catalog.exampleTemplates.includes(p.slug)||p.source==='template'?'template':'video';
+  return p;
+}
+const escapeXml=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
+function writePoster(p){
+  if(!/^[a-zA-Z0-9_-]+$/.test(p.slug))return;
+  const kit=p.brandKit??{};
+  const color=(s,fallback)=>typeof s==='string'&&/^#[a-fA-F0-9]{3,8}$/.test(s)?s:fallback;
+  const bg=color(kit.backgroundColor,'#142333'),fg=color(kit.textColor,'#ffffff'),accent=color(kit.accentColor,'#93c5fd');
+  const words=String(p.title??p.slug).split(/\s+/),lines=[];
+  let line='';
+  for(const word of words){if(line&&line.length+word.length>34){lines.push(line);line='';}line+=(line?' ':'')+word;}
+  if(line)lines.push(line);
+  const visible=lines.slice(0,3);
+  if(lines.length>3)visible[2]+='…';
+  const duration=Math.round((p.scenes??[]).reduce((a,s)=>a+(Number(s.durationSec)||0),0));
+  const tag=p.seriesId?catalog.series.find(s=>s.id===p.seriesId)?.title:p.category;
+  const svg='<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360"><rect width="640" height="360" fill="'+bg+'"/><circle cx="600" cy="12" r="160" fill="none" stroke="'+accent+'" stroke-width="42" opacity=".22"/><rect x="34" y="34" width="44" height="5" rx="2" fill="'+accent+'"/><text x="34" y="77" fill="'+fg+'" font-family="system-ui,sans-serif" font-size="18" opacity=".75">'+escapeXml(tag)+'</text>'+visible.map((s,i)=>'<text x="34" y="'+(150+i*46)+'" fill="'+fg+'" font-family="system-ui,sans-serif" font-weight="650" font-size="30">'+escapeXml(s)+'</text>').join('')+'<text x="34" y="323" fill="'+fg+'" font-family="system-ui,sans-serif" font-size="17" opacity=".8">'+escapeXml(p.format)+' · '+duration+' sec</text></svg>';
+  const dest=path.join(rootDir,'public','thumbnails');
+  fs.mkdirSync(dest,{recursive:true});
+  fs.writeFileSync(path.join(dest,p.slug+'.svg'),svg);
+  p.thumbnailUrl='thumbnails/'+p.slug+'.svg';
+}
 
 // Cache checks happen before media tools are installed or source files fetched.
 const ci = process.env.GITHUB_ACTIONS === 'true';
@@ -168,6 +205,18 @@ if (fs.existsSync(projectsDir)) {
   }
 }
 
+const occupied=new Set();
+for(const p of projects){
+  enrichCatalog(p);
+  if(p.seriesId){
+    const s=catalog.series.find(s=>s.id===p.seriesId);
+    if(!s||!Number.isInteger(p.season)||p.season<1||!Number.isInteger(p.episodeNumber)||p.episodeNumber<1||!s.versions.some(v=>v.version===p.templateVersion))throw Error('Invalid series metadata for '+p.slug);
+    const key=p.seriesId+'/'+p.season+'/'+p.episodeNumber;
+    if(occupied.has(key))throw Error('Duplicate episode '+key);
+    occupied.add(key);
+  }
+  writePoster(p);
+}
 fs.mkdirSync(outDir, { recursive: true });
 fs.writeFileSync(
   outFile,
@@ -176,6 +225,7 @@ fs.writeFileSync(
       schemaVersion: '1.0',
       updatedAt: new Date().toISOString(),
       count: projects.length,
+      series: catalog.series,
       projects,
     },
     null,

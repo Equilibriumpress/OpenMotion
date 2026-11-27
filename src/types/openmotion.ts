@@ -577,12 +577,21 @@ export interface OpenMotionBrandKit {
   surfaceColor: string;
   textColor: string;
   mutedColor: string;
-  fontFamily: 'Bricolage Grotesque' | 'Plus Jakarta Sans' | 'JetBrains Mono';
+  fontFamily: 'Bricolage Grotesque' | 'Plus Jakarta Sans' | 'JetBrains Mono' | 'Kalam' | 'Inter' | 'Georgia';
 }
 
 export type ProjectSource = 'github' | 'chatgpt' | 'template';
 
+export type ProjectKind = 'video' | 'template' | 'experiment';
+export type ProductionStatus = 'concept' | 'script' | 'production' | 'review' | 'approved' | 'exported' | 'published';
 export interface OpenMotionProject {
+  kind?: ProjectKind;
+  seriesId?: string;
+  season?: number;
+  episodeNumber?: number;
+  templateVersion?: string;
+  productionStatus?: ProductionStatus;
+  thumbnailUrl?: string;
   schemaVersion: '1.0';
   id: string;
   slug: string;

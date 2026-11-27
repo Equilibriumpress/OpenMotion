@@ -18,9 +18,12 @@ import {
   OpenMotionProject,
 } from '../types/openmotion';
 import { CanvasPreview } from './CanvasPreview';
+import { activeTemplate, episodePrompt, nextEpisode, type SeriesDefinition } from '../services/series';
 
 interface ChatGptWorkflowViewProps {
   repoConfig: GitHubRepoConfig;
+  series?: SeriesDefinition;
+  projects?: OpenMotionProject[];
   onAddProject: (project: OpenMotionProject, openInStudio?: boolean) => void;
 }
 
@@ -89,14 +92,18 @@ const EXAMPLE_CHATGPT_JSON = `{
 export function ChatGptWorkflowView({
   repoConfig,
   onAddProject,
+  series,
+  projects=[],
 }: ChatGptWorkflowViewProps) {
+  const template=series?activeTemplate(series):undefined;
+  const next=series?nextEpisode(projects,series.id):undefined;
   const [topic, setTopic] = useState(
-    'Lancering van onze nieuwe automatische facturatie-koppeling voor MKB-teams'
+    series ? '' : 'Lancering van onze nieuwe automatische facturatie-koppeling voor MKB-teams'
   );
-  const [brandName, setBrandName] = useState('Studio Noord');
-  const [format, setFormat] = useState<AspectFormat>('16:9');
-  const [tone, setTone] = useState('Strak, modern, zakelijk en direct to-the-point');
-  const [durationSec, setDurationSec] = useState(10);
+  const [brandName, setBrandName] = useState(template?.brandKit.brandName??'Studio Noord');
+  const [format, setFormat] = useState<AspectFormat>(template?.format??'16:9');
+  const [tone, setTone] = useState(template?.instructions??'Strak, modern, zakelijk en direct to-the-point');
+  const [durationSec, setDurationSec] = useState(template?.durationSec??10);
   const [copiedPrompt, setCopiedPrompt] = useState(false);
 
   const [pastedJson, setPastedJson] = useState('');
@@ -108,7 +115,7 @@ export function ChatGptWorkflowView({
 
   const generatedPrompt = useMemo(
     () =>
-      buildChatGptPrompt({
+      (series?episodePrompt(series,projects,repoConfig.owner+'/'+repoConfig.repo).replace('[vul onderwerp in]',topic||'[vul onderwerp in]')+'\n\nOnderstaande generieke schema-instructies zijn aanvullend. De serie-instellingen en versie hierboven hebben voorrang.\n\n':'')+buildChatGptPrompt({
         topic,
         brandName,
         format,
@@ -116,7 +123,7 @@ export function ChatGptWorkflowView({
         durationSec,
         repoSlug: `${repoConfig.owner}/${repoConfig.repo}`,
       }),
-    [topic, brandName, format, tone, durationSec, repoConfig.owner, repoConfig.repo]
+    [topic, brandName, format, tone, durationSec, repoConfig.owner, repoConfig.repo, series, projects]
   );
 
   const validation = useMemo(() => {
@@ -128,8 +135,16 @@ export function ChatGptWorkflowView({
         .trim()
         .replace(/^```(?:json)?\s*/i, '')
         .replace(/\s*```$/, '');
-      const parsed = JSON.parse(cleaned);
+      const raw = JSON.parse(cleaned);
+      if(series&&template&&next){
+        if(!raw||typeof raw!=='object'||Array.isArray(raw)) throw Error('Verwacht een projectobject.');
+        if(raw.seriesId&&raw.seriesId!==series.id) throw Error('Deze JSON hoort bij een andere serie.');
+        if(raw.templateVersion&&raw.templateVersion!==template.version) throw Error('Deze JSON verwijst naar een andere templateversie.');
+        if(raw.season!==undefined&&raw.season!==next.season||raw.episodeNumber!==undefined&&raw.episodeNumber!==next.episodeNumber) throw Error('Controleer het vrije afleveringsnummer: seizoen '+next.season+', aflevering '+next.episodeNumber+'.');
+      }
+      const parsed=series&&template&&next?{...raw,kind:'video',seriesId:series.id,season:next.season,episodeNumber:next.episodeNumber,templateVersion:template.version,productionStatus:raw.productionStatus??'review',format:raw.format??template.format,fps:raw.fps??template.fps,brandKit:{...template.brandKit,...raw.brandKit}}:raw;
       const res = normalizeOpenMotionProject(parsed, 'chatgpt-video');
+      if(series&&res.project&&projects.some(p=>p.slug===res.project?.slug)) throw Error('Deze slug bestaat al. Kies een unieke slug voor de nieuwe aflevering.');
       return {
         project: res.project ?? null,
         error: res.error ?? null,
@@ -140,7 +155,7 @@ export function ChatGptWorkflowView({
         error: err instanceof Error ? `JSON fout: ${err.message}` : 'Ongeldige JSON-syntaxis.',
       };
     }
-  }, [pastedJson]);
+  }, [pastedJson, series, template, next?.season, next?.episodeNumber, projects]);
 
   const handleCopyPrompt = async () => {
     await navigator.clipboard.writeText(generatedPrompt);
@@ -179,7 +194,7 @@ export function ChatGptWorkflowView({
           ChatGPT → GitHub Project → OpenMotion Bibliotheek
         </p>
         <h1 className="text-3xl font-bold tracking-tight text-slate-900 text-balance">
-          ChatGPT OpenMotion Workflow
+          {series ? 'Nieuwe aflevering · '+series.title : 'ChatGPT OpenMotion Workflow'}
         </h1>
         <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
           Laat ChatGPT een video-project in het OpenMotion-schema genereren, commit het bestand als{' '}
@@ -191,6 +206,7 @@ export function ChatGptWorkflowView({
         </p>
       </section>
 
+      {series&&template&&next&&<section className="rounded-xl border border-slate-200 bg-white p-4 text-sm space-y-2"><p className="font-semibold">Seizoen {next.season} · Aflevering {next.episodeNumber} · Template v{template.version}</p><p className="text-slate-600">{template.instructions}</p><p className="text-slate-500">{template.format} · {template.fps} fps · {template.durationSec} sec</p></section>}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         {/* Step 01: Prompt Builder for ChatGPT */}
         <section className="bg-white border border-slate-200 rounded-xl p-6 space-y-5">
@@ -234,7 +250,7 @@ export function ChatGptWorkflowView({
                 <input
                   type="number"
                   min={6}
-                  max={45}
+                  max={600}
                   value={durationSec}
                   onChange={(e) => setDurationSec(Math.max(6, Number(e.target.value) || 10))}
                   className="w-full px-3 py-2 text-sm font-mono tabular-nums border border-slate-200 rounded-lg focus:border-blue-600 focus:outline-none"

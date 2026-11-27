@@ -1,0 +1,359 @@
+{
+  "schemaVersion": 1,
+  "series": [
+    {
+      "id": "inside-your-mind",
+      "title": "Inside Your Mind",
+      "description": "Psychologie in korte geanimeerde verhalen",
+      "activeVersion": "1.0",
+      "versions": [
+        {
+          "version": "1.0",
+          "format": "9:16",
+          "fps": 30,
+          "durationSec": 29,
+          "referenceProject": "inside-your-mind-01-adhd-task-paralysis",
+          "templatePath": "series/inside-your-mind/template-v1.0.json",
+          "instructions": "Gebruik de bestaande mind-series-v1 vectorpersonages, poses, pastelpalet en dialoogtiming. 20–35 seconden. Controleer psychologische claims en bronnen. Behoud de voice-overstijl en captions.",
+          "brandKit": {
+            "brandName": "INSIDE YOUR MIND",
+            "primaryColor": "#518D89",
+            "accentColor": "#B94D41",
+            "backgroundColor": "#EFE3D0",
+            "surfaceColor": "#DCE8EB",
+            "textColor": "#49392F",
+            "mutedColor": "#79685B",
+            "fontFamily": "Kalam"
+          }
+        }
+      ],
+      "episodes": [
+        {
+          "slug": "inside-your-mind-01-adhd-task-paralysis",
+          "season": 1,
+          "episodeNumber": 1,
+          "templateVersion": "1.0"
+        },
+        {
+          "slug": "inside-your-mind-02-replays-conversations",
+          "season": 1,
+          "episodeNumber": 2,
+          "templateVersion": "1.0"
+        },
+        {
+          "slug": "inside-your-mind-03-small-decisions",
+          "season": 1,
+          "episodeNumber": 3,
+          "templateVersion": "1.0"
+        },
+        {
+          "slug": "inside-your-mind-04-embarrassing-moments",
+          "season": 1,
+          "episodeNumber": 4,
+          "templateVersion": "1.0"
+        },
+        {
+          "slug": "inside-your-mind-05-uncomfortable-silence",
+          "season": 1,
+          "episodeNumber": 5,
+          "templateVersion": "1.0"
+        }
+      ]
+    },
+    {
+      "id": "inside-adhd-mind",
+      "title": "Inside the ADHD Mind",
+      "description": "Herkenbare ADHD-situaties",
+      "activeVersion": "1.0",
+      "versions": [
+        {
+          "version": "1.0",
+          "format": "9:16",
+          "fps": 30,
+          "durationSec": 45,
+          "referenceProject": "inside-adhd-mind-001",
+          "templatePath": "series/inside-adhd-mind/template-v1.0.json",
+          "instructions": "Gebruik de bestaande doodle-personages, dezelfde visuele identiteit en herkenbare situaties. Vermijd diagnoseclaims.",
+          "brandKit": {
+            "brandName": "INSIDE THE ADHD MIND",
+            "primaryColor": "#518D89",
+            "accentColor": "#B94D41",
+            "backgroundColor": "#EFE3D0",
+            "surfaceColor": "#DCE8EB",
+            "textColor": "#49392F",
+            "mutedColor": "#79685B",
+            "fontFamily": "Kalam"
+          }
+        }
+      ],
+      "episodes": [
+        {
+          "slug": "inside-adhd-mind-001",
+          "season": 1,
+          "episodeNumber": 1,
+          "templateVersion": "1.0"
+        },
+        {
+          "slug": "inside-adhd-mind-002",
+          "season": 1,
+          "episodeNumber": 2,
+          "templateVersion": "1.0"
+        }
+      ]
+    },
+    {
+      "id": "why-things-work",
+      "title": "Why Things Work",
+      "description": "Wetenschappelijke verklaringen van alledaagse dingen",
+      "activeVersion": "1.0",
+      "versions": [
+        {
+          "version": "1.0",
+          "format": "9:16",
+          "fps": 30,
+          "durationSec": 30,
+          "referenceProject": null,
+          "templatePath": "series/why-things-work/template-v1.0.json",
+          "instructions": "Ontwikkel eerst een proefaflevering: Why Airplane Windows Are Round. Controleer bronnen, gebruik duidelijke diagrammen, korte Engelstalige voice-over en captions. Template is voorlopig.",
+          "brandKit": {
+            "brandName": "Why Things Work",
+            "primaryColor": "#173B52",
+            "accentColor": "#D5A34C",
+            "backgroundColor": "#102B3B",
+            "surfaceColor": "#24495D",
+            "textColor": "#F8FAFC",
+            "mutedColor": "#B8CBD4",
+            "fontFamily": "Bricolage Grotesque"
+          }
+        }
+      ],
+      "episodes": []
+    },
+    {
+      "id": "my-bucket-list",
+      "title": "My Bucket List",
+      "description": "Bestemmingen in korte globe-zoom reels",
+      "activeVersion": "1.0",
+      "versions": [
+        {
+          "version": "1.0",
+          "format": "9:16",
+          "fps": 30,
+          "durationSec": 20,
+          "referenceProject": "bucket-list-001-sao-miguel",
+          "templatePath": "series/my-bucket-list/template-v1.0.json",
+          "instructions": "Behoud de doorlopende globe-to-location camera, drie redenen om te bezoeken en de save-this-place outro. Gebruik gelicentieerde foto's.",
+          "brandKit": {
+            "brandName": "MY BUCKET LIST",
+            "primaryColor": "#101B2B",
+            "accentColor": "#D9B77A",
+            "backgroundColor": "#101B2B",
+            "surfaceColor": "#17283C",
+            "textColor": "#F5F1E8",
+            "mutedColor": "#B8C1C8",
+            "fontFamily": "Bricolage Grotesque"
+          }
+        }
+      ],
+      "episodes": [
+        {
+          "slug": "bucket-list-001-sao-miguel",
+          "season": 1,
+          "episodeNumber": 1,
+          "templateVersion": "1.0"
+        }
+      ]
+    },
+    {
+      "id": "places-worth-exploring",
+      "title": "Places Worth Exploring",
+      "description": "Geografische minidocumentaires",
+      "activeVersion": "1.0",
+      "versions": [
+        {
+          "version": "1.0",
+          "format": "16:9",
+          "fps": 60,
+          "durationSec": 207,
+          "referenceProject": "places-worth-exploring-001-okinawa",
+          "templatePath": "series/places-worth-exploring/template-v1.0.json",
+          "instructions": "Gebruik het bestaande documentaireformaat, geografische kaarten, foto/video, voice-over, broncredits en ondertiteling.",
+          "brandKit": {
+            "brandName": "PLACES WORTH EXPLORING",
+            "primaryColor": "#102B3B",
+            "accentColor": "#80D7D0",
+            "backgroundColor": "#102B3B",
+            "surfaceColor": "#168C9E",
+            "textColor": "#FAFAF7",
+            "mutedColor": "#F1E9D7",
+            "fontFamily": "Inter"
+          }
+        }
+      ],
+      "episodes": [
+        {
+          "slug": "places-worth-exploring-001-okinawa",
+          "season": 1,
+          "episodeNumber": 1,
+          "templateVersion": "1.0"
+        }
+      ]
+    },
+    {
+      "id": "geographical-stories",
+      "title": "Geographical Stories",
+      "description": "Geografische verhalen en landschapsvorming",
+      "activeVersion": "1.0",
+      "versions": [
+        {
+          "version": "1.0",
+          "format": "16:9",
+          "fps": 30,
+          "durationSec": 300,
+          "referenceProject": "geographical-stories-001-sao-miguel",
+          "templatePath": "series/geographical-stories/template-v1.0.json",
+          "instructions": "Behoud de geografische documentairestijl, betrouwbare feiten, kaartrelief, narratie en bronvermeldingen.",
+          "brandKit": {
+            "brandName": "GEOGRAPHICAL STORIES",
+            "primaryColor": "#0B1724",
+            "accentColor": "#C69B61",
+            "backgroundColor": "#0B1724",
+            "surfaceColor": "#192B36",
+            "textColor": "#F0EDE4",
+            "mutedColor": "#A4B4B8",
+            "fontFamily": "Plus Jakarta Sans"
+          }
+        }
+      ],
+      "episodes": [
+        {
+          "slug": "geographical-stories-001-sao-miguel",
+          "season": 1,
+          "episodeNumber": 1,
+          "templateVersion": "1.0"
+        }
+      ]
+    },
+    {
+      "id": "hoe-werkt-de-wereld",
+      "title": "Hoe werkt de wereld?",
+      "description": "Nederlandstalige uitleg over systemen en economie",
+      "activeVersion": "1.0",
+      "versions": [
+        {
+          "version": "1.0",
+          "format": "9:16",
+          "fps": 60,
+          "durationSec": 72,
+          "referenceProject": "hoe-werkt-de-wereld-001-schiphol",
+          "templatePath": "series/hoe-werkt-de-wereld/template-v1.0.json",
+          "instructions": "Gebruik de bestaande worldStory-scènes, Nederlands, data en geverifieerde bronnen. Houd de beeldtaal en voice-over consistent.",
+          "brandKit": {
+            "brandName": "HOE WERKT DE WERELD?",
+            "primaryColor": "#2457cc",
+            "accentColor": "#d5a23e",
+            "backgroundColor": "#f4ecdf",
+            "surfaceColor": "#fff9ef",
+            "textColor": "#22262b",
+            "mutedColor": "#746e66",
+            "fontFamily": "Bricolage Grotesque"
+          }
+        }
+      ],
+      "episodes": [
+        {
+          "slug": "hoe-werkt-de-wereld-001-schiphol",
+          "season": 1,
+          "episodeNumber": 1,
+          "templateVersion": "1.0"
+        }
+      ]
+    },
+    {
+      "id": "cat-office",
+      "title": "The Cat Office",
+      "description": "Korte kattenhumor op kantoor",
+      "activeVersion": "1.0",
+      "versions": [
+        {
+          "version": "1.0",
+          "format": "9:16",
+          "fps": 60,
+          "durationSec": 18,
+          "referenceProject": "cat-office-001-quick-meeting",
+          "templatePath": "series/cat-office/template-v1.0.json",
+          "instructions": "Gebruik dezelfde katten-assets, kantooromgeving, snelle reacties, geluidseffecten en loop. Controleer dat de katten zichtbaar zijn.",
+          "brandKit": {
+            "brandName": "THE CAT OFFICE",
+            "primaryColor": "#f4b45e",
+            "accentColor": "#e8e4df",
+            "backgroundColor": "#292c32",
+            "surfaceColor": "#353b42",
+            "textColor": "#ffffff",
+            "mutedColor": "#b4b7b9",
+            "fontFamily": "Plus Jakarta Sans"
+          }
+        }
+      ],
+      "episodes": [
+        {
+          "slug": "cat-office-001-quick-meeting",
+          "season": 1,
+          "episodeNumber": 1,
+          "templateVersion": "1.0"
+        }
+      ]
+    },
+    {
+      "id": "premium-travel-routes",
+      "title": "Premium Travel Routes",
+      "description": "Roadtrips met geanimeerde kaarten en fotostops",
+      "activeVersion": "1.0",
+      "versions": [
+        {
+          "version": "1.0",
+          "format": "9:16",
+          "fps": 60,
+          "durationSec": 30,
+          "referenceProject": "short-scotland-road-trip",
+          "templatePath": "series/premium-travel-routes/template-v1.0.json",
+          "instructions": "Gebruik de bestaande premiumTravel renderer, echte routegeometrie, vloeiende camera, gelicentieerde foto's en consistente kaartstijl.",
+          "brandKit": {
+            "brandName": "SCOTLAND / THE OPEN ROAD",
+            "primaryColor": "#AE674A",
+            "accentColor": "#E2C48F",
+            "backgroundColor": "#E7E8DE",
+            "surfaceColor": "#173D37",
+            "textColor": "#F8F7EF",
+            "mutedColor": "#AFC9BE",
+            "fontFamily": "Georgia"
+          }
+        }
+      ],
+      "episodes": [
+        {
+          "slug": "short-scotland-road-trip",
+          "season": 1,
+          "episodeNumber": 1,
+          "templateVersion": "1.0"
+        }
+      ]
+    }
+  ],
+  "standaloneVideos": [
+    "adhd-ik-heb-adhd",
+    "adhd-sleep-handdrawn-explainer",
+    "campervan-traveler-3d",
+    "edinburgh-on-foot",
+    "short-human-mind-book"
+  ],
+  "exampleTemplates": [
+    "openmotion-pages-starter",
+    "short-data-story",
+    "short-edinburgh-documentary",
+    "short-edinburgh-facts",
+    "short-memory-explainer",
+    "short-multitasking-myth",
+    "short-whiteboard-habits"
+  ]
+}
