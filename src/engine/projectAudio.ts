@@ -18,7 +18,7 @@ export async function mixProjectAudio(project: OpenMotionProject, durationSec: n
     if (project.scenes.some(scene => scene.layout === 'parallax-cinema')) return createParallaxAudio(durationSec);
     if (project.scenes.some(scene => scene.layout === 'premium-travel-route')) return createPremiumTravelAudio(durationSec);
     if (project.scenes.some(scene => scene.layout === 'doodle-explainer')) return createDoodleExplainerAudio(durationSec);
-    if (project.scenes.some(scene => scene.layout === 'bucket-list-zoom')) return createBucketListAudio(durationSec);
+    if (project.scenes.some(scene => scene.layout === 'bucket-list-zoom')) return createBucketListAudio(durationSec,project.scenes.some(scene=>scene.bucketList?.directorsCut));
     return null;
   }
   const rate = 48000;
