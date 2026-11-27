@@ -132,6 +132,36 @@ export function ShortsMediaEditor({project,activeScene,onUpdateProject,onUpdateS
   {activeScene.doodle&&(()=>{
     const doodle=activeScene.doodle;
     const update=(patch:Partial<NonNullable<OpenMotionScene['doodle']>>)=>onUpdateScene({doodle:{...doodle,...patch}});
+    if(doodle.extras?.includes('song-explainer-v1')){
+      const extras=doodle.extras??[];
+      const get=(key:string,fallback='')=>extras.find(x=>x.startsWith(key+':'))?.slice(key.length+1)??fallback;
+      const set=(key:string,value:string)=>update({extras:[...extras.filter(x=>!x.startsWith(key+':')),key+':'+value]});
+      return <div className="space-y-3">
+        <p className="text-xs font-semibold text-slate-700">The Song Explained · vectorillustraties</p>
+        <label className="block text-xs text-slate-600">Scène
+          <select className="w-full rounded border border-slate-200 p-2" value={get('shot','road')} onChange={e=>set('shot',e.target.value)}>
+            {['road','room','shop','night','return','symbol'].map(v=><option key={v}>{v}</option>)}
+          </select>
+        </label>
+        <label className="block text-xs text-slate-600">Camera
+          <select className="w-full rounded border border-slate-200 p-2" value={get('camera','push')} onChange={e=>set('camera',e.target.value)}>
+            <option value="push">Langzaam inzoomen</option><option value="pull">Langzaam uitzoomen</option>
+          </select>
+        </label>
+        <label className="block text-xs text-slate-600">Symbool
+          <select className="w-full rounded border border-slate-200 p-2" value={get('symbol','car')} onChange={e=>set('symbol',e.target.value)}>
+            {['car','record','heart'].map(v=><option key={v}>{v}</option>)}
+          </select>
+        </label>
+        {['episode','artist','cover-title','cover-hook'].map(k=><label key={k} className="block text-xs text-slate-600">{k}
+          <input className="w-full rounded border border-slate-200 p-2" value={get(k)} onChange={e=>set(k,e.target.value)}/>
+        </label>)}
+        <label className="block text-xs text-slate-600">Engelse voice-over (herpubliceer via GitHub voor nieuwe audio)
+          <textarea rows={4} className="w-full rounded border border-slate-200 p-2" value={doodle.narration??''} onChange={e=>update({narration:e.target.value})}/>
+        </label>
+        <p className="text-xs text-slate-500">Gebruik | voor een nieuwe regel in de headline. Laat cover-title leeg behalve in scène 1.</p>
+      </div>;
+    }
     if(doodle.extras?.includes('human-side-v1')){
       const extras=doodle.extras??[];
       const get=(key:string,fallback='')=>extras.find(x=>x.startsWith(key+':'))?.slice(key.length+1)??fallback;
