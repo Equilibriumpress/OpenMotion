@@ -39,14 +39,15 @@ function lunarTexture(){
   }
   const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;return t;
 }
-let moonStage:{world:THREE.Scene;camera:THREE.PerspectiveCamera;moon:THREE.Mesh}|null=null;
+let moonStage:{world:THREE.Scene;camera:THREE.PerspectiveCamera;moon:THREE.Mesh;sun:THREE.DirectionalLight;earth:THREE.Mesh}|null=null;
 function getMoon(){
   if(moonStage)return moonStage;
   const world=new THREE.Scene();world.background=new THREE.Color(0x080f20);
   const camera=new THREE.PerspectiveCamera(38,1,.1,100);
   const moon=new THREE.Mesh(new THREE.SphereGeometry(1,96,64),new THREE.MeshStandardMaterial({map:lunarTexture(),roughness:1}));
-  world.add(moon);
-  const sun=new THREE.DirectionalLight(0xffedcc,3.0);sun.position.set(6,0,0);world.add(sun);
+  moon.receiveShadow=true;world.add(moon);
+  const sun=new THREE.DirectionalLight(0xffedcc,3.0);sun.position.set(15,0,0);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);sun.shadow.camera.left=-3;sun.shadow.camera.right=3;sun.shadow.camera.top=3;sun.shadow.camera.bottom=-3;sun.shadow.camera.near=.1;sun.shadow.camera.far=30;sun.shadow.bias=-.0002;world.add(sun);
+  const earth=new THREE.Mesh(new THREE.SphereGeometry(1.35,48,32),new THREE.MeshBasicMaterial({color:0x426ca8}));earth.castShadow=true;earth.visible=false;world.add(earth);
   world.add(new THREE.AmbientLight(0x253650,.025));
   const r=rng(18),positions:number[]=[];
   for(let i=0;i<430;i++){
@@ -55,7 +56,7 @@ function getMoon(){
   }
   const geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));
   world.add(new THREE.Points(geo,new THREE.PointsMaterial({color:0xb7c9e6,size:.045,sizeAttenuation:true,transparent:true,opacity:.75})));
-  moonStage={world,camera,moon};return moonStage;
+  moonStage={world,camera,moon,sun,earth};return moonStage;
 }
 function text(ctx:CanvasRenderingContext2D,s:string,x:number,y:number,size:number,color='#f2f5fa',weight=500,align:CanvasTextAlign='left'){
   ctx.font=weight+' '+size+'px Inter, Arial, sans-serif';ctx.textAlign=align;ctx.textBaseline='middle';ctx.fillStyle=color;ctx.fillText(s,x,y);
@@ -88,16 +89,16 @@ function orbitDiagram(ctx:CanvasRenderingContext2D,theta:number,eclipse=false){
   text(ctx,'Not to scale',116,767,18,'#899ab0');
 }
 function moonAngle(shot:number,p:number){
-  switch(shot){case 0:return mix(Math.PI*.83,Math.PI*.15,p);case 1:return mix(Math.PI,0,smooth(p));case 2:return Math.PI/2;case 3:return mix(Math.PI,0,smooth(p));case 4:return mix(Math.PI,Math.PI*3,smooth(p));case 5:return mix(Math.PI*1.25,Math.PI*1.68,p);case 6:return 0;default:return Math.PI*.36;}
+  switch(shot){case 0:return mix(Math.PI*.83,Math.PI*.15,p);case 1:return mix(Math.PI,0,smooth(p));case 2:return Math.PI/2;case 3:return mix(Math.PI,0,smooth(p));case 4:{const t=p*4,i=Math.min(3,Math.floor(t)),f=t-i;return Math.PI+i*Math.PI/2+Math.PI/2*smooth(clamp((f-.25)/.75));}case 5:return mix(Math.PI*1.25,Math.PI*1.68,p);case 6:return 0;default:return Math.PI*.36;}
 }
 function drawMoon(ctx:CanvasRenderingContext2D,scene:OpenMotionScene,p:number,w:number,h:number){
   const shot=scene.threeExplainer!.shot,stage=getMoon(),r=getRenderer();
   const theta=moonAngle(shot,p);
   if(r){
-    const small=shot>=2&&shot<=6, rw=Math.max(2,Math.round(w*(small?.48:.93))),rh=Math.max(2,Math.round(h*.58));
+    const small=shot>=2&&shot<=6, rw=Math.max(2,Math.round(w*(small ? .48 : .93))),rh=Math.max(2,Math.round(h*.58));
     r.setSize(rw,rh,false);stage.camera.aspect=rw/rh;stage.camera.updateProjectionMatrix();
     stage.camera.position.set(Math.cos(theta)*4.45,0,Math.sin(theta)*4.45);stage.camera.lookAt(0,0,0);
-    r.render(stage.world,stage.camera);
+    r.shadowMap.enabled=shot===6;stage.earth.visible=shot===6;stage.earth.position.set(7,mix(2.7,-2.7,smooth(p)),0);r.render(stage.world,stage.camera);
     const dx=small?910:70,dw=small?930:1780;
     ctx.drawImage(r.domElement,dx,250,dw,630);
   }else text(ctx,'WebGL unavailable',960,520,36,'#d4dce8',600,'center');
@@ -121,7 +122,7 @@ function terrainPoint(lon:number,lat:number,d:Terrain){
   const a=d.heights[j*d.cols+i],b=d.heights[j*d.cols+i+1],c=d.heights[(j+1)*d.cols+i],e=d.heights[(j+1)*d.cols+i+1];
   return {x:(u-.5)*8,z:(v-.5)*9,y:mix(mix(a,b,x-i),mix(c,e,x-i),y-j)/1000*.62};
 }
-let terrainStage:{world:THREE.Scene;camera:THREE.PerspectiveCamera;sun:THREE.DirectionalLight;route:THREE.Line;data:Terrain}|null=null;
+let terrainStage:{world:THREE.Scene;camera:THREE.PerspectiveCamera;sun:THREE.DirectionalLight;route:THREE.Mesh<THREE.TubeGeometry,THREE.MeshBasicMaterial>;data:Terrain}|null=null;
 function getTerrain(d:Terrain){
   if(terrainStage)return terrainStage;
   const world=new THREE.Scene();world.background=new THREE.Color(0x080f20);
@@ -141,7 +142,7 @@ function getTerrain(d:Terrain){
     for(let k=0;k<32;k++){const f=k/32,q=terrainPoint(mix(a[1],b[1],f),mix(a[2],b[2],f),d);points.push(new THREE.Vector3(q.x,q.y+.065,q.z))}
   }
   const last=terrainPoint(checkpoints[0][1],checkpoints[0][2],d);points.push(new THREE.Vector3(last.x,last.y+.065,last.z));
-  const route=new THREE.Line(new THREE.BufferGeometry().setFromPoints(points),new THREE.LineBasicMaterial({color:0xff833d,depthTest:false}));
+  const route=new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points),points.length*2,.028,6,false),new THREE.MeshBasicMaterial({color:0xff833d}));
   route.renderOrder=10;world.add(route);
   const sun=new THREE.DirectionalLight(0xffe6c6,2.4);sun.position.set(-5,7,3);world.add(sun);
   world.add(new THREE.HemisphereLight(0xb9d7ff,0x151b26,1.3));
@@ -186,7 +187,9 @@ function drawTerrain(ctx:CanvasRenderingContext2D,scene:OpenMotionScene,p:number
     const t=shot===4?Math.cos(p*TAU):1;
     stage.sun.position.set(mix(-7,7,p),Math.max(.4,6*t),4);
     stage.sun.intensity=shot===4?mix(.15,2.8,clamp((t+1)/2)):2.4;
-    stage.route.geometry.setDrawRange(0,shot===1?Math.max(2,Math.floor(stage.route.geometry.attributes.position.count*smooth(p))):stage.route.geometry.attributes.position.count);
+    const count=stage.route.geometry.index!.count;
+    stage.route.geometry.setDrawRange(0,shot===1?Math.max(36,Math.floor(count*smooth(p)/36)*36):count);
+    r.shadowMap.enabled=false;
     r.setSize(Math.round(w),Math.max(2,Math.round(h*.65)),false);stage.camera.aspect=r.domElement.width/r.domElement.height;stage.camera.updateProjectionMatrix();r.render(stage.world,stage.camera);
     ctx.drawImage(r.domElement,0,255,1920,700);
     text(ctx,'AWS TERRARIUM DEM  /  SCHEMATIC CHECKPOINT CONNECTION',80,837,19,'#bac8da',600);
