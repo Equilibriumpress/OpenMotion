@@ -89,3 +89,24 @@ Keep human-side-v1, mind-series-v1, human-side-v2, human-side-v21 and human-side
 Export investigation: the supplied file was 512 x 910, 30 fps, 29 seconds, H.264 with no audio stream. The existing browser fallback explicitly allows downscaled or silent output; this is a plausible cause, not proof of the particular export path. Human Side now requires a voiceover source, disallows automatic resolution downgrade, and rejects browser MP4 outputs that fail dimension, frame-rate or audio-track validation. A browser without working encoders may therefore fail instead of producing a defective MP4. The existing manual GitHub master workflow supports Human Side, uses the project dimensions and fps, mixes project audio and validates H.264, AAC, duration and frame count with ffprobe. No additional automatic master rendering or test Actions.
 
 QA: the fetched renderer code was executed with TypeScript annotations removed against a strict Canvas command mock at all 750 frame times; cover labels, clock range, template consistency, and a 25-second non-silent unclipped synthesized PCM effects track were checked. This does not constitute a native browser render, a full TypeScript build, audible Piper review, or actual MP4 verification. The supplied old MP4 was inspected with ffprobe. Keep productionStatus review until the new deployed export is reviewed.
+
+
+## Full-series cinematic revision — template 2.3
+
+Episode 08 stays unchanged on its 2.2 phone-habit pilot. Episodes 01–07 and 09–10 use 2.3, six shots, 25 seconds each, 1080 × 1920 at 30 fps, with a 1.5-second opening cover and 64 px four-word captions. Existing export safeguards and manual master workflow apply unchanged.
+
+| Episode | Thematic action |
+| --- | --- |
+| 01 | Message close-up, contrasting facial reactions, dinner reply |
+| 02 | Sent message, waiting clock, phone moved toward table, reply |
+| 03 | Cancelled appointment, calendar card moved to tomorrow |
+| 04 | Request, accumulating tasks, boundary response |
+| 05 | Marked draft, facial reaction, shortening the opening |
+| 06 | Sitting down, appearing tasks, rest |
+| 07 | Mask close-up, mask removal, honest conversation |
+| 09 | Growing labelled stack, sharing the load |
+| 10 | Moving group, isolated close-up, one-to-one contact |
+
+For the new themed compositions use the markers mind-series-v1, human-side-v1, human-side-v2, human-side-v21, human-side-v22, human-side-v23, plus theme and film:event/reaction/action/turn/change/ending. The theme and shot are editable in the dedicated editor. Use the existing shot markers for the narrative beats. The new landscape posters use the same subject artwork as the opening cover, with separate typography. Captions are approximate phrase timings until generated speech is available. These are curated thematic motion presets, not a fully generic skeletal animation editor.
+
+QA: all ten projects were sampled at 30 fps, 7,500 scene-local frame times, against a strict Canvas command mock. Cover text and separate PNG-render entry point checked. All ten synthesized effects tracks were generated in memory, with 25-second length, nonzero samples and no clipping. No additional test Actions or master renders were launched. Native browser pixels, full build, Piper voice and final MP4 sound/quality still need actual playback verification. Production status remains review.
