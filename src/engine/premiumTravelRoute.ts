@@ -70,6 +70,17 @@ export function preparePremiumTravelProject(project:OpenMotionProject):Promise<v
           if(!/place/i.test(sourceLayer+' '+layer.id))map.setLayoutProperty(layer.id,'visibility','none');
         }
       }
+      if(scenes.some(scene=>scene.premiumTravel?.relief)){
+        map.addSource('ptr-terrain',{type:'raster-dem',tiles:['https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png'],tileSize:256,maxzoom:15,encoding:'terrarium',attribution:'Mapzen Terrain Tiles / AWS Open Data'});
+        const layers=map.getStyle().layers??[];
+        const before=layers.find(layer=>layer.type==='line'||layer.type==='symbol')?.id;
+        map.addLayer({id:'ptr-hillshade',type:'hillshade',source:'ptr-terrain',paint:{'hillshade-exaggeration':.42,'hillshade-shadow-color':'#526455','hillshade-highlight-color':'#fff4d9','hillshade-accent-color':'#a3aa91'}},before);
+        for(const layer of layers){
+          const sourceLayer='source-layer' in layer?String(layer['source-layer']):'';
+          if(layer.type==='fill'&&sourceLayer==='water')map.setPaintProperty(layer.id,'fill-color','#a8c4cc');
+          if(layer.type==='background')map.setPaintProperty(layer.id,'background-color','#eee9db');
+        }
+      }
       for(const scene of scenes){
         const p=scene.premiumTravel!;
         if(p.chapter==='photo'||p.chapter==='opening')continue;
@@ -201,7 +212,7 @@ function editorialPhoto(ctx:CanvasRenderingContext2D,img:HTMLImageElement,w:numb
   const pw=img.naturalWidth*k,ph=img.naturalHeight*k;
   const x=Math.max(w-pw,Math.min(0,w*.5-pw*clamp(focus[0]))),y=Math.max(h-ph,Math.min(0,h*.48-ph*clamp(focus[1])));
   if(fit==='contain'){
-    ctx.save();ctx.filter='blur(24px) brightness(.53)';ctx.drawImage(img,x-20,y-20,pw+40,ph+40);ctx.restore();
+    ctx.fillStyle='#142C27';ctx.fillRect(0,0,w,h);
     const scale=Math.min(w*.94/img.naturalWidth,h*.64/img.naturalHeight);
     const iw=img.naturalWidth*scale,ih=img.naturalHeight*scale;
     ctx.drawImage(img,(w-iw)/2,h*.43-ih/2,iw,ih);
@@ -231,20 +242,20 @@ function photoScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMot
   const p=scene.premiumTravel!,t=clamp(time/Math.max(.1,scene.durationSec)),s=w/WIDTH;
   const index=!p.editorial&&p.chapter==='opening'?0:Math.max(0,Math.min(p.stops.length-1,p.focusStopIndex));
   const stop=p.stops[index];
-  const alternate=stop.secondaryPhoto;
-  const useAlternate=!!alternate&&(p.openingSecondary||(p.editorial&&p.chapter==='photo'&&t>=.52));
+  const alternate=p.chapter==='opening'&&p.openingPhoto?p.openingPhoto:stop.secondaryPhoto;
+  const useAlternate=!!alternate&&((p.chapter==='opening'&&!!p.openingPhoto)||p.openingSecondary||(p.editorial&&p.chapter==='photo'&&t>=.52));
   const alternateImage=useAlternate?getPhoto(alternate!.photoUrl):null;
   const photo=alternateImage?alternate!:stop;
   const img=alternateImage||getPhoto(stop.photoUrl);
   const shotTime=p.chapter==='photo'&&alternate?clamp(useAlternate?(t-.52)/.48:t/.52):t;
   if(img){
-    if(p.editorial)editorialPhoto(ctx,img,w,h,shotTime,photo.photoFocus,photo.photoFit);
+    if(p.editorial){ctx.save();if((p.editorialRevision??0)>=6)ctx.filter='saturate(.91) contrast(1.035) brightness(.99)';editorialPhoto(ctx,img,w,h,shotTime,photo.photoFocus,photo.photoFit);ctx.restore();}
     else cover(ctx,img,0,0,w,h,t);
   }else scenicFallback(ctx,w,h);
   // A title fades in after the image appears and fades out before the next
   // shot. The underlying photo stays visible during the cross-dissolve.
-  const titleIn=p.editorial?ease((time-.06)/.22):ease((time-.18)/.42);
-  const titleOut=1-ease((time-(scene.durationSec-.42))/.42);
+  const titleIn=(p.editorialRevision??0)>=6?(.75+.25*ease(time/.16)):p.editorial?ease((time-.06)/.22):ease((time-.18)/.42);
+  const titleOut=(p.editorialRevision??0)>=6?1:1-ease((time-(scene.durationSec-.42))/.42);
   ctx.save();ctx.globalAlpha*=titleIn*titleOut;
   const gradient=ctx.createLinearGradient(0,h*.22,0,h);
   gradient.addColorStop(0,'rgba(9,29,29,0)');
@@ -277,7 +288,7 @@ function drawMapScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenM
     ctx.fillText('Preparing road map…',w/2,h/2);return;
   }
   const driving=p.chapter==='drive',finishing=p.chapter==='finale';
-  const fraction=finishing?1:lerp(p.routeProgressFrom,p.routeProgressTo,smoother((t-.05)/.86));
+  const fraction=finishing?1:lerp(p.routeProgressFrom,p.routeProgressTo,smoother((t-.025)/.86));
   const car=sample(stage,fraction);
 
   // Lead the moving dot gently through bends and return to the destination
@@ -285,7 +296,7 @@ function drawMapScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenM
   const legSize=Math.max(0,p.routeProgressTo-p.routeProgressFrom);
   const ahead=driving ? legSize*.065*ease(t/.33)*(1-ease((t-.75)/.22)) : 0;
   const roadFocus=smoothRouteFocus(stage,clamp(fraction+ahead));
-  const reveal=p.mapIntro?1:smoother(t/.73);
+  const reveal=p.mapIntro?1:smoother(t/.62);
   const lastStop=stage.stops[stage.stops.length-1];
   const cameraFocus=finishing
     ? {x:lerp(lastStop.x,WIDTH/2,reveal),y:lerp(lastStop.y,HEIGHT/2,reveal)}
@@ -294,13 +305,13 @@ function drawMapScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenM
   // Driving scenes start at the previous stop, track the road and ease back
   // slightly at arrival. Limit zoom to avoid blurry 2x raster enlargement.
   const zoom=finishing
-    ? lerp(1.72,1,reveal)
-    : 1.13+.16*smoother(t/.34)-.10*smoother((t-.70)/.30);
+    ? (p.mapIntro?1.06-.06*smoother(t):lerp(1.42,1,reveal))
+    : 1.09+.13*smoother(t/.38)-.08*smoother((t-.66)/.34);
   const desiredX=w*.5,desiredY=h*.485;
   const panX=Math.max(w-w*zoom,Math.min(0,desiredX-cameraFocus.x*s*zoom));
   const panY=Math.max(h-h*zoom,Math.min(0,desiredY-cameraFocus.y*s*zoom));
   ctx.save();ctx.translate(panX,panY);ctx.scale(zoom,zoom);
-  ctx.save();if(p.editorial)ctx.filter='saturate(.38) contrast(.91) brightness(1.035)';ctx.drawImage(stage.image,0,0,w,h);ctx.restore();
+  ctx.save();if(p.editorial)ctx.filter=p.relief?'saturate(.78) contrast(.98) brightness(1.015)':'saturate(.38) contrast(.91) brightness(1.035)';ctx.drawImage(stage.image,0,0,w,h);ctx.restore();
   // Muted base trace, followed by the much bolder travelled section.
   ctx.save();ctx.beginPath();
   stage.path.forEach((pt,i)=>i===0?ctx.moveTo(pt.x*s,pt.y*s):ctx.lineTo(pt.x*s,pt.y*s));
@@ -325,10 +336,28 @@ function drawMapScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenM
     }
   }
   ctx.restore();
+  if((p.editorialRevision??0)>=6){
+    ctx.save();ctx.textBaseline='middle';ctx.font='700 '+(32*s)+'px Georgia,serif';
+    const used:{x:number;y:number;w:number;h:number}[]=[];
+    const indexes=stage.stops.map((_,i)=>i).sort((a,b)=>Number(b===p.focusStopIndex)-Number(a===p.focusStopIndex));
+    for(const i of indexes){
+      const pt=stage.stops[i],x=panX+pt.x*s*zoom,y=panY+pt.y*s*zoom;
+      if(x<40*s||x>w-40*s||y<260*s||y>h-600*s)continue;
+      const name=p.stops[i].name,tw=ctx.measureText(name).width+24*s,th=46*s;
+      const candidates=[[x+30*s,y-th/2],[x-tw-30*s,y-th/2],[x-tw/2,y-64*s],[x-tw/2,y+30*s]];
+      const pos=candidates.find(([a,b])=>a>=25*s&&a+tw<=w-25*s&&b>=250*s&&b+th<=h-560*s&&!used.some(q=>a<q.x+q.w+5*s&&a+tw+5*s>q.x&&b<q.y+q.h+5*s&&b+th+5*s>q.y)&&!stage.stops.some((other,j)=>j!==i&&panX+other.x*s*zoom>a-25*s&&panX+other.x*s*zoom<a+tw+25*s&&panY+other.y*s*zoom>b-25*s&&panY+other.y*s*zoom<b+th+25*s));
+      if(!pos)continue;
+      const [a,b]=pos;used.push({x:a,y:b,w:tw,h:th});
+      ctx.fillStyle='rgba(250,247,237,.96)';ctx.strokeStyle='rgba(38,65,56,.32)';ctx.lineWidth=1.5*s;
+      ctx.beginPath();ctx.roundRect(a,b,tw,th,7*s);ctx.fill();ctx.stroke();
+      ctx.fillStyle='#173D37';ctx.textAlign='left';ctx.fillText(name,a+12*s,b+th/2,tw-24*s);
+    }
+    ctx.restore();
+  }
   // Scene titles are eased independently of the cartographic layer so two
   // captions do not stack over one another during an incoming cross-fade.
-  const titlesIn=finishing?ease((time-(p.mapIntro ? .15 : .45))/.42):ease((time-.15)/.28);
-  const titlesOut=finishing?1:1-ease((time-(scene.durationSec-.42))/.42);
+  const titlesIn=(p.editorialRevision??0)>=6?(.85+.15*ease(time/.18)):finishing?ease((time-(p.mapIntro ? .15 : .45))/.42):ease((time-.15)/.28);
+  const titlesOut=finishing||(p.editorialRevision??0)>=6?1:1-ease((time-(scene.durationSec-.42))/.42);
   ctx.save();ctx.globalAlpha*=titlesIn*titlesOut;
   // Compact hierarchy, leaving the centre clear for the route and marker.
   const m=66*s;
@@ -351,11 +380,11 @@ function drawMapScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenM
   ctx.fillText(name,m,h-415*s,w-200*s);
   ctx.fillStyle='#E6F0E8';ctx.font='500 '+(30*s)+'px "Plus Jakarta Sans",sans-serif';
   ctx.fillText(finishing?p.stops.map(stop=>stop.name).join(' · '):'ON THE ROAD',m,h-340*s,w-200*s);
-  if(finishing&&p.cta){ctx.fillStyle='#E5C48B';ctx.font='700 '+(32*s)+'px sans-serif';ctx.fillText(p.cta,m,h-270*s,w-200*s);}
+  if(finishing&&p.cta){ctx.fillStyle='#E5C48B';ctx.font='700 '+(50*s)+'px sans-serif';ctx.fillText(p.cta,m,h-240*s,w-200*s);}
   ctx.restore();
   ctx.fillStyle='rgba(251,250,245,.93)';ctx.fillRect(0,h-61*s,w,61*s);
   ctx.textAlign='center';ctx.font='500 '+(21*s)+'px "Plus Jakarta Sans",sans-serif';ctx.fillStyle='#244C44';
-  ctx.fillText('Map: OpenFreeMap / OpenMapTiles · © OpenStreetMap contributors',w/2,h-24*s,w-54*s);
+  ctx.fillText(p.relief?'Map: OpenFreeMap / OpenMapTiles · © OpenStreetMap · Terrain: Mapzen / AWS':'Map: OpenFreeMap / OpenMapTiles · © OpenStreetMap contributors',w/2,h-24*s,w-54*s);
 }
 export function renderPremiumTravelScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMotionScene,time:number,getPhoto:(url:string)=>HTMLImageElement|null):void{
   const p=scene.premiumTravel!;

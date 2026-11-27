@@ -695,7 +695,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
     "id": "short-scotland-road-trip",
     "slug": "short-scotland-road-trip",
     "title": "Premium Travel Route Reel — Scotland / The Open Road",
-    "description": "30-second R5 director's cut: Highland road cold open, four two-shot destinations, restrained road-matched cartography and save-the-route finale. Original procedural score, editable photos and route.",
+    "description": "R6 editorial director's cut: direct cuts, genuine shaded relief, independent opening image, two portrait castle photographs, legible destination labels and original score.",
     "category": "Shorts & Reels",
     "author": "OpenMotion Studio",
     "source": "template",
@@ -772,14 +772,14 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               ],
               "photoFit": "cover",
               "secondaryPhoto": {
-                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg/1280px-A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
-                "photoAuthor": "Steven Brown",
-                "photoLicense": "CC BY-SA 2.0",
-                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
-                "label": "A82 · Pass of Glencoe",
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/The_Three_Sisters%2C_Glencoe%2C_Scotland.jpg/1280px-The_Three_Sisters%2C_Glencoe%2C_Scotland.jpg",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:The_Three_Sisters,_Glencoe,_Scotland.jpg",
+                "photoAuthor": "rboed",
+                "photoLicense": "CC BY 2.0",
+                "label": "Three Sisters of Glen Coe",
                 "photoFocus": [
-                  0.5,
-                  0.55
+                  0.47,
+                  0.48
                 ],
                 "photoFit": "cover"
               }
@@ -789,27 +789,28 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 57.2743,
               "lon": -5.5168,
               "note": "A celebrated island castle stands where three sea lochs meet.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg/1280px-Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
-              "photoAuthor": "Gillfoto",
-              "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/20210818_Eilean_Donan_Castle_causeway-9470.jpg/1365px-20210818_Eilean_Donan_Castle_causeway-9470.jpg",
+              "photoAuthor": "Balon Greyjoy",
+              "photoLicense": "CC BY-SA 3.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:20210818_Eilean_Donan_Castle_causeway-9470.jpg",
               "photoFocus": [
-                0.5,
-                0.5
+                0.49,
+                0.42
               ],
-              "photoFit": "contain",
+              "photoFit": "cover",
               "secondaryPhoto": {
-                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Eilean_Donan_Castle_v02.jpg/1280px-Eilean_Donan_Castle_v02.jpg",
-                "photoAuthor": "Thomas Fuhrmann",
-                "photoLicense": "CC BY-SA 4.0",
-                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Eilean_Donan_Castle_v02.jpg",
-                "label": "Eilean Donan Castle",
+                "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c8/2012_Eilean_Donan_Castle.JPG",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2012_Eilean_Donan_Castle.JPG",
+                "photoAuthor": "Dakotsmom229",
+                "photoLicense": "CC BY-SA 3.0",
+                "label": "Stone walls above the loch",
                 "photoFocus": [
-                  0.5,
-                  0.5
+                  0.44,
+                  0.42
                 ],
-                "photoFit": "contain"
-              }
+                "photoFit": "cover"
+              },
+              "label": "Across the causeway"
             },
             {
               "name": "Portree",
@@ -882,7 +883,20 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "seriesTitle": "THE OPEN ROAD COLLECTION · 001",
           "regionTitle": "SCOTLAND",
           "mapIntro": false,
-          "openingSecondary": true
+          "editorialRevision": 6,
+          "relief": true,
+          "openingPhoto": {
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg/1280px-A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
+            "photoAuthor": "Steven Brown",
+            "photoLicense": "CC BY-SA 2.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
+            "label": "A82 · Pass of Glencoe",
+            "photoFocus": [
+              0.5,
+              0.55
+            ],
+            "photoFit": "cover"
+          }
         }
       },
       {
@@ -938,14 +952,14 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               ],
               "photoFit": "cover",
               "secondaryPhoto": {
-                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg/1280px-A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
-                "photoAuthor": "Steven Brown",
-                "photoLicense": "CC BY-SA 2.0",
-                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
-                "label": "A82 · Pass of Glencoe",
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/The_Three_Sisters%2C_Glencoe%2C_Scotland.jpg/1280px-The_Three_Sisters%2C_Glencoe%2C_Scotland.jpg",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:The_Three_Sisters,_Glencoe,_Scotland.jpg",
+                "photoAuthor": "rboed",
+                "photoLicense": "CC BY 2.0",
+                "label": "Three Sisters of Glen Coe",
                 "photoFocus": [
-                  0.5,
-                  0.55
+                  0.47,
+                  0.48
                 ],
                 "photoFit": "cover"
               }
@@ -955,27 +969,28 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 57.2743,
               "lon": -5.5168,
               "note": "A celebrated island castle stands where three sea lochs meet.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg/1280px-Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
-              "photoAuthor": "Gillfoto",
-              "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/20210818_Eilean_Donan_Castle_causeway-9470.jpg/1365px-20210818_Eilean_Donan_Castle_causeway-9470.jpg",
+              "photoAuthor": "Balon Greyjoy",
+              "photoLicense": "CC BY-SA 3.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:20210818_Eilean_Donan_Castle_causeway-9470.jpg",
               "photoFocus": [
-                0.5,
-                0.5
+                0.49,
+                0.42
               ],
-              "photoFit": "contain",
+              "photoFit": "cover",
               "secondaryPhoto": {
-                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Eilean_Donan_Castle_v02.jpg/1280px-Eilean_Donan_Castle_v02.jpg",
-                "photoAuthor": "Thomas Fuhrmann",
-                "photoLicense": "CC BY-SA 4.0",
-                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Eilean_Donan_Castle_v02.jpg",
-                "label": "Eilean Donan Castle",
+                "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c8/2012_Eilean_Donan_Castle.JPG",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2012_Eilean_Donan_Castle.JPG",
+                "photoAuthor": "Dakotsmom229",
+                "photoLicense": "CC BY-SA 3.0",
+                "label": "Stone walls above the loch",
                 "photoFocus": [
-                  0.5,
-                  0.5
+                  0.44,
+                  0.42
                 ],
-                "photoFit": "contain"
-              }
+                "photoFit": "cover"
+              },
+              "label": "Across the causeway"
             },
             {
               "name": "Portree",
@@ -1047,13 +1062,15 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "editorial": true,
           "seriesTitle": "THE OPEN ROAD COLLECTION · 001",
           "regionTitle": "SCOTLAND",
-          "mapIntro": true
+          "mapIntro": true,
+          "editorialRevision": 6,
+          "relief": true
         }
       },
       {
         "id": "photo-edinburgh",
         "name": "03 / Edinburgh",
-        "durationSec": 3,
+        "durationSec": 2.5,
         "layout": "premium-travel-route",
         "transition": "fade",
         "backdrop": "swiss-lines",
@@ -1103,14 +1120,14 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               ],
               "photoFit": "cover",
               "secondaryPhoto": {
-                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg/1280px-A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
-                "photoAuthor": "Steven Brown",
-                "photoLicense": "CC BY-SA 2.0",
-                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
-                "label": "A82 · Pass of Glencoe",
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/The_Three_Sisters%2C_Glencoe%2C_Scotland.jpg/1280px-The_Three_Sisters%2C_Glencoe%2C_Scotland.jpg",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:The_Three_Sisters,_Glencoe,_Scotland.jpg",
+                "photoAuthor": "rboed",
+                "photoLicense": "CC BY 2.0",
+                "label": "Three Sisters of Glen Coe",
                 "photoFocus": [
-                  0.5,
-                  0.55
+                  0.47,
+                  0.48
                 ],
                 "photoFit": "cover"
               }
@@ -1120,27 +1137,28 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 57.2743,
               "lon": -5.5168,
               "note": "A celebrated island castle stands where three sea lochs meet.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg/1280px-Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
-              "photoAuthor": "Gillfoto",
-              "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/20210818_Eilean_Donan_Castle_causeway-9470.jpg/1365px-20210818_Eilean_Donan_Castle_causeway-9470.jpg",
+              "photoAuthor": "Balon Greyjoy",
+              "photoLicense": "CC BY-SA 3.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:20210818_Eilean_Donan_Castle_causeway-9470.jpg",
               "photoFocus": [
-                0.5,
-                0.5
+                0.49,
+                0.42
               ],
-              "photoFit": "contain",
+              "photoFit": "cover",
               "secondaryPhoto": {
-                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Eilean_Donan_Castle_v02.jpg/1280px-Eilean_Donan_Castle_v02.jpg",
-                "photoAuthor": "Thomas Fuhrmann",
-                "photoLicense": "CC BY-SA 4.0",
-                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Eilean_Donan_Castle_v02.jpg",
-                "label": "Eilean Donan Castle",
+                "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c8/2012_Eilean_Donan_Castle.JPG",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2012_Eilean_Donan_Castle.JPG",
+                "photoAuthor": "Dakotsmom229",
+                "photoLicense": "CC BY-SA 3.0",
+                "label": "Stone walls above the loch",
                 "photoFocus": [
-                  0.5,
-                  0.5
+                  0.44,
+                  0.42
                 ],
-                "photoFit": "contain"
-              }
+                "photoFit": "cover"
+              },
+              "label": "Across the causeway"
             },
             {
               "name": "Portree",
@@ -1212,13 +1230,15 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "editorial": true,
           "seriesTitle": "THE OPEN ROAD COLLECTION · 001",
           "regionTitle": "SCOTLAND",
-          "mapIntro": false
+          "mapIntro": false,
+          "editorialRevision": 6,
+          "relief": true
         }
       },
       {
         "id": "drive-glencoe",
         "name": "04 / Into the Highlands",
-        "durationSec": 2,
+        "durationSec": 2.5,
         "layout": "premium-travel-route",
         "transition": "fade",
         "backdrop": "swiss-lines",
@@ -1268,14 +1288,14 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               ],
               "photoFit": "cover",
               "secondaryPhoto": {
-                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg/1280px-A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
-                "photoAuthor": "Steven Brown",
-                "photoLicense": "CC BY-SA 2.0",
-                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
-                "label": "A82 · Pass of Glencoe",
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/The_Three_Sisters%2C_Glencoe%2C_Scotland.jpg/1280px-The_Three_Sisters%2C_Glencoe%2C_Scotland.jpg",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:The_Three_Sisters,_Glencoe,_Scotland.jpg",
+                "photoAuthor": "rboed",
+                "photoLicense": "CC BY 2.0",
+                "label": "Three Sisters of Glen Coe",
                 "photoFocus": [
-                  0.5,
-                  0.55
+                  0.47,
+                  0.48
                 ],
                 "photoFit": "cover"
               }
@@ -1285,27 +1305,28 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 57.2743,
               "lon": -5.5168,
               "note": "A celebrated island castle stands where three sea lochs meet.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg/1280px-Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
-              "photoAuthor": "Gillfoto",
-              "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/20210818_Eilean_Donan_Castle_causeway-9470.jpg/1365px-20210818_Eilean_Donan_Castle_causeway-9470.jpg",
+              "photoAuthor": "Balon Greyjoy",
+              "photoLicense": "CC BY-SA 3.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:20210818_Eilean_Donan_Castle_causeway-9470.jpg",
               "photoFocus": [
-                0.5,
-                0.5
+                0.49,
+                0.42
               ],
-              "photoFit": "contain",
+              "photoFit": "cover",
               "secondaryPhoto": {
-                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Eilean_Donan_Castle_v02.jpg/1280px-Eilean_Donan_Castle_v02.jpg",
-                "photoAuthor": "Thomas Fuhrmann",
-                "photoLicense": "CC BY-SA 4.0",
-                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Eilean_Donan_Castle_v02.jpg",
-                "label": "Eilean Donan Castle",
+                "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c8/2012_Eilean_Donan_Castle.JPG",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2012_Eilean_Donan_Castle.JPG",
+                "photoAuthor": "Dakotsmom229",
+                "photoLicense": "CC BY-SA 3.0",
+                "label": "Stone walls above the loch",
                 "photoFocus": [
-                  0.5,
-                  0.5
+                  0.44,
+                  0.42
                 ],
-                "photoFit": "contain"
-              }
+                "photoFit": "cover"
+              },
+              "label": "Across the causeway"
             },
             {
               "name": "Portree",
@@ -1377,13 +1398,15 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "editorial": true,
           "seriesTitle": "THE OPEN ROAD COLLECTION · 001",
           "regionTitle": "SCOTLAND",
-          "mapIntro": false
+          "mapIntro": false,
+          "editorialRevision": 6,
+          "relief": true
         }
       },
       {
         "id": "photo-glencoe",
         "name": "05 / Glen Coe",
-        "durationSec": 4,
+        "durationSec": 3.5,
         "layout": "premium-travel-route",
         "transition": "fade",
         "backdrop": "swiss-lines",
@@ -1433,14 +1456,14 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               ],
               "photoFit": "cover",
               "secondaryPhoto": {
-                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg/1280px-A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
-                "photoAuthor": "Steven Brown",
-                "photoLicense": "CC BY-SA 2.0",
-                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
-                "label": "A82 · Pass of Glencoe",
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/The_Three_Sisters%2C_Glencoe%2C_Scotland.jpg/1280px-The_Three_Sisters%2C_Glencoe%2C_Scotland.jpg",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:The_Three_Sisters,_Glencoe,_Scotland.jpg",
+                "photoAuthor": "rboed",
+                "photoLicense": "CC BY 2.0",
+                "label": "Three Sisters of Glen Coe",
                 "photoFocus": [
-                  0.5,
-                  0.55
+                  0.47,
+                  0.48
                 ],
                 "photoFit": "cover"
               }
@@ -1450,27 +1473,28 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 57.2743,
               "lon": -5.5168,
               "note": "A celebrated island castle stands where three sea lochs meet.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg/1280px-Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
-              "photoAuthor": "Gillfoto",
-              "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/20210818_Eilean_Donan_Castle_causeway-9470.jpg/1365px-20210818_Eilean_Donan_Castle_causeway-9470.jpg",
+              "photoAuthor": "Balon Greyjoy",
+              "photoLicense": "CC BY-SA 3.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:20210818_Eilean_Donan_Castle_causeway-9470.jpg",
               "photoFocus": [
-                0.5,
-                0.5
+                0.49,
+                0.42
               ],
-              "photoFit": "contain",
+              "photoFit": "cover",
               "secondaryPhoto": {
-                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Eilean_Donan_Castle_v02.jpg/1280px-Eilean_Donan_Castle_v02.jpg",
-                "photoAuthor": "Thomas Fuhrmann",
-                "photoLicense": "CC BY-SA 4.0",
-                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Eilean_Donan_Castle_v02.jpg",
-                "label": "Eilean Donan Castle",
+                "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c8/2012_Eilean_Donan_Castle.JPG",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2012_Eilean_Donan_Castle.JPG",
+                "photoAuthor": "Dakotsmom229",
+                "photoLicense": "CC BY-SA 3.0",
+                "label": "Stone walls above the loch",
                 "photoFocus": [
-                  0.5,
-                  0.5
+                  0.44,
+                  0.42
                 ],
-                "photoFit": "contain"
-              }
+                "photoFit": "cover"
+              },
+              "label": "Across the causeway"
             },
             {
               "name": "Portree",
@@ -1542,13 +1566,15 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "editorial": true,
           "seriesTitle": "THE OPEN ROAD COLLECTION · 001",
           "regionTitle": "SCOTLAND",
-          "mapIntro": false
+          "mapIntro": false,
+          "editorialRevision": 6,
+          "relief": true
         }
       },
       {
         "id": "drive-eilean",
         "name": "06 / To Eilean Donan",
-        "durationSec": 2,
+        "durationSec": 2.5,
         "layout": "premium-travel-route",
         "transition": "fade",
         "backdrop": "swiss-lines",
@@ -1598,14 +1624,14 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               ],
               "photoFit": "cover",
               "secondaryPhoto": {
-                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg/1280px-A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
-                "photoAuthor": "Steven Brown",
-                "photoLicense": "CC BY-SA 2.0",
-                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
-                "label": "A82 · Pass of Glencoe",
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/The_Three_Sisters%2C_Glencoe%2C_Scotland.jpg/1280px-The_Three_Sisters%2C_Glencoe%2C_Scotland.jpg",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:The_Three_Sisters,_Glencoe,_Scotland.jpg",
+                "photoAuthor": "rboed",
+                "photoLicense": "CC BY 2.0",
+                "label": "Three Sisters of Glen Coe",
                 "photoFocus": [
-                  0.5,
-                  0.55
+                  0.47,
+                  0.48
                 ],
                 "photoFit": "cover"
               }
@@ -1615,27 +1641,28 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 57.2743,
               "lon": -5.5168,
               "note": "A celebrated island castle stands where three sea lochs meet.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg/1280px-Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
-              "photoAuthor": "Gillfoto",
-              "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/20210818_Eilean_Donan_Castle_causeway-9470.jpg/1365px-20210818_Eilean_Donan_Castle_causeway-9470.jpg",
+              "photoAuthor": "Balon Greyjoy",
+              "photoLicense": "CC BY-SA 3.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:20210818_Eilean_Donan_Castle_causeway-9470.jpg",
               "photoFocus": [
-                0.5,
-                0.5
+                0.49,
+                0.42
               ],
-              "photoFit": "contain",
+              "photoFit": "cover",
               "secondaryPhoto": {
-                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Eilean_Donan_Castle_v02.jpg/1280px-Eilean_Donan_Castle_v02.jpg",
-                "photoAuthor": "Thomas Fuhrmann",
-                "photoLicense": "CC BY-SA 4.0",
-                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Eilean_Donan_Castle_v02.jpg",
-                "label": "Eilean Donan Castle",
+                "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c8/2012_Eilean_Donan_Castle.JPG",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2012_Eilean_Donan_Castle.JPG",
+                "photoAuthor": "Dakotsmom229",
+                "photoLicense": "CC BY-SA 3.0",
+                "label": "Stone walls above the loch",
                 "photoFocus": [
-                  0.5,
-                  0.5
+                  0.44,
+                  0.42
                 ],
-                "photoFit": "contain"
-              }
+                "photoFit": "cover"
+              },
+              "label": "Across the causeway"
             },
             {
               "name": "Portree",
@@ -1707,13 +1734,15 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "editorial": true,
           "seriesTitle": "THE OPEN ROAD COLLECTION · 001",
           "regionTitle": "SCOTLAND",
-          "mapIntro": false
+          "mapIntro": false,
+          "editorialRevision": 6,
+          "relief": true
         }
       },
       {
         "id": "photo-eilean",
         "name": "07 / Eilean Donan",
-        "durationSec": 4,
+        "durationSec": 3.5,
         "layout": "premium-travel-route",
         "transition": "fade",
         "backdrop": "swiss-lines",
@@ -1763,14 +1792,14 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               ],
               "photoFit": "cover",
               "secondaryPhoto": {
-                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg/1280px-A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
-                "photoAuthor": "Steven Brown",
-                "photoLicense": "CC BY-SA 2.0",
-                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
-                "label": "A82 · Pass of Glencoe",
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/The_Three_Sisters%2C_Glencoe%2C_Scotland.jpg/1280px-The_Three_Sisters%2C_Glencoe%2C_Scotland.jpg",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:The_Three_Sisters,_Glencoe,_Scotland.jpg",
+                "photoAuthor": "rboed",
+                "photoLicense": "CC BY 2.0",
+                "label": "Three Sisters of Glen Coe",
                 "photoFocus": [
-                  0.5,
-                  0.55
+                  0.47,
+                  0.48
                 ],
                 "photoFit": "cover"
               }
@@ -1780,27 +1809,28 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 57.2743,
               "lon": -5.5168,
               "note": "A celebrated island castle stands where three sea lochs meet.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg/1280px-Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
-              "photoAuthor": "Gillfoto",
-              "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/20210818_Eilean_Donan_Castle_causeway-9470.jpg/1365px-20210818_Eilean_Donan_Castle_causeway-9470.jpg",
+              "photoAuthor": "Balon Greyjoy",
+              "photoLicense": "CC BY-SA 3.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:20210818_Eilean_Donan_Castle_causeway-9470.jpg",
               "photoFocus": [
-                0.5,
-                0.5
+                0.49,
+                0.42
               ],
-              "photoFit": "contain",
+              "photoFit": "cover",
               "secondaryPhoto": {
-                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Eilean_Donan_Castle_v02.jpg/1280px-Eilean_Donan_Castle_v02.jpg",
-                "photoAuthor": "Thomas Fuhrmann",
-                "photoLicense": "CC BY-SA 4.0",
-                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Eilean_Donan_Castle_v02.jpg",
-                "label": "Eilean Donan Castle",
+                "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c8/2012_Eilean_Donan_Castle.JPG",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2012_Eilean_Donan_Castle.JPG",
+                "photoAuthor": "Dakotsmom229",
+                "photoLicense": "CC BY-SA 3.0",
+                "label": "Stone walls above the loch",
                 "photoFocus": [
-                  0.5,
-                  0.5
+                  0.44,
+                  0.42
                 ],
-                "photoFit": "contain"
-              }
+                "photoFit": "cover"
+              },
+              "label": "Across the causeway"
             },
             {
               "name": "Portree",
@@ -1872,13 +1902,15 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "editorial": true,
           "seriesTitle": "THE OPEN ROAD COLLECTION · 001",
           "regionTitle": "SCOTLAND",
-          "mapIntro": false
+          "mapIntro": false,
+          "editorialRevision": 6,
+          "relief": true
         }
       },
       {
         "id": "drive-portree",
         "name": "08 / Crossing to Skye",
-        "durationSec": 2,
+        "durationSec": 2.5,
         "layout": "premium-travel-route",
         "transition": "fade",
         "backdrop": "swiss-lines",
@@ -1928,14 +1960,14 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               ],
               "photoFit": "cover",
               "secondaryPhoto": {
-                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg/1280px-A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
-                "photoAuthor": "Steven Brown",
-                "photoLicense": "CC BY-SA 2.0",
-                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
-                "label": "A82 · Pass of Glencoe",
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/The_Three_Sisters%2C_Glencoe%2C_Scotland.jpg/1280px-The_Three_Sisters%2C_Glencoe%2C_Scotland.jpg",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:The_Three_Sisters,_Glencoe,_Scotland.jpg",
+                "photoAuthor": "rboed",
+                "photoLicense": "CC BY 2.0",
+                "label": "Three Sisters of Glen Coe",
                 "photoFocus": [
-                  0.5,
-                  0.55
+                  0.47,
+                  0.48
                 ],
                 "photoFit": "cover"
               }
@@ -1945,27 +1977,28 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 57.2743,
               "lon": -5.5168,
               "note": "A celebrated island castle stands where three sea lochs meet.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg/1280px-Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
-              "photoAuthor": "Gillfoto",
-              "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/20210818_Eilean_Donan_Castle_causeway-9470.jpg/1365px-20210818_Eilean_Donan_Castle_causeway-9470.jpg",
+              "photoAuthor": "Balon Greyjoy",
+              "photoLicense": "CC BY-SA 3.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:20210818_Eilean_Donan_Castle_causeway-9470.jpg",
               "photoFocus": [
-                0.5,
-                0.5
+                0.49,
+                0.42
               ],
-              "photoFit": "contain",
+              "photoFit": "cover",
               "secondaryPhoto": {
-                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Eilean_Donan_Castle_v02.jpg/1280px-Eilean_Donan_Castle_v02.jpg",
-                "photoAuthor": "Thomas Fuhrmann",
-                "photoLicense": "CC BY-SA 4.0",
-                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Eilean_Donan_Castle_v02.jpg",
-                "label": "Eilean Donan Castle",
+                "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c8/2012_Eilean_Donan_Castle.JPG",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2012_Eilean_Donan_Castle.JPG",
+                "photoAuthor": "Dakotsmom229",
+                "photoLicense": "CC BY-SA 3.0",
+                "label": "Stone walls above the loch",
                 "photoFocus": [
-                  0.5,
-                  0.5
+                  0.44,
+                  0.42
                 ],
-                "photoFit": "contain"
-              }
+                "photoFit": "cover"
+              },
+              "label": "Across the causeway"
             },
             {
               "name": "Portree",
@@ -2037,13 +2070,15 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "editorial": true,
           "seriesTitle": "THE OPEN ROAD COLLECTION · 001",
           "regionTitle": "SCOTLAND",
-          "mapIntro": false
+          "mapIntro": false,
+          "editorialRevision": 6,
+          "relief": true
         }
       },
       {
         "id": "photo-portree",
         "name": "09 / Isle of Skye",
-        "durationSec": 5,
+        "durationSec": 4.5,
         "layout": "premium-travel-route",
         "transition": "fade",
         "backdrop": "swiss-lines",
@@ -2093,14 +2128,14 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               ],
               "photoFit": "cover",
               "secondaryPhoto": {
-                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg/1280px-A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
-                "photoAuthor": "Steven Brown",
-                "photoLicense": "CC BY-SA 2.0",
-                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
-                "label": "A82 · Pass of Glencoe",
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/The_Three_Sisters%2C_Glencoe%2C_Scotland.jpg/1280px-The_Three_Sisters%2C_Glencoe%2C_Scotland.jpg",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:The_Three_Sisters,_Glencoe,_Scotland.jpg",
+                "photoAuthor": "rboed",
+                "photoLicense": "CC BY 2.0",
+                "label": "Three Sisters of Glen Coe",
                 "photoFocus": [
-                  0.5,
-                  0.55
+                  0.47,
+                  0.48
                 ],
                 "photoFit": "cover"
               }
@@ -2110,27 +2145,28 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 57.2743,
               "lon": -5.5168,
               "note": "A celebrated island castle stands where three sea lochs meet.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg/1280px-Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
-              "photoAuthor": "Gillfoto",
-              "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/20210818_Eilean_Donan_Castle_causeway-9470.jpg/1365px-20210818_Eilean_Donan_Castle_causeway-9470.jpg",
+              "photoAuthor": "Balon Greyjoy",
+              "photoLicense": "CC BY-SA 3.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:20210818_Eilean_Donan_Castle_causeway-9470.jpg",
               "photoFocus": [
-                0.5,
-                0.5
+                0.49,
+                0.42
               ],
-              "photoFit": "contain",
+              "photoFit": "cover",
               "secondaryPhoto": {
-                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Eilean_Donan_Castle_v02.jpg/1280px-Eilean_Donan_Castle_v02.jpg",
-                "photoAuthor": "Thomas Fuhrmann",
-                "photoLicense": "CC BY-SA 4.0",
-                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Eilean_Donan_Castle_v02.jpg",
-                "label": "Eilean Donan Castle",
+                "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c8/2012_Eilean_Donan_Castle.JPG",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2012_Eilean_Donan_Castle.JPG",
+                "photoAuthor": "Dakotsmom229",
+                "photoLicense": "CC BY-SA 3.0",
+                "label": "Stone walls above the loch",
                 "photoFocus": [
-                  0.5,
-                  0.5
+                  0.44,
+                  0.42
                 ],
-                "photoFit": "contain"
-              }
+                "photoFit": "cover"
+              },
+              "label": "Across the causeway"
             },
             {
               "name": "Portree",
@@ -2202,13 +2238,15 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "editorial": true,
           "seriesTitle": "THE OPEN ROAD COLLECTION · 001",
           "regionTitle": "SCOTLAND",
-          "mapIntro": false
+          "mapIntro": false,
+          "editorialRevision": 6,
+          "relief": true
         }
       },
       {
         "id": "finale",
         "name": "10 / Save this road trip",
-        "durationSec": 3,
+        "durationSec": 3.5,
         "layout": "premium-travel-route",
         "transition": "fade",
         "backdrop": "swiss-lines",
@@ -2258,14 +2296,14 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               ],
               "photoFit": "cover",
               "secondaryPhoto": {
-                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg/1280px-A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
-                "photoAuthor": "Steven Brown",
-                "photoLicense": "CC BY-SA 2.0",
-                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
-                "label": "A82 · Pass of Glencoe",
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/The_Three_Sisters%2C_Glencoe%2C_Scotland.jpg/1280px-The_Three_Sisters%2C_Glencoe%2C_Scotland.jpg",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:The_Three_Sisters,_Glencoe,_Scotland.jpg",
+                "photoAuthor": "rboed",
+                "photoLicense": "CC BY 2.0",
+                "label": "Three Sisters of Glen Coe",
                 "photoFocus": [
-                  0.5,
-                  0.55
+                  0.47,
+                  0.48
                 ],
                 "photoFit": "cover"
               }
@@ -2275,27 +2313,28 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "lat": 57.2743,
               "lon": -5.5168,
               "note": "A celebrated island castle stands where three sea lochs meet.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg/1280px-Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
-              "photoAuthor": "Gillfoto",
-              "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/20210818_Eilean_Donan_Castle_causeway-9470.jpg/1365px-20210818_Eilean_Donan_Castle_causeway-9470.jpg",
+              "photoAuthor": "Balon Greyjoy",
+              "photoLicense": "CC BY-SA 3.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:20210818_Eilean_Donan_Castle_causeway-9470.jpg",
               "photoFocus": [
-                0.5,
-                0.5
+                0.49,
+                0.42
               ],
-              "photoFit": "contain",
+              "photoFit": "cover",
               "secondaryPhoto": {
-                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Eilean_Donan_Castle_v02.jpg/1280px-Eilean_Donan_Castle_v02.jpg",
-                "photoAuthor": "Thomas Fuhrmann",
-                "photoLicense": "CC BY-SA 4.0",
-                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Eilean_Donan_Castle_v02.jpg",
-                "label": "Eilean Donan Castle",
+                "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c8/2012_Eilean_Donan_Castle.JPG",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2012_Eilean_Donan_Castle.JPG",
+                "photoAuthor": "Dakotsmom229",
+                "photoLicense": "CC BY-SA 3.0",
+                "label": "Stone walls above the loch",
                 "photoFocus": [
-                  0.5,
-                  0.5
+                  0.44,
+                  0.42
                 ],
-                "photoFit": "contain"
-              }
+                "photoFit": "cover"
+              },
+              "label": "Across the causeway"
             },
             {
               "name": "Portree",
@@ -2368,7 +2407,9 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "seriesTitle": "THE OPEN ROAD COLLECTION · 001",
           "regionTitle": "SCOTLAND",
           "mapIntro": false,
-          "cta": "SAVE THIS ROAD TRIP"
+          "cta": "SAVE THIS ROAD TRIP",
+          "editorialRevision": 6,
+          "relief": true
         }
       }
     ]

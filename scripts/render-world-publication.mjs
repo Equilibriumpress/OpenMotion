@@ -72,6 +72,7 @@ try {
         if(p.scenes.some(s=>s.premiumTravel)){
           const {preloadProjectImages,getCachedPhoto}=await import('/src/engine/imageCache.ts');
           await preloadProjectImages(p);
+          for(const s of p.scenes){const opening=s.premiumTravel?.openingPhoto;if(opening&&!getCachedPhoto(opening.photoUrl))throw Error('Opening photo did not decode: '+opening.photoUrl);}
           for(const s of p.scenes)for(const stop of s.premiumTravel?.stops??[]){
             for(const photo of [stop,stop.secondaryPhoto].filter(Boolean)){
               if(!getCachedPhoto(photo.photoUrl))throw Error('Premium photo did not decode: '+photo.photoUrl);
@@ -138,7 +139,7 @@ try {
       const probe=spawnSync('ffprobe',['-v','error','-show_streams','-show_format','-of','json',target],{encoding:'utf8'});
       if(probe.status!==0)throw Error('ffprobe failed');
       const info=JSON.parse(probe.stdout),v=info.streams.find(s=>s.codec_type==='video'),a=info.streams.find(s=>s.codec_type==='audio');
-      if(v?.width!==width||v?.height!==height||v?.avg_frame_rate!==fps+'/1'||!a||Math.abs(Number(info.format.duration)-duration)>.15)throw Error('Output does not match requested resolution / fps / audio / duration');
+      if(v?.codec_name!=='h264'||v?.width!==width||v?.height!==height||v?.avg_frame_rate!==fps+'/1'||a?.codec_name!=='aac'||(premium&&Number(v?.nb_frames)!==frames)||Math.abs(Number(info.format.duration)-duration)>.15)throw Error('Output does not match requested resolution / fps / audio / duration');
       p.prebuiltMp4Url='renders/'+p.slug+'.mp4';
       fs.writeFileSync(manifestPath,JSON.stringify(manifest,null,2));
       console.log('[world-render] verified master:',p.slug,width,height,fps,duration,a.codec_name);

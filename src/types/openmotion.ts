@@ -403,6 +403,9 @@ export interface ScenePremiumTravelRoute {
   regionTitle?: string;
   mapIntro?: boolean;
   openingSecondary?: boolean;
+  openingPhoto?: PremiumTravelPhoto;
+  editorialRevision?: number;
+  relief?: boolean;
   cta?: string;
 }
 export interface SceneWhiteboard {

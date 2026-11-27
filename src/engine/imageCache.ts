@@ -115,6 +115,7 @@ export async function preloadProjectImages(project: OpenMotionProject): Promise<
   const urls = new Set<string>();
   for (const scene of project.scenes) {
     for (const stop of scene.premiumTravel?.stops ?? []) { urls.add(stop.photoUrl); if(stop.secondaryPhoto?.photoUrl) urls.add(stop.secondaryPhoto.photoUrl); }
+    if(scene.premiumTravel?.openingPhoto?.photoUrl) urls.add(scene.premiumTravel.openingPhoto.photoUrl);
     if (scene.imageUrl) urls.add(projectAssetUrl(scene.imageUrl));
     if (scene.editorialMap?.photoUrl) {
       urls.add(scene.editorialMap.photoUrl);
