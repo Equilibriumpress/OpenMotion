@@ -212,33 +212,33 @@ function clock(c:C,x:number,y:number,r:number,t:number,p:Palette){
  const a=t*2.1;curve(c,()=>{c.moveTo(x,y);c.lineTo(x+Math.sin(a)*r*.72,y-Math.cos(a)*r*.72);c.moveTo(x,y);c.lineTo(x+Math.sin(a/12+.7)*r*.43,y-Math.cos(a/12+.7)*r*.43);},p.ink,3.5);
  ellipse(c,x,y,3,3,p.ink);
 }
-function calendar(c:C,x:number,y:number,p:Palette,t:number,mode:string){
+function calendar(c:C,x:number,y:number,p:Palette,t:number,mode:string,title='DINNER',next='TOMORROW?'){
  c.save();c.translate(x,y);
  rounded(c,-111,-59,222,118,12,p,'#FFFFFF');
  rounded(c,-111,-59,222,29,8,p,p.light);text(c,'TODAY',0,-44,16,p.ink,800);
  const u=smooth((t-.3)/.65);
  for(let i=0;i<3;i++){const yy=-15+i*24;curve(c,()=>{c.moveTo(-92,yy);c.lineTo(91,yy);},p.shadow,1);}
  c.save();c.globalAlpha=mode==='reveal'?1-u:1;
- rounded(c,-83,-8,166,31,6,p,p.light);text(c,'DINNER',0,8,18,p.ink,800);
+ rounded(c,-83,-8,166,31,6,p,p.light);fitText(c,title,0,8,150,18,p,800);
  if(mode!=='calm'&&mode!=='reveal'){curve(c,()=>{c.moveTo(-78,10);c.lineTo(-78+156*u,10);},'#844F70',4);}
  c.restore();
  if(mode==='calm'||mode==='reveal'){
-  c.save();c.translate(0,31*(1-u));c.globalAlpha=u;rounded(c,-83,24,166,29,6,p,p.light);text(c,'TOMORROW?',0,39,16,p.ink,750);c.restore();
+  c.save();c.translate(0,31*(1-u));c.globalAlpha=u;rounded(c,-83,24,166,29,6,p,p.light);fitText(c,next,0,39,150,16,p,750);c.restore();
  }c.restore();
 }
-function taskStack(c:C,x:number,y:number,p:Palette,t:number,count:number){
+function taskStack(c:C,x:number,y:number,p:Palette,t:number,count:number,labels:string[]){
  for(let i=0;i<count;i++){
   const u=smooth((t-i*.45)/.42);if(u<=0)continue;
   c.save();c.globalAlpha=u;c.translate(x+Math.sin(i*2.2)*8,y-i*22-20*(1-u));c.rotate((i%2?1:-1)*.025);
   rounded(c,-75,-15,150,30,6,p,i%2?p.light:'#FFFFFF');
-  curve(c,()=>{c.moveTo(-55,0);c.lineTo(50-i*7,0);},p.shadow,3);
+  fitText(c,labels[i]??'TASK',0,0,125,14,p,750);
   c.restore();
  }
 }
-function feedback(c:C,x:number,y:number,p:Palette,t:number,mode:string){
+function feedback(c:C,x:number,y:number,p:Palette,t:number,mode:string,title='DRAFT'){
  c.save();c.translate(x,y);c.rotate(mode==='worry'?-.08:.025);
  rounded(c,-89,-72,178,144,10,p,'#FFFFFF');
- text(c,'DRAFT',0,-51,18,p.ink,800);
+ fitText(c,title,0,-51,155,18,p,800);
  for(let i=0;i<4;i++){const yy=-22+i*23;curve(c,()=>{c.moveTo(-64,yy);c.lineTo(56-(i%2)*20,yy);},p.shadow,3);}
  const u=smooth((t-.35)/.8);
  c.save();c.globalAlpha=u;curve(c,()=>{c.moveTo(-70,-22);c.lineTo(64,-22);},'#844F70',mode==='worry'?5:3);
@@ -261,14 +261,14 @@ function renderHumanV2(c:C,width:number,height:number,scene:OpenMotionScene,t:nu
   else if(shot==='contrast'){clock(c,270,258,37,time,p);thought(c,get('label-a'),141,348,214,p,time);thought(c,get('label-b'),366,348,214,p,time,.35);}
   else{clock(c,worried?100:424,226,40, time*(worried?1.8:.35),p);thought(c,get(worried?'label-a':'label-b'),270,325,300,p,time,.35);}
  }else if(theme==='calendar'){
-  calendar(c,270,propY,p,time,shot);
+  calendar(c,270,propY,p,time,shot,get('prop-title','DINNER'),get('prop-next','TOMORROW?'));
   if(!pair)thought(c,get(worried?'label-a':'label-b'),270,315,310,p,time,.45);
  }else if(theme==='boundaries'){
   if(shot==='message'||shot==='reveal')phone(c,get('message'),propY,p,time,shot==='message'?'REQUEST':'REPLY');
-  else if(shot==='contrast'){taskStack(c,142,360,p,time,4);taskStack(c,370,360,p,time,1);}
-  else{taskStack(c,worried?104:425,333,p,time,worried?5:1);thought(c,get(worried?'label-a':'label-b'),270,247,290,p,time,.35);}
+  else if(shot==='contrast'){const tasks=get('prop-tasks','WORK|ERRANDS|DINNER|HELP|ONE MORE').split('|');taskStack(c,142,360,p,time,4,tasks);taskStack(c,370,360,p,time,1,['TOMORROW']);}
+  else{const tasks=get('prop-tasks','WORK|ERRANDS|DINNER|HELP|ONE MORE').split('|');taskStack(c,worried?104:425,365,p,time,worried?5:1,worried?tasks:['TOMORROW']);thought(c,get(worried?'label-a':'label-b'),270,208,290,p,time,.35);}
  }else if(theme==='feedback'){
-  feedback(c,270,propY,p,time,shot);
+  feedback(c,270,propY,p,time,shot,get('prop-title','DRAFT'));
   if(shot==='reveal')thought(c,get('message'),270,379,310,p,time,.6);
   else if(!pair)thought(c,get(worried?'label-a':'label-b'),270,315,300,p,time,.6);
  }else{
