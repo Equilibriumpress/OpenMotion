@@ -1,0 +1,10 @@
+# Official example reconstructions
+
+These two new 16:9 / 30 fps standalone films are inspired by the public references at https://openmotion.studio/examples. The original .oms files were not accessible to the implementation environment. This is a new interpretation, not a byte-for-byte import.
+
+- Moon: https://openmotion.studio/examples/moon-phases/ — eight chapters, 115 seconds. Procedural seeded lunar surface, real sphere and stationary directional light. The orbit diagram is schematic and not to scale. The illuminated fraction derives from the observer angle; the phase is not a painted crescent. The eclipse chapter distinguishes a shadow alignment from ordinary phases. The simulated sphere is not an observational lunar texture.
+- UTMB: https://openmotion.studio/examples/utmb/ — seven chapters, 111 seconds. Terrain from the AWS elevation-tiles-prod Terrarium dataset (zoom 10, sampled geographic grid); this is not the reference's Copernicus GLO-30 dataset. The route connects approximate named checkpoints, not the actual race GPX, and the profile is checkpoint-only. The statistics reflect the edition described by the reference (2025). The terrain is cached per project. If the terrain cannot be prepared, the film displays a clearly labelled schematic rather than invented heights. The SVG covers are original illustrative graphics, not geographic elevation data.
+
+The existing three dependency and Canvas frame interface are used for both live preview and browser MP4 export. Existing documentary Piper narration generation provides separate voice, score and ambience tracks; word timings are estimates. No MiniMax voice or original reference photographs/audio are included. No new dependencies, test workflows or automatic MP4 server render. Existing normal Pages deployment prepares media and indexes the projects. The projects are review candidates, not visually approved masters.
+
+The source projects are under projects/official-example-moon-phases and projects/official-example-utmb. Scene headlines, timing and narration are editable through JSON. The new scene renderer lives at src/engine/threeExplainerRenderer.ts.
