@@ -1,0 +1,307 @@
+{
+  "schemaVersion": "1.0",
+  "id": "short-inside-adhd-mind-002",
+  "slug": "inside-adhd-mind-002",
+  "title": "Inside the ADHD Mind 02 — I'm Not Arguing",
+  "description": "A 40-second personal story about conversational enthusiasm and its impact on others. Original animated characters, two voices and editable narration.",
+  "category": "Shorts & Reels",
+  "author": "OpenMotion Studio",
+  "source": "template",
+  "createdAt": "2026-11-27",
+  "updatedAt": "2026-11-27",
+  "githubPath": "projects/inside-adhd-mind-002/project.json",
+  "format": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "brandKit": {
+    "brandName": "INSIDE THE ADHD MIND",
+    "primaryColor": "#518D89",
+    "accentColor": "#B94D41",
+    "backgroundColor": "#EFE3D0",
+    "surfaceColor": "#DCE8EB",
+    "textColor": "#49392F",
+    "mutedColor": "#79685B",
+    "fontFamily": "Kalam"
+  },
+  "scenes": [
+    {
+      "id": "mind-02-1",
+      "name": "Not arguing",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "I'm not arguing.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [
+          "not"
+        ],
+        "extras": [
+          "mind-series-v1",
+          "conversation-v1",
+          "not-arguing"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "I'm not arguing."
+      }
+    },
+    {
+      "id": "mind-02-2",
+      "name": "Excited",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "I'm excited about the conversation.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "happy",
+        "pose": "neutral",
+        "emphasis": [
+          "excited"
+        ],
+        "extras": [
+          "mind-series-v1",
+          "conversation-v1",
+          "enthusiasm"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "I'm excited about the conversation."
+      }
+    },
+    {
+      "id": "mind-02-3",
+      "name": "Fast thoughts",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "My thoughts are moving faster than my mouth.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "happy",
+        "pose": "neutral",
+        "emphasis": [
+          "faster"
+        ],
+        "extras": [
+          "mind-series-v1",
+          "conversation-v1",
+          "fast-thoughts",
+          "thoughts:Wait!|And then…|One more thing!"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "My thoughts are moving faster than my mouth."
+      }
+    },
+    {
+      "id": "mind-02-4",
+      "name": "Interrupting",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Sometimes I interrupt.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [
+          "interrupt"
+        ],
+        "extras": [
+          "mind-series-v1",
+          "conversation-v1",
+          "interruption"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "Sometimes I interrupt."
+      }
+    },
+    {
+      "id": "mind-02-5",
+      "name": "Getting louder",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Sometimes my voice gets louder.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "happy",
+        "pose": "neutral",
+        "emphasis": [
+          "louder"
+        ],
+        "extras": [
+          "mind-series-v1",
+          "conversation-v1",
+          "volume"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "Sometimes my voice gets louder."
+      }
+    },
+    {
+      "id": "mind-02-6",
+      "name": "The question",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "And then someone says: “Why are you angry?”",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "shower",
+        "mood": "worried",
+        "pose": "neutral",
+        "emphasis": [
+          "angry"
+        ],
+        "extras": [
+          "mind-series-v1",
+          "conversation-v1",
+          "question",
+          "dialogue-other:Why are you angry?"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "And then someone says: “Why are you angry?”"
+      }
+    },
+    {
+      "id": "mind-02-7",
+      "name": "The surprise",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Angry? I was having fun!",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "shower",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [
+          "angry",
+          "fun"
+        ],
+        "extras": [
+          "mind-series-v1",
+          "conversation-v1",
+          "reaction"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "Angry? I was having fun!"
+      }
+    },
+    {
+      "id": "mind-02-8",
+      "name": "Two perspectives",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "My enthusiasm doesn't always come across the way I intend.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "shower",
+        "mood": "worried",
+        "pose": "neutral",
+        "emphasis": [
+          "enthusiasm",
+          "intend"
+        ],
+        "extras": [
+          "mind-series-v1",
+          "conversation-v1",
+          "perspectives",
+          "labels:What I feel|What they hear|Enthusiasm|Intensity"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "My enthusiasm doesn't always come across the way I intend."
+      }
+    },
+    {
+      "id": "mind-02-9",
+      "name": "Listening",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "I'm learning to slow down and listen, too.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "relaxed",
+        "pose": "neutral",
+        "emphasis": [
+          "slow",
+          "listen"
+        ],
+        "extras": [
+          "mind-series-v1",
+          "conversation-v1",
+          "listening"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "I'm learning to slow down and listen, too."
+      }
+    }
+  ],
+  "captions": [],
+  "audioTracks": [
+    {
+      "id": "voice",
+      "kind": "voiceover",
+      "src": "assets/audio/inside-adhd-mind-002-voice.mp3",
+      "startSec": 0,
+      "endSec": 40,
+      "volume": 1
+    },
+    {
+      "id": "score",
+      "kind": "music",
+      "src": "assets/audio/inside-adhd-mind-002-score.mp3",
+      "startSec": 0,
+      "endSec": 40,
+      "volume": 0.28,
+      "fadeInSec": 0.3,
+      "fadeOutSec": 1.2
+    },
+    {
+      "id": "effects",
+      "kind": "effect",
+      "src": "assets/audio/inside-adhd-mind-002-effects.mp3",
+      "startSec": 0,
+      "endSec": 40,
+      "volume": 0.38
+    }
+  ]
+}

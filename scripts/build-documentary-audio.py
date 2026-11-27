@@ -37,6 +37,46 @@ def ambience(ch,duration,out):
     filt=filters.get(ch,filters[1])
     fade=min(1.5,duration/4)
     ff("-f","lavfi","-i",f"anoisesrc=color=pink:amplitude=0.09:r=48000:d={duration}:seed={42+ch}","-af",f"{filt},volume=0.6,afade=t=in:d={fade},afade=t=out:st={duration-fade}:d={fade}","-ac","1","-c:a","pcm_s16le",out)
+def conversation_voice(scene,work,python,model,target,duration,offset):
+    """Fit speaker turns independently; record approximate audible spans."""
+    extras=scene.get("doodle",{}).get("extras",[])
+    narration=scene.get("doodle",{}).get("narration","")
+    reply=next((x.split(":",1)[1] for x in extras if x.startswith("dialogue-other:")),"")
+    if reply and reply in narration:
+        lead_text=narration.split(reply,1)[0].strip().rstrip("“\"").strip()
+    else:
+        reply=""
+    turns=[("hero",lead_text,.3,min(1.7,duration*.43)),("other",reply,min(1.8,duration*.45),duration-.45)] if reply else [("hero",narration,.3,duration-.45)]
+    cfg=json.loads((CACHE/"models"/(model+".onnx.json")).read_text())
+    ids=sorted(set(cfg.get("speaker_id_map",{}).values()))
+    if len(ids)<2: ids=list(range(int(cfg.get("num_speakers",1))))
+    if len(ids)<2: raise RuntimeError("Conversation requires a multi-speaker Piper model")
+    frame_rate=48000
+    pcm=bytearray(round(duration*frame_rate)*2)
+    cues=[]
+    shot=extras[2] if len(extras)>2 else ""
+    for i,(who,words,start,end) in enumerate(turns):
+        if not words.strip():continue
+        raw=work/f"conversation-{i}-raw.wav"; fitted=work/f"conversation-{i}-fit.wav"
+        run([python,"-m","piper","-m",CACHE/"models"/(model+".onnx"),"--speaker",str(ids[0] if who=="hero" else ids[1]),"-f",raw],input=words+"\n",text=True)
+        with wave.open(str(raw)) as w: seconds=w.getnframes()/w.getframerate()
+        window=max(.1,end-start)
+        pace=1.10 if shot in ("enthusiasm","fast-thoughts","interruption","volume") and who=="hero" else 1.0
+        if shot=="listening" or who=="other":pace=.94
+        rate=max(pace,seconds/window)
+        factors=[]
+        while rate>2:factors.append("atempo=2");rate/=2
+        factors.append(f"atempo={rate:.7f}")
+        ff("-i",raw,"-af",",".join(factors),"-t",str(window),"-ar",str(frame_rate),"-ac","1","-c:a","pcm_s16le",fitted)
+        with wave.open(str(fitted)) as w: samples=w.readframes(w.getnframes())
+        pos=round(start*frame_rate)*2
+        samples=samples[:max(0,len(pcm)-pos)]
+        pcm[pos:pos+len(samples)]=samples
+        cues.append({"text":words,"startSec":round(offset+start,3),"endSec":round(offset+start+len(samples)/(frame_rate*2),3),"style":"minimal","position":.85,"speaker":who})
+    with wave.open(str(target),"wb") as w:
+        w.setnchannels(1);w.setsampwidth(2);w.setframerate(frame_rate);w.writeframes(pcm)
+    return cues
+
 def build(p,work,python,model=MODEL):
     slug=p["slug"]
     if not re.fullmatch(r"[a-z0-9-]+",slug): raise ValueError("Invalid slug")
@@ -47,7 +87,10 @@ def build(p,work,python,model=MODEL):
         duration=sum(float(s["durationSec"]) for s in scenes)
         narration=" ".join((s.get("worldStory",{}).get("narration") or s.get("bucketList",{}).get("documentary",{}).get("narration") or s.get("doodle",{}).get("narration","")).strip() for s in scenes).strip()
         raw=work/f"{ch}-raw.wav";fitted=work/f"{ch}-voice.wav"
-        if narration:
+        conversation=any("conversation-v1" in s.get("doodle",{}).get("extras",[]) for s in scenes)
+        if conversation and narration:
+            captions.extend(conversation_voice(scenes[0],work,python,model,fitted,duration,offset))
+        elif narration:
             # One uninterrupted synthesis per chapter: no restart on every cut.
             if model=="espeak-nl":
                 run([shutil.which("espeak-ng") or shutil.which("espeak") or "espeak-ng","-v","nl","-s","155","-w",raw,narration])
@@ -83,7 +126,15 @@ def build(p,work,python,model=MODEL):
             print(f"[narration] chapter {ch}: {seconds:.2f}s synthesized; {speech:.2f}s placed in {duration:.2f}s")
         else:ff("-f","lavfi","-i","anullsrc=r=48000:cl=mono","-t",str(duration),"-c:a","pcm_s16le",fitted)
         score=work/f"{ch}-score.wav";amb=work/f"{ch}-amb.wav"
-        music(ch,duration,score);ambience(ch,duration,amb)
+        if conversation and "question" in scenes[0].get("doodle",{}).get("extras",[]):
+            ff("-f","lavfi","-i","anullsrc=r=48000:cl=mono","-t",str(duration),"-c:a","pcm_s16le",score)
+        elif conversation and "reaction" in scenes[0].get("doodle",{}).get("extras",[]):
+            temp_score=work/"reaction-score.wav"
+            music(ch,duration,temp_score)
+            ff("-i",temp_score,"-af","volume=0:enable='lt(t,0.8)'","-c:a","pcm_s16le",score)
+        else:
+            music(ch,duration,score)
+        ambience(ch,duration,amb)
         voicefiles.append(fitted);musicfiles.append(score);ambfiles.append(amb);offset+=duration
     concat(voicefiles,OUT/(slug+"-voice.mp3"),work,norm=True)
     concat(musicfiles,OUT/(slug+"-score.mp3"),work,bitrate="96k")
@@ -92,7 +143,7 @@ def build(p,work,python,model=MODEL):
     (OUT/(slug+"-captions.srt")).write_text("".join(f"{i+1}\n{fmt_time(c['startSec'])} --> {fmt_time(c['endSec'])}\n{c['text']}\n\n" for i,c in enumerate(captions)))
     if needs_effects(p):
         # Original short, quiet cues at reaction beats; no recorded samples.
-        expr="+".join(f"0.10*exp(-18*max(0,t-{a}))*sin(2*PI*{hz}*(t-{a}))*between(t,{a},{a+.22})" for a,hz in [(6.5,540),(10.1,310),(14.6,220),(25.5,740),(40.0,490)])
+        expr="+".join(f"0.10*exp(-18*max(0,t-{a}))*sin(2*PI*{hz}*(t-{a}))*between(t,{a},{a+.22})" for a,hz in ([(8.4,540),(8.85,620),(9.3,710),(12.95,310),(18.2,440),(24.8,220),(37.5,490)] if slug=="inside-adhd-mind-002" else [(6.5,540),(10.1,310),(14.6,220),(25.5,740),(40.0,490)]))
         ff("-f","lavfi","-i",f"aevalsrc={expr.replace(chr(44), chr(92)+chr(44))}:s=48000:d={offset}","-c:a","libmp3lame","-b:a","96k",OUT/(slug+"-effects.mp3"))
     print(f"[documentary] {slug}: {offset:.0f}s, {len(chapters)} narrated chapters, {len(captions)} cues, three audio tracks")
 def is_mind(s):
@@ -102,7 +153,7 @@ def needs_effects(p):
     return any(is_mind(s) for s in p["scenes"]) and any(t.get("src")==f"assets/audio/{p['slug']}-effects.mp3" for t in p.get("audioTracks",[]))
 
 def audio_inputs(p,model):
-    return {"model":model,"effects":needs_effects(p),"scenes":[{"id":s["id"],"duration":s["durationSec"],"world":bool(s.get("worldStory")),"mind":is_mind(s),"chapter":s["worldStory"].get("chapter",s["id"]) if s.get("worldStory") else s["id"] if is_mind(s) else s.get("bucketList",{}).get("documentary",{}).get("chapter",1),"narration":(s.get("worldStory",{}).get("narration") or s.get("bucketList",{}).get("documentary",{}).get("narration") or s.get("doodle",{}).get("narration","")).strip()} for s in p["scenes"]]}
+    return {"model":model,"effects":needs_effects(p),"scenes":[{"id":s["id"],"duration":s["durationSec"],"world":bool(s.get("worldStory")),"mind":is_mind(s),"conversation":[x for x in s.get("doodle",{}).get("extras",[]) if x=="conversation-v1" or x.startswith("dialogue-other:") or (len(s.get("doodle",{}).get("extras",[]))>2 and s.get("doodle",{}).get("extras",[])[1]=="conversation-v1" and x==s["doodle"]["extras"][2])],"chapter":s["worldStory"].get("chapter",s["id"]) if s.get("worldStory") else s["id"] if is_mind(s) else s.get("bucketList",{}).get("documentary",{}).get("chapter",1),"narration":(s.get("worldStory",{}).get("narration") or s.get("bucketList",{}).get("documentary",{}).get("narration") or s.get("doodle",{}).get("narration","")).strip()} for s in p["scenes"]]}
 
 def ensure_model(model,base):
     folder=CACHE/"models"

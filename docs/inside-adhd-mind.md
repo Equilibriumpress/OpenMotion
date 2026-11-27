@@ -7,3 +7,13 @@ The `mind-series-v1` marker in doodle.extras selects the new vector rig. The sec
 The existing publication audio build synthesizes each scene with Piper, fits it to the scene and generates a quiet original score and reaction effects. Text emphasis follows estimated speech timings, not phoneme alignment. Audio regeneration is required after narration or duration edits. Without generated audio, Studio uses its existing doodle music fallback. No new workflow or automatic master render.
 
 The renderer is Canvas vector geometry shared by preview and export, rather than external SVG images. Browser playback, voice quality and exported MP4 require verification after deployment.
+
+## Episode 02 — I'm Not Arguing
+
+Open `#studio/inside-adhd-mind-002`. 40 seconds, nine scenes, same characters and 1080 × 1920 at 30 fps. A personal account of conversational enthusiasm and its impact on others, not a universal ADHD trait.
+
+The mind-series-v1, conversation-v1 and shot name in doodle.extras select conversation staging. New reusable talk, listen, interrupt and recoil gestures, thought bubbles, dialogue bubbles, volume arcs and two-perspective framing. Text, palette, facial expression and narration remain editable; shot layout and motion live in the renderer.
+
+The existing Piper model config supplies two speaker IDs. The build fits each spoken turn and writes measured speaker spans to caption metadata. The manifest uses these spans for mouth animation. The other character speaks the quoted question; the main narrator voices the lead-in and remaining narration. The illustrative interruption bubbles do not add overlapping spoken words. Music drops out for the question and start of the reaction. No additional build workflow or master render. CI requires generated audio; local builds without audio preparation remove unavailable tracks and report missing voice-over. Conversation settings participate in the existing audio cache.
+
+The design uses Canvas vector geometry and approximate mouth animation, not phoneme lip sync. Actual voice quality, browser playback and MP4 export still require review.
