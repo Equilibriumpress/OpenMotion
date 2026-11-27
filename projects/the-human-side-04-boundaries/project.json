@@ -33,7 +33,7 @@
       "transition": "fade",
       "backdrop": "dot-matrix",
       "headline": "One more favour?",
-      "caption": "Same request. Different response.",
+      "caption": "",
       "fullBleed": true,
       "doodle": {
         "setting": "standing",
@@ -51,16 +51,18 @@
           "pose-b:phone",
           "face-a:surprise",
           "face-b:neutral",
-          "cover-title:SAYING YES|OR SETTING LIMITS?",
-          "cover-hook:One more favour?",
           "cover-pose-a:crossed",
           "cover-pose-b:relief",
           "cover-face-a:worry",
-          "cover-face-b:relief"
+          "cover-face-b:relief",
+          "human-side-v2",
+          "theme:boundaries",
+          "cover-title:SAYING YES|SETTING LIMITS",
+          "cover-hook:One more favour?"
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "Two people get the same request for help tonight."
+        "narration": "One more favour? Two responses."
       }
     },
     {
@@ -71,7 +73,7 @@
       "transition": "fade",
       "backdrop": "dot-matrix",
       "headline": "Sure... I guess.",
-      "caption": "One agrees despite feeling overloaded.",
+      "caption": "",
       "fullBleed": true,
       "doodle": {
         "setting": "standing",
@@ -86,11 +88,13 @@
           "episode:04",
           "label-a:I should say yes.",
           "pose-a:crossed",
-          "face-a:worry"
+          "face-a:worry",
+          "human-side-v2",
+          "theme:boundaries"
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "One says yes immediately, even though their evening is already full."
+        "narration": "One says yes. Another task lands on an already crowded evening."
       }
     },
     {
@@ -101,7 +105,7 @@
       "transition": "fade",
       "backdrop": "dot-matrix",
       "headline": "Not tonight, sorry.",
-      "caption": "Another states a limit.",
+      "caption": "",
       "fullBleed": true,
       "doodle": {
         "setting": "standing",
@@ -116,11 +120,13 @@
           "episode:04",
           "label-b:Not tonight, sorry.",
           "pose-b:relief",
-          "face-b:relief"
+          "face-b:relief",
+          "human-side-v2",
+          "theme:boundaries"
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "The other checks their schedule and offers to help tomorrow instead."
+        "narration": "The other checks their schedule and says, not tonight. Tomorrow works for me."
       }
     },
     {
@@ -131,7 +137,7 @@
       "transition": "fade",
       "backdrop": "dot-matrix",
       "headline": "Approval or capacity?",
-      "caption": "Different concerns.",
+      "caption": "",
       "fullBleed": true,
       "doodle": {
         "setting": "standing",
@@ -149,11 +155,13 @@
           "pose-a:crossed",
           "pose-b:relief",
           "face-a:worry",
-          "face-b:relief"
+          "face-b:relief",
+          "human-side-v2",
+          "theme:boundaries"
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "Sometimes agreeing feels easier than risking disappointment, even when you need rest."
+        "narration": "Both want to help. One overlooks their own capacity to avoid disappointing someone."
       }
     },
     {
@@ -163,8 +171,8 @@
       "layout": "doodle-explainer",
       "transition": "fade",
       "backdrop": "dot-matrix",
-      "headline": "A boundary is information.",
-      "caption": "A limit need not mean rejection.",
+      "headline": "A limit is not rejection.",
+      "caption": "",
       "fullBleed": true,
       "doodle": {
         "setting": "standing",
@@ -181,15 +189,122 @@
           "pose-a:relief",
           "pose-b:calm",
           "face-a:relief",
-          "face-b:smile"
+          "face-b:smile",
+          "human-side-v2",
+          "theme:boundaries"
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "The reply comes back. Tomorrow works too. A clear limit leaves room for another solution."
+        "narration": "Tomorrow works too. A clear limit leaves room for another solution."
       }
     }
   ],
-  "captions": [],
+  "captions": [
+    {
+      "text": "One more favour? Two responses.",
+      "startSec": 1.5,
+      "endSec": 3.55,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "One says yes. Another task",
+      "startSec": 4.3,
+      "endSec": 6.686,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "lands on an already crowded",
+      "startSec": 6.686,
+      "endSec": 9.073,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "evening.",
+      "startSec": 9.073,
+      "endSec": 9.55,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "The other checks their schedule",
+      "startSec": 10.3,
+      "endSec": 12.319,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "and says, not tonight. Tomorrow",
+      "startSec": 12.319,
+      "endSec": 14.338,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "works for me.",
+      "startSec": 14.338,
+      "endSec": 15.55,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "Both want to help. One",
+      "startSec": 16.3,
+      "endSec": 18.319,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "overlooks their own capacity to",
+      "startSec": 18.319,
+      "endSec": 20.338,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "avoid disappointing someone.",
+      "startSec": 20.338,
+      "endSec": 21.55,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "Tomorrow works too. A clear",
+      "startSec": 22.3,
+      "endSec": 24.686,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "limit leaves room for another",
+      "startSec": 24.686,
+      "endSec": 27.073,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "solution.",
+      "startSec": 27.073,
+      "endSec": 27.55,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    }
+  ],
   "audioTracks": [
     {
       "id": "voice",
@@ -205,16 +320,24 @@
       "src": "assets/audio/the-human-side-04-boundaries-score.mp3",
       "startSec": 0,
       "endSec": 28,
-      "volume": 0.22,
+      "volume": 0.15,
       "fadeInSec": 0.3,
       "fadeOutSec": 1
+    },
+    {
+      "id": "human-sfx",
+      "kind": "effect",
+      "src": "assets/audio/the-human-side-04-boundaries-human-sfx.wav",
+      "startSec": 0,
+      "endSec": 28,
+      "volume": 0.48
     }
   ],
   "kind": "video",
   "seriesId": "the-human-side",
   "season": 1,
   "episodeNumber": 4,
-  "templateVersion": "1.1",
+  "templateVersion": "2.0",
   "productionStatus": "review",
-  "thumbnailUrl": "assets/the-human-side/the-human-side-04-boundaries.svg"
+  "thumbnailUrl": "assets/the-human-side/v2/the-human-side-04-boundaries.svg"
 }
