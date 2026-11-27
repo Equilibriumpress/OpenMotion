@@ -9,16 +9,18 @@ interface CanvasPreviewProps {
   timeSec: number;
   isPlaying?: boolean;
   onTimeUpdate?: (nextTimeSec: number) => void;
+  onRenderError?: () => void;
   renderScale?: number;
   className?: string;
 }
 
 export function CanvasPreview({
-  project,timeSec,isPlaying=false,onTimeUpdate,renderScale=.5,className='',
+  project,timeSec,isPlaying=false,onTimeUpdate,onRenderError,renderScale=.5,className='',
 }: CanvasPreviewProps) {
   const canvasRef=useRef<HTMLCanvasElement|null>(null);
   const timeRef=useRef(timeSec);
   const onTimeUpdateRef=useRef(onTimeUpdate);
+  const onRenderErrorRef=useRef(onRenderError);
   const failedRef=useRef(false);
   const lastPaint=useRef<number|null>(null);
   const [renderError,setRenderError]=useState<string|null>(null);
@@ -28,7 +30,7 @@ export function CanvasPreview({
   const cinematic=project.scenes.some(s=>s.doodle?.extras?.includes('song-cinematic-v2'));
   const previewFps=cinematic?30:60;
 
-  useEffect(()=>{onTimeUpdateRef.current=onTimeUpdate;},[onTimeUpdate]);
+  useEffect(()=>{onTimeUpdateRef.current=onTimeUpdate;onRenderErrorRef.current=onRenderError;},[onTimeUpdate,onRenderError]);
   useEffect(()=>{if(!isPlaying)timeRef.current=timeSec;},[timeSec,isPlaying]);
   useEffect(()=>()=>disposeBucketListProject(project),[project]);
   useEffect(()=>{
@@ -53,6 +55,7 @@ export function CanvasPreview({
       // Reset a possibly incomplete Canvas save/restore stack before recovery.
       canvas.width=internalWidth;
       setRenderError(error instanceof Error?error.message:String(error));
+      onRenderErrorRef.current?.();
       return false;
     }
   },[project,internalWidth,internalHeight]);
@@ -98,7 +101,7 @@ export function CanvasPreview({
       {renderError&&<div role="alert" className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-slate-950/95 p-4 text-center text-sm text-white">
         <p>Preview gestopt door een renderfout.</p><p className="break-all text-xs text-slate-300">{renderError}</p>
         <button type="button" className="rounded border border-slate-400 px-3 py-2" onClick={()=>{failedRef.current=false;lastPaint.current=null;setRenderError(null);paint(timeRef.current,true);}}>Probeer frame opnieuw</button>
-        <p className="text-xs">Pauzeer en start opnieuw om verder af te spelen.</p>
+        <p className="text-xs">Start de preview opnieuw na een geslaagde framecontrole.</p>
       </div>}
     </div>
   );
