@@ -64,18 +64,25 @@ function zoomFrame(ctx:CanvasRenderingContext2D,w:number,h:number,project:OpenMo
   }
   ctx.drawImage(frame,0,0,w,h);
   const t=clamp(time/Math.max(.1,scene.durationSec));
-  const approach=scene.bucketList?.directorsCut?smooth((t-.22)/.23):smooth((t-.69)/.22);
+  const flight=scene.bucketList?.regionalFlight;
+  if(flight&&t<.39){
+    ctx.save();ctx.globalAlpha*=1-smooth((t-.17)/.22);ctx.textAlign='center';ctx.font='700 '+Math.round(w*.024)+'px "Plus Jakarta Sans",sans-serif';ctx.lineWidth=w*.004;ctx.strokeStyle='rgba(12,26,34,.76)';ctx.fillStyle=PAPER;
+    for(const label of flight.contextLabels??[]){const point=getDocumentaryProjectedPoint(project,label.lon,label.lat);if(!point||point.x<.12||point.x>.88||point.y<.20||point.y>.70)continue;const x=point.x*w,y=point.y*h;ctx.strokeText(label.label,x,y,w*.44);ctx.fillText(label.label,x,y,w*.44);}
+    ctx.restore();
+  }
+  const approach=flight?smooth((t+.03)/.12):scene.bucketList?.directorsCut?smooth((t-.22)/.23):smooth((t-.69)/.22);
   if(approach>0){
     const d=scene.bucketList!;
     const point=d.directorsCut?getDocumentaryProjectedPoint(project,d.longitude,d.latitude):undefined;
-    const x=point?point.x*w:w*.5,y=point?point.y*h:h*.50,pulse=.5+.5*Math.sin(time*6.4);
+    if(flight&&!point)return;
+    const x=point?point.x*w:w*.5,y=point?point.y*h:h*.50,pulse=(flight&&t>=3.1/3.5)?0:.5+.5*Math.sin(time*6.4);
     if(x<w*.05||x>w*.95||y<h*.15||y>h*.85)return;
     ctx.save();ctx.globalAlpha*=approach;
     ctx.fillStyle='rgba(217,183,122,.22)';
     ctx.beginPath();ctx.arc(x,y,w*(.027+.004*pulse),0,Math.PI*2);ctx.fill();
     ctx.fillStyle=GOLD;ctx.strokeStyle=PAPER;ctx.lineWidth=w*.004;
     ctx.beginPath();ctx.arc(x,y,w*.012,0,Math.PI*2);ctx.fill();ctx.stroke();
-    if(d.directorsCut){ctx.strokeStyle=GOLD;ctx.lineWidth=w*.002;for(const size of [.045,.066]){ctx.beginPath();ctx.arc(x,y,w*(size+.004*pulse),0,Math.PI*2);ctx.stroke();}ctx.font='700 '+Math.round(w*.025)+'px "Plus Jakarta Sans",sans-serif';ctx.textAlign='center';const label=(t>.70?d.destination:d.region).toUpperCase();const tw=ctx.measureText(label).width+w*.035;const lx=Math.max(tw/2+w*.04,Math.min(w-tw/2-w*.04,x));ctx.fillStyle='rgba(8,23,31,.85)';ctx.fillRect(lx-tw/2,y-w*.115,tw,w*.04);ctx.fillStyle=PAPER;ctx.fillText(label,lx,y-w*.083);}
+    if(d.directorsCut){ctx.strokeStyle=GOLD;ctx.lineWidth=w*.002;for(const size of [.045,.066]){ctx.beginPath();ctx.arc(x,y,w*(size+.004*pulse),0,Math.PI*2);ctx.stroke();}ctx.font='700 '+Math.round(w*.025)+'px "Plus Jakarta Sans",sans-serif';ctx.textAlign='center';const label=(flight?(t>.77?flight.arrivalLabel:d.destination):t>.70?d.destination:d.region).toUpperCase();const tw=ctx.measureText(label).width+w*.035;const lx=Math.max(tw/2+w*.04,Math.min(w-tw/2-w*.04,x));ctx.fillStyle='rgba(8,23,31,.85)';ctx.fillRect(lx-tw/2,y-w*.115,tw,w*.04);ctx.fillStyle=PAPER;ctx.fillText(label,lx,y-w*.083);}
     ctx.restore();
   }
 }
@@ -115,6 +122,11 @@ function zoomScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMoti
   ctx.fillStyle=GOLD;ctx.font='700 '+Math.round(25*s)+'px "Plus Jakarta Sans",sans-serif';
   ctx.fillText(d.region.toUpperCase()+'  /  '+d.country.toUpperCase(),70*s,250*s,w-250*s);
 
+  if(d.regionalFlight){
+    ctx.fillStyle=PAPER;ctx.font='800 '+Math.round(89*s)+'px "Bricolage Grotesque",sans-serif';ctx.fillText(d.destination.toUpperCase(),70*s,h-470*s,w-250*s);
+    ctx.fillStyle=GOLD;ctx.font='600 '+Math.round(30*s)+'px "Plus Jakarta Sans",sans-serif';ctx.fillText(t<.74?d.country.toUpperCase()+'  /  '+d.region.toUpperCase():d.regionalFlight.arrivalLabel.toUpperCase(),74*s,h-390*s,w-250*s);
+    footer(ctx,w,h,scene);return;
+  }
   // The first second must communicate the episode immediately. The large
   // typography yields before the accelerated geographic approach begins.
   const launch=d.directorsCut?0:1-smooth((time-.72)/.32);
