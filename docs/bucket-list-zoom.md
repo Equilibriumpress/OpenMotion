@@ -9,7 +9,13 @@ Canvas renderer: src/engine/bucketListRenderer.ts
 Original music: src/engine/bucketListAudio.ts
 Layout identifier: bucket-list-zoom
 
-## R4 Director's Cut — final timeline
+## Bucket List 3.0 — current timeline
+
+0–1.5 s: Boca do Inferno photographic cover. 1.5–5 s: native globe flight and projected marker. 5–9 s: crater lakes and expanding map-to-photo reveal. 9–12.5 s: forest. 12.5–16.5 s: viewpoint. 16.5–20 s: coast and return to the exact opening cover.
+
+The WHY label sits above all wrapped title lines, with reserved interface margins. The original score is retimed and adds synthetic wind. Existing native map, credited images, MP4 checks and WAV fallback remain. Actual Full HD and embedded audio require a device export. Photo moves remain 2D crops, not reconstructed depth.
+
+## R4 Director's Cut — historical timeline
 
 | Video time | Camera / edit | On-screen direction |
 | --- | --- | --- |

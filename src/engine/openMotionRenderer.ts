@@ -408,7 +408,7 @@ export function renderOpenMotionFrame(
     const documentary = scene.bucketList.documentary;
     const documentaryMapCut = documentary?.mode === 'map' || previous?.bucketList?.documentary?.mode === 'map';
      const travelMapCut = documentary?.series==='places-worth-exploring' && documentaryMapCut;
-    const dissolveTarget = travelMapCut ? 0 : documentary ? (documentary.chapter === 1 ? .18 : documentaryMapCut ? .65 : .4) : previous?.bucketList?.chapter==='zoom' ? .78
+    const dissolveTarget = scene.bucketList.directorsCut&&previous?.bucketList?.cover ? 0 : travelMapCut ? 0 : documentary ? (documentary.chapter === 1 ? .18 : documentaryMapCut ? .65 : .4) : previous?.bucketList?.chapter==='zoom' ? .78
       : scene.bucketList.chapter==='outro' ? .60 : .36;
     const continuousDocMap=previous?.bucketList?.documentary?.mode==='map'&&scene.bucketList.documentary?.mode==='map';
     const dissolve=previous?.layout==='bucket-list-zoom'&&previous.bucketList&&scene.transition==='fade'&&!continuousDocMap
@@ -422,6 +422,7 @@ export function renderOpenMotionFrame(
       renderBucketListScene(ctx,w,h,previous,finalPreviousTime,project,getPhoto,'image');
       const t=clamp(localTime/dissolve),opacity=t*t*(3-2*t);
       ctx.save();ctx.globalAlpha*=opacity;
+      if(scene.bucketList.directorsCut&&previous.bucketList.chapter==='zoom'){ctx.beginPath();ctx.arc(w/2,h/2,Math.hypot(w,h)*.55*Math.sqrt(t),0,Math.PI*2);ctx.clip();}
       renderBucketListScene(ctx,w,h,scene,localTime,project,getPhoto,'image');
       ctx.restore();
       renderBucketListScene(ctx,w,h,scene,localTime,project,getPhoto,'text');
