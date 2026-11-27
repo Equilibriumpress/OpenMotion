@@ -1,0 +1,185 @@
+{
+  "schemaVersion": "1.0",
+  "id": "short-inside-your-mind-01-adhd-task-paralysis",
+  "slug": "inside-your-mind-01-adhd-task-paralysis",
+  "title": "Inside Your Mind 01 — ADHD and Task Paralysis",
+  "description": "Original short animated psychology explainer. Source: https://www.nhs.uk/conditions/adhd-adults/",
+  "category": "Shorts & Reels",
+  "author": "OpenMotion Studio",
+  "source": "template",
+  "createdAt": "2026-11-27",
+  "updatedAt": "2026-11-27",
+  "githubPath": "projects/inside-your-mind-01-adhd-task-paralysis/project.json",
+  "format": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "brandKit": {
+    "brandName": "INSIDE YOUR MIND",
+    "primaryColor": "#518D89",
+    "accentColor": "#B94D41",
+    "backgroundColor": "#EFE3D0",
+    "surfaceColor": "#DCE8EB",
+    "textColor": "#49392F",
+    "mutedColor": "#79685B",
+    "fontFamily": "Kalam"
+  },
+  "scenes": [
+    {
+      "id": "iym-01-1",
+      "name": "Hook",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "You want to start. So why are you still sitting there?",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "shower",
+        "mood": "worried",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "inside-your-mind",
+          "desk",
+          "01",
+          "Finish report"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "You want to start. So why are you still sitting there?"
+      }
+    },
+    {
+      "id": "iym-01-2",
+      "name": "Recognition",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "With ADHD, organizing a task and getting started often feel difficult.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "shower",
+        "mood": "overwhelmed",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "inside-your-mind",
+          "thoughts",
+          "01",
+          "Email|Laundry|Report|Call|Dishes|Messages"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "With ADHD, organizing a task and getting started often feel difficult."
+      }
+    },
+    {
+      "id": "iym-01-3",
+      "name": "Explanation",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "When several steps compete for attention, even a familiar task feels overwhelming.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "shower",
+        "mood": "worried",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "inside-your-mind",
+          "desk",
+          "01",
+          "Where do I start?"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "When several steps compete for attention, even a familiar task feels overwhelming."
+      }
+    },
+    {
+      "id": "iym-01-4",
+      "name": "Reframe",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Try choosing one specific action instead of the entire task.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "focused",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "inside-your-mind",
+          "focus",
+          "01",
+          "Open the laptop"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "Try choosing one specific action instead of the entire task."
+      }
+    },
+    {
+      "id": "iym-01-5",
+      "name": "Payoff",
+      "durationSec": 7,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Opening the laptop is a start. You don't need to finish everything now.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "relieved",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "inside-your-mind",
+          "desk-open",
+          "01",
+          "One step first"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "Opening the laptop is a start. You don't need to finish everything now."
+      }
+    }
+  ],
+  "captions": [],
+  "audioTracks": [
+    {
+      "id": "voice",
+      "kind": "voiceover",
+      "src": "assets/audio/inside-your-mind-01-adhd-task-paralysis-voice.mp3",
+      "startSec": 0,
+      "endSec": 29,
+      "volume": 1
+    },
+    {
+      "id": "score",
+      "kind": "music",
+      "src": "assets/audio/inside-your-mind-01-adhd-task-paralysis-score.mp3",
+      "startSec": 0,
+      "endSec": 29,
+      "volume": 0.22,
+      "fadeInSec": 0.3,
+      "fadeOutSec": 1
+    }
+  ]
+}
