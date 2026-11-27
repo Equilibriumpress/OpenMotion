@@ -43,18 +43,24 @@ for(const s of [-1,1]){
 }
 plate(2.13,-.20,.20,.53,.65,'#BCA789');plate(2.13,-.76,.76,.41,.49,'#B09985');plate(-2.15,-.73,.73,.39,.47,'#9D9285');
 plate(-2.15,-.32,.32,.56,.67,'#263039');
-function wheel(s:number,z:number,t:number):Face[]{
- const out:Face[]=[],n=16,R=.35,y=.35,outer=s*.94,inner=s*.74;
+// Static wheel surfaces are allocated once. Only the five spoke faces rotate.
+type Wheel={s:number;z:number;fixed:Face[]};
+function makeWheel(s:number,z:number):Wheel{
+ const fixed:Face[]=[],n=12,R=.35,y=.35,outer=s*.94,inner=s*.74;
  const v=(x:number,r:number,a:number):V=>[x,y+Math.cos(a)*r,z+Math.sin(a)*r];
- for(let i=0;i<n;i++){const a=i*TAU/n,b=(i+1)*TAU/n;
- out.push({v:[v(inner,R,a),v(outer,R,a),v(outer,R,b),v(inner,R,b)],color:'#1B2229'});
- out.push({v:[v(outer,R,a),v(outer,R,b),v(outer,.24,b),v(outer,.24,a)],color:'#303139'});
- out.push({v:[v(outer+s*.005,.24,a),v(outer+s*.005,.24,b),v(outer+s*.005,.19,b),v(outer+s*.005,.19,a)],color:'#B39B85'});
+ for(let i=0;i<n;i++){const a=i*TAU/n,b=(i+1)*TAU/n;fixed.push({v:[v(inner,R,a),v(outer,R,a),v(outer,R,b),v(inner,R,b)],color:'#1B2229'});}
+ // Full concentric discs replace 32 annulus polygons per wheel.
+ for(const [radius,depth,color] of [[R,0,'#303139'],[.24,.005,'#B39B85'],[.19,.009,'#484A4A']] as const){
+  fixed.push({v:Array.from({length:24},(_,i)=>v(outer+s*depth,radius,i*TAU/24)),color});
  }
- const faceX=outer+s*.009;
- out.push({v:Array.from({length:n},(_,i)=>v(faceX,.19,i*TAU/n)),color:'#484A4A'});
- for(let i=0;i<5;i++){const a=i*TAU/5+t*9;
- out.push({v:[v(faceX+s*.004,.045,a-.25),v(faceX+s*.004,.18,a-.10),v(faceX+s*.004,.18,a+.10),v(faceX+s*.004,.045,a+.25)],color:'#D0B99A'});}
+ return {s,z,fixed};
+}
+const wheels=[makeWheel(-1,-1.35),makeWheel(1,-1.35),makeWheel(-1,1.35),makeWheel(1,1.35)];
+const staticFaces=[...faces,...wheels.flatMap(w=>w.fixed)];
+function spokes(w:Wheel,t:number):Face[]{
+ const out:Face[]=[],x=w.s*.953;
+ const v=(r:number,a:number):V=>[x,.35+Math.cos(a)*r,w.z+Math.sin(a)*r];
+ for(let i=0;i<5;i++){const a=i*TAU/5+t*9;out.push({v:[v(.045,a-.25),v(.18,a-.10),v(.18,a+.10),v(.045,a+.25)],color:'#D0B99A'});}
  return out;
 }
 export function drawHeroCar(c:C,x:number,y:number,scale:number,t:number,yaw=.48,warm=false){
@@ -66,7 +72,7 @@ export function drawHeroCar(c:C,x:number,y:number,scale:number,t:number,yaw=.48,
  const shadow=[ground([-1.07,0,-2.15]),ground([1.07,0,-2.15]),ground([1.1,0,2.18]),ground([-1.1,0,2.18])];
  const poly=(p:P[])=>{c.beginPath();p.forEach((v,i)=>i?c.lineTo(v.x,v.y):c.moveTo(v.x,v.y));c.closePath();};
  c.save();poly(shadow);c.fillStyle='rgba(8,12,19,.52)';c.fill();
- const all=[...faces,...wheel(-1,-1.35,t),...wheel(1,-1.35,t),...wheel(-1,1.35,t),...wheel(1,1.35,t)];
+ const all=[...staticFaces,...wheels.flatMap(w=>spokes(w,t))];
  const projected=all.map(f=>{const p=f.v.map(project);return {f,p,d:p.reduce((n,v)=>n+v.d,0)/p.length};}).sort((a,b)=>a.d-b.d);
  for(const {f,p} of projected){
   // Lamp decals live on the two end panels. Do not paint the hidden end's glow.
