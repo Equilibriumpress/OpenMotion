@@ -26,13 +26,13 @@
   },
   "scenes": [
     {
-      "id": "ths-04-1",
-      "name": "Shared situation",
-      "durationSec": 4,
+      "id": "ths-04-v23-1",
+      "name": "Opening event",
+      "durationSec": 5,
       "layout": "doodle-explainer",
       "transition": "fade",
       "backdrop": "dot-matrix",
-      "headline": "One more favour?",
+      "headline": "Opening event",
       "caption": "",
       "fullBleed": true,
       "doodle": {
@@ -44,130 +44,183 @@
         "extras": [
           "mind-series-v1",
           "human-side-v1",
-          "shot:message",
-          "episode:04",
-          "message:Could you help me tonight?",
-          "pose-a:phone",
-          "pose-b:phone",
-          "face-a:surprise",
-          "face-b:neutral",
-          "cover-pose-a:crossed",
-          "cover-pose-b:relief",
-          "cover-face-a:worry",
-          "cover-face-b:relief",
           "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
+          "episode:04",
           "theme:boundaries",
+          "film:event",
+          "shot:setup",
           "cover-title:SAYING YES|SETTING LIMITS",
-          "cover-hook:One more favour?"
-        ],
-        "shirtColor": "#C5A8D0",
-        "highlightColor": "#191619",
-        "narration": "One more favour? Two responses."
-      }
-    },
-    {
-      "id": "ths-04-2",
-      "name": "Response A",
-      "durationSec": 6,
-      "layout": "doodle-explainer",
-      "transition": "fade",
-      "backdrop": "dot-matrix",
-      "headline": "Sure... I guess.",
-      "caption": "",
-      "fullBleed": true,
-      "doodle": {
-        "setting": "standing",
-        "palette": "cream",
-        "mood": "worried",
-        "pose": "neutral",
-        "emphasis": [],
-        "extras": [
-          "mind-series-v1",
-          "human-side-v1",
-          "shot:worry",
-          "episode:04",
-          "label-a:I should say yes.",
-          "pose-a:crossed",
-          "face-a:worry",
-          "human-side-v2",
-          "theme:boundaries"
-        ],
-        "shirtColor": "#C5A8D0",
-        "highlightColor": "#191619",
-        "narration": "One says yes. Another task lands on an already crowded evening."
-      }
-    },
-    {
-      "id": "ths-04-3",
-      "name": "Response B",
-      "durationSec": 6,
-      "layout": "doodle-explainer",
-      "transition": "fade",
-      "backdrop": "dot-matrix",
-      "headline": "Not tonight, sorry.",
-      "caption": "",
-      "fullBleed": true,
-      "doodle": {
-        "setting": "standing",
-        "palette": "cream",
-        "mood": "relaxed",
-        "pose": "neutral",
-        "emphasis": [],
-        "extras": [
-          "mind-series-v1",
-          "human-side-v1",
-          "shot:calm",
-          "episode:04",
-          "label-b:Not tonight, sorry.",
-          "pose-b:relief",
-          "face-b:relief",
-          "human-side-v2",
-          "theme:boundaries"
-        ],
-        "shirtColor": "#C5A8D0",
-        "highlightColor": "#191619",
-        "narration": "The other checks their schedule and says, not tonight. Tomorrow works for me."
-      }
-    },
-    {
-      "id": "ths-04-4",
-      "name": "Contrast",
-      "durationSec": 6,
-      "layout": "doodle-explainer",
-      "transition": "fade",
-      "backdrop": "dot-matrix",
-      "headline": "Approval or capacity?",
-      "caption": "",
-      "fullBleed": true,
-      "doodle": {
-        "setting": "standing",
-        "palette": "cream",
-        "mood": "worried",
-        "pose": "neutral",
-        "emphasis": [],
-        "extras": [
-          "mind-series-v1",
-          "human-side-v1",
-          "shot:contrast",
-          "episode:04",
+          "cover-hook:One more favour?",
+          "message:Could you help me tonight?",
           "label-a:I should say yes.",
           "label-b:Not tonight, sorry.",
-          "pose-a:crossed",
-          "pose-b:relief",
-          "face-a:worry",
-          "face-b:relief",
-          "human-side-v2",
-          "theme:boundaries"
+          "reply:Tomorrow works too. Thanks!",
+          "prop-tasks:WORK|ERRANDS|DINNER|ONE MORE"
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "Both want to help. One overlooks their own capacity to avoid disappointing someone."
+        "narration": "Could you help me tonight?"
       }
     },
     {
-      "id": "ths-04-5",
-      "name": "More context",
-      "durationSec": 6,
+      "id": "ths-04-v23-2",
+      "name": "Emotional reaction",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Emotional reaction",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
+          "episode:04",
+          "theme:boundaries",
+          "film:reaction",
+          "shot:build",
+          "message:Could you help me tonight?",
+          "label-a:I should say yes.",
+          "label-b:Not tonight, sorry.",
+          "reply:Tomorrow works too. Thanks!",
+          "prop-tasks:WORK|ERRANDS|DINNER|ONE MORE"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "One says yes. Another task joins the pile."
+      }
+    },
+    {
+      "id": "ths-04-v23-3",
+      "name": "Physical action",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Physical action",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
+          "episode:04",
+          "theme:boundaries",
+          "film:action",
+          "shot:build",
+          "message:Could you help me tonight?",
+          "label-a:I should say yes.",
+          "label-b:Not tonight, sorry.",
+          "reply:Tomorrow works too. Thanks!",
+          "prop-tasks:WORK|ERRANDS|DINNER|ONE MORE"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "The other says, not tonight. Tomorrow works for me."
+      }
+    },
+    {
+      "id": "ths-04-v23-4",
+      "name": "Turning point",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Turning point",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
+          "episode:04",
+          "theme:boundaries",
+          "film:turn",
+          "shot:turn",
+          "message:Could you help me tonight?",
+          "label-a:I should say yes.",
+          "label-b:Not tonight, sorry.",
+          "reply:Tomorrow works too. Thanks!",
+          "prop-tasks:WORK|ERRANDS|DINNER|ONE MORE"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "Both want to help, but their capacity matters too."
+      }
+    },
+    {
+      "id": "ths-04-v23-5",
+      "name": "A different response",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "A different response",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
+          "episode:04",
+          "theme:boundaries",
+          "film:change",
+          "shot:change",
+          "message:Could you help me tonight?",
+          "label-a:I should say yes.",
+          "label-b:Not tonight, sorry.",
+          "reply:Tomorrow works too. Thanks!",
+          "prop-tasks:WORK|ERRANDS|DINNER|ONE MORE"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "The reply comes back. Tomorrow works too."
+      }
+    },
+    {
+      "id": "ths-04-v23-6",
+      "name": "Final reflection",
+      "durationSec": 4,
       "layout": "doodle-explainer",
       "transition": "fade",
       "backdrop": "dot-matrix",
@@ -177,132 +230,144 @@
       "doodle": {
         "setting": "standing",
         "palette": "cream",
-        "mood": "happy",
+        "mood": "surprised",
         "pose": "neutral",
         "emphasis": [],
         "extras": [
           "mind-series-v1",
           "human-side-v1",
-          "shot:reveal",
-          "episode:04",
-          "message:Tomorrow works too. Thanks!",
-          "pose-a:relief",
-          "pose-b:calm",
-          "face-a:relief",
-          "face-b:smile",
           "human-side-v2",
-          "theme:boundaries"
+          "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
+          "episode:04",
+          "theme:boundaries",
+          "film:ending",
+          "shot:resolve",
+          "message:Could you help me tonight?",
+          "label-a:I should say yes.",
+          "label-b:Not tonight, sorry.",
+          "reply:Tomorrow works too. Thanks!",
+          "prop-tasks:WORK|ERRANDS|DINNER|ONE MORE"
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "Tomorrow works too. A clear limit leaves room for another solution."
+        "narration": "A limit need not mean rejection."
       }
     }
   ],
   "captions": [
     {
-      "text": "One more favour? Two responses.",
+      "text": "Could you help me",
       "startSec": 1.5,
-      "endSec": 3.55,
+      "endSec": 3.7,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "One says yes. Another task",
-      "startSec": 4.3,
-      "endSec": 6.686,
+      "text": "tonight?",
+      "startSec": 3.7,
+      "endSec": 4.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "lands on an already crowded",
-      "startSec": 6.686,
-      "endSec": 9.073,
+      "text": "One says yes. Another",
+      "startSec": 5.3,
+      "endSec": 6.925,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "evening.",
-      "startSec": 9.073,
-      "endSec": 9.55,
+      "text": "task joins the pile.",
+      "startSec": 6.925,
+      "endSec": 8.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "The other checks their schedule",
-      "startSec": 10.3,
-      "endSec": 12.319,
+      "text": "The other says, not",
+      "startSec": 9.3,
+      "endSec": 10.744,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "and says, not tonight. Tomorrow",
-      "startSec": 12.319,
-      "endSec": 14.338,
+      "text": "tonight. Tomorrow works for",
+      "startSec": 10.744,
+      "endSec": 12.189,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "works for me.",
-      "startSec": 14.338,
-      "endSec": 15.55,
+      "text": "me.",
+      "startSec": 12.189,
+      "endSec": 12.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "Both want to help. One",
-      "startSec": 16.3,
-      "endSec": 18.319,
+      "text": "Both want to help,",
+      "startSec": 13.3,
+      "endSec": 14.744,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "overlooks their own capacity to",
-      "startSec": 18.319,
-      "endSec": 20.338,
+      "text": "but their capacity matters",
+      "startSec": 14.744,
+      "endSec": 16.189,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "avoid disappointing someone.",
-      "startSec": 20.338,
-      "endSec": 21.55,
+      "text": "too.",
+      "startSec": 16.189,
+      "endSec": 16.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "Tomorrow works too. A clear",
-      "startSec": 22.3,
-      "endSec": 24.686,
+      "text": "The reply comes back.",
+      "startSec": 17.3,
+      "endSec": 19.157,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "limit leaves room for another",
-      "startSec": 24.686,
-      "endSec": 27.073,
+      "text": "Tomorrow works too.",
+      "startSec": 19.157,
+      "endSec": 20.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "solution.",
-      "startSec": 27.073,
-      "endSec": 27.55,
+      "text": "A limit need not",
+      "startSec": 21.3,
+      "endSec": 23.467,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
+    },
+    {
+      "text": "mean rejection.",
+      "startSec": 23.467,
+      "endSec": 24.55,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 64
     }
   ],
   "audioTracks": [
@@ -311,7 +376,7 @@
       "kind": "voiceover",
       "src": "assets/audio/the-human-side-04-boundaries-voice.mp3",
       "startSec": 0,
-      "endSec": 28,
+      "endSec": 25,
       "volume": 1
     },
     {
@@ -319,7 +384,7 @@
       "kind": "music",
       "src": "assets/audio/the-human-side-04-boundaries-score.mp3",
       "startSec": 0,
-      "endSec": 28,
+      "endSec": 25,
       "volume": 0.15,
       "fadeInSec": 0.3,
       "fadeOutSec": 1
@@ -329,7 +394,7 @@
       "kind": "effect",
       "src": "assets/audio/the-human-side-04-boundaries-human-sfx.wav",
       "startSec": 0,
-      "endSec": 28,
+      "endSec": 25,
       "volume": 0.48
     }
   ],
@@ -337,7 +402,7 @@
   "seriesId": "the-human-side",
   "season": 1,
   "episodeNumber": 4,
-  "templateVersion": "2.0",
+  "templateVersion": "2.3",
   "productionStatus": "review",
-  "thumbnailUrl": "assets/the-human-side/v2/the-human-side-04-boundaries.svg"
+  "thumbnailUrl": "assets/the-human-side/v23/the-human-side-04-boundaries.svg"
 }
