@@ -39,7 +39,7 @@ export function projectKind(p: OpenMotionProject): ProjectKind {
   return 'video';
 }
 export function seriesEpisodes(projects: OpenMotionProject[], id: string) {
-  return projects.filter(p => episodeInfo(p)?.seriesId === id && projectKind(p) !== 'template')
+  return projects.filter(p => episodeInfo(p)?.seriesId === id && projectKind(p) === 'video')
     .sort((a,b) => (episodeInfo(a)?.season ?? 1) - (episodeInfo(b)?.season ?? 1) || (episodeInfo(a)?.episodeNumber || 9999) - (episodeInfo(b)?.episodeNumber || 9999) || a.title.localeCompare(b.title));
 }
 export function nextEpisode(projects: OpenMotionProject[], id: string) {

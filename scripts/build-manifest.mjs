@@ -27,6 +27,9 @@ function enrichCatalog(p){
 const escapeXml=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
 function writePoster(p){
   if(!/^[a-zA-Z0-9_-]+$/.test(p.slug))return;
+  const localImage=s=>typeof s==='string'&&/^(?:assets|thumbnails)\/(?:[a-zA-Z0-9_-]+\/)*[a-zA-Z0-9_.-]+\.(?:png|jpe?g|webp|svg)$/i.test(s)&&fs.existsSync(path.join(rootDir,'public',s));
+  const cover=[p.thumbnailUrl,...(p.scenes??[]).map(s=>s.imageUrl)].find(localImage);
+  if(cover){p.thumbnailUrl=cover;return;}
   const kit=p.brandKit??{};
   const color=(s,fallback)=>typeof s==='string'&&/^#[a-fA-F0-9]{3,8}$/.test(s)?s:fallback;
   const bg=color(kit.backgroundColor,'#142333'),fg=color(kit.textColor,'#ffffff'),accent=color(kit.accentColor,'#93c5fd');

@@ -45,7 +45,7 @@ Why Things Work is voorlopig leeg: de eerste aflevering staat nog niet op main.
 
 ## Bibliotheek
 
-De manifestgenerator genereert statische SVG-titelkaarten in public/thumbnails.
+De manifestgenerator gebruikt een opgegeven lokale afbeelding of een beschikbare lokale scèneafbeelding; anders maakt hij statische SVG-titelkaarten in public/thumbnails.
 Dit zijn grafische posters, geen gerenderde videoframes. Live preview blijft in Studio.
 Gebruik kind=template voor voorbeelden en kind=experiment voor het archief. De
 bestaande voorbeelden en legacy video's zijn expliciet ingedeeld in de catalogus.

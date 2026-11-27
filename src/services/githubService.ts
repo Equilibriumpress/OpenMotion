@@ -417,7 +417,7 @@ export function normalizeOpenMotionProject(
     episodeNumber: typeof obj.episodeNumber === 'number' && Number.isInteger(obj.episodeNumber) && obj.episodeNumber > 0 ? obj.episodeNumber : undefined,
     templateVersion: typeof obj.templateVersion === 'string' ? obj.templateVersion : undefined,
     productionStatus: ['concept','script','production','review','approved','exported','published'].includes(String(obj.productionStatus)) ? obj.productionStatus as OpenMotionProject['productionStatus'] : undefined,
-    thumbnailUrl: typeof obj.thumbnailUrl === 'string' && /^thumbnails\/[a-zA-Z0-9_-]+\.svg$/.test(obj.thumbnailUrl) ? obj.thumbnailUrl : undefined,
+    thumbnailUrl: typeof obj.thumbnailUrl === 'string' && /^(?:assets|thumbnails)\/(?:[a-zA-Z0-9_-]+\/)*[a-zA-Z0-9_.-]+\.(?:png|jpe?g|webp|svg)$/i.test(obj.thumbnailUrl) ? obj.thumbnailUrl : undefined,
     id: typeof obj.id === 'string' && obj.id ? obj.id : `om-${slugBase}-${Date.now().toString(36)}`,
     slug: slugBase,
     title,

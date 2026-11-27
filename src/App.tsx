@@ -67,6 +67,7 @@ function parseHashRoute(projects: OpenMotionProject[]): {
     return {tab:'series',seriesId:seriesById(id)?.id};
   }
   if (raw === 'chatgpt') return { tab: 'chatgpt' };
+  if(raw.startsWith('chatgpt/'))return {tab:'chatgpt',seriesId:seriesById(raw.slice('chatgpt/'.length))?.id};
   if (raw === 'github') return { tab: 'github' };
   if (raw === 'studio') return { tab: 'studio' };
   if (raw.startsWith('studio/')) {
@@ -79,10 +80,10 @@ function parseHashRoute(projects: OpenMotionProject[]): {
 
 export default function App() {
   const [projects, setProjects] = useState<OpenMotionProject[]>(loadSavedProjects);
-  const initialRoute = parseHashRoute(projects);
+  const [initialRoute] = useState(()=>parseHashRoute(projects));
   const [activeTab, setActiveTab] = useState<AppTab>(initialRoute.tab);
   const [selectedSeriesId, setSelectedSeriesId] = useState<string|null>(initialRoute.seriesId??null);
-  const [workflowSeries, setWorkflowSeries] = useState<SeriesDefinition|undefined>();
+  const [workflowSeries, setWorkflowSeries] = useState<SeriesDefinition|undefined>(()=>initialRoute.tab==='chatgpt'?seriesById(initialRoute.seriesId):undefined);
   const [menuOpen, setMenuOpen] = useState(false);
   const returnTabRef = useRef<WorkspaceTab>(initialRoute.tab === 'studio' ? 'library' : 'dashboard');
   const returnSeriesRef = useRef<string|null>(null);
@@ -93,8 +94,8 @@ export default function App() {
     if (tab==='chatgpt') setWorkflowSeries(undefined);
     setActiveTab(tab);
   };
-  const openSeries = (id:string|null) => {setSelectedSeriesId(id);setActiveTab('series');setMenuOpen(false);};
-  const newEpisode = (s:SeriesDefinition) => {setWorkflowSeries(s);setActiveTab('chatgpt');setMenuOpen(false);};
+  const openSeries = (id:string|null) => {pendingDeepLinkSlugRef.current=null;setSelectedSeriesId(id);setActiveTab('series');setMenuOpen(false);};
+  const newEpisode = (s:SeriesDefinition) => {pendingDeepLinkSlugRef.current=null;setWorkflowSeries(s);setActiveTab('chatgpt');setMenuOpen(false);};
   const [selectedProjectId, setSelectedProjectId] = useState<string>(
     () => initialRoute.projectId ?? projects[0]?.id ?? SAMPLE_OPENMOTION_PROJECTS[0].id
   );
@@ -114,18 +115,18 @@ export default function App() {
     const desiredHash =
       activeTab === 'studio' && current
         ? `#studio/${encodeURIComponent(current.slug)}`
-        : activeTab === 'series' && selectedSeriesId ? `#series/${selectedSeriesId}` : `#${activeTab}`;
+        : activeTab === 'series' && selectedSeriesId ? `#series/${selectedSeriesId}` : activeTab==='chatgpt'&&workflowSeries ? `#chatgpt/${workflowSeries.id}` : `#${activeTab}`;
     if (window.location.hash !== desiredHash) {
       window.history.replaceState(null, '', desiredHash);
     }
-  }, [activeTab, selectedProjectId, selectedSeriesId, projects]);
+  }, [activeTab, selectedProjectId, selectedSeriesId, workflowSeries, projects]);
 
   useEffect(() => {
     const onHashChange = () => {
       const parsed = parseHashRoute(projects);
       setActiveTab(parsed.tab);
       setSelectedSeriesId(parsed.seriesId??null);
-      setWorkflowSeries(undefined);
+      setWorkflowSeries(parsed.tab==='chatgpt'?seriesById(parsed.seriesId):undefined);
       pendingDeepLinkSlugRef.current=parsed.requestedSlug&&!parsed.projectId?parsed.requestedSlug:null;
       if (parsed.projectId) {
         setSelectedProjectId(parsed.projectId);
@@ -198,6 +199,7 @@ export default function App() {
     projects.find((p) => p.id === selectedProjectId) ?? projects[0] ?? SAMPLE_OPENMOTION_PROJECTS[0];
 
   const handleOpenStudio = (project: OpenMotionProject, startExport = false) => {
+    pendingDeepLinkSlugRef.current=null;
     const ep=episodeInfo(project);
     returnTabRef.current=activeTab==='templates'||activeTab==='archive'||activeTab==='dashboard'||activeTab==='library'?activeTab:ep?'series':'library';
     returnSeriesRef.current=ep?.seriesId??null;
