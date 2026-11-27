@@ -411,6 +411,13 @@ export function normalizeOpenMotionProject(
 
   const project: OpenMotionProject = {
     schemaVersion: '1.0',
+    kind: obj.kind === 'video' || obj.kind === 'template' || obj.kind === 'experiment' ? obj.kind : undefined,
+    seriesId: typeof obj.seriesId === 'string' ? obj.seriesId : undefined,
+    season: typeof obj.season === 'number' && Number.isInteger(obj.season) && obj.season > 0 ? obj.season : undefined,
+    episodeNumber: typeof obj.episodeNumber === 'number' && Number.isInteger(obj.episodeNumber) && obj.episodeNumber > 0 ? obj.episodeNumber : undefined,
+    templateVersion: typeof obj.templateVersion === 'string' ? obj.templateVersion : undefined,
+    productionStatus: ['concept','script','production','review','approved','exported','published'].includes(String(obj.productionStatus)) ? obj.productionStatus as OpenMotionProject['productionStatus'] : undefined,
+    thumbnailUrl: typeof obj.thumbnailUrl === 'string' && /^(?:assets|thumbnails)\/(?:[a-zA-Z0-9_-]+\/)*[a-zA-Z0-9_.-]+\.(?:png|jpe?g|webp|svg)$/i.test(obj.thumbnailUrl) ? obj.thumbnailUrl : undefined,
     id: typeof obj.id === 'string' && obj.id ? obj.id : `om-${slugBase}-${Date.now().toString(36)}`,
     slug: slugBase,
     title,
@@ -455,7 +462,7 @@ export function normalizeOpenMotionProject(
       textColor: typeof rawBrand.textColor === 'string' ? rawBrand.textColor : '#F8FAFC',
       mutedColor: typeof rawBrand.mutedColor === 'string' ? rawBrand.mutedColor : '#94A3B8',
       fontFamily:
-        rawBrand.fontFamily === 'Plus Jakarta Sans' || rawBrand.fontFamily === 'JetBrains Mono'
+        rawBrand.fontFamily === 'Plus Jakarta Sans' || rawBrand.fontFamily === 'JetBrains Mono' || rawBrand.fontFamily === 'Kalam' || rawBrand.fontFamily === 'Inter' || rawBrand.fontFamily === 'Georgia'
           ? rawBrand.fontFamily
           : 'Bricolage Grotesque',
     },

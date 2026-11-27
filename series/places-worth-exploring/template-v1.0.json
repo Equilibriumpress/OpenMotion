@@ -1,0 +1,1394 @@
+{
+  "version": "1.0",
+  "format": "16:9",
+  "fps": 60,
+  "durationSec": 207,
+  "referenceProject": "places-worth-exploring-001-okinawa",
+  "templatePath": "series/places-worth-exploring/template-v1.0.json",
+  "instructions": "Gebruik het bestaande documentaireformaat, geografische kaarten, foto/video, voice-over, broncredits en ondertiteling.",
+  "brandKit": {
+    "brandName": "PLACES WORTH EXPLORING",
+    "primaryColor": "#102B3B",
+    "accentColor": "#80D7D0",
+    "backgroundColor": "#102B3B",
+    "surfaceColor": "#168C9E",
+    "textColor": "#FAFAF7",
+    "mutedColor": "#F1E9D7",
+    "fontFamily": "Inter"
+  },
+  "seriesId": "places-worth-exploring",
+  "exampleScenes": [
+    {
+      "id": "shot-01",
+      "name": "01 · Haneji Inland Sea",
+      "durationSec": 3,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Haneji Inland Sea",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "reason",
+        "reasonTitle": "Haneji Inland Sea",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 1,
+          "narration": "Japan is often associated with crowded cities, mountain temples and cherry blossoms. Far to the south, Okinawa offers a different view of the country.",
+          "composition": "clean",
+          "photoMotion": "push",
+          "series": "places-worth-exploring",
+          "videoGrid": {
+            "fps": 20,
+            "cols": 10,
+            "rows": 6,
+            "frameWidth": 640,
+            "frameHeight": 360,
+            "frames": 60
+          }
+        },
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Drone_flyover_video_of_the_Haneji_Inland_Sea%2C_Okinawa_Prefecture.webm"
+      },
+      "imageUrl": "assets/places-worth-exploring/places-worth-exploring-001-okinawa/shot-01.jpg"
+    },
+    {
+      "id": "shot-02",
+      "name": "01 · Beneath the surface",
+      "durationSec": 3,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Beneath the surface",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "reason",
+        "reasonTitle": "Beneath the surface",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 1,
+          "narration": "",
+          "composition": "clean",
+          "photoMotion": "pan",
+          "series": "places-worth-exploring"
+        },
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Coral_reef_life_near_Akajima_01.jpg"
+      },
+      "imageUrl": "assets/places-worth-exploring/places-worth-exploring-001-okinawa/shot-02.jpg"
+    },
+    {
+      "id": "shot-03",
+      "name": "01 · Kerama coast",
+      "durationSec": 3,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Kerama coast",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "reason",
+        "reasonTitle": "Kerama coast",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 1,
+          "narration": "",
+          "composition": "clean",
+          "photoMotion": "pull",
+          "series": "places-worth-exploring"
+        },
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Furuzamami_beach_Okinawa_Zamami.jpg"
+      },
+      "imageUrl": "assets/places-worth-exploring/places-worth-exploring-001-okinawa/shot-03.jpg"
+    },
+    {
+      "id": "shot-04",
+      "name": "01 · OKINAWA",
+      "durationSec": 3,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "OKINAWA",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "reason",
+        "reasonTitle": "OKINAWA",
+        "documentary": {
+          "mode": "title",
+          "chapter": 1,
+          "narration": "",
+          "composition": "title",
+          "photoMotion": "hold",
+          "series": "places-worth-exploring"
+        },
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Yonaha_Bay_in_Miyako_Island.jpg"
+      },
+      "subheadline": "Japan beyond the mainland",
+      "imageUrl": "assets/places-worth-exploring/places-worth-exploring-001-okinawa/shot-04.jpg"
+    },
+    {
+      "id": "shot-05",
+      "name": "02 · East Asia",
+      "durationSec": 10,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "East Asia",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "zoom",
+        "reasonTitle": "East Asia",
+        "documentary": {
+          "mode": "map",
+          "chapter": 2,
+          "narration": "The Ryukyu island chain stretches southwest from the Japanese mainland toward Taiwan. Okinawa Prefecture includes several island groups, scattered across warm subtropical seas. Our journey begins on the largest island.",
+          "composition": "map",
+          "photoMotion": "push",
+          "series": "places-worth-exploring",
+          "from": [
+            133,
+            34,
+            3
+          ],
+          "to": [
+            128,
+            28.5,
+            5
+          ],
+          "markers": [
+            {
+              "label": "Japan",
+              "lon": 138,
+              "lat": 35.5
+            },
+            {
+              "label": "Taiwan",
+              "lon": 121,
+              "lat": 23.7
+            },
+            {
+              "label": "Okinawa",
+              "lon": 127.98,
+              "lat": 26.48
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "shot-06",
+      "name": "02 · The Ryukyu Islands",
+      "durationSec": 10,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "The Ryukyu Islands",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "zoom",
+        "reasonTitle": "The Ryukyu Islands",
+        "documentary": {
+          "mode": "map",
+          "chapter": 2,
+          "narration": "",
+          "composition": "map",
+          "photoMotion": "pan",
+          "series": "places-worth-exploring",
+          "from": [
+            128,
+            28.5,
+            5
+          ],
+          "to": [
+            127.85,
+            26.5,
+            8
+          ],
+          "markers": [
+            {
+              "label": "Okinawa",
+              "lon": 127.98,
+              "lat": 26.48
+            },
+            {
+              "label": "Kerama",
+              "lon": 127.33,
+              "lat": 26.2
+            },
+            {
+              "label": "Miyako",
+              "lon": 125.3,
+              "lat": 24.8
+            },
+            {
+              "label": "Ishigaki",
+              "lon": 124.15,
+              "lat": 24.4
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "shot-07",
+      "name": "03 · Cape Manzamo",
+      "durationSec": 5,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Cape Manzamo",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "reason",
+        "reasonTitle": "Cape Manzamo",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 3,
+          "narration": "On Okinawa's main island, limestone cliffs rise above the sea at Cape Manzamo. The coast gives way to the streets of Naha, the prefectural capital. Further north, the sheltered waters of Haneji reveal another side of the island.",
+          "composition": "lower",
+          "photoMotion": "pull",
+          "series": "places-worth-exploring"
+        },
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Onna_Okinawa_Japan_Cape-Manzamo-01.jpg"
+      },
+      "imageUrl": "assets/places-worth-exploring/places-worth-exploring-001-okinawa/shot-07.jpg"
+    },
+    {
+      "id": "shot-08",
+      "name": "03 · Limestone coast",
+      "durationSec": 5,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Limestone coast",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "reason",
+        "reasonTitle": "Limestone coast",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 3,
+          "narration": "",
+          "composition": "clean",
+          "photoMotion": "hold",
+          "series": "places-worth-exploring"
+        },
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Cape_Manzamo%2C_Onna%2C_Okinawa_-_Feb_17%2C_2019.jpg"
+      },
+      "imageUrl": "assets/places-worth-exploring/places-worth-exploring-001-okinawa/shot-08.jpg"
+    },
+    {
+      "id": "shot-09",
+      "name": "03 · Naha",
+      "durationSec": 5,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Naha",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "reason",
+        "reasonTitle": "Naha",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 3,
+          "narration": "",
+          "composition": "lower",
+          "photoMotion": "push",
+          "series": "places-worth-exploring"
+        },
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Naha_Shuri-jo_View_over_Naha_02.jpg"
+      },
+      "imageUrl": "assets/places-worth-exploring/places-worth-exploring-001-okinawa/shot-09.jpg"
+    },
+    {
+      "id": "shot-10",
+      "name": "03 · Kokusai-dori",
+      "durationSec": 5,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Kokusai-dori",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "reason",
+        "reasonTitle": "Kokusai-dori",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 3,
+          "narration": "",
+          "composition": "clean",
+          "photoMotion": "pan",
+          "series": "places-worth-exploring"
+        },
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Kokusai_Dori_01.JPG"
+      },
+      "imageUrl": "assets/places-worth-exploring/places-worth-exploring-001-okinawa/shot-10.jpg"
+    },
+    {
+      "id": "shot-11",
+      "name": "03 · Haneji Inland Sea",
+      "durationSec": 5,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Haneji Inland Sea",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "reason",
+        "reasonTitle": "Haneji Inland Sea",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 3,
+          "narration": "",
+          "composition": "lower",
+          "photoMotion": "pull",
+          "series": "places-worth-exploring",
+          "videoGrid": {
+            "fps": 20,
+            "cols": 10,
+            "rows": 10,
+            "frameWidth": 640,
+            "frameHeight": 360,
+            "frames": 100
+          }
+        },
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Drone_flyover_video_of_the_Haneji_Inland_Sea%2C_Okinawa_Prefecture.webm"
+      },
+      "imageUrl": "assets/places-worth-exploring/places-worth-exploring-001-okinawa/shot-11.jpg"
+    },
+    {
+      "id": "shot-12",
+      "name": "04 · Kerama Islands",
+      "durationSec": 4,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Kerama Islands",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "zoom",
+        "reasonTitle": "Kerama Islands",
+        "documentary": {
+          "mode": "map",
+          "chapter": 4,
+          "narration": "West of Naha lie the Kerama Islands. On Tokashiki and Zamami, the coastline alternates between wooded hills, sandy beaches and sheltered bays. Clear water makes the islands a favorite for snorkeling and diving. Ferries link several of the inhabited islands to Naha.",
+          "composition": "map",
+          "photoMotion": "hold",
+          "series": "places-worth-exploring",
+          "from": [
+            127.72,
+            26.22,
+            9
+          ],
+          "to": [
+            127.34,
+            26.21,
+            10
+          ],
+          "markers": [
+            {
+              "label": "Tokashiki",
+              "lon": 127.35,
+              "lat": 26.19
+            },
+            {
+              "label": "Zamami",
+              "lon": 127.3,
+              "lat": 26.23
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "shot-13",
+      "name": "04 · Zamami",
+      "durationSec": 6,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Zamami",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "reason",
+        "reasonTitle": "Zamami",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 4,
+          "narration": "",
+          "composition": "lower",
+          "photoMotion": "push",
+          "series": "places-worth-exploring",
+          "videoGrid": {
+            "fps": 20,
+            "cols": 10,
+            "rows": 12,
+            "frameWidth": 640,
+            "frameHeight": 360,
+            "frames": 120
+          }
+        },
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Japan%2C_Okinawa%2C_Kerama_islands_-_view_from_Zamami_island_2018.webm"
+      },
+      "imageUrl": "assets/places-worth-exploring/places-worth-exploring-001-okinawa/shot-13.jpg"
+    },
+    {
+      "id": "shot-14",
+      "name": "04 · Aharen Beach",
+      "durationSec": 6,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Aharen Beach",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "reason",
+        "reasonTitle": "Aharen Beach",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 4,
+          "narration": "",
+          "composition": "lower",
+          "photoMotion": "pan",
+          "series": "places-worth-exploring"
+        },
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Aharen_Beach_On_Tokashiki_Island_2009_(7384).jpg"
+      },
+      "imageUrl": "assets/places-worth-exploring/places-worth-exploring-001-okinawa/shot-14.jpg"
+    },
+    {
+      "id": "shot-15",
+      "name": "04 · Ri Island",
+      "durationSec": 6,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Ri Island",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "reason",
+        "reasonTitle": "Ri Island",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 4,
+          "narration": "",
+          "composition": "clean",
+          "photoMotion": "pull",
+          "series": "places-worth-exploring"
+        },
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Ri_Island_viewed_from_Tokashiki%2C_Okinawa%3B_January_2020.jpg"
+      },
+      "imageUrl": "assets/places-worth-exploring/places-worth-exploring-001-okinawa/shot-15.jpg"
+    },
+    {
+      "id": "shot-16",
+      "name": "04 · Furuzamami",
+      "durationSec": 6,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Furuzamami",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "reason",
+        "reasonTitle": "Furuzamami",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 4,
+          "narration": "",
+          "composition": "lower",
+          "photoMotion": "hold",
+          "series": "places-worth-exploring"
+        },
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:JAP_Zamami_Furuzamami_Beach.jpg"
+      },
+      "imageUrl": "assets/places-worth-exploring/places-worth-exploring-001-okinawa/shot-16.jpg"
+    },
+    {
+      "id": "shot-17",
+      "name": "05 · Miyako Islands",
+      "durationSec": 5,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Miyako Islands",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "zoom",
+        "reasonTitle": "Miyako Islands",
+        "documentary": {
+          "mode": "map",
+          "chapter": 5,
+          "narration": "Farther southwest, Miyakojima is known for its pale sand and shallow turquoise water. Yonaha Maehama looks across to Kurima Island. Bridges connect several neighboring islands, offering coastal views along the way. At Sunayama, a rocky arch frames the beach.",
+          "composition": "map",
+          "photoMotion": "push",
+          "series": "places-worth-exploring",
+          "from": [
+            127.34,
+            26.21,
+            7
+          ],
+          "to": [
+            125.29,
+            24.8,
+            10
+          ],
+          "markers": [
+            {
+              "label": "Miyakojima",
+              "lon": 125.29,
+              "lat": 24.8
+            },
+            {
+              "label": "Irabu",
+              "lon": 125.18,
+              "lat": 24.83
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "shot-18",
+      "name": "05 · Yonaha Maehama",
+      "durationSec": 5,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Yonaha Maehama",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "reason",
+        "reasonTitle": "Yonaha Maehama",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 5,
+          "narration": "",
+          "composition": "lower",
+          "photoMotion": "pan",
+          "series": "places-worth-exploring"
+        },
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Yonahamaehama_Miyakojima_Okinawa_Japan03bs3s4500.jpg"
+      },
+      "imageUrl": "assets/places-worth-exploring/places-worth-exploring-001-okinawa/shot-18.jpg"
+    },
+    {
+      "id": "shot-19",
+      "name": "05 · Miyako coast",
+      "durationSec": 5,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Miyako coast",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "reason",
+        "reasonTitle": "Miyako coast",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 5,
+          "narration": "",
+          "composition": "clean",
+          "photoMotion": "pull",
+          "series": "places-worth-exploring"
+        },
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Yonahamaehama_Miyakojima_Okinawa_Japan06s3s4592.jpg"
+      },
+      "imageUrl": "assets/places-worth-exploring/places-worth-exploring-001-okinawa/shot-19.jpg"
+    },
+    {
+      "id": "shot-20",
+      "name": "05 · Irabu Bridge",
+      "durationSec": 5,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Irabu Bridge",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "reason",
+        "reasonTitle": "Irabu Bridge",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 5,
+          "narration": "",
+          "composition": "lower",
+          "photoMotion": "hold",
+          "series": "places-worth-exploring"
+        },
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Irabu_Bridge_connecting_Miyako_and_Irabu_islands_(52204289208).jpg"
+      },
+      "imageUrl": "assets/places-worth-exploring/places-worth-exploring-001-okinawa/shot-20.jpg"
+    },
+    {
+      "id": "shot-21",
+      "name": "05 · Sunayama",
+      "durationSec": 5,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Sunayama",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "reason",
+        "reasonTitle": "Sunayama",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 5,
+          "narration": "",
+          "composition": "lower",
+          "photoMotion": "push",
+          "series": "places-worth-exploring"
+        },
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Sunayama_Beach_in_Miyako_Island_%2C_Okinawa_Pref._-_panoramio.jpg"
+      },
+      "imageUrl": "assets/places-worth-exploring/places-worth-exploring-001-okinawa/shot-21.jpg"
+    },
+    {
+      "id": "shot-22",
+      "name": "06 · Yaeyama Islands",
+      "durationSec": 5,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Yaeyama Islands",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "zoom",
+        "reasonTitle": "Yaeyama Islands",
+        "documentary": {
+          "mode": "map",
+          "chapter": 6,
+          "narration": "Ishigaki is the gateway to the Yaeyama Islands. Kabira Bay is among its most distinctive landscapes, with green islets and a sheltered blue lagoon. Swimming is prohibited in the bay. Glass-bottom boats offer a view of the water instead.",
+          "composition": "map",
+          "photoMotion": "pan",
+          "series": "places-worth-exploring",
+          "from": [
+            125.29,
+            24.8,
+            7.5
+          ],
+          "to": [
+            124.15,
+            24.43,
+            10
+          ],
+          "markers": [
+            {
+              "label": "Ishigaki",
+              "lon": 124.16,
+              "lat": 24.42
+            },
+            {
+              "label": "Taketomi",
+              "lon": 124.08,
+              "lat": 24.33
+            },
+            {
+              "label": "Kabira Bay",
+              "lon": 124.14,
+              "lat": 24.46
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "shot-23",
+      "name": "06 · Kabira Bay",
+      "durationSec": 5,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Kabira Bay",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "reason",
+        "reasonTitle": "Kabira Bay",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 6,
+          "narration": "",
+          "composition": "lower",
+          "photoMotion": "pull",
+          "series": "places-worth-exploring"
+        },
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Kabira_Bay_Ishigaki_Island47n3750.jpg"
+      },
+      "imageUrl": "assets/places-worth-exploring/places-worth-exploring-001-okinawa/shot-23.jpg"
+    },
+    {
+      "id": "shot-24",
+      "name": "06 · Kabira lagoon",
+      "durationSec": 5,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Kabira lagoon",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "reason",
+        "reasonTitle": "Kabira lagoon",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 6,
+          "narration": "",
+          "composition": "clean",
+          "photoMotion": "hold",
+          "series": "places-worth-exploring"
+        },
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Kabira_Bay_Ishigaki_Island40bs3s4592.jpg"
+      },
+      "imageUrl": "assets/places-worth-exploring/places-worth-exploring-001-okinawa/shot-24.jpg"
+    },
+    {
+      "id": "shot-25",
+      "name": "06 · Boats in Kabira",
+      "durationSec": 5,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Boats in Kabira",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "reason",
+        "reasonTitle": "Boats in Kabira",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 6,
+          "narration": "",
+          "composition": "clean",
+          "photoMotion": "push",
+          "series": "places-worth-exploring"
+        },
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Kabira_Bay_Ishigaki_Island41s3s4500.jpg"
+      },
+      "imageUrl": "assets/places-worth-exploring/places-worth-exploring-001-okinawa/shot-25.jpg"
+    },
+    {
+      "id": "shot-26",
+      "name": "06 · Ishigaki coast",
+      "durationSec": 5,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Ishigaki coast",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "reason",
+        "reasonTitle": "Ishigaki coast",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 6,
+          "narration": "",
+          "composition": "lower",
+          "photoMotion": "pan",
+          "series": "places-worth-exploring"
+        },
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Ishigaki's_Sunset_beach_(52116054672).jpg"
+      },
+      "imageUrl": "assets/places-worth-exploring/places-worth-exploring-001-okinawa/shot-26.jpg"
+    },
+    {
+      "id": "shot-27",
+      "name": "07 · Coral reefs",
+      "durationSec": 5,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Coral reefs",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "reason",
+        "reasonTitle": "Coral reefs",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 7,
+          "narration": "Beneath the surface, coral reefs provide habitat for a remarkable range of marine life. Fish shelter among coral branches, and sea turtles move through coastal waters. These fragile ecosystems are part of the reason to approach the islands with care.",
+          "composition": "lower",
+          "photoMotion": "pull",
+          "series": "places-worth-exploring"
+        },
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Coral_reef_of_Tonaki_Island_202407.jpg"
+      },
+      "imageUrl": "assets/places-worth-exploring/places-worth-exploring-001-okinawa/shot-27.jpg"
+    },
+    {
+      "id": "shot-28",
+      "name": "07 · Reef life",
+      "durationSec": 5,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Reef life",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "reason",
+        "reasonTitle": "Reef life",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 7,
+          "narration": "",
+          "composition": "clean",
+          "photoMotion": "hold",
+          "series": "places-worth-exploring"
+        },
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Coral_reef_life_near_Akajima_10.jpg"
+      },
+      "imageUrl": "assets/places-worth-exploring/places-worth-exploring-001-okinawa/shot-28.jpg"
+    },
+    {
+      "id": "shot-29",
+      "name": "07 · A redbreast wrasse",
+      "durationSec": 5,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "A redbreast wrasse",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "reason",
+        "reasonTitle": "A redbreast wrasse",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 7,
+          "narration": "",
+          "composition": "clean",
+          "photoMotion": "push",
+          "series": "places-worth-exploring"
+        },
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Cheilinus_fasciatus.jpg"
+      },
+      "imageUrl": "assets/places-worth-exploring/places-worth-exploring-001-okinawa/shot-29.jpg"
+    },
+    {
+      "id": "shot-30",
+      "name": "07 · Hawksbill turtle",
+      "durationSec": 4,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Hawksbill turtle",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "reason",
+        "reasonTitle": "Hawksbill turtle",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 7,
+          "narration": "",
+          "composition": "lower",
+          "photoMotion": "pan",
+          "series": "places-worth-exploring"
+        },
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Hawksbill_sea_turtle%2C_Iriomote_Island%2C_Okinawa%2C_Japan.jpg"
+      },
+      "imageUrl": "assets/places-worth-exploring/places-worth-exploring-001-okinawa/shot-30.jpg"
+    },
+    {
+      "id": "shot-31",
+      "name": "07 · Kerama reef",
+      "durationSec": 4,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Kerama reef",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "reason",
+        "reasonTitle": "Kerama reef",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 7,
+          "narration": "",
+          "composition": "clean",
+          "photoMotion": "pull",
+          "series": "places-worth-exploring"
+        },
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Coral_reef_life_near_Akajima_08.jpg"
+      },
+      "imageUrl": "assets/places-worth-exploring/places-worth-exploring-001-okinawa/shot-31.jpg"
+    },
+    {
+      "id": "shot-32",
+      "name": "08 · Ryukyu heritage",
+      "durationSec": 5,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Ryukyu heritage",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "reason",
+        "reasonTitle": "Ryukyu heritage",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 8,
+          "narration": "Okinawa's identity extends beyond the beaches. The islands were once part of the Ryukyu Kingdom, whose connections reached across East Asia. On Taketomi, stone walls and red tiled roofs line sandy streets. Shisa figures guard homes, while local dishes such as soki soba reflect the islands' own food traditions.",
+          "composition": "lower",
+          "photoMotion": "hold",
+          "series": "places-worth-exploring"
+        },
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Naha_Shuri_Castle02s5s3200.jpg"
+      },
+      "imageUrl": "assets/places-worth-exploring/places-worth-exploring-001-okinawa/shot-32.jpg"
+    },
+    {
+      "id": "shot-33",
+      "name": "08 · Taketomi",
+      "durationSec": 5,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Taketomi",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "reason",
+        "reasonTitle": "Taketomi",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 8,
+          "narration": "",
+          "composition": "lower",
+          "photoMotion": "push",
+          "series": "places-worth-exploring"
+        },
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Taketomi_asatoya.jpg"
+      },
+      "imageUrl": "assets/places-worth-exploring/places-worth-exploring-001-okinawa/shot-33.jpg"
+    },
+    {
+      "id": "shot-34",
+      "name": "08 · Village houses",
+      "durationSec": 6,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Village houses",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "reason",
+        "reasonTitle": "Village houses",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 8,
+          "narration": "",
+          "composition": "clean",
+          "photoMotion": "pan",
+          "series": "places-worth-exploring"
+        },
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Village_in_Taketomi_Island_-_located_at_southwest_Japan.jpg"
+      },
+      "imageUrl": "assets/places-worth-exploring/places-worth-exploring-001-okinawa/shot-34.jpg"
+    },
+    {
+      "id": "shot-35",
+      "name": "08 · Shisa",
+      "durationSec": 5,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Shisa",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "reason",
+        "reasonTitle": "Shisa",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 8,
+          "narration": "",
+          "composition": "clean",
+          "photoMotion": "pull",
+          "series": "places-worth-exploring"
+        },
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:2013-07-23_Shisa_on_roof_at_Taketomijima.jpg"
+      },
+      "imageUrl": "assets/places-worth-exploring/places-worth-exploring-001-okinawa/shot-35.jpg"
+    },
+    {
+      "id": "shot-36",
+      "name": "08 · Soki soba",
+      "durationSec": 6,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Soki soba",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "reason",
+        "reasonTitle": "Soki soba",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 8,
+          "narration": "",
+          "composition": "lower",
+          "photoMotion": "hold",
+          "series": "places-worth-exploring"
+        },
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Soki_Soba_at_Takenoko.jpg"
+      },
+      "imageUrl": "assets/places-worth-exploring/places-worth-exploring-001-okinawa/shot-36.jpg"
+    },
+    {
+      "id": "shot-37",
+      "name": "09 · Miyako at dusk",
+      "durationSec": 5,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Miyako at dusk",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "reason",
+        "reasonTitle": "Miyako at dusk",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 9,
+          "narration": "From reef to village, Okinawa rewards a slower journey. Each island has its own character, and the sea connects them all. It is a side of Japan worth taking the time to explore.",
+          "composition": "clean",
+          "photoMotion": "push",
+          "series": "places-worth-exploring"
+        },
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Sunset_in_Okinawa_(51924272929).jpg"
+      },
+      "imageUrl": "assets/places-worth-exploring/places-worth-exploring-001-okinawa/shot-37.jpg"
+    },
+    {
+      "id": "shot-38",
+      "name": "09 · Okinawa sunset",
+      "durationSec": 5,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Okinawa sunset",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "reason",
+        "reasonTitle": "Okinawa sunset",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 9,
+          "narration": "",
+          "composition": "clean",
+          "photoMotion": "pan",
+          "series": "places-worth-exploring"
+        },
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Sunset_beach_at_Okinawa.jpg"
+      },
+      "imageUrl": "assets/places-worth-exploring/places-worth-exploring-001-okinawa/shot-38.jpg"
+    },
+    {
+      "id": "shot-39",
+      "name": "09 · Kerama from Zamami",
+      "durationSec": 6,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Kerama from Zamami",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "reason",
+        "reasonTitle": "Kerama from Zamami",
+        "documentary": {
+          "mode": "photo",
+          "chapter": 9,
+          "narration": "",
+          "composition": "clean",
+          "photoMotion": "pull",
+          "series": "places-worth-exploring",
+          "videoGrid": {
+            "fps": 20,
+            "cols": 10,
+            "rows": 12,
+            "frameWidth": 640,
+            "frameHeight": 360,
+            "frames": 120
+          }
+        },
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Japan%2C_Okinawa%2C_Kerama_islands_-_view_from_Zamami_island_2018.webm"
+      },
+      "imageUrl": "assets/places-worth-exploring/places-worth-exploring-001-okinawa/shot-39.jpg"
+    },
+    {
+      "id": "shot-40",
+      "name": "09 · OKINAWA · JAPAN",
+      "durationSec": 6,
+      "layout": "bucket-list-zoom",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "OKINAWA · JAPAN",
+      "fullBleed": true,
+      "bucketList": {
+        "episode": 1,
+        "destination": "Okinawa",
+        "region": "Ryukyu Islands",
+        "country": "Japan",
+        "latitude": 26.48,
+        "longitude": 127.98,
+        "chapter": "reason",
+        "reasonTitle": "OKINAWA · JAPAN",
+        "documentary": {
+          "mode": "end",
+          "chapter": 9,
+          "narration": "",
+          "composition": "end",
+          "photoMotion": "hold",
+          "series": "places-worth-exploring"
+        },
+        "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Sunset_-_panoramio_(334).jpg"
+      },
+      "imageUrl": "assets/places-worth-exploring/places-worth-exploring-001-okinawa/shot-40.jpg"
+    }
+  ],
+  "exampleCaptionStyle": null,
+  "exampleAudioTracks": [
+    {
+      "kind": "voiceover",
+      "volume": 1
+    },
+    {
+      "kind": "music",
+      "volume": 0.48,
+      "fadeInSec": 1,
+      "fadeOutSec": 2
+    },
+    {
+      "kind": "effect",
+      "volume": 0.25,
+      "fadeInSec": 1,
+      "fadeOutSec": 2
+    }
+  ]
+}

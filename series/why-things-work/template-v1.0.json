@@ -1,0 +1,23 @@
+{
+  "version": "1.0",
+  "format": "9:16",
+  "fps": 30,
+  "durationSec": 30,
+  "referenceProject": null,
+  "templatePath": "series/why-things-work/template-v1.0.json",
+  "instructions": "Ontwikkel eerst een proefaflevering: Why Airplane Windows Are Round. Controleer bronnen, gebruik duidelijke diagrammen, korte Engelstalige voice-over en captions. Template is voorlopig.",
+  "brandKit": {
+    "brandName": "Why Things Work",
+    "primaryColor": "#173B52",
+    "accentColor": "#D5A34C",
+    "backgroundColor": "#102B3B",
+    "surfaceColor": "#24495D",
+    "textColor": "#F8FAFC",
+    "mutedColor": "#B8CBD4",
+    "fontFamily": "Bricolage Grotesque"
+  },
+  "seriesId": "why-things-work",
+  "exampleScenes": [],
+  "exampleCaptionStyle": null,
+  "exampleAudioTracks": []
+}
