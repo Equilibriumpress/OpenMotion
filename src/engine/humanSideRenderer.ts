@@ -254,15 +254,15 @@ function renderHumanV2(c:C,width:number,height:number,scene:OpenMotionScene,t:nu
  c.save();c.scale(width/W,height/H);background(c,p,pair?370:270,worried ? .12:.78);
  text(c,'THE HUMAN SIDE  /  '+get('episode','01'),270,94,15,p.ink,750);
  // One visual emphasis per shot. Captions are composited by the shared renderer.
- const propY=shot==='message'||shot==='reveal'?286:259;
+ const propY=shot==='message'||shot==='reveal'?286:235;
  if(theme==='waiting'){
   if(shot==='message')phone(c,get('message','No reply yet'),propY,p,time,'SENT');
   else if(shot==='reveal')phone(c,get('message'),propY,p,time,'REPLY');
   else if(shot==='contrast'){clock(c,270,258,37,time,p);thought(c,get('label-a'),141,348,214,p,time);thought(c,get('label-b'),366,348,214,p,time,.35);}
-  else{clock(c,worried?100:424,269,44, time*(worried?1.8:.35),p);thought(c,get(worried?'label-a':'label-b'),270,325,300,p,time,.35);}
+  else{clock(c,worried?100:424,226,40, time*(worried?1.8:.35),p);thought(c,get(worried?'label-a':'label-b'),270,325,300,p,time,.35);}
  }else if(theme==='calendar'){
   calendar(c,270,propY,p,time,shot);
-  if(!pair)thought(c,get(worried?'label-a':'label-b'),270,370,310,p,time,.45);
+  if(!pair)thought(c,get(worried?'label-a':'label-b'),270,315,310,p,time,.45);
  }else if(theme==='boundaries'){
   if(shot==='message'||shot==='reveal')phone(c,get('message'),propY,p,time,shot==='message'?'REQUEST':'REPLY');
   else if(shot==='contrast'){taskStack(c,142,360,p,time,4);taskStack(c,370,360,p,time,1);}
@@ -270,7 +270,7 @@ function renderHumanV2(c:C,width:number,height:number,scene:OpenMotionScene,t:nu
  }else if(theme==='feedback'){
   feedback(c,270,propY,p,time,shot);
   if(shot==='reveal')thought(c,get('message'),270,379,310,p,time,.6);
-  else if(!pair)thought(c,get(worried?'label-a':'label-b'),270,373,300,p,time,.6);
+  else if(!pair)thought(c,get(worried?'label-a':'label-b'),270,315,300,p,time,.6);
  }else{
   if(shot==='message'||shot==='reveal')phone(c,get('message'),propY,p,time,shot==='message'?'NEW MESSAGE':'REPLY');
   else if(shot==='contrast'){thought(c,get('label-a'),140,308,216,p,time);thought(c,get('label-b'),367,308,216,p,time,.35);}
@@ -286,7 +286,7 @@ function renderHumanV2(c:C,width:number,height:number,scene:OpenMotionScene,t:nu
  }else{
   const side=worried?'a':'b',pose=get('pose-'+side,worried?'panic':'calm'),f=face(get('face-'+side),worried?'panic':'smile');
   const shrink=theme==='feedback'&&worried?1-.14*smooth(time/2):1;
-  const scale=1.2*camera*shrink;
+  const scale=(theme==='calendar'||theme==='feedback'?1.09:1.2)*camera*shrink;
   const xpos=270+(worried?-12:12)*u;
   figure(c,xpos,floor,scale,time,pose,f,p,'phone',worried ? .5:1.8,true);
   if(worried)stress(c,xpos-26,480,time,p);
@@ -299,7 +299,7 @@ function renderHumanV2(c:C,width:number,height:number,scene:OpenMotionScene,t:nu
  c.restore();
 }
 
-export function renderHumanSideCover(c:C,width:number,height:number,scene:OpenMotionScene,brand:OpenMotionBrandKit){
+export function renderHumanSideCover(c:C,width:number,height:number,scene:OpenMotionScene,brand:OpenMotionBrandKit,localTime=.3){
  const p:Palette={ink:brand.textColor||INK,bg:brand.backgroundColor||PAPER,light:brand.surfaceColor||LIGHT,shadow:brand.mutedColor||SHADOW};
  c.save();c.scale(width/W,height/H);background(c,p,370,.95);
  if(isHumanSideV2(scene)){
@@ -307,8 +307,9 @@ export function renderHumanSideCover(c:C,width:number,height:number,scene:OpenMo
   rounded(c,130,210,280,38,19,p,p.ink);text(c,'THE HUMAN SIDE  /  '+episode,270,229,17,'#FFFFFF',800);
   lines.forEach((v,i)=>fitText(c,v,270,287+i*58,448,53,p,900));
   const a=coverValue(scene,'cover-pose-a','kneel'),b=coverValue(scene,'cover-pose-b','joy');
-  figure(c,144,735,1.08,1.25,a,face(coverValue(scene,'cover-face-a'),'panic'),p,a,.7,true);
-  figure(c,369,735,1.08,1.25,b,face(coverValue(scene,'cover-face-b'),'joy'),p,b,2,true);
+  const act=1.25+.65*smooth((localTime-.82)/.68);
+  figure(c,144,735,1.08,act,a,face(coverValue(scene,'cover-face-a'),'panic'),p,a,.7,true);
+  figure(c,369,735,1.08,act,b,face(coverValue(scene,'cover-face-b'),'joy'),p,b,2,true);
   if(['panic','worry','sad'].includes(coverValue(scene,'cover-face-a','panic')))stress(c,112,530,1.25,p);
   const hook=coverValue(scene,'cover-hook',coverValue(scene,'message',''));
   if(hook){rounded(c,63,383,414,51,16,p,'#FFFFFF');fitText(c,hook,270,408,382,24,p,650);}
@@ -337,7 +338,7 @@ export function renderHumanSideCover(c:C,width:number,height:number,scene:OpenMo
 
 export function renderHumanSide(c:C,width:number,height:number,scene:OpenMotionScene,localTime:number,brand:OpenMotionBrandKit){
  const t=Math.max(0,Math.min(scene.durationSec,localTime));
- if(t<humanSideCoverDuration(scene)){renderHumanSideCover(c,width,height,scene,brand);return;}
+ if(t<humanSideCoverDuration(scene)){renderHumanSideCover(c,width,height,scene,brand,t);return;}
  if(isHumanSideV2(scene)){renderHumanV2(c,width,height,scene,t,brand);return;}
  const extras=scene.doodle?.extras??[];
  const get=(key:string,fallback='')=>extras.find(x=>x.startsWith(key+':'))?.slice(key.length+1)??fallback;
