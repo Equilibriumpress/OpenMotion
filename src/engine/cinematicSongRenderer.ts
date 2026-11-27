@@ -271,7 +271,15 @@ function pcDrive(c:C,t:number,u:number,angle:string){
   pcRoad(c,t,true);shape(c,'M 0 0 H 540 V 92 L 455 138 H 76 L 0 90 Z','#192A35');
   shape(c,'M 0 0 L 99 100 L 143 635 L 0 786 Z','#1C303A');shape(c,'M 540 0 L 455 100 L 420 647 L 540 785 Z','#1C303A');
   shape(c,'M 0 730 Q 270 650 540 730 V 960 H 0 Z','#22343E');pcLine(c,0,739,540,739,'#8F7863',3);
-  pcPerson(c,140,487,1.15,t,'drive',true);pcPerson(c,410,438,1.40,t,'look',true,true);
+  // The partner has a distinct silhouette, not a copy of the protagonist.
+  c.save();c.translate(132,493);c.rotate(Math.sin(t*.8)*.015);
+  shape(c,'M -26 18 L -32 63 L 24 83 L 39 61 L 22 17 Z','#886D59');
+  shape(c,'M -32 63 Q -92 76 -120 125 L -132 240 H 125 L 87 108 L 39 61 L 24 83 Z','#475B61');
+  shape(c,'M -57 -42 Q -69 -100 -27 -126 Q 14 -148 46 -111 L 59 -67 L 73 -33 L 62 -24 L 59 12 Q 44 43 14 43 L -19 31 Q -46 14 -57 -42 Z','#AB886A');
+  shape(c,'M -63 -13 Q -84 -78 -53 -115 Q -21 -148 28 -130 Q 50 -122 55 -98 L 30 -110 L -6 -76 L -27 -27 Z','#24323A');
+  pcLine(c,38,-55,55,-56,'#2C3034',3);pcLine(c,47,-46,58,-45,'#2C3034',2);
+  stroke(c,'M 73 104 Q 96 138 122 173','#475B61',29);stroke(c,'M 122 173 L 137 185','#AB886A',12);c.restore();
+  pcPerson(c,410,438,1.40,t,'look',true,true);
   oval(c,116,720,69,69,'#1A282E');oval(c,116,720,50,50,'#3F4A4D');pcLine(c,71,720,161,720,'#172B34',9);
   const a=(t*.22)%1;shape(c,'M '+(487-a*255)+' 130 l 19 0 -64 355 -26 0 Z','rgba(255,215,155,.12)');
  }
@@ -294,7 +302,7 @@ function pcCover(c:C,w:number,h:number,s:OpenMotionScene,t:number){
  drawHeroCar(c,354,667,.73,t,.66,true);
  finish(c);box(c,0,0,W,335,grad(c,0,0,0,335,[[0,'rgba(10,25,34,.98)'],[1,'rgba(10,25,34,0)']]));
  text(c,'THE SONG EXPLAINED  /  '+field(s,'episode','01'),270,168,17,pcGold,'center',700);
- text(c,'FAST CAR',270,238,83,pcPaper,'center',900,440);
+ text(c,field(s,'cover-title','FAST CAR'),270,238,83,pcPaper,'center',900,440);
  box(c,217,282,106,3,pcRust);
  text(c,field(s,'artist',''),270,311,18,pcPaper,'center',650);
  text(c,field(s,'cover-hook','More than a car.'),270,733,29,pcPaper,'center',750);
