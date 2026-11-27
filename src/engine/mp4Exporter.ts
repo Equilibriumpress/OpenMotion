@@ -267,8 +267,9 @@ export async function exportProjectToMp4(
   const totalFrames = Math.max(1, Math.ceil(durationSec * fps));
   const bitrate = Math.round(options.bitrateMbps * 1_000_000);
   const strictTravel=isTravelDocumentary(project);
+  const strictHuman=project.seriesId==='the-human-side';
   const strictError='Deze browser ondersteunt geen betrouwbare H.264/AAC-export op de gekozen resolutie en framerate. Gebruik de handmatige GitHub-master voor dit project.';
-  if(strictTravel && !project.audioTracks?.some(t=>t.kind==='voiceover'&&t.src?.trim()))throw new Error('Voice-over ontbreekt in het project. Open de gepubliceerde Studio opnieuw.');
+  if((strictTravel||strictHuman) && !project.audioTracks?.some(t=>t.kind==='voiceover'&&t.src?.trim()))throw new Error('Voice-over ontbreekt in het project. Open de gepubliceerde Studio opnieuw.');
   const travelVideoConfig=strictTravel?await pickSupportedH264Config(width,height,fps,bitrate):null;
   if(strictTravel&&(!travelVideoConfig||!await probeAacEncoder()))throw new Error(strictError);
 
@@ -295,7 +296,7 @@ export async function exportProjectToMp4(
   // A browser may decline 1080×1920 while supporting 720×1280 H.264
   // with AAC. Prefer that encoded-and-muxed result to the Safari
   // MediaRecorder fallback observed to shrink exports to 512×910.
-  if(!strictTravel && !h264Config && audioConfig && Math.max(width,height)>1280) {
+  if(!strictTravel && !strictHuman && !h264Config && audioConfig && Math.max(width,height)>1280) {
     const factor=1280/Math.max(width,height);
     const w=Math.max(2,Math.floor(width*factor/2)*2);
     const h=Math.max(2,Math.floor(height*factor/2)*2);
@@ -470,7 +471,7 @@ async function encodeWithWebCodecsMp4(params: {
     const actual=await actualVideoSize(mp4Blob);
     const measuredFps=await actualMp4FrameRate(mp4Blob);
     const audioTrack=mixedAudio?await containsMp4AudioTrack(mp4Blob):null;
-    if(isTravelDocumentary(project)&&(!actual||actual.width!==width||actual.height!==height||measuredFps===null||Math.abs(measuredFps-fps)>.05||audioTrack!==true))throw new Error('Mastercontrole mislukt: resolutie, framerate of AAC-audiospoor niet bevestigd. Gebruik de handmatige GitHub-master.');
+    if((isTravelDocumentary(project)||project.seriesId==='the-human-side')&&(!actual||actual.width!==width||actual.height!==height||measuredFps===null||Math.abs(measuredFps-fps)>.05||audioTrack!==true))throw new Error('Mastercontrole mislukt: resolutie, framerate of AAC-audiospoor niet bevestigd. Gebruik de handmatige GitHub-master.');
     const verified=measuredFps===null?' · framerate niet geverifieerd':' · gemeten '+measuredFps+' fps';
     const inspected = describeOutput(actual,width,height,`WebCodecs H.264 (${h264Config.codec})`+encoderNote+verified+(audioTrack===true?' · audiotrack gecontroleerd':''));
     const outputUrl = URL.createObjectURL(mp4Blob);
@@ -641,7 +642,11 @@ async function encodeWithMediaRecorderFallback(params: {
     : Math.abs(measuredFps-fps)>.5
       ? ' · LET OP: feitelijk '+measuredFps+' fps (gevraagd '+fps+')'
       : ' · framerate gecontroleerd: '+measuredFps+' fps';
-  const inspected = describeOutput(await actualVideoSize(blob),width,height,`MediaRecorder (${chosenMime})`+audioStatus+fpsStatus);
+  const actual=await actualVideoSize(blob);
+  if(project.seriesId==='the-human-side'&&(!isMp4||!actual||actual.width!==width||actual.height!==height||audioTrackFound!==true||measuredFps===null||Math.abs(measuredFps-fps)>.5)){
+    throw new Error('The Human Side: export afgekeurd. De browser leverde geen MP4 met de gekozen resolutie, framerate en audiospoor. Gebruik de handmatige GitHub-masterexport.');
+  }
+  const inspected = describeOutput(actual,width,height,`MediaRecorder (${chosenMime})`+audioStatus+fpsStatus);
   const outputUrl = URL.createObjectURL(blob);
   const fpsLabel=measuredFps===null?'fps-onbekend':measuredFps+'fps';
   const fileName = `${project.slug}-${inspected.w}x${inspected.h}-${fpsLabel}.${container}`;
