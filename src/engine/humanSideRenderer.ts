@@ -545,10 +545,10 @@ function scrollCloseup(c:C,p:Palette,t:number,interval:number){
  const phase=(t%interval)/interval,swipe=smooth((phase-.12)/.65);
  actionPhone(c,p,270,420,Math.floor(t/interval)*27+swipe*27,true,3.05);
  // Palm, thumb and curved finger remain attached to the forearm.
- curve(c,()=>{c.moveTo(474,699);c.bezierCurveTo(395,663,379,574,367,525);
+ curve(c,()=>{c.moveTo(474,670);c.bezierCurveTo(395,663,379,574,367,525);
  c.quadraticCurveTo(348,485,327,503);c.quadraticCurveTo(306,515,323,543);
  c.lineTo(339,580);c.quadraticCurveTo(302,565,290,582);
- c.quadraticCurveTo(274,614,328,654);c.lineTo(392,735);c.closePath();},p.ink,5,'#FFFFFF');
+ c.quadraticCurveTo(274,614,328,654);c.lineTo(392,697);c.closePath();},p.ink,5,'#FFFFFF');
  const fy=520-112*swipe;
  curve(c,()=>{c.moveTo(341,582);c.quadraticCurveTo(326,fy+44,307,fy);c.quadraticCurveTo(300,fy-13,311,fy-20);},p.ink,7);
  ellipse(c,307,fy,9,9,p.ink);
@@ -565,19 +565,19 @@ function renderHumanV22(c:C,width:number,height:number,scene:OpenMotionScene,t:n
   const hook=coverValue(scene,'cover-hook');if(hook){rounded(c,83,345,374,39,14,p,'#FFFFFF');fitText(c,hook,270,364,348,22,p,650);}
   // Large face and phone form the thumbnail, not a miniature full stage.
   c.save();c.translate(169,538);c.scale(2.7,2.7);drawFace(c,'worry',.3,p,.7);c.restore();
-  actionPhone(c,p,378,568,22,true,2.05);actionClock(c,p,270,748,'23:30',.85);
+  actionPhone(c,p,378,568,22,true,2.05);actionClock(c,p,168,713,'23:30',.72);
   c.restore();return;
  }
  text(c,'THE HUMAN SIDE  /  '+coverValue(scene,'episode','08'),270,102,17,p.ink,750);
  if(shot==='scroll'){
   scrollCloseup(c,p,time,1.05);
  }else if(shot==='time'){
-  const minute=Math.min(90,Math.floor(u*90/15)*15),hh=22+Math.floor(minute/60),mm=String(minute%60).padStart(2,'0');
+  const minute=Math.min(90,Math.floor(u*105/15)*15),hh=22+Math.floor(minute/60),mm=String(minute%60).padStart(2,'0');
   actionClock(c,p,270,225,hh+':'+mm,1.36);
-  actionCamera(c,270,430,1.18,()=>actionHero(c,p,235,floor,time,'stand','neutral',true,105,-191));
+  actionCamera(c,270,470,1.18,()=>actionHero(c,p,235,floor,time,'stand','neutral',true,105,-191));
  }else if(shot==='repeat'){
   const cut=u<.41?0:u<.74?1:2,local=(u-[0,.41,.74][cut])*d;
-  if(cut===1){actionClock(c,p,270,225,'23:15',1.36);actionCamera(c,270,430,1.18,()=>actionHero(c,p,235,floor,local,'stand','worry',true,105,-191));}
+  if(cut===1){actionClock(c,p,270,225,'23:30',1.36);actionCamera(c,270,470,1.18,()=>actionHero(c,p,235,floor,local,'stand','worry',true,105,-191));}
   else {scrollCloseup(c,p,local,cut===0 ? .8 : .43);storyCard(c,p,270,186,coverValue(scene,'prop-title','JUST ONE MORE'),220);}
  }else if(shot==='realize'){
   actionClock(c,p,270,252,'23:30',1.33);
@@ -585,16 +585,16 @@ function renderHumanV22(c:C,width:number,height:number,scene:OpenMotionScene,t:n
   stress(c,270,491,time,p);
  }else if(shot==='place'){
   const walk=clamp(time/2.1),reach=smooth((time-2.1)/.9),release=smooth((time-3)/.45);
-  const x=mix(106,269,walk),gx=mix(79,76,reach),gy=mix(-190,-127,reach);
+  const x=mix(106,269,walk),gx=mix(79,76,reach),gy=mix(-190,-150,reach);
   actionTable(c,p,403,floor);
   if(time<3.0)actionHero(c,p,x,floor,time,time<2.1?'walk':'reach','determined',true,gx,gy,1,reach*Math.PI/2);
   else{
-   actionHero(c,p,269,floor,time,'reach','relief',false,mix(76,55,release),mix(-127,-112,release));
-   c.save();c.translate(381,floor-121);c.rotate(Math.PI/2);actionPhone(c,p,0,0,0,false,.7);c.restore();
+   actionHero(c,p,269,floor,time,'reach','relief',false,mix(76,55,release),mix(-150,-112,release));
+   c.save();c.translate(381,floor-144);c.rotate(Math.PI/2);actionPhone(c,p,0,0,0,false,.7);c.restore();
   }
  }else{
   const settle=smooth(time/.9);
-  actionTable(c,p,403,floor);c.save();c.translate(381,floor-121);c.rotate(Math.PI/2);actionPhone(c,p,0,0,0,false,.7);c.restore();
+  actionTable(c,p,403,floor);c.save();c.translate(381,floor-144);c.rotate(Math.PI/2);actionPhone(c,p,0,0,0,false,.7);c.restore();
   storyChair(c,p,161,floor);
   actionHero(c,p,151,floor,time,'sit','relief',false,0,0,settle);
   if(time>1.3){c.save();c.globalAlpha=smooth((time-1.3)/.35);fitText(c,scene.headline||'Change the cue.',270,226,448,42,p,850);c.restore();}
