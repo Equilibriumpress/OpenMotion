@@ -133,8 +133,8 @@
           "episode:01",
           "label-a:Something is wrong.",
           "label-b:Let's find out.",
-          "pose-a:panic",
-          "pose-b:relief",
+          "pose-a:kneel",
+          "pose-b:joy",
           "face-a:panic",
           "face-b:joy"
         ],
