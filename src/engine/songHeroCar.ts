@@ -69,6 +69,8 @@ export function drawHeroCar(c:C,x:number,y:number,scale:number,t:number,yaw=.48,
  const all=[...faces,...wheel(-1,-1.35,t),...wheel(1,-1.35,t),...wheel(-1,1.35,t),...wheel(1,1.35,t)];
  const projected=all.map(f=>{const p=f.v.map(project);return {f,p,d:p.reduce((n,v)=>n+v.d,0)/p.length};}).sort((a,b)=>a.d-b.d);
  for(const {f,p} of projected){
+  // Lamp decals live on the two end panels. Do not paint the hidden end's glow.
+  const endZ=f.v[0][2];if(f.glow&&endZ*cy<0)continue;
   const n=cross(sub(f.v[1],f.v[0]),sub(f.v[2],f.v[0])),length=Math.hypot(...n)||1;
   const light=(Math.abs(n[1])*.21+Math.abs(n[0])*.06+Math.abs(n[2])*.025)/length;
   const col=shade(f.color,.80+light+(warm ? .12 : 0));
