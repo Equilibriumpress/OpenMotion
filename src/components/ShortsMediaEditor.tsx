@@ -137,11 +137,12 @@ export function ShortsMediaEditor({project,activeScene,onUpdateProject,onUpdateS
       const get=(key:string,fallback='')=>extras.find(x=>x.startsWith(key+':'))?.slice(key.length+1)??fallback;
       const set=(key:string,value:string)=>update({extras:[...extras.filter(x=>!x.startsWith(key+':')),key+':'+value]});
       const cinematic=extras.includes('song-cinematic-v2');
+      const breath=extras.includes('song-breath-v1');
       return <div className="space-y-3">
-        <p className="text-xs font-semibold text-slate-700">The Song Explained · {extras.includes('song-hero-rigs-v21')?'Cinematic v2.1':cinematic?'Cinematic v2':'vectorillustraties'}</p>
+        <p className="text-xs font-semibold text-slate-700">The Song Explained · {breath?'Cinematic v2.1 · Every Breath':extras.includes('song-hero-rigs-v21')?'Cinematic v2.1':cinematic?'Cinematic v2':'vectorillustraties'}</p>
         <label className="block text-xs text-slate-600">Scène
           <select className="w-full rounded border border-slate-200 p-2" value={get('shot','road')} onChange={e=>set('shot',e.target.value)}>
-            {(cinematic?['longing','shop','drive','return','reflection','road','night','symbol']:['road','room','shop','night','return','symbol']).map(v=><option key={v}>{v}</option>)}
+            {(breath?['breath-romance','breath-gaze','breath-enclosure','breath-separation','breath-release']:cinematic?['longing','shop','drive','return','reflection','road','night','symbol']:['road','room','shop','night','return','symbol']).map(v=><option key={v}>{v}</option>)}
           </select>
         </label>
         <label className="block text-xs text-slate-600">Camera
