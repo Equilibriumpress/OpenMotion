@@ -155,6 +155,7 @@ export function normalizeOpenMotionProject(
     'whiteboard-science',
     'doodle-explainer',
     'three-campervan-journey',
+    'three-explainer',
   ]);
   const validBackdrops = new Set([
     'grid-architectural',
@@ -398,6 +399,7 @@ export function normalizeOpenMotionProject(
       catOffice: sc.catOffice && typeof sc.catOffice === 'object'
         ? (sc.catOffice as OpenMotionScene['catOffice']) : undefined,
       worldStory: sc.worldStory && typeof sc.worldStory === 'object' ? (sc.worldStory as OpenMotionScene['worldStory']) : undefined,
+      threeExplainer: sc.threeExplainer && typeof sc.threeExplainer === 'object' ? (sc.threeExplainer as OpenMotionScene['threeExplainer']) : undefined,
       fullBleed: typeof sc.fullBleed === 'boolean' ? sc.fullBleed : undefined,
     };
   });

@@ -72,6 +72,7 @@ if (process.env.OPENMOTION_REQUIRE_FFMPEG === '1') {
 }
 if (ci || process.env.DOCUMENTARY_AUDIO === '1') {
   stage('terrain','scripts/build-documentary-terrain.py',600000,false);
+  stage('explainer-relief','scripts/build-explainer-relief.py',90000,false);
   stage('documentary-audio','scripts/build-documentary-audio.py',1800000,ci);
 }
 if (ci || process.env.CAT_OFFICE_ASSETS === '1') {
@@ -82,6 +83,15 @@ if (ci || process.env.TRAVEL_ASSETS === '1') {
 }
 const manifestStarted=Date.now();
 function prepareProject(p) {
+  if(p.scenes?.some(s=>s.threeExplainer?.kind==='utmb')){
+    const gridPath=path.join(rootDir,'public','assets','maps','utmb-explainer-relief.json');
+    if(fs.existsSync(gridPath)){
+      const grid=JSON.parse(fs.readFileSync(gridPath,'utf8'));
+      if(grid.cols>1&&grid.rows>1&&grid.heights.length===grid.cols*grid.rows&&grid.heights.every(Number.isFinite)){
+        for(const s of p.scenes)if(s.threeExplainer?.kind==='utmb'&&[0,1,2,4,6].includes(s.threeExplainer.shot))s.threeExplainer.terrain=grid;
+      }
+    }
+  }
   prepareSongSound(p,rootDir);
   prepareHumanSideSound(p,rootDir);
   if (ci) {
@@ -98,6 +108,7 @@ function prepareProject(p) {
     const cueFile=path.join(rootDir,'public','assets','audio',p.slug+'-captions.json');
     if(voice&&fs.existsSync(cueFile)){
       const cues=JSON.parse(fs.readFileSync(cueFile,'utf8'));
+      if(p.scenes.some(s=>s.threeExplainer))p.captions=cues.map(c=>({...c,style:'karaoke',position:.9,fontSizePx:38}));
       if(p.scenes.some(s=>s.doodle?.extras?.includes('song-explainer-v1'))){
         const cinematic=p.scenes.some(s=>s.doodle?.extras?.includes('song-cinematic-v2'));
         p.captions=cues.map(c=>({...c,startSec:Math.max(.85,c.startSec),position:cinematic ? .75 : .78,fontSizePx:cinematic?43:45})).filter(c=>c.endSec>c.startSec);

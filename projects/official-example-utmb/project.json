@@ -1,0 +1,505 @@
+{
+  "schemaVersion": "1.0",
+  "id": "official-example-utmb",
+  "slug": "official-example-utmb",
+  "kind": "video",
+  "productionStatus": "review",
+  "title": "UTMB: around the giant",
+  "description": "Independent reconstruction of the official OpenMotionStudio UTMB example. AWS Terrarium DEM relief is prepared at publication, with an explicitly schematic checkpoint connection and approximate checkpoint elevations, not a verified GPX course. English Piper narration and captions. Race statistics follow the reference's stated 2025 edition.",
+  "category": "Geography · 3D explainer",
+  "author": "OpenMotion Studio · Equilibriumpress",
+  "source": "github",
+  "templateReferenceUrl": "https://openmotion.studio/examples/utmb/",
+  "createdAt": "2026-11-27",
+  "updatedAt": "2026-11-27",
+  "githubPath": "projects/official-example-utmb/project.json",
+  "thumbnailUrl": "assets/official-examples/utmb.svg",
+  "format": "16:9",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "brandKit": {
+    "brandName": "OpenMotion · 3D explainers",
+    "primaryColor": "#ff833d",
+    "accentColor": "#ff833d",
+    "backgroundColor": "#080f20",
+    "surfaceColor": "#152237",
+    "textColor": "#f5f7fb",
+    "mutedColor": "#a5b5c9",
+    "fontFamily": "Inter"
+  },
+  "scenes": [
+    {
+      "id": "shot-1",
+      "name": "Around the giant",
+      "durationSec": 15,
+      "layout": "three-explainer",
+      "transition": "fade",
+      "backdrop": "radial-studio",
+      "headline": "Around the giant",
+      "subheadline": "Mont Blanc / 4,800+ m above sea level.",
+      "fullBleed": true,
+      "threeExplainer": {
+        "kind": "utmb",
+        "shot": 0
+      },
+      "doodle": {
+        "setting": "standing",
+        "palette": "night",
+        "mood": "relaxed",
+        "extras": [
+          "mind-series-v1"
+        ],
+        "narration": "Mont Blanc rises more than four thousand eight hundred metres above sea level. Every summer, runners gather beneath it for a race that does not take them to the summit. Instead, they travel all the way around the massif."
+      }
+    },
+    {
+      "id": "shot-2",
+      "name": "One loop, three countries",
+      "durationSec": 19,
+      "layout": "three-explainer",
+      "transition": "fade",
+      "backdrop": "radial-studio",
+      "headline": "One loop, three countries",
+      "subheadline": "Around 170 km / France → Italy → Switzerland.",
+      "fullBleed": true,
+      "threeExplainer": {
+        "kind": "utmb",
+        "shot": 1
+      },
+      "doodle": {
+        "setting": "standing",
+        "palette": "night",
+        "mood": "relaxed",
+        "extras": [
+          "mind-series-v1"
+        ],
+        "narration": "From Chamonix, the course heads through the French valleys and over Alpine passes into Italy. From Courmayeur it continues towards Switzerland, before turning back into France. Around one hundred and seventy kilometres bring the runners back to the town where they began."
+      }
+    },
+    {
+      "id": "shot-3",
+      "name": "The climbs keep coming",
+      "durationSec": 17,
+      "layout": "three-explainer",
+      "transition": "fade",
+      "backdrop": "radial-studio",
+      "headline": "The climbs keep coming",
+      "subheadline": "Checkpoint elevations across the massif.",
+      "fullBleed": true,
+      "threeExplainer": {
+        "kind": "utmb",
+        "shot": 2
+      },
+      "doodle": {
+        "setting": "standing",
+        "palette": "night",
+        "mood": "relaxed",
+        "extras": [
+          "mind-series-v1"
+        ],
+        "narration": "Look at the elevations along the route. Runners descend into valleys and then climb towards the passes. They repeat this sequence throughout the race. This diagram connects approximate checkpoint elevations, rather than showing every rise and fall of the actual course."
+      }
+    },
+    {
+      "id": "shot-4",
+      "name": "More climbing than Everest",
+      "durationSec": 15,
+      "layout": "three-explainer",
+      "transition": "fade",
+      "backdrop": "radial-studio",
+      "headline": "More climbing than Everest",
+      "subheadline": "Cumulative ascent is not the same as elevation.",
+      "fullBleed": true,
+      "threeExplainer": {
+        "kind": "utmb",
+        "shot": 3
+      },
+      "doodle": {
+        "setting": "standing",
+        "palette": "night",
+        "mood": "relaxed",
+        "extras": [
+          "mind-series-v1"
+        ],
+        "narration": "The climbs add up to roughly ten thousand metres of ascent. Mount Everest stands eight thousand eight hundred and forty-nine metres above sea level. The comparison shows how much climbing runners accumulate, even though no point on this course reaches that height."
+      }
+    },
+    {
+      "id": "shot-5",
+      "name": "Through the night",
+      "durationSec": 16,
+      "layout": "three-explainer",
+      "transition": "fade",
+      "backdrop": "radial-studio",
+      "headline": "Through the night",
+      "subheadline": "The race continues after sunset.",
+      "fullBleed": true,
+      "threeExplainer": {
+        "kind": "utmb",
+        "shot": 4
+      },
+      "doodle": {
+        "setting": "standing",
+        "palette": "night",
+        "mood": "relaxed",
+        "extras": [
+          "mind-series-v1"
+        ],
+        "narration": "The race begins in the evening. For runners who spend close to the time limit on the course, darkness falls twice. The temperature, visibility and terrain change while the distance remaining steadily decreases. The mountain is still there when the sun returns."
+      }
+    },
+    {
+      "id": "shot-6",
+      "name": "Not everyone finishes",
+      "durationSec": 14,
+      "layout": "three-explainer",
+      "transition": "fade",
+      "backdrop": "radial-studio",
+      "headline": "Not everyone finishes",
+      "subheadline": "2025 edition / 2,492 starters.",
+      "fullBleed": true,
+      "threeExplainer": {
+        "kind": "utmb",
+        "shot": 5
+      },
+      "doodle": {
+        "setting": "standing",
+        "palette": "night",
+        "mood": "relaxed",
+        "extras": [
+          "mind-series-v1"
+        ],
+        "narration": "In the twenty twenty-five edition, according to the reference, two thousand four hundred and ninety-two runners started. Eight hundred and twenty-nine did not finish. Nearly one third of the field stopped before reaching Chamonix."
+      }
+    },
+    {
+      "id": "shot-7",
+      "name": "One loop around Mont Blanc",
+      "durationSec": 15,
+      "layout": "three-explainer",
+      "transition": "fade",
+      "backdrop": "radial-studio",
+      "headline": "One loop around Mont Blanc",
+      "subheadline": "Three countries / 170 km / about 10,000 m up.",
+      "fullBleed": true,
+      "threeExplainer": {
+        "kind": "utmb",
+        "shot": 6
+      },
+      "doodle": {
+        "setting": "standing",
+        "palette": "night",
+        "mood": "relaxed",
+        "extras": [
+          "mind-series-v1"
+        ],
+        "narration": "One circuit of the massif. Three countries. Around ten thousand metres of cumulative ascent. The race ends at its starting point, and the summit of Mont Blanc is never part of the route. This is the scale of the UTMB."
+      }
+    }
+  ],
+  "captions": [
+    {
+      "text": "Mont Blanc rises more than four thousand eight hundred",
+      "startSec": 0.3,
+      "endSec": 3.5769230769230766,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "metres above sea level. Every summer, runners gather beneath",
+      "startSec": 3.5769230769230766,
+      "endSec": 6.8538461538461535,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "it for a race that does not take them",
+      "startSec": 6.8538461538461535,
+      "endSec": 10.13076923076923,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "to the summit. Instead, they travel all the way",
+      "startSec": 10.13076923076923,
+      "endSec": 13.407692307692308,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "around the massif.",
+      "startSec": 13.407692307692308,
+      "endSec": 14.5,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "From Chamonix, the course heads through the French valleys",
+      "startSec": 15.3,
+      "endSec": 19.2,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "and over Alpine passes into Italy. From Courmayeur it",
+      "startSec": 19.2,
+      "endSec": 23.1,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "continues towards Switzerland, before turning back into France. Around",
+      "startSec": 23.1,
+      "endSec": 27,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "one hundred and seventy kilometres bring the runners back",
+      "startSec": 27,
+      "endSec": 30.9,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "to the town where they began.",
+      "startSec": 30.9,
+      "endSec": 33.5,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "Look at the elevations along the route. Runners descend",
+      "startSec": 34.3,
+      "endSec": 37.856097560975606,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "into valleys and then climb towards the passes. They",
+      "startSec": 37.856097560975606,
+      "endSec": 41.412195121951214,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "repeat this sequence throughout the race. This diagram connects",
+      "startSec": 41.412195121951214,
+      "endSec": 44.96829268292683,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "approximate checkpoint elevations, rather than showing every rise and",
+      "startSec": 44.96829268292683,
+      "endSec": 48.52439024390243,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "fall of the actual course.",
+      "startSec": 48.52439024390243,
+      "endSec": 50.5,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "The climbs add up to roughly ten thousand metres",
+      "startSec": 51.3,
+      "endSec": 54.34285714285714,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "of ascent. Mount Everest stands eight thousand eight hundred",
+      "startSec": 54.34285714285714,
+      "endSec": 57.385714285714286,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "and forty-nine metres above sea level. The comparison shows",
+      "startSec": 57.385714285714286,
+      "endSec": 60.42857142857142,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "how much climbing runners accumulate, even though no point",
+      "startSec": 60.42857142857142,
+      "endSec": 63.47142857142857,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "on this course reaches that height.",
+      "startSec": 63.47142857142857,
+      "endSec": 65.5,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "The race begins in the evening. For runners who",
+      "startSec": 66.3,
+      "endSec": 69.55714285714285,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "spend close to the time limit on the course,",
+      "startSec": 69.55714285714285,
+      "endSec": 72.81428571428572,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "darkness falls twice. The temperature, visibility and terrain change",
+      "startSec": 72.81428571428572,
+      "endSec": 76.07142857142857,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "while the distance remaining steadily decreases. The mountain is",
+      "startSec": 76.07142857142857,
+      "endSec": 79.32857142857142,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "still there when the sun returns.",
+      "startSec": 79.32857142857142,
+      "endSec": 81.5,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "In the twenty twenty-five edition, according to the reference,",
+      "startSec": 82.3,
+      "endSec": 85.79411764705883,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "two thousand four hundred and ninety-two runners started. Eight",
+      "startSec": 85.79411764705883,
+      "endSec": 89.28823529411764,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "hundred and twenty-nine did not finish. Nearly one third",
+      "startSec": 89.28823529411764,
+      "endSec": 92.78235294117647,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "of the field stopped before reaching Chamonix.",
+      "startSec": 92.78235294117647,
+      "endSec": 95.5,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "One circuit of the massif. Three countries. Around ten",
+      "startSec": 96.3,
+      "endSec": 99.49499999999999,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "thousand metres of cumulative ascent. The race ends at",
+      "startSec": 99.49499999999999,
+      "endSec": 102.69,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "its starting point, and the summit of Mont Blanc",
+      "startSec": 102.69,
+      "endSec": 105.88499999999999,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "is never part of the route. This is the",
+      "startSec": 105.88499999999999,
+      "endSec": 109.08,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "scale of the UTMB.",
+      "startSec": 109.08,
+      "endSec": 110.5,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    }
+  ],
+  "audioTracks": [
+    {
+      "id": "voice",
+      "kind": "voiceover",
+      "src": "assets/audio/official-example-utmb-voice.mp3",
+      "startSec": 0,
+      "endSec": 111,
+      "volume": 1
+    },
+    {
+      "id": "score",
+      "kind": "music",
+      "src": "assets/audio/official-example-utmb-score.mp3",
+      "startSec": 0,
+      "endSec": 111,
+      "volume": 0.22,
+      "fadeInSec": 1,
+      "fadeOutSec": 2
+    },
+    {
+      "id": "ambience",
+      "kind": "effect",
+      "src": "assets/audio/official-example-utmb-ambience.mp3",
+      "startSec": 0,
+      "endSec": 111,
+      "volume": 0.17,
+      "fadeInSec": 1,
+      "fadeOutSec": 2
+    }
+  ]
+}

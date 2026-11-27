@@ -1,0 +1,545 @@
+{
+  "schemaVersion": "1.0",
+  "id": "official-example-moon-phases",
+  "slug": "official-example-moon-phases",
+  "kind": "video",
+  "productionStatus": "review",
+  "title": "Why the Moon has phases",
+  "description": "Independent reconstruction of the official OpenMotionStudio reference. A real Three.js sphere, a fixed directional light and a moving observer explain the lunar cycle. Original procedural texture, English Piper narration and timed captions. No generated still images.",
+  "category": "Science · 3D explainer",
+  "author": "OpenMotion Studio · Equilibriumpress",
+  "source": "github",
+  "templateReferenceUrl": "https://openmotion.studio/examples/moon-phases/",
+  "createdAt": "2026-11-27",
+  "updatedAt": "2026-11-27",
+  "githubPath": "projects/official-example-moon-phases/project.json",
+  "thumbnailUrl": "assets/official-examples/moon.svg",
+  "format": "16:9",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "brandKit": {
+    "brandName": "OpenMotion · 3D explainers",
+    "primaryColor": "#e5b46d",
+    "accentColor": "#e5b46d",
+    "backgroundColor": "#080f20",
+    "surfaceColor": "#152237",
+    "textColor": "#f5f7fb",
+    "mutedColor": "#a5b5c9",
+    "fontFamily": "Inter"
+  },
+  "scenes": [
+    {
+      "id": "shot-1",
+      "name": "Why the Moon has phases",
+      "durationSec": 13,
+      "layout": "three-explainer",
+      "transition": "fade",
+      "backdrop": "radial-studio",
+      "headline": "Why the Moon has phases",
+      "subheadline": "One Moon, seen from a changing angle.",
+      "fullBleed": true,
+      "threeExplainer": {
+        "kind": "moon",
+        "shot": 0
+      },
+      "doodle": {
+        "setting": "standing",
+        "palette": "night",
+        "mood": "relaxed",
+        "extras": [
+          "mind-series-v1"
+        ],
+        "narration": "Look up at the Moon over several nights and its shape seems to change. Some nights we see a thin crescent. Other nights we see a bright, almost complete circle. But the Moon itself has not changed shape."
+      }
+    },
+    {
+      "id": "shot-2",
+      "name": "Is it Earth's shadow?",
+      "durationSec": 13,
+      "layout": "three-explainer",
+      "transition": "fade",
+      "backdrop": "radial-studio",
+      "headline": "Is it Earth's shadow?",
+      "subheadline": "A full Moon gives us a clue.",
+      "fullBleed": true,
+      "threeExplainer": {
+        "kind": "moon",
+        "shot": 1
+      },
+      "doodle": {
+        "setting": "standing",
+        "palette": "night",
+        "mood": "relaxed",
+        "extras": [
+          "mind-series-v1"
+        ],
+        "narration": "A common explanation is that Earth's shadow falls across the Moon. That is not how ordinary phases work. Most of the time the Moon passes above or below Earth's shadow, and the Sun still shines on it."
+      }
+    },
+    {
+      "id": "shot-3",
+      "name": "Half of the Moon is lit",
+      "durationSec": 13,
+      "layout": "three-explainer",
+      "transition": "fade",
+      "backdrop": "radial-studio",
+      "headline": "Half of the Moon is lit",
+      "subheadline": "Sunlight comes from one direction.",
+      "fullBleed": true,
+      "threeExplainer": {
+        "kind": "moon",
+        "shot": 2
+      },
+      "doodle": {
+        "setting": "standing",
+        "palette": "night",
+        "mood": "relaxed",
+        "extras": [
+          "mind-series-v1"
+        ],
+        "narration": "Away from an eclipse, sunlight illuminates one hemisphere of the Moon. The opposite hemisphere faces away from the Sun. We see only the part of the lit hemisphere that faces us."
+      }
+    },
+    {
+      "id": "shot-4",
+      "name": "Change the viewing angle",
+      "durationSec": 15,
+      "layout": "three-explainer",
+      "transition": "fade",
+      "backdrop": "radial-studio",
+      "headline": "Change the viewing angle",
+      "subheadline": "The light stays fixed. The observer moves.",
+      "fullBleed": true,
+      "threeExplainer": {
+        "kind": "moon",
+        "shot": 3
+      },
+      "doodle": {
+        "setting": "standing",
+        "palette": "night",
+        "mood": "relaxed",
+        "extras": [
+          "mind-series-v1"
+        ],
+        "narration": "Watch the same sphere while our viewing angle changes. Near the dark side, we see a narrow lit crescent. From the side we see half of the visible disc. From the Sun's side we see a full Moon."
+      }
+    },
+    {
+      "id": "shot-5",
+      "name": "One orbit, four principal phases",
+      "durationSec": 20,
+      "layout": "three-explainer",
+      "transition": "fade",
+      "backdrop": "radial-studio",
+      "headline": "One orbit, four principal phases",
+      "subheadline": "New Moon → first quarter → full Moon → last quarter.",
+      "fullBleed": true,
+      "threeExplainer": {
+        "kind": "moon",
+        "shot": 4
+      },
+      "doodle": {
+        "setting": "standing",
+        "palette": "night",
+        "mood": "relaxed",
+        "extras": [
+          "mind-series-v1"
+        ],
+        "narration": "As the Moon travels around Earth, our view changes. At new Moon, the illuminated side faces away from us. At first quarter we see half the disc, then the full Moon. At last quarter the other half is visible before the cycle begins again."
+      }
+    },
+    {
+      "id": "shot-6",
+      "name": "A cycle of 29.5 days",
+      "durationSec": 13,
+      "layout": "three-explainer",
+      "transition": "fade",
+      "backdrop": "radial-studio",
+      "headline": "A cycle of 29.5 days",
+      "subheadline": "The Moon moves eastward against the stars.",
+      "fullBleed": true,
+      "threeExplainer": {
+        "kind": "moon",
+        "shot": 5
+      },
+      "doodle": {
+        "setting": "standing",
+        "palette": "night",
+        "mood": "relaxed",
+        "extras": [
+          "mind-series-v1"
+        ],
+        "narration": "The sequence takes about twenty-nine and a half days from one new Moon to the next. The Moon moves eastward by roughly twelve to thirteen degrees each day. On average, moonrise happens about fifty minutes later."
+      }
+    },
+    {
+      "id": "shot-7",
+      "name": "An eclipse is different",
+      "durationSec": 14,
+      "layout": "three-explainer",
+      "transition": "fade",
+      "backdrop": "radial-studio",
+      "headline": "An eclipse is different",
+      "subheadline": "The three bodies must line up closely.",
+      "fullBleed": true,
+      "threeExplainer": {
+        "kind": "moon",
+        "shot": 6
+      },
+      "doodle": {
+        "setting": "standing",
+        "palette": "night",
+        "mood": "relaxed",
+        "extras": [
+          "mind-series-v1"
+        ],
+        "narration": "During a lunar eclipse, Earth passes between the Sun and the Moon, and its shadow reaches the lunar surface. This only happens when the full Moon passes close enough to Earth's orbital plane."
+      }
+    },
+    {
+      "id": "shot-8",
+      "name": "Same Moon. New angle.",
+      "durationSec": 14,
+      "layout": "three-explainer",
+      "transition": "fade",
+      "backdrop": "radial-studio",
+      "headline": "Same Moon. New angle.",
+      "subheadline": "The phase changes, not the shape.",
+      "fullBleed": true,
+      "threeExplainer": {
+        "kind": "moon",
+        "shot": 7
+      },
+      "doodle": {
+        "setting": "standing",
+        "palette": "night",
+        "mood": "relaxed",
+        "extras": [
+          "mind-series-v1"
+        ],
+        "narration": "Next time you see a crescent, notice which edge is bright. The Sun is lighting a sphere, and you are looking at it from Earth. The geometry of sunlight and your viewpoint explains the changing shape."
+      }
+    }
+  ],
+  "captions": [
+    {
+      "text": "Look up at the Moon over several nights and",
+      "startSec": 0.3,
+      "endSec": 3.189473684210526,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "its shape seems to change. Some nights we see",
+      "startSec": 3.189473684210526,
+      "endSec": 6.078947368421052,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "a thin crescent. Other nights we see a bright,",
+      "startSec": 6.078947368421052,
+      "endSec": 8.968421052631578,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "almost complete circle. But the Moon itself has not",
+      "startSec": 8.968421052631578,
+      "endSec": 11.857894736842105,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "changed shape.",
+      "startSec": 11.857894736842105,
+      "endSec": 12.5,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "A common explanation is that Earth's shadow falls across",
+      "startSec": 13.3,
+      "endSec": 16.267567567567568,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "the Moon. That is not how ordinary phases work.",
+      "startSec": 16.267567567567568,
+      "endSec": 19.235135135135135,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "Most of the time the Moon passes above or",
+      "startSec": 19.235135135135135,
+      "endSec": 22.2027027027027,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "below Earth's shadow, and the Sun still shines on",
+      "startSec": 22.2027027027027,
+      "endSec": 25.170270270270272,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "it.",
+      "startSec": 25.170270270270272,
+      "endSec": 25.5,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "Away from an eclipse, sunlight illuminates one hemisphere of",
+      "startSec": 26.3,
+      "endSec": 29.84193548387097,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "the Moon. The opposite hemisphere faces away from the",
+      "startSec": 29.84193548387097,
+      "endSec": 33.383870967741935,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "Sun. We see only the part of the lit",
+      "startSec": 33.383870967741935,
+      "endSec": 36.9258064516129,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "hemisphere that faces us.",
+      "startSec": 36.9258064516129,
+      "endSec": 38.5,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "Watch the same sphere while our viewing angle changes.",
+      "startSec": 39.3,
+      "endSec": 42.66315789473684,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "Near the dark side, we see a narrow lit",
+      "startSec": 42.66315789473684,
+      "endSec": 46.026315789473685,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "crescent. From the side we see half of the",
+      "startSec": 46.026315789473685,
+      "endSec": 49.38947368421052,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "visible disc. From the Sun's side we see a",
+      "startSec": 49.38947368421052,
+      "endSec": 52.752631578947366,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "full Moon.",
+      "startSec": 52.752631578947366,
+      "endSec": 53.5,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "As the Moon travels around Earth, our view changes.",
+      "startSec": 54.3,
+      "endSec": 58.22727272727273,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "At new Moon, the illuminated side faces away from",
+      "startSec": 58.22727272727273,
+      "endSec": 62.15454545454545,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "us. At first quarter we see half the disc,",
+      "startSec": 62.15454545454545,
+      "endSec": 66.08181818181818,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "then the full Moon. At last quarter the other",
+      "startSec": 66.08181818181818,
+      "endSec": 70.0090909090909,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "half is visible before the cycle begins again.",
+      "startSec": 70.0090909090909,
+      "endSec": 73.5,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "The sequence takes about twenty-nine and a half days",
+      "startSec": 74.3,
+      "endSec": 77.35,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "from one new Moon to the next. The Moon",
+      "startSec": 77.35,
+      "endSec": 80.39999999999999,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "moves eastward by roughly twelve to thirteen degrees each",
+      "startSec": 80.39999999999999,
+      "endSec": 83.44999999999999,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "day. On average, moonrise happens about fifty minutes later.",
+      "startSec": 83.44999999999999,
+      "endSec": 86.5,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "During a lunar eclipse, Earth passes between the Sun",
+      "startSec": 87.3,
+      "endSec": 90.89999999999999,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "and the Moon, and its shadow reaches the lunar",
+      "startSec": 90.89999999999999,
+      "endSec": 94.5,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "surface. This only happens when the full Moon passes",
+      "startSec": 94.5,
+      "endSec": 98.1,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "close enough to Earth's orbital plane.",
+      "startSec": 98.1,
+      "endSec": 100.5,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "Next time you see a crescent, notice which edge",
+      "startSec": 101.3,
+      "endSec": 104.6,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "is bright. The Sun is lighting a sphere, and",
+      "startSec": 104.6,
+      "endSec": 107.89999999999999,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "you are looking at it from Earth. The geometry",
+      "startSec": 107.89999999999999,
+      "endSec": 111.19999999999999,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    },
+    {
+      "text": "of sunlight and your viewpoint explains the changing shape.",
+      "startSec": 111.19999999999999,
+      "endSec": 114.5,
+      "style": "minimal",
+      "position": 0.9,
+      "fontSizePx": 38
+    }
+  ],
+  "audioTracks": [
+    {
+      "id": "voice",
+      "kind": "voiceover",
+      "src": "assets/audio/official-example-moon-phases-voice.mp3",
+      "startSec": 0,
+      "endSec": 115,
+      "volume": 1
+    },
+    {
+      "id": "score",
+      "kind": "music",
+      "src": "assets/audio/official-example-moon-phases-score.mp3",
+      "startSec": 0,
+      "endSec": 115,
+      "volume": 0.22,
+      "fadeInSec": 1,
+      "fadeOutSec": 2
+    },
+    {
+      "id": "ambience",
+      "kind": "effect",
+      "src": "assets/audio/official-example-moon-phases-ambience.mp3",
+      "startSec": 0,
+      "endSec": 115,
+      "volume": 0.17,
+      "fadeInSec": 1,
+      "fadeOutSec": 2
+    }
+  ]
+}
