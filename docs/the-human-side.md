@@ -10,7 +10,7 @@ Use layout=doodle-explainer, fullBleed=true, and both markers in doodle.extras:
 ```json
 ["mind-series-v1","human-side-v1","shot:contrast","episode:01","pose-a:panic","pose-b:calm","face-a:worry","face-b:smile","label-a:Something is wrong.","label-b:Let's find out."]
 ```
-The legacy mind marker is intentional: it selects existing cached Piper narration generation, music generation and missing-audio validation. The new marker is dispatched first by the doodle renderer. No audio build script or workflow was changed. Scene headline and caption are independent of editable narration. Extras and versioned scene JSON are the controls for pose, face, labels and shot. They are not independent SVG layers in the Studio editor.
+The legacy mind marker is intentional: it selects existing cached Piper narration generation, music generation and missing-audio validation. The new marker is dispatched first by the doodle renderer. No audio build script or workflow was changed. Scene headline and caption are independent of editable narration. Studio's Shorts editor offers dedicated selectors for both characters' poses and faces, thoughts, message, scene preset and episode number. These controls are stored in extras and versioned scene JSON. They are not independent SVG layers in the Studio editor.
 
 Shot presets: message (both receive the same message), worry (A solo), calm (B solo), contrast (side-by-side), reveal (both receive new context). Change message:, label-a:, label-b:, episode:, pose-a:, pose-b:, face-a:, face-b: in extras.
 
