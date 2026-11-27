@@ -182,7 +182,7 @@ export function ShortsMediaEditor({project,activeScene,onUpdateProject,onUpdateS
         {extras.includes('human-side-v2')&&<><label className="block text-xs">Visueel thema<select className={style} value={get('theme','message')} onChange={e=>set('theme',e.target.value)}>
           {['message','waiting','calendar','boundaries','feedback'].map(v=><option key={v}>{v}</option>)}
         </select></label>
-        {['detail-a','detail-b'].map(key=><label key={key} className="block text-xs">Extra gedachte ({key})<input className={style} value={get(key)} onChange={e=>set(key,e.target.value)}/></label>)}</>}
+        {['detail-a','detail-b','prop-title','prop-next','prop-tasks'].map(key=><label key={key} className="block text-xs">Visueel attribuut ({key})<input className={style} value={get(key)} onChange={e=>set(key,e.target.value)}/></label>)}</>}
         {activeScene.id===project.scenes[0]?.id&&<div className="space-y-2 border-b border-purple-100 pb-3">
           <h5 className="text-xs font-semibold">Shorts / TikTok cover</h5>
           <label className="block text-xs">Covertekst (max. twee regels, scheiding |)<input className={style} value={get('cover-title')} placeholder="SAME MESSAGE|DIFFERENT MINDS" onChange={e=>set('cover-title',e.target.value)}/></label>
