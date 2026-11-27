@@ -682,8 +682,8 @@ function filmStack(c:C,p:Palette,t:number,labels:string[],share=false){
  const hero=share?160:175,other=420;
  const count=share?labels.length:Math.min(labels.length,1+Math.floor(t/.65));
  const mood:Face=share?'relief':count>2?'worry':'neutral';
- filmActor(c,p,hero,694,1.05,t,mood,'reach',105,-120-count*16*(1-u));
- if(share)filmActor(c,p,other,694,.9,t,'smile','reach',-95,-155);
+ filmActor(c,p,hero,694,1.05,t,mood,'reach',97,-115);
+ if(share)filmActor(c,p,other,694,.9,t,'smile','reach',-76,-110);
  for(let i=0;i<count;i++){
   const move=share&&i>=count-2?u:0;
   const x=mix(hero+102,other-68,move),y=552-i*47+move*80;
@@ -762,7 +762,8 @@ function renderHumanV23(c:C,width:number,height:number,scene:OpenMotionScene,t:n
    else phone(c,msg,635,p,time,'SAME MESSAGE');
   }
  }else if(theme==='calendar'){
-  if(shot==='event'||shot==='action'||shot==='change')filmCalendar(c,p,time,shot!=='event');
+  if(shot==='event'||shot==='action')filmCalendar(c,p,time,shot!=='event');
+  else if(shot==='change'){filmActor(c,p,148,floor,1.02,time,'relief','reach',104,-180);c.save();c.translate(256,210);c.scale(.48,.68);filmCalendar(c,p,time+1.9,true);c.restore();}
   else if(shot==='reaction'){filmFace(c,p,270,460,3.05,'worry',time,-.08);thought(c,a,270,235,385,p,time);stress(c,270,460,time,p);}
   else {filmFace(c,p,145,470,1.85,'worry',time);filmFace(c,p,395,470,1.85,'determined',time);thought(c,a,140,263,225,p,time);thought(c,b,400,263,225,p,time,.35);}
  }else if(theme==='boundaries'){
@@ -771,7 +772,8 @@ function renderHumanV23(c:C,width:number,height:number,scene:OpenMotionScene,t:n
   else if(shot==='action'){filmFace(c,p,270,461,2.85,'determined',time);thought(c,b,270,232,380,p,time,.3);}
   else{filmStack(c,p,time+2,tasks,true);}
  }else if(theme==='feedback'){
-  if(shot==='event'||shot==='action'||shot==='change')filmDocument(c,p,time,shot!=='event');
+  if(shot==='event'||shot==='action')filmDocument(c,p,time,shot!=='event');
+  else if(shot==='change'){filmActor(c,p,149,floor,1.05,time,'determined','reach',110,-168);c.save();c.translate(250,220);c.scale(.47,.67);filmDocument(c,p,time,true);c.restore();}
   else if(shot==='reaction'){const z=mix(3.1,2.15,smooth(time/2));filmFace(c,p,270,464,z,'sad',time,-.12);thought(c,a,270,237,375,p,time);}
   else{filmFace(c,p,145,470,1.85,'sad',time);filmFace(c,p,395,470,1.85,'determined',time);thought(c,a,140,261,225,p,time);thought(c,b,400,261,225,p,time,.35);}
  }else if(theme==='rest'){
@@ -779,22 +781,29 @@ function renderHumanV23(c:C,width:number,height:number,scene:OpenMotionScene,t:n
    storyChair(c,p,186,floor);
    filmActor(c,p,mix(92,175,smooth(time/.75)),floor,1.05,time,shot==='change'?'relief':'neutral','sit');
    clock(c,411,411,50,time*.4,p);
-  }else if(shot==='reaction'||shot==='action'){
+  }else if(shot==='action'){
+   storyChair(c,p,250,floor);filmActor(c,p,239,floor,1.18,time,'worry','sit');
+   tasks.forEach((v,i)=>{storyCard(c,p,140+(i%2)*250,230+Math.floor(i/2)*58,v,210,smooth((time-i*.5)/.35));});
+  }else if(shot==='reaction'){
    filmFace(c,p,270,480,2.65,'worry',time,-.07);
    tasks.forEach((v,i)=>{const a=-2.8+i*1.05;storyCard(c,p,270+Math.cos(a)*164,322+Math.sin(a)*71,v,139,smooth((time-i*.5)/.35));});
   }else{filmFace(c,p,270,450,3.0,'sad',time,-.08);thought(c,'I should be doing more.',270,223,390,p,time);}
  }else if(theme==='mask'){
-  if(shot==='event'||shot==='reaction'||shot==='action'||shot==='turn'){
+  if(shot==='reaction'){
+   filmFace(c,p,270,455,3.0,'joy',time);thought(c,'I’m fine.',270,226,250,p,time);
+  }else if(shot==='event'||shot==='action'||shot==='turn'){
    const amount=shot==='turn'?smooth(time/1.8):shot==='action' ? .1*smooth(time):0;
    if(shot==='event')for(const x of [70,470]){c.save();c.globalAlpha=.35;figure(c,x,660,.7,time,'wave','smile',{...p,ink:p.shadow},'neutral',x,true);c.restore();}
    filmMask(c,p,time,amount,'sad');
   }else{filmFace(c,p,154,456,1.85,'sad',time);filmFace(c,p,386,456,1.85,'smile',time);thought(c,a||'I’m not okay today.',270,236,390,p,time,.2);}
  }else if(theme==='load'){
-  if(shot==='event'||shot==='reaction'||shot==='action')filmStack(c,p,shot==='event'?Math.min(time,.5):time,tasks);
+  if(shot==='event'||shot==='action')filmStack(c,p,shot==='event'?Math.min(time,.5):time,tasks);
+  else if(shot==='reaction'){tasks.forEach((v,i)=>{const a=smooth((time-i*.5)/.4);if(a>0){c.save();c.globalAlpha=a;filmBox(c,p,270,620-i*87-36*(1-a),v,1.95);c.restore();}});}
   else if(shot==='turn'){filmFace(c,p,270,455,3.0,'sad',time,-.13);stress(c,270,455,time,p);}
   else filmStack(c,p,time,tasks,true);
  }else{
-  if(shot==='event'||shot==='reaction')filmCrowd(c,p,time,false);
+  if(shot==='event')filmCrowd(c,p,time,false);
+  else if(shot==='reaction'){filmFace(c,p,150,390,1.7,'joy',time);filmFace(c,p,395,390,1.7,'joy',time);thought(c,'…',270,222,140,p,time);filmFace(c,p,270,625,1.25,'sad',time);}
   else if(shot==='action'||shot==='turn'){filmFace(c,p,270,452,3.0,'sad',time,-.07);for(let i=0;i<3;i++){c.save();c.globalAlpha=.35;filmFace(c,p,95+i*175,232,.62,'smile',time);c.restore();}}
   else filmCrowd(c,p,time,true);
  }
