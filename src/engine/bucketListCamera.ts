@@ -50,12 +50,28 @@ function announce(){for(const cb of subscribers)try{cb();}catch{/* Disposed prev
  * (zoom numbers); no image scaling, screenshot interpolation, or forced
  * projection switch occurs at a chapter boundary.
  */
+/** Hermite interpolation with shared endpoint velocities; no stop/restart at intermediate keyframes. */
+function regionalZoom(t:number,start:number,end:number):number{
+  const keys=[[0,0,0],[.5,.055,.20],[1.4,.40,.42],[2.6,.91,.24],[3.1,1,0]];
+  if(t>=3.1)return end;
+  const i=keys.findIndex((k,j)=>j>0&&t<=k[0])-1;
+  const [a,y0,m0]=keys[Math.max(0,i)],[b,y1,m1]=keys[Math.max(0,i)+1];
+  const span=b-a,u=clamp((t-a)/span),u2=u*u,u3=u2*u;
+  const f=(2*u3-3*u2+1)*y0+(u3-2*u2+u)*span*m0+(-2*u3+3*u2)*y1+(u3-u2)*span*m1;
+  return lerp(start,end,clamp(f));
+}
 function introCamera(scene:OpenMotionScene,timeSec:number):Camera{
   const d=scene.bucketList!,u=clamp(timeSec/Math.max(.1,scene.durationSec));
   const doc=d.documentary;
   if(doc?.from && doc.to){
     const t=smooth(clamp(u/.94)), a=doc.from,b=doc.to;
     return {center:[lerp(a[0],b[0],t),lerp(a[1],b[1],t)],zoom:lerp(a[2],b[2],t),bearing:0,pitch:0};
+  }
+  if(d.regionalFlight){
+    const t=u*3.5, f=d.regionalFlight;
+    // Center on the destination before high magnification; avoid crossing empty ocean at street-level zoom.
+    const move=smooth(t/1.4);
+    return {center:[lerp(d.startLongitude??d.longitude+7,d.longitude,move),lerp(d.startLatitude??d.latitude+3,d.latitude,move)],zoom:regionalZoom(t,f.startZoom,f.arrivalZoom),bearing:0,pitch:0};
   }
   // Director's curve: accelerate through the ocean, then reach the
   // destination early enough for a short, steady hero-map hold before
@@ -88,12 +104,15 @@ function outroCamera(scene:OpenMotionScene,timeSec:number):Camera{
 /** Canvas renderer and video encoder share this exact timeline. */
 function cameraAt(project:OpenMotionProject,timeSec:number):Camera|null{
   let start=0;
-  for(const scene of project.scenes){
+  for(let i=0;i<project.scenes.length;i++){
+    const scene=project.scenes[i],previous=project.scenes[i-1];
     const duration=Math.max(.5,scene.durationSec);
     if(timeSec<start+duration || scene===project.scenes[project.scenes.length-1]){
       if(scene.layout!=='bucket-list-zoom'||!scene.bucketList)return null;
       const local=Math.max(0,Math.min(duration,timeSec-start));
       if(scene.bucketList.chapter==='zoom')return introCamera(scene,local);
+      // A seek straight into the reveal must render the final native map, not a stale wide shot.
+      if(previous?.bucketList?.regionalFlight&&previous.bucketList.chapter==='zoom'&&local<.5)return introCamera(previous,previous.durationSec);
       if(scene.bucketList.chapter==='outro'&&!scene.bucketList.directorsCut&&local>=duration-1.8)return outroCamera(scene,local);
       return null;
     }
@@ -168,14 +187,14 @@ export async function prepareBucketListProject(project:OpenMotionProject):Promis
       image.width=mapW;image.height=mapH;
       const ctx=image.getContext('2d',{alpha:false});
       if(!ctx)throw new Error('Kaartcanvas niet beschikbaar.');
-      const points=project.scenes.flatMap(s=>s.bucketList?.documentary?.markers??(s.bucketList?.directorsCut&&s.bucketList.chapter==='zoom'?[{lon:s.bucketList.longitude,lat:s.bucketList.latitude}]:[]));
+      const points=project.scenes.flatMap(s=>s.bucketList?.documentary?.markers??(s.bucketList?.directorsCut&&s.bucketList.chapter==='zoom'?[{lon:s.bucketList.longitude,lat:s.bucketList.latitude},...(s.bucketList.regionalFlight?.contextLabels??[])]:[]));
       state={map,host,image,ctx,loaded:false,exporting:false,lastPreviewTime:-1,disposed:false,points,projected:new Map()};
       controllers.set(project,state);
       if(!map.loaded())await waitForEvent(map,'load',30000);
       for(const layer of map.getStyle().layers??[]){
         if(layer.type==='symbol'&&!intro.bucketList?.documentary)map.setLayoutProperty(layer.id,'visibility','none');
       }
-      if(intro.bucketList?.documentary){
+      if(intro.bucketList?.documentary||intro.bucketList?.regionalFlight?.relief){
         // Actual Terrarium elevations, not decorative contour geometry.
         try{
           const before=map.getStyle().layers?.find(l=>l.type==='symbol')?.id;
@@ -248,14 +267,14 @@ export async function beginBucketListExport(project:OpenMotionProject,signal?:Ab
   state.exporting=true;
   const intro=project.scenes.find(s=>s.layout==='bucket-list-zoom'&&s.bucketList?.chapter==='zoom');
   if(!intro)return;
-  const anchors=[0,.18,.37,.56,.75,1];
+  const anchors=intro.bucketList?.regionalFlight?[0,.5/3.5,1.4/3.5,2.1/3.5,2.6/3.5,3.1/3.5,1]:[0,.18,.37,.56,.75,1];
   try{
     for(const part of anchors){
       if(signal?.aborted)throw new Error('Video-export geannuleerd.');
       setCamera(state,introCamera(intro,intro.durationSec*part));
       // Wait for visible tiles at a few representative scales. Per-frame
       // export only waits for the render event, not hundreds of idle calls.
-      try{await waitForEvent(state.map,'idle',11000,signal);}
+      try{if(!state.map.areTilesLoaded())await waitForEvent(state.map,'idle',11000,signal);}
       catch(error){if(signal?.aborted)throw error;console.warn('Map tiles still loading at zoom',part);}
     }
     if(intro.bucketList?.documentary){
