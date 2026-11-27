@@ -477,6 +477,9 @@ export interface DocumentaryShot {
 export interface SceneBucketList {
   cover?: boolean;
   directorsCut?: boolean;
+  /** Optional deterministic photographic overlays and camera direction. */
+  atmosphere?: 'cloud' | 'mist';
+  photoMotion?: 'push' | 'pan' | 'pull';
   documentary?: DocumentaryShot;
   chapter: 'zoom' | 'reason' | 'outro';
   episode: number;

@@ -192,6 +192,12 @@
           "season": 1,
           "episodeNumber": 1,
           "templateVersion": "3.0"
+        },
+        {
+          "slug": "bucket-list-002-madeira",
+          "season": 1,
+          "episodeNumber": 2,
+          "templateVersion": "3.0"
         }
       ],
       "cover": {
