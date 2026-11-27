@@ -3727,7 +3727,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
     "id": "bucket-list-002-madeira",
     "slug": "bucket-list-002-madeira",
     "title": "MY BUCKET LIST #002 · Madeira, Above the Clouds",
-    "description": "Madeira in 20 seconds: sunrise above the Atlantic cloud layer, native globe flight to Pico do Arieiro, mountain trail, Fanal mist, coastal cliffs and Seixal black sand. Original atmospheric score and seamless photographic cover loop.",
+    "description": "Madeira in 20 seconds: sunrise above the Atlantic cloud layer, native globe flight to Pico do Arieiro, mountain trail, Fanal mist, coastal cliffs and Seixal black sand. Original atmospheric score and seamless photographic cover loop. Camera 3.1: regional start, continuous accelerated flight, 0.4-second landing hold and feathered geographic reveal.",
     "category": "Shorts & Reels",
     "author": "OpenMotion Studio",
     "source": "template",
@@ -3780,7 +3780,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
       },
       {
         "id": "zoom",
-        "name": "02 / Earth to Pico do Arieiro",
+        "name": "02 / Regional Atlantic flight to Vereda do Arieiro",
         "durationSec": 3.5,
         "layout": "bucket-list-zoom",
         "transition": "fade",
@@ -3794,10 +3794,33 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "country": "Portugal",
           "latitude": 32.740405,
           "longitude": -16.93884,
-          "startLongitude": -6,
-          "startLatitude": 42,
+          "startLongitude": -10.1,
+          "startLatitude": 35.8,
           "chapter": "zoom",
-          "directorsCut": true
+          "directorsCut": true,
+          "regionalFlight": {
+            "startZoom": 3.35,
+            "arrivalZoom": 12,
+            "arrivalLabel": "VEREDA DO ARIEIRO",
+            "contextLabels": [
+              {
+                "label": "PORTUGAL",
+                "lon": -8.1,
+                "lat": 39.5
+              },
+              {
+                "label": "MOROCCO",
+                "lon": -6.7,
+                "lat": 32.4
+              },
+              {
+                "label": "ATLANTIC OCEAN",
+                "lon": -20.1,
+                "lat": 37.5
+              }
+            ],
+            "relief": true
+          }
         }
       },
       {

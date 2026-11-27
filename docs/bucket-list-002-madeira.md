@@ -22,3 +22,7 @@ Template 3.0, 1080 × 1920, 30 fps, 20 s. Native MapLibre camera ends at the geo
 Photographs are cropped, graded and animated, with synthetic haze over the mountain and forest. Adapted CC BY-SA 4.0 photo material is shared under CC BY-SA 4.0: https://creativecommons.org/licenses/by-sa/4.0/ . Other photo licenses: https://creativecommons.org/licenses/by/2.0/ and https://creativecommons.org/publicdomain/zero/1.0/ . Retain credits and license links in publication descriptions.
 
 Map: OpenFreeMap/OpenMapTiles, © OpenStreetMap contributors. Sound: original procedural Web Audio score and filtered-noise atmospheres, not field recordings. No voice-over. Remote Commons thumbnails and native map tiles require network access. The project is editable and exportable via the existing studio. Device playback and actual MP4 audio/resolution still require visual verification. No extra test Actions.
+
+## Camera revision 3.1
+
+Regional start at zoom 3.35, with Iberia, Morocco and Atlantic context. A continuous Hermite zoom curve (0 / 0.5 / 1.4 / 2.6 / 3.1 seconds), destination centering by 1.4 seconds, fixed arrival at zoom 12 and a 0.4-second hold. Real optional Terrarium relief uses the existing documentary map source. A feathered radial reveal runs for the first 0.5 seconds of the mountain shot; direct seeking renders the final native map. The scene timeline stays at 20 seconds. No additional libraries or test Actions. Actual device rendering and tile-loading performance remain to be verified.
