@@ -475,6 +475,8 @@ export interface DocumentaryShot {
   to?: [number, number, number];
 }
 export interface SceneBucketList {
+  cover?: boolean;
+  directorsCut?: boolean;
   documentary?: DocumentaryShot;
   chapter: 'zoom' | 'reason' | 'outro';
   episode: number;
