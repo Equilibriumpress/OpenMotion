@@ -16,11 +16,20 @@ function grad(c:C,x:number,y:number,x2:number,y2:number,stops:[number,string][])
 function glow(c:C,x:number,y:number,r:number,col:string){const g=c.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,col);g.addColorStop(1,'rgba(0,0,0,0)');oval(c,x,y,r,r,g);}
 function text(c:C,v:string,x:number,y:number,size:number,color=PAPER,weight=750,max=446){c.font=weight+' '+size+'px system-ui, sans-serif';const f=Math.min(size,size*max/Math.max(1,c.measureText(v).width));c.font=weight+' '+f+'px system-ui, sans-serif';c.textAlign='center';c.textBaseline='middle';c.fillStyle=color;c.fillText(v,x,y);}
 const grain=Array.from({length:1250},(_,i)=>[(i*137.507764)%W,(i*91.137)%H,i%7===0?2:1,i%3===0] as const);
-function finish(c:C){
- const g=c.createRadialGradient(270,400,170,270,440,630);g.addColorStop(0,'rgba(9,15,24,0)');g.addColorStop(1,'rgba(9,15,24,.66)');rect(c,0,0,W,H,g);
+let grainSurface:HTMLCanvasElement|OffscreenCanvas|undefined;
+function paintGrain(c:C){
+ if(!grainSurface){
+  const surface=typeof document!=='undefined'?document.createElement('canvas'):typeof OffscreenCanvas!=='undefined'?new OffscreenCanvas(W,H):undefined;
+  if(surface){surface.width=W;surface.height=H;const ctx=surface.getContext('2d');if(ctx){ctx.globalAlpha=.12;for(const [x,y,r,d] of grain){ctx.fillStyle=d?'#E7C8BA':'#08121B';ctx.fillRect(x,y,r,r);}grainSurface=surface;}}
+ }
+ if(grainSurface){c.drawImage(grainSurface,0,0,W,H,0,0,W,H);return;}
  c.save();c.globalAlpha=.12;
  for(const light of [true,false]){c.beginPath();for(const [x,y,r,d] of grain)if(d===light)c.rect(x,y,r,r);c.fillStyle=light?'#E7C8BA':'#08121B';c.fill();}
  c.restore();
+}
+function finish(c:C){
+ const g=c.createRadialGradient(270,400,170,270,440,630);g.addColorStop(0,'rgba(9,15,24,0)');g.addColorStop(1,'rgba(9,15,24,.66)');rect(c,0,0,W,H,g);
+ paintGrain(c);
  rect(c,0,640,W,320,grad(c,0,640,0,960,[[0,'rgba(7,12,20,0)'],[.50,'rgba(7,12,20,.48)'],[1,'rgba(7,12,20,.84)']]));
 }
 function city(c:C,t:number,warm=false){
