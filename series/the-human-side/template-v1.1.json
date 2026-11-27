@@ -1,0 +1,198 @@
+{
+  "version": "1.1",
+  "format": "9:16",
+  "fps": 30,
+  "durationSec": 28,
+  "referenceProject": "the-human-side-01-same-situation",
+  "templatePath": "series/the-human-side/template-v1.1.json",
+  "instructions": "Create 20–35s original English stories contrasting two responses to the same event. Use human-side-v1 with mind-series-v1 for audio, original black curved stick figures, white round faces, lilac paper, lavender glow and oval shadows. Reuse shot, face and pose presets in doodle.extras. Preserve visual safe areas and avoid clinical diagnoses or universal claims. Use short headlines and captions, 5 beats, English Piper narration. See docs/the-human-side.md. Social cover: include cover-title:LINE ONE|LINE TWO, cover-hook:, cover-pose-a/b: and cover-face-a/b: in the first scene only. Keep the 0.85s selectable cover within the existing opening scene; title maximum two short lines. Export PNG via Studio.",
+  "brandKit": {
+    "brandName": "THE HUMAN SIDE",
+    "primaryColor": "#C5A8D0",
+    "accentColor": "#E6D8ED",
+    "backgroundColor": "#C5A8D0",
+    "surfaceColor": "#E6D8ED",
+    "textColor": "#191619",
+    "mutedColor": "#806D87",
+    "fontFamily": "system-ui"
+  },
+  "seriesId": "the-human-side",
+  "exampleScenes": [
+    {
+      "id": "ths-01-1",
+      "name": "One message",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Same message.",
+      "caption": "Two different reactions.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "shot:message",
+          "episode:01",
+          "message:We need to talk.",
+          "pose-a:phone",
+          "pose-b:phone",
+          "face-a:surprise",
+          "face-b:neutral",
+          "cover-title:SAME MESSAGE|DIFFERENT MINDS",
+          "cover-hook:We need to talk.",
+          "cover-pose-a:kneel",
+          "cover-pose-b:joy",
+          "cover-face-a:panic",
+          "cover-face-b:joy"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "Two people get the same message: we need to talk."
+      }
+    },
+    {
+      "id": "ths-01-2",
+      "name": "A imagines a threat",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "What if something is wrong?",
+      "caption": "One possible interpretation.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "worried",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "shot:worry",
+          "episode:01",
+          "label-a:What did I do?",
+          "pose-a:kneel",
+          "face-a:panic"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "One starts worrying. Did I do something wrong? Are they upset with me?"
+      }
+    },
+    {
+      "id": "ths-01-3",
+      "name": "B waits for context",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "I'll find out later.",
+      "caption": "Another possible interpretation.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "relaxed",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "shot:calm",
+          "episode:01",
+          "label-b:We will talk later.",
+          "pose-b:calm",
+          "face-b:smile"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "The other thinks, I'll find out later, and gets on with the day."
+      }
+    },
+    {
+      "id": "ths-01-4",
+      "name": "Two interpretations",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Same situation. Different minds.",
+      "caption": "Interpretation shapes emotion.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "worried",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "shot:contrast",
+          "episode:01",
+          "label-a:Something is wrong.",
+          "label-b:Let's find out.",
+          "pose-a:kneel",
+          "pose-b:joy",
+          "face-a:panic",
+          "face-b:joy"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "The message is identical. How we interpret a situation influences how we feel."
+      }
+    },
+    {
+      "id": "ths-01-5",
+      "name": "More context",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Ask before assuming.",
+      "caption": "A thought is not a fact.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "happy",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "shot:reveal",
+          "episode:01",
+          "message:What time works for dinner?",
+          "pose-a:relief",
+          "pose-b:calm",
+          "face-a:relief",
+          "face-b:smile"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "Then the reply arrives. Dinner plans. Sometimes, asking for context changes everything."
+      }
+    }
+  ],
+  "exampleCaptionStyle": null,
+  "exampleAudioTracks": [
+    {
+      "kind": "voiceover",
+      "volume": 1
+    },
+    {
+      "kind": "music",
+      "volume": 0.22,
+      "fadeInSec": 0.3,
+      "fadeOutSec": 1
+    }
+  ]
+}
