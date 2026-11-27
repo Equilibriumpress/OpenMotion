@@ -51,3 +51,9 @@ Fast Car keeps the five existing beats, 40 seconds, captions and audio tracks. T
 - The thumbnail SVG is an independent composition using the same subject and perspective; the 0.85-second video cover and PNG share the actual Canvas renderer.
 
 No external asset, dependency, workflow or audio generator changes. Inspect the exterior shot, wheels, facial angles, light and cover in Studio and in an actual MP4 before approving. Static checks do not replace browser rendering.
+
+## Episode 02 — Every Breath You Take (1983)
+
+Template 2.1, 40 seconds, 9:16, 60fps. Episode-specific marker song-breath-v1 dispatches to songBreathRenderer.ts before the Fast Car renderer. Editable shot presets: breath-romance (0–6), breath-gaze (6–14), breath-enclosure (14–22), breath-separation (22–30), breath-release (30–40). A consistent fictional couple, original portrait geometry, closing architectural bars, reflections and an open doorway support the contrast between affection and possession. The heart-eye motif is used for both the selectable opening frame and PNG export, with a matching static library SVG. This is illustrative interpretation, not biography or a recreation of the music video.
+
+Source: [Sting interview, Los Angeles Times, 11 August 1985](https://www.latimes.com/archives/la-xpm-1985-08-11-ca-2719-story.html), [official Sting album notes](https://sting.com/blogs/news/sting-my-songs-album-out-today). The final statement is editorial interpretation. No lyrics or original recording used. Episode-specific sound profiles add a low dissonant tone and restrained pulses. Fast Car audio inputs and project remain unchanged. Actual browser visuals, generated voice and MP4 still require review.
