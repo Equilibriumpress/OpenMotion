@@ -380,8 +380,8 @@
     {
       "id": "the-human-side",
       "title": "The Human Side",
-      "description": "Dezelfde situatie, verschillende emoties. Handgetekende stickfiguren op lila papier.",
-      "activeVersion": "2.0",
+      "description": "Herkenbare menselijke emoties, gewoontes en innerlijke conflicten. Handgetekende stickfiguren op lila papier.",
+      "activeVersion": "2.1",
       "versions": [
         {
           "version": "1.0",
@@ -429,6 +429,25 @@
           "referenceProject": "the-human-side-01-same-situation",
           "templatePath": "series/the-human-side/template-v2.0.json",
           "instructions": "Create 20–35s original stories using human-side-v1, mind-series-v1 and human-side-v2 on every scene. Choose an editable theme: message, waiting, calendar, boundaries, feedback. Retain the lilac paper, black curved stick figures, white faces and expressive asymmetry. Use shot:message/worry/calm/contrast/reveal with topic-specific props, pose-a/b, face-a/b, label-a/b, and optional detail-a/b. First scene only: cover-title (two short lines separated by |), cover-hook, cover-pose-a/b, cover-face-a/b. The 1.5-second cover is part of the existing opening scene; select around .3 seconds or download matching PNG in Studio. No extra title card or duplicate captions. Use short spoken lines, short timed captions (manifest replaces estimates from Piper), generated original -human-sfx.wav track, and a quiet score. Use an individual library poster. Keep clinical framing cautious. See docs/the-human-side.md.",
+          "brandKit": {
+            "brandName": "THE HUMAN SIDE",
+            "primaryColor": "#C5A8D0",
+            "accentColor": "#E6D8ED",
+            "backgroundColor": "#C5A8D0",
+            "surfaceColor": "#E6D8ED",
+            "textColor": "#191619",
+            "mutedColor": "#806D87",
+            "fontFamily": "system-ui"
+          }
+        },
+        {
+          "version": "2.1",
+          "format": "9:16",
+          "fps": 30,
+          "durationSec": 29,
+          "referenceProject": "the-human-side-06-resting-guilt",
+          "templatePath": "series/the-human-side/template-v2.1.json",
+          "instructions": "Create original 25–35s English narrative episodes with one protagonist, optionally supporting characters. Use human-side-v1, mind-series-v1, human-side-v2 and human-side-v21 on every scene. Choose one theme: rest (chair, unfinished tasks, rest), mask (removable smile), loop (phone and repeated action), load (accumulating responsibilities and shared weight), crowd (background people and connection). Set shot:setup/build/turn/change/resolve, use short visual-first narration and one final headline. Optional face-a/b and pose-a/b override automatic acting where relevant. Editable props: prop-tasks, prop-next, prop-title, label-a, label-b depending on module. First scene only: cover-title (two short lines separated by |), cover-hook. The 1.5s cover uses the chosen module's own artwork. Export PNG via Studio or choose frame .3s. Use estimated phrase captions replaced by Piper timings at publication, quiet music and generated original -human-sfx.wav track. Create individual illustrated library poster. Keep claims cautious and non-diagnostic. See docs/the-human-side.md.",
           "brandKit": {
             "brandName": "THE HUMAN SIDE",
             "primaryColor": "#C5A8D0",
