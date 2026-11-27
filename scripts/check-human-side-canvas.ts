@@ -33,7 +33,7 @@ for(const slug of ['01-same-situation','02-no-text-back','03-plans-change','04-b
  }
  labels=[];renderHumanSideCover(c,1080,1920,p.scenes[0],p.brandKit);
  assert.equal(depth,0);assert(title.every(v=>labels.includes(v)),slug+' PNG cover missing');
- const rate=p.templateVersion==='2.2'?30:6;
+ const rate=['2.2','2.3'].includes(p.templateVersion??'')?30:6;
  for(const s of p.scenes)for(let k=0;k<Math.ceil(s.durationSec*rate);k++){
   renderHumanSide(c,540,960,s,k/rate,p.brandKit);assert.equal(depth,0,slug+' '+s.name);frames++;
  }
