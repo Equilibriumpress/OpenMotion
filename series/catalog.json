@@ -432,7 +432,7 @@
       "id": "the-song-explained",
       "title": "The Song Explained",
       "description": "De betekenis en achtergrond van bekende nummers in geanimeerde muziekposters.",
-      "activeVersion": "2.0",
+      "activeVersion": "2.1",
       "versions": [
         {
           "version": "1.0",
@@ -461,6 +461,25 @@
           "referenceProject": "the-song-explained-001-fast-car",
           "templatePath": "series/the-song-explained/template-v2.0.json",
           "instructions": "Produce an original 30–40s animated music mini-documentary. Full-bleed shots, a recurring fictional protagonist, emotionally motivated color and light, a restrained cover and captions, no repeated title panels. Use layout=doodle-explainer and the three markers mind-series-v1, song-explainer-v1, song-cinematic-v2. Existing Fast Car presets longing, shop, drive, return, reflection are story-specific; extend cinematicSongRenderer with original compositions for new songs. Camera push/pull/track. Use one selectable 0.85s cover, separate SVG thumbnail, and optional original procedural sound bed at assets/the-song-explained/<slug>-sound.wav. Existing cached Piper provides voice. Verify artist interviews and distinguish interpretation from documented intent. No lyrics, original music or album art. Visual review before season expansion.",
+          "brandKit": {
+            "brandName": "THE SONG EXPLAINED",
+            "primaryColor": "#D39A62",
+            "accentColor": "#A85C43",
+            "backgroundColor": "#182735",
+            "surfaceColor": "#465A72",
+            "textColor": "#F4E6D0",
+            "mutedColor": "#9F8F81",
+            "fontFamily": "system-ui"
+          }
+        },
+        {
+          "version": "2.1",
+          "format": "9:16",
+          "fps": 60,
+          "durationSec": 40,
+          "referenceProject": "the-song-explained-001-fast-car",
+          "templatePath": "series/the-song-explained/template-v2.1.json",
+          "instructions": "Produce an original 30–40s animated music mini-documentary. Full-bleed shots, a recurring fictional protagonist, emotionally motivated color and light, a restrained cover and captions, no repeated title panels. Use layout=doodle-explainer and the three markers mind-series-v1, song-explainer-v1, song-cinematic-v2. Existing Fast Car presets longing, shop, drive, return, reflection are story-specific; extend cinematicSongRenderer with original compositions for new songs. Camera push/pull/track. Use one selectable 0.85s cover, separate SVG thumbnail, and optional original procedural sound bed at assets/the-song-explained/<slug>-sound.wav. Existing cached Piper provides voice. Verify artist interviews and distinguish interpretation from documented intent. No lyrics, original music or album art. Visual review before season expansion. For the Fast Car quality pass add song-hero-rigs-v21. Hero face has profile, three-quarter and near-front views; the original compact sedan is a projected 3D model with material shading and spinning wheels. Reuse these rigs only where story-appropriate. Keep the 0.85s selectable cover and original timing. See docs/the-song-explained.md.",
           "brandKit": {
             "brandName": "THE SONG EXPLAINED",
             "primaryColor": "#D39A62",
