@@ -302,9 +302,170 @@ function renderHumanV2(c:C,width:number,height:number,scene:OpenMotionScene,t:nu
  c.restore();
 }
 
+
+/** 2.1: five reusable single-protagonist story modules. All coordinates
+ * are local to a 540 x 400 stage, so the same art fits cover and story. */
+export const HUMAN_STORY_THEMES=['rest','mask','loop','load','crowd'] as const;
+export const HUMAN_STORY_BEATS=['setup','build','turn','change','resolve'] as const;
+export function isHumanSideV21(s:OpenMotionScene|undefined):boolean{
+ return !!s?.doodle?.extras?.includes('human-side-v21');
+}
+type StoryGet=(key:string,fallback?:string)=>string;
+function storyLine(c:C,p:Palette,x1:number,y1:number,x2:number,y2:number,w=3){
+ curve(c,()=>{c.moveTo(x1,y1);c.lineTo(x2,y2);},p.ink,w);
+}
+function storyActor(c:C,p:Palette,x:number,y:number,scale:number,t:number,get:StoryGet,pose:string,mood:Face,side='a',phase=.7){
+ figure(c,x,y,scale,t,get('pose-'+side,pose),face(get('face-'+side),mood),p,pose,phase,true);
+}
+function storyCard(c:C,p:Palette,x:number,y:number,label:string,w=118,alpha=1){
+ c.save();c.globalAlpha*=alpha;rounded(c,x-w/2,y-18,w,36,8,p,'#FFFFFF');
+ fitText(c,label,x,y,w-12,16,p,700);c.restore();
+}
+function storyChair(c:C,p:Palette,x:number,y:number){
+ c.save();c.translate(x,y);
+ rounded(c,-90,-144,82,108,19,p,p.light);
+ rounded(c,-91,-67,151,35,13,p,p.light);
+ storyLine(c,p,-75,-32,-75,0,5);storyLine(c,p,43,-32,43,0,5);
+ rounded(c,-104,-90,26,64,10,p,p.light);c.restore();
+}
+function storyPhone(c:C,p:Palette,x:number,y:number,t:number,lit=true,scale=1){
+ c.save();c.translate(x,y);c.scale(scale,scale);
+ rounded(c,-24,-42,48,84,8,p,'#FFFFFF');
+ rounded(c,-19,-34,38,64,5,p,lit?p.light:p.shadow);
+ if(lit){for(let i=0;i<3;i++){const dy=-25+i*18+(Math.sin(t*5)*3);rounded(c,-13,dy,26,12,3,p,'#FFFFFF');}}
+ ellipse(c,0,35,2.4,2.4,p.ink);c.restore();
+}
+function restStory(c:C,p:Palette,get:StoryGet,beat:number,t:number,cover:boolean){
+ const settle=smooth(t/1.1),release=beat>=3?smooth(t/1.6):0;
+ storyChair(c,p,264,370);
+ const mood:Face=beat===0?'neutral':beat===1?'worry':beat===2?'sad':'relief';
+ // Sitting is drawn using the deeply bent rig, with the chair behind it.
+ storyActor(c,p,270,337,.91,t,get,beat<3?'kneel':'calm',mood);
+ if(beat===1||beat===2||cover){
+  const words=get('prop-tasks','EMAIL|LAUNDRY|ONE MORE THING').split('|').slice(0,4);
+  words.forEach((v,i)=>{
+   const a=-2.85+i*.75+Math.sin(t*1.1+i)*.08;
+   const alpha=(cover?1:smooth((t-i*.45)/.45))*(1-release);
+   storyCard(c,p,270+Math.cos(a)*166,157+Math.sin(a)*87,v,136,alpha);
+  });
+  clock(c,438,205,36,t,p);
+ }else if(beat>=3){
+  c.save();c.globalAlpha=settle;ellipse(c,270,84,102,45,p.light);
+  fitText(c,get('prop-next','REST IS ALLOWED'),270,83,195,19,p,800);c.restore();
+ }else clock(c,424,175,35,t,p);
+}
+function maskStory(c:C,p:Palette,get:StoryGet,beat:number,t:number,cover:boolean){
+ const alone=beat>=2;
+ if(!alone&&!cover){for(const [x,phase] of [[85,0],[455,2]]){c.save();c.globalAlpha=.42;figure(c,x,340,.58,t,'wave','smile',p,'wave',phase,true);c.restore();}}
+ // One face beneath a physical, removable smiling mask.
+ const x=270,y=170,scale=1.5;
+ c.save();c.translate(x,y);
+ curve(c,()=>{c.moveTo(0,64);c.bezierCurveTo(-22,98,-16,142,0,164);c.moveTo(0,164);c.lineTo(-45,200);c.moveTo(0,164);c.lineTo(42,200);},p.ink,6);
+ const faceMood=face(get('face-a',beat>=3?'relief':'sad'),'sad');
+ c.save();c.scale(scale,scale);drawFace(c,faceMood,t,p,0);c.restore();
+ const move=cover ? .78:beat===0||beat===1?0:beat===2?smooth(t/2.1):1;
+ const mx=118*move,my=72*move;
+ curve(c,()=>{c.moveTo(0,76);c.quadraticCurveTo(100,145,mx+32,my+43);},p.ink,5);
+ curve(c,()=>{c.moveTo(0,77);c.quadraticCurveTo(-67,112,-68,150);},p.ink,5);
+ if(beat<4||cover){c.save();c.translate(mx,my);c.rotate(.22*move);c.scale(scale,scale);drawFace(c,'joy',.6,p,2);c.restore();}
+ else if(beat===4){storyActor(c,p,135,202,.65,t,get,'relief','smile','b',2);}
+ c.restore();
+ if(beat===3&&!cover)thought(c,get('label-a','I’m not okay today.'),270,54,300,p,t,.2);
+}
+function loopStory(c:C,p:Palette,get:StoryGet,beat:number,t:number,cover:boolean){
+ const repeat=beat===0||beat===1||beat===2;
+ const progress=repeat?(t%1.6)/1.6:smooth(t/1.6);
+ const cx=270,cy=192,rad=151;
+ if(repeat||cover){
+  const angle=cover?-.65:t*1.9;
+  for(let i=0;i<18;i++){
+   const a=angle+i*Math.PI*2/20,b=a+.23;
+   curve(c,()=>{c.moveTo(cx+rad*Math.cos(a),cy+rad*Math.sin(a));c.quadraticCurveTo(cx+rad*Math.cos((a+b)/2),cy+rad*Math.sin((a+b)/2),cx+rad*Math.cos(b),cy+rad*Math.sin(b));},p.shadow,5);
+  }
+  const a=angle+18*Math.PI*2/20,ax=cx+rad*Math.cos(a),ay=cy+rad*Math.sin(a);
+  c.save();c.translate(ax,ay);c.rotate(a+Math.PI/2);stroke(c,p.ink,'M -16 -12 L 0 0 L -16 12',5);c.restore();
+  storyActor(c,p,270,333,.91,t,get,beat===2?'think':'phone',beat===2?'confused':'worry');
+  clock(c,426,110,33,t*.8,p);storyPhone(c,p,112,211,t,true,.9);
+  if(!cover)storyCard(c,p,270,31,get('prop-title','JUST ONE MORE'),220);
+ }else{
+  const x=mix(180,405,progress);
+  storyActor(c,p,180,368,1.0,t,get,beat===3?'point':'relief',beat===3?'determined':'relief');
+  storyPhone(c,p,x,250,t,false,.95);
+  storyLine(c,p,350,291,466,291,5);storyLine(c,p,366,291,366,367,4);storyLine(c,p,448,291,448,367,4);
+  if(beat===4)storyCard(c,p,400,153,get('prop-next','PHONE AWAY'),170,progress);
+ }
+}
+function loadStory(c:C,p:Palette,get:StoryGet,beat:number,t:number,cover:boolean){
+ const words=get('prop-tasks','WORK|FAMILY|ERRANDS|FAVOURS').split('|').slice(0,5);
+ const count=cover?words.length:beat===0?1:beat===1?Math.min(words.length,1+Math.floor(t/.85)):beat===2?words.length:beat===3?words.length:Math.max(1,words.length-2);
+ const transfer=beat===3?smooth((t-.35)/1.7):beat===4?1:0;
+ const heroX=beat>=3?182:235,heroScale=beat===2?.86:.95;
+ storyActor(c,p,heroX,370,heroScale,t,get,beat===2?'kneel':beat===1?'lean':beat>=3?'relief':'point',beat===2?'sad':beat===1?'worry':'neutral');
+ if(beat>=3)storyActor(c,p,414,370,.85,t,get,'point','smile','b',2);
+ for(let i=0;i<count;i++){
+  const u=cover||beat!==1?1:smooth((t-i*.85)/.38);
+  if(u<=0)continue;
+  const shared=beat>=3&&i>=Math.max(1,count-2),xx=shared?mix(300,414,transfer):heroX+99;
+  const yy=260-i*42-16*(1-u)+(shared?transfer*42:0);
+  c.save();c.globalAlpha*=u;c.translate(xx,yy);c.rotate((i%2 ? .02:-.02)*(1-transfer));
+  rounded(c,-60,-20,120,40,5,p,i%2?p.light:'#FFFFFF');
+  fitText(c,words[i]??'TASK',0,0,108,15,p,800);c.restore();
+ }
+ if(beat===2&&!cover)stress(c,heroX-25,170,t,p);
+}
+function crowdStory(c:C,p:Palette,get:StoryGet,beat:number,t:number,cover:boolean){
+ const connected=beat>=3,clear=connected?smooth(t/1.5):0;
+ const people=[[61,230,.48],[162,197,.50],[367,204,.49],[482,234,.47]];
+ for(let i=0;i<people.length;i++){
+  const [x,y,scale]=people[i];
+  c.save();c.globalAlpha=(cover ? .4:.52)*(1-.7*clear);
+  const crowdP={...p,ink:p.shadow};
+  figure(c,x+Math.sin(t*.8+i)*9+(x<270?-1:1)*clear*28,y,scale,t,i%2?'wave':'joy','smile',crowdP,'neutral',i,true);
+  if(!connected){ellipse(c,x,y-177,25,11,p.light);ellipse(c,x-11,y-177,2,2,p.shadow);ellipse(c,x,y-177,2,2,p.shadow);ellipse(c,x+11,y-177,2,2,p.shadow);}
+  c.restore();
+ }
+ const heroX=connected?mix(270,195,clear):270;
+ storyActor(c,p,heroX,370,1.02,t,get,beat===2?'kneel':connected?'relief':'crossed',connected?'relief':'sad');
+ if(connected){const x=mix(494,365,clear);storyActor(c,p,x,370,1.01,t,get,'relief','smile','b',2);
+  if(beat===4){const a=smooth((t-.7)/.6);c.save();c.globalAlpha=a;thought(c,get('label-b','I’m listening.'),280,67,220,p,t,0);c.restore();}
+ }
+}
+function storyArt(c:C,p:Palette,scene:OpenMotionScene,t:number,cover=false){
+ const theme=coverValue(scene,'theme','rest'),shot=coverValue(scene,'shot','setup');
+ const idx=HUMAN_STORY_BEATS.indexOf(shot as typeof HUMAN_STORY_BEATS[number]);
+ const beat=cover?(theme==='mask'?2:theme==='load'?2:1):Math.max(0,idx);
+ const get:StoryGet=(k,f='')=>cover&&(/^(pose|face)-[ab]$/.test(k))?f:coverValue(scene,k,f);
+ const module=theme==='mask'?maskStory:theme==='loop'?loopStory:theme==='load'?loadStory:theme==='crowd'?crowdStory:restStory;
+ module(c,p,get,beat,t,cover);
+}
+function renderHumanV21(c:C,width:number,height:number,scene:OpenMotionScene,t:number,brand:OpenMotionBrandKit){
+ const p:Palette={ink:brand.textColor||INK,bg:brand.backgroundColor||PAPER,light:brand.surfaceColor||LIGHT,shadow:brand.mutedColor||SHADOW};
+ const shot=coverValue(scene,'shot','setup'),time=Math.max(0,t-humanSideCoverDuration(scene));
+ const push=1+.035*smooth(time/Math.max(1,scene.durationSec-1));
+ c.save();c.scale(width/W,height/H);
+ background(c,p,270,shot==='turn' ? .26:.86);
+ text(c,'THE HUMAN SIDE  /  '+coverValue(scene,'episode','06'),270,94,15,p.ink,750);
+ c.save();c.translate(270,690);c.scale(push,push);c.translate(-270,-370);
+ storyArt(c,p,scene,time);c.restore();
+ if(shot==='resolve'&&time>Math.max(0,scene.durationSec-2)){
+  c.save();c.globalAlpha=smooth((time-(scene.durationSec-2))/.35);
+  fitText(c,scene.headline,270,169,430,31,p,850);c.restore();
+ }
+ c.restore();
+}
+
 export function renderHumanSideCover(c:C,width:number,height:number,scene:OpenMotionScene,brand:OpenMotionBrandKit,localTime=.3){
  const p:Palette={ink:brand.textColor||INK,bg:brand.backgroundColor||PAPER,light:brand.surfaceColor||LIGHT,shadow:brand.mutedColor||SHADOW};
  c.save();c.scale(width/W,height/H);background(c,p,370,.95);
+ if(isHumanSideV21(scene)){
+  rounded(c,130,210,280,38,19,p,p.ink);text(c,'THE HUMAN SIDE  /  '+coverValue(scene,'episode','06'),270,229,17,'#FFFFFF',800);
+  coverValue(scene,'cover-title').split('|').filter(Boolean).slice(0,2).forEach((v,i)=>fitText(c,v,270,280+i*55,430,51,p,900));
+  const hook=coverValue(scene,'cover-hook');if(hook){rounded(c,63,372,414,39,14,p,'#FFFFFF');fitText(c,hook,270,391.5,382,21,p,650);}
+  const act=1.55+.45*smooth((localTime-.82)/.68);
+  c.save();c.translate(270,742);c.scale(.79,.79);c.translate(-270,-370);
+  storyArt(c,p,scene,act,true);c.restore();
+  c.restore();return;
+ }
  if(isHumanSideV2(scene)){
   const episode=coverValue(scene,'episode','01'),lines=coverValue(scene,'cover-title').split('|').filter(Boolean).slice(0,2);
   rounded(c,130,210,280,38,19,p,p.ink);text(c,'THE HUMAN SIDE  /  '+episode,270,229,17,'#FFFFFF',800);
@@ -342,6 +503,7 @@ export function renderHumanSideCover(c:C,width:number,height:number,scene:OpenMo
 export function renderHumanSide(c:C,width:number,height:number,scene:OpenMotionScene,localTime:number,brand:OpenMotionBrandKit){
  const t=Math.max(0,Math.min(scene.durationSec,localTime));
  if(t<humanSideCoverDuration(scene)){renderHumanSideCover(c,width,height,scene,brand,t);return;}
+ if(isHumanSideV21(scene)){renderHumanV21(c,width,height,scene,t,brand);return;}
  if(isHumanSideV2(scene)){renderHumanV2(c,width,height,scene,t,brand);return;}
  const extras=scene.doodle?.extras??[];
  const get=(key:string,fallback='')=>extras.find(x=>x.startsWith(key+':'))?.slice(key.length+1)??fallback;
