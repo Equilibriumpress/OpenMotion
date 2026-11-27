@@ -1,0 +1,220 @@
+{
+  "version": "1.0",
+  "format": "9:16",
+  "fps": 60,
+  "durationSec": 40,
+  "referenceProject": "the-song-explained-001-fast-car",
+  "templatePath": "series/the-song-explained/template-v1.0.json",
+  "instructions": "Create original English 30–40s song interpretations. Verify the song context using artist interviews and reliable publications, distinguish interpretation from documented intent, and do not quote lyrics or use commercial recordings or album artwork. Use layout=doodle-explainer with song-explainer-v1 and mind-series-v1 (cached Piper audio). Reuse original SVG Path2D illustrations and the editable shot:, camera:, symbol:, artist:, episode: and cover-title:/cover-hook: extras. Shot presets: road, room, shop, night, return, symbol; symbols: car, record, heart. Extend the renderer for new story-specific visuals. Use separate episode cover art and 0.85s selectable cover. See docs/the-song-explained.md.",
+  "brandKit": {
+    "brandName": "THE SONG EXPLAINED",
+    "primaryColor": "#D5A34B",
+    "accentColor": "#A4473D",
+    "backgroundColor": "#EDE5D5",
+    "surfaceColor": "#526F80",
+    "textColor": "#191919",
+    "mutedColor": "#766A5B",
+    "fontFamily": "system-ui"
+  },
+  "seriesId": "the-song-explained",
+  "exampleScenes": [
+    {
+      "id": "tse-001-1",
+      "name": "Opening",
+      "durationSec": 3,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "MORE THAN A CAR.",
+      "caption": "A song about escape.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "neutral",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "song-explainer-v1",
+          "shot:road",
+          "episode:01",
+          "artist:TRACY CHAPMAN · 1988",
+          "camera:push",
+          "cover-title:FAST CAR",
+          "cover-hook:More than a car.",
+          "symbol:car"
+        ],
+        "shirtColor": "#A4473D",
+        "highlightColor": "#D5A34B",
+        "narration": "Fast Car is about more than driving."
+      }
+    },
+    {
+      "id": "tse-001-2",
+      "name": "The narrator",
+      "durationSec": 5,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "A DIFFERENT LIFE",
+      "caption": "Tracy Chapman · 1988",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "neutral",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "song-explainer-v1",
+          "shot:room",
+          "episode:01",
+          "artist:TRACY CHAPMAN · 1988",
+          "camera:push"
+        ],
+        "shirtColor": "#A4473D",
+        "highlightColor": "#D5A34B",
+        "narration": "In Tracy Chapman's 1988 song, a young woman dreams of a different life."
+      }
+    },
+    {
+      "id": "tse-001-3",
+      "name": "Responsibility",
+      "durationSec": 8,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "WORK. FAMILY. POVERTY.",
+      "caption": "Responsibility comes first.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "neutral",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "song-explainer-v1",
+          "shot:shop",
+          "episode:01",
+          "artist:TRACY CHAPMAN · 1988",
+          "camera:push"
+        ],
+        "shirtColor": "#A4473D",
+        "highlightColor": "#D5A34B",
+        "narration": "She leaves school to support her father. She works, but money is scarce and the future feels limited."
+      }
+    },
+    {
+      "id": "tse-001-4",
+      "name": "A brief escape",
+      "durationSec": 8,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "A MOMENT OF FREEDOM",
+      "caption": "Hope returns.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "neutral",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "song-explainer-v1",
+          "shot:night",
+          "episode:01",
+          "artist:TRACY CHAPMAN · 1988",
+          "camera:push"
+        ],
+        "shirtColor": "#A4473D",
+        "highlightColor": "#D5A34B",
+        "narration": "With her partner, she sees a chance to start over. For a moment, the journey offers freedom and belonging."
+      }
+    },
+    {
+      "id": "tse-001-5",
+      "name": "The pattern returns",
+      "durationSec": 8,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "THE SAME STRUGGLES",
+      "caption": "A new place, familiar problems.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "neutral",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "song-explainer-v1",
+          "shot:return",
+          "episode:01",
+          "artist:TRACY CHAPMAN · 1988",
+          "camera:push"
+        ],
+        "shirtColor": "#A4473D",
+        "highlightColor": "#D5A34B",
+        "narration": "But the new life brings familiar problems. Her partner drinks, and the responsibility for the family falls on her again."
+      }
+    },
+    {
+      "id": "tse-001-6",
+      "name": "Interpretation",
+      "durationSec": 8,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "ESCAPE IS MORE|THAN DISTANCE.",
+      "caption": "The meaning of Fast Car.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "neutral",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "song-explainer-v1",
+          "shot:road",
+          "episode:01",
+          "artist:TRACY CHAPMAN · 1988",
+          "camera:pull"
+        ],
+        "shirtColor": "#A4473D",
+        "highlightColor": "#D5A34B",
+        "narration": "The car becomes a symbol of hope and escape. The song asks whether leaving a place is enough to change a life."
+      }
+    }
+  ],
+  "exampleCaptionStyle": "minimal",
+  "exampleAudioTracks": [
+    {
+      "id": "voice",
+      "kind": "voiceover",
+      "src": "assets/audio/the-song-explained-001-fast-car-voice.mp3",
+      "startSec": 0,
+      "endSec": 40,
+      "volume": 1
+    },
+    {
+      "id": "score",
+      "kind": "music",
+      "src": "assets/audio/the-song-explained-001-fast-car-score.mp3",
+      "startSec": 0,
+      "endSec": 40,
+      "volume": 0.18,
+      "fadeInSec": 0.3,
+      "fadeOutSec": 1.2
+    }
+  ]
+}

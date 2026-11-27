@@ -427,6 +427,38 @@
         "imageUrl": "series-covers/the-human-side.svg",
         "alt": "The Human Side – seriecover"
       }
+    },
+    {
+      "id": "the-song-explained",
+      "title": "The Song Explained",
+      "description": "De betekenis en achtergrond van bekende nummers in geanimeerde muziekposters.",
+      "activeVersion": "1.0",
+      "versions": [
+        {
+          "version": "1.0",
+          "format": "9:16",
+          "fps": 60,
+          "durationSec": 40,
+          "referenceProject": "the-song-explained-001-fast-car",
+          "templatePath": "series/the-song-explained/template-v1.0.json",
+          "instructions": "Create original English 30–40s song interpretations. Verify the song context using artist interviews and reliable publications, distinguish interpretation from documented intent, and do not quote lyrics or use commercial recordings or album artwork. Use layout=doodle-explainer with song-explainer-v1 and mind-series-v1 (cached Piper audio). Reuse original SVG Path2D illustrations and the editable shot:, camera:, symbol:, artist:, episode: and cover-title:/cover-hook: extras. Shot presets: road, room, shop, night, return, symbol; symbols: car, record, heart. Extend the renderer for new story-specific visuals. Use separate episode cover art and 0.85s selectable cover. See docs/the-song-explained.md.",
+          "brandKit": {
+            "brandName": "THE SONG EXPLAINED",
+            "primaryColor": "#D5A34B",
+            "accentColor": "#A4473D",
+            "backgroundColor": "#EDE5D5",
+            "surfaceColor": "#526F80",
+            "textColor": "#191919",
+            "mutedColor": "#766A5B",
+            "fontFamily": "system-ui"
+          }
+        }
+      ],
+      "episodes": [],
+      "cover": {
+        "imageUrl": "series-covers/the-song-explained.svg",
+        "alt": "The Song Explained – seriecover met vinylplaat"
+      }
     }
   ],
   "standaloneVideos": [

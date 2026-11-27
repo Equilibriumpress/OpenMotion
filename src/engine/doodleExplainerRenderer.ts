@@ -1,3 +1,4 @@
+import { renderSongExplainer } from './songExplainerRenderer';
 import { renderHumanSide } from './humanSideRenderer';
 import { renderMindSeries } from './mindSeriesRenderer';
 import { renderAdhdExperience } from './adhdExperienceRenderer';
@@ -326,6 +327,7 @@ export function renderDoodleExplainerScene(
 ):void{
   const d=scene.doodle;
   if(!d)return;
+  if(d.extras?.includes('song-explainer-v1')){renderSongExplainer(ctx,width,height,scene,localTime,brand);return;}
   if(d.extras?.includes('human-side-v1')){renderHumanSide(ctx,width,height,scene,localTime,brand);return;}
   if(d.extras?.includes('mind-series-v1')){renderMindSeries(ctx,width,height,scene,localTime);return;}
   if(d.extras?.includes('experience-v1')){renderAdhdExperience(ctx,width,height,scene,localTime);return;}
