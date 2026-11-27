@@ -1,0 +1,327 @@
+{
+  "schemaVersion": "1.0",
+  "id": "the-human-side-10-lonely-in-a-crowd",
+  "slug": "the-human-side-10-lonely-in-a-crowd",
+  "title": "The Human Side 10 — Lonely in a Room Full of People",
+  "description": "Original fictional story about everyday human experiences. No diagnosis or universal psychological claim.",
+  "category": "Shorts & Reels",
+  "author": "OpenMotion Studio",
+  "source": "template",
+  "createdAt": "2026-11-27",
+  "updatedAt": "2026-11-27",
+  "githubPath": "projects/the-human-side-10-lonely-in-a-crowd/project.json",
+  "format": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "brandKit": {
+    "brandName": "THE HUMAN SIDE",
+    "primaryColor": "#C5A8D0",
+    "accentColor": "#E6D8ED",
+    "backgroundColor": "#C5A8D0",
+    "surfaceColor": "#E6D8ED",
+    "textColor": "#191619",
+    "mutedColor": "#806D87",
+    "fontFamily": "system-ui"
+  },
+  "scenes": [
+    {
+      "id": "ths-10-1",
+      "name": "Opening situation",
+      "durationSec": 4.5,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "episode:10",
+          "theme:crowd",
+          "shot:setup",
+          "label-b:I'm listening.",
+          "cover-title:SURROUNDED|YET ALONE",
+          "cover-hook:Together, but disconnected."
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "Surrounded. Still lonely."
+      }
+    },
+    {
+      "id": "ths-10-2",
+      "name": "The pattern builds",
+      "durationSec": 5.5,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "worried",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "episode:10",
+          "theme:crowd",
+          "shot:build",
+          "label-b:I'm listening."
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "The room is full of conversation, but none of it feels close."
+      }
+    },
+    {
+      "id": "ths-10-3",
+      "name": "Emotional turning point",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "relaxed",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "episode:10",
+          "theme:crowd",
+          "shot:turn",
+          "label-b:I'm listening."
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "You want to feel understood, not simply be around more people."
+      }
+    },
+    {
+      "id": "ths-10-4",
+      "name": "One small change",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "worried",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "episode:10",
+          "theme:crowd",
+          "shot:change",
+          "label-b:I'm listening."
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "One honest conversation might feel more meaningful than ten brief exchanges."
+      }
+    },
+    {
+      "id": "ths-10-5",
+      "name": "Reflection",
+      "durationSec": 7,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Connection, not a headcount.",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "happy",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "episode:10",
+          "theme:crowd",
+          "shot:resolve",
+          "label-b:I'm listening."
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "Connection is not measured by the number of people in a room."
+      }
+    }
+  ],
+  "captions": [
+    {
+      "text": "Surrounded. Still lonely.",
+      "startSec": 1.5,
+      "endSec": 4.05,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "The room is full of",
+      "startSec": 4.8,
+      "endSec": 6.779,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "conversation, but none of it",
+      "startSec": 6.779,
+      "endSec": 8.758,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "feels close.",
+      "startSec": 8.758,
+      "endSec": 9.55,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "You want to feel understood,",
+      "startSec": 10.3,
+      "endSec": 12.686,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "not simply be around more",
+      "startSec": 12.686,
+      "endSec": 15.073,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "people.",
+      "startSec": 15.073,
+      "endSec": 15.55,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "One honest conversation might feel",
+      "startSec": 16.3,
+      "endSec": 18.686,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "more meaningful than ten brief",
+      "startSec": 18.686,
+      "endSec": 21.073,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "exchanges.",
+      "startSec": 21.073,
+      "endSec": 21.55,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "Connection is not measured by",
+      "startSec": 22.3,
+      "endSec": 24.904,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "the number of people in",
+      "startSec": 24.904,
+      "endSec": 27.508,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "a room.",
+      "startSec": 27.508,
+      "endSec": 28.55,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    }
+  ],
+  "audioTracks": [
+    {
+      "id": "voice",
+      "kind": "voiceover",
+      "src": "assets/audio/the-human-side-10-lonely-in-a-crowd-voice.mp3",
+      "startSec": 0,
+      "endSec": 29,
+      "volume": 1
+    },
+    {
+      "id": "score",
+      "kind": "music",
+      "src": "assets/audio/the-human-side-10-lonely-in-a-crowd-score.mp3",
+      "startSec": 0,
+      "endSec": 29,
+      "volume": 0.13,
+      "fadeInSec": 0.3,
+      "fadeOutSec": 1
+    },
+    {
+      "id": "human-sfx",
+      "kind": "effect",
+      "src": "assets/audio/the-human-side-10-lonely-in-a-crowd-human-sfx.wav",
+      "startSec": 0,
+      "endSec": 29,
+      "volume": 0.48
+    }
+  ],
+  "kind": "video",
+  "seriesId": "the-human-side",
+  "season": 1,
+  "episodeNumber": 10,
+  "templateVersion": "2.1",
+  "productionStatus": "review",
+  "thumbnailUrl": "assets/the-human-side/v21/the-human-side-10-lonely-in-a-crowd.svg"
+}
