@@ -114,15 +114,17 @@ function prepareProject(p) {
         p.captions=cues.map(c=>({...c,startSec:Math.max(.85,c.startSec),position:cinematic ? .75 : .78,fontSizePx:cinematic?43:45})).filter(c=>c.endSec>c.startSec);
       }
       if(p.scenes.some(s=>s.doodle?.extras?.includes('human-side-v2'))){
+        const cinematic=p.scenes.some(s=>s.doodle?.extras?.includes('human-side-v22'));
+        const chunkSize=cinematic?4:5;
         const coverEnd=p.scenes[0].doodle?.extras?.some(v=>v.startsWith('cover-title:')&&v.slice(12).trim())?Math.min(1.5,p.scenes[0].durationSec*.55):0;
         p.captions=cues.flatMap(c=>{
           const words=String(c.text??'').trim().split(/\s+/).filter(Boolean);
           const parts=[];
-          for(let i=0;i<words.length;i+=5){
+          for(let i=0;i<words.length;i+=chunkSize){
             const start=c.startSec+(c.endSec-c.startSec)*i/words.length;
-            const end=c.startSec+(c.endSec-c.startSec)*Math.min(words.length,i+5)/words.length;
+            const end=c.startSec+(c.endSec-c.startSec)*Math.min(words.length,i+chunkSize)/words.length;
             const startSec=Math.max(coverEnd,start);
-            if(end-startSec>.12)parts.push({text:words.slice(i,i+5).join(' '),startSec,endSec:end,style:'minimal',position:.78,fontSizePx:45});
+            if(end-startSec>.12)parts.push({text:words.slice(i,i+chunkSize).join(' '),startSec,endSec:end,style:'minimal',position:.78,fontSizePx:cinematic?64:45});
           }
           return parts;
         });
