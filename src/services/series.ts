@@ -15,6 +15,7 @@ export interface SeriesDefinition {
   id: string;
   title: string;
   description: string;
+  cover?: {imageUrl:string; photoUrl?:string; alt?:string};
   activeVersion: string;
   versions: SeriesTemplate[];
   episodes: {slug:string; season:number; episodeNumber:number; templateVersion:string}[];
