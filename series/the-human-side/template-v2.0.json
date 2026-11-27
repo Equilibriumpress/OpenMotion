@@ -1,0 +1,214 @@
+{
+  "version": "2.0",
+  "format": "9:16",
+  "fps": 30,
+  "durationSec": 28,
+  "referenceProject": "the-human-side-01-same-situation",
+  "templatePath": "series/the-human-side/template-v2.0.json",
+  "instructions": "Create 20–35s original stories using human-side-v1, mind-series-v1 and human-side-v2 on every scene. Choose an editable theme: message, waiting, calendar, boundaries, feedback. Retain the lilac paper, black curved stick figures, white faces and expressive asymmetry. Use shot:message/worry/calm/contrast/reveal with topic-specific props, pose-a/b, face-a/b, label-a/b, and optional detail-a/b. First scene only: cover-title (two short lines separated by |), cover-hook, cover-pose-a/b, cover-face-a/b. The 1.5-second cover is part of the existing opening scene; select around .3 seconds or download matching PNG in Studio. No extra title card or duplicate captions. Use short spoken lines, short timed captions (manifest replaces estimates from Piper), generated original -human-sfx.wav track, and a quiet score. Use an individual library poster. Keep clinical framing cautious. See docs/the-human-side.md.",
+  "brandKit": {
+    "brandName": "THE HUMAN SIDE",
+    "primaryColor": "#C5A8D0",
+    "accentColor": "#E6D8ED",
+    "backgroundColor": "#C5A8D0",
+    "surfaceColor": "#E6D8ED",
+    "textColor": "#191619",
+    "mutedColor": "#806D87",
+    "fontFamily": "system-ui"
+  },
+  "seriesId": "the-human-side",
+  "exampleScenes": [
+    {
+      "id": "ths-01-1",
+      "name": "One message",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Same message.",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "shot:message",
+          "episode:01",
+          "message:We need to talk.",
+          "pose-a:phone",
+          "pose-b:phone",
+          "face-a:surprise",
+          "face-b:neutral",
+          "cover-pose-a:kneel",
+          "cover-pose-b:joy",
+          "cover-face-a:panic",
+          "cover-face-b:joy",
+          "human-side-v2",
+          "theme:message",
+          "cover-title:SAME MESSAGE|DIFFERENT MINDS",
+          "cover-hook:We need to talk."
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "Same message. Two reactions."
+      }
+    },
+    {
+      "id": "ths-01-2",
+      "name": "A imagines a threat",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "What if something is wrong?",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "worried",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "shot:worry",
+          "episode:01",
+          "label-a:What did I do?",
+          "pose-a:kneel",
+          "face-a:panic",
+          "human-side-v2",
+          "theme:message",
+          "detail-a:What if I messed up?",
+          "detail-b:Are they upset?"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "One reads it as bad news. What did I do? Are they upset?"
+      }
+    },
+    {
+      "id": "ths-01-3",
+      "name": "B waits for context",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "I'll find out later.",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "relaxed",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "shot:calm",
+          "episode:01",
+          "label-b:We will talk later.",
+          "pose-b:calm",
+          "face-b:smile",
+          "human-side-v2",
+          "theme:message"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "The other sees an unanswered question and waits for more context."
+      }
+    },
+    {
+      "id": "ths-01-4",
+      "name": "Two interpretations",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Same situation. Different minds.",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "worried",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "shot:contrast",
+          "episode:01",
+          "label-a:Something is wrong.",
+          "label-b:Let's find out.",
+          "pose-a:kneel",
+          "pose-b:joy",
+          "face-a:panic",
+          "face-b:joy",
+          "human-side-v2",
+          "theme:message"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "The words are identical. The meanings they give them are different."
+      }
+    },
+    {
+      "id": "ths-01-5",
+      "name": "More context",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Ask before assuming.",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "happy",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "shot:reveal",
+          "episode:01",
+          "message:What time works for dinner?",
+          "pose-a:relief",
+          "pose-b:calm",
+          "face-a:relief",
+          "face-b:smile",
+          "human-side-v2",
+          "theme:message"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "Dinner plans. Ask what someone means before assuming the worst."
+      }
+    }
+  ],
+  "exampleCaptionStyle": "minimal",
+  "exampleAudioTracks": [
+    {
+      "kind": "voiceover",
+      "volume": 1
+    },
+    {
+      "kind": "music",
+      "volume": 0.15,
+      "fadeInSec": 0.3,
+      "fadeOutSec": 1
+    },
+    {
+      "kind": "effect",
+      "volume": 0.48
+    }
+  ]
+}
