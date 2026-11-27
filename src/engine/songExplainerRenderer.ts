@@ -1,3 +1,4 @@
+import { isCinematicSong, renderCinematicSong, renderCinematicSongCover } from './cinematicSongRenderer';
 import type { OpenMotionBrandKit, OpenMotionScene } from '../types/openmotion';
 
 // Original vector artwork. A deterministic scene-time renderer shared by preview and MP4.
@@ -77,6 +78,7 @@ function symbol(c:C,p:Palette,kind:string,t:number){
 }
 export function hasSongCover(scene:OpenMotionScene|undefined){return !!scene?.doodle?.extras?.includes('song-explainer-v1')&&!!val(scene,'cover-title');}
 export function renderSongCover(c:C,w:number,h:number,s:OpenMotionScene,b:OpenMotionBrandKit){
+ if(isCinematicSong(s)){renderCinematicSongCover(c,w,h,s,b);return;}
  const p=palette(b);c.save();c.scale(w/W,h/H);paper(c,p);
  text(c,'THE SONG EXPLAINED  /  '+val(s,'episode','01'),270,219,430,19,p.red);
  lines(c,val(s,'cover-title','FAST CAR'),285,p,62);
@@ -86,6 +88,7 @@ export function renderSongCover(c:C,w:number,h:number,s:OpenMotionScene,b:OpenMo
  c.restore();
 }
 export function renderSongExplainer(c:C,w:number,h:number,s:OpenMotionScene,time:number,b:OpenMotionBrandKit){
+ if(isCinematicSong(s)){renderCinematicSong(c,w,h,s,time,b);return;}
  const t=Math.max(0,Math.min(s.durationSec,time)),u=t/Math.max(.01,s.durationSec),p=palette(b);
  if(hasSongCover(s)&&t<Math.min(.85,s.durationSec*.3)){renderSongCover(c,w,h,s,b);return;}
  const shot=val(s,'shot','road'),camera=val(s,'camera','push'),z=camera==='pull'?1.09-.09*ease(u):1+.07*ease(u);
