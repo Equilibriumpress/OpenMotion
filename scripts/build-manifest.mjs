@@ -36,6 +36,23 @@ if (process.env.GITHUB_ACTIONS === 'true' || process.env.TRAVEL_ASSETS === '1') 
   if(result.status!==0)throw Error('[travel] Source media preparation failed; refusing to publish an incomplete episode.');
 }
 function prepareProject(p) {
+  if(p.scenes?.some(s=>s.doodle?.extras?.includes('mind-series-v1'))){
+    p.audioTracks=(p.audioTracks??[]).filter(t=>fs.existsSync(path.join(rootDir,'public',t.src)));
+    const voice=p.audioTracks.some(t=>t.kind==='voiceover');
+    const cueFile=path.join(rootDir,'public','assets','audio',p.slug+'-captions.json');
+    if(voice&&fs.existsSync(cueFile)){
+      const cues=JSON.parse(fs.readFileSync(cueFile,'utf8'));
+      let offset=0;
+      for(const s of p.scenes){
+        const end=offset+s.durationSec;
+        const matching=cues.filter(c=>c.startSec>=offset&&c.startSec<end);
+        if(matching.length)s.doodle.extras.push('speech-end:'+Math.min(s.durationSec,matching[matching.length-1].endSec-offset));
+        offset=end;
+      }
+    }
+    if(!voice)p.description+=' | Voice-over not available in this build. Add an audio track or run DOCUMENTARY_AUDIO=1 npm run build:manifest.';
+    return p;
+  }
   if(p.scenes?.some(s=>s.bucketList?.documentary?.series==='places-worth-exploring')){
     const base='assets/places-worth-exploring/'+p.slug+'/';
     const creditPath=path.join(rootDir,'public',base,'credits.json');

@@ -1,3 +1,4 @@
+import { renderMindSeries } from './mindSeriesRenderer';
 import { renderAdhdExperience } from './adhdExperienceRenderer';
 import { drawDoodleHead as head, drawDoodlePerson as person, drawDoodleBrain as brain } from './doodleCharacters';
 import type { OpenMotionScene, OpenMotionBrandKit } from '../types/openmotion';
@@ -324,6 +325,7 @@ export function renderDoodleExplainerScene(
 ):void{
   const d=scene.doodle;
   if(!d)return;
+  if(d.extras?.includes('mind-series-v1')){renderMindSeries(ctx,width,height,scene,localTime);return;}
   if(d.extras?.includes('experience-v1')){renderAdhdExperience(ctx,width,height,scene,localTime);return;}
   const t=Math.max(0,Math.min(scene.durationSec,localTime));
   const palette=d.palette??'cream';
