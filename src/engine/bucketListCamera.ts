@@ -60,8 +60,8 @@ function introCamera(scene:OpenMotionScene,timeSec:number):Camera{
   // Director's curve: accelerate through the ocean, then reach the
   // destination early enough for a short, steady hero-map hold before
   // the volcanic crater photograph fades in.
-  const speed=smooth(clamp(u/.92));
-  const move=smooth(clamp(u/.77));
+  const speed=smooth(clamp(u/(d.directorsCut ? .88 : .92)));
+  const move=smooth(clamp(u/(d.directorsCut ? .70 : .77)));
   const lon0=d.startLongitude??d.longitude+16;
   const lat0=d.startLatitude??d.latitude+5;
   return {
@@ -94,7 +94,7 @@ function cameraAt(project:OpenMotionProject,timeSec:number):Camera|null{
       if(scene.layout!=='bucket-list-zoom'||!scene.bucketList)return null;
       const local=Math.max(0,Math.min(duration,timeSec-start));
       if(scene.bucketList.chapter==='zoom')return introCamera(scene,local);
-      if(scene.bucketList.chapter==='outro'&&local>=duration-1.8)return outroCamera(scene,local);
+      if(scene.bucketList.chapter==='outro'&&!scene.bucketList.directorsCut&&local>=duration-1.8)return outroCamera(scene,local);
       return null;
     }
     start+=duration;
@@ -168,7 +168,7 @@ export async function prepareBucketListProject(project:OpenMotionProject):Promis
       image.width=mapW;image.height=mapH;
       const ctx=image.getContext('2d',{alpha:false});
       if(!ctx)throw new Error('Kaartcanvas niet beschikbaar.');
-      const points=project.scenes.flatMap(s=>s.bucketList?.documentary?.markers??[]);
+      const points=project.scenes.flatMap(s=>s.bucketList?.documentary?.markers??(s.bucketList?.directorsCut&&s.bucketList.chapter==='zoom'?[{lon:s.bucketList.longitude,lat:s.bucketList.latitude}]:[]));
       state={map,host,image,ctx,loaded:false,exporting:false,lastPreviewTime:-1,disposed:false,points,projected:new Map()};
       controllers.set(project,state);
       if(!map.loaded())await waitForEvent(map,'load',30000);
