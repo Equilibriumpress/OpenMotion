@@ -164,7 +164,7 @@ export function renderHumanSide(c:C,width:number,height:number,scene:OpenMotionS
  const pair=shot==='message'||shot==='contrast'||shot==='reveal';
  const warm=shot==='calm'||shot==='contrast'||shot==='reveal';
  c.save();c.scale(width/W,height/H);
- background(c,p,pair?370:270,warm?.72:0);
+ background(c,p,pair?370:270,warm ? .72 : 0);
  text(c,'THE HUMAN SIDE  /  '+episode,270,82,17,p.ink,750);
  // Primary visuals remain inside the Shorts overlay-safe centre.
  if(shot==='message'){
@@ -187,6 +187,7 @@ export function renderHumanSide(c:C,width:number,height:number,scene:OpenMotionS
   bubble(c,get('label-b','Let us find out.'),380,323,216,p,smooth(t/.55));
   figure(c,141,699,.87,t,get('pose-a','worried'),face(get('face-a'),'worry'),p,'neutral',.7);
   figure(c,365,699,.87,t,get('pose-b','calm'),face(get('face-b'),'smile'),p,'neutral',2);
+  if(['panic','worry','sad'].includes(get('face-a','worry')))stress(c,124,529,t,p);
  }
  wrap(c,scene.headline,270,166,444,34,p.ink);
  if(scene.caption)wrap(c,scene.caption,270,790,432,25,p.ink);
