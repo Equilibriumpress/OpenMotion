@@ -695,38 +695,38 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
     "id": "short-scotland-road-trip",
     "slug": "short-scotland-road-trip",
     "title": "Premium Travel Route Reel — Scotland / The Open Road",
-    "description": "30-second eight-scene travel film: full-screen Edinburgh opening, three dynamic road-trip segments following a camper, three photographic landmarks, and an editorial cartographic finale. Built-in original soundtrack; editable images and route data.",
+    "description": "30-second R5 director's cut: Highland road cold open, four two-shot destinations, restrained road-matched cartography and save-the-route finale. Original procedural score, editable photos and route.",
     "category": "Shorts & Reels",
     "author": "OpenMotion Studio",
     "source": "template",
     "createdAt": "2026-11-24",
-    "updatedAt": "2026-11-25",
+    "updatedAt": "2026-11-27",
     "githubPath": "projects/short-scotland-road-trip/project.json",
     "format": "9:16",
     "width": 1080,
     "height": 1920,
-    "fps": 30,
+    "fps": 60,
     "brandKit": {
       "brandName": "SCOTLAND / THE OPEN ROAD",
-      "primaryColor": "#D74936",
+      "primaryColor": "#AE674A",
       "accentColor": "#E2C48F",
       "backgroundColor": "#E7E8DE",
       "surfaceColor": "#173D37",
       "textColor": "#F8F7EF",
       "mutedColor": "#AFC9BE",
-      "fontFamily": "Bricolage Grotesque"
+      "fontFamily": "Georgia"
     },
     "audioTracks": [],
     "captions": [],
     "scenes": [
       {
         "id": "opening",
-        "name": "01 / Cinematic Edinburgh",
+        "name": "01 / Highlands cold open",
         "durationSec": 3,
         "layout": "premium-travel-route",
         "transition": "fade",
         "backdrop": "swiss-lines",
-        "headline": "FROM CITY TO HIGHLANDS",
+        "headline": "SCOTLAND'S ULTIMATE\nROAD TRIP",
         "fullBleed": true,
         "premiumTravel": {
           "stops": [
@@ -738,7 +738,24 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Edinburgh_Castle_from_Princes_Street_%282026%29.jpg/1280px-Edinburgh_Castle_from_Princes_Street_%282026%29.jpg",
               "photoAuthor": "LibKat17",
               "photoLicense": "CC BY 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_from_Princes_Street_(2026).jpg"
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_from_Princes_Street_(2026).jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Edinburgh_old_town.jpg/1280px-Edinburgh_old_town.jpg",
+                "photoAuthor": "Kidozh",
+                "photoLicense": "CC BY-SA 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_old_town.jpg",
+                "label": "Old Town",
+                "photoFocus": [
+                  0.5,
+                  0.5
+                ],
+                "photoFit": "cover"
+              }
             },
             {
               "name": "Glen Coe",
@@ -748,7 +765,24 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Glencoe%2C_Scotland.jpg/1280px-Glencoe%2C_Scotland.jpg",
               "photoAuthor": "Saadtowheed",
               "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Glencoe,_Scotland.jpg"
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Glencoe,_Scotland.jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg/1280px-A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
+                "photoAuthor": "Steven Brown",
+                "photoLicense": "CC BY-SA 2.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
+                "label": "A82 · Pass of Glencoe",
+                "photoFocus": [
+                  0.5,
+                  0.55
+                ],
+                "photoFit": "cover"
+              }
             },
             {
               "name": "Eilean Donan",
@@ -758,7 +792,24 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg/1280px-Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
               "photoAuthor": "Gillfoto",
               "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg"
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "contain",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Eilean_Donan_Castle_v02.jpg/1280px-Eilean_Donan_Castle_v02.jpg",
+                "photoAuthor": "Thomas Fuhrmann",
+                "photoLicense": "CC BY-SA 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Eilean_Donan_Castle_v02.jpg",
+                "label": "Eilean Donan Castle",
+                "photoFocus": [
+                  0.5,
+                  0.5
+                ],
+                "photoFit": "contain"
+              }
             },
             {
               "name": "Portree",
@@ -768,7 +819,24 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
               "photoAuthor": "Bewahrerderwerte",
               "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg"
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg/1280px-Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
+                "photoAuthor": "Squirrel1113",
+                "photoLicense": "CC BY 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
+                "label": "The Quiraing · Isle of Skye",
+                "photoFocus": [
+                  0.5,
+                  0.5
+                ],
+                "photoFit": "cover"
+              }
             }
           ],
           "route": {
@@ -800,7 +868,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
             }
           },
           "chapter": "opening",
-          "focusStopIndex": 0,
+          "focusStopIndex": 1,
           "mapCenter": [
             -4.4,
             56.55
@@ -809,17 +877,22 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "routeProgressFrom": 0,
           "routeProgressTo": 1,
           "roadMatched": false,
-          "markerStyle": "dot"
+          "markerStyle": "dot",
+          "editorial": true,
+          "seriesTitle": "THE OPEN ROAD COLLECTION · 001",
+          "regionTitle": "SCOTLAND",
+          "mapIntro": false,
+          "openingSecondary": true
         }
       },
       {
-        "id": "drive-glencoe",
-        "name": "02 / Drive to Glen Coe",
-        "durationSec": 5,
+        "id": "route-intro",
+        "name": "02 / Route introduction",
+        "durationSec": 2,
         "layout": "premium-travel-route",
         "transition": "fade",
         "backdrop": "swiss-lines",
-        "headline": "THE ROAD TO GLEN COE",
+        "headline": "FROM CITY TO HIGHLANDS",
         "fullBleed": true,
         "premiumTravel": {
           "stops": [
@@ -831,7 +904,24 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Edinburgh_Castle_from_Princes_Street_%282026%29.jpg/1280px-Edinburgh_Castle_from_Princes_Street_%282026%29.jpg",
               "photoAuthor": "LibKat17",
               "photoLicense": "CC BY 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_from_Princes_Street_(2026).jpg"
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_from_Princes_Street_(2026).jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Edinburgh_old_town.jpg/1280px-Edinburgh_old_town.jpg",
+                "photoAuthor": "Kidozh",
+                "photoLicense": "CC BY-SA 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_old_town.jpg",
+                "label": "Old Town",
+                "photoFocus": [
+                  0.5,
+                  0.5
+                ],
+                "photoFit": "cover"
+              }
             },
             {
               "name": "Glen Coe",
@@ -841,7 +931,24 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Glencoe%2C_Scotland.jpg/1280px-Glencoe%2C_Scotland.jpg",
               "photoAuthor": "Saadtowheed",
               "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Glencoe,_Scotland.jpg"
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Glencoe,_Scotland.jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg/1280px-A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
+                "photoAuthor": "Steven Brown",
+                "photoLicense": "CC BY-SA 2.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
+                "label": "A82 · Pass of Glencoe",
+                "photoFocus": [
+                  0.5,
+                  0.55
+                ],
+                "photoFit": "cover"
+              }
             },
             {
               "name": "Eilean Donan",
@@ -851,7 +958,24 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg/1280px-Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
               "photoAuthor": "Gillfoto",
               "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg"
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "contain",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Eilean_Donan_Castle_v02.jpg/1280px-Eilean_Donan_Castle_v02.jpg",
+                "photoAuthor": "Thomas Fuhrmann",
+                "photoLicense": "CC BY-SA 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Eilean_Donan_Castle_v02.jpg",
+                "label": "Eilean Donan Castle",
+                "photoFocus": [
+                  0.5,
+                  0.5
+                ],
+                "photoFit": "contain"
+              }
             },
             {
               "name": "Portree",
@@ -861,565 +985,24 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
               "photoAuthor": "Bewahrerderwerte",
               "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg"
-            }
-          ],
-          "route": {
-            "type": "Feature",
-            "geometry": {
-              "type": "LineString",
-              "coordinates": [
-                [
-                  -3.1999,
-                  55.9486
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg/1280px-Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
+                "photoAuthor": "Squirrel1113",
+                "photoLicense": "CC BY 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
+                "label": "The Quiraing · Isle of Skye",
+                "photoFocus": [
+                  0.5,
+                  0.5
                 ],
-                [
-                  -5.004,
-                  56.681
-                ],
-                [
-                  -5.5168,
-                  57.2743
-                ],
-                [
-                  -6.1945,
-                  57.4129
-                ]
-              ]
-            },
-            "properties": {
-              "status": "routing-needed",
-              "source": "Illustrative stop positions, NOT the driving route"
-            }
-          },
-          "chapter": "drive",
-          "focusStopIndex": 1,
-          "mapCenter": [
-            -4.22,
-            56.48
-          ],
-          "mapZoom": 7.15,
-          "routeProgressFrom": 0,
-          "routeProgressTo": 1,
-          "roadMatched": false,
-          "markerStyle": "dot"
-        }
-      },
-      {
-        "id": "photo-glencoe",
-        "name": "03 / Glen Coe landscape",
-        "durationSec": 3,
-        "layout": "premium-travel-route",
-        "transition": "fade",
-        "backdrop": "swiss-lines",
-        "headline": "GLEN COE",
-        "fullBleed": true,
-        "premiumTravel": {
-          "stops": [
-            {
-              "name": "Edinburgh",
-              "lat": 55.9486,
-              "lon": -3.1999,
-              "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Edinburgh_Castle_from_Princes_Street_%282026%29.jpg/1280px-Edinburgh_Castle_from_Princes_Street_%282026%29.jpg",
-              "photoAuthor": "LibKat17",
-              "photoLicense": "CC BY 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_from_Princes_Street_(2026).jpg"
-            },
-            {
-              "name": "Glen Coe",
-              "lat": 56.681,
-              "lon": -5.004,
-              "note": "Drive past dramatic mountain walls and a glacial Highland valley.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Glencoe%2C_Scotland.jpg/1280px-Glencoe%2C_Scotland.jpg",
-              "photoAuthor": "Saadtowheed",
-              "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Glencoe,_Scotland.jpg"
-            },
-            {
-              "name": "Eilean Donan",
-              "lat": 57.2743,
-              "lon": -5.5168,
-              "note": "A celebrated island castle stands where three sea lochs meet.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg/1280px-Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
-              "photoAuthor": "Gillfoto",
-              "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg"
-            },
-            {
-              "name": "Portree",
-              "lat": 57.4129,
-              "lon": -6.1945,
-              "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
-              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
-              "photoAuthor": "Bewahrerderwerte",
-              "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg"
-            }
-          ],
-          "route": {
-            "type": "Feature",
-            "geometry": {
-              "type": "LineString",
-              "coordinates": [
-                [
-                  -3.1999,
-                  55.9486
-                ],
-                [
-                  -5.004,
-                  56.681
-                ],
-                [
-                  -5.5168,
-                  57.2743
-                ],
-                [
-                  -6.1945,
-                  57.4129
-                ]
-              ]
-            },
-            "properties": {
-              "status": "routing-needed",
-              "source": "Illustrative stop positions, NOT the driving route"
-            }
-          },
-          "chapter": "photo",
-          "focusStopIndex": 1,
-          "mapCenter": [
-            -4.22,
-            56.48
-          ],
-          "mapZoom": 7.15,
-          "routeProgressFrom": 0,
-          "routeProgressTo": 1,
-          "roadMatched": false,
-          "markerStyle": "dot"
-        }
-      },
-      {
-        "id": "drive-eilean",
-        "name": "04 / Follow the A87",
-        "durationSec": 5,
-        "layout": "premium-travel-route",
-        "transition": "fade",
-        "backdrop": "swiss-lines",
-        "headline": "TO EILEAN DONAN",
-        "fullBleed": true,
-        "premiumTravel": {
-          "stops": [
-            {
-              "name": "Edinburgh",
-              "lat": 55.9486,
-              "lon": -3.1999,
-              "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Edinburgh_Castle_from_Princes_Street_%282026%29.jpg/1280px-Edinburgh_Castle_from_Princes_Street_%282026%29.jpg",
-              "photoAuthor": "LibKat17",
-              "photoLicense": "CC BY 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_from_Princes_Street_(2026).jpg"
-            },
-            {
-              "name": "Glen Coe",
-              "lat": 56.681,
-              "lon": -5.004,
-              "note": "Drive past dramatic mountain walls and a glacial Highland valley.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Glencoe%2C_Scotland.jpg/1280px-Glencoe%2C_Scotland.jpg",
-              "photoAuthor": "Saadtowheed",
-              "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Glencoe,_Scotland.jpg"
-            },
-            {
-              "name": "Eilean Donan",
-              "lat": 57.2743,
-              "lon": -5.5168,
-              "note": "A celebrated island castle stands where three sea lochs meet.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg/1280px-Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
-              "photoAuthor": "Gillfoto",
-              "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg"
-            },
-            {
-              "name": "Portree",
-              "lat": 57.4129,
-              "lon": -6.1945,
-              "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
-              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
-              "photoAuthor": "Bewahrerderwerte",
-              "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg"
-            }
-          ],
-          "route": {
-            "type": "Feature",
-            "geometry": {
-              "type": "LineString",
-              "coordinates": [
-                [
-                  -3.1999,
-                  55.9486
-                ],
-                [
-                  -5.004,
-                  56.681
-                ],
-                [
-                  -5.5168,
-                  57.2743
-                ],
-                [
-                  -6.1945,
-                  57.4129
-                ]
-              ]
-            },
-            "properties": {
-              "status": "routing-needed",
-              "source": "Illustrative stop positions, NOT the driving route"
-            }
-          },
-          "chapter": "drive",
-          "focusStopIndex": 2,
-          "mapCenter": [
-            -5.14,
-            57.03
-          ],
-          "mapZoom": 7.7,
-          "routeProgressFrom": 0,
-          "routeProgressTo": 1,
-          "roadMatched": false,
-          "markerStyle": "dot"
-        }
-      },
-      {
-        "id": "photo-eilean",
-        "name": "05 / Eilean Donan Castle",
-        "durationSec": 3,
-        "layout": "premium-travel-route",
-        "transition": "fade",
-        "backdrop": "swiss-lines",
-        "headline": "EILEAN DONAN",
-        "fullBleed": true,
-        "premiumTravel": {
-          "stops": [
-            {
-              "name": "Edinburgh",
-              "lat": 55.9486,
-              "lon": -3.1999,
-              "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Edinburgh_Castle_from_Princes_Street_%282026%29.jpg/1280px-Edinburgh_Castle_from_Princes_Street_%282026%29.jpg",
-              "photoAuthor": "LibKat17",
-              "photoLicense": "CC BY 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_from_Princes_Street_(2026).jpg"
-            },
-            {
-              "name": "Glen Coe",
-              "lat": 56.681,
-              "lon": -5.004,
-              "note": "Drive past dramatic mountain walls and a glacial Highland valley.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Glencoe%2C_Scotland.jpg/1280px-Glencoe%2C_Scotland.jpg",
-              "photoAuthor": "Saadtowheed",
-              "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Glencoe,_Scotland.jpg"
-            },
-            {
-              "name": "Eilean Donan",
-              "lat": 57.2743,
-              "lon": -5.5168,
-              "note": "A celebrated island castle stands where three sea lochs meet.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg/1280px-Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
-              "photoAuthor": "Gillfoto",
-              "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg"
-            },
-            {
-              "name": "Portree",
-              "lat": 57.4129,
-              "lon": -6.1945,
-              "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
-              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
-              "photoAuthor": "Bewahrerderwerte",
-              "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg"
-            }
-          ],
-          "route": {
-            "type": "Feature",
-            "geometry": {
-              "type": "LineString",
-              "coordinates": [
-                [
-                  -3.1999,
-                  55.9486
-                ],
-                [
-                  -5.004,
-                  56.681
-                ],
-                [
-                  -5.5168,
-                  57.2743
-                ],
-                [
-                  -6.1945,
-                  57.4129
-                ]
-              ]
-            },
-            "properties": {
-              "status": "routing-needed",
-              "source": "Illustrative stop positions, NOT the driving route"
-            }
-          },
-          "chapter": "photo",
-          "focusStopIndex": 2,
-          "mapCenter": [
-            -5.14,
-            57.03
-          ],
-          "mapZoom": 7.7,
-          "routeProgressFrom": 0,
-          "routeProgressTo": 1,
-          "roadMatched": false,
-          "markerStyle": "dot"
-        }
-      },
-      {
-        "id": "drive-portree",
-        "name": "06 / Crossing to Skye",
-        "durationSec": 4,
-        "layout": "premium-travel-route",
-        "transition": "fade",
-        "backdrop": "swiss-lines",
-        "headline": "TO THE ISLE OF SKYE",
-        "fullBleed": true,
-        "premiumTravel": {
-          "stops": [
-            {
-              "name": "Edinburgh",
-              "lat": 55.9486,
-              "lon": -3.1999,
-              "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Edinburgh_Castle_from_Princes_Street_%282026%29.jpg/1280px-Edinburgh_Castle_from_Princes_Street_%282026%29.jpg",
-              "photoAuthor": "LibKat17",
-              "photoLicense": "CC BY 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_from_Princes_Street_(2026).jpg"
-            },
-            {
-              "name": "Glen Coe",
-              "lat": 56.681,
-              "lon": -5.004,
-              "note": "Drive past dramatic mountain walls and a glacial Highland valley.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Glencoe%2C_Scotland.jpg/1280px-Glencoe%2C_Scotland.jpg",
-              "photoAuthor": "Saadtowheed",
-              "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Glencoe,_Scotland.jpg"
-            },
-            {
-              "name": "Eilean Donan",
-              "lat": 57.2743,
-              "lon": -5.5168,
-              "note": "A celebrated island castle stands where three sea lochs meet.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg/1280px-Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
-              "photoAuthor": "Gillfoto",
-              "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg"
-            },
-            {
-              "name": "Portree",
-              "lat": 57.4129,
-              "lon": -6.1945,
-              "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
-              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
-              "photoAuthor": "Bewahrerderwerte",
-              "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg"
-            }
-          ],
-          "route": {
-            "type": "Feature",
-            "geometry": {
-              "type": "LineString",
-              "coordinates": [
-                [
-                  -3.1999,
-                  55.9486
-                ],
-                [
-                  -5.004,
-                  56.681
-                ],
-                [
-                  -5.5168,
-                  57.2743
-                ],
-                [
-                  -6.1945,
-                  57.4129
-                ]
-              ]
-            },
-            "properties": {
-              "status": "routing-needed",
-              "source": "Illustrative stop positions, NOT the driving route"
-            }
-          },
-          "chapter": "drive",
-          "focusStopIndex": 3,
-          "mapCenter": [
-            -5.82,
-            57.3
-          ],
-          "mapZoom": 8,
-          "routeProgressFrom": 0,
-          "routeProgressTo": 1,
-          "roadMatched": false,
-          "markerStyle": "dot"
-        }
-      },
-      {
-        "id": "photo-portree",
-        "name": "07 / Portree harbour",
-        "durationSec": 3,
-        "layout": "premium-travel-route",
-        "transition": "fade",
-        "backdrop": "swiss-lines",
-        "headline": "PORTREE",
-        "fullBleed": true,
-        "premiumTravel": {
-          "stops": [
-            {
-              "name": "Edinburgh",
-              "lat": 55.9486,
-              "lon": -3.1999,
-              "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Edinburgh_Castle_from_Princes_Street_%282026%29.jpg/1280px-Edinburgh_Castle_from_Princes_Street_%282026%29.jpg",
-              "photoAuthor": "LibKat17",
-              "photoLicense": "CC BY 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_from_Princes_Street_(2026).jpg"
-            },
-            {
-              "name": "Glen Coe",
-              "lat": 56.681,
-              "lon": -5.004,
-              "note": "Drive past dramatic mountain walls and a glacial Highland valley.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Glencoe%2C_Scotland.jpg/1280px-Glencoe%2C_Scotland.jpg",
-              "photoAuthor": "Saadtowheed",
-              "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Glencoe,_Scotland.jpg"
-            },
-            {
-              "name": "Eilean Donan",
-              "lat": 57.2743,
-              "lon": -5.5168,
-              "note": "A celebrated island castle stands where three sea lochs meet.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg/1280px-Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
-              "photoAuthor": "Gillfoto",
-              "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg"
-            },
-            {
-              "name": "Portree",
-              "lat": 57.4129,
-              "lon": -6.1945,
-              "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
-              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
-              "photoAuthor": "Bewahrerderwerte",
-              "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg"
-            }
-          ],
-          "route": {
-            "type": "Feature",
-            "geometry": {
-              "type": "LineString",
-              "coordinates": [
-                [
-                  -3.1999,
-                  55.9486
-                ],
-                [
-                  -5.004,
-                  56.681
-                ],
-                [
-                  -5.5168,
-                  57.2743
-                ],
-                [
-                  -6.1945,
-                  57.4129
-                ]
-              ]
-            },
-            "properties": {
-              "status": "routing-needed",
-              "source": "Illustrative stop positions, NOT the driving route"
-            }
-          },
-          "chapter": "photo",
-          "focusStopIndex": 3,
-          "mapCenter": [
-            -5.82,
-            57.3
-          ],
-          "mapZoom": 8,
-          "routeProgressFrom": 0,
-          "routeProgressTo": 1,
-          "roadMatched": false,
-          "markerStyle": "dot"
-        }
-      },
-      {
-        "id": "finale",
-        "name": "08 / Complete Highland Route",
-        "durationSec": 4,
-        "layout": "premium-travel-route",
-        "transition": "fade",
-        "backdrop": "swiss-lines",
-        "headline": "THE OPEN ROAD",
-        "fullBleed": true,
-        "premiumTravel": {
-          "stops": [
-            {
-              "name": "Edinburgh",
-              "lat": 55.9486,
-              "lon": -3.1999,
-              "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Edinburgh_Castle_from_Princes_Street_%282026%29.jpg/1280px-Edinburgh_Castle_from_Princes_Street_%282026%29.jpg",
-              "photoAuthor": "LibKat17",
-              "photoLicense": "CC BY 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_from_Princes_Street_(2026).jpg"
-            },
-            {
-              "name": "Glen Coe",
-              "lat": 56.681,
-              "lon": -5.004,
-              "note": "Drive past dramatic mountain walls and a glacial Highland valley.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Glencoe%2C_Scotland.jpg/1280px-Glencoe%2C_Scotland.jpg",
-              "photoAuthor": "Saadtowheed",
-              "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Glencoe,_Scotland.jpg"
-            },
-            {
-              "name": "Eilean Donan",
-              "lat": 57.2743,
-              "lon": -5.5168,
-              "note": "A celebrated island castle stands where three sea lochs meet.",
-              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg/1280px-Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
-              "photoAuthor": "Gillfoto",
-              "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg"
-            },
-            {
-              "name": "Portree",
-              "lat": 57.4129,
-              "lon": -6.1945,
-              "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
-              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
-              "photoAuthor": "Bewahrerderwerte",
-              "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg"
+                "photoFit": "cover"
+              }
             }
           ],
           "route": {
@@ -1460,7 +1043,1332 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "routeProgressFrom": 0,
           "routeProgressTo": 1,
           "roadMatched": false,
-          "markerStyle": "dot"
+          "markerStyle": "dot",
+          "editorial": true,
+          "seriesTitle": "THE OPEN ROAD COLLECTION · 001",
+          "regionTitle": "SCOTLAND",
+          "mapIntro": true
+        }
+      },
+      {
+        "id": "photo-edinburgh",
+        "name": "03 / Edinburgh",
+        "durationSec": 3,
+        "layout": "premium-travel-route",
+        "transition": "fade",
+        "backdrop": "swiss-lines",
+        "headline": "Edinburgh",
+        "fullBleed": true,
+        "premiumTravel": {
+          "stops": [
+            {
+              "name": "Edinburgh",
+              "lat": 55.9486,
+              "lon": -3.1999,
+              "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Edinburgh_Castle_from_Princes_Street_%282026%29.jpg/1280px-Edinburgh_Castle_from_Princes_Street_%282026%29.jpg",
+              "photoAuthor": "LibKat17",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_from_Princes_Street_(2026).jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Edinburgh_old_town.jpg/1280px-Edinburgh_old_town.jpg",
+                "photoAuthor": "Kidozh",
+                "photoLicense": "CC BY-SA 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_old_town.jpg",
+                "label": "Old Town",
+                "photoFocus": [
+                  0.5,
+                  0.5
+                ],
+                "photoFit": "cover"
+              }
+            },
+            {
+              "name": "Glen Coe",
+              "lat": 56.681,
+              "lon": -5.004,
+              "note": "Drive past dramatic mountain walls and a glacial Highland valley.",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Glencoe%2C_Scotland.jpg/1280px-Glencoe%2C_Scotland.jpg",
+              "photoAuthor": "Saadtowheed",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Glencoe,_Scotland.jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg/1280px-A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
+                "photoAuthor": "Steven Brown",
+                "photoLicense": "CC BY-SA 2.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
+                "label": "A82 · Pass of Glencoe",
+                "photoFocus": [
+                  0.5,
+                  0.55
+                ],
+                "photoFit": "cover"
+              }
+            },
+            {
+              "name": "Eilean Donan",
+              "lat": 57.2743,
+              "lon": -5.5168,
+              "note": "A celebrated island castle stands where three sea lochs meet.",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg/1280px-Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
+              "photoAuthor": "Gillfoto",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "contain",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Eilean_Donan_Castle_v02.jpg/1280px-Eilean_Donan_Castle_v02.jpg",
+                "photoAuthor": "Thomas Fuhrmann",
+                "photoLicense": "CC BY-SA 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Eilean_Donan_Castle_v02.jpg",
+                "label": "Eilean Donan Castle",
+                "photoFocus": [
+                  0.5,
+                  0.5
+                ],
+                "photoFit": "contain"
+              }
+            },
+            {
+              "name": "Portree",
+              "lat": 57.4129,
+              "lon": -6.1945,
+              "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
+              "photoAuthor": "Bewahrerderwerte",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg/1280px-Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
+                "photoAuthor": "Squirrel1113",
+                "photoLicense": "CC BY 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
+                "label": "The Quiraing · Isle of Skye",
+                "photoFocus": [
+                  0.5,
+                  0.5
+                ],
+                "photoFit": "cover"
+              }
+            }
+          ],
+          "route": {
+            "type": "Feature",
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  -3.1999,
+                  55.9486
+                ],
+                [
+                  -5.004,
+                  56.681
+                ],
+                [
+                  -5.5168,
+                  57.2743
+                ],
+                [
+                  -6.1945,
+                  57.4129
+                ]
+              ]
+            },
+            "properties": {
+              "status": "routing-needed",
+              "source": "Illustrative stop positions, NOT the driving route"
+            }
+          },
+          "chapter": "photo",
+          "focusStopIndex": 0,
+          "mapCenter": [
+            -4.4,
+            56.55
+          ],
+          "mapZoom": 7.1,
+          "routeProgressFrom": 0,
+          "routeProgressTo": 1,
+          "roadMatched": false,
+          "markerStyle": "dot",
+          "editorial": true,
+          "seriesTitle": "THE OPEN ROAD COLLECTION · 001",
+          "regionTitle": "SCOTLAND",
+          "mapIntro": false
+        }
+      },
+      {
+        "id": "drive-glencoe",
+        "name": "04 / Into the Highlands",
+        "durationSec": 2,
+        "layout": "premium-travel-route",
+        "transition": "fade",
+        "backdrop": "swiss-lines",
+        "headline": "Glen Coe",
+        "fullBleed": true,
+        "premiumTravel": {
+          "stops": [
+            {
+              "name": "Edinburgh",
+              "lat": 55.9486,
+              "lon": -3.1999,
+              "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Edinburgh_Castle_from_Princes_Street_%282026%29.jpg/1280px-Edinburgh_Castle_from_Princes_Street_%282026%29.jpg",
+              "photoAuthor": "LibKat17",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_from_Princes_Street_(2026).jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Edinburgh_old_town.jpg/1280px-Edinburgh_old_town.jpg",
+                "photoAuthor": "Kidozh",
+                "photoLicense": "CC BY-SA 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_old_town.jpg",
+                "label": "Old Town",
+                "photoFocus": [
+                  0.5,
+                  0.5
+                ],
+                "photoFit": "cover"
+              }
+            },
+            {
+              "name": "Glen Coe",
+              "lat": 56.681,
+              "lon": -5.004,
+              "note": "Drive past dramatic mountain walls and a glacial Highland valley.",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Glencoe%2C_Scotland.jpg/1280px-Glencoe%2C_Scotland.jpg",
+              "photoAuthor": "Saadtowheed",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Glencoe,_Scotland.jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg/1280px-A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
+                "photoAuthor": "Steven Brown",
+                "photoLicense": "CC BY-SA 2.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
+                "label": "A82 · Pass of Glencoe",
+                "photoFocus": [
+                  0.5,
+                  0.55
+                ],
+                "photoFit": "cover"
+              }
+            },
+            {
+              "name": "Eilean Donan",
+              "lat": 57.2743,
+              "lon": -5.5168,
+              "note": "A celebrated island castle stands where three sea lochs meet.",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg/1280px-Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
+              "photoAuthor": "Gillfoto",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "contain",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Eilean_Donan_Castle_v02.jpg/1280px-Eilean_Donan_Castle_v02.jpg",
+                "photoAuthor": "Thomas Fuhrmann",
+                "photoLicense": "CC BY-SA 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Eilean_Donan_Castle_v02.jpg",
+                "label": "Eilean Donan Castle",
+                "photoFocus": [
+                  0.5,
+                  0.5
+                ],
+                "photoFit": "contain"
+              }
+            },
+            {
+              "name": "Portree",
+              "lat": 57.4129,
+              "lon": -6.1945,
+              "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
+              "photoAuthor": "Bewahrerderwerte",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg/1280px-Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
+                "photoAuthor": "Squirrel1113",
+                "photoLicense": "CC BY 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
+                "label": "The Quiraing · Isle of Skye",
+                "photoFocus": [
+                  0.5,
+                  0.5
+                ],
+                "photoFit": "cover"
+              }
+            }
+          ],
+          "route": {
+            "type": "Feature",
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  -3.1999,
+                  55.9486
+                ],
+                [
+                  -5.004,
+                  56.681
+                ],
+                [
+                  -5.5168,
+                  57.2743
+                ],
+                [
+                  -6.1945,
+                  57.4129
+                ]
+              ]
+            },
+            "properties": {
+              "status": "routing-needed",
+              "source": "Illustrative stop positions, NOT the driving route"
+            }
+          },
+          "chapter": "drive",
+          "focusStopIndex": 1,
+          "mapCenter": [
+            -4.22,
+            56.48
+          ],
+          "mapZoom": 7.15,
+          "routeProgressFrom": 0,
+          "routeProgressTo": 1,
+          "roadMatched": false,
+          "markerStyle": "dot",
+          "editorial": true,
+          "seriesTitle": "THE OPEN ROAD COLLECTION · 001",
+          "regionTitle": "SCOTLAND",
+          "mapIntro": false
+        }
+      },
+      {
+        "id": "photo-glencoe",
+        "name": "05 / Glen Coe",
+        "durationSec": 4,
+        "layout": "premium-travel-route",
+        "transition": "fade",
+        "backdrop": "swiss-lines",
+        "headline": "Glen Coe",
+        "fullBleed": true,
+        "premiumTravel": {
+          "stops": [
+            {
+              "name": "Edinburgh",
+              "lat": 55.9486,
+              "lon": -3.1999,
+              "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Edinburgh_Castle_from_Princes_Street_%282026%29.jpg/1280px-Edinburgh_Castle_from_Princes_Street_%282026%29.jpg",
+              "photoAuthor": "LibKat17",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_from_Princes_Street_(2026).jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Edinburgh_old_town.jpg/1280px-Edinburgh_old_town.jpg",
+                "photoAuthor": "Kidozh",
+                "photoLicense": "CC BY-SA 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_old_town.jpg",
+                "label": "Old Town",
+                "photoFocus": [
+                  0.5,
+                  0.5
+                ],
+                "photoFit": "cover"
+              }
+            },
+            {
+              "name": "Glen Coe",
+              "lat": 56.681,
+              "lon": -5.004,
+              "note": "Drive past dramatic mountain walls and a glacial Highland valley.",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Glencoe%2C_Scotland.jpg/1280px-Glencoe%2C_Scotland.jpg",
+              "photoAuthor": "Saadtowheed",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Glencoe,_Scotland.jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg/1280px-A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
+                "photoAuthor": "Steven Brown",
+                "photoLicense": "CC BY-SA 2.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
+                "label": "A82 · Pass of Glencoe",
+                "photoFocus": [
+                  0.5,
+                  0.55
+                ],
+                "photoFit": "cover"
+              }
+            },
+            {
+              "name": "Eilean Donan",
+              "lat": 57.2743,
+              "lon": -5.5168,
+              "note": "A celebrated island castle stands where three sea lochs meet.",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg/1280px-Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
+              "photoAuthor": "Gillfoto",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "contain",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Eilean_Donan_Castle_v02.jpg/1280px-Eilean_Donan_Castle_v02.jpg",
+                "photoAuthor": "Thomas Fuhrmann",
+                "photoLicense": "CC BY-SA 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Eilean_Donan_Castle_v02.jpg",
+                "label": "Eilean Donan Castle",
+                "photoFocus": [
+                  0.5,
+                  0.5
+                ],
+                "photoFit": "contain"
+              }
+            },
+            {
+              "name": "Portree",
+              "lat": 57.4129,
+              "lon": -6.1945,
+              "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
+              "photoAuthor": "Bewahrerderwerte",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg/1280px-Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
+                "photoAuthor": "Squirrel1113",
+                "photoLicense": "CC BY 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
+                "label": "The Quiraing · Isle of Skye",
+                "photoFocus": [
+                  0.5,
+                  0.5
+                ],
+                "photoFit": "cover"
+              }
+            }
+          ],
+          "route": {
+            "type": "Feature",
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  -3.1999,
+                  55.9486
+                ],
+                [
+                  -5.004,
+                  56.681
+                ],
+                [
+                  -5.5168,
+                  57.2743
+                ],
+                [
+                  -6.1945,
+                  57.4129
+                ]
+              ]
+            },
+            "properties": {
+              "status": "routing-needed",
+              "source": "Illustrative stop positions, NOT the driving route"
+            }
+          },
+          "chapter": "photo",
+          "focusStopIndex": 1,
+          "mapCenter": [
+            -4.22,
+            56.48
+          ],
+          "mapZoom": 7.15,
+          "routeProgressFrom": 0,
+          "routeProgressTo": 1,
+          "roadMatched": false,
+          "markerStyle": "dot",
+          "editorial": true,
+          "seriesTitle": "THE OPEN ROAD COLLECTION · 001",
+          "regionTitle": "SCOTLAND",
+          "mapIntro": false
+        }
+      },
+      {
+        "id": "drive-eilean",
+        "name": "06 / To Eilean Donan",
+        "durationSec": 2,
+        "layout": "premium-travel-route",
+        "transition": "fade",
+        "backdrop": "swiss-lines",
+        "headline": "Eilean Donan",
+        "fullBleed": true,
+        "premiumTravel": {
+          "stops": [
+            {
+              "name": "Edinburgh",
+              "lat": 55.9486,
+              "lon": -3.1999,
+              "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Edinburgh_Castle_from_Princes_Street_%282026%29.jpg/1280px-Edinburgh_Castle_from_Princes_Street_%282026%29.jpg",
+              "photoAuthor": "LibKat17",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_from_Princes_Street_(2026).jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Edinburgh_old_town.jpg/1280px-Edinburgh_old_town.jpg",
+                "photoAuthor": "Kidozh",
+                "photoLicense": "CC BY-SA 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_old_town.jpg",
+                "label": "Old Town",
+                "photoFocus": [
+                  0.5,
+                  0.5
+                ],
+                "photoFit": "cover"
+              }
+            },
+            {
+              "name": "Glen Coe",
+              "lat": 56.681,
+              "lon": -5.004,
+              "note": "Drive past dramatic mountain walls and a glacial Highland valley.",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Glencoe%2C_Scotland.jpg/1280px-Glencoe%2C_Scotland.jpg",
+              "photoAuthor": "Saadtowheed",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Glencoe,_Scotland.jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg/1280px-A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
+                "photoAuthor": "Steven Brown",
+                "photoLicense": "CC BY-SA 2.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
+                "label": "A82 · Pass of Glencoe",
+                "photoFocus": [
+                  0.5,
+                  0.55
+                ],
+                "photoFit": "cover"
+              }
+            },
+            {
+              "name": "Eilean Donan",
+              "lat": 57.2743,
+              "lon": -5.5168,
+              "note": "A celebrated island castle stands where three sea lochs meet.",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg/1280px-Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
+              "photoAuthor": "Gillfoto",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "contain",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Eilean_Donan_Castle_v02.jpg/1280px-Eilean_Donan_Castle_v02.jpg",
+                "photoAuthor": "Thomas Fuhrmann",
+                "photoLicense": "CC BY-SA 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Eilean_Donan_Castle_v02.jpg",
+                "label": "Eilean Donan Castle",
+                "photoFocus": [
+                  0.5,
+                  0.5
+                ],
+                "photoFit": "contain"
+              }
+            },
+            {
+              "name": "Portree",
+              "lat": 57.4129,
+              "lon": -6.1945,
+              "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
+              "photoAuthor": "Bewahrerderwerte",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg/1280px-Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
+                "photoAuthor": "Squirrel1113",
+                "photoLicense": "CC BY 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
+                "label": "The Quiraing · Isle of Skye",
+                "photoFocus": [
+                  0.5,
+                  0.5
+                ],
+                "photoFit": "cover"
+              }
+            }
+          ],
+          "route": {
+            "type": "Feature",
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  -3.1999,
+                  55.9486
+                ],
+                [
+                  -5.004,
+                  56.681
+                ],
+                [
+                  -5.5168,
+                  57.2743
+                ],
+                [
+                  -6.1945,
+                  57.4129
+                ]
+              ]
+            },
+            "properties": {
+              "status": "routing-needed",
+              "source": "Illustrative stop positions, NOT the driving route"
+            }
+          },
+          "chapter": "drive",
+          "focusStopIndex": 2,
+          "mapCenter": [
+            -5.14,
+            57.03
+          ],
+          "mapZoom": 7.7,
+          "routeProgressFrom": 0,
+          "routeProgressTo": 1,
+          "roadMatched": false,
+          "markerStyle": "dot",
+          "editorial": true,
+          "seriesTitle": "THE OPEN ROAD COLLECTION · 001",
+          "regionTitle": "SCOTLAND",
+          "mapIntro": false
+        }
+      },
+      {
+        "id": "photo-eilean",
+        "name": "07 / Eilean Donan",
+        "durationSec": 4,
+        "layout": "premium-travel-route",
+        "transition": "fade",
+        "backdrop": "swiss-lines",
+        "headline": "Eilean Donan",
+        "fullBleed": true,
+        "premiumTravel": {
+          "stops": [
+            {
+              "name": "Edinburgh",
+              "lat": 55.9486,
+              "lon": -3.1999,
+              "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Edinburgh_Castle_from_Princes_Street_%282026%29.jpg/1280px-Edinburgh_Castle_from_Princes_Street_%282026%29.jpg",
+              "photoAuthor": "LibKat17",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_from_Princes_Street_(2026).jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Edinburgh_old_town.jpg/1280px-Edinburgh_old_town.jpg",
+                "photoAuthor": "Kidozh",
+                "photoLicense": "CC BY-SA 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_old_town.jpg",
+                "label": "Old Town",
+                "photoFocus": [
+                  0.5,
+                  0.5
+                ],
+                "photoFit": "cover"
+              }
+            },
+            {
+              "name": "Glen Coe",
+              "lat": 56.681,
+              "lon": -5.004,
+              "note": "Drive past dramatic mountain walls and a glacial Highland valley.",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Glencoe%2C_Scotland.jpg/1280px-Glencoe%2C_Scotland.jpg",
+              "photoAuthor": "Saadtowheed",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Glencoe,_Scotland.jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg/1280px-A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
+                "photoAuthor": "Steven Brown",
+                "photoLicense": "CC BY-SA 2.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
+                "label": "A82 · Pass of Glencoe",
+                "photoFocus": [
+                  0.5,
+                  0.55
+                ],
+                "photoFit": "cover"
+              }
+            },
+            {
+              "name": "Eilean Donan",
+              "lat": 57.2743,
+              "lon": -5.5168,
+              "note": "A celebrated island castle stands where three sea lochs meet.",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg/1280px-Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
+              "photoAuthor": "Gillfoto",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "contain",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Eilean_Donan_Castle_v02.jpg/1280px-Eilean_Donan_Castle_v02.jpg",
+                "photoAuthor": "Thomas Fuhrmann",
+                "photoLicense": "CC BY-SA 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Eilean_Donan_Castle_v02.jpg",
+                "label": "Eilean Donan Castle",
+                "photoFocus": [
+                  0.5,
+                  0.5
+                ],
+                "photoFit": "contain"
+              }
+            },
+            {
+              "name": "Portree",
+              "lat": 57.4129,
+              "lon": -6.1945,
+              "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
+              "photoAuthor": "Bewahrerderwerte",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg/1280px-Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
+                "photoAuthor": "Squirrel1113",
+                "photoLicense": "CC BY 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
+                "label": "The Quiraing · Isle of Skye",
+                "photoFocus": [
+                  0.5,
+                  0.5
+                ],
+                "photoFit": "cover"
+              }
+            }
+          ],
+          "route": {
+            "type": "Feature",
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  -3.1999,
+                  55.9486
+                ],
+                [
+                  -5.004,
+                  56.681
+                ],
+                [
+                  -5.5168,
+                  57.2743
+                ],
+                [
+                  -6.1945,
+                  57.4129
+                ]
+              ]
+            },
+            "properties": {
+              "status": "routing-needed",
+              "source": "Illustrative stop positions, NOT the driving route"
+            }
+          },
+          "chapter": "photo",
+          "focusStopIndex": 2,
+          "mapCenter": [
+            -5.14,
+            57.03
+          ],
+          "mapZoom": 7.7,
+          "routeProgressFrom": 0,
+          "routeProgressTo": 1,
+          "roadMatched": false,
+          "markerStyle": "dot",
+          "editorial": true,
+          "seriesTitle": "THE OPEN ROAD COLLECTION · 001",
+          "regionTitle": "SCOTLAND",
+          "mapIntro": false
+        }
+      },
+      {
+        "id": "drive-portree",
+        "name": "08 / Crossing to Skye",
+        "durationSec": 2,
+        "layout": "premium-travel-route",
+        "transition": "fade",
+        "backdrop": "swiss-lines",
+        "headline": "Isle of Skye",
+        "fullBleed": true,
+        "premiumTravel": {
+          "stops": [
+            {
+              "name": "Edinburgh",
+              "lat": 55.9486,
+              "lon": -3.1999,
+              "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Edinburgh_Castle_from_Princes_Street_%282026%29.jpg/1280px-Edinburgh_Castle_from_Princes_Street_%282026%29.jpg",
+              "photoAuthor": "LibKat17",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_from_Princes_Street_(2026).jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Edinburgh_old_town.jpg/1280px-Edinburgh_old_town.jpg",
+                "photoAuthor": "Kidozh",
+                "photoLicense": "CC BY-SA 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_old_town.jpg",
+                "label": "Old Town",
+                "photoFocus": [
+                  0.5,
+                  0.5
+                ],
+                "photoFit": "cover"
+              }
+            },
+            {
+              "name": "Glen Coe",
+              "lat": 56.681,
+              "lon": -5.004,
+              "note": "Drive past dramatic mountain walls and a glacial Highland valley.",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Glencoe%2C_Scotland.jpg/1280px-Glencoe%2C_Scotland.jpg",
+              "photoAuthor": "Saadtowheed",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Glencoe,_Scotland.jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg/1280px-A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
+                "photoAuthor": "Steven Brown",
+                "photoLicense": "CC BY-SA 2.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
+                "label": "A82 · Pass of Glencoe",
+                "photoFocus": [
+                  0.5,
+                  0.55
+                ],
+                "photoFit": "cover"
+              }
+            },
+            {
+              "name": "Eilean Donan",
+              "lat": 57.2743,
+              "lon": -5.5168,
+              "note": "A celebrated island castle stands where three sea lochs meet.",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg/1280px-Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
+              "photoAuthor": "Gillfoto",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "contain",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Eilean_Donan_Castle_v02.jpg/1280px-Eilean_Donan_Castle_v02.jpg",
+                "photoAuthor": "Thomas Fuhrmann",
+                "photoLicense": "CC BY-SA 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Eilean_Donan_Castle_v02.jpg",
+                "label": "Eilean Donan Castle",
+                "photoFocus": [
+                  0.5,
+                  0.5
+                ],
+                "photoFit": "contain"
+              }
+            },
+            {
+              "name": "Portree",
+              "lat": 57.4129,
+              "lon": -6.1945,
+              "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
+              "photoAuthor": "Bewahrerderwerte",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg/1280px-Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
+                "photoAuthor": "Squirrel1113",
+                "photoLicense": "CC BY 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
+                "label": "The Quiraing · Isle of Skye",
+                "photoFocus": [
+                  0.5,
+                  0.5
+                ],
+                "photoFit": "cover"
+              }
+            }
+          ],
+          "route": {
+            "type": "Feature",
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  -3.1999,
+                  55.9486
+                ],
+                [
+                  -5.004,
+                  56.681
+                ],
+                [
+                  -5.5168,
+                  57.2743
+                ],
+                [
+                  -6.1945,
+                  57.4129
+                ]
+              ]
+            },
+            "properties": {
+              "status": "routing-needed",
+              "source": "Illustrative stop positions, NOT the driving route"
+            }
+          },
+          "chapter": "drive",
+          "focusStopIndex": 3,
+          "mapCenter": [
+            -5.82,
+            57.3
+          ],
+          "mapZoom": 8,
+          "routeProgressFrom": 0,
+          "routeProgressTo": 1,
+          "roadMatched": false,
+          "markerStyle": "dot",
+          "editorial": true,
+          "seriesTitle": "THE OPEN ROAD COLLECTION · 001",
+          "regionTitle": "SCOTLAND",
+          "mapIntro": false
+        }
+      },
+      {
+        "id": "photo-portree",
+        "name": "09 / Isle of Skye",
+        "durationSec": 5,
+        "layout": "premium-travel-route",
+        "transition": "fade",
+        "backdrop": "swiss-lines",
+        "headline": "Isle of Skye",
+        "fullBleed": true,
+        "premiumTravel": {
+          "stops": [
+            {
+              "name": "Edinburgh",
+              "lat": 55.9486,
+              "lon": -3.1999,
+              "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Edinburgh_Castle_from_Princes_Street_%282026%29.jpg/1280px-Edinburgh_Castle_from_Princes_Street_%282026%29.jpg",
+              "photoAuthor": "LibKat17",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_from_Princes_Street_(2026).jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Edinburgh_old_town.jpg/1280px-Edinburgh_old_town.jpg",
+                "photoAuthor": "Kidozh",
+                "photoLicense": "CC BY-SA 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_old_town.jpg",
+                "label": "Old Town",
+                "photoFocus": [
+                  0.5,
+                  0.5
+                ],
+                "photoFit": "cover"
+              }
+            },
+            {
+              "name": "Glen Coe",
+              "lat": 56.681,
+              "lon": -5.004,
+              "note": "Drive past dramatic mountain walls and a glacial Highland valley.",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Glencoe%2C_Scotland.jpg/1280px-Glencoe%2C_Scotland.jpg",
+              "photoAuthor": "Saadtowheed",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Glencoe,_Scotland.jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg/1280px-A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
+                "photoAuthor": "Steven Brown",
+                "photoLicense": "CC BY-SA 2.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
+                "label": "A82 · Pass of Glencoe",
+                "photoFocus": [
+                  0.5,
+                  0.55
+                ],
+                "photoFit": "cover"
+              }
+            },
+            {
+              "name": "Eilean Donan",
+              "lat": 57.2743,
+              "lon": -5.5168,
+              "note": "A celebrated island castle stands where three sea lochs meet.",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg/1280px-Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
+              "photoAuthor": "Gillfoto",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "contain",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Eilean_Donan_Castle_v02.jpg/1280px-Eilean_Donan_Castle_v02.jpg",
+                "photoAuthor": "Thomas Fuhrmann",
+                "photoLicense": "CC BY-SA 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Eilean_Donan_Castle_v02.jpg",
+                "label": "Eilean Donan Castle",
+                "photoFocus": [
+                  0.5,
+                  0.5
+                ],
+                "photoFit": "contain"
+              }
+            },
+            {
+              "name": "Portree",
+              "lat": 57.4129,
+              "lon": -6.1945,
+              "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
+              "photoAuthor": "Bewahrerderwerte",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg/1280px-Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
+                "photoAuthor": "Squirrel1113",
+                "photoLicense": "CC BY 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
+                "label": "The Quiraing · Isle of Skye",
+                "photoFocus": [
+                  0.5,
+                  0.5
+                ],
+                "photoFit": "cover"
+              }
+            }
+          ],
+          "route": {
+            "type": "Feature",
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  -3.1999,
+                  55.9486
+                ],
+                [
+                  -5.004,
+                  56.681
+                ],
+                [
+                  -5.5168,
+                  57.2743
+                ],
+                [
+                  -6.1945,
+                  57.4129
+                ]
+              ]
+            },
+            "properties": {
+              "status": "routing-needed",
+              "source": "Illustrative stop positions, NOT the driving route"
+            }
+          },
+          "chapter": "photo",
+          "focusStopIndex": 3,
+          "mapCenter": [
+            -5.82,
+            57.3
+          ],
+          "mapZoom": 8,
+          "routeProgressFrom": 0,
+          "routeProgressTo": 1,
+          "roadMatched": false,
+          "markerStyle": "dot",
+          "editorial": true,
+          "seriesTitle": "THE OPEN ROAD COLLECTION · 001",
+          "regionTitle": "SCOTLAND",
+          "mapIntro": false
+        }
+      },
+      {
+        "id": "finale",
+        "name": "10 / Save this road trip",
+        "durationSec": 3,
+        "layout": "premium-travel-route",
+        "transition": "fade",
+        "backdrop": "swiss-lines",
+        "headline": "THE OPEN ROAD",
+        "fullBleed": true,
+        "premiumTravel": {
+          "stops": [
+            {
+              "name": "Edinburgh",
+              "lat": 55.9486,
+              "lon": -3.1999,
+              "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Edinburgh_Castle_from_Princes_Street_%282026%29.jpg/1280px-Edinburgh_Castle_from_Princes_Street_%282026%29.jpg",
+              "photoAuthor": "LibKat17",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_Castle_from_Princes_Street_(2026).jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Edinburgh_old_town.jpg/1280px-Edinburgh_old_town.jpg",
+                "photoAuthor": "Kidozh",
+                "photoLicense": "CC BY-SA 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Edinburgh_old_town.jpg",
+                "label": "Old Town",
+                "photoFocus": [
+                  0.5,
+                  0.5
+                ],
+                "photoFit": "cover"
+              }
+            },
+            {
+              "name": "Glen Coe",
+              "lat": 56.681,
+              "lon": -5.004,
+              "note": "Drive past dramatic mountain walls and a glacial Highland valley.",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Glencoe%2C_Scotland.jpg/1280px-Glencoe%2C_Scotland.jpg",
+              "photoAuthor": "Saadtowheed",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Glencoe,_Scotland.jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg/1280px-A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
+                "photoAuthor": "Steven Brown",
+                "photoLicense": "CC BY-SA 2.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
+                "label": "A82 · Pass of Glencoe",
+                "photoFocus": [
+                  0.5,
+                  0.55
+                ],
+                "photoFit": "cover"
+              }
+            },
+            {
+              "name": "Eilean Donan",
+              "lat": 57.2743,
+              "lon": -5.5168,
+              "note": "A celebrated island castle stands where three sea lochs meet.",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg/1280px-Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
+              "photoAuthor": "Gillfoto",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Highland_-_Eilean_Donan_Castle_-_20240525001946.jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "contain",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Eilean_Donan_Castle_v02.jpg/1280px-Eilean_Donan_Castle_v02.jpg",
+                "photoAuthor": "Thomas Fuhrmann",
+                "photoLicense": "CC BY-SA 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Eilean_Donan_Castle_v02.jpg",
+                "label": "Eilean Donan Castle",
+                "photoFocus": [
+                  0.5,
+                  0.5
+                ],
+                "photoFit": "contain"
+              }
+            },
+            {
+              "name": "Portree",
+              "lat": 57.4129,
+              "lon": -6.1945,
+              "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
+              "photoAuthor": "Bewahrerderwerte",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover",
+              "secondaryPhoto": {
+                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg/1280px-Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
+                "photoAuthor": "Squirrel1113",
+                "photoLicense": "CC BY 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
+                "label": "The Quiraing · Isle of Skye",
+                "photoFocus": [
+                  0.5,
+                  0.5
+                ],
+                "photoFit": "cover"
+              }
+            }
+          ],
+          "route": {
+            "type": "Feature",
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  -3.1999,
+                  55.9486
+                ],
+                [
+                  -5.004,
+                  56.681
+                ],
+                [
+                  -5.5168,
+                  57.2743
+                ],
+                [
+                  -6.1945,
+                  57.4129
+                ]
+              ]
+            },
+            "properties": {
+              "status": "routing-needed",
+              "source": "Illustrative stop positions, NOT the driving route"
+            }
+          },
+          "chapter": "finale",
+          "focusStopIndex": -1,
+          "mapCenter": [
+            -4.82,
+            56.96
+          ],
+          "mapZoom": 6.85,
+          "routeProgressFrom": 0,
+          "routeProgressTo": 1,
+          "roadMatched": false,
+          "markerStyle": "dot",
+          "editorial": true,
+          "seriesTitle": "THE OPEN ROAD COLLECTION · 001",
+          "regionTitle": "SCOTLAND",
+          "mapIntro": false,
+          "cta": "SAVE THIS ROAD TRIP"
         }
       }
     ]

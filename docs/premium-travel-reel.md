@@ -146,3 +146,16 @@ stop for on-frame attribution. See the source pages for the license terms.
 Source consistency checks verify every scene uses the same photo set and
 the template catalog matches its standalone project JSON. No GitHub Actions
 have been started. Live Safari/iPad MP4 exports still need visual inspection.
+
+
+## R5 — Editorial director's cut (PTR-01–10)
+
+1080 × 1920, 60 fps requested, 30 seconds. Ten scenes: Highland A82 opening (0–3), route introduction (3–5), Edinburgh (5–8), drive (8–10), Glen Coe (10–14), drive (14–16), Eilean Donan (16–20), drive (20–22), Skye (22–27), save CTA (27–30). 19 seconds photography, 11 seconds map. Per-stop secondary photos, focal coordinates and optional contained foreground image over a blurred background preserve wide subjects. Sequential short fades through forest green prevent map marks showing over photographs. Road-matched geometry and map snapshot engine remain unchanged. Basemap is muted by canvas color filtering, not a terrain relief model. Serif typography and elevated captions leave space for social UI; photo credits are retained. The procedural score follows revised cuts; browser AAC and actual 60 fps / 1080p output still require export validation.
+
+Additional photographs (cropped or contained, attribution on frame; original terms apply):
+- Old Town: Kidozh, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Edinburgh_old_town.jpg
+- A82 · Pass of Glencoe: Steven Brown, CC BY-SA 2.0, https://commons.wikimedia.org/wiki/File:A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg
+- Eilean Donan Castle: Thomas Fuhrmann, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Eilean_Donan_Castle_v02.jpg
+- The Quiraing · Isle of Skye: Squirrel1113, CC BY 4.0, https://commons.wikimedia.org/wiki/File:Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg
+
+The Quiraing is a nearby Skye excursion, not a fifth routed stop. No new server rendering or test workflow is required. Existing Pages deploy remains the publication mechanism.

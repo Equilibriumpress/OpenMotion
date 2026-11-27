@@ -114,7 +114,7 @@ export function getCachedPhoto(url?: string): HTMLImageElement | null {
 export async function preloadProjectImages(project: OpenMotionProject): Promise<void> {
   const urls = new Set<string>();
   for (const scene of project.scenes) {
-    for (const stop of scene.premiumTravel?.stops ?? []) urls.add(stop.photoUrl);
+    for (const stop of scene.premiumTravel?.stops ?? []) { urls.add(stop.photoUrl); if(stop.secondaryPhoto?.photoUrl) urls.add(stop.secondaryPhoto.photoUrl); }
     if (scene.imageUrl) urls.add(projectAssetUrl(scene.imageUrl));
     if (scene.editorialMap?.photoUrl) {
       urls.add(scene.editorialMap.photoUrl);

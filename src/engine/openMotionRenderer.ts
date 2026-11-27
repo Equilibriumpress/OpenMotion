@@ -356,9 +356,16 @@ export function renderOpenMotionFrame(
     // The incoming shot is composited above it with smoothstep opacity.
     // Both preview and MP4 use this exact deterministic timeline.
     const dissolveSec=prior?.layout==='premium-travel-route'&&prior.premiumTravel&&scene.transition==='fade'
-      ? Math.min(.7,scene.durationSec*.28,prior.durationSec*.28)
+      ? Math.min(scene.premiumTravel.editorial?.24:.7,scene.durationSec*.28,prior.durationSec*.28)
       : 0;
-    if(prior?.premiumTravel && dissolveSec>0 && localTime<dissolveSec) {
+    if(prior?.premiumTravel && scene.premiumTravel.editorial && dissolveSec>0 && localTime<dissolveSec){
+      // Sequential fade through a neutral colour: no route marks over photos.
+      const t=localTime/dissolveSec;
+      if(t<.5) renderPremiumTravelScene(ctx,w,h,prior,Math.max(0,prior.durationSec-1/Math.max(1,project.fps)),getCachedPhoto);
+      else renderPremiumTravelScene(ctx,w,h,scene,localTime,getCachedPhoto);
+      const opacity=1-Math.abs(2*t-1);
+      ctx.save();ctx.globalAlpha*=opacity*opacity*(3-2*opacity);ctx.fillStyle='#142C27';ctx.fillRect(0,0,w,h);ctx.restore();
+    } else if(prior?.premiumTravel && dissolveSec>0 && localTime<dissolveSec) {
       const endTime=Math.max(0,prior.durationSec-1/Math.max(1,project.fps));
       renderPremiumTravelScene(ctx,w,h,prior,endTime,getCachedPhoto);
       const x=Math.max(0,Math.min(1,localTime/dissolveSec));
