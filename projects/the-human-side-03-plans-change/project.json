@@ -26,13 +26,13 @@
   },
   "scenes": [
     {
-      "id": "ths-03-1",
-      "name": "Shared situation",
-      "durationSec": 4,
+      "id": "ths-03-v23-1",
+      "name": "Opening event",
+      "durationSec": 5,
       "layout": "doodle-explainer",
       "transition": "fade",
       "backdrop": "dot-matrix",
-      "headline": "Plans changed.",
+      "headline": "Opening event",
       "caption": "",
       "fullBleed": true,
       "doodle": {
@@ -44,130 +44,178 @@
         "extras": [
           "mind-series-v1",
           "human-side-v1",
-          "shot:message",
-          "episode:03",
-          "message:Dinner is cancelled tonight.",
-          "pose-a:phone",
-          "pose-b:phone",
-          "face-a:surprise",
-          "face-b:neutral",
-          "cover-pose-a:panic",
-          "cover-pose-b:point",
-          "cover-face-a:worry",
-          "cover-face-b:determined",
           "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
+          "episode:03",
           "theme:calendar",
+          "film:event",
+          "shot:setup",
           "cover-title:PLANS CHANGED|NOW WHAT?",
-          "cover-hook:Dinner plans cancelled."
-        ],
-        "shirtColor": "#C5A8D0",
-        "highlightColor": "#191619",
-        "narration": "Dinner cancelled. Now what?"
-      }
-    },
-    {
-      "id": "ths-03-2",
-      "name": "Response A",
-      "durationSec": 6,
-      "layout": "doodle-explainer",
-      "transition": "fade",
-      "backdrop": "dot-matrix",
-      "headline": "Now everything feels off.",
-      "caption": "",
-      "fullBleed": true,
-      "doodle": {
-        "setting": "standing",
-        "palette": "cream",
-        "mood": "worried",
-        "pose": "neutral",
-        "emphasis": [],
-        "extras": [
-          "mind-series-v1",
-          "human-side-v1",
-          "shot:worry",
-          "episode:03",
-          "label-a:My whole day is off.",
-          "pose-a:panic",
-          "face-a:worry",
-          "human-side-v2",
-          "theme:calendar"
-        ],
-        "shirtColor": "#C5A8D0",
-        "highlightColor": "#191619",
-        "narration": "One had planned the entire evening around dinner. Now the evening feels uncertain."
-      }
-    },
-    {
-      "id": "ths-03-3",
-      "name": "Response B",
-      "durationSec": 6,
-      "layout": "doodle-explainer",
-      "transition": "fade",
-      "backdrop": "dot-matrix",
-      "headline": "What's the new plan?",
-      "caption": "",
-      "fullBleed": true,
-      "doodle": {
-        "setting": "standing",
-        "palette": "cream",
-        "mood": "relaxed",
-        "pose": "neutral",
-        "emphasis": [],
-        "extras": [
-          "mind-series-v1",
-          "human-side-v1",
-          "shot:calm",
-          "episode:03",
-          "label-b:What's the new plan?",
-          "pose-b:point",
-          "face-b:determined",
-          "human-side-v2",
-          "theme:calendar"
-        ],
-        "shirtColor": "#C5A8D0",
-        "highlightColor": "#191619",
-        "narration": "The other looks at the calendar and suggests tomorrow instead."
-      }
-    },
-    {
-      "id": "ths-03-4",
-      "name": "Contrast",
-      "durationSec": 6,
-      "layout": "doodle-explainer",
-      "transition": "fade",
-      "backdrop": "dot-matrix",
-      "headline": "Change feels different.",
-      "caption": "",
-      "fullBleed": true,
-      "doodle": {
-        "setting": "standing",
-        "palette": "cream",
-        "mood": "worried",
-        "pose": "neutral",
-        "emphasis": [],
-        "extras": [
-          "mind-series-v1",
-          "human-side-v1",
-          "shot:contrast",
-          "episode:03",
+          "cover-hook:Dinner plans cancelled.",
+          "message:Dinner is cancelled tonight.",
           "label-a:My whole day is off.",
           "label-b:What's the new plan?",
-          "pose-a:panic",
-          "pose-b:point",
-          "face-a:worry",
-          "face-b:determined",
-          "human-side-v2",
-          "theme:calendar"
+          "reply:New plan: dinner tomorrow?"
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "The same change feels different when you were relying on the original plan."
+        "narration": "Dinner tonight. Then the plan is cancelled."
       }
     },
     {
-      "id": "ths-03-5",
-      "name": "More context",
-      "durationSec": 6,
+      "id": "ths-03-v23-2",
+      "name": "Emotional reaction",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Emotional reaction",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
+          "episode:03",
+          "theme:calendar",
+          "film:reaction",
+          "shot:build",
+          "message:Dinner is cancelled tonight.",
+          "label-a:My whole day is off.",
+          "label-b:What's the new plan?",
+          "reply:New plan: dinner tomorrow?"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "One had organized the entire evening around dinner."
+      }
+    },
+    {
+      "id": "ths-03-v23-3",
+      "name": "Physical action",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Physical action",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
+          "episode:03",
+          "theme:calendar",
+          "film:action",
+          "shot:build",
+          "message:Dinner is cancelled tonight.",
+          "label-a:My whole day is off.",
+          "label-b:What's the new plan?",
+          "reply:New plan: dinner tomorrow?"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "The other moves the appointment to tomorrow."
+      }
+    },
+    {
+      "id": "ths-03-v23-4",
+      "name": "Turning point",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Turning point",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
+          "episode:03",
+          "theme:calendar",
+          "film:turn",
+          "shot:turn",
+          "message:Dinner is cancelled tonight.",
+          "label-a:My whole day is off.",
+          "label-b:What's the new plan?",
+          "reply:New plan: dinner tomorrow?"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "The same change affects them differently."
+      }
+    },
+    {
+      "id": "ths-03-v23-5",
+      "name": "A different response",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "A different response",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
+          "episode:03",
+          "theme:calendar",
+          "film:change",
+          "shot:change",
+          "message:Dinner is cancelled tonight.",
+          "label-a:My whole day is off.",
+          "label-b:What's the new plan?",
+          "reply:New plan: dinner tomorrow?"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "A new plan begins to take shape."
+      }
+    },
+    {
+      "id": "ths-03-v23-6",
+      "name": "Final reflection",
+      "durationSec": 4,
       "layout": "doodle-explainer",
       "transition": "fade",
       "backdrop": "dot-matrix",
@@ -177,124 +225,127 @@
       "doodle": {
         "setting": "standing",
         "palette": "cream",
-        "mood": "happy",
+        "mood": "surprised",
         "pose": "neutral",
         "emphasis": [],
         "extras": [
           "mind-series-v1",
           "human-side-v1",
-          "shot:reveal",
-          "episode:03",
-          "message:New plan: dinner tomorrow?",
-          "pose-a:relief",
-          "pose-b:calm",
-          "face-a:relief",
-          "face-b:smile",
           "human-side-v2",
-          "theme:calendar"
+          "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
+          "episode:03",
+          "theme:calendar",
+          "film:ending",
+          "shot:resolve",
+          "message:Dinner is cancelled tonight.",
+          "label-a:My whole day is off.",
+          "label-b:What's the new plan?",
+          "reply:New plan: dinner tomorrow?"
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "Give yourself a moment. Find one next step, instead of solving the whole evening."
+        "narration": "Give yourself time. Find one next step."
       }
     }
   ],
   "captions": [
     {
-      "text": "Dinner cancelled. Now what?",
+      "text": "Dinner tonight. Then the",
       "startSec": 1.5,
-      "endSec": 3.55,
+      "endSec": 2.729,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "One had planned the entire",
-      "startSec": 4.3,
-      "endSec": 6.319,
+      "text": "plan is cancelled.",
+      "startSec": 2.729,
+      "endSec": 4.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "evening around dinner. Now the",
-      "startSec": 6.319,
-      "endSec": 8.338,
+      "text": "One had organized the",
+      "startSec": 5.3,
+      "endSec": 6.925,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "evening feels uncertain.",
-      "startSec": 8.338,
-      "endSec": 9.55,
+      "text": "entire evening around dinner.",
+      "startSec": 6.925,
+      "endSec": 8.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "The other looks at the",
-      "startSec": 10.3,
-      "endSec": 12.925,
+      "text": "The other moves the",
+      "startSec": 9.3,
+      "endSec": 11.157,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "calendar and suggests tomorrow instead.",
-      "startSec": 12.925,
-      "endSec": 15.55,
+      "text": "appointment to tomorrow.",
+      "startSec": 11.157,
+      "endSec": 12.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "The same change feels different",
-      "startSec": 16.3,
-      "endSec": 18.319,
+      "text": "The same change affects",
+      "startSec": 13.3,
+      "endSec": 15.467,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "when you were relying on",
-      "startSec": 18.319,
-      "endSec": 20.338,
+      "text": "them differently.",
+      "startSec": 15.467,
+      "endSec": 16.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "the original plan.",
-      "startSec": 20.338,
-      "endSec": 21.55,
+      "text": "A new plan begins",
+      "startSec": 17.3,
+      "endSec": 19.157,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "Give yourself a moment. Find",
-      "startSec": 22.3,
-      "endSec": 24.175,
+      "text": "to take shape.",
+      "startSec": 19.157,
+      "endSec": 20.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "one next step, instead of",
-      "startSec": 24.175,
-      "endSec": 26.05,
+      "text": "Give yourself time. Find",
+      "startSec": 21.3,
+      "endSec": 23.157,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "solving the whole evening.",
-      "startSec": 26.05,
-      "endSec": 27.55,
+      "text": "one next step.",
+      "startSec": 23.157,
+      "endSec": 24.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     }
   ],
   "audioTracks": [
@@ -303,7 +354,7 @@
       "kind": "voiceover",
       "src": "assets/audio/the-human-side-03-plans-change-voice.mp3",
       "startSec": 0,
-      "endSec": 28,
+      "endSec": 25,
       "volume": 1
     },
     {
@@ -311,7 +362,7 @@
       "kind": "music",
       "src": "assets/audio/the-human-side-03-plans-change-score.mp3",
       "startSec": 0,
-      "endSec": 28,
+      "endSec": 25,
       "volume": 0.15,
       "fadeInSec": 0.3,
       "fadeOutSec": 1
@@ -321,7 +372,7 @@
       "kind": "effect",
       "src": "assets/audio/the-human-side-03-plans-change-human-sfx.wav",
       "startSec": 0,
-      "endSec": 28,
+      "endSec": 25,
       "volume": 0.48
     }
   ],
@@ -329,7 +380,7 @@
   "seriesId": "the-human-side",
   "season": 1,
   "episodeNumber": 3,
-  "templateVersion": "2.0",
+  "templateVersion": "2.3",
   "productionStatus": "review",
-  "thumbnailUrl": "assets/the-human-side/v2/the-human-side-03-plans-change.svg"
+  "thumbnailUrl": "assets/the-human-side/v23/the-human-side-03-plans-change.svg"
 }
