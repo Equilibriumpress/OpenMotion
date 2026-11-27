@@ -381,7 +381,7 @@
       "id": "the-human-side",
       "title": "The Human Side",
       "description": "Dezelfde situatie, verschillende emoties. Handgetekende stickfiguren op lila papier.",
-      "activeVersion": "1.1",
+      "activeVersion": "2.0",
       "versions": [
         {
           "version": "1.0",
@@ -410,6 +410,25 @@
           "referenceProject": "the-human-side-01-same-situation",
           "templatePath": "series/the-human-side/template-v1.1.json",
           "instructions": "Create 20–35s original English stories contrasting two responses to the same event. Use human-side-v1 with mind-series-v1 for audio, original black curved stick figures, white round faces, lilac paper, lavender glow and oval shadows. Reuse shot, face and pose presets in doodle.extras. Preserve visual safe areas and avoid clinical diagnoses or universal claims. Use short headlines and captions, 5 beats, English Piper narration. See docs/the-human-side.md. Social cover: include cover-title:LINE ONE|LINE TWO, cover-hook:, cover-pose-a/b: and cover-face-a/b: in the first scene only. Keep the 0.85s selectable cover within the existing opening scene; title maximum two short lines. Export PNG via Studio.",
+          "brandKit": {
+            "brandName": "THE HUMAN SIDE",
+            "primaryColor": "#C5A8D0",
+            "accentColor": "#E6D8ED",
+            "backgroundColor": "#C5A8D0",
+            "surfaceColor": "#E6D8ED",
+            "textColor": "#191619",
+            "mutedColor": "#806D87",
+            "fontFamily": "system-ui"
+          }
+        },
+        {
+          "version": "2.0",
+          "format": "9:16",
+          "fps": 30,
+          "durationSec": 28,
+          "referenceProject": "the-human-side-01-same-situation",
+          "templatePath": "series/the-human-side/template-v2.0.json",
+          "instructions": "Create 20–35s original stories using human-side-v1, mind-series-v1 and human-side-v2 on every scene. Choose an editable theme: message, waiting, calendar, boundaries, feedback. Retain the lilac paper, black curved stick figures, white faces and expressive asymmetry. Use shot:message/worry/calm/contrast/reveal with topic-specific props, pose-a/b, face-a/b, label-a/b, and optional detail-a/b. First scene only: cover-title (two short lines separated by |), cover-hook, cover-pose-a/b, cover-face-a/b. The 1.5-second cover is part of the existing opening scene; select around .3 seconds or download matching PNG in Studio. No extra title card or duplicate captions. Use short spoken lines, short timed captions (manifest replaces estimates from Piper), generated original -human-sfx.wav track, and a quiet score. Use an individual library poster. Keep clinical framing cautious. See docs/the-human-side.md.",
           "brandKit": {
             "brandName": "THE HUMAN SIDE",
             "primaryColor": "#C5A8D0",
