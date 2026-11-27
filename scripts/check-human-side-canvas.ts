@@ -12,6 +12,7 @@ const numeric=(name:string,n:number,args:unknown[])=>{
  assert(args.every(x=>typeof x==='number'&&Number.isFinite(x)),name+' nonfinite coordinates');
 };
 const ctx:Record<string,unknown>={
+ globalAlpha:1,
  save(){depth++;},restore(){assert(--depth>=0,'unbalanced restore');},
  beginPath(){},closePath(){},
  fill(...a:unknown[]){assert.equal(a.length,0,'fill overload');},
@@ -22,7 +23,7 @@ const ctx:Record<string,unknown>={
 };
 for(const [name,n] of Object.entries({scale:2,translate:2,rotate:1,fillRect:4,moveTo:2,lineTo:2,quadraticCurveTo:4,bezierCurveTo:6}))ctx[name]=(...a:unknown[])=>numeric(name,n,a);
 const c=ctx as unknown as CanvasRenderingContext2D;
-for(const slug of ['01-same-situation','02-no-text-back','03-plans-change','04-boundaries','05-criticism'].map(s=>'the-human-side-'+s)){
+for(const slug of ['01-same-situation','02-no-text-back','03-plans-change','04-boundaries','05-criticism','06-resting-guilt','07-smile-we-hide-behind','08-same-mistakes','09-being-strong','10-lonely-in-a-crowd'].map(s=>'the-human-side-'+s)){
  const p=JSON.parse(fs.readFileSync('projects/'+slug+'/project.json','utf8')) as OpenMotionProject;
  assert.equal(humanSideCoverDuration(p.scenes[0]),1.5);
  const title=p.scenes[0].doodle!.extras!.find(v=>v.startsWith('cover-title:'))!.slice(12).split('|');
@@ -36,4 +37,4 @@ for(const slug of ['01-same-situation','02-no-text-back','03-plans-change','04-b
   renderHumanSide(c,540,960,s,k/6,p.brandKit);assert.equal(depth,0,slug+' '+s.name);frames++;
  }
 }
-console.log('Human Side Canvas regression:',frames,'scene samples and all five covers passed.');
+console.log('Human Side Canvas regression:',frames,'scene samples and all ten covers passed.');

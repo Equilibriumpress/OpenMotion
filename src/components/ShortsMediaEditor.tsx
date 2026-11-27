@@ -173,6 +173,38 @@ export function ShortsMediaEditor({project,activeScene,onUpdateProject,onUpdateS
       const extras=doodle.extras??[];
       const get=(key:string,fallback='')=>extras.find(x=>x.startsWith(key+':'))?.slice(key.length+1)??fallback;
       const set=(key:string,value:string)=>update({extras:[...extras.filter(x=>!x.startsWith(key+':')),key+':'+value]});
+      if(extras.includes('human-side-v21')){
+        const theme=get('theme','rest'),shot=get('shot','setup');
+        const fields=theme==='rest'?['prop-tasks','prop-next']:theme==='load'?['prop-tasks']:theme==='loop'?['prop-title','prop-next']:theme==='mask'?['label-a']:['label-b'];
+        const cast=(theme==='load'||theme==='crowd'||theme==='mask')&&['change','resolve'].includes(shot)?['a','b']:['a'];
+        return <div className="space-y-3 rounded-xl border border-purple-200 p-3">
+          <h4 className="font-semibold text-sm text-purple-900">The Human Side · verhaal 2.1</h4>
+          <label className="block text-xs">Animatiemodule<select className={style} value={theme} onChange={e=>set('theme',e.target.value)}>
+            {['rest','mask','loop','load','crowd'].map(v=><option key={v}>{v}</option>)}
+          </select></label>
+          <label className="block text-xs">Verhaalfase<select className={style} value={shot} onChange={e=>set('shot',e.target.value)}>
+            {['setup','build','turn','change','resolve'].map(v=><option key={v}>{v}</option>)}
+          </select></label>
+          {fields.map(key=><label key={key} className="block text-xs">Attribuut ({key})<input className={style} value={get(key)} onChange={e=>set(key,e.target.value)}/></label>)}
+          {cast.map(side=><div key={side} className="space-y-2 border-t border-purple-100 pt-2">
+            <h5 className="text-xs font-semibold">Personage {side.toUpperCase()}</h5>
+            {!(side==='a'&&(theme==='rest'||theme==='mask'))&&<label className="block text-xs">Houding<select className={style} value={get('pose-'+side)} onChange={e=>set('pose-'+side,e.target.value)}><option value="">Automatisch</option>
+              {Object.keys(HUMAN_POSES).map(v=><option key={v}>{v}</option>)}</select></label>}
+            <label className="block text-xs">Gezicht<select className={style} value={get('face-'+side)} onChange={e=>set('face-'+side,e.target.value)}><option value="">Automatisch</option>
+              {HUMAN_FACES.map(v=><option key={v}>{v}</option>)}</select></label>
+          </div>)}
+          {activeScene.id===project.scenes[0]?.id&&<div className="space-y-2 border-t border-purple-100 pt-2">
+            <h5 className="text-xs font-semibold">Shorts / TikTok cover</h5>
+            <label className="block text-xs">Covertekst (twee regels met |)<input className={style} value={get('cover-title')} onChange={e=>set('cover-title',e.target.value)}/></label>
+            <label className="block text-xs">Korte hook<input className={style} value={get('cover-hook')} onChange={e=>set('cover-hook',e.target.value)}/></label>
+            <p className="text-xs text-slate-500">De illustratie volgt de gekozen animatiemodule. Bekijk het frame op 0,3 seconde.</p>
+          </div>}
+          <label className="block text-xs">Afleveringsnummer<input className={style} value={get('episode','06')} onChange={e=>set('episode',e.target.value)}/></label>
+          <label className="block text-xs">Afsluitende tekst<input className={style} value={activeScene.headline} onChange={e=>onUpdateScene({headline:e.target.value})}/></label>
+          <label className="block text-xs">Engelse voice-over<textarea className={style} rows={3} value={doodle.narration??''} onChange={e=>update({narration:e.target.value})}/></label>
+          <p className="text-xs text-slate-500">Herpubliceer via GitHub voor nieuwe audio en ondertiteling.</p>
+        </div>;
+      }
       const shot=get('shot','contrast');
       const poseA=shot==='message'?'phone':shot==='worry'?'panic':shot==='reveal'?'relief':'worried';
       const poseB=shot==='message'?'phone':shot==='reveal'?'relief':'calm';

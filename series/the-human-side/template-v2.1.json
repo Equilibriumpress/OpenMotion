@@ -1,0 +1,201 @@
+{
+  "version": "2.1",
+  "format": "9:16",
+  "fps": 30,
+  "durationSec": 29,
+  "referenceProject": "the-human-side-06-resting-guilt",
+  "templatePath": "series/the-human-side/template-v2.1.json",
+  "instructions": "Create original 25–35s English narrative episodes with one protagonist, optionally supporting characters. Use human-side-v1, mind-series-v1, human-side-v2 and human-side-v21 on every scene. Choose one theme: rest (chair, unfinished tasks, rest), mask (removable smile), loop (phone and repeated action), load (accumulating responsibilities and shared weight), crowd (background people and connection). Set shot:setup/build/turn/change/resolve, use short visual-first narration and one final headline. Optional face-a/b and pose-a/b override automatic acting where relevant. Editable props: prop-tasks, prop-next, prop-title, label-a, label-b depending on module. First scene only: cover-title (two short lines separated by |), cover-hook. The 1.5s cover uses the chosen module's own artwork. Export PNG via Studio or choose frame .3s. Use estimated phrase captions replaced by Piper timings at publication, quiet music and generated original -human-sfx.wav track. Create individual illustrated library poster. Keep claims cautious and non-diagnostic. See docs/the-human-side.md.",
+  "brandKit": {
+    "brandName": "THE HUMAN SIDE",
+    "primaryColor": "#C5A8D0",
+    "accentColor": "#E6D8ED",
+    "backgroundColor": "#C5A8D0",
+    "surfaceColor": "#E6D8ED",
+    "textColor": "#191619",
+    "mutedColor": "#806D87",
+    "fontFamily": "system-ui"
+  },
+  "seriesId": "the-human-side",
+  "exampleScenes": [
+    {
+      "id": "ths-06-1",
+      "name": "Opening situation",
+      "durationSec": 4.5,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "episode:06",
+          "theme:rest",
+          "shot:setup",
+          "prop-tasks:EMAIL|LAUNDRY|ONE MORE THING",
+          "prop-next:REST IS ALLOWED",
+          "cover-title:RESTING|FEELS WRONG",
+          "cover-hook:Why does rest feel guilty?"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "Finally, a moment to rest."
+      }
+    },
+    {
+      "id": "ths-06-2",
+      "name": "The pattern builds",
+      "durationSec": 5.5,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "worried",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "episode:06",
+          "theme:rest",
+          "shot:build",
+          "prop-tasks:EMAIL|LAUNDRY|ONE MORE THING",
+          "prop-next:REST IS ALLOWED"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "You sit down. Then unfinished tasks start demanding your attention."
+      }
+    },
+    {
+      "id": "ths-06-3",
+      "name": "Emotional turning point",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "relaxed",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "episode:06",
+          "theme:rest",
+          "shot:turn",
+          "prop-tasks:EMAIL|LAUNDRY|ONE MORE THING",
+          "prop-next:REST IS ALLOWED"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "Sometimes, being busy starts to feel like the only way to be useful."
+      }
+    },
+    {
+      "id": "ths-06-4",
+      "name": "One small change",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "worried",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "episode:06",
+          "theme:rest",
+          "shot:change",
+          "prop-tasks:EMAIL|LAUNDRY|ONE MORE THING",
+          "prop-next:REST IS ALLOWED"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "Try leaving one thing unfinished while you take a short break."
+      }
+    },
+    {
+      "id": "ths-06-5",
+      "name": "Reflection",
+      "durationSec": 7,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Rest does not need to be earned.",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "happy",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "episode:06",
+          "theme:rest",
+          "shot:resolve",
+          "prop-tasks:EMAIL|LAUNDRY|ONE MORE THING",
+          "prop-next:REST IS ALLOWED"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "You do not need to finish every task before taking a moment for yourself."
+      }
+    }
+  ],
+  "exampleCaptionStyle": "minimal",
+  "exampleAudioTracks": [
+    {
+      "kind": "voiceover",
+      "volume": 1
+    },
+    {
+      "kind": "music",
+      "volume": 0.13,
+      "fadeInSec": 0.3,
+      "fadeOutSec": 1
+    },
+    {
+      "kind": "effect",
+      "volume": 0.48
+    }
+  ]
+}

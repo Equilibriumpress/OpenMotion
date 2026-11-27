@@ -51,3 +51,20 @@ All five existing episodes migrate to 2.0, with their 28-second duration and ori
 - Sound: original deterministic Foley WAV generated in the ordinary manifest build, only for opted-in Human Side scenes. Add audio track assets/audio/<slug>-human-sfx.wav, kind effect, volume .48. No external samples or Piper cache script changes.
 - Future episodes: use version 2.0, all three markers human-side-v1, mind-series-v1, human-side-v2. Keep the two-line cover and one theme per episode, and create its own poster. Use the existing editor controls; update voiceover and generated captions through the normal publication workflow.
 - Review: run npx tsx scripts/check-human-side-canvas.ts manually, then visually inspect the actual deployed Canvas on Safari/Chromium and export MP4. The strict Canvas mock is not proof of Safari compatibility, browser rendering, audio playback or MP4 encoding. The pilot cover was reconstructed from recorded renderer drawing commands with approximate text metrics for layout QA; the margins and kneeling silhouette were revised after that check. The real browser/MP4 output still requires verification. The exact cause of the originally reported missing cover has not been reproduced.
+
+
+## Narrative expansion — template 2.1
+
+Episodes 06–10 move from two contrasting responses to a single protagonist's story. Episodes 01–05 retain their original 2.0 version and scene design. All new episodes are 29 seconds, five beats, 1080 × 1920, 30 fps. Template 2.1 is the active version. The first 1.5 seconds use module-specific artwork in the existing cover renderer and remain selectable around .3 seconds. Library posters use the same illustration geometry captured as SVG, with separate landscape typography.
+
+| Episode | Theme | Visual action |
+| --- | --- | --- |
+| 06 Why We Feel Guilty Doing Nothing | rest | Seated figure, orbiting unfinished tasks, clock and release into rest |
+| 07 The Smile We Hide Behind | mask | Smiling face overlay moves away from the underlying expression, followed by support |
+| 08 Why We Keep Making the Same Mistakes | loop | Repeating scroll and clock, loop breaks when the phone moves to a table |
+| 09 Being Strong Gets Exhausting | load | Labelled boxes accumulate, body posture changes, responsibilities are shared |
+| 10 Lonely in a Room Full of People | crowd | Subdued moving background group, foreground isolation and one-to-one contact |
+
+For every 2.1 scene include human-side-v1, mind-series-v1, human-side-v2, human-side-v21, episode:NN, theme:<module>, shot:<setup/build/turn/change/resolve>. Edit these in the new story panel. Use a short final headline in resolve only. Use cover-title and cover-hook only in the opening scene. Covers automatically use theme-specific acting instead of the two-figure cover poses. Relevant prop controls: rest uses prop-tasks and prop-next; mask uses label-a; loop uses prop-title and prop-next; load uses prop-tasks; crowd uses label-b. Optional pose-a/b and face-a/b override applicable actor defaults; seated and mask animation have dedicated body geometry. Audio scripts generate narration, score, original synthesized foley and publication-time approximate phrase captions through the existing build. No new dependency or workflow. Fictional scripts do not diagnose or promise psychological outcomes.
+
+Run the manual Canvas regression in scripts/check-human-side-canvas.ts if desired. The strict command mock checks finite coordinates, draw method signatures, cover labels and state balance. Real Safari/Chromium playback, synthesized narration, sound mix and MP4 export require visual/auditory review. All new projects remain in review status.
