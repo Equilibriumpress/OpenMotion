@@ -381,7 +381,7 @@
       "id": "the-human-side",
       "title": "The Human Side",
       "description": "Dezelfde situatie, verschillende emoties. Handgetekende stickfiguren op lila papier.",
-      "activeVersion": "1.0",
+      "activeVersion": "1.1",
       "versions": [
         {
           "version": "1.0",
@@ -391,6 +391,25 @@
           "referenceProject": "the-human-side-01-same-situation",
           "templatePath": "series/the-human-side/template-v1.0.json",
           "instructions": "Create 20–35s original English stories contrasting two responses to the same event. Use human-side-v1 with mind-series-v1 for audio, original black curved stick figures, white round faces, lilac paper, lavender glow and oval shadows. Reuse shot, face and pose presets in doodle.extras. Preserve visual safe areas and avoid clinical diagnoses or universal claims. Use short headlines and captions, 5 beats, English Piper narration. See docs/the-human-side.md.",
+          "brandKit": {
+            "brandName": "THE HUMAN SIDE",
+            "primaryColor": "#C5A8D0",
+            "accentColor": "#E6D8ED",
+            "backgroundColor": "#C5A8D0",
+            "surfaceColor": "#E6D8ED",
+            "textColor": "#191619",
+            "mutedColor": "#806D87",
+            "fontFamily": "system-ui"
+          }
+        },
+        {
+          "version": "1.1",
+          "format": "9:16",
+          "fps": 30,
+          "durationSec": 28,
+          "referenceProject": "the-human-side-01-same-situation",
+          "templatePath": "series/the-human-side/template-v1.1.json",
+          "instructions": "Create 20–35s original English stories contrasting two responses to the same event. Use human-side-v1 with mind-series-v1 for audio, original black curved stick figures, white round faces, lilac paper, lavender glow and oval shadows. Reuse shot, face and pose presets in doodle.extras. Preserve visual safe areas and avoid clinical diagnoses or universal claims. Use short headlines and captions, 5 beats, English Piper narration. See docs/the-human-side.md. Social cover: include cover-title:LINE ONE|LINE TWO, cover-hook:, cover-pose-a/b: and cover-face-a/b: in the first scene only. Keep the 0.85s selectable cover within the existing opening scene; title maximum two short lines. Export PNG via Studio.",
           "brandKit": {
             "brandName": "THE HUMAN SIDE",
             "primaryColor": "#C5A8D0",
