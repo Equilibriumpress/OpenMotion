@@ -469,8 +469,8 @@
     {
       "id": "the-song-explained",
       "title": "The Song Explained",
-      "description": "De betekenis en achtergrond van bekende nummers in geanimeerde muziekposters.",
-      "activeVersion": "2.1",
+      "description": "Filmische muziekverhalen met volledig programmatisch getekende en bewegende beelden.",
+      "activeVersion": "3.0",
       "versions": [
         {
           "version": "1.0",
@@ -518,6 +518,25 @@
           "referenceProject": "the-song-explained-001-fast-car",
           "templatePath": "series/the-song-explained/template-v2.1.json",
           "instructions": "Produce an original 30–40s animated music mini-documentary. Full-bleed shots, a recurring fictional protagonist, emotionally motivated color and light, a restrained cover and captions, no repeated title panels. Use layout=doodle-explainer and the three markers mind-series-v1, song-explainer-v1, song-cinematic-v2. Existing Fast Car presets longing, shop, drive, return, reflection are story-specific; extend cinematicSongRenderer with original compositions for new songs. Camera push/pull/track. Use one selectable 0.85s cover, separate SVG thumbnail, and optional original procedural sound bed at assets/the-song-explained/<slug>-sound.wav. Existing cached Piper provides voice. Verify artist interviews and distinguish interpretation from documented intent. No lyrics, original music or album art. Visual review before season expansion. For the Fast Car quality pass add song-hero-rigs-v21. Hero face has profile, three-quarter and near-front views; the original compact sedan is a projected 3D model with material shading and spinning wheels. Reuse these rigs only where story-appropriate. Keep the 0.85s selectable cover and original timing. See docs/the-song-explained.md.",
+          "brandKit": {
+            "brandName": "THE SONG EXPLAINED",
+            "primaryColor": "#D39A62",
+            "accentColor": "#A85C43",
+            "backgroundColor": "#182735",
+            "surfaceColor": "#465A72",
+            "textColor": "#F4E6D0",
+            "mutedColor": "#9F8F81",
+            "fontFamily": "system-ui"
+          }
+        },
+        {
+          "version": "3.0",
+          "format": "9:16",
+          "fps": 60,
+          "durationSec": 40,
+          "referenceProject": "the-song-explained-001-fast-car",
+          "templatePath": "series/the-song-explained/template-v3.0.json",
+          "instructions": "Procedural Cinema 3.0. Use only original runtime-drawn Canvas/SVG geometry within the existing song scene functions, and the existing projected car where appropriate. No generated raster images, external models, new engines, libraries or render services. Keep layout=doodle-explainer, markers mind-series-v1, song-explainer-v1, song-cinematic-v2 and song-procedural-v3. Episode 01 additionally uses song-hero-rigs-v21; episode 02 uses song-breath-v1. Use the existing shot and camera selectors. Create distinct animated compositions with articulated silhouettes, motivated cuts, changing light, environmental motion and symbol transformations; do not rely on zoom alone. Keep 40 seconds, 9:16, 60fps, original English narration and independent sound bed. First 0.85s is an animated selectable title cover; the shared cover export uses time 0.3s. Store a matching original SVG library thumbnail. Research artist intent, distinguish interpretation, no lyrics or original recording. Verify actual motion and mobile preview/export before approving. See docs/the-song-explained.md.",
           "brandKit": {
             "brandName": "THE SONG EXPLAINED",
             "primaryColor": "#D39A62",
