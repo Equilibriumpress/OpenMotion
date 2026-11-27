@@ -477,6 +477,8 @@ export interface DocumentaryShot {
 export interface SceneBucketList {
   cover?: boolean;
   directorsCut?: boolean;
+  /** Optional regional geographic flight, ending in a stationary photo reveal. */
+  regionalFlight?: { startZoom: number; arrivalZoom: number; arrivalLabel: string; contextLabels?: {label:string; lon:number; lat:number}[]; relief?: boolean };
   /** Optional deterministic photographic overlays and camera direction. */
   atmosphere?: 'cloud' | 'mist';
   photoMotion?: 'push' | 'pan' | 'pull';
