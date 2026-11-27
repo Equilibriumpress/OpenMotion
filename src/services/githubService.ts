@@ -155,6 +155,7 @@ export function normalizeOpenMotionProject(
     'whiteboard-science',
     'doodle-explainer',
     'three-campervan-journey',
+    'three-explainer',
   ]);
   const validBackdrops = new Set([
     'grid-architectural',
