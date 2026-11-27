@@ -26,13 +26,13 @@
   },
   "scenes": [
     {
-      "id": "ths-07-1",
-      "name": "Opening situation",
-      "durationSec": 4.5,
+      "id": "ths-07-v23-1",
+      "name": "Opening event",
+      "durationSec": 5,
       "layout": "doodle-explainer",
       "transition": "fade",
       "backdrop": "dot-matrix",
-      "headline": "",
+      "headline": "Opening event",
       "caption": "",
       "fullBleed": true,
       "doodle": {
@@ -46,12 +46,15 @@
           "human-side-v1",
           "human-side-v2",
           "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
           "episode:07",
           "theme:mask",
+          "film:event",
           "shot:setup",
-          "label-a:I'm not okay today.",
           "cover-title:SMILING|BUT STRUGGLING",
-          "cover-hook:Behind the smile."
+          "cover-hook:Behind the smile.",
+          "label-a:I'm not okay today."
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
@@ -59,19 +62,19 @@
       }
     },
     {
-      "id": "ths-07-2",
-      "name": "The pattern builds",
-      "durationSec": 5.5,
+      "id": "ths-07-v23-2",
+      "name": "Emotional reaction",
+      "durationSec": 4,
       "layout": "doodle-explainer",
       "transition": "fade",
       "backdrop": "dot-matrix",
-      "headline": "",
+      "headline": "Emotional reaction",
       "caption": "",
       "fullBleed": true,
       "doodle": {
         "setting": "standing",
         "palette": "cream",
-        "mood": "worried",
+        "mood": "surprised",
         "pose": "neutral",
         "emphasis": [],
         "extras": [
@@ -79,30 +82,33 @@
           "human-side-v1",
           "human-side-v2",
           "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
           "episode:07",
           "theme:mask",
+          "film:reaction",
           "shot:build",
           "label-a:I'm not okay today."
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "You smile through the conversation, even when you feel drained."
+        "narration": "You smile even when you feel drained."
       }
     },
     {
-      "id": "ths-07-3",
-      "name": "Emotional turning point",
-      "durationSec": 6,
+      "id": "ths-07-v23-3",
+      "name": "Physical action",
+      "durationSec": 4,
       "layout": "doodle-explainer",
       "transition": "fade",
       "backdrop": "dot-matrix",
-      "headline": "",
+      "headline": "Physical action",
       "caption": "",
       "fullBleed": true,
       "doodle": {
         "setting": "standing",
         "palette": "cream",
-        "mood": "relaxed",
+        "mood": "surprised",
         "pose": "neutral",
         "emphasis": [],
         "extras": [
@@ -110,30 +116,67 @@
           "human-side-v1",
           "human-side-v2",
           "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
           "episode:07",
           "theme:mask",
+          "film:action",
+          "shot:build",
+          "label-a:I'm not okay today."
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "Around other people, the smile stays in place."
+      }
+    },
+    {
+      "id": "ths-07-v23-4",
+      "name": "Turning point",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Turning point",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
+          "episode:07",
+          "theme:mask",
+          "film:turn",
           "shot:turn",
           "label-a:I'm not okay today."
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "When you are alone, the smile finally comes down."
+        "narration": "When you're alone, the smile finally comes down."
       }
     },
     {
-      "id": "ths-07-4",
-      "name": "One small change",
-      "durationSec": 6,
+      "id": "ths-07-v23-5",
+      "name": "A different response",
+      "durationSec": 4,
       "layout": "doodle-explainer",
       "transition": "fade",
       "backdrop": "dot-matrix",
-      "headline": "",
+      "headline": "A different response",
       "caption": "",
       "fullBleed": true,
       "doodle": {
         "setting": "standing",
         "palette": "cream",
-        "mood": "worried",
+        "mood": "surprised",
         "pose": "neutral",
         "emphasis": [],
         "extras": [
@@ -141,20 +184,23 @@
           "human-side-v1",
           "human-side-v2",
           "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
           "episode:07",
           "theme:mask",
+          "film:change",
           "shot:change",
           "label-a:I'm not okay today."
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "You might choose one person you trust and tell them how you feel."
+        "narration": "Choose someone you trust and tell them how you feel."
       }
     },
     {
-      "id": "ths-07-5",
-      "name": "Reflection",
-      "durationSec": 7,
+      "id": "ths-07-v23-6",
+      "name": "Final reflection",
+      "durationSec": 4,
       "layout": "doodle-explainer",
       "transition": "fade",
       "backdrop": "dot-matrix",
@@ -164,7 +210,7 @@
       "doodle": {
         "setting": "standing",
         "palette": "cream",
-        "mood": "happy",
+        "mood": "surprised",
         "pose": "neutral",
         "emphasis": [],
         "extras": [
@@ -172,113 +218,124 @@
           "human-side-v1",
           "human-side-v2",
           "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
           "episode:07",
           "theme:mask",
+          "film:ending",
           "shot:resolve",
           "label-a:I'm not okay today."
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "You do not owe everyone a smile. Being honest with someone safe is enough."
+        "narration": "You do not owe everyone a smile."
       }
     }
   ],
   "captions": [
     {
-      "text": "A smile does not tell",
+      "text": "A smile does not",
       "startSec": 1.5,
-      "endSec": 2.644,
+      "endSec": 2.425,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "the whole story.",
-      "startSec": 2.644,
-      "endSec": 4.05,
+      "text": "tell the whole story.",
+      "startSec": 2.425,
+      "endSec": 4.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "You smile through the conversation,",
-      "startSec": 4.8,
-      "endSec": 7.175,
+      "text": "You smile even when",
+      "startSec": 5.3,
+      "endSec": 7.157,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "even when you feel drained.",
-      "startSec": 7.175,
-      "endSec": 9.55,
+      "text": "you feel drained.",
+      "startSec": 7.157,
+      "endSec": 8.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "When you are alone, the",
-      "startSec": 10.3,
-      "endSec": 13.217,
+      "text": "Around other people, the",
+      "startSec": 9.3,
+      "endSec": 10.925,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
+    },
+    {
+      "text": "smile stays in place.",
+      "startSec": 10.925,
+      "endSec": 12.55,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 64
+    },
+    {
+      "text": "When you're alone, the",
+      "startSec": 13.3,
+      "endSec": 14.925,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 64
     },
     {
       "text": "smile finally comes down.",
-      "startSec": 13.217,
-      "endSec": 15.55,
+      "startSec": 14.925,
+      "endSec": 16.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "You might choose one person",
-      "startSec": 16.3,
-      "endSec": 18.319,
+      "text": "Choose someone you trust",
+      "startSec": 17.3,
+      "endSec": 18.6,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "you trust and tell them",
-      "startSec": 18.319,
-      "endSec": 20.338,
+      "text": "and tell them how",
+      "startSec": 18.6,
+      "endSec": 19.9,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "how you feel.",
-      "startSec": 20.338,
-      "endSec": 21.55,
+      "text": "you feel.",
+      "startSec": 19.9,
+      "endSec": 20.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "You do not owe everyone",
-      "startSec": 22.3,
-      "endSec": 24.532,
+      "text": "You do not owe",
+      "startSec": 21.3,
+      "endSec": 23.157,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "a smile. Being honest with",
-      "startSec": 24.532,
-      "endSec": 26.764,
+      "text": "everyone a smile.",
+      "startSec": 23.157,
+      "endSec": 24.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
-    },
-    {
-      "text": "someone safe is enough.",
-      "startSec": 26.764,
-      "endSec": 28.55,
-      "style": "minimal",
-      "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     }
   ],
   "audioTracks": [
@@ -287,7 +344,7 @@
       "kind": "voiceover",
       "src": "assets/audio/the-human-side-07-smile-we-hide-behind-voice.mp3",
       "startSec": 0,
-      "endSec": 29,
+      "endSec": 25,
       "volume": 1
     },
     {
@@ -295,7 +352,7 @@
       "kind": "music",
       "src": "assets/audio/the-human-side-07-smile-we-hide-behind-score.mp3",
       "startSec": 0,
-      "endSec": 29,
+      "endSec": 25,
       "volume": 0.13,
       "fadeInSec": 0.3,
       "fadeOutSec": 1
@@ -305,7 +362,7 @@
       "kind": "effect",
       "src": "assets/audio/the-human-side-07-smile-we-hide-behind-human-sfx.wav",
       "startSec": 0,
-      "endSec": 29,
+      "endSec": 25,
       "volume": 0.48
     }
   ],
@@ -313,7 +370,7 @@
   "seriesId": "the-human-side",
   "season": 1,
   "episodeNumber": 7,
-  "templateVersion": "2.1",
+  "templateVersion": "2.3",
   "productionStatus": "review",
-  "thumbnailUrl": "assets/the-human-side/v21/the-human-side-07-smile-we-hide-behind.svg"
+  "thumbnailUrl": "assets/the-human-side/v23/the-human-side-07-smile-we-hide-behind.svg"
 }

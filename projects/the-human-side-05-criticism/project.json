@@ -26,13 +26,13 @@
   },
   "scenes": [
     {
-      "id": "ths-05-1",
-      "name": "Shared situation",
-      "durationSec": 4,
+      "id": "ths-05-v23-1",
+      "name": "Opening event",
+      "durationSec": 5,
       "layout": "doodle-explainer",
       "transition": "fade",
       "backdrop": "dot-matrix",
-      "headline": "Some feedback for you.",
+      "headline": "Opening event",
       "caption": "",
       "fullBleed": true,
       "doodle": {
@@ -44,130 +44,178 @@
         "extras": [
           "mind-series-v1",
           "human-side-v1",
-          "shot:message",
-          "episode:05",
-          "message:Your draft needs some changes.",
-          "pose-a:phone",
-          "pose-b:phone",
-          "face-a:surprise",
-          "face-b:neutral",
-          "cover-pose-a:kneel",
-          "cover-pose-b:point",
-          "cover-face-a:sad",
-          "cover-face-b:determined",
           "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
+          "episode:05",
           "theme:feedback",
+          "film:event",
+          "shot:setup",
           "cover-title:CRITICISM HURTS|BUT WHY?",
-          "cover-hook:Your draft needs changes."
-        ],
-        "shirtColor": "#C5A8D0",
-        "highlightColor": "#191619",
-        "narration": "Same feedback. Different impact."
-      }
-    },
-    {
-      "id": "ths-05-2",
-      "name": "Response A",
-      "durationSec": 6,
-      "layout": "doodle-explainer",
-      "transition": "fade",
-      "backdrop": "dot-matrix",
-      "headline": "I'm not good enough.",
-      "caption": "",
-      "fullBleed": true,
-      "doodle": {
-        "setting": "standing",
-        "palette": "cream",
-        "mood": "worried",
-        "pose": "neutral",
-        "emphasis": [],
-        "extras": [
-          "mind-series-v1",
-          "human-side-v1",
-          "shot:worry",
-          "episode:05",
-          "label-a:I'm not good enough.",
-          "pose-a:kneel",
-          "face-a:sad",
-          "human-side-v2",
-          "theme:feedback"
-        ],
-        "shirtColor": "#C5A8D0",
-        "highlightColor": "#191619",
-        "narration": "One hears a comment about the draft and starts questioning their own worth."
-      }
-    },
-    {
-      "id": "ths-05-3",
-      "name": "Response B",
-      "durationSec": 6,
-      "layout": "doodle-explainer",
-      "transition": "fade",
-      "backdrop": "dot-matrix",
-      "headline": "Which part needs work?",
-      "caption": "",
-      "fullBleed": true,
-      "doodle": {
-        "setting": "standing",
-        "palette": "cream",
-        "mood": "relaxed",
-        "pose": "neutral",
-        "emphasis": [],
-        "extras": [
-          "mind-series-v1",
-          "human-side-v1",
-          "shot:calm",
-          "episode:05",
-          "label-b:Which part needs work?",
-          "pose-b:point",
-          "face-b:determined",
-          "human-side-v2",
-          "theme:feedback"
-        ],
-        "shirtColor": "#C5A8D0",
-        "highlightColor": "#191619",
-        "narration": "The other also feels the sting, but looks for something specific to improve."
-      }
-    },
-    {
-      "id": "ths-05-4",
-      "name": "Contrast",
-      "durationSec": 6,
-      "layout": "doodle-explainer",
-      "transition": "fade",
-      "backdrop": "dot-matrix",
-      "headline": "Feedback and identity.",
-      "caption": "",
-      "fullBleed": true,
-      "doodle": {
-        "setting": "standing",
-        "palette": "cream",
-        "mood": "worried",
-        "pose": "neutral",
-        "emphasis": [],
-        "extras": [
-          "mind-series-v1",
-          "human-side-v1",
-          "shot:contrast",
-          "episode:05",
+          "cover-hook:Your draft needs changes.",
+          "message:Your draft needs some changes.",
           "label-a:I'm not good enough.",
           "label-b:Which part needs work?",
-          "pose-a:kneel",
-          "pose-b:point",
-          "face-a:sad",
-          "face-b:determined",
-          "human-side-v2",
-          "theme:feedback"
+          "reply:Please shorten the opening."
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "The feedback is about the work. Neither person's worth depends on a draft."
+        "narration": "Your draft needs some changes."
       }
     },
     {
-      "id": "ths-05-5",
-      "name": "More context",
-      "durationSec": 6,
+      "id": "ths-05-v23-2",
+      "name": "Emotional reaction",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Emotional reaction",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
+          "episode:05",
+          "theme:feedback",
+          "film:reaction",
+          "shot:build",
+          "message:Your draft needs some changes.",
+          "label-a:I'm not good enough.",
+          "label-b:Which part needs work?",
+          "reply:Please shorten the opening."
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "One hears criticism and starts doubting their own worth."
+      }
+    },
+    {
+      "id": "ths-05-v23-3",
+      "name": "Physical action",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Physical action",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
+          "episode:05",
+          "theme:feedback",
+          "film:action",
+          "shot:build",
+          "message:Your draft needs some changes.",
+          "label-a:I'm not good enough.",
+          "label-b:Which part needs work?",
+          "reply:Please shorten the opening."
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "The other looks for something specific to improve."
+      }
+    },
+    {
+      "id": "ths-05-v23-4",
+      "name": "Turning point",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Turning point",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
+          "episode:05",
+          "theme:feedback",
+          "film:turn",
+          "shot:turn",
+          "message:Your draft needs some changes.",
+          "label-a:I'm not good enough.",
+          "label-b:Which part needs work?",
+          "reply:Please shorten the opening."
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "The feedback is about the draft, not their identity."
+      }
+    },
+    {
+      "id": "ths-05-v23-5",
+      "name": "A different response",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "A different response",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
+          "episode:05",
+          "theme:feedback",
+          "film:change",
+          "shot:change",
+          "message:Your draft needs some changes.",
+          "label-a:I'm not good enough.",
+          "label-b:Which part needs work?",
+          "reply:Please shorten the opening."
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "The request is simple. Shorten the opening."
+      }
+    },
+    {
+      "id": "ths-05-v23-6",
+      "name": "Final reflection",
+      "durationSec": 4,
       "layout": "doodle-explainer",
       "transition": "fade",
       "backdrop": "dot-matrix",
@@ -177,132 +225,151 @@
       "doodle": {
         "setting": "standing",
         "palette": "cream",
-        "mood": "happy",
+        "mood": "surprised",
         "pose": "neutral",
         "emphasis": [],
         "extras": [
           "mind-series-v1",
           "human-side-v1",
-          "shot:reveal",
-          "episode:05",
-          "message:Please shorten the opening.",
-          "pose-a:relief",
-          "pose-b:calm",
-          "face-a:relief",
-          "face-b:smile",
           "human-side-v2",
-          "theme:feedback"
+          "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
+          "episode:05",
+          "theme:feedback",
+          "film:ending",
+          "shot:resolve",
+          "message:Your draft needs some changes.",
+          "label-a:I'm not good enough.",
+          "label-b:Which part needs work?",
+          "reply:Please shorten the opening."
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "Shorten the opening. Use what is helpful without judging your whole self."
+        "narration": "Use what helps. Leave your self-worth out of it."
       }
     }
   ],
   "captions": [
     {
-      "text": "Same feedback. Different impact.",
+      "text": "Your draft needs some",
       "startSec": 1.5,
-      "endSec": 3.55,
+      "endSec": 3.7,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "One hears a comment about",
-      "startSec": 4.3,
-      "endSec": 6.319,
+      "text": "changes.",
+      "startSec": 3.7,
+      "endSec": 4.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "the draft and starts questioning",
-      "startSec": 6.319,
-      "endSec": 8.338,
+      "text": "One hears criticism and",
+      "startSec": 5.3,
+      "endSec": 6.744,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "their own worth.",
-      "startSec": 8.338,
-      "endSec": 9.55,
+      "text": "starts doubting their own",
+      "startSec": 6.744,
+      "endSec": 8.189,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "The other also feels the",
-      "startSec": 10.3,
-      "endSec": 12.319,
+      "text": "worth.",
+      "startSec": 8.189,
+      "endSec": 8.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "sting, but looks for something",
-      "startSec": 12.319,
-      "endSec": 14.338,
+      "text": "The other looks for",
+      "startSec": 9.3,
+      "endSec": 10.925,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "specific to improve.",
-      "startSec": 14.338,
-      "endSec": 15.55,
+      "text": "something specific to improve.",
+      "startSec": 10.925,
+      "endSec": 12.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "The feedback is about the",
-      "startSec": 16.3,
-      "endSec": 18.319,
+      "text": "The feedback is about",
+      "startSec": 13.3,
+      "endSec": 14.744,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "work. Neither person's worth depends",
-      "startSec": 18.319,
-      "endSec": 20.338,
+      "text": "the draft, not their",
+      "startSec": 14.744,
+      "endSec": 16.189,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "on a draft.",
-      "startSec": 20.338,
-      "endSec": 21.55,
+      "text": "identity.",
+      "startSec": 16.189,
+      "endSec": 16.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "Shorten the opening. Use what",
-      "startSec": 22.3,
-      "endSec": 24.488,
+      "text": "The request is simple.",
+      "startSec": 17.3,
+      "endSec": 19.157,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "is helpful without judging your",
-      "startSec": 24.488,
-      "endSec": 26.675,
+      "text": "Shorten the opening.",
+      "startSec": 19.157,
+      "endSec": 20.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "whole self.",
-      "startSec": 26.675,
-      "endSec": 27.55,
+      "text": "Use what helps. Leave",
+      "startSec": 21.3,
+      "endSec": 22.744,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
+    },
+    {
+      "text": "your self-worth out of",
+      "startSec": 22.744,
+      "endSec": 24.189,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 64
+    },
+    {
+      "text": "it.",
+      "startSec": 24.189,
+      "endSec": 24.55,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 64
     }
   ],
   "audioTracks": [
@@ -311,7 +378,7 @@
       "kind": "voiceover",
       "src": "assets/audio/the-human-side-05-criticism-voice.mp3",
       "startSec": 0,
-      "endSec": 28,
+      "endSec": 25,
       "volume": 1
     },
     {
@@ -319,7 +386,7 @@
       "kind": "music",
       "src": "assets/audio/the-human-side-05-criticism-score.mp3",
       "startSec": 0,
-      "endSec": 28,
+      "endSec": 25,
       "volume": 0.15,
       "fadeInSec": 0.3,
       "fadeOutSec": 1
@@ -329,7 +396,7 @@
       "kind": "effect",
       "src": "assets/audio/the-human-side-05-criticism-human-sfx.wav",
       "startSec": 0,
-      "endSec": 28,
+      "endSec": 25,
       "volume": 0.48
     }
   ],
@@ -337,7 +404,7 @@
   "seriesId": "the-human-side",
   "season": 1,
   "episodeNumber": 5,
-  "templateVersion": "2.0",
+  "templateVersion": "2.3",
   "productionStatus": "review",
-  "thumbnailUrl": "assets/the-human-side/v2/the-human-side-05-criticism.svg"
+  "thumbnailUrl": "assets/the-human-side/v23/the-human-side-05-criticism.svg"
 }

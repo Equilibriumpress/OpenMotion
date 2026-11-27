@@ -26,13 +26,13 @@
   },
   "scenes": [
     {
-      "id": "ths-06-1",
-      "name": "Opening situation",
-      "durationSec": 4.5,
+      "id": "ths-06-v23-1",
+      "name": "Opening event",
+      "durationSec": 5,
       "layout": "doodle-explainer",
       "transition": "fade",
       "backdrop": "dot-matrix",
-      "headline": "",
+      "headline": "Opening event",
       "caption": "",
       "fullBleed": true,
       "doodle": {
@@ -46,13 +46,16 @@
           "human-side-v1",
           "human-side-v2",
           "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
           "episode:06",
           "theme:rest",
+          "film:event",
           "shot:setup",
-          "prop-tasks:EMAIL|LAUNDRY|ONE MORE THING",
-          "prop-next:REST IS ALLOWED",
           "cover-title:RESTING|FEELS WRONG",
-          "cover-hook:Why does rest feel guilty?"
+          "cover-hook:Why does rest feel guilty?",
+          "prop-tasks:EMAIL|LAUNDRY|ONE MORE THING",
+          "prop-next:REST IS ALLOWED"
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
@@ -60,19 +63,19 @@
       }
     },
     {
-      "id": "ths-06-2",
-      "name": "The pattern builds",
-      "durationSec": 5.5,
+      "id": "ths-06-v23-2",
+      "name": "Emotional reaction",
+      "durationSec": 4,
       "layout": "doodle-explainer",
       "transition": "fade",
       "backdrop": "dot-matrix",
-      "headline": "",
+      "headline": "Emotional reaction",
       "caption": "",
       "fullBleed": true,
       "doodle": {
         "setting": "standing",
         "palette": "cream",
-        "mood": "worried",
+        "mood": "surprised",
         "pose": "neutral",
         "emphasis": [],
         "extras": [
@@ -80,31 +83,34 @@
           "human-side-v1",
           "human-side-v2",
           "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
           "episode:06",
           "theme:rest",
+          "film:reaction",
           "shot:build",
           "prop-tasks:EMAIL|LAUNDRY|ONE MORE THING",
           "prop-next:REST IS ALLOWED"
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "You sit down. Then unfinished tasks start demanding your attention."
+        "narration": "Then unfinished tasks start demanding your attention."
       }
     },
     {
-      "id": "ths-06-3",
-      "name": "Emotional turning point",
-      "durationSec": 6,
+      "id": "ths-06-v23-3",
+      "name": "Physical action",
+      "durationSec": 4,
       "layout": "doodle-explainer",
       "transition": "fade",
       "backdrop": "dot-matrix",
-      "headline": "",
+      "headline": "Physical action",
       "caption": "",
       "fullBleed": true,
       "doodle": {
         "setting": "standing",
         "palette": "cream",
-        "mood": "relaxed",
+        "mood": "surprised",
         "pose": "neutral",
         "emphasis": [],
         "extras": [
@@ -112,31 +118,69 @@
           "human-side-v1",
           "human-side-v2",
           "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
           "episode:06",
           "theme:rest",
+          "film:action",
+          "shot:build",
+          "prop-tasks:EMAIL|LAUNDRY|ONE MORE THING",
+          "prop-next:REST IS ALLOWED"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "You sit down, but your mind keeps working."
+      }
+    },
+    {
+      "id": "ths-06-v23-4",
+      "name": "Turning point",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Turning point",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
+          "episode:06",
+          "theme:rest",
+          "film:turn",
           "shot:turn",
           "prop-tasks:EMAIL|LAUNDRY|ONE MORE THING",
           "prop-next:REST IS ALLOWED"
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "Sometimes, being busy starts to feel like the only way to be useful."
+        "narration": "Sometimes being busy starts to feel like the only way to be useful."
       }
     },
     {
-      "id": "ths-06-4",
-      "name": "One small change",
-      "durationSec": 6,
+      "id": "ths-06-v23-5",
+      "name": "A different response",
+      "durationSec": 4,
       "layout": "doodle-explainer",
       "transition": "fade",
       "backdrop": "dot-matrix",
-      "headline": "",
+      "headline": "A different response",
       "caption": "",
       "fullBleed": true,
       "doodle": {
         "setting": "standing",
         "palette": "cream",
-        "mood": "worried",
+        "mood": "surprised",
         "pose": "neutral",
         "emphasis": [],
         "extras": [
@@ -144,21 +188,24 @@
           "human-side-v1",
           "human-side-v2",
           "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
           "episode:06",
           "theme:rest",
+          "film:change",
           "shot:change",
           "prop-tasks:EMAIL|LAUNDRY|ONE MORE THING",
           "prop-next:REST IS ALLOWED"
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "Try leaving one thing unfinished while you take a short break."
+        "narration": "Try leaving one task unfinished during a short break."
       }
     },
     {
-      "id": "ths-06-5",
-      "name": "Reflection",
-      "durationSec": 7,
+      "id": "ths-06-v23-6",
+      "name": "Final reflection",
+      "durationSec": 4,
       "layout": "doodle-explainer",
       "transition": "fade",
       "backdrop": "dot-matrix",
@@ -168,7 +215,7 @@
       "doodle": {
         "setting": "standing",
         "palette": "cream",
-        "mood": "happy",
+        "mood": "surprised",
         "pose": "neutral",
         "emphasis": [],
         "extras": [
@@ -176,114 +223,141 @@
           "human-side-v1",
           "human-side-v2",
           "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
           "episode:06",
           "theme:rest",
+          "film:ending",
           "shot:resolve",
           "prop-tasks:EMAIL|LAUNDRY|ONE MORE THING",
           "prop-next:REST IS ALLOWED"
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "You do not need to finish every task before taking a moment for yourself."
+        "narration": "Rest does not need to be earned."
       }
     }
   ],
   "captions": [
     {
-      "text": "Finally, a moment to rest.",
+      "text": "Finally, a moment to",
       "startSec": 1.5,
-      "endSec": 4.05,
+      "endSec": 3.7,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "You sit down. Then unfinished",
-      "startSec": 4.8,
-      "endSec": 7.175,
+      "text": "rest.",
+      "startSec": 3.7,
+      "endSec": 4.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "tasks start demanding your attention.",
-      "startSec": 7.175,
-      "endSec": 9.55,
+      "text": "Then unfinished tasks start",
+      "startSec": 5.3,
+      "endSec": 7.157,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "Sometimes, being busy starts to",
-      "startSec": 10.3,
-      "endSec": 12.319,
+      "text": "demanding your attention.",
+      "startSec": 7.157,
+      "endSec": 8.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "feel like the only way",
-      "startSec": 12.319,
-      "endSec": 14.338,
+      "text": "You sit down, but",
+      "startSec": 9.3,
+      "endSec": 10.925,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "to be useful.",
-      "startSec": 14.338,
-      "endSec": 15.55,
+      "text": "your mind keeps working.",
+      "startSec": 10.925,
+      "endSec": 12.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "Try leaving one thing unfinished",
+      "text": "Sometimes being busy starts",
+      "startSec": 13.3,
+      "endSec": 14.3,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 64
+    },
+    {
+      "text": "to feel like the",
+      "startSec": 14.3,
+      "endSec": 15.3,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 64
+    },
+    {
+      "text": "only way to be",
+      "startSec": 15.3,
+      "endSec": 16.3,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 64
+    },
+    {
+      "text": "useful.",
       "startSec": 16.3,
-      "endSec": 18.686,
+      "endSec": 16.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "while you take a short",
-      "startSec": 18.686,
-      "endSec": 21.073,
+      "text": "Try leaving one task",
+      "startSec": 17.3,
+      "endSec": 18.744,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
+    },
+    {
+      "text": "unfinished during a short",
+      "startSec": 18.744,
+      "endSec": 20.189,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 64
     },
     {
       "text": "break.",
-      "startSec": 21.073,
-      "endSec": 21.55,
+      "startSec": 20.189,
+      "endSec": 20.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "You do not need to",
-      "startSec": 22.3,
-      "endSec": 24.532,
+      "text": "Rest does not need",
+      "startSec": 21.3,
+      "endSec": 23.157,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "finish every task before taking",
-      "startSec": 24.532,
-      "endSec": 26.764,
+      "text": "to be earned.",
+      "startSec": 23.157,
+      "endSec": 24.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
-    },
-    {
-      "text": "a moment for yourself.",
-      "startSec": 26.764,
-      "endSec": 28.55,
-      "style": "minimal",
-      "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     }
   ],
   "audioTracks": [
@@ -292,7 +366,7 @@
       "kind": "voiceover",
       "src": "assets/audio/the-human-side-06-resting-guilt-voice.mp3",
       "startSec": 0,
-      "endSec": 29,
+      "endSec": 25,
       "volume": 1
     },
     {
@@ -300,7 +374,7 @@
       "kind": "music",
       "src": "assets/audio/the-human-side-06-resting-guilt-score.mp3",
       "startSec": 0,
-      "endSec": 29,
+      "endSec": 25,
       "volume": 0.13,
       "fadeInSec": 0.3,
       "fadeOutSec": 1
@@ -310,7 +384,7 @@
       "kind": "effect",
       "src": "assets/audio/the-human-side-06-resting-guilt-human-sfx.wav",
       "startSec": 0,
-      "endSec": 29,
+      "endSec": 25,
       "volume": 0.48
     }
   ],
@@ -318,7 +392,7 @@
   "seriesId": "the-human-side",
   "season": 1,
   "episodeNumber": 6,
-  "templateVersion": "2.1",
+  "templateVersion": "2.3",
   "productionStatus": "review",
-  "thumbnailUrl": "assets/the-human-side/v21/the-human-side-06-resting-guilt.svg"
+  "thumbnailUrl": "assets/the-human-side/v23/the-human-side-06-resting-guilt.svg"
 }

@@ -16,6 +16,31 @@ export function prepareHumanSideSound(p,root){
   const duration=Number(s.durationSec);
   if(!Number.isFinite(duration)||duration<=0)throw Error('Invalid Human Side scene duration');
   const add=(dt,type,vol)=>{if(dt>=0&&dt+.25<duration)cues.push(cue(at+dt,type,vol));};
+  if(s.doodle?.extras?.includes('human-side-v23')){
+   const film=value('film'),phone=['message','waiting','boundaries'].includes(theme);
+   if(film==='event')add(1.7,phone?'ping':theme==='rest'?'cloth':theme==='mask'||theme==='crowd'?'room':theme==='load'?'thud':'paper',.62);
+   if(film==='reaction'){
+    if(theme==='load'||theme==='boundaries')for(let t=.15;t<2.8;t+=.65)add(t,'thud',.62);
+    else if(theme==='rest')for(let t=.15;t<1.6;t+=.5)add(t,'paper',.42);
+    else add(.35,theme==='crowd'?'room':'breath',.5);
+   }
+   if(film==='action'){
+    if(theme==='waiting'){add(.3,'tick',.43);add(2,'thud',.55);}
+    else if(theme==='calendar'||theme==='feedback')add(.45,'paper',.62);
+    else if(theme==='load')for(let t=.12;t<2.8;t+=.65)add(t,'thud',.65);
+    else if(theme==='rest')add(.55,'cloth',.55);
+    else add(.45,theme==='mask'?'cloth':'breath',.44);
+   }
+   if(film==='turn')add(.35,theme==='mask'?'cloth':theme==='waiting'?'tick':'breath',.54);
+   if(film==='change'){
+    if(phone)add(.25,'ping',.64);
+    else if(theme==='load'){add(.45,'cloth',.48);add(2.05,'thud',.62);}
+    else if(theme==='crowd'){add(.4,'step',.5);add(.85,'step',.5);}
+    else add(.55,theme==='calendar'||theme==='feedback'?'paper':'breath',.6);
+   }
+   if(film==='ending')add(.65,'breath',.35);
+   at+=duration;continue;
+  }
   if(s.doodle?.extras?.includes('human-side-v22')){
    const action=value('action');
    if(action==='scroll')for(let t=1.5+.32;t<duration-.25;t+=1.05)add(t,'swipe',.65);
