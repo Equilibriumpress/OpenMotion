@@ -91,7 +91,7 @@ def build(p,work,python,model=MODEL):
     (OUT/(slug+"-captions.srt")).write_text("".join(f"{i+1}\n{fmt_time(c['startSec'])} --> {fmt_time(c['endSec'])}\n{c['text']}\n\n" for i,c in enumerate(captions)))
     if any("mind-series-v1" in s.get("doodle",{}).get("extras",[]) for s in p["scenes"]):
         # Original short, quiet cues at reaction beats; no recorded samples.
-        expr="+".join(f"0.10*exp(-18*(t-{a}))*sin(2*PI*{hz}*(t-{a}))*between(t,{a},{a+.22})" for a,hz in [(6.5,540),(10.1,310),(14.6,220),(25.5,740),(40.0,490)])
+        expr="+".join(f"0.10*exp(-18*max(0,t-{a}))*sin(2*PI*{hz}*(t-{a}))*between(t,{a},{a+.22})" for a,hz in [(6.5,540),(10.1,310),(14.6,220),(25.5,740),(40.0,490)])
         ff("-f","lavfi","-i",f"aevalsrc={expr}:s=48000:d={offset}","-c:a","libmp3lame","-b:a","96k",OUT/(slug+"-effects.mp3"))
     print(f"[documentary] {slug}: {offset:.0f}s, {len(chapters)} narrated chapters, {len(captions)} cues, three audio tracks")
 def main():

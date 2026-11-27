@@ -100,7 +100,8 @@ export function renderMindSeries(c:C,width:number,height:number,scene:OpenMotion
  c.save();c.scale(width/W,height/H);paper(c,cool);
  text(c,'INSIDE THE ADHD MIND  /  01',270,72,16,'#79685B');title(c,scene,t);
  line(c,[43,747,497,747],2,'#9D8F7F');
- const mood=d.mood, speaking=t>.3&&t<scene.durationSec-.5;
+ const speechEnd=Number(d.extras?.find(x=>x.startsWith('speech-end:'))?.split(':')[1]??scene.durationSec-.5);
+ const mood=d.mood, speaking=t>.3&&t<speechEnd;
  const override=d.pose==='point'?'point':d.pose==='exhausted'?'slump':d.pose==='relieved'?'open':d.pose==='alert'?'shrug':undefined;
  if(shot==='hook'){drawMindPerson(c,270,747,1.56,t,mood,override??'point',shirt,false,speaking);}
  else if(shot==='walk'){kitchen(c,false,t);const u=ease(t/2.5);drawMindPerson(c,83+140*u,747,1.15,t,mood,t<2.5?'walk':'idle',shirt,false,speaking);if(t>2.5)text(c,'✓',244,402,46,'#648D75');}
