@@ -18,7 +18,9 @@ function text(c:C,v:string,x:number,y:number,size:number,color=PAPER,weight=750,
 const grain=Array.from({length:1250},(_,i)=>[(i*137.507764)%W,(i*91.137)%H,i%7===0?2:1,i%3===0] as const);
 function finish(c:C){
  const g=c.createRadialGradient(270,400,170,270,440,630);g.addColorStop(0,'rgba(9,15,24,0)');g.addColorStop(1,'rgba(9,15,24,.66)');rect(c,0,0,W,H,g);
- c.globalAlpha=.12;for(const [x,y,r,d] of grain)rect(c,x,y,r,r,d?'#E7C8BA':'#08121B');c.globalAlpha=1;
+ c.save();c.globalAlpha=.12;
+ for(const light of [true,false]){c.beginPath();for(const [x,y,r,d] of grain)if(d===light)c.rect(x,y,r,r);c.fillStyle=light?'#E7C8BA':'#08121B';c.fill();}
+ c.restore();
  rect(c,0,640,W,320,grad(c,0,640,0,960,[[0,'rgba(7,12,20,0)'],[.50,'rgba(7,12,20,.48)'],[1,'rgba(7,12,20,.84)']]));
 }
 function city(c:C,t:number,warm=false){
