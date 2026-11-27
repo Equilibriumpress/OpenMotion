@@ -1,3 +1,4 @@
+import { traceSongPath, songEllipse } from './songCanvasPath';
 import { isBreathStory, renderBreathStory, renderBreathCover } from './songBreathRenderer';
 import type { OpenMotionBrandKit, OpenMotionScene } from '../types/openmotion';
 import { drawHeroFace, type FaceAngle } from './songHeroFace';
@@ -10,28 +11,34 @@ const mix=(a:number,b:number,u:number)=>a+(b-a)*u;
 export const isCinematicSong=(s?:OpenMotionScene)=>!!s?.doodle?.extras?.includes('song-cinematic-v2');
 const field=(s:OpenMotionScene,k:string,f='')=>s.doodle?.extras?.find(v=>v.startsWith(k+':'))?.slice(k.length+1)??f;
 function box(c:C,x:number,y:number,w:number,h:number,color:string|CanvasGradient){c.fillStyle=color;c.fillRect(x,y,w,h);}
-const pathCache=new Map<string,Path2D>();
-function cachedPath(d:string){let p=pathCache.get(d);if(p){pathCache.delete(d);pathCache.set(d,p);return p;}p=new Path2D(d);if(pathCache.size>=128){const oldest=pathCache.keys().next().value;if(oldest!==undefined)pathCache.delete(oldest);}pathCache.set(d,p);return p;}
-function shape(c:C,d:string,color:string|CanvasGradient){c.fillStyle=color;c.fill(cachedPath(d));}
-function stroke(c:C,d:string,color:string,width=2){c.strokeStyle=color;c.lineWidth=width;c.lineJoin='round';c.lineCap='round';c.stroke(cachedPath(d));}
-function oval(c:C,x:number,y:number,rx:number,ry:number,color:string|CanvasGradient){c.beginPath();c.ellipse(x,y,rx,ry,0,0,Math.PI*2);c.fillStyle=color;c.fill();}
+function shape(c:C,d:string,color:string|CanvasGradient){traceSongPath(c,d);c.fillStyle=color;c.fill();}
+function stroke(c:C,d:string,color:string,width=2){traceSongPath(c,d);c.strokeStyle=color;c.lineWidth=width;c.lineJoin='round';c.lineCap='round';c.stroke();}
+function oval(c:C,x:number,y:number,rx:number,ry:number,color:string|CanvasGradient){c.beginPath();songEllipse(c,x,y,rx,ry);c.fillStyle=color;c.fill();}
 function grad(c:C,x1:number,y1:number,x2:number,y2:number,stops:[number,string][]):CanvasGradient{const g=c.createLinearGradient(x1,y1,x2,y2);stops.forEach(([a,b])=>g.addColorStop(a,b));return g;}
 function glow(c:C,x:number,y:number,r:number,color:string){const g=c.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,color);g.addColorStop(1,'rgba(0,0,0,0)');oval(c,x,y,r,r,g);}
 function text(c:C,v:string,x:number,y:number,size:number,color='#F4E6D0',align:CanvasTextAlign='center',weight=700,max=440){
  c.font=weight+' '+size+'px system-ui, sans-serif';const f=Math.min(size,size*max/Math.max(1,c.measureText(v).width));c.font=weight+' '+f+'px system-ui, sans-serif';c.textAlign=align;c.textBaseline='middle';c.fillStyle=color;c.fillText(v,x,y);
 }
-// Two bounded reusable paths replace 1550 per-frame fillRect calls.
-let grainPaths:[Path2D,Path2D]|undefined;
-function getGrainPaths():[Path2D,Path2D]{
- if(!grainPaths){const light=new Path2D(),dark=new Path2D();
-  for(let i=0;i<1550;i++){const r=i%7===0?2:1;(i%3===0?light:dark).rect((i*137.507764)%W,(i*91.137)%H,r,r);}
-  grainPaths=[light,dark];
+// One transparent grain bitmap, reused by preview and export. The fallback
+// is a simple batched native path if no canvas constructor is available.
+let grain:HTMLCanvasElement|OffscreenCanvas|undefined;
+function drawGrain(c:C){
+ if(!grain){
+  const surface=typeof document!=='undefined'?document.createElement('canvas'):typeof OffscreenCanvas!=='undefined'?new OffscreenCanvas(W,H):undefined;
+  if(surface){surface.width=W;surface.height=H;const g=surface.getContext('2d');if(g){
+   g.globalAlpha=.13;
+   for(let i=0;i<1550;i++){const r=i%7===0?2:1;g.fillStyle=i%3===0?'#E7C8A4':'#09141D';g.fillRect((i*137.507764)%W,(i*91.137)%H,r,r);}
+   grain=surface;
+  }}
  }
- return grainPaths;
+ if(grain){c.drawImage(grain,0,0,W,H,0,0,W,H);return;}
+ c.save();c.globalAlpha=.13;
+ for(const light of [true,false]){c.beginPath();for(let i=0;i<1550;i++){if((i%3===0)!==light)continue;const r=i%7===0?2:1;c.rect((i*137.507764)%W,(i*91.137)%H,r,r);}c.fillStyle=light?'#E7C8A4':'#09141D';c.fill();}
+ c.restore();
 }
 function finish(c:C){
  const v=c.createRadialGradient(270,410,160,270,440,620);v.addColorStop(0,'rgba(7,12,20,0)');v.addColorStop(1,'rgba(7,12,20,.62)');box(c,0,0,W,H,v);
- const [light,dark]=getGrainPaths();c.globalAlpha=.13;c.fillStyle='#E7C8A4';c.fill(light);c.fillStyle='#09141D';c.fill(dark);c.globalAlpha=1;
+ drawGrain(c);
  // Reserved lower space for captions, without a card or visible border.
  box(c,0,615,W,345,grad(c,0,615,0,960,[[0,'rgba(7,12,20,0)'],[.52,'rgba(7,12,20,.43)'],[1,'rgba(7,12,20,.82)']]));
 }
@@ -149,10 +156,17 @@ function sceneArt(c:C,shot:string,t:number,u:number,mode:string,hero=false,carAn
  if(shot==='shop')store(c,t,u,hero);else if(shot==='drive')drive(c,t,u,hero,carAngle);else if(shot==='return')windowShot(c,t,u,true,hero);else if(shot==='reflection')finalRoad(c,t,u,hero);else if(shot==='road'||shot==='night'){landscape(c,t,shot==='road');if(hero)drawHeroCar(c,270,645,.64,t,carYaw(carAngle,.58),shot==='road');else rearCar(c,270,645,.64,t);}else if(shot==='symbol'){landscape(c,t,false);oval(c,270,370,135,135,'#202932');oval(c,270,370,50,50,'#A76C50');oval(c,270,370,6,6,'#D6BA95');}else windowShot(c,t,u,false,hero);
  c.restore();
 }
+function stage<T>(name:string,fn:()=>T):T{
+ try{return fn();}catch(error){throw new Error('Fast Car · '+name+': '+(error instanceof Error?error.message:String(error)));}
+}
 export function renderCinematicSongCover(c:C,w:number,h:number,s:OpenMotionScene,_b:OpenMotionBrandKit){
  if(isBreathStory(s)){renderBreathCover(c,w,h,s);return;}
  const hero=!!s.doodle?.extras?.includes('song-hero-rigs-v21');
- c.save();c.scale(w/W,h/H);landscape(c,0,true);if(hero){portrait(c,126,482,1.11,0,'look','warm',false,true,'three-quarter');drawHeroCar(c,354,662,.69,0,.68,true);}else{rearCar(c,264,659,.83,0);portrait(c,139,446,1.37,0,'look','warm');}finish(c);
+ c.save();c.scale(w/W,h/H);
+ stage('cover landscape',()=>landscape(c,0,true));
+ if(hero){stage('cover portrait',()=>portrait(c,126,482,1.11,0,'look','warm',false,true,'three-quarter'));stage('cover 3D car',()=>drawHeroCar(c,354,662,.69,0,.68,true));}
+ else{rearCar(c,264,659,.83,0);portrait(c,139,446,1.37,0,'look','warm');}
+ stage('cover grain and lighting',()=>finish(c));
  box(c,0,0,W,340,grad(c,0,0,0,340,[[0,'rgba(11,19,29,.92)'],[1,'rgba(11,19,29,0)']]));
  text(c,'THE SONG EXPLAINED  /  '+field(s,'episode','01'),270,223,15,'#D4A574','center',650);
  const titles=field(s,'cover-title','FAST CAR').split('|').slice(0,2);titles.forEach((v,i)=>text(c,v,270,278+i*55,66,'#F9E8CD','center',900,446));
@@ -164,7 +178,7 @@ export function renderCinematicSong(c:C,w:number,h:number,s:OpenMotionScene,time
  if(isBreathStory(s)){renderBreathStory(c,w,h,s,time);return;}
  const t=Math.max(0,Math.min(s.durationSec,time)),u=t/Math.max(.01,s.durationSec),shot=field(s,'shot','longing');
  const cover=!!field(s,'cover-title');if(cover&&t<.85){renderCinematicSongCover(c,w,h,s,b);return;}
- c.save();c.scale(w/W,h/H);sceneArt(c,shot,t,u,field(s,'camera','push'),!!s.doodle?.extras?.includes('song-hero-rigs-v21'),field(s,'car-angle','auto'));finish(c);
+ c.save();c.scale(w/W,h/H);stage('scene '+shot,()=>sceneArt(c,shot,t,u,field(s,'camera','push'),!!s.doodle?.extras?.includes('song-hero-rigs-v21'),field(s,'car-angle','auto')));stage('scene lighting',()=>finish(c));
  // Restrained typography. No repeated title card. Caption renderer handles narration.
  if(cover){const a=ease((t-.85)/.55)*(1-ease((t-3.5)/.9));c.globalAlpha=a;text(c,field(s,'artist',''),270,153,16,'#EAD0AA','center',600);c.globalAlpha=1;}
  if(shot==='reflection'&&s.headline){const a=ease((u-.40)/.22);c.globalAlpha=a;s.headline.split('|').slice(0,2).forEach((v,i)=>text(c,v,270,218+i*41,34,'#F5E6CD','center',800));c.globalAlpha=1;}

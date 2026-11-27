@@ -1,14 +1,13 @@
+import { traceSongPath, songEllipse } from './songCanvasPath';
 // Original recurring character. Profile and two three-quarter variants share
 // hair, skin palette, cheek structure and earring. Expressions are time sampled.
 type C=CanvasRenderingContext2D;
 export type HeroPose='look'|'work'|'drive'|'tired';
 export type FaceAngle='profile'|'three-quarter'|'near-front';
 const clamp=(v:number)=>Math.max(0,Math.min(1,v));
-const paths=new Map<string,Path2D>();
-function path(d:string){let p=paths.get(d);if(p){paths.delete(d);paths.set(d,p);return p;}p=new Path2D(d);if(paths.size>=96){const first=paths.keys().next().value;if(first!==undefined)paths.delete(first);}paths.set(d,p);return p;}
-function fill(c:C,d:string,col:string|CanvasGradient){c.fillStyle=col;c.fill(path(d));}
-function line(c:C,d:string,col:string,w=2){c.strokeStyle=col;c.lineWidth=w;c.lineJoin='round';c.lineCap='round';c.stroke(path(d));}
-function oval(c:C,x:number,y:number,rx:number,ry:number,col:string|CanvasGradient){c.beginPath();c.ellipse(x,y,rx,ry,0,Math.PI*2);c.fillStyle=col;c.fill();}
+function fill(c:C,d:string,col:string|CanvasGradient){traceSongPath(c,d);c.fillStyle=col;c.fill();}
+function line(c:C,d:string,col:string,w=2){traceSongPath(c,d);c.strokeStyle=col;c.lineWidth=w;c.lineJoin='round';c.lineCap='round';c.stroke();}
+function oval(c:C,x:number,y:number,rx:number,ry:number,col:string|CanvasGradient){c.beginPath();songEllipse(c,x,y,rx,ry);c.fillStyle=col;c.fill();}
 function gradient(c:C,x:number,y:number,x2:number,y2:number,stops:[number,string][]){const g=c.createLinearGradient(x,y,x2,y2);stops.forEach(([a,b])=>g.addColorStop(a,b));return g;}
 function spot(c:C,x:number,y:number,r:number,col:string){const g=c.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,col);g.addColorStop(1,'rgba(0,0,0,0)');return g;}
 const heads:Record<FaceAngle,string>={
@@ -24,9 +23,9 @@ export function drawHeroFace(c:C,t:number,pose:HeroPose,light:string,angle:FaceA
  const tilt=tired ? .08 : work ? .025 : hope ? -.025 : -.03;
  c.save();c.translate(0,Math.sin(t*1.7)*.8);c.rotate(tilt+Math.sin(t*.8)*.013);
  fill(c,'M -79 -12 Q -99 -70 -77 -115 Q -55 -156 -10 -157 Q 44 -172 70 -125 L 78 -75 L -37 39 L -64 45 Z',hair);
- const head=path(heads[angle]);
- c.save();c.clip(head);
- c.fillStyle=gradient(c,-66,12,80,-77,[[0,shadow],[.37,mid],[.72,skin],[1,lit]]);c.fill(head);
+ const head=heads[angle];
+ c.save();traceSongPath(c,head);c.clip();
+ c.fillStyle=gradient(c,-66,12,80,-77,[[0,shadow],[.37,mid],[.72,skin],[1,lit]]);traceSongPath(c,head);c.fill();
  oval(c,nearX+3,-2,48,48,spot(c,nearX+3,-2,48,cold?'rgba(234,177,150,.30)':'rgba(255,209,154,.38)'));
  oval(c,nearX-12,-77,48,53,spot(c,nearX-12,-77,53,'rgba(242,200,163,.22)'));
  fill(c,profile?'M -21 19 Q 10 47 44 56 Q 65 54 78 34 L 78 62 L 5 80 L -50 31 Z':'M -42 15 Q -14 46 20 57 Q 50 61 74 31 L 65 77 L -31 74 Z','rgba(62,41,46,.23)');
@@ -35,7 +34,7 @@ export function drawHeroFace(c:C,t:number,pose:HeroPose,light:string,angle:FaceA
  // Curls are painted in clusters, with a coherent sweep and small rim accents.
  fill(c,'M -79 8 C -96 -29 -97 -76 -78 -116 C -58 -151 -25 -160 5 -155 Q 52 -164 73 -130 Q 86 -108 74 -85 C 58 -110 29 -118 8 -101 C -12 -83 -16 -54 -27 -36 Q -38 -11 -56 21 L -65 41 Z',hair);
  for(let i=0;i<20;i++){const a=2.74+i*.183,rx=18+(i%4)*2,ry=18+(i%3)*3,x=-10+Math.cos(a)*72,y=-79+Math.sin(a)*71;
-  oval(c,x,y,rx,ry,hair);c.save();c.beginPath();c.ellipse(x,y,rx*.74,ry*.68,-.3,Math.PI*1.08,Math.PI*1.78);c.strokeStyle=cold?'#41434B':'#4C4143';c.lineWidth=1.6;c.stroke();c.restore();
+  oval(c,x,y,rx,ry,hair);c.save();c.beginPath();songEllipse(c,x,y,rx*.74,ry*.68,-.3,Math.PI*1.08,Math.PI*1.78);c.strokeStyle=cold?'#41434B':'#4C4143';c.lineWidth=1.6;c.stroke();c.restore();
  }
  line(c,'M -65 -114 C -42 -146 -7 -150 24 -140 M -53 -99 Q -24 -133 5 -132',cold?'#555057':'#66524C',2.2);
  const earX=profile?-15:-51;oval(c,earX,-1,15,23,gradient(c,earX-14,-12,earX+12,14,[[0,shadow],[.5,skin],[1,lit]]));line(c,'M '+(earX-5)+' -12 Q '+(earX+10)+' -8 '+(earX+1)+' 6',shadow,3);
@@ -45,7 +44,7 @@ export function drawHeroFace(c:C,t:number,pose:HeroPose,light:string,angle:FaceA
   line(c,'M '+(x-width*.55)+' '+(y-14)+' Q '+x+' '+(y-(tired?16:21))+' '+(x+width*.57)+' '+(y-13),ink,far?2.5:3.2);
   if(open<.12){line(c,'M '+(x-width/2)+' '+y+' Q '+x+' '+(y+2)+' '+(x+width/2)+' '+y,ink,2.1);return;}
   const d='M '+(x-width/2)+' '+y+' Q '+x+' '+(y-h)+' '+(x+width/2)+' '+y+' Q '+x+' '+(y+h*.64)+' '+(x-width/2)+' '+y+' Z';
-  fill(c,d,cold?'#CFB6A1':'#E2C7AA');c.save();c.clip(path(d));oval(c,x+look+1,y,far?2.8:4.2,far?4:5.5,'#49362F');oval(c,x+look+1,y,1.9,3.3,'#211F24');oval(c,x+look-1,y-2,1.1,1.1,'#F9D8AF');c.restore();
+  fill(c,d,cold?'#CFB6A1':'#E2C7AA');c.save();traceSongPath(c,d);c.clip();oval(c,x+look+1,y,far?2.8:4.2,far?4:5.5,'#49362F');oval(c,x+look+1,y,1.9,3.3,'#211F24');oval(c,x+look-1,y-2,1.1,1.1,'#F9D8AF');c.restore();
   line(c,'M '+(x-width/2)+' '+y+' Q '+x+' '+(y-h)+' '+(x+width/2)+' '+y,ink,far?1.8:2.5);
   line(c,'M '+(x-width*.42)+' '+(y+4)+' Q '+x+' '+(y+h*.55+3)+' '+(x+width*.37)+' '+(y+3),shadow,.9);
  }
