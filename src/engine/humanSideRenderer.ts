@@ -315,7 +315,7 @@ function storyLine(c:C,p:Palette,x1:number,y1:number,x2:number,y2:number,w=3){
  curve(c,()=>{c.moveTo(x1,y1);c.lineTo(x2,y2);},p.ink,w);
 }
 function storyActor(c:C,p:Palette,x:number,y:number,scale:number,t:number,get:StoryGet,pose:string,mood:Face,side='a',phase=.7){
- figure(c,x,y,scale,t,get('pose-'+side,pose),face(get('face-'+side),mood),p,pose,phase,true);
+ figure(c,x,y,scale,t,get('pose-'+side,pose)||pose,face(get('face-'+side),mood),p,pose,phase,true);
 }
 function storyCard(c:C,p:Palette,x:number,y:number,label:string,w=118,alpha=1){
  c.save();c.globalAlpha*=alpha;rounded(c,x-w/2,y-18,w,36,8,p,'#FFFFFF');
@@ -373,7 +373,8 @@ function maskStory(c:C,p:Palette,get:StoryGet,beat:number,t:number,cover:boolean
  const x=270,y=170,scale=1.5;
  c.save();c.translate(x,y);
  curve(c,()=>{c.moveTo(0,64);c.bezierCurveTo(-22,98,-16,142,0,164);c.moveTo(0,164);c.lineTo(-45,200);c.moveTo(0,164);c.lineTo(42,200);},p.ink,6);
- const faceMood=face(get('face-a',beat>=3?'relief':'sad'),'sad');
+ const defaultMood:Face=beat>=3?'relief':'sad';
+ const faceMood=face(get('face-a'),defaultMood);
  c.save();c.scale(scale,scale);drawFace(c,faceMood,t,p,0);c.restore();
  const move=cover ? .78:beat===0||beat===1?0:beat===2?smooth(t/2.1):1;
  const mx=118*move,my=72*move;
