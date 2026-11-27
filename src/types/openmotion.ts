@@ -37,7 +37,8 @@ export type SceneLayout =
   | 'whiteboard-science'
   | 'doodle-explainer'
   | 'editorial-cartography'
-  | 'three-campervan-journey';
+  | 'three-campervan-journey'
+  | 'three-explainer';
 
 export type SceneTransition = 'fade' | 'slide-up' | 'wipe-left' | 'zoom';
 
@@ -508,7 +509,13 @@ export interface CatOfficeScene {
   cues?: { start: number; end: number; text: string }[];
   events?: { at: number; duration: number; kind: 'typing' | 'ping' | 'meow' | 'scratch' | 'bass' | 'tick' | 'snore' | 'scream' }[];
 }
+export interface SceneThreeExplainer {
+  kind: 'moon' | 'utmb';
+  shot: number;
+  terrain?: { cols: number; rows: number; heights: number[] };
+}
 export interface OpenMotionScene {
+  threeExplainer?: SceneThreeExplainer;
   catOffice?: CatOfficeScene;
   worldStory?: WorldStoryScene;
   id: string;
@@ -651,6 +658,7 @@ export interface RenderProgressState {
 }
 
 export const ALL_SCENE_LAYOUTS: SceneLayout[] = [
+  'three-explainer',
   'three-campervan-journey',
   'editorial-cartography',
   'geo-route-reel',
@@ -700,6 +708,7 @@ export const ALL_BACKDROPS: MotionBackdrop[] = [
 ];
 
 export const LAYOUT_DISPLAY_NAMES: Record<SceneLayout, string> = {
+  'three-explainer': 'Three.js Cinematic Explainer',
   'three-campervan-journey': '3D Three.js Character Journey',
   'editorial-cartography': 'Editorial Cartography (OSM)',
   'geo-route-reel': 'GeoJSON / GPX Travel Route',
