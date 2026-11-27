@@ -75,7 +75,8 @@ export function StudioView({
   onUpdateProject,
   onBackToLibrary,
 }: StudioViewProps) {
-  const [isPlaying, setIsPlaying] = useState(true);
+  // Heavy 3D song projects open paused so the user controls playback on mobile.
+  const [isPlaying, setIsPlaying] = useState(()=>!project.scenes.some(s=>s.doodle?.extras?.includes('song-hero-rigs-v21')));
   const [audioEnabled, setAudioEnabled] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [inspectorTab, setInspectorTab] = useState<InspectorTab>('export');
@@ -497,6 +498,7 @@ export function StudioView({
                 timeSec={currentTime}
                 isPlaying={isPlaying}
                 onTimeUpdate={setCurrentTime}
+                onRenderError={()=>setIsPlaying(false)}
                 renderScale={project.format === '16:9' ? 0.55 : 0.5}
                 className={`max-h-full max-w-full rounded shadow-2xl ${
                   project.format === '16:9' ? 'w-full h-full object-contain' : 'h-full w-auto'

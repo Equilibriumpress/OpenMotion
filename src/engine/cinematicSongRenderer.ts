@@ -10,18 +10,28 @@ const mix=(a:number,b:number,u:number)=>a+(b-a)*u;
 export const isCinematicSong=(s?:OpenMotionScene)=>!!s?.doodle?.extras?.includes('song-cinematic-v2');
 const field=(s:OpenMotionScene,k:string,f='')=>s.doodle?.extras?.find(v=>v.startsWith(k+':'))?.slice(k.length+1)??f;
 function box(c:C,x:number,y:number,w:number,h:number,color:string|CanvasGradient){c.fillStyle=color;c.fillRect(x,y,w,h);}
-function shape(c:C,d:string,color:string|CanvasGradient){c.fillStyle=color;c.fill(new Path2D(d));}
-function stroke(c:C,d:string,color:string,width=2){c.strokeStyle=color;c.lineWidth=width;c.lineJoin='round';c.lineCap='round';c.stroke(new Path2D(d));}
+const pathCache=new Map<string,Path2D>();
+function cachedPath(d:string){let p=pathCache.get(d);if(p){pathCache.delete(d);pathCache.set(d,p);return p;}p=new Path2D(d);if(pathCache.size>=128){const oldest=pathCache.keys().next().value;if(oldest!==undefined)pathCache.delete(oldest);}pathCache.set(d,p);return p;}
+function shape(c:C,d:string,color:string|CanvasGradient){c.fillStyle=color;c.fill(cachedPath(d));}
+function stroke(c:C,d:string,color:string,width=2){c.strokeStyle=color;c.lineWidth=width;c.lineJoin='round';c.lineCap='round';c.stroke(cachedPath(d));}
 function oval(c:C,x:number,y:number,rx:number,ry:number,color:string|CanvasGradient){c.beginPath();c.ellipse(x,y,rx,ry,0,0,Math.PI*2);c.fillStyle=color;c.fill();}
 function grad(c:C,x1:number,y1:number,x2:number,y2:number,stops:[number,string][]):CanvasGradient{const g=c.createLinearGradient(x1,y1,x2,y2);stops.forEach(([a,b])=>g.addColorStop(a,b));return g;}
 function glow(c:C,x:number,y:number,r:number,color:string){const g=c.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,color);g.addColorStop(1,'rgba(0,0,0,0)');oval(c,x,y,r,r,g);}
 function text(c:C,v:string,x:number,y:number,size:number,color='#F4E6D0',align:CanvasTextAlign='center',weight=700,max=440){
  c.font=weight+' '+size+'px system-ui, sans-serif';const f=Math.min(size,size*max/Math.max(1,c.measureText(v).width));c.font=weight+' '+f+'px system-ui, sans-serif';c.textAlign=align;c.textBaseline='middle';c.fillStyle=color;c.fillText(v,x,y);
 }
-const noise=Array.from({length:1550},(_,i)=>[(i*137.507764)%W,(i*91.137)%H,i%7===0?2:1,i%3===0] as const);
+// Two bounded reusable paths replace 1550 per-frame fillRect calls.
+let grainPaths:[Path2D,Path2D]|undefined;
+function getGrainPaths():[Path2D,Path2D]{
+ if(!grainPaths){const light=new Path2D(),dark=new Path2D();
+  for(let i=0;i<1550;i++){const r=i%7===0?2:1;(i%3===0?light:dark).rect((i*137.507764)%W,(i*91.137)%H,r,r);}
+  grainPaths=[light,dark];
+ }
+ return grainPaths;
+}
 function finish(c:C){
  const v=c.createRadialGradient(270,410,160,270,440,620);v.addColorStop(0,'rgba(7,12,20,0)');v.addColorStop(1,'rgba(7,12,20,.62)');box(c,0,0,W,H,v);
- c.globalAlpha=.13;for(const [x,y,r,d] of noise)box(c,x,y,r,r,d?'#E7C8A4':'#09141D');c.globalAlpha=1;
+ const [light,dark]=getGrainPaths();c.globalAlpha=.13;c.fillStyle='#E7C8A4';c.fill(light);c.fillStyle='#09141D';c.fill(dark);c.globalAlpha=1;
  // Reserved lower space for captions, without a card or visible border.
  box(c,0,615,W,345,grad(c,0,615,0,960,[[0,'rgba(7,12,20,0)'],[.52,'rgba(7,12,20,.43)'],[1,'rgba(7,12,20,.82)']]));
 }
