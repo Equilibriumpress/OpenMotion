@@ -18,6 +18,7 @@ import {
 } from '../types/openmotion';
 import { renderEditorialCartographyScene } from './editorialCartographyRenderer';
 import { renderThreeCampervanScene } from './threeCampervanRenderer';
+import { renderParallaxCinema } from './parallaxCinemaRenderer';
 import { renderThreeExplainer } from './threeExplainerRenderer';
 
 function clamp(v: number, min = 0, max = 1): number {
@@ -322,6 +323,11 @@ export function renderOpenMotionFrame(
   ctx.save();
   ctx.clearRect(0, 0, w, h);
 
+  if (scene.layout === 'parallax-cinema') {
+    renderParallaxCinema(ctx,w,h,scene,localTime,safeTime);
+    renderTimedCaptions(ctx,w,h,project,safeTime);
+    ctx.restore();return;
+  }
   if (scene.layout === 'three-explainer' && scene.threeExplainer) {
     renderThreeExplainer(ctx,w,h,scene,localTime);
     renderTimedCaptions(ctx,w,h,project,safeTime);

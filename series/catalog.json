@@ -554,6 +554,38 @@
         "imageUrl": "series-covers/the-song-explained-procedural-v3.svg",
         "alt": "The Song Explained · Procedural Cinema"
       }
+    },
+    {
+      "id": "window-seat",
+      "title": "Window Seat",
+      "description": "Sfeervolle geïllustreerde reizen vanuit een raam, met live getekende landschappen, dieptewerking en omgevingsgeluid.",
+      "activeVersion": "1.0",
+      "versions": [
+        {
+          "version": "1.0",
+          "format": "9:16",
+          "fps": 60,
+          "durationSec": 40,
+          "referenceProject": "window-seat-001-japan-by-train",
+          "templatePath": "series/window-seat/template-v1.0.json",
+          "instructions": "Produce 40-second original illustrated passenger journeys. Use parallax-cinema Canvas layout with parallax.shot, speed and episode. Existing shot presets cover, boarding, fields, fuji, blossom, station and outro are Japan-specific: extend the same module for new destinations. Use fixed-depth movement, cinematic composition, original procedural audio, editorial opening cover and separate SVG thumbnail. No external images, libraries, generated imagery or automatic MP4 render. Keep safe text areas, verify preview and MP4, distinguish fictional journeys from verified itineraries.",
+          "brandKit": {
+            "brandName": "WINDOW SEAT",
+            "primaryColor": "#E9C394",
+            "accentColor": "#BC786E",
+            "backgroundColor": "#243940",
+            "surfaceColor": "#657F78",
+            "textColor": "#FFF2D9",
+            "mutedColor": "#9EAEAA",
+            "fontFamily": "Georgia"
+          }
+        }
+      ],
+      "episodes": [],
+      "cover": {
+        "imageUrl": "series-covers/window-seat.svg",
+        "alt": "Window Seat · Parallax Cinema"
+      }
     }
   ],
   "standaloneVideos": [

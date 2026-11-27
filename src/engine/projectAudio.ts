@@ -1,4 +1,5 @@
 import { OpenMotionProject } from '../types/openmotion';
+import { createParallaxAudio } from './parallaxCinemaAudio';
 import { createPremiumTravelAudio } from './premiumTravelAudio';
 import { createDoodleExplainerAudio } from './doodleExplainerAudio';
 import { createBucketListAudio } from './bucketListAudio';
@@ -14,6 +15,7 @@ export function projectAssetUrl(src: string): string {
 export async function mixProjectAudio(project: OpenMotionProject, durationSec: number): Promise<AudioBuffer | null> {
   const tracks = (project.audioTracks ?? []).filter(t => t.src?.trim());
   if (!tracks.length) {
+    if (project.scenes.some(scene => scene.layout === 'parallax-cinema')) return createParallaxAudio(durationSec);
     if (project.scenes.some(scene => scene.layout === 'premium-travel-route')) return createPremiumTravelAudio(durationSec);
     if (project.scenes.some(scene => scene.layout === 'doodle-explainer')) return createDoodleExplainerAudio(durationSec);
     if (project.scenes.some(scene => scene.layout === 'bucket-list-zoom')) return createBucketListAudio(durationSec);
