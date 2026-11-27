@@ -381,7 +381,7 @@
       "id": "the-human-side",
       "title": "The Human Side",
       "description": "Herkenbare menselijke emoties, gewoontes en innerlijke conflicten. Handgetekende stickfiguren op lila papier.",
-      "activeVersion": "2.2",
+      "activeVersion": "2.3",
       "versions": [
         {
           "version": "1.0",
@@ -467,6 +467,25 @@
           "referenceProject": "the-human-side-08-same-mistakes",
           "templatePath": "series/the-human-side/template-v2.2.json",
           "instructions": "Cinematic action pilot. Use mind-series-v1, human-side-v1, human-side-v2, human-side-v21 and human-side-v22 on all pilot scenes. Keep lilac paper, black curved strokes and white faces. Action shots: scroll (hand close-up), time (clock and phone), repeat (accelerating cuts), realize (face close-up), place (walk and hand-to-table transfer), sit (seated resolution). Use theme:loop and shot:setup/build/turn/change/resolve plus action:<shot>. Use 1.5s selectable cover in opening scene only, short narration and larger four-word captions, original synchronized effects. The 2.2 action module is designed for phone-habit stories; use 2.1 modules for other topics until adapted. Existing episodes retain their versions. Native-size H.264/AAC master export is available through the existing manual workflow. See docs/the-human-side.md.",
+          "brandKit": {
+            "brandName": "THE HUMAN SIDE",
+            "primaryColor": "#C5A8D0",
+            "accentColor": "#E6D8ED",
+            "backgroundColor": "#C5A8D0",
+            "surfaceColor": "#E6D8ED",
+            "textColor": "#191619",
+            "mutedColor": "#806D87",
+            "fontFamily": "system-ui"
+          }
+        },
+        {
+          "version": "2.3",
+          "format": "9:16",
+          "fps": 30,
+          "durationSec": 25,
+          "referenceProject": "the-human-side-01-same-situation",
+          "templatePath": "series/the-human-side/template-v2.3.json",
+          "instructions": "Six-shot cinematic stories, 25 seconds, 1080x1920, 30 fps. Use mind-series-v1, human-side-v1, human-side-v2, human-side-v21, human-side-v22, human-side-v23 on each scene. Select theme:message/waiting/calendar/boundaries/feedback/rest/mask/load/crowd, film:event/reaction/action/turn/change/ending and shot:setup/build/build/turn/change/resolve. First scene only: cover-title (two lines separated by |), cover-hook. Theme props message, reply, label-a, label-b, prop-tasks are editable. Large topic-specific covers, physical object actions, close-ups, original foley, 64px short captions and strict verified export. Episode 08 retains its approved 2.2 phone-habit action rig. Use the existing manual master workflow if browser export fails. See docs/the-human-side.md.",
           "brandKit": {
             "brandName": "THE HUMAN SIDE",
             "primaryColor": "#C5A8D0",
