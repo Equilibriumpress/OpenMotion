@@ -26,13 +26,13 @@
   },
   "scenes": [
     {
-      "id": "ths-02-1",
-      "name": "Shared situation",
-      "durationSec": 4,
+      "id": "ths-02-v23-1",
+      "name": "Opening event",
+      "durationSec": 5,
       "layout": "doodle-explainer",
       "transition": "fade",
       "backdrop": "dot-matrix",
-      "headline": "No reply yet.",
+      "headline": "Opening event",
       "caption": "",
       "fullBleed": true,
       "doodle": {
@@ -44,130 +44,178 @@
         "extras": [
           "mind-series-v1",
           "human-side-v1",
-          "shot:message",
-          "episode:02",
-          "message:Seen · No reply yet",
-          "pose-a:phone",
-          "pose-b:phone",
-          "face-a:surprise",
-          "face-b:neutral",
-          "cover-pose-a:kneel",
-          "cover-pose-b:calm",
-          "cover-face-a:panic",
-          "cover-face-b:smile",
           "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
+          "episode:02",
           "theme:waiting",
+          "film:event",
+          "shot:setup",
           "cover-title:NO REPLY|TWO STORIES",
-          "cover-hook:Why haven't they replied?"
-        ],
-        "shirtColor": "#C5A8D0",
-        "highlightColor": "#191619",
-        "narration": "No reply yet. Two reactions."
-      }
-    },
-    {
-      "id": "ths-02-2",
-      "name": "Response A",
-      "durationSec": 6,
-      "layout": "doodle-explainer",
-      "transition": "fade",
-      "backdrop": "dot-matrix",
-      "headline": "Did I say something wrong?",
-      "caption": "",
-      "fullBleed": true,
-      "doodle": {
-        "setting": "standing",
-        "palette": "cream",
-        "mood": "worried",
-        "pose": "neutral",
-        "emphasis": [],
-        "extras": [
-          "mind-series-v1",
-          "human-side-v1",
-          "shot:worry",
-          "episode:02",
-          "label-a:Are they upset?",
-          "pose-a:kneel",
-          "face-a:panic",
-          "human-side-v2",
-          "theme:waiting"
-        ],
-        "shirtColor": "#C5A8D0",
-        "highlightColor": "#191619",
-        "narration": "One checks the phone again and again. Did I say something wrong?"
-      }
-    },
-    {
-      "id": "ths-02-3",
-      "name": "Response B",
-      "durationSec": 6,
-      "layout": "doodle-explainer",
-      "transition": "fade",
-      "backdrop": "dot-matrix",
-      "headline": "They might be busy.",
-      "caption": "",
-      "fullBleed": true,
-      "doodle": {
-        "setting": "standing",
-        "palette": "cream",
-        "mood": "relaxed",
-        "pose": "neutral",
-        "emphasis": [],
-        "extras": [
-          "mind-series-v1",
-          "human-side-v1",
-          "shot:calm",
-          "episode:02",
-          "label-b:They might be busy.",
-          "pose-b:calm",
-          "face-b:smile",
-          "human-side-v2",
-          "theme:waiting"
-        ],
-        "shirtColor": "#C5A8D0",
-        "highlightColor": "#191619",
-        "narration": "The other puts the phone down. They might simply be busy."
-      }
-    },
-    {
-      "id": "ths-02-4",
-      "name": "Contrast",
-      "durationSec": 6,
-      "layout": "doodle-explainer",
-      "transition": "fade",
-      "backdrop": "dot-matrix",
-      "headline": "Silence is not an answer.",
-      "caption": "",
-      "fullBleed": true,
-      "doodle": {
-        "setting": "standing",
-        "palette": "cream",
-        "mood": "worried",
-        "pose": "neutral",
-        "emphasis": [],
-        "extras": [
-          "mind-series-v1",
-          "human-side-v1",
-          "shot:contrast",
-          "episode:02",
+          "cover-hook:Why haven't they replied?",
+          "message:Seen · No reply yet",
           "label-a:Are they upset?",
           "label-b:They might be busy.",
-          "pose-a:kneel",
-          "pose-b:calm",
-          "face-a:panic",
-          "face-b:smile",
-          "human-side-v2",
-          "theme:waiting"
+          "reply:Sorry, I was in a meeting."
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "The minutes pass for both. Neither knows the reason for the silence."
+        "narration": "You send a message. No reply yet."
       }
     },
     {
-      "id": "ths-02-5",
-      "name": "More context",
-      "durationSec": 6,
+      "id": "ths-02-v23-2",
+      "name": "Emotional reaction",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Emotional reaction",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
+          "episode:02",
+          "theme:waiting",
+          "film:reaction",
+          "shot:build",
+          "message:Seen · No reply yet",
+          "label-a:Are they upset?",
+          "label-b:They might be busy.",
+          "reply:Sorry, I was in a meeting."
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "One keeps checking. Are they upset with me?"
+      }
+    },
+    {
+      "id": "ths-02-v23-3",
+      "name": "Physical action",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Physical action",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
+          "episode:02",
+          "theme:waiting",
+          "film:action",
+          "shot:build",
+          "message:Seen · No reply yet",
+          "label-a:Are they upset?",
+          "label-b:They might be busy.",
+          "reply:Sorry, I was in a meeting."
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "The other puts the phone down for a while."
+      }
+    },
+    {
+      "id": "ths-02-v23-4",
+      "name": "Turning point",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Turning point",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
+          "episode:02",
+          "theme:waiting",
+          "film:turn",
+          "shot:turn",
+          "message:Seen · No reply yet",
+          "label-a:Are they upset?",
+          "label-b:They might be busy.",
+          "reply:Sorry, I was in a meeting."
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "Both are waiting. Neither knows the reason."
+      }
+    },
+    {
+      "id": "ths-02-v23-5",
+      "name": "A different response",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "A different response",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
+          "episode:02",
+          "theme:waiting",
+          "film:change",
+          "shot:change",
+          "message:Seen · No reply yet",
+          "label-a:Are they upset?",
+          "label-b:They might be busy.",
+          "reply:Sorry, I was in a meeting."
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "Then the reply arrives. Sorry, I was in a meeting."
+      }
+    },
+    {
+      "id": "ths-02-v23-6",
+      "name": "Final reflection",
+      "durationSec": 4,
       "layout": "doodle-explainer",
       "transition": "fade",
       "backdrop": "dot-matrix",
@@ -177,132 +225,143 @@
       "doodle": {
         "setting": "standing",
         "palette": "cream",
-        "mood": "happy",
+        "mood": "surprised",
         "pose": "neutral",
         "emphasis": [],
         "extras": [
           "mind-series-v1",
           "human-side-v1",
-          "shot:reveal",
-          "episode:02",
-          "message:Sorry, I was in a meeting.",
-          "pose-a:relief",
-          "pose-b:calm",
-          "face-a:relief",
-          "face-b:smile",
           "human-side-v2",
-          "theme:waiting"
+          "human-side-v21",
+          "human-side-v22",
+          "human-side-v23",
+          "episode:02",
+          "theme:waiting",
+          "film:ending",
+          "shot:resolve",
+          "message:Seen · No reply yet",
+          "label-a:Are they upset?",
+          "label-b:They might be busy.",
+          "reply:Sorry, I was in a meeting."
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "Sorry, I was in a meeting. Silence alone told us nothing."
+        "narration": "Silence alone told us nothing."
       }
     }
   ],
   "captions": [
     {
-      "text": "No reply yet. Two reactions.",
+      "text": "You send a message.",
       "startSec": 1.5,
-      "endSec": 3.55,
+      "endSec": 2.729,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "One checks the phone again",
-      "startSec": 4.3,
-      "endSec": 6.487,
+      "text": "No reply yet.",
+      "startSec": 2.729,
+      "endSec": 4.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "and again. Did I say",
-      "startSec": 6.487,
-      "endSec": 8.675,
+      "text": "One keeps checking. Are",
+      "startSec": 5.3,
+      "endSec": 6.925,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "something wrong?",
-      "startSec": 8.675,
-      "endSec": 9.55,
+      "text": "they upset with me?",
+      "startSec": 6.925,
+      "endSec": 8.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "The other puts the phone",
-      "startSec": 10.3,
-      "endSec": 12.686,
+      "text": "The other puts the",
+      "startSec": 9.3,
+      "endSec": 10.744,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "down. They might simply be",
-      "startSec": 12.686,
-      "endSec": 15.073,
+      "text": "phone down for a",
+      "startSec": 10.744,
+      "endSec": 12.189,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "busy.",
-      "startSec": 15.073,
-      "endSec": 15.55,
+      "text": "while.",
+      "startSec": 12.189,
+      "endSec": 12.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "The minutes pass for both.",
-      "startSec": 16.3,
-      "endSec": 18.488,
+      "text": "Both are waiting. Neither",
+      "startSec": 13.3,
+      "endSec": 15.157,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "Neither knows the reason for",
-      "startSec": 18.488,
-      "endSec": 20.675,
+      "text": "knows the reason.",
+      "startSec": 15.157,
+      "endSec": 16.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "the silence.",
-      "startSec": 20.675,
-      "endSec": 21.55,
+      "text": "Then the reply arrives.",
+      "startSec": 17.3,
+      "endSec": 18.6,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "Sorry, I was in a",
-      "startSec": 22.3,
-      "endSec": 24.686,
+      "text": "Sorry, I was in",
+      "startSec": 18.6,
+      "endSec": 19.9,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     },
     {
-      "text": "meeting. Silence alone told us",
-      "startSec": 24.686,
-      "endSec": 27.073,
+      "text": "a meeting.",
+      "startSec": 19.9,
+      "endSec": 20.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
+    },
+    {
+      "text": "Silence alone told us",
+      "startSec": 21.3,
+      "endSec": 23.9,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 64
     },
     {
       "text": "nothing.",
-      "startSec": 27.073,
-      "endSec": 27.55,
+      "startSec": 23.9,
+      "endSec": 24.55,
       "style": "minimal",
       "position": 0.78,
-      "fontSizePx": 45
+      "fontSizePx": 64
     }
   ],
   "audioTracks": [
@@ -311,7 +370,7 @@
       "kind": "voiceover",
       "src": "assets/audio/the-human-side-02-no-text-back-voice.mp3",
       "startSec": 0,
-      "endSec": 28,
+      "endSec": 25,
       "volume": 1
     },
     {
@@ -319,7 +378,7 @@
       "kind": "music",
       "src": "assets/audio/the-human-side-02-no-text-back-score.mp3",
       "startSec": 0,
-      "endSec": 28,
+      "endSec": 25,
       "volume": 0.15,
       "fadeInSec": 0.3,
       "fadeOutSec": 1
@@ -329,7 +388,7 @@
       "kind": "effect",
       "src": "assets/audio/the-human-side-02-no-text-back-human-sfx.wav",
       "startSec": 0,
-      "endSec": 28,
+      "endSec": 25,
       "volume": 0.48
     }
   ],
@@ -337,7 +396,7 @@
   "seriesId": "the-human-side",
   "season": 1,
   "episodeNumber": 2,
-  "templateVersion": "2.0",
+  "templateVersion": "2.3",
   "productionStatus": "review",
-  "thumbnailUrl": "assets/the-human-side/v2/the-human-side-02-no-text-back.svg"
+  "thumbnailUrl": "assets/the-human-side/v23/the-human-side-02-no-text-back.svg"
 }
