@@ -5,7 +5,7 @@ import path from 'node:path';
 const SR=24000;
 const clamp=v=>Math.max(0,Math.min(1,v));
 const smooth=v=>{const x=clamp(v);return x*x*(3-2*x);};
-const profiles={longing:[.22,.06,.02],shop:[.18,.03,.20],drive:[.58,.26,.02],return:[.15,.04,.05],reflection:[.23,.10,.01],road:[.40,.19,.02],night:[.17,.08,.01],symbol:[.18,.03,.02]};
+const profiles={longing:[.22,.06,.02],shop:[.18,.03,.20],drive:[.58,.26,.02],return:[.15,.04,.05],reflection:[.23,.10,.01],road:[.40,.19,.02],night:[.17,.08,.01],symbol:[.18,.03,.02],'breath-romance':[.35,.04,.015],'breath-gaze':[.39,.025,.11],'breath-enclosure':[.53,.03,.22],'breath-separation':[.26,.025,.07],'breath-release':[.20,.015,0]};
 const TAU=Math.PI*2;
 export function prepareSongSound(project,root){
  if(!project.scenes?.some(s=>s.doodle?.extras?.includes('song-cinematic-v2')))return;
@@ -15,6 +15,7 @@ export function prepareSongSound(project,root){
  let at=0;
  const cues=project.scenes.map(s=>{const start=at;at+=Number(s.durationSec);const shot=s.doodle?.extras?.find(x=>x.startsWith('shot:'))?.slice(5);return {start,end:at,profile:profiles[shot]||profiles.longing};});
  if(!Number.isFinite(at)||at<=0||at>180)throw Error('Invalid song sound duration');
+ const breath=project.scenes.some(s=>s.doodle?.extras?.includes('song-breath-v1'));
  const n=Math.round(at*SR),wav=Buffer.alloc(44+2*n);
  wav.write('RIFF',0);wav.writeUInt32LE(36+2*n,4);wav.write('WAVEfmt ',8);wav.writeUInt32LE(16,16);wav.writeUInt16LE(1,20);wav.writeUInt16LE(1,22);wav.writeUInt32LE(SR,24);wav.writeUInt32LE(SR*2,28);wav.writeUInt16LE(2,32);wav.writeUInt16LE(16,34);wav.write('data',36);wav.writeUInt32LE(2*n,40);
  let seed=127491,low=0,mid=0,index=0;
@@ -29,8 +30,9 @@ export function prepareSongSound(project,root){
   const tone=pad*breathing*(.10*Math.sin(TAU*48*t)+.06*Math.sin(TAU*73.4*t)+.026*Math.sin(TAU*119.3*t));
   const engine=road*(.3*low+.14*Math.sin(TAU*(31*t+.28*Math.sin(t*.9)))+.10*mid);
   const dt=t-Math.floor(t);const clock=tick*Math.exp(-dt*65)*Math.sin(TAU*760*dt)*.3;
+  const tension=breath?tick*(.09*Math.sin(TAU*57*t)+.06*Math.sin(TAU*60.1*t))*(.55+.45*Math.sin(TAU*.17*t)):0;
   const env=smooth(t/1.1)*smooth((at-t)/1.8);
-  wav.writeInt16LE(Math.round(32767*Math.max(-1,Math.min(1,(tone+engine+clock)*env))),44+i*2);
+  wav.writeInt16LE(Math.round(32767*Math.max(-1,Math.min(1,(tone+engine+clock+tension)*env))),44+i*2);
  }
  const dest=path.join(root,'public',src);fs.mkdirSync(path.dirname(dest),{recursive:true});fs.writeFileSync(dest,wav);
 }
