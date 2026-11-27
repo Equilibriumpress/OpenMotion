@@ -51,7 +51,8 @@
           "artist:TRACY CHAPMAN · 1988",
           "cover-title:FAST CAR",
           "cover-hook:More than a car.",
-          "symbol:car"
+          "symbol:car",
+          "song-hero-rigs-v21"
         ],
         "shirtColor": "#A85C43",
         "highlightColor": "#D39A62",
@@ -81,7 +82,8 @@
           "shot:shop",
           "camera:push",
           "episode:01",
-          "artist:TRACY CHAPMAN · 1988"
+          "artist:TRACY CHAPMAN · 1988",
+          "song-hero-rigs-v21"
         ],
         "shirtColor": "#A85C43",
         "highlightColor": "#D39A62",
@@ -111,7 +113,8 @@
           "shot:drive",
           "camera:track",
           "episode:01",
-          "artist:TRACY CHAPMAN · 1988"
+          "artist:TRACY CHAPMAN · 1988",
+          "song-hero-rigs-v21"
         ],
         "shirtColor": "#A85C43",
         "highlightColor": "#D39A62",
@@ -141,7 +144,8 @@
           "shot:return",
           "camera:push",
           "episode:01",
-          "artist:TRACY CHAPMAN · 1988"
+          "artist:TRACY CHAPMAN · 1988",
+          "song-hero-rigs-v21"
         ],
         "shirtColor": "#A85C43",
         "highlightColor": "#D39A62",
@@ -171,7 +175,8 @@
           "shot:reflection",
           "camera:pull",
           "episode:01",
-          "artist:TRACY CHAPMAN · 1988"
+          "artist:TRACY CHAPMAN · 1988",
+          "song-hero-rigs-v21"
         ],
         "shirtColor": "#A85C43",
         "highlightColor": "#D39A62",
@@ -309,7 +314,7 @@
   "seriesId": "the-song-explained",
   "season": 1,
   "episodeNumber": 1,
-  "templateVersion": "2.0",
+  "templateVersion": "2.1",
   "productionStatus": "review",
-  "thumbnailUrl": "assets/the-song-explained/fast-car-cover-v2.svg"
+  "thumbnailUrl": "assets/the-song-explained/fast-car-cover-v21.svg"
 }

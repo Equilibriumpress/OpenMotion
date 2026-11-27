@@ -138,7 +138,7 @@ export function ShortsMediaEditor({project,activeScene,onUpdateProject,onUpdateS
       const set=(key:string,value:string)=>update({extras:[...extras.filter(x=>!x.startsWith(key+':')),key+':'+value]});
       const cinematic=extras.includes('song-cinematic-v2');
       return <div className="space-y-3">
-        <p className="text-xs font-semibold text-slate-700">The Song Explained · {cinematic?'Cinematic v2':'vectorillustraties'}</p>
+        <p className="text-xs font-semibold text-slate-700">The Song Explained · {extras.includes('song-hero-rigs-v21')?'Cinematic v2.1':cinematic?'Cinematic v2':'vectorillustraties'}</p>
         <label className="block text-xs text-slate-600">Scène
           <select className="w-full rounded border border-slate-200 p-2" value={get('shot','road')} onChange={e=>set('shot',e.target.value)}>
             {(cinematic?['longing','shop','drive','return','reflection','road','night','symbol']:['road','room','shop','night','return','symbol']).map(v=><option key={v}>{v}</option>)}
@@ -149,6 +149,11 @@ export function ShortsMediaEditor({project,activeScene,onUpdateProject,onUpdateS
             <option value="push">Langzaam inzoomen</option><option value="pull">Langzaam uitzoomen</option>{cinematic&&<option value="track">Tracking</option>}
           </select>
         </label>
+        {extras.includes('song-hero-rigs-v21')&&['drive','road','night'].includes(get('shot'))&&<label className="block text-xs text-slate-600">Auto camerahoek
+          <select className="w-full rounded border border-slate-200 p-2" value={get('car-angle','auto')} onChange={e=>set('car-angle',e.target.value)}>
+            <option value="auto">Regie (automatisch)</option><option value="rear">Achter 3/4</option><option value="side">Zijaanzicht</option><option value="front">Voor 3/4</option>
+          </select>
+        </label>}
         <label className="block text-xs text-slate-600">Symbool
           <select className="w-full rounded border border-slate-200 p-2" value={get('symbol','car')} onChange={e=>set('symbol',e.target.value)}>
             {['car','record','heart'].map(v=><option key={v}>{v}</option>)}
