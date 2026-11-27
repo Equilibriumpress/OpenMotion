@@ -2,6 +2,7 @@
 Only small documentary extents are accepted. No fabricated contours.
 """
 import json, math, pathlib, subprocess, tempfile, urllib.request
+from media_cache import MediaCache, ensure_ffmpeg, prune
 ROOT=pathlib.Path(__file__).resolve().parent.parent
 ZOOM=11
 N=2**ZOOM*256
@@ -58,9 +59,18 @@ def build(p,work):
     out.write_text(json.dumps(output,separators=(",",":")))
     print(f"[terrain] {p['slug']}: {len(tiles)} actual DEM tiles; {len(lines)} contour levels")
 def main():
-    for f in (ROOT/"projects").glob("*/project.json"):
-        p=json.loads(f.read_text())
-        if p.get("documentaryTerrain"):
-            try: build(p,None)
-            except Exception as e: print(f"[terrain] {p['slug']}: optional contours unavailable: {e}")
-if __name__=="__main__": main()
+    projects=[json.loads(f.read_text()) for f in sorted((ROOT/"projects").glob("*/project.json"))]
+    projects=[p for p in projects if p.get("documentaryTerrain")]
+    prune("terrain",{p["slug"] for p in projects})
+    for p in projects:
+        output=ROOT/"public/assets/maps"/(p["slug"]+"-contours.geojson")
+        cache=MediaCache("terrain",p["slug"],__file__,p["documentaryTerrain"],[output])
+        if cache.restore(): continue
+        try:
+            ensure_ffmpeg()
+            cache.clear_outputs()
+            build(p,None)
+            cache.save()
+        except Exception as e:
+            print(f"[terrain] {p['slug']}: optional contours unavailable: {e}",flush=True)
+if __name__=="__main__":main()

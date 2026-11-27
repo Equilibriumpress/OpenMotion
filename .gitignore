@@ -6,3 +6,6 @@ coverage/
 *.log
 .env*
 !.env.example
+
+.openmotion-cache/
+__pycache__/
