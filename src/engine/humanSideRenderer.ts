@@ -141,8 +141,11 @@ function figure(c:C,x:number,y:number,scale:number,time:number,pose:string,face:
  ellipse(c,0,5,Math.max(47,(rf-lf)/2+18),9,p.shadow);
  // Feet stay at floor level; knees and elbows use independent curved paths.
  for(const side of [-1,1]){
-  const fx=side===-1?lf:rf,kneeX=fx+side*(crouch*(.48+.38*e)+10)+e*lean*.32,kneeY=-39+(tense?e*side*8:0);
-  curve(c,()=>{c.moveTo(hipX,hipY);c.bezierCurveTo(hipX+side*17,hipY+15,kneeX,kneeY-13,kneeX,kneeY);c.quadraticCurveTo(fx,-12,fx,0);c.lineTo(fx+side*13,0);},k,5);
+  const fx=side===-1?lf:rf,km=expressive&&pose==='kneel'?u:0;
+  const kneeX=mix(fx+side*(crouch*(.48+.38*e)+10)+e*lean*.32,side===-1?-42:-16,km);
+  const kneeY=mix(-39+(tense?e*side*8:0),side===-1?-8:1,km);
+  const footX=mix(fx,side===-1?12:48,km),footY=mix(0,side===-1?-18:-10,km);
+  curve(c,()=>{c.moveTo(hipX,hipY);c.bezierCurveTo(hipX+side*17,hipY+15,kneeX,kneeY-13,kneeX,kneeY);c.quadraticCurveTo(mix(fx,kneeX+25,km),mix(-12,kneeY-6,km),footX,footY);c.lineTo(footX+side*13*(1-km),0);},k,5);
  }
  const shoulderX=hx*.72,shoulderY=neck+7;
  curve(c,()=>{c.moveTo(hx,neck-2);c.bezierCurveTo(hx-17-e*lean*.65,neck+26,hipX-13+e*lean*.9,hipY-25,hipX,hipY);},k,5.2);
@@ -305,14 +308,14 @@ export function renderHumanSideCover(c:C,width:number,height:number,scene:OpenMo
  if(isHumanSideV2(scene)){
   const episode=coverValue(scene,'episode','01'),lines=coverValue(scene,'cover-title').split('|').filter(Boolean).slice(0,2);
   rounded(c,130,210,280,38,19,p,p.ink);text(c,'THE HUMAN SIDE  /  '+episode,270,229,17,'#FFFFFF',800);
-  lines.forEach((v,i)=>fitText(c,v,270,287+i*58,448,53,p,900));
+  lines.forEach((v,i)=>fitText(c,v,270,280+i*55,430,51,p,900));
   const a=coverValue(scene,'cover-pose-a','kneel'),b=coverValue(scene,'cover-pose-b','joy');
   const act=1.25+.65*smooth((localTime-.82)/.68);
-  figure(c,144,735,1.08,act,a,face(coverValue(scene,'cover-face-a'),'panic'),p,a,.7,true);
-  figure(c,369,735,1.08,act,b,face(coverValue(scene,'cover-face-b'),'joy'),p,b,2,true);
+  figure(c,144,742,1.06,act,a,face(coverValue(scene,'cover-face-a'),'panic'),p,a,.7,true);
+  figure(c,369,742,1.04,act,b,face(coverValue(scene,'cover-face-b'),'joy'),p,b,2,true);
   if(['panic','worry','sad'].includes(coverValue(scene,'cover-face-a','panic')))stress(c,112,530,1.25,p);
   const hook=coverValue(scene,'cover-hook',coverValue(scene,'message',''));
-  if(hook){rounded(c,63,383,414,51,16,p,'#FFFFFF');fitText(c,hook,270,408,382,24,p,650);}
+  if(hook){rounded(c,63,372,414,39,14,p,'#FFFFFF');fitText(c,hook,270,391.5,382,21,p,650);}
   c.restore();return;
  }
  // Core title and faces are within the central profile-grid crop (y=210–750).
