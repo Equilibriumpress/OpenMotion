@@ -1,0 +1,245 @@
+{
+  "version": "2.2",
+  "format": "9:16",
+  "fps": 30,
+  "durationSec": 25,
+  "referenceProject": "the-human-side-08-same-mistakes",
+  "templatePath": "series/the-human-side/template-v2.2.json",
+  "instructions": "Cinematic action pilot. Use mind-series-v1, human-side-v1, human-side-v2, human-side-v21 and human-side-v22 on all pilot scenes. Keep lilac paper, black curved strokes and white faces. Action shots: scroll (hand close-up), time (clock and phone), repeat (accelerating cuts), realize (face close-up), place (walk and hand-to-table transfer), sit (seated resolution). Use theme:loop and shot:setup/build/turn/change/resolve plus action:<shot>. Use 1.5s selectable cover in opening scene only, short narration and larger four-word captions, original synchronized effects. The 2.2 action module is designed for phone-habit stories; use 2.1 modules for other topics until adapted. Existing episodes retain their versions. Native-size H.264/AAC master export is available through the existing manual workflow. See docs/the-human-side.md.",
+  "brandKit": {
+    "brandName": "THE HUMAN SIDE",
+    "primaryColor": "#C5A8D0",
+    "accentColor": "#E6D8ED",
+    "backgroundColor": "#C5A8D0",
+    "surfaceColor": "#E6D8ED",
+    "textColor": "#191619",
+    "mutedColor": "#806D87",
+    "fontFamily": "system-ui"
+  },
+  "seriesId": "the-human-side",
+  "exampleScenes": [
+    {
+      "id": "ths-08-v22-1",
+      "name": "One more scroll",
+      "durationSec": 5,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "One more scroll",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
+          "episode:08",
+          "theme:loop",
+          "shot:setup",
+          "action:scroll",
+          "prop-title:JUST ONE MORE",
+          "prop-next:PHONE AWAY",
+          "cover-title:SAME MISTAKE|AGAIN?",
+          "cover-hook:One more scroll."
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "One more scroll. Five minutes, you tell yourself."
+      }
+    },
+    {
+      "id": "ths-08-v22-2",
+      "name": "The clock advances",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "The clock advances",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
+          "episode:08",
+          "theme:loop",
+          "shot:build",
+          "action:time",
+          "prop-title:JUST ONE MORE",
+          "prop-next:PHONE AWAY"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "Five minutes become ninety. You're still scrolling."
+      }
+    },
+    {
+      "id": "ths-08-v22-3",
+      "name": "The repeated action",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "The repeated action",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
+          "episode:08",
+          "theme:loop",
+          "shot:build",
+          "action:repeat",
+          "prop-title:JUST ONE MORE",
+          "prop-next:PHONE AWAY"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "One more video. One more swipe. Again."
+      }
+    },
+    {
+      "id": "ths-08-v22-4",
+      "name": "Recognizing the loop",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Recognizing the loop",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
+          "episode:08",
+          "theme:loop",
+          "shot:turn",
+          "action:realize",
+          "prop-title:JUST ONE MORE",
+          "prop-next:PHONE AWAY"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "The clock says eleven thirty. You notice the pattern."
+      }
+    },
+    {
+      "id": "ths-08-v22-5",
+      "name": "Change the environment",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Change the environment",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
+          "episode:08",
+          "theme:loop",
+          "shot:change",
+          "action:place",
+          "prop-title:JUST ONE MORE",
+          "prop-next:PHONE AWAY"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "Move the phone somewhere harder to reach."
+      }
+    },
+    {
+      "id": "ths-08-v22-6",
+      "name": "A different cue",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Change the cue.",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "human-side-v2",
+          "human-side-v21",
+          "human-side-v22",
+          "episode:08",
+          "theme:loop",
+          "shot:resolve",
+          "action:sit",
+          "prop-title:JUST ONE MORE",
+          "prop-next:PHONE AWAY"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "Change the cue. Give yourself a different starting point."
+      }
+    }
+  ],
+  "exampleCaptionStyle": "minimal",
+  "exampleAudioTracks": [
+    {
+      "kind": "voiceover",
+      "volume": 1
+    },
+    {
+      "kind": "music",
+      "volume": 0.13,
+      "fadeInSec": 0.3,
+      "fadeOutSec": 1
+    },
+    {
+      "kind": "effect",
+      "volume": 0.48
+    }
+  ]
+}
