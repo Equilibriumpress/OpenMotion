@@ -287,7 +287,7 @@ function pcDrive(c:C,t:number,u:number,angle:string){
 function pcEnding(c:C,t:number,u:number){
  pcRoad(c,t,false,true);
  const a=ease(u),z=(1-a)*(1-a);
- drawHeroCar(c,270,490+194*z,.035+.77*z,t,.38*(1-a),false);
+ if(u<.99){c.save();c.globalAlpha=1-ease((u-.92)/.07);drawHeroCar(c,270,490+194*z,.035+.77*z,t,.38*(1-a),false);c.restore();}
  if(u>.82){c.save();c.globalAlpha=ease((u-.82)/.18)*.20;box(c,0,0,W,H,'#11242F');c.restore();}
 }
 function pcScene(c:C,shot:string,t:number,u:number,mode:string,angle:string){
