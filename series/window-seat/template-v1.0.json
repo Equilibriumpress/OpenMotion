@@ -1,0 +1,134 @@
+{
+  "version": "1.0",
+  "format": "9:16",
+  "fps": 60,
+  "durationSec": 40,
+  "referenceProject": "window-seat-001-japan-by-train",
+  "templatePath": "series/window-seat/template-v1.0.json",
+  "instructions": "Produce 40-second original illustrated passenger journeys. Use parallax-cinema Canvas layout with parallax.shot, speed and episode. Existing shot presets cover, boarding, fields, fuji, blossom, station and outro are Japan-specific: extend the same module for new destinations. Use fixed-depth movement, cinematic composition, original procedural audio, editorial opening cover and separate SVG thumbnail. No external images, libraries, generated imagery or automatic MP4 render. Keep safe text areas, verify preview and MP4, distinguish fictional journeys from verified itineraries.",
+  "brandKit": {
+    "brandName": "WINDOW SEAT",
+    "primaryColor": "#E9C394",
+    "accentColor": "#BC786E",
+    "backgroundColor": "#243940",
+    "surfaceColor": "#657F78",
+    "textColor": "#FFF2D9",
+    "mutedColor": "#9EAEAA",
+    "fontFamily": "Georgia"
+  },
+  "seriesId": "window-seat",
+  "exampleScenes": [
+    {
+      "id": "ws-001-1",
+      "name": "Opening cover",
+      "durationSec": 4,
+      "layout": "parallax-cinema",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Japan by Train",
+      "subheadline": "A journey in motion",
+      "fullBleed": true,
+      "parallax": {
+        "shot": "cover",
+        "speed": 1,
+        "episode": 1
+      }
+    },
+    {
+      "id": "ws-001-2",
+      "name": "Boarding",
+      "durationSec": 6,
+      "layout": "parallax-cinema",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "A window seat",
+      "subheadline": "",
+      "fullBleed": true,
+      "parallax": {
+        "shot": "boarding",
+        "speed": 1,
+        "episode": 1
+      }
+    },
+    {
+      "id": "ws-001-3",
+      "name": "Rice fields",
+      "durationSec": 7,
+      "layout": "parallax-cinema",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "",
+      "subheadline": "",
+      "fullBleed": true,
+      "parallax": {
+        "shot": "fields",
+        "speed": 1,
+        "episode": 1
+      }
+    },
+    {
+      "id": "ws-001-4",
+      "name": "Mount Fuji",
+      "durationSec": 7,
+      "layout": "parallax-cinema",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Mount Fuji",
+      "subheadline": "",
+      "fullBleed": true,
+      "parallax": {
+        "shot": "fuji",
+        "speed": 0.8,
+        "episode": 1
+      }
+    },
+    {
+      "id": "ws-001-5",
+      "name": "Spring blossoms",
+      "durationSec": 7,
+      "layout": "parallax-cinema",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "",
+      "subheadline": "",
+      "fullBleed": true,
+      "parallax": {
+        "shot": "blossom",
+        "speed": 1,
+        "episode": 1
+      }
+    },
+    {
+      "id": "ws-001-6",
+      "name": "Evening station",
+      "durationSec": 6,
+      "layout": "parallax-cinema",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "",
+      "subheadline": "",
+      "fullBleed": true,
+      "parallax": {
+        "shot": "station",
+        "speed": 0.55,
+        "episode": 1
+      }
+    },
+    {
+      "id": "ws-001-7",
+      "name": "Arrival",
+      "durationSec": 3,
+      "layout": "parallax-cinema",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Until the next journey",
+      "subheadline": "WINDOW SEAT / JAPAN",
+      "fullBleed": true,
+      "parallax": {
+        "shot": "outro",
+        "speed": 0.15,
+        "episode": 1
+      }
+    }
+  ]
+}

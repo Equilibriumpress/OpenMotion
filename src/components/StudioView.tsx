@@ -20,6 +20,7 @@ import {
   Volume2,
   VolumeX,
 } from 'lucide-react';
+import { createParallaxAudio } from '../engine/parallaxCinemaAudio';
 import { DocumentaryAudioEngine } from '../engine/ambientAudio';
 import { projectAssetUrl } from '../engine/projectAudio';
 import { createPremiumTravelAudio } from '../engine/premiumTravelAudio';
@@ -109,6 +110,7 @@ export function StudioView({
   const totalDuration = Math.max(0.5, getProjectDurationSec(project));
   const totalFrames = Math.max(1, Math.round(totalDuration * project.fps));
   const currentFrame = Math.min(totalFrames, Math.floor(currentTime * project.fps) + 1);
+  const isParallaxCinema = project.scenes.some(scene => scene.layout === 'parallax-cinema');
   const isPremiumTravel = project.scenes.some(scene => scene.layout === 'premium-travel-route');
   const isDoodleExplainer = project.scenes.some(scene => scene.layout === 'doodle-explainer');
   const isBucketList = project.scenes.some(scene => scene.layout === 'bucket-list-zoom');
@@ -163,13 +165,13 @@ export function StudioView({
   // Match the procedural film score between the live preview and the MP4.
   // Unlike the previous preview-only ambience, this is the exported soundtrack.
   useEffect(() => {
-    const needsMusic = (isPremiumTravel || isDoodleExplainer || isBucketList) && !(project.audioTracks?.length) && audioEnabled && isPlaying;
+    const needsMusic = (isParallaxCinema || isPremiumTravel || isDoodleExplainer || isBucketList) && !(project.audioTracks?.length) && audioEnabled && isPlaying;
     if (!needsMusic) return;
 
     const context = new AudioContext();
     let cancelled = false;
     let source: AudioBufferSourceNode | null = null;
-    void context.resume().then(() => isBucketList ? createBucketListAudio(totalDuration) : isDoodleExplainer ? createDoodleExplainerAudio(totalDuration) : createPremiumTravelAudio(totalDuration)).then(buffer => {
+    void context.resume().then(() => isParallaxCinema ? createParallaxAudio(totalDuration) : isBucketList ? createBucketListAudio(totalDuration) : isDoodleExplainer ? createDoodleExplainerAudio(totalDuration) : createPremiumTravelAudio(totalDuration)).then(buffer => {
       if (cancelled) return;
       source = context.createBufferSource();
       source.buffer = buffer;
@@ -189,7 +191,7 @@ export function StudioView({
     // The audio source follows the video clock from the moment playback begins.
     // Seeking while paused restarts it at the new timeline position.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isPremiumTravel, isDoodleExplainer, isBucketList, audioEnabled, isPlaying, project, totalDuration]);
+  }, [isParallaxCinema, isPremiumTravel, isDoodleExplainer, isBucketList, audioEnabled, isPlaying, project, totalDuration]);
 
   // Synchronize subtle documentary audio soundtrack & city ambience with playback
   useEffect(() => {
@@ -197,19 +199,19 @@ export function StudioView({
       audioEngineRef.current = new DocumentaryAudioEngine();
     }
     const engine = audioEngineRef.current;
-    if (audioEnabled && isPlaying && !isPremiumTravel && !isDoodleExplainer && !isBucketList && !(project.audioTracks?.length)) {
+    if (audioEnabled && isPlaying && !isParallaxCinema && !isPremiumTravel && !isDoodleExplainer && !isBucketList && !(project.audioTracks?.length)) {
       engine.start(currentTime);
     } else {
       engine.stop();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [audioEnabled, isPlaying, isPremiumTravel, isDoodleExplainer, isBucketList, project.audioTracks]);
+  }, [audioEnabled, isPlaying, isParallaxCinema, isPremiumTravel, isDoodleExplainer, isBucketList, project.audioTracks]);
 
   useEffect(() => {
-    if (audioEnabled && isPlaying && !isPremiumTravel && !isDoodleExplainer && !isBucketList && !(project.audioTracks?.length)) {
+    if (audioEnabled && isPlaying && !isParallaxCinema && !isPremiumTravel && !isDoodleExplainer && !isBucketList && !(project.audioTracks?.length)) {
       audioEngineRef.current?.syncTime(currentTime);
     }
-  }, [audioEnabled, isPlaying, isPremiumTravel, isDoodleExplainer, isBucketList, currentTime, project.audioTracks]);
+  }, [audioEnabled, isPlaying, isParallaxCinema, isPremiumTravel, isDoodleExplainer, isBucketList, currentTime, project.audioTracks]);
 
   useEffect(() => {
     return () => {

@@ -1,0 +1,148 @@
+{
+  "schemaVersion": "1.0",
+  "id": "window-seat-001-japan-by-train",
+  "slug": "window-seat-001-japan-by-train",
+  "title": "Window Seat 01 — Japan by Train",
+  "description": "A fictional, Japan-inspired rail journey in original procedural 2.5D Canvas art. No generated images or footage. Seven shots, independent depth layers, moving train, rice fields, Mount Fuji, spring blossoms, evening station and original synthesized train ambience and score. Not a geographically verified rail itinerary.",
+  "category": "Shorts & Reels",
+  "author": "OpenMotion Studio",
+  "source": "template",
+  "createdAt": "2026-11-27",
+  "updatedAt": "2026-11-27",
+  "githubPath": "projects/window-seat-001-japan-by-train/project.json",
+  "format": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 60,
+  "brandKit": {
+    "brandName": "WINDOW SEAT",
+    "primaryColor": "#E9C394",
+    "accentColor": "#BC786E",
+    "backgroundColor": "#243940",
+    "surfaceColor": "#657F78",
+    "textColor": "#FFF2D9",
+    "mutedColor": "#9EAEAA",
+    "fontFamily": "Georgia"
+  },
+  "scenes": [
+    {
+      "id": "ws-001-1",
+      "name": "Opening cover",
+      "durationSec": 4,
+      "layout": "parallax-cinema",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Japan by Train",
+      "subheadline": "A journey in motion",
+      "fullBleed": true,
+      "parallax": {
+        "shot": "cover",
+        "speed": 1,
+        "episode": 1
+      }
+    },
+    {
+      "id": "ws-001-2",
+      "name": "Boarding",
+      "durationSec": 6,
+      "layout": "parallax-cinema",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "A window seat",
+      "subheadline": "",
+      "fullBleed": true,
+      "parallax": {
+        "shot": "boarding",
+        "speed": 1,
+        "episode": 1
+      }
+    },
+    {
+      "id": "ws-001-3",
+      "name": "Rice fields",
+      "durationSec": 7,
+      "layout": "parallax-cinema",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "",
+      "subheadline": "",
+      "fullBleed": true,
+      "parallax": {
+        "shot": "fields",
+        "speed": 1,
+        "episode": 1
+      }
+    },
+    {
+      "id": "ws-001-4",
+      "name": "Mount Fuji",
+      "durationSec": 7,
+      "layout": "parallax-cinema",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Mount Fuji",
+      "subheadline": "",
+      "fullBleed": true,
+      "parallax": {
+        "shot": "fuji",
+        "speed": 0.8,
+        "episode": 1
+      }
+    },
+    {
+      "id": "ws-001-5",
+      "name": "Spring blossoms",
+      "durationSec": 7,
+      "layout": "parallax-cinema",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "",
+      "subheadline": "",
+      "fullBleed": true,
+      "parallax": {
+        "shot": "blossom",
+        "speed": 1,
+        "episode": 1
+      }
+    },
+    {
+      "id": "ws-001-6",
+      "name": "Evening station",
+      "durationSec": 6,
+      "layout": "parallax-cinema",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "",
+      "subheadline": "",
+      "fullBleed": true,
+      "parallax": {
+        "shot": "station",
+        "speed": 0.55,
+        "episode": 1
+      }
+    },
+    {
+      "id": "ws-001-7",
+      "name": "Arrival",
+      "durationSec": 3,
+      "layout": "parallax-cinema",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Until the next journey",
+      "subheadline": "WINDOW SEAT / JAPAN",
+      "fullBleed": true,
+      "parallax": {
+        "shot": "outro",
+        "speed": 0.15,
+        "episode": 1
+      }
+    }
+  ],
+  "kind": "video",
+  "seriesId": "window-seat",
+  "season": 1,
+  "episodeNumber": 1,
+  "templateVersion": "1.0",
+  "productionStatus": "review",
+  "thumbnailUrl": "assets/window-seat/japan-by-train.svg"
+}

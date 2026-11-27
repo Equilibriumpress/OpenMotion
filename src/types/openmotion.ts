@@ -38,7 +38,8 @@ export type SceneLayout =
   | 'doodle-explainer'
   | 'editorial-cartography'
   | 'three-campervan-journey'
-  | 'three-explainer';
+  | 'three-explainer'
+  | 'parallax-cinema';
 
 export type SceneTransition = 'fade' | 'slide-up' | 'wipe-left' | 'zoom';
 
@@ -514,7 +515,13 @@ export interface SceneThreeExplainer {
   shot: number;
   terrain?: { cols: number; rows: number; heights: number[] };
 }
+export interface SceneParallaxCinema {
+  shot: 'cover' | 'boarding' | 'fields' | 'fuji' | 'blossom' | 'station' | 'outro';
+  speed?: number;
+  episode?: number;
+}
 export interface OpenMotionScene {
+  parallax?: SceneParallaxCinema;
   threeExplainer?: SceneThreeExplainer;
   catOffice?: CatOfficeScene;
   worldStory?: WorldStoryScene;
@@ -658,6 +665,7 @@ export interface RenderProgressState {
 }
 
 export const ALL_SCENE_LAYOUTS: SceneLayout[] = [
+  'parallax-cinema',
   'three-explainer',
   'three-campervan-journey',
   'editorial-cartography',
@@ -708,6 +716,7 @@ export const ALL_BACKDROPS: MotionBackdrop[] = [
 ];
 
 export const LAYOUT_DISPLAY_NAMES: Record<SceneLayout, string> = {
+  'parallax-cinema': 'Parallax Cinema · Window Seat',
   'three-explainer': 'Three.js Cinematic Explainer',
   'three-campervan-journey': '3D Three.js Character Journey',
   'editorial-cartography': 'Editorial Cartography (OSM)',
