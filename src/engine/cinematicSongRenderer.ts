@@ -156,10 +156,17 @@ function sceneArt(c:C,shot:string,t:number,u:number,mode:string,hero=false,carAn
  if(shot==='shop')store(c,t,u,hero);else if(shot==='drive')drive(c,t,u,hero,carAngle);else if(shot==='return')windowShot(c,t,u,true,hero);else if(shot==='reflection')finalRoad(c,t,u,hero);else if(shot==='road'||shot==='night'){landscape(c,t,shot==='road');if(hero)drawHeroCar(c,270,645,.64,t,carYaw(carAngle,.58),shot==='road');else rearCar(c,270,645,.64,t);}else if(shot==='symbol'){landscape(c,t,false);oval(c,270,370,135,135,'#202932');oval(c,270,370,50,50,'#A76C50');oval(c,270,370,6,6,'#D6BA95');}else windowShot(c,t,u,false,hero);
  c.restore();
 }
+function stage<T>(name:string,fn:()=>T):T{
+ try{return fn();}catch(error){throw new Error('Fast Car · '+name+': '+(error instanceof Error?error.message:String(error)));}
+}
 export function renderCinematicSongCover(c:C,w:number,h:number,s:OpenMotionScene,_b:OpenMotionBrandKit){
  if(isBreathStory(s)){renderBreathCover(c,w,h,s);return;}
  const hero=!!s.doodle?.extras?.includes('song-hero-rigs-v21');
- c.save();c.scale(w/W,h/H);landscape(c,0,true);if(hero){portrait(c,126,482,1.11,0,'look','warm',false,true,'three-quarter');drawHeroCar(c,354,662,.69,0,.68,true);}else{rearCar(c,264,659,.83,0);portrait(c,139,446,1.37,0,'look','warm');}finish(c);
+ c.save();c.scale(w/W,h/H);
+ stage('cover landscape',()=>landscape(c,0,true));
+ if(hero){stage('cover portrait',()=>portrait(c,126,482,1.11,0,'look','warm',false,true,'three-quarter'));stage('cover 3D car',()=>drawHeroCar(c,354,662,.69,0,.68,true));}
+ else{rearCar(c,264,659,.83,0);portrait(c,139,446,1.37,0,'look','warm');}
+ stage('cover grain and lighting',()=>finish(c));
  box(c,0,0,W,340,grad(c,0,0,0,340,[[0,'rgba(11,19,29,.92)'],[1,'rgba(11,19,29,0)']]));
  text(c,'THE SONG EXPLAINED  /  '+field(s,'episode','01'),270,223,15,'#D4A574','center',650);
  const titles=field(s,'cover-title','FAST CAR').split('|').slice(0,2);titles.forEach((v,i)=>text(c,v,270,278+i*55,66,'#F9E8CD','center',900,446));
@@ -171,7 +178,7 @@ export function renderCinematicSong(c:C,w:number,h:number,s:OpenMotionScene,time
  if(isBreathStory(s)){renderBreathStory(c,w,h,s,time);return;}
  const t=Math.max(0,Math.min(s.durationSec,time)),u=t/Math.max(.01,s.durationSec),shot=field(s,'shot','longing');
  const cover=!!field(s,'cover-title');if(cover&&t<.85){renderCinematicSongCover(c,w,h,s,b);return;}
- c.save();c.scale(w/W,h/H);sceneArt(c,shot,t,u,field(s,'camera','push'),!!s.doodle?.extras?.includes('song-hero-rigs-v21'),field(s,'car-angle','auto'));finish(c);
+ c.save();c.scale(w/W,h/H);stage('scene '+shot,()=>sceneArt(c,shot,t,u,field(s,'camera','push'),!!s.doodle?.extras?.includes('song-hero-rigs-v21'),field(s,'car-angle','auto')));stage('scene lighting',()=>finish(c));
  // Restrained typography. No repeated title card. Caption renderer handles narration.
  if(cover){const a=ease((t-.85)/.55)*(1-ease((t-3.5)/.9));c.globalAlpha=a;text(c,field(s,'artist',''),270,153,16,'#EAD0AA','center',600);c.globalAlpha=1;}
  if(shot==='reflection'&&s.headline){const a=ease((u-.40)/.22);c.globalAlpha=a;s.headline.split('|').slice(0,2).forEach((v,i)=>text(c,v,270,218+i*41,34,'#F5E6CD','center',800));c.globalAlpha=1;}
