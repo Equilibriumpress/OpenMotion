@@ -1,0 +1,185 @@
+{
+  "schemaVersion": "1.0",
+  "id": "short-inside-your-mind-05-uncomfortable-silence",
+  "slug": "inside-your-mind-05-uncomfortable-silence",
+  "title": "Inside Your Mind 05 — Why Silence Sometimes Feels Uncomfortable",
+  "description": "Original short animated psychology explainer. Source: https://doi.org/10.1016/j.jesp.2010.12.006",
+  "category": "Shorts & Reels",
+  "author": "OpenMotion Studio",
+  "source": "template",
+  "createdAt": "2026-11-27",
+  "updatedAt": "2026-11-27",
+  "githubPath": "projects/inside-your-mind-05-uncomfortable-silence/project.json",
+  "format": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "brandKit": {
+    "brandName": "INSIDE YOUR MIND",
+    "primaryColor": "#518D89",
+    "accentColor": "#B94D41",
+    "backgroundColor": "#EFE3D0",
+    "surfaceColor": "#DCE8EB",
+    "textColor": "#49392F",
+    "mutedColor": "#79685B",
+    "fontFamily": "Kalam"
+  },
+  "scenes": [
+    {
+      "id": "iym-05-1",
+      "name": "Hook",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Two seconds of silence. Why does that feel so awkward?",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "shower",
+        "mood": "confused",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "inside-your-mind",
+          "pair",
+          "05",
+          "…"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "Two seconds of silence. Why does that feel so awkward?"
+      }
+    },
+    {
+      "id": "iym-05-2",
+      "name": "Recognition",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "When conversation stops unexpectedly, you might wonder what the pause means.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "shower",
+        "mood": "worried",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "inside-your-mind",
+          "thoughts",
+          "05",
+          "Did I say too much?|Are they upset?"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "When conversation stops unexpectedly, you might wonder what the pause means."
+      }
+    },
+    {
+      "id": "iym-05-3",
+      "name": "Explanation",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Experiments suggest brief interruptions in conversation sometimes evoke feelings of rejection.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "shower",
+        "mood": "overwhelmed",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "inside-your-mind",
+          "pair",
+          "05",
+          "Should I say something?"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "Experiments suggest brief interruptions in conversation sometimes evoke feelings of rejection."
+      }
+    },
+    {
+      "id": "iym-05-4",
+      "name": "Reframe",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "But a pause doesn't prove rejection. The other person might simply be thinking.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "relaxed",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "inside-your-mind",
+          "pair-calm",
+          "05",
+          "Thinking…"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "But a pause doesn't prove rejection. The other person might simply be thinking."
+      }
+    },
+    {
+      "id": "iym-05-5",
+      "name": "Payoff",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Try giving the conversation a moment before filling the silence.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "relieved",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "inside-your-mind",
+          "resolve",
+          "05",
+          "A pause is okay"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "Try giving the conversation a moment before filling the silence."
+      }
+    }
+  ],
+  "captions": [],
+  "audioTracks": [
+    {
+      "id": "voice",
+      "kind": "voiceover",
+      "src": "assets/audio/inside-your-mind-05-uncomfortable-silence-voice.mp3",
+      "startSec": 0,
+      "endSec": 28,
+      "volume": 1
+    },
+    {
+      "id": "score",
+      "kind": "music",
+      "src": "assets/audio/inside-your-mind-05-uncomfortable-silence-score.mp3",
+      "startSec": 0,
+      "endSec": 28,
+      "volume": 0.22,
+      "fadeInSec": 0.3,
+      "fadeOutSec": 1
+    }
+  ]
+}
