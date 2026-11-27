@@ -3,7 +3,7 @@
   "id": "the-song-explained-001-fast-car",
   "slug": "the-song-explained-001-fast-car",
   "title": "The Song Explained 01 — Fast Car",
-  "description": "An original visual interpretation of Tracy Chapman's Fast Car (1988): poverty, hope, responsibility and the difficulty of changing one's circumstances. Sources: https://www.about-tracy-chapman.net/1988-the-pop-life/ (New York Times interview, April 1988); https://www.kgou.org/2021-10-15/meeting-tracy-chapman-in-the-spaces-between (NPR, 2021); https://www.latimes.com/archives/la-xpm-1995-12-09-ca-12251-story.html (artist interview, 1995). No song lyrics, original recording or album art. The final question is an editorial interpretation. Cinematic v2: fictional recurring protagonist, original non-melodic sound design and full-bleed illustration.",
+  "description": "An original visual interpretation of Tracy Chapman's Fast Car (1988): poverty, hope, responsibility and the difficulty of changing one's circumstances. Sources: https://www.about-tracy-chapman.net/1988-the-pop-life/ (New York Times interview, April 1988); https://www.kgou.org/2021-10-15/meeting-tracy-chapman-in-the-spaces-between (NPR, 2021); https://www.latimes.com/archives/la-xpm-1995-12-09-ca-12251-story.html (artist interview, 1995). No song lyrics, original recording or album art. The final question is an editorial interpretation. Cinematic v2: fictional recurring protagonist, original non-melodic sound design and full-bleed illustration. Procedural Cinema 3.0: original live Canvas animation, graphic silhouettes, choreographed motion, and no generated imagery.",
   "category": "Shorts & Reels",
   "author": "OpenMotion Studio",
   "source": "template",
@@ -52,7 +52,8 @@
           "cover-title:FAST CAR",
           "cover-hook:More than a car.",
           "symbol:car",
-          "song-hero-rigs-v21"
+          "song-hero-rigs-v21",
+          "song-procedural-v3"
         ],
         "shirtColor": "#A85C43",
         "highlightColor": "#D39A62",
@@ -83,7 +84,8 @@
           "camera:push",
           "episode:01",
           "artist:TRACY CHAPMAN · 1988",
-          "song-hero-rigs-v21"
+          "song-hero-rigs-v21",
+          "song-procedural-v3"
         ],
         "shirtColor": "#A85C43",
         "highlightColor": "#D39A62",
@@ -114,7 +116,8 @@
           "camera:track",
           "episode:01",
           "artist:TRACY CHAPMAN · 1988",
-          "song-hero-rigs-v21"
+          "song-hero-rigs-v21",
+          "song-procedural-v3"
         ],
         "shirtColor": "#A85C43",
         "highlightColor": "#D39A62",
@@ -145,7 +148,8 @@
           "camera:push",
           "episode:01",
           "artist:TRACY CHAPMAN · 1988",
-          "song-hero-rigs-v21"
+          "song-hero-rigs-v21",
+          "song-procedural-v3"
         ],
         "shirtColor": "#A85C43",
         "highlightColor": "#D39A62",
@@ -176,7 +180,8 @@
           "camera:pull",
           "episode:01",
           "artist:TRACY CHAPMAN · 1988",
-          "song-hero-rigs-v21"
+          "song-hero-rigs-v21",
+          "song-procedural-v3"
         ],
         "shirtColor": "#A85C43",
         "highlightColor": "#D39A62",
@@ -314,7 +319,7 @@
   "seriesId": "the-song-explained",
   "season": 1,
   "episodeNumber": 1,
-  "templateVersion": "2.1",
+  "templateVersion": "3.0",
   "productionStatus": "review",
-  "thumbnailUrl": "assets/the-song-explained/fast-car-cover-v21.svg"
+  "thumbnailUrl": "assets/the-song-explained/fast-car-procedural-v3.svg"
 }
