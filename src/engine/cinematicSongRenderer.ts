@@ -156,11 +156,165 @@ function sceneArt(c:C,shot:string,t:number,u:number,mode:string,hero=false,carAn
  if(shot==='shop')store(c,t,u,hero);else if(shot==='drive')drive(c,t,u,hero,carAngle);else if(shot==='return')windowShot(c,t,u,true,hero);else if(shot==='reflection')finalRoad(c,t,u,hero);else if(shot==='road'||shot==='night'){landscape(c,t,shot==='road');if(hero)drawHeroCar(c,270,645,.64,t,carYaw(carAngle,.58),shot==='road');else rearCar(c,270,645,.64,t);}else if(shot==='symbol'){landscape(c,t,false);oval(c,270,370,135,135,'#202932');oval(c,270,370,50,50,'#A76C50');oval(c,270,370,6,6,'#D6BA95');}else windowShot(c,t,u,false,hero);
  c.restore();
 }
+
+// Procedural Cinema 3.0: story-specific choreography using the existing
+// Canvas helpers, portrait geometry and projected vehicle. No image assets.
+const procedural=(s:OpenMotionScene)=>s.doodle?.extras?.includes('song-procedural-v3')===true;
+const pcInk='#14252F',pcPaper='#F3E2C3',pcRust='#BC6547',pcGold='#E2AD69';
+function pcLine(c:C,x:number,y:number,x2:number,y2:number,col:string,width=2){
+ c.beginPath();c.moveTo(x,y);c.lineTo(x2,y2);c.strokeStyle=col;c.lineWidth=width;c.lineCap='round';c.stroke();
+}
+function pcRain(c:C,t:number,alpha=.25){
+ c.save();c.beginPath();c.rect(87,113,375,557);c.clip();c.strokeStyle='rgba(183,218,222,'+alpha+')';c.lineWidth=1.3;
+ c.beginPath();for(let i=0;i<38;i++){const x=90+(i*67.37)%370,y=113+((i*97.21+t*(43+i%5*11))%557);c.moveTo(x,y);c.lineTo(x-3,y+12+i%4*5);}c.stroke();
+ c.restore();
+}
+function pcPerson(c:C,x:number,y:number,s:number,t:number,pose:'look'|'work'|'drive'|'tired',warm=false,flip=false){
+ c.save();c.translate(x,y);c.scale(flip?-s:s,s);
+ const slump=pose==='tired' ? .15 : pose==='work' ? .045 : -.025;
+ c.rotate(slump+Math.sin(t*1.35)*.012);
+ const skin=warm?'#CF9A72':'#AA8174',edge=warm?'#F0BC83':'#C2A495',coat=warm?pcRust:'#84514D',dark='#202A35';
+ // A deliberately graphic profile: single strong nose and jaw contour,
+ // hair silhouette, one eye, and a contrasting side plane.
+ shape(c,'M -35 26 L -44 71 L 5 102 L 48 69 L 27 26 Z','#78564F');
+ shape(c,'M -46 65 Q -108 79 -135 132 L -153 281 H 139 L 110 128 Q 82 79 46 65 L 5 102 Z',coat);
+ shape(c,'M -46 65 L 5 102 L -24 144 L -69 91 Z',warm?'#D68B5C':'#A46B64');
+ shape(c,'M 46 65 L 5 102 L 42 150 L 80 94 L 139 281 H 16 Z','#593D42');
+ shape(c,'M -68 -50 Q -79 -110 -32 -139 Q 10 -157 49 -126 Q 75 -108 69 -69 L 79 -40 L 96 -13 L 82 -5 L 79 25 Q 69 56 34 62 L -3 42 Q -51 34 -68 -50 Z',skin);
+ shape(c,'M 29 -129 Q 59 -113 63 -72 L 76 -40 L 94 -13 L 80 -5 L 75 28 Q 64 49 34 57 L 8 42 Q 44 24 48 -9 Z',edge);
+ shape(c,'M -74 22 Q -99 -40 -86 -97 Q -74 -143 -34 -151 Q 12 -171 48 -143 Q 77 -126 76 -96 Q 36 -118 12 -88 Q -12 -62 -22 -12 Q -35 20 -65 41 Z',dark);
+ for(let i=0;i<8;i++){const a=2.8+i*.36;oval(c,-14+Math.cos(a)*63,-81+Math.sin(a)*58,20,22,dark);}
+ stroke(c,'M -70 -105 Q -43 -145 5 -145 M -55 -78 Q -29 -120 9 -122',warm?'#625047':'#454B53',2);
+ oval(c,-16,-2,14,21,skin);oval(c,-11,19,4,7,pcGold);
+ const blink=Math.abs(Math.sin(t*.83+1.6))>.985;
+ stroke(c,'M 38 -44 Q 52 -50 65 -43',dark,3.8);
+ stroke(c,blink?'M 43 -28 L 65 -27':'M 43 -28 Q 54 -35 65 -28',dark,2.4);
+ if(!blink)oval(c,58,-27,3,3.8,dark);
+ stroke(c,'M 61 15 Q 70 '+(pose==='drive'?19:14)+' 79 15','#68434A',2.4);
+ pcLine(c,-76,126,-70,240,'#573D42',2.5);
+ if(pose==='work'){const a=Math.sin(t*2.7)*12;stroke(c,'M -87 133 Q -61 175 6 '+(202+a)+' L 49 '+(204+a),coat,33);stroke(c,'M 46 '+(204+a)+' L 79 '+(199+a),skin,13);}
+ if(pose==='tired'){stroke(c,'M -84 142 Q -61 206 4 216 L 46 170',coat,32);stroke(c,'M 46 170 Q 64 139 68 101',skin,13);}
+ if(pose==='drive'){stroke(c,'M 71 136 Q 112 157 153 197',coat,30);stroke(c,'M 153 197 L 178 195',skin,13);}
+ c.restore();
+}
+function pcWindow(c:C,t:number,u:number,late=false){
+ c.save();c.translate(-u*12,0);city(c,t,false);c.restore();
+ // Animated window highlights and rain occupy their own depth plane.
+ pcRain(c,t,late ? .15 : .31);
+ const beam=((t*71)%660)-100;shape(c,'M '+beam+' 112 l 34 0 -95 557 -40 0 Z','rgba(242,189,112,.10)');
+ box(c,0,0,87,720,pcInk);box(c,462,0,78,720,pcInk);
+ box(c,83,90,383,23,'#334450');box(c,83,668,383,24,'#1B303B');
+ box(c,264,111,12,557,'#263944');
+ shape(c,'M 0 0 H 112 L 72 250 L 92 520 L 48 720 H 0 Z','#172630');
+ if(!late){
+  c.save();c.globalAlpha=.16;pcPerson(c,377,430,1.02,t,'look',false,true);c.restore();
+  pcPerson(c,169,455,1.38,t,'look');shape(c,'M 0 733 Q 212 688 540 744 V 960 H 0 Z','#14232D');
+  pcLine(c,0,734,540,744,'#58636A',2);
+ }else{
+  // Empty chair, moving clock, a growing pile of bills, lamp.
+  box(c,367,500,108,14,'#897461');pcLine(c,377,514,377,696,'#68534B',10);pcLine(c,464,514,464,696,'#68534B',10);
+  pcLine(c,428,524,428,665,'#68534B',10);pcLine(c,376,555,466,555,'#68534B',10);
+  glow(c,419,409,180,'rgba(239,170,91,.31)');shape(c,'M 370 378 H 468 L 483 429 H 355 Z','#BA8C58');pcLine(c,420,430,420,510,'#C1A079',5);
+  clock(c,340,185,34,t);
+  c.save();c.translate(154,503);c.rotate(.10*ease(u));pcPerson(c,0,0,1.25,t,'tired');c.restore();
+  shape(c,'M 0 713 L 540 623 V 960 H 0 Z',grad(c,0,630,0,960,[[0,'#746354'],[1,'#24313B']]));
+  for(let i=0;i<5;i++){const a=ease((u-i*.12)/.12);if(a<=0)continue;const x=262+i*12+(1-a)*82,y=705-i*5+(1-a)*30;c.save();c.globalAlpha=a;shape(c,'M '+x+' '+y+' l 94 -14 27 35 -93 20 Z','#D7C3A2');pcLine(c,x+18,y+10,x+75,y+1,'#938174',2);pcLine(c,x+22,y+18,x+68,y+11,'#938174',2);c.restore();}
+  oval(c,445,673,23,9,'#26313A');box(c,424,639,42,33,'#94735E');oval(c,445,638,21,8,'#C3A484');
+ }
+}
+function pcShop(c:C,t:number,u:number){
+ // First shot is wide and rhythmically mechanical; second is a hand close-up.
+ if(u<.61){
+  box(c,0,0,W,H,grad(c,0,0,0,H,[[0,'#293E49'],[.56,'#828B7E'],[1,'#23343D']]));
+  for(let row=0;row<3;row++){const y=178+row*129;box(c,0,y+77,W,9,'#334750');for(let j=0;j<12;j++){const h=32+(j*19+row*11)%42;box(c,j*46+3,y+77-h,31,h,['#9C9679','#B58B64','#6D8987','#C1B18E'][j%4]);box(c,j*46+7,y+82-h,23,6,'#D4C0A2');}}
+  shape(c,'M 0 0 H 540 V 96 L 386 138 H 154 L 0 96 Z','#253642');box(c,80,54,380,11,'#E5DEC0');glow(c,270,70,165,'rgba(226,217,184,.19)');
+  clock(c,395,177,47,t);pcPerson(c,173,461,1.34,t,'work');
+  shape(c,'M 0 677 L 540 612 V 960 H 0 Z','#374B51');shape(c,'M 0 687 L 540 622 L 540 704 L 0 794 Z','#52686A');
+  for(let i=0;i<12;i++){const x=(i*57+t*65)%684-75;pcLine(c,x,687-x*.12,x,773-x*.12,'#273B45',2.5);}
+  for(let i=0;i<4;i++){const x=(i*155+t*65)%620-80,y=686-x*.12;shape(c,'M '+x+' '+y+' l 44 -8 19 24 -43 10 Z',['#BDA078','#8D9D88','#A55E4D','#D0B99A'][i]);}
+  shape(c,'M 361 523 L 493 541 L 477 637 L 348 621 Z','#1A303B');shape(c,'M 371 538 L 480 552 L 472 590 L 362 578 Z','#779A94');
+ }else{
+  box(c,0,0,W,H,grad(c,0,0,0,H,[[0,'#293A45'],[1,'#645447']]));
+  shape(c,'M 0 535 L 540 413 V 960 H 0 Z','#8A7661');
+  for(let i=0;i<5;i++){const a=ease((u-.61-i*.035)/.06);const x=142+i*14+(1-a)*95,y=482-i*13;shape(c,'M '+x+' '+y+' l 173 -24 47 71 -174 26 Z','#B6B28A');pcLine(c,x+26,y+16,x+145,y,'#737F69',2);oval(c,x+85,y+22,18,11,'#8E9878');}
+  const dx=Math.sin(t*2.5)*12;
+  shape(c,'M -40 335 L 115 358 Q 167 377 216 445 L 273 479 Q 286 497 267 507 L 216 487 Q 184 470 150 456 L 59 449 L -40 431 Z','#9A5F51');
+  c.save();c.translate(dx,0);shape(c,'M 580 299 L 410 341 Q 365 359 317 433 L 272 453 Q 251 464 266 477 L 302 475 L 353 450 Q 392 429 432 419 L 580 395 Z','#C39472');c.restore();
+ }
+ if(u>.84){const a=ease((u-.84)/.14);c.save();c.globalAlpha=a;box(c,0,0,W,H,pcInk);clock(c,270,430,130,t);c.restore();}
+}
+function pcRoad(c:C,t:number,warm:boolean,receding=false){
+ const horizon=490;
+ box(c,0,0,W,H,grad(c,0,0,0,H,[[0,warm?'#344B5B':'#122936'],[.37,warm?'#D08659':'#526477'],[.53,warm?'#E7B471':'#AA7770'],[1,'#20343F']]));
+ glow(c,315,375,warm?175:110,warm?'rgba(246,192,109,.42)':'rgba(217,150,122,.19)');oval(c,315,375,warm?57:22,warm?57:22,warm?'#F2C583':'#D09A83');
+ for(let layer=0;layer<3;layer++){const y=485+layer*52,shift=Math.sin(t*.13+layer)*7*(layer+1);let d='M -40 '+(y+70);for(let i=0;i<9;i++)d+=' L '+(-40+i*78+shift)+' '+(y-(i*41+layer*67)%78);d+=' L 580 960 H -40 Z';shape(c,d,[warm?'#8C7164':'#3A4B5B',warm?'#706A55':'#2C4652','#233B43'][layer]);}
+ shape(c,'M 253 '+horizon+' H 287 L 650 960 H -110 Z','#41464C');
+ pcLine(c,253,horizon,-85,960,warm?'#D1AD79':'#74848C',3);pcLine(c,287,horizon,625,960,warm?'#D1AD79':'#74848C',3);
+ for(let i=0;i<10;i++){const z=(i/10+t*(receding ? .055 : .24))%1,y=horizon+z*z*470,ww=1+z*4,hh=1+z*z*48;shape(c,'M '+(270-ww)+' '+y+' H '+(270+ww)+' L '+(270+ww*1.4)+' '+(y+hh)+' H '+(270-ww*1.4)+' Z',warm?'#D9B77E':'#8F9490');}
+ for(let i=0;i<14;i++){const z=(i/14+t*(receding ? .055 : .16))%1,y=horizon+z*z*460,x=270+(i%2?1:-1)*(24+z*z*315),h=10+z*z*141,w=3+z*z*22;
+  pcLine(c,x,y,x,y-h,'#26373B',2+z*4);shape(c,'M '+x+' '+(y-h)+' l '+w+' '+(h*.67)+' h '+(-w*2)+' Z',warm?'#3A4C42':'#182F3C');
+ }
+}
+function pcWheel(c:C,t:number){
+ box(c,0,0,W,H,pcInk);oval(c,270,430,134,134,'#202B34');oval(c,270,430,110,110,'#BBA37D');oval(c,270,430,95,95,'#34414A');
+ for(let i=0;i<5;i++){const a=i*Math.PI*2/5+t*4;pcLine(c,270,430,270+Math.cos(a)*86,430+Math.sin(a)*86,'#CBB391',13);}
+ oval(c,270,430,21,21,'#D2BA91');
+}
+function pcDrive(c:C,t:number,u:number,angle:string){
+ if(t<.85){pcWheel(c,t);return;}
+ if(t<3.75){
+  pcRoad(c,t,true);const a=ease((t-.85)/2.9);
+  drawHeroCar(c,270+Math.sin(t*.7)*16,681,.95+.12*a,t,carYaw(angle,.75-.30*a),true);
+  // Light streaks are foreground movement, not camera shake.
+  for(let i=0;i<4;i++){const y=730+((i*71+t*95)%180);pcLine(c,0,y,55+i*20,y-12,'rgba(238,188,121,.15)',3);}
+ }else{
+  pcRoad(c,t,true);shape(c,'M 0 0 H 540 V 92 L 455 138 H 76 L 0 90 Z','#192A35');
+  shape(c,'M 0 0 L 99 100 L 143 635 L 0 786 Z','#1C303A');shape(c,'M 540 0 L 455 100 L 420 647 L 540 785 Z','#1C303A');
+  shape(c,'M 0 730 Q 270 650 540 730 V 960 H 0 Z','#22343E');pcLine(c,0,739,540,739,'#8F7863',3);
+  // The partner has a distinct silhouette, not a copy of the protagonist.
+  c.save();c.translate(132,493);c.rotate(Math.sin(t*.8)*.015);
+  shape(c,'M -26 18 L -32 63 L 24 83 L 39 61 L 22 17 Z','#886D59');
+  shape(c,'M -32 63 Q -92 76 -120 125 L -132 240 H 125 L 87 108 L 39 61 L 24 83 Z','#475B61');
+  shape(c,'M -57 -42 Q -69 -100 -27 -126 Q 14 -148 46 -111 L 59 -67 L 73 -33 L 62 -24 L 59 12 Q 44 43 14 43 L -19 31 Q -46 14 -57 -42 Z','#AB886A');
+  shape(c,'M -63 -13 Q -84 -78 -53 -115 Q -21 -148 28 -130 Q 50 -122 55 -98 L 30 -110 L -6 -76 L -27 -27 Z','#24323A');
+  pcLine(c,38,-55,55,-56,'#2C3034',3);pcLine(c,47,-46,58,-45,'#2C3034',2);
+  stroke(c,'M 73 104 Q 96 138 122 173','#475B61',29);stroke(c,'M 122 173 L 137 185','#AB886A',12);c.restore();
+  pcPerson(c,410,438,1.40,t,'look',true,true);
+  oval(c,116,720,69,69,'#1A282E');oval(c,116,720,50,50,'#3F4A4D');pcLine(c,71,720,161,720,'#172B34',9);
+  const a=(t*.22)%1;shape(c,'M '+(487-a*255)+' 130 l 19 0 -64 355 -26 0 Z','rgba(255,215,155,.12)');
+ }
+}
+function pcEnding(c:C,t:number,u:number){
+ pcRoad(c,t,false,true);
+ const a=ease(u),z=(1-a)*(1-a);
+ if(u<.99){c.save();c.globalAlpha=1-ease((u-.92)/.07);drawHeroCar(c,270,490+194*z,.035+.77*z,t,.38*(1-a),false);c.restore();}
+ if(u>.82){c.save();c.globalAlpha=ease((u-.82)/.18)*.20;box(c,0,0,W,H,'#11242F');c.restore();}
+}
+function pcScene(c:C,shot:string,t:number,u:number,mode:string,angle:string){
+ const z=mode==='pull'?mix(1.09,1.02,ease(u)):mode==='track'?1.035:mix(1.015,1.055,ease(u));
+ c.save();c.translate(270,480);c.scale(z,z);c.translate(-270,-480);
+ if(shot==='shop')pcShop(c,t,u);else if(shot==='drive')pcDrive(c,t,u,angle);else if(shot==='return')pcWindow(c,t,u,true);else if(shot==='reflection')pcEnding(c,t,u);else if(shot==='road'||shot==='night'){pcRoad(c,t,shot==='road');drawHeroCar(c,270,655,.82,t,carYaw(angle,.6),shot==='road');}else if(shot==='symbol'){pcWheel(c,t);}else pcWindow(c,t,u);
+ c.restore();
+}
+function pcCover(c:C,w:number,h:number,s:OpenMotionScene,t:number){
+ c.save();c.scale(w/W,h/H);pcRoad(c,t,true);
+ pcPerson(c,134,489,1.13,t,'look',true);
+ drawHeroCar(c,354,667,.73,t,.66,true);
+ finish(c);box(c,0,0,W,335,grad(c,0,0,0,335,[[0,'rgba(10,25,34,.98)'],[1,'rgba(10,25,34,0)']]));
+ text(c,'THE SONG EXPLAINED  /  '+field(s,'episode','01'),270,168,17,pcGold,'center',700);
+ text(c,field(s,'cover-title','FAST CAR'),270,238,83,pcPaper,'center',900,440);
+ box(c,217,282,106,3,pcRust);
+ text(c,field(s,'artist',''),270,311,18,pcPaper,'center',650);
+ text(c,field(s,'cover-hook','More than a car.'),270,733,29,pcPaper,'center',750);
+ c.restore();
+}
+
 function stage<T>(name:string,fn:()=>T):T{
  try{return fn();}catch(error){throw new Error('Fast Car · '+name+': '+(error instanceof Error?error.message:String(error)));}
 }
 export function renderCinematicSongCover(c:C,w:number,h:number,s:OpenMotionScene,_b:OpenMotionBrandKit){
  if(isBreathStory(s)){renderBreathCover(c,w,h,s);return;}
+ if(procedural(s)){pcCover(c,w,h,s,.3);return;}
  const hero=!!s.doodle?.extras?.includes('song-hero-rigs-v21');
  c.save();c.scale(w/W,h/H);
  stage('cover landscape',()=>landscape(c,0,true));
@@ -177,8 +331,8 @@ export function renderCinematicSongCover(c:C,w:number,h:number,s:OpenMotionScene
 export function renderCinematicSong(c:C,w:number,h:number,s:OpenMotionScene,time:number,b:OpenMotionBrandKit){
  if(isBreathStory(s)){renderBreathStory(c,w,h,s,time);return;}
  const t=Math.max(0,Math.min(s.durationSec,time)),u=t/Math.max(.01,s.durationSec),shot=field(s,'shot','longing');
- const cover=!!field(s,'cover-title');if(cover&&t<.85){renderCinematicSongCover(c,w,h,s,b);return;}
- c.save();c.scale(w/W,h/H);stage('scene '+shot,()=>sceneArt(c,shot,t,u,field(s,'camera','push'),!!s.doodle?.extras?.includes('song-hero-rigs-v21'),field(s,'car-angle','auto')));stage('scene lighting',()=>finish(c));
+ const cover=!!field(s,'cover-title');if(cover&&t<.85){if(procedural(s))pcCover(c,w,h,s,t);else renderCinematicSongCover(c,w,h,s,b);return;}
+ c.save();c.scale(w/W,h/H);stage('scene '+shot,()=>{if(procedural(s))pcScene(c,shot,t,u,field(s,'camera','push'),field(s,'car-angle','auto'));else sceneArt(c,shot,t,u,field(s,'camera','push'),!!s.doodle?.extras?.includes('song-hero-rigs-v21'),field(s,'car-angle','auto'));});stage('scene lighting',()=>finish(c));
  // Restrained typography. No repeated title card. Caption renderer handles narration.
  if(cover){const a=ease((t-.85)/.55)*(1-ease((t-3.5)/.9));c.globalAlpha=a;text(c,field(s,'artist',''),270,153,16,'#EAD0AA','center',600);c.globalAlpha=1;}
  if(shot==='reflection'&&s.headline){const a=ease((u-.40)/.22);c.globalAlpha=a;s.headline.split('|').slice(0,2).forEach((v,i)=>text(c,v,270,218+i*41,34,'#F5E6CD','center',800));c.globalAlpha=1;}

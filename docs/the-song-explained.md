@@ -69,3 +69,15 @@ A mock Canvas regression check sampled 100 frames across both episodes, includin
 The reported iOS frame-001 error was `Not enough arguments`. The earlier performance fix prevents repeated frame rendering but did not eliminate this browser exception. Fast Car now uses a bounded parser for its existing SVG path commands, explicitly traces native Canvas path primitives and draws ellipses with cubic Bézier segments, avoiding Path2D fill/clip/stroke overloads and ellipse overloads. Grain uses one cached bitmap with a native path fallback, and errors now identify the failing cover/scene stage. No changes to the story, 3D car model, export frame rate or audio.
 
 The strict mock regression sampled 100 frames with minimum argument counts and finite coordinate checks. Run `npx tsx scripts/check-song-canvas.ts` manually for future revisions; no new CI workflow. Native iOS WebKit has not been tested, so the exact browser-specific exception remains unconfirmed until device validation.
+
+## Procedural Cinema 3.0 (PC-01–11)
+
+Production art direction, not another engine. All visible footage is computed from scene time using the existing Canvas helpers, vector path primitives and projected 3D sedan. Do not use generated images, raster storyboards, external model downloads or video assets. Original vector SVG covers are library thumbnails; actual selectable video covers and PNG exports use the runtime drawing at 0.3 seconds. The 0–0.85s opening is animated.
+
+Visual grammar: a restrained dark teal / rust / warm paper palette, expressive graphic profiles, layered environments, foreground motion, purposeful internal cuts, and restrained typography. Keep the two separate stories and their visual identities.
+
+Fast Car: rain and window reflection; conveyor and hand close-up; clock/wheel cut; layered road and moving 3D car, then two distinct interior characters; accumulating bills and empty chair; shrinking and disappearing vehicle. Every Breath: articulated couple dancing, matched heart motif, cubic-control-point heart-to-eye transformation, tracked iris, rain and window reflection, enclosing shadows, separating figures and expanding divider, opening door and walking figure.
+
+Both existing project IDs, scene IDs, five-beat durations, voice-over text, original sound bed, captions, audio-cache inputs, 9:16 size and 60fps export are retained. The v3 marker selects the new shot choreography; v2 paths remain available for earlier project versions. The series catalog activates 3.0 and keeps older templates. No extra dependencies or workflows.
+
+Manual regression: `npx tsx scripts/check-song-canvas.ts` (61 samples per scene, 610 frames plus both covers). Mock Canvas validates argument counts, finite coordinates, gradient bounds, and balanced state; the development check also compares repeated frame instruction hashes and checks that every shot changes over time. This does not constitute a native browser rendering, visual approval, or measured GPU performance test. Native Safari preview, MP4 export and audio playback require verification after normal deployment.

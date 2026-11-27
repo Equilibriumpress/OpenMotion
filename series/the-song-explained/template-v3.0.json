@@ -1,0 +1,206 @@
+{
+  "version": "3.0",
+  "format": "9:16",
+  "fps": 60,
+  "durationSec": 40,
+  "referenceProject": "the-song-explained-001-fast-car",
+  "templatePath": "series/the-song-explained/template-v3.0.json",
+  "instructions": "Procedural Cinema 3.0. Use only original runtime-drawn Canvas/SVG geometry within the existing song scene functions, and the existing projected car where appropriate. No generated raster images, external models, new engines, libraries or render services. Keep layout=doodle-explainer, markers mind-series-v1, song-explainer-v1, song-cinematic-v2 and song-procedural-v3. Episode 01 additionally uses song-hero-rigs-v21; episode 02 uses song-breath-v1. Use the existing shot and camera selectors. Create distinct animated compositions with articulated silhouettes, motivated cuts, changing light, environmental motion and symbol transformations; do not rely on zoom alone. Keep 40 seconds, 9:16, 60fps, original English narration and independent sound bed. First 0.85s is an animated selectable title cover; the shared cover export uses time 0.3s. Store a matching original SVG library thumbnail. Research artist intent, distinguish interpretation, no lyrics or original recording. Verify actual motion and mobile preview/export before approving. See docs/the-song-explained.md.",
+  "brandKit": {
+    "brandName": "THE SONG EXPLAINED",
+    "primaryColor": "#D39A62",
+    "accentColor": "#A85C43",
+    "backgroundColor": "#182735",
+    "surfaceColor": "#465A72",
+    "textColor": "#F4E6D0",
+    "mutedColor": "#9F8F81",
+    "fontFamily": "system-ui"
+  },
+  "seriesId": "the-song-explained",
+  "exampleScenes": [
+    {
+      "id": "tse-001-v2-1",
+      "name": "Longing",
+      "durationSec": 5,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "MORE THAN A CAR.",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "neutral",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "song-explainer-v1",
+          "song-cinematic-v2",
+          "shot:longing",
+          "camera:push",
+          "episode:01",
+          "artist:TRACY CHAPMAN · 1988",
+          "cover-title:FAST CAR",
+          "cover-hook:More than a car.",
+          "symbol:car",
+          "song-hero-rigs-v21",
+          "song-procedural-v3"
+        ],
+        "shirtColor": "#A85C43",
+        "highlightColor": "#D39A62",
+        "narration": "Fast Car tells the story of someone longing for a different life."
+      }
+    },
+    {
+      "id": "tse-001-v2-2",
+      "name": "Responsibility",
+      "durationSec": 7,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "neutral",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "song-explainer-v1",
+          "song-cinematic-v2",
+          "shot:shop",
+          "camera:push",
+          "episode:01",
+          "artist:TRACY CHAPMAN · 1988",
+          "song-hero-rigs-v21",
+          "song-procedural-v3"
+        ],
+        "shirtColor": "#A85C43",
+        "highlightColor": "#D39A62",
+        "narration": "She leaves school to care for her father. She works, but money is scarce."
+      }
+    },
+    {
+      "id": "tse-001-v2-3",
+      "name": "Freedom",
+      "durationSec": 8,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "neutral",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "song-explainer-v1",
+          "song-cinematic-v2",
+          "shot:drive",
+          "camera:track",
+          "episode:01",
+          "artist:TRACY CHAPMAN · 1988",
+          "song-hero-rigs-v21",
+          "song-procedural-v3"
+        ],
+        "shirtColor": "#A85C43",
+        "highlightColor": "#D39A62",
+        "narration": "With her partner, she sees a chance to start over. For a moment, she feels free."
+      }
+    },
+    {
+      "id": "tse-001-v2-4",
+      "name": "Reality",
+      "durationSec": 10,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "neutral",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "song-explainer-v1",
+          "song-cinematic-v2",
+          "shot:return",
+          "camera:push",
+          "episode:01",
+          "artist:TRACY CHAPMAN · 1988",
+          "song-hero-rigs-v21",
+          "song-procedural-v3"
+        ],
+        "shirtColor": "#A85C43",
+        "highlightColor": "#D39A62",
+        "narration": "Then the old pattern returns. Her partner drinks, and she is left carrying the responsibility for their family."
+      }
+    },
+    {
+      "id": "tse-001-v2-5",
+      "name": "Reflection",
+      "durationSec": 10,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "ESCAPE IS MORE|THAN DISTANCE.",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "neutral",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "song-explainer-v1",
+          "song-cinematic-v2",
+          "shot:reflection",
+          "camera:pull",
+          "episode:01",
+          "artist:TRACY CHAPMAN · 1988",
+          "song-hero-rigs-v21",
+          "song-procedural-v3"
+        ],
+        "shirtColor": "#A85C43",
+        "highlightColor": "#D39A62",
+        "narration": "The car represents hope. But leaving a place does not always mean leaving your circumstances behind."
+      }
+    }
+  ],
+  "exampleCaptionStyle": "minimal",
+  "exampleAudioTracks": [
+    {
+      "id": "voice",
+      "kind": "voiceover",
+      "src": "assets/audio/the-song-explained-001-fast-car-voice.mp3",
+      "startSec": 0,
+      "endSec": 40,
+      "volume": 1
+    },
+    {
+      "id": "cinematic-sound",
+      "kind": "music",
+      "src": "assets/the-song-explained/the-song-explained-001-fast-car-sound.wav",
+      "startSec": 0,
+      "endSec": 40,
+      "volume": 0.65,
+      "fadeInSec": 0,
+      "fadeOutSec": 0
+    }
+  ]
+}

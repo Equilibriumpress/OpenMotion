@@ -3,7 +3,7 @@
   "id": "the-song-explained-002-every-breath-you-take",
   "slug": "the-song-explained-002-every-breath-you-take",
   "title": "The Song Explained 02 — Every Breath You Take",
-  "description": "Original visual interpretation of The Police's Every Breath You Take (1983), contrasting its gentle sound with themes of possession, surveillance and control. Sources: Sting interview, Los Angeles Times, 11 August 1985, https://www.latimes.com/archives/la-xpm-1985-08-11-ca-2719-story.html ; official Sting album notes, https://sting.com/blogs/news/sting-my-songs-album-out-today . Fictional characters and the final statement are editorial interpretation, not biography. No lyrics, original recording or album art.",
+  "description": "Original visual interpretation of The Police's Every Breath You Take (1983), contrasting its gentle sound with themes of possession, surveillance and control. Sources: Sting interview, Los Angeles Times, 11 August 1985, https://www.latimes.com/archives/la-xpm-1985-08-11-ca-2719-story.html ; official Sting album notes, https://sting.com/blogs/news/sting-my-songs-album-out-today . Fictional characters and the final statement are editorial interpretation, not biography. No lyrics, original recording or album art. Procedural Cinema 3.0: original live Canvas animation, graphic silhouettes, choreographed motion, and no generated imagery.",
   "category": "Shorts & Reels",
   "author": "OpenMotion Studio",
   "source": "template",
@@ -52,7 +52,8 @@
           "artist:THE POLICE · 1983",
           "cover-title:EVERY BREATH|YOU TAKE",
           "cover-hook:Love or obsession?",
-          "symbol:heart"
+          "symbol:heart",
+          "song-procedural-v3"
         ],
         "shirtColor": "#A84F50",
         "highlightColor": "#D3A99A",
@@ -83,7 +84,8 @@
           "shot:breath-gaze",
           "camera:track",
           "episode:02",
-          "artist:THE POLICE · 1983"
+          "artist:THE POLICE · 1983",
+          "song-procedural-v3"
         ],
         "shirtColor": "#A84F50",
         "highlightColor": "#D3A99A",
@@ -114,7 +116,8 @@
           "shot:breath-enclosure",
           "camera:push",
           "episode:02",
-          "artist:THE POLICE · 1983"
+          "artist:THE POLICE · 1983",
+          "song-procedural-v3"
         ],
         "shirtColor": "#A84F50",
         "highlightColor": "#D3A99A",
@@ -145,7 +148,8 @@
           "shot:breath-separation",
           "camera:pull",
           "episode:02",
-          "artist:THE POLICE · 1983"
+          "artist:THE POLICE · 1983",
+          "song-procedural-v3"
         ],
         "shirtColor": "#A84F50",
         "highlightColor": "#D3A99A",
@@ -176,7 +180,8 @@
           "shot:breath-release",
           "camera:pull",
           "episode:02",
-          "artist:THE POLICE · 1983"
+          "artist:THE POLICE · 1983",
+          "song-procedural-v3"
         ],
         "shirtColor": "#A84F50",
         "highlightColor": "#D3A99A",
@@ -338,7 +343,7 @@
   "seriesId": "the-song-explained",
   "season": 1,
   "episodeNumber": 2,
-  "templateVersion": "2.1",
+  "templateVersion": "3.0",
   "productionStatus": "review",
-  "thumbnailUrl": "assets/the-song-explained/every-breath-cover.svg"
+  "thumbnailUrl": "assets/the-song-explained/every-breath-procedural-v3.svg"
 }
