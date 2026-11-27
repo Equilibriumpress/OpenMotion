@@ -3,7 +3,7 @@
   "id": "the-song-explained-001-fast-car",
   "slug": "the-song-explained-001-fast-car",
   "title": "The Song Explained 01 — Fast Car",
-  "description": "An original visual interpretation of Tracy Chapman's Fast Car (1988): poverty, hope, responsibility and the difficulty of changing one's circumstances. Sources: https://www.about-tracy-chapman.net/1988-the-pop-life/ (New York Times interview, April 1988); https://www.kgou.org/2021-10-15/meeting-tracy-chapman-in-the-spaces-between (NPR, 2021); https://www.latimes.com/archives/la-xpm-1995-12-09-ca-12251-story.html (artist interview, 1995). No song lyrics, original recording or album art. The final question is an editorial interpretation.",
+  "description": "An original visual interpretation of Tracy Chapman's Fast Car (1988): poverty, hope, responsibility and the difficulty of changing one's circumstances. Sources: https://www.about-tracy-chapman.net/1988-the-pop-life/ (New York Times interview, April 1988); https://www.kgou.org/2021-10-15/meeting-tracy-chapman-in-the-spaces-between (NPR, 2021); https://www.latimes.com/archives/la-xpm-1995-12-09-ca-12251-story.html (artist interview, 1995). No song lyrics, original recording or album art. The final question is an editorial interpretation. Cinematic v2: fictional recurring protagonist, original non-melodic sound design and full-bleed illustration.",
   "category": "Shorts & Reels",
   "author": "OpenMotion Studio",
   "source": "template",
@@ -16,56 +16,24 @@
   "fps": 60,
   "brandKit": {
     "brandName": "THE SONG EXPLAINED",
-    "primaryColor": "#D5A34B",
-    "accentColor": "#A4473D",
-    "backgroundColor": "#EDE5D5",
-    "surfaceColor": "#526F80",
-    "textColor": "#191919",
-    "mutedColor": "#766A5B",
+    "primaryColor": "#D39A62",
+    "accentColor": "#A85C43",
+    "backgroundColor": "#182735",
+    "surfaceColor": "#465A72",
+    "textColor": "#F4E6D0",
+    "mutedColor": "#9F8F81",
     "fontFamily": "system-ui"
   },
   "scenes": [
     {
-      "id": "tse-001-1",
-      "name": "Opening",
-      "durationSec": 3,
-      "layout": "doodle-explainer",
-      "transition": "fade",
-      "backdrop": "dot-matrix",
-      "headline": "MORE THAN A CAR.",
-      "caption": "A song about escape.",
-      "fullBleed": true,
-      "doodle": {
-        "setting": "standing",
-        "palette": "cream",
-        "mood": "neutral",
-        "pose": "neutral",
-        "emphasis": [],
-        "extras": [
-          "mind-series-v1",
-          "song-explainer-v1",
-          "shot:road",
-          "episode:01",
-          "artist:TRACY CHAPMAN · 1988",
-          "camera:push",
-          "cover-title:FAST CAR",
-          "cover-hook:More than a car.",
-          "symbol:car"
-        ],
-        "shirtColor": "#A4473D",
-        "highlightColor": "#D5A34B",
-        "narration": "Fast Car is about more than driving."
-      }
-    },
-    {
-      "id": "tse-001-2",
-      "name": "The narrator",
+      "id": "tse-001-v2-1",
+      "name": "Longing",
       "durationSec": 5,
       "layout": "doodle-explainer",
       "transition": "fade",
       "backdrop": "dot-matrix",
-      "headline": "A DIFFERENT LIFE",
-      "caption": "Tracy Chapman · 1988",
+      "headline": "MORE THAN A CAR.",
+      "caption": "",
       "fullBleed": true,
       "doodle": {
         "setting": "standing",
@@ -76,25 +44,29 @@
         "extras": [
           "mind-series-v1",
           "song-explainer-v1",
-          "shot:room",
+          "song-cinematic-v2",
+          "shot:longing",
+          "camera:push",
           "episode:01",
           "artist:TRACY CHAPMAN · 1988",
-          "camera:push"
+          "cover-title:FAST CAR",
+          "cover-hook:More than a car.",
+          "symbol:car"
         ],
-        "shirtColor": "#A4473D",
-        "highlightColor": "#D5A34B",
-        "narration": "In Tracy Chapman's 1988 song, a young woman dreams of a different life."
+        "shirtColor": "#A85C43",
+        "highlightColor": "#D39A62",
+        "narration": "Fast Car tells the story of someone longing for a different life."
       }
     },
     {
-      "id": "tse-001-3",
+      "id": "tse-001-v2-2",
       "name": "Responsibility",
-      "durationSec": 8,
+      "durationSec": 7,
       "layout": "doodle-explainer",
       "transition": "fade",
       "backdrop": "dot-matrix",
-      "headline": "WORK. FAMILY. POVERTY.",
-      "caption": "Responsibility comes first.",
+      "headline": "",
+      "caption": "",
       "fullBleed": true,
       "doodle": {
         "setting": "standing",
@@ -105,25 +77,26 @@
         "extras": [
           "mind-series-v1",
           "song-explainer-v1",
+          "song-cinematic-v2",
           "shot:shop",
+          "camera:push",
           "episode:01",
-          "artist:TRACY CHAPMAN · 1988",
-          "camera:push"
+          "artist:TRACY CHAPMAN · 1988"
         ],
-        "shirtColor": "#A4473D",
-        "highlightColor": "#D5A34B",
-        "narration": "She leaves school to support her father. She works, but money is scarce and the future feels limited."
+        "shirtColor": "#A85C43",
+        "highlightColor": "#D39A62",
+        "narration": "She leaves school to care for her father. She works, but money is scarce."
       }
     },
     {
-      "id": "tse-001-4",
-      "name": "A brief escape",
+      "id": "tse-001-v2-3",
+      "name": "Freedom",
       "durationSec": 8,
       "layout": "doodle-explainer",
       "transition": "fade",
       "backdrop": "dot-matrix",
-      "headline": "A MOMENT OF FREEDOM",
-      "caption": "Hope returns.",
+      "headline": "",
+      "caption": "",
       "fullBleed": true,
       "doodle": {
         "setting": "standing",
@@ -134,25 +107,26 @@
         "extras": [
           "mind-series-v1",
           "song-explainer-v1",
-          "shot:night",
+          "song-cinematic-v2",
+          "shot:drive",
+          "camera:track",
           "episode:01",
-          "artist:TRACY CHAPMAN · 1988",
-          "camera:push"
+          "artist:TRACY CHAPMAN · 1988"
         ],
-        "shirtColor": "#A4473D",
-        "highlightColor": "#D5A34B",
-        "narration": "With her partner, she sees a chance to start over. For a moment, the journey offers freedom and belonging."
+        "shirtColor": "#A85C43",
+        "highlightColor": "#D39A62",
+        "narration": "With her partner, she sees a chance to start over. For a moment, she feels free."
       }
     },
     {
-      "id": "tse-001-5",
-      "name": "The pattern returns",
-      "durationSec": 8,
+      "id": "tse-001-v2-4",
+      "name": "Reality",
+      "durationSec": 10,
       "layout": "doodle-explainer",
       "transition": "fade",
       "backdrop": "dot-matrix",
-      "headline": "THE SAME STRUGGLES",
-      "caption": "A new place, familiar problems.",
+      "headline": "",
+      "caption": "",
       "fullBleed": true,
       "doodle": {
         "setting": "standing",
@@ -163,25 +137,26 @@
         "extras": [
           "mind-series-v1",
           "song-explainer-v1",
+          "song-cinematic-v2",
           "shot:return",
+          "camera:push",
           "episode:01",
-          "artist:TRACY CHAPMAN · 1988",
-          "camera:push"
+          "artist:TRACY CHAPMAN · 1988"
         ],
-        "shirtColor": "#A4473D",
-        "highlightColor": "#D5A34B",
-        "narration": "But the new life brings familiar problems. Her partner drinks, and the responsibility for the family falls on her again."
+        "shirtColor": "#A85C43",
+        "highlightColor": "#D39A62",
+        "narration": "Then the old pattern returns. Her partner drinks, and she is left carrying the responsibility for their family."
       }
     },
     {
-      "id": "tse-001-6",
-      "name": "Interpretation",
-      "durationSec": 8,
+      "id": "tse-001-v2-5",
+      "name": "Reflection",
+      "durationSec": 10,
       "layout": "doodle-explainer",
       "transition": "fade",
       "backdrop": "dot-matrix",
       "headline": "ESCAPE IS MORE|THAN DISTANCE.",
-      "caption": "The meaning of Fast Car.",
+      "caption": "",
       "fullBleed": true,
       "doodle": {
         "setting": "standing",
@@ -192,145 +167,122 @@
         "extras": [
           "mind-series-v1",
           "song-explainer-v1",
-          "shot:road",
+          "song-cinematic-v2",
+          "shot:reflection",
+          "camera:pull",
           "episode:01",
-          "artist:TRACY CHAPMAN · 1988",
-          "camera:pull"
+          "artist:TRACY CHAPMAN · 1988"
         ],
-        "shirtColor": "#A4473D",
-        "highlightColor": "#D5A34B",
-        "narration": "The car becomes a symbol of hope and escape. The song asks whether leaving a place is enough to change a life."
+        "shirtColor": "#A85C43",
+        "highlightColor": "#D39A62",
+        "narration": "The car represents hope. But leaving a place does not always mean leaving your circumstances behind."
       }
     }
   ],
   "captions": [
     {
-      "text": "Fast Car is about more than driving.",
+      "text": "Fast Car tells the story of someone",
       "startSec": 0.85,
-      "endSec": 2.6,
+      "endSec": 3.038,
       "style": "minimal",
-      "position": 0.78,
-      "fontSizePx": 45
+      "position": 0.75,
+      "fontSizePx": 43
     },
     {
-      "text": "In Tracy Chapman's 1988 song, a young",
-      "startSec": 3.3,
-      "endSec": 5.449999999999999,
+      "text": "longing for a different life.",
+      "startSec": 3.038,
+      "endSec": 4.6,
       "style": "minimal",
-      "position": 0.78,
-      "fontSizePx": 45
+      "position": 0.75,
+      "fontSizePx": 43
     },
     {
-      "text": "woman dreams of a different life.",
-      "startSec": 5.449999999999999,
-      "endSec": 7.6,
+      "text": "She leaves school to care for her",
+      "startSec": 5.3,
+      "endSec": 8.45,
       "style": "minimal",
-      "position": 0.78,
-      "fontSizePx": 45
+      "position": 0.75,
+      "fontSizePx": 43
     },
     {
-      "text": "She leaves school to support her father.",
-      "startSec": 8.3,
-      "endSec": 10.733333333333334,
+      "text": "father. She works, but money is scarce.",
+      "startSec": 8.45,
+      "endSec": 11.6,
       "style": "minimal",
-      "position": 0.78,
-      "fontSizePx": 45
-    },
-    {
-      "text": "She works, but money is scarce and",
-      "startSec": 10.733333333333334,
-      "endSec": 13.166666666666668,
-      "style": "minimal",
-      "position": 0.78,
-      "fontSizePx": 45
-    },
-    {
-      "text": "the future feels limited.",
-      "startSec": 13.166666666666668,
-      "endSec": 15.600000000000001,
-      "style": "minimal",
-      "position": 0.78,
-      "fontSizePx": 45
+      "position": 0.75,
+      "fontSizePx": 43
     },
     {
       "text": "With her partner, she sees a chance",
-      "startSec": 16.3,
-      "endSec": 18.733333333333334,
+      "startSec": 12.3,
+      "endSec": 15.494,
       "style": "minimal",
-      "position": 0.78,
-      "fontSizePx": 45
+      "position": 0.75,
+      "fontSizePx": 43
     },
     {
-      "text": "to start over. For a moment, the",
-      "startSec": 18.733333333333334,
-      "endSec": 21.166666666666668,
+      "text": "to start over. For a moment, she",
+      "startSec": 15.494,
+      "endSec": 18.688,
       "style": "minimal",
-      "position": 0.78,
-      "fontSizePx": 45
+      "position": 0.75,
+      "fontSizePx": 43
     },
     {
-      "text": "journey offers freedom and belonging.",
-      "startSec": 21.166666666666668,
-      "endSec": 23.6,
+      "text": "feels free.",
+      "startSec": 18.688,
+      "endSec": 19.6,
       "style": "minimal",
-      "position": 0.78,
-      "fontSizePx": 45
+      "position": 0.75,
+      "fontSizePx": 43
     },
     {
-      "text": "But the new life brings familiar problems.",
-      "startSec": 24.3,
-      "endSec": 26.733333333333334,
+      "text": "Then the old pattern returns. Her partner",
+      "startSec": 20.3,
+      "endSec": 23.917,
       "style": "minimal",
-      "position": 0.78,
-      "fontSizePx": 45
+      "position": 0.75,
+      "fontSizePx": 43
     },
     {
-      "text": "Her partner drinks, and the responsibility for",
-      "startSec": 26.733333333333334,
-      "endSec": 29.166666666666668,
+      "text": "drinks, and she is left carrying the",
+      "startSec": 23.917,
+      "endSec": 27.533,
       "style": "minimal",
-      "position": 0.78,
-      "fontSizePx": 45
+      "position": 0.75,
+      "fontSizePx": 43
     },
     {
-      "text": "the family falls on her again.",
-      "startSec": 29.166666666666668,
-      "endSec": 31.6,
+      "text": "responsibility for their family.",
+      "startSec": 27.533,
+      "endSec": 29.6,
       "style": "minimal",
-      "position": 0.78,
-      "fontSizePx": 45
+      "position": 0.75,
+      "fontSizePx": 43
     },
     {
-      "text": "The car becomes a symbol of hope",
-      "startSec": 32.3,
-      "endSec": 34.125,
+      "text": "The car represents hope. But leaving a",
+      "startSec": 30.3,
+      "endSec": 33.844,
       "style": "minimal",
-      "position": 0.78,
-      "fontSizePx": 45
+      "position": 0.75,
+      "fontSizePx": 43
     },
     {
-      "text": "and escape. The song asks whether leaving",
-      "startSec": 34.125,
-      "endSec": 35.949999999999996,
+      "text": "place does not always mean leaving your",
+      "startSec": 33.844,
+      "endSec": 37.388,
       "style": "minimal",
-      "position": 0.78,
-      "fontSizePx": 45
+      "position": 0.75,
+      "fontSizePx": 43
     },
     {
-      "text": "a place is enough to change a",
-      "startSec": 35.949999999999996,
-      "endSec": 37.775,
+      "text": "circumstances behind.",
+      "startSec": 37.388,
+      "endSec": 38.4,
       "style": "minimal",
-      "position": 0.78,
-      "fontSizePx": 45
-    },
-    {
-      "text": "life.",
-      "startSec": 37.775,
-      "endSec": 39.599999999999994,
-      "style": "minimal",
-      "position": 0.78,
-      "fontSizePx": 45
+      "position": 0.75,
+      "fontSizePx": 43
     }
   ],
   "audioTracks": [
@@ -343,21 +295,21 @@
       "volume": 1
     },
     {
-      "id": "score",
+      "id": "cinematic-sound",
       "kind": "music",
-      "src": "assets/audio/the-song-explained-001-fast-car-score.mp3",
+      "src": "assets/the-song-explained/the-song-explained-001-fast-car-sound.wav",
       "startSec": 0,
       "endSec": 40,
-      "volume": 0.18,
-      "fadeInSec": 0.3,
-      "fadeOutSec": 1.2
+      "volume": 0.65,
+      "fadeInSec": 0,
+      "fadeOutSec": 0
     }
   ],
   "kind": "video",
   "seriesId": "the-song-explained",
   "season": 1,
   "episodeNumber": 1,
-  "templateVersion": "1.0",
+  "templateVersion": "2.0",
   "productionStatus": "review",
-  "thumbnailUrl": "assets/the-song-explained/fast-car-cover.svg"
+  "thumbnailUrl": "assets/the-song-explained/fast-car-cover-v2.svg"
 }

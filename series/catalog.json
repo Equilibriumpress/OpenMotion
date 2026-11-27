@@ -432,7 +432,7 @@
       "id": "the-song-explained",
       "title": "The Song Explained",
       "description": "De betekenis en achtergrond van bekende nummers in geanimeerde muziekposters.",
-      "activeVersion": "1.0",
+      "activeVersion": "2.0",
       "versions": [
         {
           "version": "1.0",
@@ -452,12 +452,31 @@
             "mutedColor": "#766A5B",
             "fontFamily": "system-ui"
           }
+        },
+        {
+          "version": "2.0",
+          "format": "9:16",
+          "fps": 60,
+          "durationSec": 40,
+          "referenceProject": "the-song-explained-001-fast-car",
+          "templatePath": "series/the-song-explained/template-v2.0.json",
+          "instructions": "Produce an original 30–40s animated music mini-documentary. Full-bleed shots, a recurring fictional protagonist, emotionally motivated color and light, a restrained cover and captions, no repeated title panels. Use layout=doodle-explainer and the three markers mind-series-v1, song-explainer-v1, song-cinematic-v2. Existing Fast Car presets longing, shop, drive, return, reflection are story-specific; extend cinematicSongRenderer with original compositions for new songs. Camera push/pull/track. Use one selectable 0.85s cover, separate SVG thumbnail, and optional original procedural sound bed at assets/the-song-explained/<slug>-sound.wav. Existing cached Piper provides voice. Verify artist interviews and distinguish interpretation from documented intent. No lyrics, original music or album art. Visual review before season expansion.",
+          "brandKit": {
+            "brandName": "THE SONG EXPLAINED",
+            "primaryColor": "#D39A62",
+            "accentColor": "#A85C43",
+            "backgroundColor": "#182735",
+            "surfaceColor": "#465A72",
+            "textColor": "#F4E6D0",
+            "mutedColor": "#9F8F81",
+            "fontFamily": "system-ui"
+          }
         }
       ],
       "episodes": [],
       "cover": {
-        "imageUrl": "series-covers/the-song-explained.svg",
-        "alt": "The Song Explained – seriecover met vinylplaat"
+        "imageUrl": "series-covers/the-song-explained-v2.svg",
+        "alt": "The Song Explained – cinematic music documentary"
       }
     }
   ],

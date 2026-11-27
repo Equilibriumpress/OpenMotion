@@ -1,3 +1,4 @@
+import { prepareSongSound } from './song-cinematic-sound.mjs';
 import fs from 'fs';
 import path from 'path';
 import { spawnSync } from 'node:child_process';
@@ -80,6 +81,7 @@ if (ci || process.env.TRAVEL_ASSETS === '1') {
 }
 const manifestStarted=Date.now();
 function prepareProject(p) {
+  prepareSongSound(p,rootDir);
   if (ci) {
     for (const track of p.audioTracks ?? []) {
       if (typeof track.src === 'string' && (track.src.startsWith('assets/audio/'+p.slug+'-') || track.src === 'assets/cat-office/'+p.slug+'.wav')) {
@@ -95,7 +97,8 @@ function prepareProject(p) {
     if(voice&&fs.existsSync(cueFile)){
       const cues=JSON.parse(fs.readFileSync(cueFile,'utf8'));
       if(p.scenes.some(s=>s.doodle?.extras?.includes('song-explainer-v1'))){
-        p.captions=cues.map(c=>({...c,startSec:Math.max(.85,c.startSec),position:.78,fontSizePx:45})).filter(c=>c.endSec>c.startSec);
+        const cinematic=p.scenes.some(s=>s.doodle?.extras?.includes('song-cinematic-v2'));
+        p.captions=cues.map(c=>({...c,startSec:Math.max(.85,c.startSec),position:cinematic ? .75 : .78,fontSizePx:cinematic?43:45})).filter(c=>c.endSec>c.startSec);
       }
       let offset=0;
       for(const s of p.scenes){
