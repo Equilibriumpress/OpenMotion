@@ -155,8 +155,42 @@ function stress(c:C,x:number,y:number,t:number,p:Palette){
  }
 }
 const face=(value:string|undefined,fallback:Face):Face=>HUMAN_FACES.includes(value as Face)?value as Face:fallback;
+
+/** A selectable social-video cover frame, deliberately readable in a small grid.
+ * Also used by the PNG export; no separate asset or asynchronous image load. */
+export function hasHumanSideCover(scene:OpenMotionScene|undefined):boolean{
+ return !!scene?.doodle?.extras?.includes('human-side-v1')&&!!scene.doodle.extras.some(v=>v.startsWith('cover-title:')&&v.slice(12).trim());
+}
+function coverValue(scene:OpenMotionScene,key:string,fallback=''):string{
+ return scene.doodle?.extras?.find(v=>v.startsWith(key+':'))?.slice(key.length+1)??fallback;
+}
+export function renderHumanSideCover(c:C,width:number,height:number,scene:OpenMotionScene,brand:OpenMotionBrandKit){
+ const p:Palette={ink:brand.textColor||INK,bg:brand.backgroundColor||PAPER,light:brand.surfaceColor||LIGHT,shadow:brand.mutedColor||SHADOW};
+ c.save();c.scale(width/W,height/H);background(c,p,370,.95);
+ // Core title and faces are within the central profile-grid crop (y=210–750).
+ const episode=coverValue(scene,'episode','01');
+ rounded(c,135,210,270,39,19,p,p.ink);
+ text(c,'THE HUMAN SIDE  /  '+episode,270,229,17,'#FFFFFF',800);
+ const lines=coverValue(scene,'cover-title','SAME MESSAGE|DIFFERENT MINDS').split('|').filter(Boolean).slice(0,3);
+ lines.forEach((v,i)=>{
+  const y=287+i*55;
+  c.font='900 48px system-ui, sans-serif';
+  const size=Math.min(48,48*430/Math.max(1,c.measureText(v).width));
+  text(c,v,270,y,size,p.ink,900);
+ });
+ // Enlarged expressions: opposing poses communicate the topic even without text.
+ const a=coverValue(scene,'cover-pose-a','kneel'),b=coverValue(scene,'cover-pose-b','joy');
+ figure(c,144,713,1.12,1.25,a,face(coverValue(scene,'cover-face-a'),'panic'),p,a,.7);
+ figure(c,369,713,1.12,1.25,b,face(coverValue(scene,'cover-face-b'),'joy'),p,b,2);
+ if(['panic','worry','sad'].includes(coverValue(scene,'cover-face-a','panic')))stress(c,120,492,1.25,p);
+ const hook=coverValue(scene,'cover-hook',coverValue(scene,'message',''));
+ if(hook){rounded(c,77,380,386,56,16,p,'#FFFFFF');wrap(c,hook,270,408,356,24,p.ink);}
+ c.restore();
+}
+
 export function renderHumanSide(c:C,width:number,height:number,scene:OpenMotionScene,localTime:number,brand:OpenMotionBrandKit){
  const t=Math.max(0,Math.min(scene.durationSec,localTime));
+ if(hasHumanSideCover(scene)&&t<Math.min(.85,scene.durationSec*.3)){renderHumanSideCover(c,width,height,scene,brand);return;}
  const extras=scene.doodle?.extras??[];
  const get=(key:string,fallback='')=>extras.find(x=>x.startsWith(key+':'))?.slice(key.length+1)??fallback;
  const shot=get('shot','contrast'),episode=get('episode','01'),message=get('message','We need to talk.');
