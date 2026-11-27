@@ -21,6 +21,7 @@ import { renderThreeCampervanScene } from './threeCampervanRenderer';
 import { renderParallaxCinema } from './parallaxCinemaRenderer';
 import { renderThreeExplainer } from './threeExplainerRenderer';
 
+let regionalRevealCanvas:HTMLCanvasElement|undefined;
 function clamp(v: number, min = 0, max = 1): number {
   return Math.max(min, Math.min(max, v));
 }
@@ -408,7 +409,8 @@ export function renderOpenMotionFrame(
     const documentary = scene.bucketList.documentary;
     const documentaryMapCut = documentary?.mode === 'map' || previous?.bucketList?.documentary?.mode === 'map';
      const travelMapCut = documentary?.series==='places-worth-exploring' && documentaryMapCut;
-    const dissolveTarget = scene.bucketList.directorsCut&&previous?.bucketList?.cover ? 0 : travelMapCut ? 0 : documentary ? (documentary.chapter === 1 ? .18 : documentaryMapCut ? .65 : .4) : previous?.bucketList?.chapter==='zoom' ? .78
+    const regionalReveal=previous?.bucketList?.chapter==='zoom'&&Boolean(previous.bucketList.regionalFlight);
+    const dissolveTarget = regionalReveal ? .5 : scene.bucketList.directorsCut&&previous?.bucketList?.cover ? 0 : travelMapCut ? 0 : documentary ? (documentary.chapter === 1 ? .18 : documentaryMapCut ? .65 : .4) : previous?.bucketList?.chapter==='zoom' ? .78
       : scene.bucketList.chapter==='outro' ? .60 : .36;
     const continuousDocMap=previous?.bucketList?.documentary?.mode==='map'&&scene.bucketList.documentary?.mode==='map';
     const dissolve=previous?.layout==='bucket-list-zoom'&&previous.bucketList&&scene.transition==='fade'&&!continuousDocMap
@@ -421,10 +423,24 @@ export function renderOpenMotionFrame(
       // layer belonging to the incoming scene: no ghosted double titles.
       renderBucketListScene(ctx,w,h,previous,finalPreviousTime,project,getPhoto,'image');
       const t=clamp(localTime/dissolve),opacity=t*t*(3-2*t);
-      ctx.save();ctx.globalAlpha*=opacity;
-      if(scene.bucketList.directorsCut&&previous.bucketList.chapter==='zoom'){ctx.beginPath();ctx.arc(w/2,h/2,Math.hypot(w,h)*.55*Math.sqrt(t),0,Math.PI*2);ctx.clip();}
-      renderBucketListScene(ctx,w,h,scene,localTime,project,getPhoto,'image');
-      ctx.restore();
+      if(regionalReveal){
+        // Feathered radial mask, isolated on a reusable canvas; map remains below it.
+        const layer=regionalRevealCanvas??(regionalRevealCanvas=document.createElement('canvas'));
+        if(layer.width!==w||layer.height!==h){layer.width=w;layer.height=h;}
+        const lc=layer.getContext('2d');
+        if(lc){
+          lc.clearRect(0,0,w,h);renderBucketListScene(lc,w,h,scene,localTime,project,getPhoto,'image');
+          const maxRadius=Math.hypot(w/2,h/2),feather=w*.065,radius=(maxRadius+feather)*opacity;
+          lc.save();lc.globalCompositeOperation='destination-in';
+          const mask=lc.createRadialGradient(w/2,h/2,Math.max(0,radius-feather),w/2,h/2,Math.max(.01,radius+feather));
+          mask.addColorStop(0,'rgba(255,255,255,1)');mask.addColorStop(1,'rgba(255,255,255,0)');lc.fillStyle=mask;lc.fillRect(0,0,w,h);lc.restore();
+          ctx.save();ctx.globalAlpha*=clamp(t/.13);ctx.drawImage(layer,0,0,w,h);ctx.restore();
+        }else{ctx.save();ctx.globalAlpha*=opacity;renderBucketListScene(ctx,w,h,scene,localTime,project,getPhoto,'image');ctx.restore();}
+      }else{
+        ctx.save();ctx.globalAlpha*=opacity;
+        if(scene.bucketList.directorsCut&&previous.bucketList.chapter==='zoom'){ctx.beginPath();ctx.arc(w/2,h/2,Math.hypot(w,h)*.55*Math.sqrt(t),0,Math.PI*2);ctx.clip();}
+        renderBucketListScene(ctx,w,h,scene,localTime,project,getPhoto,'image');ctx.restore();
+      }
       renderBucketListScene(ctx,w,h,scene,localTime,project,getPhoto,'text');
     }else{
       renderBucketListScene(ctx,w,h,scene,localTime,project,url=>getCachedPhoto(projectAssetUrl(url)));
