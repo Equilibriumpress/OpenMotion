@@ -31,3 +31,10 @@ The two reactions are fictional, not diagnoses, not fixed personality types, and
 ## Review and publication
 
 Open #studio/the-human-side-01-same-situation after the normal Pages deploy. Inspect first-frame readability, pose transitions, hands, mobile overlays, Piper pacing and export audio. The cover is an original static SVG, not an exported video frame. Use Studio's normal MP4 export. New scene edits require normal audio regeneration for updated voiceover. Browser visual review and real MP4 export are still pending. No new test Actions or automatic MP4 render.
+
+
+## Social cover — template 1.1
+
+The first 0.85 seconds (or up to 30% of a shorter first scene) are a selectable thumbnail frame with a two-line high-contrast title, two enlarged character poses, a message hook and series label. The original narration starts on its existing timeline and the total duration is unchanged. The cover is rendered through the same deterministic Canvas path as the MP4; the export tab also provides the matching 1080 × 1920 PNG. Set the cover fields in the first scene's dedicated editor. An empty cover-title disables it. Keep core content inside the central area for profile grid crops. Choose a frame around 0.3 seconds in the platform's thumbnail picker; OpenMotion does not set the remote thumbnail automatically. For platforms/accounts supporting separate custom images, the PNG is an alternative.
+
+Version 1.0 remains unchanged; the pilot is now explicitly assigned 1.1, and future episodes inherit the new cover instructions. The horizontal Studio series cover is separate and unchanged. No extra rendering workflow is needed. Browser PNG/MP4 output and platform upload remain to be verified.
