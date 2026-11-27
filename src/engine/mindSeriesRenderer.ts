@@ -16,7 +16,7 @@ function paper(c:C,cool:number){
  for(let i=0;i<2300;i++){n=(Math.imul(n,1664525)+1013904223)>>>0;const x=n%W;n=(Math.imul(n,1664525)+1013904223)>>>0;const y=n%H;c.fillRect(x,y,1+(n%3),.65);}
  c.restore();
 }
-export type MindGesture='idle'|'walk'|'point'|'shrug'|'slump'|'wash'|'open';
+export type MindGesture='idle'|'walk'|'point'|'shrug'|'slump'|'wash'|'open'|'talk'|'listen'|'interrupt'|'recoil';
 export type MindMood='happy'|'worried'|'surprised'|'overwhelmed'|'relaxed'|'sleepy'|'annoyed'|'confused'|'focused'|'relieved';
 /** Separate limb chains, torso, hair, head, brows, eyelids, pupils and mouth.
  * Feet are grounded at y; animation is sampled from time, not accumulated. */
@@ -31,7 +31,7 @@ export function drawMindPerson(c:C,x:number,y:number,s:number,t:number,mood:stri
   shape(c,()=>{c.moveTo(side*24,-73+bob);c.quadraticCurveTo(side*23+side*stride*12,-34,fx,fy);},undefined,4.2);
   line(c,[fx,fy,fx+side*13,fy],4);
  }
- c.translate(0,bob+(slump?13:0));c.rotate(slump?-.075:0);
+ c.translate(0,bob+(slump?13:0));c.rotate(slump?-.075:gesture==='recoil'?-.07:gesture==='talk'?.018*Math.sin(t*3):0);
  // Back arms before the body, with independent hands.
  for(const side of [-1,1]){
   let hx=side*76,hy=-83;
@@ -39,6 +39,10 @@ export function drawMindPerson(c:C,x:number,y:number,s:number,t:number,mood:stri
   if(gesture==='point'&&side===1){hx=105;hy=-143+3*Math.sin(t*3);}
   if(gesture==='shrug'||gesture==='open'){hx=side*98;hy=-151+3*Math.sin(t*2.7);}
   if(slump){hx=side*63;hy=-48;}
+  if(gesture==='talk'){hx=side*(88+9*Math.sin(t*5+side));hy=-130+22*Math.sin(t*5+side);}
+  if(gesture==='listen'){hx=side*65;hy=-82+2*Math.sin(t*1.7);}
+  if(gesture==='interrupt'&&side===1){hx=101;hy=-163+4*Math.sin(t*5);}
+  if(gesture==='recoil'){hx=side*68;hy=-103;}
   if(wash){hx=side*44+Math.sin(t*8+side)*12;hy=-108+Math.cos(t*8+side)*6;}
   if(!wash){
    shape(c,()=>{c.moveTo(side*48,-136);c.quadraticCurveTo(side*78,-120,hx,hy);},undefined,4);
@@ -48,7 +52,7 @@ export function drawMindPerson(c:C,x:number,y:number,s:number,t:number,mood:stri
  shape(c,()=>{c.moveTo(-2,-168);c.bezierCurveTo(-75,-167,-83,-70,-25,-63);c.bezierCurveTo(53,-46,79,-81,65,-131);c.quadraticCurveTo(52,-170,-2,-168);c.closePath();},shirt,3.8);
  c.save();c.clip();for(const yy of [-130,-105])shape(c,()=>{c.moveTo(-75,yy);c.quadraticCurveTo(0,yy+12,75,yy);},undefined,10,other?'#D8C8DF':GOLD);c.restore();
  if(wash){for(const side of [-1,1]){const hx=side*44+Math.sin(t*8+side)*12,hy=-108+Math.cos(t*8+side)*6;shape(c,()=>{c.moveTo(side*46,-136);c.quadraticCurveTo(side*62,-95,hx,hy);},undefined,4);oval(c,hx,hy,7,8,SKIN,2.4);}}
- c.save();c.translate(0,-201);c.rotate(slump?-.07:gesture==='point'?.035:0);
+ c.save();c.translate(0,-201);c.rotate(slump?-.07:gesture==='point'?.035:gesture==='listen'?.045:gesture==='recoil'?-.055:0);
  shape(c,()=>{c.moveTo(-43,-28);c.bezierCurveTo(-62,4,-43,44,-4,45);c.bezierCurveTo(40,47,61,17,48,-18);c.quadraticCurveTo(17,-48,-43,-28);c.closePath();},SKIN,3.8);
  if(other){shape(c,()=>{c.moveTo(-47,-8);c.bezierCurveTo(-64,-56,48,-65,53,-16);c.quadraticCurveTo(30,-29,15,-26);c.quadraticCurveTo(-19,-8,-47,-8);c.closePath();},'#835C43',3.3);}
  else{shape(c,()=>{c.moveTo(-47,-10);c.quadraticCurveTo(-62,-31,-35,-42);c.quadraticCurveTo(-36,-55,-10,-45);c.quadraticCurveTo(8,-61,26,-43);c.quadraticCurveTo(56,-45,51,-11);c.quadraticCurveTo(28,-29,14,-27);c.quadraticCurveTo(-4,-14,-21,-28);c.quadraticCurveTo(-35,-18,-47,-10);c.closePath();},'#47362D',3.3);}
@@ -96,6 +100,7 @@ function title(c:C,s:OpenMotionScene,t:number){
 }
 export function renderMindSeries(c:C,width:number,height:number,scene:OpenMotionScene,time:number){
  const t=Math.max(0,Math.min(time,scene.durationSec)),d=scene.doodle!,shot=d.extras?.[1]??'hook',shirt=d.shirtColor??'#518D89';
+ if(shot==='conversation-v1'){renderConversation(c,width,height,scene,t);return;}
  if(shot==='inside-your-mind'){renderInsideYourMind(c,width,height,scene,t);return;}
  const cool=shot==='switch'?ease(t/.9):shot==='wash'?1-ease(t/.8):d.palette==='shower'?1:0;
  c.save();c.scale(width/W,height/H);paper(c,cool);
@@ -158,5 +163,92 @@ function renderInsideYourMind(c:C,width:number,height:number,scene:OpenMotionSce
  else if(shot==='flash'){hero(252,.95,'slump');c.save();c.translate(252,411);c.rotate(-.045+Math.sin(t*3)*.008);box(c,-145,-102,290,204,13,'#FBF5E9',3);iymPerson(c,-62,82,.6,t,'surprised','shrug',shirt);iymPerson(c,64,82,.56,t,'focused','idle','#9D89AE',true);if(labels[0])text(c,labels[0],0,-80,20,RED);c.restore();}
  else if(shot==='focus'||shot==='resolve'||shot==='reframe'){hero(252,1.26,'open');if(labels[0])card(labels[0],252,371,280,true);}
  else {hero(252,1.35,'point');if(labels[0])card(labels[0],252,367,264);}
+ c.restore();
+}
+
+/** Reusable conversation staging, with the episode 01 character rig. */
+function speechSpan(extras:string[],speaker:string,t:number,defaultStart:number,defaultEnd:number){
+ const item=extras.find(x=>x.startsWith('speech-'+speaker+':'));
+ if(!item)return t>=defaultStart&&t<defaultEnd;
+ const [start,end]=item.slice(item.indexOf(':')+1).split(',').map(Number);
+ return t>=start&&t<end;
+}
+function dialogueBubble(c:C,words:string[],x:number,y:number,w:number,h:number,side:-1|1,alpha=1,accent=false){
+ c.save();c.globalAlpha=clamp(alpha);
+ box(c,x-w/2,y-h/2,w,h,20,accent?'#F4D9C9':'#FBF5E9',2.6);
+ shape(c,()=>{c.moveTo(x+side*22,y+h/2-1);c.lineTo(x+side*42,y+h/2+21);c.lineTo(x+side*48,y+h/2-1);},accent?'#F4D9C9':'#FBF5E9',2.5);
+ words.forEach((v,i)=>text(c,v,x,y+(i-(words.length-1)/2)*27,23,accent?RED:INK));
+ c.restore();
+}
+function thought(c:C,word:string,x:number,y:number,w:number,alpha:number){
+ c.save();c.globalAlpha=clamp(alpha);
+ oval(c,x-25,y+40,5,4,'#FBF5E9',1.8);oval(c,x-13,y+29,8,6,'#FBF5E9',1.8);
+ box(c,x-w/2,y-25,w,50,21,'#FBF5E9',2.3);text(c,word,x,y,21);
+ c.restore();
+}
+function volumeWaves(c:C,x:number,y:number,t:number,level:number){
+ c.save();c.translate(x,y);
+ for(let i=0;i<4;i++){
+  const alpha=clamp(level*4-i)*(.7+.3*Math.sin(t*5-i*.8));
+  if(alpha<=0)continue;
+  c.globalAlpha=alpha;const radius=24+i*17;
+  shape(c,()=>c.arc(0,0,radius,-.65,.65),undefined,3,i>1?RED:'#648D75');
+ }
+ c.restore();
+}
+function renderConversation(c:C,width:number,height:number,scene:OpenMotionScene,t:number){
+ const d=scene.doodle!,extra=d.extras??[],shot=extra[2]??'not-arguing',shirt=d.shirtColor??'#518D89';
+ const cool=shot==='question'?ease(t/.8):shot==='listening'?1-ease(t/1.1):d.palette==='shower'?1:0;
+ c.save();c.scale(width/W,height/H);paper(c,cool);
+ if(shot==='perspectives'){
+  c.save();c.globalAlpha=.78;c.fillStyle='#EFE3D0';c.fillRect(0,325,270,465);c.restore();
+  line(c,[270,338,270,787],1.7,'#B2A392');
+ }
+ text(c,'INSIDE THE ADHD MIND  /  02',270,72,16,'#79685B');title(c,scene,t);
+ line(c,[43,747,497,747],2,'#9D8F7F');
+ const end=Number(extra.find(x=>x.startsWith('speech-end:'))?.split(':')[1]??scene.durationSec-.45);
+ const heroTalk=speechSpan(extra,'hero',t,.3,shot==='question'?1.65:end);
+ const otherTalk=speechSpan(extra,'other',t,shot==='question'?1.8:99,shot==='question'?end:99);
+ const pose=d.pose==='point'?'point':d.pose==='exhausted'?'slump':d.pose==='relieved'?'open':d.pose==='alert'?'shrug':undefined;
+ const hero=(x:number,s:number,m:string,g:MindGesture,talk=heroTalk)=>drawMindPerson(c,x,747,s,t,m,g,shirt,false,talk);
+ const other=(x:number,s:number,m:string,g:MindGesture,talk=otherTalk)=>drawMindPerson(c,x,747,s,t+.17,m,g,'#9D89AE',true,talk);
+ if(shot==='not-arguing'){
+  hero(270,1.52,d.mood,pose??'shrug');
+  c.save();c.globalAlpha=ease((t-.35)/.45);text(c,'?',418,393,58,RED);c.restore();
+ }else if(shot==='enthusiasm'){
+  hero(155,1.16,d.mood,'talk');other(373,1.06,'happy','listen',false);
+  dialogueBubble(c,['And then…'],165,363,204,68,1,ease(t/.45));
+ }else if(shot==='fast-thoughts'){
+  hero(270,1.16,d.mood,'talk');
+  const words=(extra.find(x=>x.startsWith('thoughts:'))?.slice(9)??'Wait!|And then…|One more thing!').split('|');
+  const loc=[[141,348,150],[374,366,170],[247,438,216]];
+  words.slice(0,3).forEach((w,i)=>{const [x,y,ww]=loc[i];thought(c,w,x,y,ww,ease((t-.3-i*.43)/.28));});
+ }else if(shot==='interruption'){
+  const interrupt=t>.95;
+  hero(151,1.16,interrupt?'surprised':'happy',interrupt?'interrupt':'listen',heroTalk);
+  other(371,1.06,interrupt?'surprised':'focused',interrupt?'recoil':'talk',!interrupt&&t>.2&&t<.95);
+  dialogueBubble(c,['I think…'],380,375,166,68,-1,1-ease((t-1.0)/.32));
+  dialogueBubble(c,['Oh! And…'],155,365,184,68,1,ease((t-.95)/.22),true);
+ }else if(shot==='volume'){
+  hero(155,1.16,d.mood,'talk');other(397,1.05,t>1.5?'worried':'focused',t>1.5?'recoil':'listen',false);
+  const u=ease((t-.4)/2.0);dialogueBubble(c,['And then!'],163,370,176+48*u,68+12*u,1,1,u>.7);
+  volumeWaves(c,239,509,t,.2+.8*u);
+ }else if(shot==='question'){
+  hero(148,1.13,t<1.6?'focused':'surprised','listen',heroTalk);
+  other(373,1.08,'worried',otherTalk?'talk':'listen',otherTalk);
+  dialogueBubble(c,['Why are','you angry?'],365,370,214,92,-1,ease((t-1.35)/.35),true);
+ }else if(shot==='reaction'){
+  hero(270,1.5,d.mood,t<.8?'recoil':'shrug',heroTalk);text(c,'?!',414,384,47,RED);
+ }else if(shot==='perspectives'){
+  const labels=(extra.find(x=>x.startsWith('labels:'))?.slice(7)??'What I feel|What they hear|Enthusiasm|Intensity').split('|');
+  text(c,labels[0]??'What I feel',135,366,22);text(c,labels[1]??'What they hear',405,366,22);
+  hero(135,1.03,'happy','talk',heroTalk);other(405,1.03,'worried','recoil',false);
+  thought(c,labels[2]??'Enthusiasm',135,439,213,ease(t/.55));
+  thought(c,labels[3]??'Intensity',405,439,210,ease((t-.45)/.55));
+ }else if(shot==='listening'){
+  hero(155,1.15,d.mood,'listen',heroTalk);other(373,1.08,'relaxed','listen',false);
+  dialogueBubble(c,['Take your time.'],270,366,244,72,1,ease((t-2.5)/.6));
+  c.save();c.globalAlpha=ease((t-3.5)/.55);text(c,'✓',270,464,38,'#648D75');c.restore();
+ }else hero(270,1.35,d.mood,pose??'idle');
  c.restore();
 }

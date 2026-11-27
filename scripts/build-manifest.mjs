@@ -47,6 +47,13 @@ function prepareProject(p) {
         const end=offset+s.durationSec;
         const matching=cues.filter(c=>c.startSec>=offset&&c.startSec<end);
         if(matching.length)s.doodle.extras.push('speech-end:'+Math.min(s.durationSec,matching[matching.length-1].endSec-offset));
+        if(s.doodle.extras.includes('conversation-v1')){
+          for(const cue of matching){
+            if(cue.speaker==='hero'||cue.speaker==='other'){
+              s.doodle.extras.push('speech-'+cue.speaker+':'+Math.max(0,cue.startSec-offset)+','+Math.min(s.durationSec,cue.endSec-offset));
+            }
+          }
+        }
         offset=end;
       }
     }
