@@ -4,12 +4,17 @@
  * and WebCodecs/MediaRecorder export. R4 cut points: 4.5 / 9 / 12 / 16s.
  */
 const RATE=48000;
-const cache=new Map<number,Promise<AudioBuffer>>();
+const cache=new Map<string,Promise<AudioBuffer>>();
 
-function synthesize(durationSec:number):Promise<AudioBuffer>{
+function synthesize(durationSec:number,directorsCut:boolean):Promise<AudioBuffer>{
   const duration=Math.max(.5,durationSec);
   const ctx=new OfflineAudioContext(2,Math.ceil(duration*RATE),RATE);
-  const at=(time:number)=>time*duration/20;
+  const at=(time:number)=>{
+    if(!directorsCut)return time*duration/20;
+    const before=[0,1.2,4.5,9,12,16,20],after=[0,1.5,5,9,12.5,16.5,20];
+    let i=0;while(i<before.length-2&&time>before[i+1])i++;
+    return (after[i]+(time-before[i])/(before[i+1]-before[i])*(after[i+1]-after[i]))*duration/20;
+  };
 
   const master=ctx.createGain();
   master.gain.setValueAtTime(.0001,0);
@@ -121,13 +126,15 @@ function synthesize(durationSec:number):Promise<AudioBuffer>{
     oscillator.connect(envelope);envelope.connect(master);
     oscillator.start(start);oscillator.stop(end);
   }
+  if(directorsCut){const air=ctx.createBuffer(1,Math.ceil(duration*RATE),RATE),samples=air.getChannelData(0);let state=7419,low=0;for(let i=0;i<samples.length;i++){state=(Math.imul(state,1664525)+1013904223)>>>0;low=.985*low+.015*(state/2147483648-1);samples[i]=low;}const source=ctx.createBufferSource();source.buffer=air;const gain=ctx.createGain();gain.gain.setValueAtTime(0,0);gain.gain.linearRampToValueAtTime(.08,at(5.5));gain.gain.setValueAtTime(.08,at(16));gain.gain.linearRampToValueAtTime(0,duration);source.connect(gain);gain.connect(master);source.start(0);}
   return ctx.startRendering();
 }
-export function createBucketListAudio(durationSec:number):Promise<AudioBuffer>{
-  const key=Math.round(durationSec*100)/100;
+export function createBucketListAudio(durationSec:number,directorsCut=false):Promise<AudioBuffer>{
+  const rounded=Math.round(durationSec*100)/100;
+  const key=rounded+':'+directorsCut;
   const existing=cache.get(key);
   if(existing)return existing;
-  const created=synthesize(key).catch(error=>{cache.delete(key);throw error;});
+  const created=synthesize(rounded,directorsCut).catch(error=>{cache.delete(key);throw error;});
   cache.set(key,created);
   return created;
 }
