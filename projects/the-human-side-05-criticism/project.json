@@ -1,0 +1,220 @@
+{
+  "schemaVersion": "1.0",
+  "id": "the-human-side-05-criticism",
+  "slug": "the-human-side-05-criticism",
+  "title": "The Human Side 05 — Two Ways to Handle Criticism",
+  "description": "Original fictional everyday situation contrasting two possible responses. Inspired by cognitive appraisal theory (https://dictionary.apa.org/appraisal-theory). Not a diagnosis or universal personality distinction.",
+  "category": "Shorts & Reels",
+  "author": "OpenMotion Studio",
+  "source": "template",
+  "createdAt": "2026-11-27",
+  "updatedAt": "2026-11-27",
+  "githubPath": "projects/the-human-side-05-criticism/project.json",
+  "format": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "brandKit": {
+    "brandName": "THE HUMAN SIDE",
+    "primaryColor": "#C5A8D0",
+    "accentColor": "#E6D8ED",
+    "backgroundColor": "#C5A8D0",
+    "surfaceColor": "#E6D8ED",
+    "textColor": "#191619",
+    "mutedColor": "#806D87",
+    "fontFamily": "system-ui"
+  },
+  "scenes": [
+    {
+      "id": "ths-05-1",
+      "name": "Shared situation",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Some feedback for you.",
+      "caption": "Same words. Different impact.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "shot:message",
+          "episode:05",
+          "message:Your draft needs some changes.",
+          "pose-a:phone",
+          "pose-b:phone",
+          "face-a:surprise",
+          "face-b:neutral",
+          "cover-title:CRITICISM HURTS|BUT WHY?",
+          "cover-hook:Some feedback for you.",
+          "cover-pose-a:kneel",
+          "cover-pose-b:point",
+          "cover-face-a:sad",
+          "cover-face-b:determined"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "Two people receive the same feedback. Their draft needs changes."
+      }
+    },
+    {
+      "id": "ths-05-2",
+      "name": "Response A",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "I'm not good enough.",
+      "caption": "One hears a personal judgment.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "worried",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "shot:worry",
+          "episode:05",
+          "label-a:I'm not good enough.",
+          "pose-a:kneel",
+          "face-a:sad"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "One feels hurt and starts questioning their ability, rather than the draft."
+      }
+    },
+    {
+      "id": "ths-05-3",
+      "name": "Response B",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Which part needs work?",
+      "caption": "Another asks for specifics.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "relaxed",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "shot:calm",
+          "episode:05",
+          "label-b:Which part needs work?",
+          "pose-b:point",
+          "face-b:determined"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "The other still feels the sting, but asks what needs changing."
+      }
+    },
+    {
+      "id": "ths-05-4",
+      "name": "Contrast",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Feedback and identity.",
+      "caption": "An action is not your whole identity.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "worried",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "shot:contrast",
+          "episode:05",
+          "label-a:I'm not good enough.",
+          "label-b:Which part needs work?",
+          "pose-a:kneel",
+          "pose-b:point",
+          "face-a:sad",
+          "face-b:determined"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "Feedback feels personal when a comment about your work becomes a judgment about yourself."
+      }
+    },
+    {
+      "id": "ths-05-5",
+      "name": "More context",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Separate the work from the self.",
+      "caption": "Consider the useful parts.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "happy",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "shot:reveal",
+          "episode:05",
+          "message:Please shorten the opening.",
+          "pose-a:relief",
+          "pose-b:calm",
+          "face-a:relief",
+          "face-b:smile"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "The feedback is specific: shorten the opening. Decide what is useful without judging your entire self."
+      }
+    }
+  ],
+  "captions": [],
+  "audioTracks": [
+    {
+      "id": "voice",
+      "kind": "voiceover",
+      "src": "assets/audio/the-human-side-05-criticism-voice.mp3",
+      "startSec": 0,
+      "endSec": 28,
+      "volume": 1
+    },
+    {
+      "id": "score",
+      "kind": "music",
+      "src": "assets/audio/the-human-side-05-criticism-score.mp3",
+      "startSec": 0,
+      "endSec": 28,
+      "volume": 0.22,
+      "fadeInSec": 0.3,
+      "fadeOutSec": 1
+    }
+  ],
+  "kind": "video",
+  "seriesId": "the-human-side",
+  "season": 1,
+  "episodeNumber": 5,
+  "templateVersion": "1.1",
+  "productionStatus": "review",
+  "thumbnailUrl": "assets/the-human-side/the-human-side-05-criticism.svg"
+}
