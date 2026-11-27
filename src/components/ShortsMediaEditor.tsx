@@ -1,3 +1,4 @@
+import { HUMAN_POSES, HUMAN_FACES } from '../engine/humanSideRenderer';
 import { ChangeEvent, useState } from 'react';
 import { OpenMotionProject, OpenMotionScene, OpenMotionAudioTrack } from '../types/openmotion';
 import { parseRouteFile, parseSrt } from '../engine/routeImport';
@@ -131,6 +132,36 @@ export function ShortsMediaEditor({project,activeScene,onUpdateProject,onUpdateS
   {activeScene.doodle&&(()=>{
     const doodle=activeScene.doodle;
     const update=(patch:Partial<NonNullable<OpenMotionScene['doodle']>>)=>onUpdateScene({doodle:{...doodle,...patch}});
+    if(doodle.extras?.includes('human-side-v1')){
+      const extras=doodle.extras??[];
+      const get=(key:string,fallback='')=>extras.find(x=>x.startsWith(key+':'))?.slice(key.length+1)??fallback;
+      const set=(key:string,value:string)=>update({extras:[...extras.filter(x=>!x.startsWith(key+':')),key+':'+value]});
+      const shot=get('shot','contrast');
+      const poseA=shot==='message'?'phone':shot==='worry'?'panic':shot==='reveal'?'relief':'worried';
+      const poseB=shot==='message'?'phone':shot==='reveal'?'relief':'calm';
+      const faceA=shot==='message'?'neutral':shot==='worry'?'panic':shot==='reveal'?'relief':'worry';
+      return <div className="space-y-3 rounded-xl border border-purple-200 p-3">
+        <h4 className="font-semibold text-sm text-purple-900">The Human Side · stickfiguren</h4>
+        <label className="block text-xs">Scène<select className={style} value={shot} onChange={e=>set('shot',e.target.value)}>
+          {['message','worry','calm','contrast','reveal'].map(v=><option key={v}>{v}</option>)}
+        </select></label>
+        {(['a','b'] as const).map(side=><div key={side} className="space-y-2 border-t border-purple-100 pt-2">
+          <h5 className="text-xs font-semibold">Personage {side.toUpperCase()}</h5>
+          <label className="block text-xs">Houding<select className={style} value={get('pose-'+side,side==='a'?poseA:poseB)} onChange={e=>set('pose-'+side,e.target.value)}>
+            {Object.keys(HUMAN_POSES).map(v=><option key={v}>{v}</option>)}
+          </select></label>
+          <label className="block text-xs">Gezicht<select className={style} value={get('face-'+side,side==='a'?faceA:shot==='message'?'neutral':'smile')} onChange={e=>set('face-'+side,e.target.value)}>
+            {HUMAN_FACES.map(v=><option key={v}>{v}</option>)}
+          </select></label>
+          <label className="block text-xs">Gedachte<input className={style} value={get('label-'+side)} onChange={e=>set('label-'+side,e.target.value)}/></label>
+        </div>)}
+        <label className="block text-xs">Bericht<input className={style} value={get('message','We need to talk.')} onChange={e=>set('message',e.target.value)}/></label>
+        <label className="block text-xs">Afleveringsnummer<input className={style} value={get('episode','01')} onChange={e=>set('episode',e.target.value)}/></label>
+        <label className="block text-xs">Bijschrift<input className={style} value={activeScene.caption??''} onChange={e=>onUpdateScene({caption:e.target.value})}/></label>
+        <label className="block text-xs">Voice-overtekst<textarea className={style} rows={3} value={doodle.narration??activeScene.headline} onChange={e=>update({narration:e.target.value})}/></label>
+        <p className="text-xs text-slate-500">Nieuwe verteltekst wordt bij de volgende normale GitHub-publicatie opnieuw ingesproken. Houdingen en gezichten zijn direct zichtbaar in de preview.</p>
+      </div>;
+    }
     return <div className="space-y-3 rounded-xl border border-rose-200 p-3">
       <h4 className="font-semibold text-sm text-rose-900">Doodle explainer · Illustraties</h4>
       <label className="block text-xs text-slate-600">Scène

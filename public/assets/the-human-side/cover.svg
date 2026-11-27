@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360">
+<defs><radialGradient id="halo"><stop stop-color="#E6D8ED"/><stop offset="1" stop-color="#C5A8D0"/></radialGradient></defs>
+<rect width="640" height="360" fill="#C5A8D0"/><circle cx="461" cy="208" r="151" fill="url(#halo)"/>
+<g fill="#191619" font-family="system-ui,sans-serif" text-anchor="middle"><text x="320" y="31" font-size="15" font-weight="700" letter-spacing="3">THE HUMAN SIDE · 01</text><text x="320" y="69" font-size="27" font-weight="750">Same Situation, Different Minds</text></g>
+<g fill="#806D87"><ellipse cx="176" cy="318" rx="76" ry="12"/><ellipse cx="450" cy="318" rx="76" ry="12"/></g>
+<g stroke="#191619" stroke-width="5.6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+<path d="M174 192 Q199 228 169 263 Q141 290 145 315 L178 298 L178 315 M169 263 Q198 281 187 315 L218 302 L218 315 M174 196 Q132 236 128 267 M174 196 Q220 230 215 267"/>
+<path d="M440 188 Q418 232 433 263 Q386 289 392 316 L380 316 M433 263 Q476 281 503 316 L491 316 M440 192 Q395 171 389 115 M440 196 Q493 181 522 143 M389 115 l-12 -12 m12 12 l-3 -18 m3 18 l9 -16 m124 44 l-2 -18 m2 18 l10 -16 m-10 16 l16 -5"/>
+<circle cx="172" cy="151" r="39" fill="white"/><circle cx="450" cy="146" r="39" fill="white"/>
+<path d="M149 144 Q155 133 162 140 M182 140 Q190 133 196 143 M151 174 Q169 146 192 172 Q192 183 183 178 Q168 160 160 183 Q153 187 151 174" stroke-width="3.5"/>
+<path d="M429 138 Q436 128 444 139 M457 138 Q466 129 473 140 M426 151 Q449 168 475 151 Q450 185 426 151 Z" stroke-width="3.5"/>
+<path d="M118 140 Q104 131 95 138 Q106 144 118 140 M220 132 Q233 120 242 126 Q233 134 220 132 M184 101 Q190 87 197 91 Q194 101 184 101" stroke-width="2.5" fill="#fff"/>
+</g></svg>
