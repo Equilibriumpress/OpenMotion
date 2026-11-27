@@ -58,7 +58,11 @@
           "episodeNumber": 5,
           "templateVersion": "1.0"
         }
-      ]
+      ],
+      "cover": {
+        "imageUrl": "series-covers/inside-your-mind.svg",
+        "alt": "Inside Your Mind – seriecover"
+      }
     },
     {
       "id": "inside-adhd-mind",
@@ -99,7 +103,11 @@
           "episodeNumber": 2,
           "templateVersion": "1.0"
         }
-      ]
+      ],
+      "cover": {
+        "imageUrl": "series-covers/inside-adhd-mind.svg",
+        "alt": "Inside the ADHD Mind – seriecover"
+      }
     },
     {
       "id": "why-things-work",
@@ -127,7 +135,11 @@
           }
         }
       ],
-      "episodes": []
+      "episodes": [],
+      "cover": {
+        "imageUrl": "series-covers/why-things-work.svg",
+        "alt": "Why Things Work – seriecover"
+      }
     },
     {
       "id": "my-bucket-list",
@@ -162,7 +174,11 @@
           "episodeNumber": 1,
           "templateVersion": "1.0"
         }
-      ]
+      ],
+      "cover": {
+        "imageUrl": "series-covers/my-bucket-list.svg",
+        "alt": "My Bucket List – seriecover"
+      }
     },
     {
       "id": "places-worth-exploring",
@@ -197,7 +213,12 @@
           "episodeNumber": 1,
           "templateVersion": "1.0"
         }
-      ]
+      ],
+      "cover": {
+        "imageUrl": "series-covers/places-worth-exploring.svg",
+        "photoUrl": "assets/places-worth-exploring/places-worth-exploring-001-okinawa/shot-01.jpg",
+        "alt": "Places Worth Exploring – seriecover"
+      }
     },
     {
       "id": "geographical-stories",
@@ -232,7 +253,11 @@
           "episodeNumber": 1,
           "templateVersion": "1.0"
         }
-      ]
+      ],
+      "cover": {
+        "imageUrl": "series-covers/geographical-stories.svg",
+        "alt": "Geographical Stories – seriecover"
+      }
     },
     {
       "id": "hoe-werkt-de-wereld",
@@ -267,7 +292,11 @@
           "episodeNumber": 1,
           "templateVersion": "1.0"
         }
-      ]
+      ],
+      "cover": {
+        "imageUrl": "series-covers/hoe-werkt-de-wereld.svg",
+        "alt": "Hoe werkt de wereld? – seriecover"
+      }
     },
     {
       "id": "cat-office",
@@ -302,7 +331,12 @@
           "episodeNumber": 1,
           "templateVersion": "1.0"
         }
-      ]
+      ],
+      "cover": {
+        "imageUrl": "series-covers/cat-office.svg",
+        "photoUrl": "assets/cat-office/oliver.jpg",
+        "alt": "The Cat Office – seriecover"
+      }
     },
     {
       "id": "premium-travel-routes",
@@ -337,7 +371,11 @@
           "episodeNumber": 1,
           "templateVersion": "1.0"
         }
-      ]
+      ],
+      "cover": {
+        "imageUrl": "series-covers/premium-travel-routes.svg",
+        "alt": "Premium Travel Routes – seriecover"
+      }
     },
     {
       "id": "the-human-side",
@@ -365,7 +403,11 @@
           }
         }
       ],
-      "episodes": []
+      "episodes": [],
+      "cover": {
+        "imageUrl": "series-covers/the-human-side.svg",
+        "alt": "The Human Side – seriecover"
+      }
     }
   ],
   "standaloneVideos": [

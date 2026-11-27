@@ -56,3 +56,14 @@ De UI maakt prompts voor ChatGPT/GitHub en gebruikt de bestaande JSON-import.
 Er is geen directe schrijffunctie voor serietemplates in de browser, zodat GitHub
 en templateversies de bron van waarheid blijven. Statusbeheer en exporthistorie
 zijn volgende fase.
+
+## Seriecovers
+
+Elke serie heeft een eigen vaste cover in catalog.json: cover.imageUrl verwijst naar
+public/series-covers/<id>.svg (of een andere lokale statische afbeelding). Optioneel
+cover.photoUrl is een al aanwezige, gelicentieerde mediafoto uit de bestaande
+productie-assets; de SVG blijft zichtbaar als deze foto ontbreekt. De seriekaart
+gebruikt nooit meer de eerste aflevering als cover. Maak bij elke nieuwe serie
+representatieve cover-art in de eigen huisstijl, onafhankelijk van een specifieke
+aflevering. Bewaar coverbestanden direct in GitHub; geen video-rendering, nieuwe
+media-downloads of aparte buildstappen nodig. Afleveringsthumbnails zijn apart.

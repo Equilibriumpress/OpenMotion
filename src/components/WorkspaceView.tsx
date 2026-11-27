@@ -25,15 +25,27 @@ interface Props {
   syncMessage: string|null;
 }
 
-function Poster({project, series, compact=false}:{project?:OpenMotionProject;series?:SeriesDefinition;compact?:boolean}) {
-  const kit=series ? activeTemplate(series).brandKit : project?.brandKit;
+function SeriesCover({series}:{series:SeriesDefinition}) {
+  const kit=activeTemplate(series).brandKit;
+  const [failed,setFailed]=useState(false);
+  const [photoFailed,setPhotoFailed]=useState(false);
+  const cover=series.cover;
+  // Only editorial series art: never fall back to an arbitrary episode image.
+  return <div className="relative aspect-video overflow-hidden rounded-lg" style={{backgroundColor:kit.backgroundColor,color:kit.textColor}}>
+    {cover&&!failed?<img src={cover.imageUrl} alt={cover.alt??series.title} loading="lazy" decoding="async" onError={()=>setFailed(true)} className="absolute inset-0 w-full h-full object-contain"/>:
+      <div className="absolute inset-0 flex flex-col justify-center p-5"><div className="w-8 h-1 mb-4 rounded-full" style={{background:kit.accentColor}}/><span className="text-xs uppercase tracking-widest opacity-70">OpenMotion Series</span><span className="mt-2 text-xl font-bold leading-tight">{series.title}</span><span className="text-xs mt-2 opacity-70">{series.description}</span></div>}
+    {cover?.photoUrl&&!failed&&!photoFailed&&<img src={cover.photoUrl} alt="" loading="lazy" decoding="async" onError={()=>setPhotoFailed(true)} className="absolute top-0 right-0 h-full w-[50%] object-cover" style={{maskImage:'linear-gradient(to right, transparent, black 12%)',WebkitMaskImage:'linear-gradient(to right, transparent, black 12%)'}}/>}
+  </div>;
+}
+function Poster({project, compact=false}:{project:OpenMotionProject;compact?:boolean}) {
+  const kit=project.brandKit;
   const [failed,setFailed]=useState(false);
   return <div className={`relative overflow-hidden rounded-lg ${compact?'w-20 h-14 shrink-0':'aspect-video'} flex items-center justify-center`} style={{backgroundColor:kit?.backgroundColor??'#142333',color:kit?.textColor??'#ffffff'}}>
-    {project?.thumbnailUrl && !failed ? <img loading="lazy" decoding="async" alt="" src={project.thumbnailUrl} onError={()=>setFailed(true)} className="w-full h-full object-cover"/> :
+    {project.thumbnailUrl && !failed ? <img loading="lazy" decoding="async" alt="" src={project.thumbnailUrl} onError={()=>setFailed(true)} className="w-full h-full object-cover"/> :
       <div className="relative w-full h-full flex flex-col justify-end p-3 sm:p-4 overflow-hidden">
         <div aria-hidden className="absolute -right-6 -top-8 w-40 h-40 rounded-full opacity-20 border-[22px]" style={{borderColor:kit?.accentColor??'#93c5fd'}}/>
-        <span className="text-[10px] opacity-75 uppercase tracking-widest truncate">{project?.format??series?.title}</span>
-        {!compact && <span className="font-semibold leading-tight line-clamp-2 text-sm sm:text-base">{project?.title??series?.title}</span>}
+        <span className="text-[10px] opacity-75 uppercase tracking-widest truncate">{project.format}</span>
+        {!compact && <span className="font-semibold leading-tight line-clamp-2 text-sm sm:text-base">{project.title}</span>}
       </div>}
   </div>;
 }
@@ -60,7 +72,7 @@ export function WorkspaceView({tab,projects,repoConfig,selectedSeriesId,onSeries
   async function copyPrompt(value:string,key:string){setPromptText(value);try{await navigator.clipboard.writeText(value);setCopy(key);setTimeout(()=>setCopy(''),1800);}catch{setCopy('');}}
   const showSeries=(id:string)=>{setQuery('');setFormat('all');setStatus('all');setSeriesPane('episodes');onSeries(id);};
   function seriesCard(s:SeriesDefinition){const eps=seriesEpisodes(projects,s.id);return <button key={s.id} onClick={()=>showSeries(s.id)} className="text-left rounded-xl border border-slate-200 bg-white p-3 hover:border-slate-400 focus-visible:outline-2 focus-visible:outline-blue-600">
-    <Poster series={s} project={eps[0]}/><div className="px-1 pt-3 pb-1"><h3 className="font-semibold text-slate-900">{s.title}</h3><p className="mt-1 text-xs text-slate-500">{eps.length} afleveringen · {activeTemplate(s).format}</p><p className="mt-2 text-sm text-slate-600 line-clamp-2">{s.description}</p></div></button>;}
+    <SeriesCover series={s}/><div className="px-1 pt-3 pb-1"><h3 className="font-semibold text-slate-900">{s.title}</h3><p className="mt-1 text-xs text-slate-500">{eps.length} afleveringen · {activeTemplate(s).format}</p><p className="mt-2 text-sm text-slate-600 line-clamp-2">{s.description}</p></div></button>;}
   function projectCard(p:OpenMotionProject, list=false){const ep=episodeInfo(p);return <article key={p.slug} className={`rounded-xl bg-white border border-slate-200 p-3 ${list?'flex flex-wrap sm:flex-nowrap items-center gap-3':'flex flex-col gap-3'}`}>
     <button className={list?'shrink-0':'w-full'} onClick={()=>onOpenStudio(p)} aria-label={'Open '+p.title}><Poster project={p} compact={list}/></button>
     <div className="flex-1 min-w-0"><button onClick={()=>onOpenStudio(p)} className="font-semibold text-left text-sm sm:text-base leading-snug hover:underline">{p.title}</button><p className="mt-1 text-xs text-slate-500">{ep?.episodeNumber ? 'S'+String(ep.season).padStart(2,'0')+' · A'+String(ep.episodeNumber).padStart(2,'0')+' · ':''}{p.format} · {duration(p)} · {p.fps} fps</p>
