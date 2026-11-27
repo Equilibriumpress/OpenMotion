@@ -33,7 +33,7 @@
       "transition": "fade",
       "backdrop": "dot-matrix",
       "headline": "Same message.",
-      "caption": "Two different reactions.",
+      "caption": "",
       "fullBleed": true,
       "doodle": {
         "setting": "standing",
@@ -51,16 +51,18 @@
           "pose-b:phone",
           "face-a:surprise",
           "face-b:neutral",
-          "cover-title:SAME MESSAGE|DIFFERENT MINDS",
-          "cover-hook:We need to talk.",
           "cover-pose-a:kneel",
           "cover-pose-b:joy",
           "cover-face-a:panic",
-          "cover-face-b:joy"
+          "cover-face-b:joy",
+          "human-side-v2",
+          "theme:message",
+          "cover-title:SAME MESSAGE|DIFFERENT MINDS",
+          "cover-hook:We need to talk."
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "Two people get the same message: we need to talk."
+        "narration": "Same message. Two reactions."
       }
     },
     {
@@ -71,7 +73,7 @@
       "transition": "fade",
       "backdrop": "dot-matrix",
       "headline": "What if something is wrong?",
-      "caption": "One possible interpretation.",
+      "caption": "",
       "fullBleed": true,
       "doodle": {
         "setting": "standing",
@@ -86,11 +88,15 @@
           "episode:01",
           "label-a:What did I do?",
           "pose-a:kneel",
-          "face-a:panic"
+          "face-a:panic",
+          "human-side-v2",
+          "theme:message",
+          "detail-a:What if I messed up?",
+          "detail-b:Are they upset?"
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "One starts worrying. Did I do something wrong? Are they upset with me?"
+        "narration": "One reads it as bad news. What did I do? Are they upset?"
       }
     },
     {
@@ -101,7 +107,7 @@
       "transition": "fade",
       "backdrop": "dot-matrix",
       "headline": "I'll find out later.",
-      "caption": "Another possible interpretation.",
+      "caption": "",
       "fullBleed": true,
       "doodle": {
         "setting": "standing",
@@ -116,11 +122,13 @@
           "episode:01",
           "label-b:We will talk later.",
           "pose-b:calm",
-          "face-b:smile"
+          "face-b:smile",
+          "human-side-v2",
+          "theme:message"
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "The other thinks, I'll find out later, and gets on with the day."
+        "narration": "The other sees an unanswered question and waits for more context."
       }
     },
     {
@@ -131,7 +139,7 @@
       "transition": "fade",
       "backdrop": "dot-matrix",
       "headline": "Same situation. Different minds.",
-      "caption": "Interpretation shapes emotion.",
+      "caption": "",
       "fullBleed": true,
       "doodle": {
         "setting": "standing",
@@ -149,11 +157,13 @@
           "pose-a:kneel",
           "pose-b:joy",
           "face-a:panic",
-          "face-b:joy"
+          "face-b:joy",
+          "human-side-v2",
+          "theme:message"
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "The message is identical. How we interpret a situation influences how we feel."
+        "narration": "The words are identical. The meanings they give them are different."
       }
     },
     {
@@ -164,7 +174,7 @@
       "transition": "fade",
       "backdrop": "dot-matrix",
       "headline": "Ask before assuming.",
-      "caption": "A thought is not a fact.",
+      "caption": "",
       "fullBleed": true,
       "doodle": {
         "setting": "standing",
@@ -181,15 +191,114 @@
           "pose-a:relief",
           "pose-b:calm",
           "face-a:relief",
-          "face-b:smile"
+          "face-b:smile",
+          "human-side-v2",
+          "theme:message"
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "Then the reply arrives. Dinner plans. Sometimes, asking for context changes everything."
+        "narration": "Dinner plans. Ask what someone means before assuming the worst."
       }
     }
   ],
-  "captions": [],
+  "captions": [
+    {
+      "text": "Same message. Two reactions.",
+      "startSec": 1.5,
+      "endSec": 3.55,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "One reads it as bad",
+      "startSec": 4.3,
+      "endSec": 6.319,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "news. What did I do?",
+      "startSec": 6.319,
+      "endSec": 8.338,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "Are they upset?",
+      "startSec": 8.338,
+      "endSec": 9.55,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "The other sees an unanswered",
+      "startSec": 10.3,
+      "endSec": 12.686,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "question and waits for more",
+      "startSec": 12.686,
+      "endSec": 15.073,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "context.",
+      "startSec": 15.073,
+      "endSec": 15.55,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "The words are identical. The",
+      "startSec": 16.3,
+      "endSec": 18.686,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "meanings they give them are",
+      "startSec": 18.686,
+      "endSec": 21.073,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "different.",
+      "startSec": 21.073,
+      "endSec": 21.55,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "Dinner plans. Ask what someone",
+      "startSec": 22.3,
+      "endSec": 24.925,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "means before assuming the worst.",
+      "startSec": 24.925,
+      "endSec": 27.55,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    }
+  ],
   "audioTracks": [
     {
       "id": "voice",
@@ -205,16 +314,24 @@
       "src": "assets/audio/the-human-side-01-same-situation-score.mp3",
       "startSec": 0,
       "endSec": 28,
-      "volume": 0.22,
+      "volume": 0.15,
       "fadeInSec": 0.3,
       "fadeOutSec": 1
+    },
+    {
+      "id": "human-sfx",
+      "kind": "effect",
+      "src": "assets/audio/the-human-side-01-same-situation-human-sfx.wav",
+      "startSec": 0,
+      "endSec": 28,
+      "volume": 0.48
     }
   ],
   "kind": "video",
   "seriesId": "the-human-side",
   "season": 1,
   "episodeNumber": 1,
-  "templateVersion": "1.1",
+  "templateVersion": "2.0",
   "productionStatus": "review",
-  "thumbnailUrl": "assets/the-human-side/cover.svg"
+  "thumbnailUrl": "assets/the-human-side/v2/the-human-side-01-same-situation.svg"
 }

@@ -1,3 +1,4 @@
+import { humanSideCoverDuration } from './humanSideRenderer';
 import { renderCatOffice } from './catOfficeRenderer';
 import { renderGeoRouteReel, renderWhiteboardScience } from './shortsRenderer';
 import { renderDoodleExplainerScene } from './doodleExplainerRenderer';
@@ -427,7 +428,7 @@ export function renderOpenMotionFrame(
   }
   if (scene.layout === 'doodle-explainer' && scene.doodle) {
     renderDoodleExplainerScene(ctx,w,h,scene,localTime,brand);
-    renderTimedCaptions(ctx,w,h,project,safeTime);
+    if(localTime>=humanSideCoverDuration(scene))renderTimedCaptions(ctx,w,h,project,safeTime);
     ctx.restore();return;
   }
   if (scene.layout === 'geo-route-reel') {

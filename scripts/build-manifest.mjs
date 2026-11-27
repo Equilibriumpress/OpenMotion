@@ -1,3 +1,4 @@
+import { prepareHumanSideSound } from './human-side-sound.mjs';
 import { prepareSongSound } from './song-cinematic-sound.mjs';
 import fs from 'fs';
 import path from 'path';
@@ -82,6 +83,7 @@ if (ci || process.env.TRAVEL_ASSETS === '1') {
 const manifestStarted=Date.now();
 function prepareProject(p) {
   prepareSongSound(p,rootDir);
+  prepareHumanSideSound(p,rootDir);
   if (ci) {
     for (const track of p.audioTracks ?? []) {
       if (typeof track.src === 'string' && (track.src.startsWith('assets/audio/'+p.slug+'-') || track.src === 'assets/cat-office/'+p.slug+'.wav')) {
@@ -99,6 +101,20 @@ function prepareProject(p) {
       if(p.scenes.some(s=>s.doodle?.extras?.includes('song-explainer-v1'))){
         const cinematic=p.scenes.some(s=>s.doodle?.extras?.includes('song-cinematic-v2'));
         p.captions=cues.map(c=>({...c,startSec:Math.max(.85,c.startSec),position:cinematic ? .75 : .78,fontSizePx:cinematic?43:45})).filter(c=>c.endSec>c.startSec);
+      }
+      if(p.scenes.some(s=>s.doodle?.extras?.includes('human-side-v2'))){
+        const coverEnd=p.scenes[0].doodle?.extras?.some(v=>v.startsWith('cover-title:')&&v.slice(12).trim())?Math.min(1.5,p.scenes[0].durationSec*.55):0;
+        p.captions=cues.flatMap(c=>{
+          const words=String(c.text??'').trim().split(/\s+/).filter(Boolean);
+          const parts=[];
+          for(let i=0;i<words.length;i+=5){
+            const start=c.startSec+(c.endSec-c.startSec)*i/words.length;
+            const end=c.startSec+(c.endSec-c.startSec)*Math.min(words.length,i+5)/words.length;
+            const startSec=Math.max(coverEnd,start);
+            if(end-startSec>.12)parts.push({text:words.slice(i,i+5).join(' '),startSec,endSec:end,style:'minimal',position:.78,fontSizePx:45});
+          }
+          return parts;
+        });
       }
       let offset=0;
       for(const s of p.scenes){

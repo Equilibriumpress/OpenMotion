@@ -1,5 +1,5 @@
 import { hasSongCover, renderSongCover } from '../engine/songExplainerRenderer';
-import { hasHumanSideCover, renderHumanSideCover } from '../engine/humanSideRenderer';
+import { hasHumanSideCover, renderHumanSideCover, isHumanSideV2 } from '../engine/humanSideRenderer';
 import { useEffect, useRef, useState } from 'react';
 import {
   ArrowLeft,
@@ -76,7 +76,7 @@ export function StudioView({
   onBackToLibrary,
 }: StudioViewProps) {
   // Heavy 3D song projects open paused so the user controls playback on mobile.
-  const [isPlaying, setIsPlaying] = useState(()=>!project.scenes.some(s=>s.doodle?.extras?.includes('song-hero-rigs-v21')));
+  const [isPlaying, setIsPlaying] = useState(()=>!isHumanSideV2(project.scenes[0])&&!project.scenes.some(s=>s.doodle?.extras?.includes('song-hero-rigs-v21')));
   const [audioEnabled, setAudioEnabled] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [inspectorTab, setInspectorTab] = useState<InspectorTab>('export');
@@ -731,6 +731,7 @@ export function StudioView({
                   <div className="space-y-2 rounded-lg border border-purple-200 p-3 text-xs">
                     <p className="font-semibold text-purple-900">Shorts / TikTok cover</p>
                     <p className="text-slate-600">Kies bij upload een frame rond 0,3 seconde. De cover zit in de video zelf, zonder extra speelduur.</p>
+                    {hasHumanSideCover(project.scenes[0])&&<button type="button" className="w-full rounded-lg bg-purple-100 px-3 py-2 font-semibold text-purple-900" onClick={()=>{setIsPlaying(false);setCurrentTime(.3);}}>Toon openingscover in preview</button>}
                     <button type="button" className="w-full rounded-lg border border-purple-300 px-3 py-2 font-semibold text-purple-900" onClick={()=>{
                       const canvas=document.createElement('canvas');canvas.width=1080;canvas.height=1920;
                       const ctx=canvas.getContext('2d');if(!ctx){setJsonError('Cover kon niet worden gerenderd.');return;}

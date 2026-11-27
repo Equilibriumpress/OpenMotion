@@ -1,0 +1,52 @@
+// Deterministic short foley cues, only for opted-in Human Side projects.
+// No downloads, dependencies or changes to the existing Piper cache.
+import fs from 'node:fs';
+import path from 'node:path';
+const SR=24000,TAU=Math.PI*2;
+const cue=(time,type,volume=1)=>({time,type,volume});
+export function prepareHumanSideSound(p,root){
+ if(!p.scenes?.some(s=>s.doodle?.extras?.includes('human-side-v2')))return;
+ if(!/^[a-z0-9-]+$/.test(p.slug))throw Error('Invalid Human Side slug');
+ const src='assets/audio/'+p.slug+'-human-sfx.wav';
+ if(!p.audioTracks?.some(t=>t.src===src))return;
+ let at=0;const cues=[];
+ for(const s of p.scenes){
+  const value=k=>s.doodle?.extras?.find(v=>v.startsWith(k+':'))?.slice(k.length+1);
+  const theme=value('theme')||'message',shot=value('shot');
+  const duration=Number(s.durationSec);
+  if(!Number.isFinite(duration)||duration<=0)throw Error('Invalid Human Side scene duration');
+  const add=(dt,type,vol)=>{if(dt>=0&&dt+.25<duration)cues.push(cue(at+dt,type,vol));};
+  if(shot==='message')add(1.62,theme==='waiting'?'tap':theme==='calendar'||theme==='feedback'?'paper':'ping',.7);
+  if(shot==='worry'){
+   if(theme==='waiting')for(let t=.6;t<Math.min(duration-.3,4.7);t+=.8)add(t,'tick',.43);
+   else if(theme==='boundaries')for(let t=.4;t<Math.min(duration-.3,2.4);t+=.45)add(t,'paper',.52);
+   else if(theme==='calendar'||theme==='feedback')add(.45,'paper',.65);
+   else{add(.5,'tap',.4);add(1.1,'tap',.3);add(1.8,'tap',.3);}
+  }
+  if(shot==='calm')add(.65,'breath',.45);
+  if(shot==='contrast'&&theme==='boundaries')add(.7,'paper',.55);
+  if(shot==='reveal')add(.35,theme==='calendar'||theme==='feedback'?'paper':'ping',.72);
+  at+=duration;
+ }
+ if(at>180)throw Error('Human Side sound exceeds maximum duration');
+ const n=Math.round(at*SR),samples=new Float32Array(n);let seed=41351;
+ for(const {time,type,volume} of cues){
+  const length=type==='breath' ? .52 : type==='ping' ? .26 : type==='paper' ? .21 : .07;
+  let noise=0;
+  for(let i=0;i<Math.round(SR*length);i++){
+   const j=Math.round(time*SR)+i;if(j>=n)break;
+   const t=i/SR,u=t/length,env=Math.min(1,t/.008)*Math.pow(Math.max(0,1-u),2);
+   seed=(Math.imul(seed,1664525)+1013904223)>>>0;const white=seed/2147483648-1;noise+=.12*(white-noise);
+   let v=0;
+   if(type==='ping')v=.19*(Math.sin(TAU*850*t)+.45*Math.sin(TAU*1275*t))*env;
+   else if(type==='tick'||type==='tap')v=.13*(Math.sin(TAU*(type==='tick'?970:520)*t)+.5*white)*env;
+   else if(type==='paper')v=.15*(white-noise)*env*(.55+.45*Math.sin(TAU*22*t));
+   else v=.14*noise*Math.sin(Math.PI*u)**2;
+   samples[j]+=volume*v;
+  }
+ }
+ const wav=Buffer.alloc(44+2*n);
+ wav.write('RIFF',0);wav.writeUInt32LE(36+2*n,4);wav.write('WAVEfmt ',8);wav.writeUInt32LE(16,16);wav.writeUInt16LE(1,20);wav.writeUInt16LE(1,22);wav.writeUInt32LE(SR,24);wav.writeUInt32LE(SR*2,28);wav.writeUInt16LE(2,32);wav.writeUInt16LE(16,34);wav.write('data',36);wav.writeUInt32LE(2*n,40);
+ for(let i=0;i<n;i++)wav.writeInt16LE(Math.round(32767*Math.max(-1,Math.min(1,samples[i]))),44+i*2);
+ const dest=path.join(root,'public',src);fs.mkdirSync(path.dirname(dest),{recursive:true});fs.writeFileSync(dest,wav);
+}
