@@ -145,7 +145,7 @@
       "id": "my-bucket-list",
       "title": "My Bucket List",
       "description": "Bestemmingen in korte globe-zoom reels",
-      "activeVersion": "1.0",
+      "activeVersion": "3.0",
       "versions": [
         {
           "version": "1.0",
@@ -165,6 +165,25 @@
             "mutedColor": "#B8C1C8",
             "fontFamily": "Bricolage Grotesque"
           }
+        },
+        {
+          "version": "3.0",
+          "format": "9:16",
+          "fps": 30,
+          "durationSec": 20,
+          "referenceProject": "bucket-list-001-sao-miguel",
+          "templatePath": "series/my-bucket-list/template-v3.0.json",
+          "instructions": "Fotografische destination cover (1,5 s), native globe flight (3,5 s), drie redenen (4 / 3,5 / 4 s), kustafsluiting en terugkeer naar dezelfde cover (3,5 s). Gebruik echte gelicentieerde foto's met broncredits. Controleer MP4-resolutie, framerate en audiospoor.",
+          "brandKit": {
+            "brandName": "MY BUCKET LIST",
+            "primaryColor": "#101B2B",
+            "accentColor": "#D9B77A",
+            "backgroundColor": "#101B2B",
+            "surfaceColor": "#17283C",
+            "textColor": "#F5F1E8",
+            "mutedColor": "#B8C1C8",
+            "fontFamily": "Bricolage Grotesque"
+          }
         }
       ],
       "episodes": [
@@ -172,7 +191,7 @@
           "slug": "bucket-list-001-sao-miguel",
           "season": 1,
           "episodeNumber": 1,
-          "templateVersion": "1.0"
+          "templateVersion": "3.0"
         }
       ],
       "cover": {
