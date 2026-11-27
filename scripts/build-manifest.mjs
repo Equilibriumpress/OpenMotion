@@ -94,6 +94,9 @@ function prepareProject(p) {
     const cueFile=path.join(rootDir,'public','assets','audio',p.slug+'-captions.json');
     if(voice&&fs.existsSync(cueFile)){
       const cues=JSON.parse(fs.readFileSync(cueFile,'utf8'));
+      if(p.scenes.some(s=>s.doodle?.extras?.includes('song-explainer-v1'))){
+        p.captions=cues.map(c=>({...c,startSec:Math.max(.85,c.startSec),position:.78,fontSizePx:45})).filter(c=>c.endSec>c.startSec);
+      }
       let offset=0;
       for(const s of p.scenes){
         const end=offset+s.durationSec;
