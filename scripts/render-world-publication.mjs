@@ -141,7 +141,7 @@ try {
       const probe=spawnSync('ffprobe',['-v','error','-show_streams','-show_format','-of','json',target],{encoding:'utf8'});
       if(probe.status!==0)throw Error('ffprobe failed');
       const info=JSON.parse(probe.stdout),v=info.streams.find(s=>s.codec_type==='video'),a=info.streams.find(s=>s.codec_type==='audio');
-      if(v?.codec_name!=='h264'||v?.width!==width||v?.height!==height||v?.avg_frame_rate!==fps+'/1'||a?.codec_name!=='aac'||(premium&&Number(v?.nb_frames)!==frames)||Math.abs(Number(info.format.duration)-duration)>.15)throw Error('Output does not match requested resolution / fps / audio / duration');
+      if(v?.codec_name!=='h264'||v?.width!==width||v?.height!==height||v?.avg_frame_rate!==fps+'/1'||a?.codec_name!=='aac'||((premium||human)&&Number(v?.nb_frames)!==frames)||Math.abs(Number(info.format.duration)-duration)>.15)throw Error('Output does not match requested resolution / fps / audio / duration');
       p.prebuiltMp4Url='renders/'+p.slug+'.mp4';
       fs.writeFileSync(manifestPath,JSON.stringify(manifest,null,2));
       console.log('[world-render] verified master:',p.slug,width,height,fps,duration,a.codec_name);
