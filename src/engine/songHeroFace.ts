@@ -4,8 +4,10 @@ type C=CanvasRenderingContext2D;
 export type HeroPose='look'|'work'|'drive'|'tired';
 export type FaceAngle='profile'|'three-quarter'|'near-front';
 const clamp=(v:number)=>Math.max(0,Math.min(1,v));
-function fill(c:C,d:string,col:string|CanvasGradient){c.fillStyle=col;c.fill(new Path2D(d));}
-function line(c:C,d:string,col:string,w=2){c.strokeStyle=col;c.lineWidth=w;c.lineJoin='round';c.lineCap='round';c.stroke(new Path2D(d));}
+const paths=new Map<string,Path2D>();
+function path(d:string){let p=paths.get(d);if(p){paths.delete(d);paths.set(d,p);return p;}p=new Path2D(d);if(paths.size>=96){const first=paths.keys().next().value;if(first!==undefined)paths.delete(first);}paths.set(d,p);return p;}
+function fill(c:C,d:string,col:string|CanvasGradient){c.fillStyle=col;c.fill(path(d));}
+function line(c:C,d:string,col:string,w=2){c.strokeStyle=col;c.lineWidth=w;c.lineJoin='round';c.lineCap='round';c.stroke(path(d));}
 function oval(c:C,x:number,y:number,rx:number,ry:number,col:string|CanvasGradient){c.beginPath();c.ellipse(x,y,rx,ry,0,Math.PI*2);c.fillStyle=col;c.fill();}
 function gradient(c:C,x:number,y:number,x2:number,y2:number,stops:[number,string][]){const g=c.createLinearGradient(x,y,x2,y2);stops.forEach(([a,b])=>g.addColorStop(a,b));return g;}
 function spot(c:C,x:number,y:number,r:number,col:string){const g=c.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,col);g.addColorStop(1,'rgba(0,0,0,0)');return g;}
@@ -22,7 +24,7 @@ export function drawHeroFace(c:C,t:number,pose:HeroPose,light:string,angle:FaceA
  const tilt=tired ? .08 : work ? .025 : hope ? -.025 : -.03;
  c.save();c.translate(0,Math.sin(t*1.7)*.8);c.rotate(tilt+Math.sin(t*.8)*.013);
  fill(c,'M -79 -12 Q -99 -70 -77 -115 Q -55 -156 -10 -157 Q 44 -172 70 -125 L 78 -75 L -37 39 L -64 45 Z',hair);
- const head=new Path2D(heads[angle]);
+ const head=path(heads[angle]);
  c.save();c.clip(head);
  c.fillStyle=gradient(c,-66,12,80,-77,[[0,shadow],[.37,mid],[.72,skin],[1,lit]]);c.fill(head);
  oval(c,nearX+3,-2,48,48,spot(c,nearX+3,-2,48,cold?'rgba(234,177,150,.30)':'rgba(255,209,154,.38)'));
@@ -43,7 +45,7 @@ export function drawHeroFace(c:C,t:number,pose:HeroPose,light:string,angle:FaceA
   line(c,'M '+(x-width*.55)+' '+(y-14)+' Q '+x+' '+(y-(tired?16:21))+' '+(x+width*.57)+' '+(y-13),ink,far?2.5:3.2);
   if(open<.12){line(c,'M '+(x-width/2)+' '+y+' Q '+x+' '+(y+2)+' '+(x+width/2)+' '+y,ink,2.1);return;}
   const d='M '+(x-width/2)+' '+y+' Q '+x+' '+(y-h)+' '+(x+width/2)+' '+y+' Q '+x+' '+(y+h*.64)+' '+(x-width/2)+' '+y+' Z';
-  fill(c,d,cold?'#CFB6A1':'#E2C7AA');c.save();c.clip(new Path2D(d));oval(c,x+look+1,y,far?2.8:4.2,far?4:5.5,'#49362F');oval(c,x+look+1,y,1.9,3.3,'#211F24');oval(c,x+look-1,y-2,1.1,1.1,'#F9D8AF');c.restore();
+  fill(c,d,cold?'#CFB6A1':'#E2C7AA');c.save();c.clip(path(d));oval(c,x+look+1,y,far?2.8:4.2,far?4:5.5,'#49362F');oval(c,x+look+1,y,1.9,3.3,'#211F24');oval(c,x+look-1,y-2,1.1,1.1,'#F9D8AF');c.restore();
   line(c,'M '+(x-width/2)+' '+y+' Q '+x+' '+(y-h)+' '+(x+width/2)+' '+y,ink,far?1.8:2.5);
   line(c,'M '+(x-width*.42)+' '+(y+4)+' Q '+x+' '+(y+h*.55+3)+' '+(x+width*.37)+' '+(y+3),shadow,.9);
  }
