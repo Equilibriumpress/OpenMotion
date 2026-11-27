@@ -173,6 +173,27 @@ export function ShortsMediaEditor({project,activeScene,onUpdateProject,onUpdateS
       const extras=doodle.extras??[];
       const get=(key:string,fallback='')=>extras.find(x=>x.startsWith(key+':'))?.slice(key.length+1)??fallback;
       const set=(key:string,value:string)=>update({extras:[...extras.filter(x=>!x.startsWith(key+':')),key+':'+value]});
+      if(extras.includes('human-side-v23')){
+        const theme=get('theme','message');
+        const fields=theme==='message'||theme==='waiting'||theme==='boundaries'?['message','reply','label-a','label-b',...(theme==='boundaries'?['prop-tasks']:[])]:theme==='calendar'||theme==='feedback'?['label-a','label-b']:theme==='load'||theme==='rest'?['prop-tasks']:theme==='mask'?['label-a','label-b']:[];
+        return <div className="space-y-3 rounded-xl border border-purple-200 p-3">
+          <h4 className="font-semibold text-sm text-purple-900">The Human Side · cinematografie 2.3</h4>
+          <label className="block text-xs">Thema<select className={style} value={theme} onChange={e=>set('theme',e.target.value)}>
+            {['message','waiting','calendar','boundaries','feedback','rest','mask','load','crowd'].map(v=><option key={v}>{v}</option>)}
+          </select></label>
+          <label className="block text-xs">Actieshot<select className={style} value={get('film','event')} onChange={e=>set('film',e.target.value)}>
+            {['event','reaction','action','turn','change','ending'].map(v=><option key={v}>{v}</option>)}
+          </select></label>
+          {fields.map(key=><label key={key} className="block text-xs">{key}<input className={style} value={get(key)} onChange={e=>set(key,e.target.value)}/></label>)}
+          {activeScene.id===project.scenes[0]?.id&&<>
+            <label className="block text-xs">Covertekst (twee regels met |)<input className={style} value={get('cover-title')} onChange={e=>set('cover-title',e.target.value)}/></label>
+            <label className="block text-xs">Korte hook<input className={style} value={get('cover-hook')} onChange={e=>set('cover-hook',e.target.value)}/></label>
+          </>}
+          <label className="block text-xs">Afsluitende tekst<input className={style} value={activeScene.headline} onChange={e=>onUpdateScene({headline:e.target.value})}/></label>
+          <label className="block text-xs">Engelse voice-over<textarea className={style} rows={3} value={doodle.narration??''} onChange={e=>update({narration:e.target.value})}/></label>
+          <p className="text-xs text-slate-500">Thema en actieshot sturen de compositie. Herpubliceer voor bijgewerkte audio.</p>
+        </div>;
+      }
       if(extras.includes('human-side-v22')){
         return <div className="space-y-3 rounded-xl border border-purple-200 p-3">
           <h4 className="font-semibold text-sm text-purple-900">The Human Side · cinematografie 2.2</h4>
