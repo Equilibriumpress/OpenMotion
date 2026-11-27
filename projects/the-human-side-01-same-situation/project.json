@@ -50,7 +50,13 @@
           "pose-a:phone",
           "pose-b:phone",
           "face-a:surprise",
-          "face-b:neutral"
+          "face-b:neutral",
+          "cover-title:SAME MESSAGE|DIFFERENT MINDS",
+          "cover-hook:We need to talk.",
+          "cover-pose-a:kneel",
+          "cover-pose-b:joy",
+          "cover-face-a:panic",
+          "cover-face-b:joy"
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
@@ -208,7 +214,7 @@
   "seriesId": "the-human-side",
   "season": 1,
   "episodeNumber": 1,
-  "templateVersion": "1.0",
+  "templateVersion": "1.1",
   "productionStatus": "review",
   "thumbnailUrl": "assets/the-human-side/cover.svg"
 }
