@@ -3,6 +3,7 @@ Video excerpts become bounded deterministic frame atlases, avoiding asynchronous
 HTMLVideoElement seeking during Canvas export. No placeholder image is generated.
 """
 import json, pathlib, urllib.request, urllib.parse, subprocess, tempfile, time, re, html, hashlib, shutil
+from media_cache import MediaCache, ensure_ffmpeg, prune
 ROOT=pathlib.Path(__file__).resolve().parent.parent
 UA="OpenMotionTravel/1.0 (https://github.com/Equilibriumpress/OpenMotion; Wikimedia documentary asset preparation)"
 def request(url, target=None):
@@ -86,4 +87,20 @@ def build(manifest):
             vf="scale=1280:720:force_original_aspect_ratio=increase,crop=1280:720,drawbox=x=0:y=450:w=1280:h=270:color=0x102B3B@0.77:t=fill,drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf:textfile="+str(headline)+":x=65:y=485:fontsize=104:fontcolor=white,drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf:textfile="+str(subtitle)+":x=70:y=610:fontsize=33:fontcolor=0x80D7D0"
             ff("-i",title,"-vf",vf,"-frames:v","1","-q:v","2",out/"thumbnail.jpg")
 if __name__=="__main__":
-    for manifest in sorted((ROOT/"projects").glob("*/travel-assets.json")): build(manifest)
+    manifests=sorted((ROOT/"projects").glob("*/travel-assets.json"))
+    prune("travel",{m.parent.name for m in manifests})
+    for manifest in manifests:
+        slug=manifest.parent.name
+        items=json.loads(manifest.read_text())
+        project=json.loads((manifest.parent/"project.json").read_text())
+        title=next((s for s in project["scenes"] if s.get("bucketList",{}).get("documentary",{}).get("mode")=="title"),None)
+        title_inputs={k:title.get(k) for k in ("id","headline","subheadline")} if title else None
+        folder=ROOT/"public/assets/places-worth-exploring"/slug
+        outputs=[folder/(a["id"]+".jpg") for a in items]+[folder/"credits.json",folder/"credits.html"]
+        if title and any(a["id"]==title["id"] for a in items): outputs.append(folder/"thumbnail.jpg")
+        cache=MediaCache("travel",slug,__file__,{"assets":items,"title":title_inputs},outputs)
+        if cache.restore(): continue
+        ensure_ffmpeg()
+        cache.clear_outputs()
+        build(manifest)
+        cache.save()
