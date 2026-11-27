@@ -358,7 +358,9 @@ export function renderOpenMotionFrame(
     const dissolveSec=prior?.layout==='premium-travel-route'&&prior.premiumTravel&&scene.transition==='fade'
       ? Math.min(scene.premiumTravel.editorial ? .24 : .7,scene.durationSec*.28,prior.durationSec*.28)
       : 0;
-    if(prior?.premiumTravel && scene.premiumTravel.editorial && dissolveSec>0 && localTime<dissolveSec){
+    if((scene.premiumTravel.editorialRevision??0)>=6){
+      renderPremiumTravelScene(ctx,w,h,scene,localTime,getCachedPhoto);
+    } else if(prior?.premiumTravel && scene.premiumTravel.editorial && dissolveSec>0 && localTime<dissolveSec){
       // Sequential fade through a neutral colour: no route marks over photos.
       const t=localTime/dissolveSec;
       if(t<.5) renderPremiumTravelScene(ctx,w,h,prior,Math.max(0,prior.durationSec-1/Math.max(1,project.fps)),getCachedPhoto);

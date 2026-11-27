@@ -10,7 +10,7 @@ const chords = [
   { start: 16, end: 23, notes: [130.81, 196.00, 329.63] },
   { start: 23, end: 30, notes: [146.83, 220.00, 349.23] },
 ];
-const cuts = [0, 3, 5, 8, 10, 14, 16, 20, 22, 27];
+const cuts = [0,3,5,7.5,10,13.5,16,19.5,22,26.5];
 async function synthesize(durationSec: number): Promise<AudioBuffer> {
   const context = new OfflineAudioContext(2, Math.ceil(durationSec * rate), rate);
   const master = context.createGain();

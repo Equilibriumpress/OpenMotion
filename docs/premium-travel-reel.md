@@ -162,3 +162,15 @@ The Quiraing is a nearby Skye excursion, not a fifth routed stop. No new server 
 
 ### Optional verified master (R5)
 In the existing manual Render OpenMotion MP4 workflow choose `short-scotland-road-trip`. It prepares the actual OSRM road and five map snapshots once, checks that the eight photographs decode, synthesizes the same score used in Studio, and encodes the selected 1080 × 1920 / 60 fps / AAC master with FFmpeg. FFprobe verifies output properties before the artifact is published. This workflow is manual only; it has not been run as part of this revision. The normal Pages build stays unchanged.
+
+
+## R6 — finishing pass (PTR-11–20)
+
+Direct cuts replace dark dips for R6 scenes only; titles and photo credits remain visible across the shot. Driving legs are now 2.5 seconds and the finale 3.5 seconds. Total duration remains 30 seconds. The cold-open photo is independent of the two Glen Coe pictures. The castle has two actual portrait photographs with full-bleed cropping instead of a duplicate blurred background. Screen-space destination labels use collision avoidance. The original score follows the edit. Real hillshading uses the Mapzen Terrain Tiles Terrarium DEM on AWS Open Data in existing map snapshots, not a 3D terrain camera. Relief depends on the external tile service. Source and attribution: https://registry.opendata.aws/terrain-tiles/ and https://github.com/tilezen/joerd/blob/master/docs/attribution.md (Europe terrain produced using Copernicus data and information funded by the European Union – EU-DEM layers; additional source-specific credits as applicable). MapLibre style: https://maplibre.org/maplibre-style-spec/sources/.
+
+New photo sources (cropped and color graded):
+- Three Sisters of Glen Coe: rboed, CC BY 2.0, https://commons.wikimedia.org/wiki/File:The_Three_Sisters,_Glencoe,_Scotland.jpg
+- Across the causeway: Balon Greyjoy, CC BY-SA 3.0, https://commons.wikimedia.org/wiki/File:20210818_Eilean_Donan_Castle_causeway-9470.jpg
+- Stone walls above the loch: Dakotsmom229, CC BY-SA 3.0, https://commons.wikimedia.org/wiki/File:2012_Eilean_Donan_Castle.JPG
+
+Manual master also checks opening-photo decoding and exact H.264/AAC codecs and frame count (1800). No master run or device playback is asserted by this source revision. Standard Pages build does not render MP4.
