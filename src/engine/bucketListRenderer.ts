@@ -11,15 +11,15 @@ function fitPhoto(ctx:CanvasRenderingContext2D,img:HTMLImageElement,w:number,h:n
   const progress=smooth(t),scale=Math.max(w/img.naturalWidth,h/img.naturalHeight);
   // Different camera intentions per shot: slow reveal, walking momentum,
   // long scenic hold, then a gentle pullback before the mapped outro.
-  const zoom=mode==='crater' ? 1.03+.09*progress
-    : mode==='trail' ? 1.055+.11*progress
-    : mode==='view' ? 1.035+.045*progress
+  const zoom=mode==='crater' ? 1.10-.065*progress
+    : mode==='trail' ? 1.055+.16*progress
+    : mode==='view' ? 1.065+.025*progress
     : 1.12-.07*progress;
   const imageW=img.naturalWidth*scale*zoom,imageH=img.naturalHeight*scale*zoom;
   const drift=mode==='view'?.008:mode==='trail'?.022:.016;
-  const pan=w*drift*(2*progress-1);
+  const pan=w*drift*(2*progress-1)*(mode==='view'?-1:1);
   const x=Math.max(w-imageW,Math.min(0,w*.5-focusX*imageW+pan));
-  const y=Math.max(h-imageH,Math.min(0,(h-imageH)/2+h*.008*(2*progress-1)));
+  const y=Math.max(h-imageH,Math.min(0,(h-imageH)/2+h*(mode==='trail'?.025:.008)*(2*progress-1)));
   ctx.drawImage(img,x,y,imageW,imageH);
 }
 function fallbackPhoto(ctx:CanvasRenderingContext2D,w:number,h:number){
@@ -110,9 +110,9 @@ function zoomScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMoti
   ctx.fillStyle=shade;ctx.fillRect(0,0,w,h);
   ctx.textAlign='left';
   ctx.fillStyle=PAPER;ctx.font='700 '+Math.round(32*s)+'px "Plus Jakarta Sans",sans-serif';
-  ctx.fillText('MY BUCKET LIST',70*s,123*s,w-140*s);
+  ctx.fillText('MY BUCKET LIST',70*s,200*s,w-250*s);
   ctx.fillStyle=GOLD;ctx.font='700 '+Math.round(25*s)+'px "Plus Jakarta Sans",sans-serif';
-  ctx.fillText(d.region.toUpperCase()+'  /  '+d.country.toUpperCase(),70*s,174*s,w-140*s);
+  ctx.fillText(d.region.toUpperCase()+'  /  '+d.country.toUpperCase(),70*s,250*s,w-250*s);
 
   // The first second must communicate the episode immediately. The large
   // typography yields before the accelerated geographic approach begins.
@@ -129,11 +129,11 @@ function zoomScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMoti
   if(arrive>0){
     ctx.save();ctx.globalAlpha*=arrive;
     ctx.fillStyle=GOLD;ctx.font='700 '+Math.round(29*s)+'px "Plus Jakarta Sans",sans-serif';
-    ctx.fillText('WELCOME TO '+d.region.toUpperCase(),72*s,h-432*s,w-150*s);
+    ctx.fillText('WELCOME TO '+d.region.toUpperCase(),72*s,h-580*s,w-250*s);
     ctx.fillStyle=PAPER;ctx.font='800 '+Math.round(102*s)+'px "Bricolage Grotesque",sans-serif';
-    ctx.fillText(d.destination.toUpperCase(),70*s,h-326*s,w-140*s);
+    ctx.fillText(d.destination.toUpperCase(),70*s,h-470*s,w-250*s);
     ctx.font='500 '+Math.round(30*s)+'px "Plus Jakarta Sans",sans-serif';
-    ctx.fillText(d.country.toUpperCase()+'  ·  '+Math.abs(d.latitude).toFixed(3)+'° '+(d.latitude>=0?'N':'S')+'  '+Math.abs(d.longitude).toFixed(3)+'° '+(d.longitude>=0?'E':'W'),72*s,h-258*s,w-140*s);
+    ctx.fillText(d.country.toUpperCase()+'  ·  '+Math.abs(d.latitude).toFixed(3)+'° '+(d.latitude>=0?'N':'S')+'  '+Math.abs(d.longitude).toFixed(3)+'° '+(d.longitude>=0?'E':'W'),72*s,h-390*s,w-250*s);
     ctx.restore();
   }
   footer(ctx,w,h,scene);
