@@ -366,7 +366,16 @@ export interface SceneGeoRoute {
   routeProgressFrom?: number;
   routeProgressTo?: number;
 }
-export interface PremiumTravelStop {
+export interface PremiumTravelPhoto {
+  photoUrl: string;
+  photoAuthor: string;
+  photoLicense: string;
+  photoSourceUrl: string;
+  label?: string;
+  photoFocus?: [number, number];
+  photoFit?: 'cover' | 'contain';
+}
+export interface PremiumTravelStop extends PremiumTravelPhoto {
   name: string;
   lat: number;
   lon: number;
@@ -375,6 +384,7 @@ export interface PremiumTravelStop {
   photoAuthor: string;
   photoLicense: string;
   photoSourceUrl: string;
+  secondaryPhoto?: PremiumTravelPhoto;
 }
 export interface ScenePremiumTravelRoute {
   stops: PremiumTravelStop[];
@@ -388,6 +398,12 @@ export interface ScenePremiumTravelRoute {
   roadMatched?: boolean;
   /** Default dot avoids abrupt turns on winding roads; camper is experimental. */
   markerStyle?: 'dot' | 'camper';
+  editorial?: boolean;
+  seriesTitle?: string;
+  regionTitle?: string;
+  mapIntro?: boolean;
+  openingSecondary?: boolean;
+  cta?: string;
 }
 export interface SceneWhiteboard {
   /** Normalized SVG-style polylines: [x, y] from 0 to 1. */

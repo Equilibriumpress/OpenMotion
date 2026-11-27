@@ -8,6 +8,7 @@ const ROUTER = 'https://router.project-osrm.org/route/v1/driving/';
 const WIDTH = 1080, HEIGHT = 1920, CSS_W = 720, CSS_H = 1280;
 const clamp = (n:number) => Math.max(0,Math.min(1,n));
 const ease = (n:number) => { const t=clamp(n); return t*t*(3-2*t); };
+const smoother = (n:number) => { const t=clamp(n); return t*t*t*(t*(t*6-15)+10); };
 const lerp = (a:number,b:number,t:number) => a+(b-a)*t;
 interface Pt {x:number;y:number}
 interface Stage { image:HTMLCanvasElement; path:Pt[]; stops:Pt[]; distances:number[]; total:number }
@@ -61,9 +62,17 @@ export function preparePremiumTravelProject(project:OpenMotionProject):Promise<v
       const first=scenes[0].premiumTravel!;
       map=new MapLibreConstructor({container:div,style:STYLE,center:first.mapCenter,zoom:first.mapZoom,interactive:false,attributionControl:false,fadeDuration:0,canvasContextAttributes:{preserveDrawingBuffer:true,antialias:false}});
       if(!map.loaded())await idle(map,'load');
+      if(scenes.some(scene=>scene.premiumTravel?.editorial)){
+        // Keep geographic place names, hide navigation clutter and POI icons.
+        for(const layer of map.getStyle().layers??[]){
+          if(layer.type!=='symbol')continue;
+          const sourceLayer='source-layer' in layer?String(layer['source-layer']):'';
+          if(!/place/i.test(sourceLayer+' '+layer.id))map.setLayoutProperty(layer.id,'visibility','none');
+        }
+      }
       for(const scene of scenes){
         const p=scene.premiumTravel!;
-        if(p.chapter==='photo')continue;
+        if(p.chapter==='photo'||p.chapter==='opening')continue;
         const loaded=idle(map,'idle');
         map.jumpTo({center:p.mapCenter,zoom:p.mapZoom,bearing:0,pitch:0});
         map.resize();map.triggerRepaint();
@@ -130,7 +139,7 @@ function routeStroke(ctx:CanvasRenderingContext2D,stage:Stage,fraction:number,s:
   ctx.lineCap='round';ctx.lineJoin='round';
   ctx.shadowColor='rgba(0,0,0,.26)';ctx.shadowBlur=15*s;
   ctx.strokeStyle='#FFFCF5';ctx.lineWidth=17*s;ctx.stroke();
-  ctx.shadowBlur=0;ctx.strokeStyle='#D74936';ctx.lineWidth=8*s;ctx.stroke();
+  ctx.shadowBlur=0;ctx.strokeStyle='#AE674A';ctx.lineWidth=7*s;ctx.stroke();
 }
 
 /**
@@ -151,7 +160,7 @@ function movingDot(ctx:CanvasRenderingContext2D,x:number,y:number,s:number,time:
   ctx.fillStyle='#FFFFFF';
   ctx.beginPath();ctx.arc(0,0,20*s,0,Math.PI*2);ctx.fill();
   ctx.shadowBlur=0;ctx.shadowOffsetY=0;
-  ctx.fillStyle='#D74936';
+  ctx.fillStyle='#AE674A';
   ctx.beginPath();ctx.arc(0,0,13*s,0,Math.PI*2);ctx.fill();
   ctx.fillStyle='rgba(255,255,255,.48)';
   ctx.beginPath();ctx.arc(-4*s,-5*s,3*s,0,Math.PI*2);ctx.fill();
@@ -186,6 +195,18 @@ function cover(ctx:CanvasRenderingContext2D,img:HTMLImageElement,x:number,y:numb
   const pan=(t-.5)*Math.min(40,w*.06);
   ctx.drawImage(img,x+(w-pw)/2+pan,y+(h-ph)/2,pw,ph);
 }
+function editorialPhoto(ctx:CanvasRenderingContext2D,img:HTMLImageElement,w:number,h:number,t:number,focus:[number,number]=[.5,.5],fit:'cover'|'contain'='cover'){
+  const zoom=1.015+.035*smoother(t);
+  const k=Math.max(w/img.naturalWidth,h/img.naturalHeight)*zoom;
+  const pw=img.naturalWidth*k,ph=img.naturalHeight*k;
+  const x=Math.max(w-pw,Math.min(0,w*.5-pw*clamp(focus[0]))),y=Math.max(h-ph,Math.min(0,h*.48-ph*clamp(focus[1])));
+  if(fit==='contain'){
+    ctx.save();ctx.filter='blur(24px) brightness(.53)';ctx.drawImage(img,x-20,y-20,pw+40,ph+40);ctx.restore();
+    const scale=Math.min(w*.94/img.naturalWidth,h*.64/img.naturalHeight);
+    const iw=img.naturalWidth*scale,ih=img.naturalHeight*scale;
+    ctx.drawImage(img,(w-iw)/2,h*.43-ih/2,iw,ih);
+  }else ctx.drawImage(img,x,y,pw,ph);
+}
 function scenicFallback(ctx:CanvasRenderingContext2D,w:number,h:number){
   const sky=ctx.createLinearGradient(0,0,0,h);
   sky.addColorStop(0,'#7FA1A6');sky.addColorStop(.5,'#CED1B9');sky.addColorStop(1,'#77968B');
@@ -208,12 +229,21 @@ function labelLines(ctx:CanvasRenderingContext2D,text:string,x:number,y:number,w
 }
 function photoScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMotionScene,time:number,getPhoto:(url:string)=>HTMLImageElement|null){
   const p=scene.premiumTravel!,t=clamp(time/Math.max(.1,scene.durationSec)),s=w/WIDTH;
-  const index=p.chapter==='opening'?0:Math.max(0,p.focusStopIndex);
-  const stop=p.stops[index],img=getPhoto(stop.photoUrl);
-  if(img)cover(ctx,img,0,0,w,h,t);else scenicFallback(ctx,w,h);
+  const index=!p.editorial&&p.chapter==='opening'?0:Math.max(0,Math.min(p.stops.length-1,p.focusStopIndex));
+  const stop=p.stops[index];
+  const alternate=stop.secondaryPhoto;
+  const useAlternate=!!alternate&&(p.openingSecondary||(p.editorial&&p.chapter==='photo'&&t>=.52));
+  const alternateImage=useAlternate?getPhoto(alternate!.photoUrl):null;
+  const photo=alternateImage?alternate!:stop;
+  const img=alternateImage||getPhoto(stop.photoUrl);
+  const shotTime=p.chapter==='photo'&&alternate?clamp(useAlternate?(t-.52)/.48:t/.52):t;
+  if(img){
+    if(p.editorial)editorialPhoto(ctx,img,w,h,shotTime,photo.photoFocus,photo.photoFit);
+    else cover(ctx,img,0,0,w,h,t);
+  }else scenicFallback(ctx,w,h);
   // A title fades in after the image appears and fades out before the next
   // shot. The underlying photo stays visible during the cross-dissolve.
-  const titleIn=ease((time-.18)/.42);
+  const titleIn=p.editorial?ease((time-.06)/.22):ease((time-.18)/.42);
   const titleOut=1-ease((time-(scene.durationSec-.42))/.42);
   ctx.save();ctx.globalAlpha*=titleIn*titleOut;
   const gradient=ctx.createLinearGradient(0,h*.22,0,h);
@@ -223,20 +253,20 @@ function photoScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMot
   ctx.fillStyle=gradient;ctx.fillRect(0,0,w,h);
   ctx.fillStyle='#F8F4E8';ctx.textAlign='left';
   ctx.font='700 '+(29*s)+'px "Plus Jakarta Sans",sans-serif';
-  ctx.fillText('SCOTLAND  /  THE OPEN ROAD',66*s,112*s,w-135*s);
+  ctx.fillText(p.seriesTitle??'SCOTLAND  /  THE OPEN ROAD',66*s,164*s,w-220*s);
   ctx.fillStyle='#E0C99C';ctx.font='700 '+(25*s)+'px "Plus Jakarta Sans",sans-serif';
   const lead=p.chapter==='opening'?'A JOURNEY BEGINS':'STOP '+String(index+1).padStart(2,'0')+' / '+String(p.stops.length).padStart(2,'0');
-  ctx.fillText(lead,66*s,h-490*s,w-134*s);
+  ctx.fillText(p.chapter==='opening'?(p.regionTitle??lead):lead,66*s,h-700*s,w-220*s);
   ctx.fillStyle='#FFFFFF';
-  const headline=p.chapter==='opening'?'FROM CITY\nTO HIGHLANDS':stop.name.toUpperCase();
-  ctx.font='800 '+(p.chapter==='opening'?104:100)*s+'px "Bricolage Grotesque",sans-serif';
-  headline.split('\n').forEach((line,i)=>ctx.fillText(line,66*s,h-(385-i*115)*s,w-128*s));
+  const headline=p.editorial?scene.headline:(p.chapter==='opening'?'FROM CITY\nTO HIGHLANDS':stop.name.toUpperCase());
+  ctx.font='400 '+(p.chapter==='opening'?85:104)*s+'px Georgia,serif';
+  headline.split('\n').forEach((line,i)=>ctx.fillText(line,66*s,h-(575-i*96)*s,w-220*s));
   ctx.font='500 '+(38*s)+'px "Plus Jakarta Sans",sans-serif';
   ctx.fillStyle='#F3F3E9';
-  const tagline=p.chapter==='opening'?'EDINBURGH TO THE ISLE OF SKYE':stop.note;
-  labelLines(ctx,tagline,70*s,h-(p.chapter==='opening'?135:235)*s,w-143*s,56*s,p.chapter==='opening'?1:3);
+  const tagline=p.chapter==='opening'?'EDINBURGH TO THE ISLE OF SKYE':(alternateImage&&alternate?.label?alternate.label:stop.note);
+  labelLines(ctx,tagline,70*s,h-410*s,w-230*s,49*s,2);
   ctx.font='500 '+(19*s)+'px "Plus Jakarta Sans",sans-serif';ctx.fillStyle='#DAE1DB';
-  ctx.fillText(img?'PHOTO  '+stop.photoAuthor+'  •  '+stop.photoLicense:'ILLUSTRATED LANDSCAPE / PHOTO UNAVAILABLE',70*s,h-103*s,w-140*s);
+  ctx.fillText(img?'PHOTO  '+photo.photoAuthor+'  ·  '+photo.photoLicense+'  ·  CROPPED':'ILLUSTRATED LANDSCAPE / PHOTO UNAVAILABLE',70*s,h-265*s,w-220*s);
   ctx.restore();
 }
 function drawMapScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMotionScene,time:number){
@@ -247,7 +277,7 @@ function drawMapScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenM
     ctx.fillText('Preparing road map…',w/2,h/2);return;
   }
   const driving=p.chapter==='drive',finishing=p.chapter==='finale';
-  const fraction=finishing?1:lerp(p.routeProgressFrom,p.routeProgressTo,ease(t));
+  const fraction=finishing?1:lerp(p.routeProgressFrom,p.routeProgressTo,smoother((t-.05)/.86));
   const car=sample(stage,fraction);
 
   // Lead the moving dot gently through bends and return to the destination
@@ -255,7 +285,7 @@ function drawMapScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenM
   const legSize=Math.max(0,p.routeProgressTo-p.routeProgressFrom);
   const ahead=driving ? legSize*.065*ease(t/.33)*(1-ease((t-.75)/.22)) : 0;
   const roadFocus=smoothRouteFocus(stage,clamp(fraction+ahead));
-  const reveal=ease(t/.86);
+  const reveal=p.mapIntro?1:smoother(t/.73);
   const lastStop=stage.stops[stage.stops.length-1];
   const cameraFocus=finishing
     ? {x:lerp(lastStop.x,WIDTH/2,reveal),y:lerp(lastStop.y,HEIGHT/2,reveal)}
@@ -265,12 +295,12 @@ function drawMapScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenM
   // slightly at arrival. Limit zoom to avoid blurry 2x raster enlargement.
   const zoom=finishing
     ? lerp(1.72,1,reveal)
-    : 1.24+.29*ease(t/.19)-.20*ease((t-.76)/.23);
+    : 1.13+.16*smoother(t/.34)-.10*smoother((t-.70)/.30);
   const desiredX=w*.5,desiredY=h*.485;
   const panX=Math.max(w-w*zoom,Math.min(0,desiredX-cameraFocus.x*s*zoom));
   const panY=Math.max(h-h*zoom,Math.min(0,desiredY-cameraFocus.y*s*zoom));
   ctx.save();ctx.translate(panX,panY);ctx.scale(zoom,zoom);
-  ctx.drawImage(stage.image,0,0,w,h);
+  ctx.save();if(p.editorial)ctx.filter='saturate(.38) contrast(.91) brightness(1.035)';ctx.drawImage(stage.image,0,0,w,h);ctx.restore();
   // Muted base trace, followed by the much bolder travelled section.
   ctx.save();ctx.beginPath();
   stage.path.forEach((pt,i)=>i===0?ctx.moveTo(pt.x*s,pt.y*s):ctx.lineTo(pt.x*s,pt.y*s));
@@ -278,7 +308,7 @@ function drawMapScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenM
   routeStroke(ctx,stage,fraction,s);
   stage.stops.forEach((pt,i)=>{
     const x=pt.x*s,y=pt.y*s;
-    ctx.fillStyle=i===p.focusStopIndex?'#D74735':'#173D37';
+    ctx.fillStyle=i===p.focusStopIndex?'#AE674A':'#173D37';
     ctx.strokeStyle='#FFFDF7';ctx.lineWidth=3*s;
     ctx.beginPath();ctx.arc(x,y,19*s,0,Math.PI*2);ctx.fill();ctx.stroke();
     ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle='#FFFFFF';
@@ -297,30 +327,31 @@ function drawMapScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenM
   ctx.restore();
   // Scene titles are eased independently of the cartographic layer so two
   // captions do not stack over one another during an incoming cross-fade.
-  const titlesIn=finishing?ease((time-.9)/.85):ease((time-.23)/.40);
+  const titlesIn=finishing?ease((time-(p.mapIntro ? .15 : .45))/.42):ease((time-.15)/.28);
   const titlesOut=finishing?1:1-ease((time-(scene.durationSec-.42))/.42);
   ctx.save();ctx.globalAlpha*=titlesIn*titlesOut;
   // Compact hierarchy, leaving the centre clear for the route and marker.
-  const m=52*s;
-  ctx.fillStyle='rgba(18,54,48,.94)';ctx.beginPath();ctx.roundRect(m,65*s,w-2*m,105*s,19*s);ctx.fill();
+  const m=66*s;
+  ctx.fillStyle='rgba(18,54,48,.94)';ctx.beginPath();ctx.roundRect(m,135*s,w-2*m-90*s,105*s,19*s);ctx.fill();
   ctx.textAlign='left';ctx.fillStyle='#FFFFFF';
   ctx.font='700 '+(29*s)+'px "Plus Jakarta Sans",sans-serif';
-  ctx.fillText('SCOTLAND / THE OPEN ROAD',m+27*s,114*s,w-2*m-54*s);
+  ctx.fillText(p.seriesTitle??'SCOTLAND / THE OPEN ROAD',m+27*s,184*s,w-2*m-54*s);
   ctx.font='500 '+(23*s)+'px "Plus Jakarta Sans",sans-serif';ctx.fillStyle='#D5E0D9';
-  ctx.fillText(finishing?'THE COMPLETE ROUTE':'ON THE ROAD · '+String(p.focusStopIndex+1).padStart(2,'0')+' / '+p.stops.length,m+27*s,147*s,w-2*m-54*s);
+  ctx.fillText(finishing?'THE COMPLETE ROUTE':'ON THE ROAD · '+String(p.focusStopIndex+1).padStart(2,'0')+' / '+p.stops.length,m+27*s,217*s,w-2*m-54*s);
 
   // Clear lower third with a single strong heading, no competing captions.
-  const lower=ctx.createLinearGradient(0,h-525*s,0,h);
+  const lower=ctx.createLinearGradient(0,h-760*s,0,h);
   lower.addColorStop(0,'rgba(11,34,32,0)');lower.addColorStop(1,'rgba(12,43,37,.92)');
-  ctx.fillStyle=lower;ctx.fillRect(0,h-525*s,w,525*s);
+  ctx.fillStyle=lower;ctx.fillRect(0,h-760*s,w,760*s);
   ctx.fillStyle='#E5C48B';ctx.font='700 '+(27*s)+'px "Plus Jakarta Sans",sans-serif';
-  ctx.fillText(finishing?'ROUTE COMPLETE':'NEXT STOP',m,h-335*s);
+  ctx.fillText(finishing?(p.mapIntro?'THE JOURNEY':'ROUTE COMPLETE'):'NEXT STOP',m,h-525*s);
   ctx.fillStyle='#FFFFFF';
-  const name=finishing?'THE OPEN ROAD':p.stops[p.focusStopIndex]?.name.toUpperCase()??'HIGHLANDS';
-  ctx.font='800 '+(finishing?92:90)*s+'px "Bricolage Grotesque",sans-serif';
-  ctx.fillText(name,m,h-230*s,w-2*m);
+  const name=p.editorial?scene.headline:(finishing?'THE OPEN ROAD':p.stops[p.focusStopIndex]?.name??'HIGHLANDS');
+  ctx.font='400 '+(finishing?83:92)*s+'px Georgia,serif';
+  ctx.fillText(name,m,h-415*s,w-200*s);
   ctx.fillStyle='#E6F0E8';ctx.font='500 '+(30*s)+'px "Plus Jakarta Sans",sans-serif';
-  ctx.fillText(finishing?'Edinburgh · Glen Coe · Eilean Donan · Skye':'A SCENIC DRIVE THROUGH THE HIGHLANDS',m,h-155*s,w-2*m);
+  ctx.fillText(finishing?p.stops.map(stop=>stop.name).join(' · '):'ON THE ROAD',m,h-340*s,w-200*s);
+  if(finishing&&p.cta){ctx.fillStyle='#E5C48B';ctx.font='700 '+(32*s)+'px sans-serif';ctx.fillText(p.cta,m,h-270*s,w-200*s);}
   ctx.restore();
   ctx.fillStyle='rgba(251,250,245,.93)';ctx.fillRect(0,h-61*s,w,61*s);
   ctx.textAlign='center';ctx.font='500 '+(21*s)+'px "Plus Jakarta Sans",sans-serif';ctx.fillStyle='#244C44';

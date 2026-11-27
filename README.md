@@ -18,7 +18,7 @@ Gebruik **Render MP4** in Studio voor de browserexport.
 Voor een servermaster met H.264/AAC (bijvoorbeeld als Safari geen betrouwbare
 AAC-export ondersteunt): ga naar GitHub Actions → **Render OpenMotion MP4
 (manual)** → Run workflow. Vul één project-slug in. Ondersteund: Cat Office,
-Hoe werkt de wereld? en Places Worth Exploring. Download de MP4 uit de artifacts
+Hoe werkt de wereld?, Places Worth Exploring en Premium Travel Route Reel. Download de MP4 uit de artifacts
 van die handmatige run (30 dagen bewaard). De handmatige workflow publiceert de
 website niet en rendert geen andere video's. Normale Pages-deploys bevatten
 geen vooraf gerenderde MP4-bestanden meer; bewaar gewenste masters lokaal.
