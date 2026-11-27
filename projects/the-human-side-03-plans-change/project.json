@@ -33,7 +33,7 @@
       "transition": "fade",
       "backdrop": "dot-matrix",
       "headline": "Plans changed.",
-      "caption": "Same update. Different reaction.",
+      "caption": "",
       "fullBleed": true,
       "doodle": {
         "setting": "standing",
@@ -51,16 +51,18 @@
           "pose-b:phone",
           "face-a:surprise",
           "face-b:neutral",
-          "cover-title:PLANS CHANGED|NOW WHAT?",
-          "cover-hook:Dinner plans cancelled.",
           "cover-pose-a:panic",
           "cover-pose-b:point",
           "cover-face-a:worry",
-          "cover-face-b:determined"
+          "cover-face-b:determined",
+          "human-side-v2",
+          "theme:calendar",
+          "cover-title:PLANS CHANGED|NOW WHAT?",
+          "cover-hook:Dinner plans cancelled."
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "Two people hear the same news. Dinner plans are cancelled."
+        "narration": "Dinner cancelled. Now what?"
       }
     },
     {
@@ -71,7 +73,7 @@
       "transition": "fade",
       "backdrop": "dot-matrix",
       "headline": "Now everything feels off.",
-      "caption": "One feels unsettled.",
+      "caption": "",
       "fullBleed": true,
       "doodle": {
         "setting": "standing",
@@ -86,11 +88,13 @@
           "episode:03",
           "label-a:My whole day is off.",
           "pose-a:panic",
-          "face-a:worry"
+          "face-a:worry",
+          "human-side-v2",
+          "theme:calendar"
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "One feels tense. They had organized their evening around those plans."
+        "narration": "One had planned the entire evening around dinner. Now the evening feels uncertain."
       }
     },
     {
@@ -101,7 +105,7 @@
       "transition": "fade",
       "backdrop": "dot-matrix",
       "headline": "What's the new plan?",
-      "caption": "Another starts adapting.",
+      "caption": "",
       "fullBleed": true,
       "doodle": {
         "setting": "standing",
@@ -116,11 +120,13 @@
           "episode:03",
           "label-b:What's the new plan?",
           "pose-b:point",
-          "face-b:determined"
+          "face-b:determined",
+          "human-side-v2",
+          "theme:calendar"
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "The other pauses and asks whether tomorrow would work instead."
+        "narration": "The other looks at the calendar and suggests tomorrow instead."
       }
     },
     {
@@ -131,7 +137,7 @@
       "transition": "fade",
       "backdrop": "dot-matrix",
       "headline": "Change feels different.",
-      "caption": "Different needs for predictability.",
+      "caption": "",
       "fullBleed": true,
       "doodle": {
         "setting": "standing",
@@ -149,11 +155,13 @@
           "pose-a:panic",
           "pose-b:point",
           "face-a:worry",
-          "face-b:determined"
+          "face-b:determined",
+          "human-side-v2",
+          "theme:calendar"
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "An unexpected change feels harder when someone was relying on the original plan."
+        "narration": "The same change feels different when you were relying on the original plan."
       }
     },
     {
@@ -164,7 +172,7 @@
       "transition": "fade",
       "backdrop": "dot-matrix",
       "headline": "Pause. Find one next step.",
-      "caption": "Give yourself time to adjust.",
+      "caption": "",
       "fullBleed": true,
       "doodle": {
         "setting": "standing",
@@ -181,15 +189,114 @@
           "pose-a:relief",
           "pose-b:calm",
           "face-a:relief",
-          "face-b:smile"
+          "face-b:smile",
+          "human-side-v2",
+          "theme:calendar"
         ],
         "shirtColor": "#C5A8D0",
         "highlightColor": "#191619",
-        "narration": "When plans shift, try a short reset. What changed? What stayed the same? What's next?"
+        "narration": "Give yourself a moment. Find one next step, instead of solving the whole evening."
       }
     }
   ],
-  "captions": [],
+  "captions": [
+    {
+      "text": "Dinner cancelled. Now what?",
+      "startSec": 1.5,
+      "endSec": 3.55,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "One had planned the entire",
+      "startSec": 4.3,
+      "endSec": 6.319,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "evening around dinner. Now the",
+      "startSec": 6.319,
+      "endSec": 8.338,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "evening feels uncertain.",
+      "startSec": 8.338,
+      "endSec": 9.55,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "The other looks at the",
+      "startSec": 10.3,
+      "endSec": 12.925,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "calendar and suggests tomorrow instead.",
+      "startSec": 12.925,
+      "endSec": 15.55,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "The same change feels different",
+      "startSec": 16.3,
+      "endSec": 18.319,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "when you were relying on",
+      "startSec": 18.319,
+      "endSec": 20.338,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "the original plan.",
+      "startSec": 20.338,
+      "endSec": 21.55,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "Give yourself a moment. Find",
+      "startSec": 22.3,
+      "endSec": 24.175,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "one next step, instead of",
+      "startSec": 24.175,
+      "endSec": 26.05,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    },
+    {
+      "text": "solving the whole evening.",
+      "startSec": 26.05,
+      "endSec": 27.55,
+      "style": "minimal",
+      "position": 0.78,
+      "fontSizePx": 45
+    }
+  ],
   "audioTracks": [
     {
       "id": "voice",
@@ -205,16 +312,24 @@
       "src": "assets/audio/the-human-side-03-plans-change-score.mp3",
       "startSec": 0,
       "endSec": 28,
-      "volume": 0.22,
+      "volume": 0.15,
       "fadeInSec": 0.3,
       "fadeOutSec": 1
+    },
+    {
+      "id": "human-sfx",
+      "kind": "effect",
+      "src": "assets/audio/the-human-side-03-plans-change-human-sfx.wav",
+      "startSec": 0,
+      "endSec": 28,
+      "volume": 0.48
     }
   ],
   "kind": "video",
   "seriesId": "the-human-side",
   "season": 1,
   "episodeNumber": 3,
-  "templateVersion": "1.1",
+  "templateVersion": "2.0",
   "productionStatus": "review",
-  "thumbnailUrl": "assets/the-human-side/the-human-side-03-plans-change.svg"
+  "thumbnailUrl": "assets/the-human-side/v2/the-human-side-03-plans-change.svg"
 }
