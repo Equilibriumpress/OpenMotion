@@ -10,7 +10,7 @@ if(!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
 }
 const root=process.cwd(),dist=path.join(root,'dist'),manifestPath=path.join(dist,'projects','manifest.json');
 const manifest=JSON.parse(fs.readFileSync(manifestPath,'utf8'));
-const projects=manifest.projects.filter(p=>p.slug===slug && p.scenes.some(s=>s.worldStory || s.catOffice || s.premiumTravel || s.bucketList?.documentary?.series==='places-worth-exploring'));
+const projects=manifest.projects.filter(p=>p.slug===slug && p.scenes.some(s=>s.worldStory || s.catOffice || s.premiumTravel || s.bucketList?.documentary?.series==='places-worth-exploring' || (p.seriesId==='the-human-side' && s.doodle?.extras?.includes('human-side-v1'))));
 if(projects.length!==1)throw Error('No unique supported master project: '+slug);
 const needsMap=projects[0].scenes.some(s=>s.premiumTravel || (s.bucketList?.documentary?.series==='places-worth-exploring' && s.bucketList?.chapter==='zoom'));
 const { chromium }=await import('playwright');
@@ -37,10 +37,12 @@ try {
     try{
       const travel=p.scenes.some(s=>s.bucketList?.documentary?.series==='places-worth-exploring');
       const premium=p.scenes.some(s=>s.premiumTravel);
-      const duration=p.scenes.reduce((sum,s)=>sum+s.durationSec,0),fps=(travel||premium)?p.fps:60,width=(travel||premium)?p.width:1080,height=(travel||premium)?p.height:1920;
+      const human=p.seriesId==='the-human-side';
+      const duration=p.scenes.reduce((sum,s)=>sum+s.durationSec,0),fps=(travel||premium||human)?p.fps:60,width=(travel||premium||human)?p.width:1080,height=(travel||premium||human)?p.height:1920;
       const tracks=(p.audioTracks??[]).filter(t=>fs.existsSync(path.join(dist,t.src)));
       const isCat=p.scenes.some(s=>s.catOffice);
       const isTravel=p.scenes.some(s=>s.bucketList?.documentary?.series==='places-worth-exploring');
+      if(human&&(!tracks.some(t=>t.kind==='voiceover')||tracks.length!==(p.audioTracks??[]).length))throw Error('Human Side soundtrack assets missing');
       if(isCat){
         if(!tracks.length)throw Error('Cat soundtrack missing.');
         for(const id of ['oliver','boss','luna','bob']) if(!fs.existsSync(path.join(dist,'assets','cat-office',id+'.jpg')))throw Error('Cat photo missing: '+id);
@@ -98,7 +100,7 @@ try {
           return out;
         };
       },{p,width,height});
-      if(premium){
+      if(premium||human){
         const wav=await page.evaluate(async ({p,duration})=>{
           const {mixProjectAudio}=await import('/src/engine/projectAudio.ts');
           const audio=await mixProjectAudio(p,duration);
@@ -128,7 +130,7 @@ try {
         if(n%480===0)console.log('[world-render]',p.slug,n,'/',frames);
       }
       encoder.stdin.end();await done;
-      if(premium){
+      if(premium||human){
         run('ffmpeg',['-hide_banner','-loglevel','error','-y','-i',silent,'-i',score,'-map','0:v:0','-map','1:a:0','-c:v','copy','-c:a','aac','-b:a','192k','-t',String(duration),'-movflags','+faststart',target]);
       }else{
       const inputs=tracks.flatMap(t=>['-i',path.join(dist,t.src)]);
