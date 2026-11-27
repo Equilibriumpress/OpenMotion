@@ -16,6 +16,35 @@ export function prepareHumanSideSound(p,root){
   const duration=Number(s.durationSec);
   if(!Number.isFinite(duration)||duration<=0)throw Error('Invalid Human Side scene duration');
   const add=(dt,type,vol)=>{if(dt>=0&&dt+.25<duration)cues.push(cue(at+dt,type,vol));};
+  if(s.doodle?.extras?.includes('human-side-v21')){
+   if(theme==='rest'){
+    if(shot==='setup')add(1.65,'cloth',.55);
+    if(shot==='build')for(let t=.45;t<1.6;t+=.45)add(t,'paper',.52);
+    if(shot==='turn')for(let t=.4;t<4.2;t+=1)add(t,'tick',.38);
+    if(shot==='change'||shot==='resolve')add(.45,'breath',.62);
+   }else if(theme==='mask'){
+    if(shot==='setup')add(1.65,'room',.55);
+    if(shot==='build')add(.3,'room',.5);
+    if(shot==='turn')add(.6,'cloth',.62);
+    if(shot==='change')add(.35,'breath',.5);
+   }else if(theme==='loop'){
+    if(shot==='setup'||shot==='build')for(let t=shot==='setup'?1.85:.35;t<duration-.4;t+=1.6)add(t,'swipe',.65);
+    if(shot==='turn')add(.55,'tick',.45);
+    if(shot==='change')add(1.6,'thud',.62);
+   }else if(theme==='load'){
+    if(shot==='setup')add(1.7,'thud',.55);
+    if(shot==='build')for(let t=.85;t<3.6;t+=.85)add(t,'thud',.72);
+    if(shot==='turn')add(.4,'breath',.6);
+    if(shot==='change'){add(.55,'cloth',.55);add(2.05,'thud',.55);}
+   }else if(theme==='crowd'){
+    if(shot==='setup')add(1.7,'room',.68);
+    if(shot==='build')for(let t=.25;t<duration-1.6;t+=1.55)add(t,'room',.55);
+    if(shot==='turn')add(.4,'breath',.42);
+    if(shot==='change'){add(.4,'step',.5);add(.85,'step',.45);}
+   }
+   if(shot==='resolve')add(.55,'breath',.36);
+   at+=duration;continue;
+  }
   if(shot==='message')add(1.62,theme==='waiting'?'tap':theme==='calendar'||theme==='feedback'?'paper':'ping',.7);
   if(shot==='worry'){
    if(theme==='waiting')for(let t=.6;t<Math.min(duration-.3,4.7);t+=.8)add(t,'tick',.43);
@@ -31,7 +60,7 @@ export function prepareHumanSideSound(p,root){
  if(at>180)throw Error('Human Side sound exceeds maximum duration');
  const n=Math.round(at*SR),samples=new Float32Array(n);let seed=41351;
  for(const {time,type,volume} of cues){
-  const length=type==='breath' ? .52 : type==='ping' ? .26 : type==='paper' ? .21 : .07;
+  const length=type==='room'?1.3:type==='cloth' ? .34:type==='swipe' ? .23:type==='thud' ? .22:type==='step' ? .16:type==='breath' ? .52 : type==='ping' ? .26 : type==='paper' ? .21 : .07;
   let noise=0;
   for(let i=0;i<Math.round(SR*length);i++){
    const j=Math.round(time*SR)+i;if(j>=n)break;
@@ -41,6 +70,9 @@ export function prepareHumanSideSound(p,root){
    if(type==='ping')v=.19*(Math.sin(TAU*850*t)+.45*Math.sin(TAU*1275*t))*env;
    else if(type==='tick'||type==='tap')v=.13*(Math.sin(TAU*(type==='tick'?970:520)*t)+.5*white)*env;
    else if(type==='paper')v=.15*(white-noise)*env*(.55+.45*Math.sin(TAU*22*t));
+   else if(type==='room')v=.22*noise*Math.sin(Math.PI*u)**2*(.55+.45*Math.sin(TAU*4.2*t)**2);
+   else if(type==='cloth'||type==='swipe')v=.14*(white-noise)*Math.sin(Math.PI*u)**2*(.6+.4*Math.sin(TAU*15*t));
+   else if(type==='thud'||type==='step')v=.16*(Math.sin(TAU*100*t)+.18*white)*env;
    else v=.14*noise*Math.sin(Math.PI*u)**2;
    samples[j]+=volume*v;
   }
