@@ -171,7 +171,7 @@ export function renderHumanSideCover(c:C,width:number,height:number,scene:OpenMo
  const episode=coverValue(scene,'episode','01');
  rounded(c,135,210,270,39,19,p,p.ink);
  text(c,'THE HUMAN SIDE  /  '+episode,270,229,17,'#FFFFFF',800);
- const lines=coverValue(scene,'cover-title','SAME MESSAGE|DIFFERENT MINDS').split('|').filter(Boolean).slice(0,3);
+ const lines=coverValue(scene,'cover-title','SAME MESSAGE|DIFFERENT MINDS').split('|').filter(Boolean).slice(0,2);
  lines.forEach((v,i)=>{
   const y=287+i*55;
   c.font='900 48px system-ui, sans-serif';
