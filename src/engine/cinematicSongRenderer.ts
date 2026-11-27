@@ -120,11 +120,9 @@ function drive(c:C,t:number,u:number,hero=false){
  shape(c,'M 444 730 Q 492 648 540 620 V 960 H 365 Z','#24303B');
  for(let i=0;i<5;i++){const z=(t*.19+i/5)%1;stroke(c,'M '+(485-z*110)+' '+(180+z*120)+' l -65 90','rgba(250,203,136,.10)',6);}
  // A short exterior tracking shot reveals the same sedan in three dimensions.
- if(hero&&t>=1.05&&t<3.65){
-  c.save();c.globalAlpha=ease((t-1.05)/.24)*(1-ease((t-3.32)/.33));
-  // Isolate the whole shot in an opaque background; transition is a motivated cut,
-  // not a transparent car overlay on the dashboard.
-  if(t>1.17&&t<3.48)c.globalAlpha=1;
+ if(hero&&t>=1.15&&t<3.55){
+  c.save();
+  // Motivated opaque cut between passenger and exterior views.
   landscape(c,t,true);
   drawHeroCar(c,270+Math.sin((t-1.05)*1.1)*12,655,.97,t,.63+.15*ease((t-1.05)/2.6),true);
   c.restore();
@@ -141,7 +139,7 @@ function sceneArt(c:C,shot:string,t:number,u:number,mode:string,hero=false){
 }
 export function renderCinematicSongCover(c:C,w:number,h:number,s:OpenMotionScene,_b:OpenMotionBrandKit){
  const hero=!!s.doodle?.extras?.includes('song-hero-rigs-v21');
- c.save();c.scale(w/W,h/H);landscape(c,0,true);if(hero){portrait(c,130,450,1.29,0,'look','warm',false,true,'three-quarter');drawHeroCar(c,345,655,.76,0,.68,true);}else{rearCar(c,264,659,.83,0);portrait(c,139,446,1.37,0,'look','warm');}finish(c);
+ c.save();c.scale(w/W,h/H);landscape(c,0,true);if(hero){portrait(c,126,482,1.11,0,'look','warm',false,true,'three-quarter');drawHeroCar(c,354,662,.69,0,.68,true);}else{rearCar(c,264,659,.83,0);portrait(c,139,446,1.37,0,'look','warm');}finish(c);
  box(c,0,0,W,340,grad(c,0,0,0,340,[[0,'rgba(11,19,29,.92)'],[1,'rgba(11,19,29,0)']]));
  text(c,'THE SONG EXPLAINED  /  '+field(s,'episode','01'),270,223,15,'#D4A574','center',650);
  const titles=field(s,'cover-title','FAST CAR').split('|').slice(0,2);titles.forEach((v,i)=>text(c,v,270,278+i*55,66,'#F9E8CD','center',900,446));
