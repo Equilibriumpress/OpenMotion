@@ -20,13 +20,13 @@ const ctx:Record<string,unknown>={
  createLinearGradient(...a:number[]){numeric('createLinearGradient',4,a);return gradient;},
 };
 for(const [name,n] of Object.entries({scale:2,translate:2,rotate:1,fillRect:4,rect:4,ellipse:7,arc:5,moveTo:2,lineTo:2,quadraticCurveTo:4,bezierCurveTo:6}))ctx[name]=(...a:unknown[])=>numeric(name,n,a);
-// The alternate renderer still has Path2D artwork. Node has no DOM.
+// Legacy artworks may use Path2D. Node has no DOM; procedural paths use native primitives.
 if(typeof globalThis.Path2D==='undefined')Object.defineProperty(globalThis,'Path2D',{value:class {constructor(d?:string){assert(!d||!(/NaN|Infinity|undefined/.test(d)));}}});
 const c=ctx as unknown as CanvasRenderingContext2D;
 for(const slug of ['the-song-explained-001-fast-car','the-song-explained-002-every-breath-you-take']){
  const p=JSON.parse(fs.readFileSync('projects/'+slug+'/project.json','utf8')) as OpenMotionProject;
  renderCinematicSongCover(c,540,960,p.scenes[0],p.brandKit);assert.equal(depth,0);
- for(const s of p.scenes)for(const t of [0,.3,.85,1.15,1.3,2,3.54,3.55,s.durationSec*.5,s.durationSec-.001]){
+ for(const s of p.scenes)for(const t of Array.from({length:61},(_,i)=>s.durationSec*i/60)){
   if(t>s.durationSec)continue;
   renderCinematicSong(c,540,960,s,t,p.brandKit);assert.equal(depth,0,slug+' / '+s.name+' / '+t);frames++;
  }
