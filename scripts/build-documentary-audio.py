@@ -39,12 +39,12 @@ def ambience(ch,duration,out):
 def build(p,work,python,model=MODEL):
     slug=p["slug"]
     if not re.fullmatch(r"[a-z0-9-]+",slug): raise ValueError("Invalid slug")
-    chapters=[(k,list(v)) for k,v in groupby(p["scenes"],key=lambda s:s["worldStory"].get("chapter",s["id"]) if s.get("worldStory") else s.get("bucketList",{}).get("documentary",{}).get("chapter",1))]
+    chapters=[(k,list(v)) for k,v in groupby(p["scenes"],key=lambda s:s["worldStory"].get("chapter",s["id"]) if s.get("worldStory") else s["id"] if "mind-series-v1" in s.get("doodle",{}).get("extras",[]) else s.get("bucketList",{}).get("documentary",{}).get("chapter",1))]
     voicefiles=[];musicfiles=[];ambfiles=[];captions=[];offset=0.0
     for ch_index,(chapter_key,scenes) in enumerate(chapters,1):
         ch=ch_index
         duration=sum(float(s["durationSec"]) for s in scenes)
-        narration=" ".join((s.get("worldStory",{}).get("narration") or s.get("bucketList",{}).get("documentary",{}).get("narration","")).strip() for s in scenes).strip()
+        narration=" ".join((s.get("worldStory",{}).get("narration") or s.get("bucketList",{}).get("documentary",{}).get("narration") or s.get("doodle",{}).get("narration","")).strip() for s in scenes).strip()
         raw=work/f"{ch}-raw.wav";fitted=work/f"{ch}-voice.wav"
         if narration:
             # One uninterrupted synthesis per chapter: no restart on every cut.
@@ -89,13 +89,17 @@ def build(p,work,python,model=MODEL):
     concat(ambfiles,OUT/(slug+"-ambience.mp3"),work,bitrate="96k")
     (OUT/(slug+"-captions.json")).write_text(json.dumps(captions,ensure_ascii=False))
     (OUT/(slug+"-captions.srt")).write_text("".join(f"{i+1}\n{fmt_time(c['startSec'])} --> {fmt_time(c['endSec'])}\n{c['text']}\n\n" for i,c in enumerate(captions)))
+    if any("mind-series-v1" in s.get("doodle",{}).get("extras",[]) for s in p["scenes"]):
+        # Original short, quiet cues at reaction beats; no recorded samples.
+        expr="+".join(f"0.10*exp(-18*max(0,t-{a}))*sin(2*PI*{hz}*(t-{a}))*between(t,{a},{a+.22})" for a,hz in [(6.5,540),(10.1,310),(14.6,220),(25.5,740),(40.0,490)])
+        ff("-f","lavfi","-i",f"aevalsrc={expr}:s=48000:d={offset}","-c:a","libmp3lame","-b:a","96k",OUT/(slug+"-effects.mp3"))
     print(f"[documentary] {slug}: {offset:.0f}s, {len(chapters)} narrated chapters, {len(captions)} cues, three audio tracks")
 def main():
     OUT.mkdir(parents=True,exist_ok=True)
     projects=[]
     for path in (ROOT/"projects").glob("*/project.json"):
         p=json.loads(path.read_text())
-        if any(s.get("bucketList",{}).get("documentary") or s.get("worldStory") for s in p.get("scenes",[])):projects.append(p)
+        if any(s.get("bucketList",{}).get("documentary") or s.get("worldStory") or "mind-series-v1" in s.get("doodle",{}).get("extras",[]) for s in p.get("scenes",[])):projects.append(p)
     projects.sort(key=lambda p:not any(s.get("worldStory") for s in p["scenes"]))
     if not projects:return
     with tempfile.TemporaryDirectory() as tmp:

@@ -1,0 +1,269 @@
+{
+  "schemaVersion": "1.0",
+  "id": "short-inside-adhd-mind-001",
+  "slug": "inside-adhd-mind-001",
+  "title": "Inside the ADHD Mind 01 — I Was Going to Do It",
+  "description": "A 45-second original hand-drawn animated story about personal experiences of pressure and autonomy. Editable characters, poses, captions and narration.",
+  "category": "Shorts & Reels",
+  "author": "OpenMotion Studio",
+  "source": "template",
+  "createdAt": "2026-11-27",
+  "updatedAt": "2026-11-27",
+  "githubPath": "projects/inside-adhd-mind-001/project.json",
+  "format": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "brandKit": {
+    "brandName": "INSIDE THE ADHD MIND",
+    "primaryColor": "#518D89",
+    "accentColor": "#B94D41",
+    "backgroundColor": "#EFE3D0",
+    "surfaceColor": "#DCE8EB",
+    "textColor": "#49392F",
+    "mutedColor": "#79685B",
+    "fontFamily": "Kalam"
+  },
+  "scenes": [
+    {
+      "id": "mind-1",
+      "name": "The hook",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Want to know how my motivation disappears?",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "happy",
+        "pose": "point",
+        "emphasis": [
+          "motivation"
+        ],
+        "extras": [
+          "mind-series-v1",
+          "hook"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "Want to know how my motivation disappears?"
+      }
+    },
+    {
+      "id": "mind-2",
+      "name": "My own idea",
+      "durationSec": 5,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "I was already going to wash the dishes.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "happy",
+        "pose": "neutral",
+        "emphasis": [
+          "already"
+        ],
+        "extras": [
+          "mind-series-v1",
+          "walk"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "I was already going to wash the dishes."
+      }
+    },
+    {
+      "id": "mind-3",
+      "name": "The request",
+      "durationSec": 5,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Then someone says: “You need to do the dishes.”",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [
+          "need"
+        ],
+        "extras": [
+          "mind-series-v1",
+          "request"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "Then someone says: “You need to do the dishes.”"
+      }
+    },
+    {
+      "id": "mind-4",
+      "name": "The switch",
+      "durationSec": 5,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Suddenly, I don't want to anymore.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "shower",
+        "mood": "worried",
+        "pose": "exhausted",
+        "emphasis": [
+          "don't"
+        ],
+        "extras": [
+          "mind-series-v1",
+          "switch"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "Suddenly, I don't want to anymore."
+      }
+    },
+    {
+      "id": "mind-5",
+      "name": "Same task",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Same task. Same dishes. Completely different feeling.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "shower",
+        "mood": "worried",
+        "pose": "neutral",
+        "emphasis": [
+          "different"
+        ],
+        "extras": [
+          "mind-series-v1",
+          "same"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "Same task. Same dishes. Completely different feeling."
+      }
+    },
+    {
+      "id": "mind-6",
+      "name": "More pressure",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Especially when you add: “Right now!”",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "shower",
+        "mood": "overwhelmed",
+        "pose": "exhausted",
+        "emphasis": [
+          "right",
+          "now"
+        ],
+        "extras": [
+          "mind-series-v1",
+          "pressure"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "Especially when you add: “Right now!”"
+      }
+    },
+    {
+      "id": "mind-7",
+      "name": "Why starting feels harder",
+      "durationSec": 7,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "For me, pressure makes starting harder.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "shower",
+        "mood": "worried",
+        "pose": "point",
+        "emphasis": [
+          "pressure",
+          "harder"
+        ],
+        "extras": [
+          "mind-series-v1",
+          "explain"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "For me, pressure makes starting harder."
+      }
+    },
+    {
+      "id": "mind-8",
+      "name": "My choice",
+      "durationSec": 7,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "I was going to do it. I wanted to decide when.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "happy",
+        "pose": "relieved",
+        "emphasis": [
+          "decide",
+          "when"
+        ],
+        "extras": [
+          "mind-series-v1",
+          "wash"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "I was going to do it. I wanted to decide when."
+      }
+    }
+  ],
+  "captions": [],
+  "audioTracks": [
+    {
+      "id": "voice",
+      "kind": "voiceover",
+      "src": "assets/audio/inside-adhd-mind-001-voice.mp3",
+      "startSec": 0,
+      "endSec": 45,
+      "volume": 1
+    },
+    {
+      "id": "score",
+      "kind": "music",
+      "src": "assets/audio/inside-adhd-mind-001-score.mp3",
+      "startSec": 0,
+      "endSec": 45,
+      "volume": 0.28,
+      "fadeInSec": 0.3,
+      "fadeOutSec": 1.2
+    },
+    {
+      "id": "effects",
+      "kind": "effect",
+      "src": "assets/audio/inside-adhd-mind-001-effects.mp3",
+      "startSec": 0,
+      "endSec": 45,
+      "volume": 0.38
+    }
+  ]
+}
