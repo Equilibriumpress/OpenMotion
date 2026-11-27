@@ -3532,12 +3532,12 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
     "id": "bucket-list-001-sao-miguel",
     "slug": "bucket-list-001-sao-miguel",
     "title": "MY BUCKET LIST #001 · São Miguel, Azores",
-    "description": "Bucket List R4 · Director's Cut: 20 seconds; immediate episode hook, 4.5-second continuous globe-to-island flight, dramatic clean crater-lake reveal, specific forest and viewpoint reasons with varied title timing, graded photography, native MapLibre map-outro and precisely retimed original cinematic score. iPad video resolution and embedded audio remain browser-dependent.",
+    "description": "Bucket List 3.0 · 20 seconds, photographic cover, native globe flight, geographic photo reveal, safe-area typography, coastal finale and cover loop, original synchronized score.",
     "category": "Shorts & Reels",
     "author": "OpenMotion Studio",
     "source": "template",
     "createdAt": "2026-11-25",
-    "updatedAt": "2026-11-25",
+    "updatedAt": "2026-11-27",
     "githubPath": "projects/bucket-list-001-sao-miguel/project.json",
     "format": "9:16",
     "width": 1080,
@@ -3555,9 +3555,36 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
     },
     "scenes": [
       {
+        "id": "destination-cover",
+        "name": "01 / Destination cover",
+        "durationSec": 1.5,
+        "layout": "bucket-list-zoom",
+        "transition": "fade",
+        "backdrop": "swiss-lines",
+        "headline": "SÃO MIGUEL",
+        "fullBleed": true,
+        "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/77/Miradouro_da_Boca_do_Inferno%2C_Lagoa_das_Sete_Cidades%2C_ilha_de_S%C3%A3o_Miguel%2C_A%C3%A7ores.JPG/1280px-Miradouro_da_Boca_do_Inferno%2C_Lagoa_das_Sete_Cidades%2C_ilha_de_S%C3%A3o_Miguel%2C_A%C3%A7ores.JPG",
+        "bucketList": {
+          "episode": 1,
+          "destination": "São Miguel",
+          "region": "Azores",
+          "country": "Portugal",
+          "latitude": 37.8533,
+          "longitude": -25.7791,
+          "startLongitude": -11,
+          "startLatitude": 43,
+          "chapter": "reason",
+          "imageAuthor": "José Luís Ávila Silveira / Pedro Noronha e Costa",
+          "imageLicense": "Public domain",
+          "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Miradouro_da_Boca_do_Inferno,_Lagoa_das_Sete_Cidades,_ilha_de_São_Miguel,_Açores.JPG",
+          "cover": true,
+          "directorsCut": true
+        }
+      },
+      {
         "id": "zoom",
-        "name": "01 / Earth to São Miguel · Reveal",
-        "durationSec": 4.5,
+        "name": "02 / Globe to Sete Cidades",
+        "durationSec": 3.5,
         "layout": "bucket-list-zoom",
         "transition": "fade",
         "backdrop": "swiss-lines",
@@ -3572,13 +3599,14 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "longitude": -25.7791,
           "startLongitude": -11,
           "startLatitude": 43,
-          "chapter": "zoom"
+          "chapter": "zoom",
+          "directorsCut": true
         }
       },
       {
         "id": "reason-crater",
-        "name": "02 / Sete Cidades · The reveal",
-        "durationSec": 4.5,
+        "name": "03 / Volcanic lakes",
+        "durationSec": 4,
         "layout": "bucket-list-zoom",
         "transition": "fade",
         "backdrop": "swiss-lines",
@@ -3600,13 +3628,14 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "reasonCopy": "SETE CIDADES · VOLCANIC CALDERA",
           "imageAuthor": "Samuel Monteiro Domingues",
           "imageLicense": "CC BY-SA 4.0",
-          "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Lagoa_das_Sete_Cidades,_São_Miguel.jpg"
+          "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Lagoa_das_Sete_Cidades,_São_Miguel.jpg",
+          "directorsCut": true
         }
       },
       {
         "id": "reason-forest",
-        "name": "03 / Lagoa do Congro · Forest trails",
-        "durationSec": 3,
+        "name": "04 / Into the forest",
+        "durationSec": 3.5,
         "layout": "bucket-list-zoom",
         "transition": "fade",
         "backdrop": "swiss-lines",
@@ -3629,12 +3658,13 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "imageAuthor": "Órvil Fernando de Aragão Russo",
           "imageLicense": "CC BY-SA 4.0",
           "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Acesso_%C3%A0_Lagoa_Do_Congro_S%C3%A3o_Miguel.jpg",
-          "imageFocusX": 0.55
+          "imageFocusX": 0.55,
+          "directorsCut": true
         }
       },
       {
         "id": "reason-viewpoint",
-        "name": "04 / Boca do Inferno · Grand viewpoint",
+        "name": "05 / Above the island",
         "durationSec": 4,
         "layout": "bucket-list-zoom",
         "transition": "fade",
@@ -3657,13 +3687,14 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "reasonCopy": "BOCA DO INFERNO VIEWPOINT",
           "imageAuthor": "José Luís Ávila Silveira / Pedro Noronha e Costa",
           "imageLicense": "Public domain",
-          "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Miradouro_da_Boca_do_Inferno,_Lagoa_das_Sete_Cidades,_ilha_de_São_Miguel,_Açores.JPG"
+          "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Miradouro_da_Boca_do_Inferno,_Lagoa_das_Sete_Cidades,_ilha_de_São_Miguel,_Açores.JPG",
+          "directorsCut": true
         }
       },
       {
         "id": "outro",
-        "name": "05 / São Miguel coast to island overview",
-        "durationSec": 4,
+        "name": "06 / Coast to destination cover",
+        "durationSec": 3.5,
         "layout": "bucket-list-zoom",
         "transition": "fade",
         "backdrop": "swiss-lines",
@@ -3683,7 +3714,8 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "imageAuthor": "Jules Verne Times Two / julesvernex2.com",
           "imageLicense": "CC BY-SA 4.0",
           "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Aerial_view_of_Mosteiros,_S%C3%A3o_Miguel_Island,_Azores,_Portugal_(PPL1-Corrected).jpg",
-          "imageFocusX": 0.36
+          "imageFocusX": 0.36,
+          "directorsCut": true
         }
       }
     ],
