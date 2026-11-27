@@ -8,34 +8,46 @@ const projectsDir = path.join(rootDir, 'projects');
 const outDir = path.join(rootDir, 'public', 'projects');
 const outFile = path.join(outDir, 'manifest.json');
 
-// Required for both the photo preparation and the MP4/audio encoders.
-if (process.env.GITHUB_ACTIONS === 'true') {
+// Cache checks happen before media tools are installed or source files fetched.
+const ci = process.env.GITHUB_ACTIONS === 'true';
+function stage(name, script, timeout, required) {
+  const started = Date.now();
+  const result = spawnSync('python3', ['-u', script], { stdio: 'inherit', timeout });
+  console.log('[build-timing]', name, ((Date.now()-started)/1000).toFixed(2)+'s');
+  if (result.status !== 0) {
+    const message = '['+name+'] Media preparation failed: '+(result.error?.message ?? result.status);
+    if (required) throw new Error(message);
+    console.warn(message);
+  }
+}
+if (process.env.OPENMOTION_REQUIRE_FFMPEG === '1') {
   const ready = () => ['ffmpeg','ffprobe'].every(cmd => spawnSync(cmd,['-version'],{stdio:'ignore'}).status === 0);
   if (!ready()) {
     const update=spawnSync('sudo',['apt-get','update'],{stdio:'inherit',timeout:180000});
-    if(update.status !== 0) throw new Error('Unable to update package list for FFmpeg');
-    const install=spawnSync('sudo',['apt-get','install','-y','ffmpeg'],{stdio:'inherit',timeout:300000});
-    if(install.status !== 0 || !ready()) throw new Error('FFmpeg / FFprobe installation failed');
+    const install=update.status===0 ? spawnSync('sudo',['apt-get','install','-y','ffmpeg'],{stdio:'inherit',timeout:300000}) : null;
+    if(install?.status !== 0 || !ready()) throw new Error('FFmpeg / FFprobe installation failed');
   }
 }
-// The existing GitHub Pages build generates documentary audio without a
-// second workflow. Local developers may opt in with DOCUMENTARY_AUDIO=1.
-if (process.env.GITHUB_ACTIONS === 'true' || process.env.DOCUMENTARY_AUDIO === '1') {
-  const terrain = spawnSync('python3', ['scripts/build-documentary-terrain.py'], { stdio: 'inherit', timeout: 180000 });
-  if (terrain.status !== 0) console.warn('[documentary] Optional DEM contour generation unavailable.');
-  const result = spawnSync('python3', ['scripts/build-documentary-audio.py'], { stdio: 'inherit', timeout: 900000 });
-  if (result.status !== 0) console.warn('[documentary] Audio generation failed; publishing visual projects without missing audio tracks.');
+if (ci || process.env.DOCUMENTARY_AUDIO === '1') {
+  stage('terrain','scripts/build-documentary-terrain.py',600000,false);
+  stage('documentary-audio','scripts/build-documentary-audio.py',1800000,ci);
 }
-if (process.env.GITHUB_ACTIONS === 'true' || process.env.CAT_OFFICE_ASSETS === '1') {
-  const cat = spawnSync('python3',['scripts/build-cat-office.py'],{stdio:'inherit',timeout:300000});
-  if (cat.status !== 0) throw new Error('[cat-office] Asset preparation failed; refusing to publish missing cats.');
+if (ci || process.env.CAT_OFFICE_ASSETS === '1') {
+  stage('cat-office','scripts/build-cat-office.py',600000,true);
 }
-// Travel source assets are materialized into public/ during the same Pages build.
-if (process.env.GITHUB_ACTIONS === 'true' || process.env.TRAVEL_ASSETS === '1') {
-  const result=spawnSync('python3',['scripts/build-travel-assets.py'],{stdio:'inherit',timeout:900000});
-  if(result.status!==0)throw Error('[travel] Source media preparation failed; refusing to publish an incomplete episode.');
+if (ci || process.env.TRAVEL_ASSETS === '1') {
+  stage('travel','scripts/build-travel-assets.py',1800000,true);
 }
+const manifestStarted=Date.now();
 function prepareProject(p) {
+  if (ci) {
+    for (const track of p.audioTracks ?? []) {
+      if (typeof track.src === 'string' && (track.src.startsWith('assets/audio/'+p.slug+'-') || track.src === 'assets/cat-office/'+p.slug+'.wav')) {
+        const file=path.join(rootDir,'public',track.src);
+        if (!fs.existsSync(file) || !fs.statSync(file).size) throw Error('Required generated audio missing: '+track.src);
+      }
+    }
+  }
   if(p.scenes?.some(s=>s.doodle?.extras?.includes('mind-series-v1'))){
     p.audioTracks=(p.audioTracks??[]).filter(t=>fs.existsSync(path.join(rootDir,'public',t.src)));
     const voice=p.audioTracks.some(t=>t.kind==='voiceover');
@@ -139,6 +151,7 @@ if (fs.existsSync(projectsDir)) {
           const parsed = JSON.parse(fs.readFileSync(candidate, 'utf8'));
           projects.push(prepareProject(parsed));
         } catch (err) {
+          if (ci) throw new Error(`Cannot publish ${candidate}: ${err.message}`, {cause:err});
           console.warn(`Skipping invalid JSON in ${candidate}:`, err.message);
         }
       }
@@ -148,7 +161,8 @@ if (fs.existsSync(projectsDir)) {
         const parsed = JSON.parse(fs.readFileSync(candidate, 'utf8'));
         projects.push(prepareProject(parsed));
       } catch (err) {
-        console.warn(`Skipping invalid JSON in ${candidate}:`, err.message);
+        if (ci) throw new Error(`Cannot publish ${candidate}: ${err.message}`, {cause:err});
+          console.warn(`Skipping invalid JSON in ${candidate}:`, err.message);
       }
     }
   }
@@ -170,3 +184,5 @@ fs.writeFileSync(
 );
 
 console.log(`[openmotion] Indexed ${projects.length} project(s) into public/projects/manifest.json`);
+
+console.log('[build-timing] manifest', ((Date.now()-manifestStarted)/1000).toFixed(2)+'s');

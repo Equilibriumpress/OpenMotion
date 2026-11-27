@@ -2,7 +2,8 @@
 an original musical score and separate synthesized environmental sound beds.
 No paid API or external sound recordings. All outputs are publication assets.
 """
-import json, math, pathlib, re, subprocess, sys, tempfile, wave, shutil
+import json, math, pathlib, re, subprocess, sys, tempfile, wave, shutil, os
+from media_cache import CACHE, MediaCache, ensure_ffmpeg, prune
 from itertools import groupby
 ROOT=pathlib.Path(__file__).resolve().parent.parent
 OUT=ROOT/"public/assets/audio"
@@ -36,7 +37,6 @@ def ambience(ch,duration,out):
     filt=filters.get(ch,filters[1])
     fade=min(1.5,duration/4)
     ff("-f","lavfi","-i",f"anoisesrc=color=pink:amplitude=0.09:r=48000:d={duration}:seed={42+ch}","-af",f"{filt},volume=0.6,afade=t=in:d={fade},afade=t=out:st={duration-fade}:d={fade}","-ac","1","-c:a","pcm_s16le",out)
-
 def conversation_voice(scene,work,python,model,target,duration,offset):
     """Fit speaker turns independently; record approximate audible spans."""
     extras=scene.get("doodle",{}).get("extras",[])
@@ -47,7 +47,7 @@ def conversation_voice(scene,work,python,model,target,duration,offset):
     else:
         reply=""
     turns=[("hero",lead_text,.3,min(1.7,duration*.43)),("other",reply,min(1.8,duration*.45),duration-.45)] if reply else [("hero",narration,.3,duration-.45)]
-    cfg=json.loads((work/(model+".onnx.json")).read_text())
+    cfg=json.loads((CACHE/"models"/(model+".onnx.json")).read_text())
     ids=sorted(set(cfg.get("speaker_id_map",{}).values()))
     if len(ids)<2: ids=list(range(int(cfg.get("num_speakers",1))))
     if len(ids)<2: raise RuntimeError("Conversation requires a multi-speaker Piper model")
@@ -58,7 +58,7 @@ def conversation_voice(scene,work,python,model,target,duration,offset):
     for i,(who,words,start,end) in enumerate(turns):
         if not words.strip():continue
         raw=work/f"conversation-{i}-raw.wav"; fitted=work/f"conversation-{i}-fit.wav"
-        run([python,"-m","piper","-m",work/(model+".onnx"),"--speaker",str(ids[0] if who=="hero" else ids[1]),"-f",raw],input=words+"\n",text=True)
+        run([python,"-m","piper","-m",CACHE/"models"/(model+".onnx"),"--speaker",str(ids[0] if who=="hero" else ids[1]),"-f",raw],input=words+"\n",text=True)
         with wave.open(str(raw)) as w: seconds=w.getnframes()/w.getframerate()
         window=max(.1,end-start)
         pace=1.10 if shot in ("enthusiasm","fast-thoughts","interruption","volume") and who=="hero" else 1.0
@@ -95,7 +95,7 @@ def build(p,work,python,model=MODEL):
             if model=="espeak-nl":
                 run([shutil.which("espeak-ng") or shutil.which("espeak") or "espeak-ng","-v","nl","-s","155","-w",raw,narration])
             else:
-                args=[python,"-m","piper","-m",work/(model+".onnx"),"-f",raw]
+                args=[python,"-m","piper","-m",CACHE/"models"/(model+".onnx"),"-f",raw]
                 if model.startswith("nl_"): args+=["--speaker","29"]
                 run(args,input=narration+"\n",text=True)
             with wave.open(str(raw)) as w: seconds=w.getnframes()/w.getframerate()
@@ -141,43 +141,77 @@ def build(p,work,python,model=MODEL):
     concat(ambfiles,OUT/(slug+"-ambience.mp3"),work,bitrate="96k")
     (OUT/(slug+"-captions.json")).write_text(json.dumps(captions,ensure_ascii=False))
     (OUT/(slug+"-captions.srt")).write_text("".join(f"{i+1}\n{fmt_time(c['startSec'])} --> {fmt_time(c['endSec'])}\n{c['text']}\n\n" for i,c in enumerate(captions)))
-    if any("mind-series-v1" in s.get("doodle",{}).get("extras",[]) for s in p["scenes"]):
+    if needs_effects(p):
         # Original short, quiet cues at reaction beats; no recorded samples.
         expr="+".join(f"0.10*exp(-18*max(0,t-{a}))*sin(2*PI*{hz}*(t-{a}))*between(t,{a},{a+.22})" for a,hz in ([(8.4,540),(8.85,620),(9.3,710),(12.95,310),(18.2,440),(24.8,220),(37.5,490)] if slug=="inside-adhd-mind-002" else [(6.5,540),(10.1,310),(14.6,220),(25.5,740),(40.0,490)]))
-        ff("-f","lavfi","-i",f"aevalsrc={expr}:s=48000:d={offset}","-c:a","libmp3lame","-b:a","96k",OUT/(slug+"-effects.mp3"))
+        ff("-f","lavfi","-i",f"aevalsrc={expr.replace(chr(44), chr(92)+chr(44))}:s=48000:d={offset}","-c:a","libmp3lame","-b:a","96k",OUT/(slug+"-effects.mp3"))
     print(f"[documentary] {slug}: {offset:.0f}s, {len(chapters)} narrated chapters, {len(captions)} cues, three audio tracks")
+def is_mind(s):
+    return "mind-series-v1" in s.get("doodle",{}).get("extras",[])
+
+def needs_effects(p):
+    return any(is_mind(s) for s in p["scenes"]) and any(t.get("src")==f"assets/audio/{p['slug']}-effects.mp3" for t in p.get("audioTracks",[]))
+
+def audio_inputs(p,model):
+    return {"model":model,"effects":needs_effects(p),"scenes":[{"id":s["id"],"duration":s["durationSec"],"world":bool(s.get("worldStory")),"mind":is_mind(s),"conversation":[x for x in s.get("doodle",{}).get("extras",[]) if x=="conversation-v1" or x.startswith("dialogue-other:") or (len(s.get("doodle",{}).get("extras",[]))>2 and s.get("doodle",{}).get("extras",[])[1]=="conversation-v1" and x==s["doodle"]["extras"][2])],"chapter":s["worldStory"].get("chapter",s["id"]) if s.get("worldStory") else s["id"] if is_mind(s) else s.get("bucketList",{}).get("documentary",{}).get("chapter",1),"narration":(s.get("worldStory",{}).get("narration") or s.get("bucketList",{}).get("documentary",{}).get("narration") or s.get("doodle",{}).get("narration","")).strip()} for s in p["scenes"]]}
+
+def ensure_model(model,base):
+    folder=CACHE/"models"
+    folder.mkdir(parents=True,exist_ok=True)
+    for suffix in [".onnx",".onnx.json"]:
+        target=folder/(model+suffix)
+        minimum=100000 if suffix==".onnx" else 10
+        valid=target.is_file() and target.stat().st_size>minimum
+        if valid and suffix==".onnx.json":
+            try: json.loads(target.read_text())
+            except (OSError,ValueError): valid=False
+        if valid: continue
+        partial=target.with_suffix(target.suffix+".partial")
+        try:
+            run(["curl","-fL","--retry","2","--max-time","180","-o",partial,base+model+suffix])
+            if partial.stat().st_size<=minimum: raise RuntimeError("Incomplete Piper model "+model)
+            if suffix==".onnx.json": json.loads(partial.read_text())
+            partial.replace(target)
+        finally: partial.unlink(missing_ok=True)
+
 def main():
     OUT.mkdir(parents=True,exist_ok=True)
     projects=[]
-    for path in (ROOT/"projects").glob("*/project.json"):
+    for path in sorted((ROOT/"projects").glob("*/project.json")):
         p=json.loads(path.read_text())
-        if any(s.get("bucketList",{}).get("documentary") or s.get("worldStory") or "mind-series-v1" in s.get("doodle",{}).get("extras",[]) for s in p.get("scenes",[])):projects.append(p)
+        if any(s.get("bucketList",{}).get("documentary") or s.get("worldStory") or is_mind(s) for s in p.get("scenes",[])): projects.append(p)
     projects.sort(key=lambda p:not any(s.get("worldStory") for s in p["scenes"]))
-    if not projects:return
+    pending=[]
+    prune("audio",{p["slug"] for p in projects})
+    for p in projects:
+        dutch=any(s.get("worldStory") for s in p["scenes"])
+        model="nl_NL-mls-medium" if dutch else MODEL
+        base="https://huggingface.co/rhasspy/piper-voices/resolve/main/nl/nl_NL/mls/medium/" if dutch else MODEL_BASE
+        suffixes=["-voice.mp3","-score.mp3","-ambience.mp3","-captions.json","-captions.srt"]
+        if needs_effects(p): suffixes.append("-effects.mp3")
+        cache=MediaCache("audio",p["slug"],__file__,audio_inputs(p,model),[OUT/(p["slug"]+s) for s in suffixes])
+        if not cache.restore(): pending.append((p,dutch,model,base,cache))
+    if not pending: return
+    ensure_ffmpeg()
     with tempfile.TemporaryDirectory() as tmp:
         work=pathlib.Path(tmp)
         run([sys.executable,"-m","venv",work/"venv"])
         python=work/"venv/bin/python"
-        try: run([python,"-m","pip","install","--disable-pip-version-check","piper-tts==1.3.0"])
-        except Exception as exc: print(f"[piper] {exc}",file=sys.stderr)
-        models=set()
-        for p in projects:
-            dutch=any(s.get("worldStory") for s in p.get("scenes",[]))
-            model="nl_NL-mls-medium" if dutch else MODEL
-            base="https://huggingface.co/rhasspy/piper-voices/resolve/main/nl/nl_NL/mls/medium/" if dutch else MODEL_BASE
+        run([python,"-m","pip","install","--disable-pip-version-check","piper-tts==1.3.0"])
+        for p,dutch,model,base,cache in pending:
+            cache.clear_outputs()
             try:
-                if model not in models:
-                    for suffix in [".onnx",".onnx.json"]:
-                        run(["curl","-fL","--retry","2","--max-time","180","-o",work/(model+suffix),base+model+suffix])
-                    models.add(model)
+                ensure_model(model,base)
                 build(p,work,python,model)
+                cache.save()
             except Exception as exc:
-                print(f"[audio] {p['slug']}: {exc}",file=sys.stderr)
-                if dutch:
-                    if not (shutil.which("espeak-ng") or shutil.which("espeak")) and __import__("os").environ.get("GITHUB_ACTIONS")=="true":
-                        try: run(["sudo","apt-get","install","-y","espeak-ng"])
-                        except Exception as fallback_error: print(f"[espeak] {fallback_error}",file=sys.stderr)
-                    if not (shutil.which("espeak-ng") or shutil.which("espeak")): continue
-                    print("[audio] Using Dutch fallback voice",file=sys.stderr)
-                    build(p,work,python,"espeak-nl")
+                print(f"[audio] {p['slug']}: {exc}",file=sys.stderr,flush=True)
+                if not dutch: raise
+                if not (shutil.which("espeak-ng") or shutil.which("espeak")) and os.environ.get("GITHUB_ACTIONS")=="true":
+                    run(["sudo","apt-get","install","-y","espeak-ng"])
+                if not (shutil.which("espeak-ng") or shutil.which("espeak")): raise
+                print("[audio] Dutch fallback voice; not caching fallback",file=sys.stderr,flush=True)
+                cache.clear_outputs()
+                build(p,work,python,"espeak-nl")
+                cache.verify()
 if __name__=="__main__":main()

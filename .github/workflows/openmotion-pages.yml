@@ -12,7 +12,7 @@ permissions:
 
 concurrency:
   group: "openmotion-pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -29,6 +29,25 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
+      - name: Cache npm downloads
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-openmotion-npm-${{ hashFiles('package.json', 'bun.lock', 'package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-openmotion-npm-
+
+      - name: Restore generated media and speech models
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            .openmotion-cache/media
+            .openmotion-cache/models
+            ~/.cache/pip
+          key: ${{ runner.os }}-openmotion-media-v1-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            ${{ runner.os }}-openmotion-media-v1-
+
       - name: Install dependencies
         run: |
           if [ -f package-lock.json ]; then
@@ -42,6 +61,17 @@ jobs:
         env:
           VITE_GITHUB_OWNER: ${{ github.repository_owner }}
           VITE_GITHUB_REPO: ${{ github.event.repository.name }}
+
+      - name: Save verified generated media
+        if: ${{ hashFiles('.openmotion-cache/media-changed') != '' }}
+        uses: actions/cache/save@v4
+        continue-on-error: true
+        with:
+          path: |
+            .openmotion-cache/media
+            .openmotion-cache/models
+            ~/.cache/pip
+          key: ${{ runner.os }}-openmotion-media-v1-${{ github.run_id }}-${{ github.run_attempt }}
 
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
