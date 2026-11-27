@@ -6,7 +6,7 @@
 const RATE=48000;
 const cache=new Map<string,Promise<AudioBuffer>>();
 
-function synthesize(durationSec:number,directorsCut:boolean):Promise<AudioBuffer>{
+function synthesize(durationSec:number,directorsCut:boolean,atmospheric:boolean):Promise<AudioBuffer>{
   const duration=Math.max(.5,durationSec);
   const ctx=new OfflineAudioContext(2,Math.ceil(duration*RATE),RATE);
   const at=(time:number)=>{
@@ -127,14 +127,24 @@ function synthesize(durationSec:number,directorsCut:boolean):Promise<AudioBuffer
     oscillator.start(start);oscillator.stop(end);
   }
   if(directorsCut){const air=ctx.createBuffer(1,Math.ceil(duration*RATE),RATE),samples=air.getChannelData(0);let state=7419,low=0;for(let i=0;i<samples.length;i++){state=(Math.imul(state,1664525)+1013904223)>>>0;low=.985*low+.015*(state/2147483648-1);samples[i]=low;}const source=ctx.createBufferSource();source.buffer=air;const gain=ctx.createGain();gain.gain.setValueAtTime(0,0);gain.gain.linearRampToValueAtTime(.08,at(5.5));gain.gain.setValueAtTime(.08,at(16));gain.gain.linearRampToValueAtTime(0,duration);source.connect(gain);gain.connect(master);source.start(0);}
+  if(atmospheric){
+    // Seeded, filtered noise: mountain wind, forest air, ocean swell; no field recordings.
+    const bed=ctx.createBuffer(1,Math.ceil(duration*RATE),RATE),samples=bed.getChannelData(0);let seed=92841;
+    for(let i=0;i<samples.length;i++){seed=(Math.imul(seed,1664525)+1013904223)>>>0;samples[i]=seed/2147483648-1;}
+    for(const cue of [{from:5,to:9,hz:380,level:.045},{from:9,to:12.5,hz:850,level:.025},{from:12.5,to:19,hz:210,level:.075}]){
+      const start=cue.from*duration/20,end=cue.to*duration/20,len=end-start;
+      const source=ctx.createBufferSource();source.buffer=bed;const tone=ctx.createBiquadFilter();tone.type='lowpass';tone.frequency.value=cue.hz;const gain=ctx.createGain();
+      gain.gain.setValueAtTime(0,start);gain.gain.linearRampToValueAtTime(cue.level,start+len*.22);gain.gain.linearRampToValueAtTime(cue.level*.45,start+len*.55);gain.gain.linearRampToValueAtTime(cue.level,start+len*.78);gain.gain.linearRampToValueAtTime(0,end);source.connect(tone);tone.connect(gain);gain.connect(master);source.start(start,0,len);
+    }
+  }
   return ctx.startRendering();
 }
-export function createBucketListAudio(durationSec:number,directorsCut=false):Promise<AudioBuffer>{
+export function createBucketListAudio(durationSec:number,directorsCut=false,atmospheric=false):Promise<AudioBuffer>{
   const rounded=Math.round(durationSec*100)/100;
-  const key=rounded+':'+directorsCut;
+  const key=rounded+':'+directorsCut+':'+atmospheric;
   const existing=cache.get(key);
   if(existing)return existing;
-  const created=synthesize(rounded,directorsCut).catch(error=>{cache.delete(key);throw error;});
+  const created=synthesize(rounded,directorsCut,atmospheric).catch(error=>{cache.delete(key);throw error;});
   cache.set(key,created);
   return created;
 }
