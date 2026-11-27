@@ -1,0 +1,220 @@
+{
+  "schemaVersion": "1.0",
+  "id": "the-human-side-03-plans-change",
+  "slug": "the-human-side-03-plans-change",
+  "title": "The Human Side 03 — When Plans Suddenly Change",
+  "description": "Original fictional everyday situation contrasting two possible responses. Inspired by cognitive appraisal theory (https://dictionary.apa.org/appraisal-theory). Not a diagnosis or universal personality distinction.",
+  "category": "Shorts & Reels",
+  "author": "OpenMotion Studio",
+  "source": "template",
+  "createdAt": "2026-11-27",
+  "updatedAt": "2026-11-27",
+  "githubPath": "projects/the-human-side-03-plans-change/project.json",
+  "format": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "brandKit": {
+    "brandName": "THE HUMAN SIDE",
+    "primaryColor": "#C5A8D0",
+    "accentColor": "#E6D8ED",
+    "backgroundColor": "#C5A8D0",
+    "surfaceColor": "#E6D8ED",
+    "textColor": "#191619",
+    "mutedColor": "#806D87",
+    "fontFamily": "system-ui"
+  },
+  "scenes": [
+    {
+      "id": "ths-03-1",
+      "name": "Shared situation",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Plans changed.",
+      "caption": "Same update. Different reaction.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "shot:message",
+          "episode:03",
+          "message:Dinner is cancelled tonight.",
+          "pose-a:phone",
+          "pose-b:phone",
+          "face-a:surprise",
+          "face-b:neutral",
+          "cover-title:PLANS CHANGED|NOW WHAT?",
+          "cover-hook:Dinner plans cancelled.",
+          "cover-pose-a:panic",
+          "cover-pose-b:point",
+          "cover-face-a:worry",
+          "cover-face-b:determined"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "Two people hear the same news. Dinner plans are cancelled."
+      }
+    },
+    {
+      "id": "ths-03-2",
+      "name": "Response A",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Now everything feels off.",
+      "caption": "One feels unsettled.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "worried",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "shot:worry",
+          "episode:03",
+          "label-a:My whole day is off.",
+          "pose-a:panic",
+          "face-a:worry"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "One feels tense. They had organized their evening around those plans."
+      }
+    },
+    {
+      "id": "ths-03-3",
+      "name": "Response B",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "What's the new plan?",
+      "caption": "Another starts adapting.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "relaxed",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "shot:calm",
+          "episode:03",
+          "label-b:What's the new plan?",
+          "pose-b:point",
+          "face-b:determined"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "The other pauses and asks whether tomorrow would work instead."
+      }
+    },
+    {
+      "id": "ths-03-4",
+      "name": "Contrast",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Change feels different.",
+      "caption": "Different needs for predictability.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "worried",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "shot:contrast",
+          "episode:03",
+          "label-a:My whole day is off.",
+          "label-b:What's the new plan?",
+          "pose-a:panic",
+          "pose-b:point",
+          "face-a:worry",
+          "face-b:determined"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "An unexpected change feels harder when someone was relying on the original plan."
+      }
+    },
+    {
+      "id": "ths-03-5",
+      "name": "More context",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Pause. Find one next step.",
+      "caption": "Give yourself time to adjust.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "happy",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "shot:reveal",
+          "episode:03",
+          "message:New plan: dinner tomorrow?",
+          "pose-a:relief",
+          "pose-b:calm",
+          "face-a:relief",
+          "face-b:smile"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "When plans shift, try a short reset. What changed? What stayed the same? What's next?"
+      }
+    }
+  ],
+  "captions": [],
+  "audioTracks": [
+    {
+      "id": "voice",
+      "kind": "voiceover",
+      "src": "assets/audio/the-human-side-03-plans-change-voice.mp3",
+      "startSec": 0,
+      "endSec": 28,
+      "volume": 1
+    },
+    {
+      "id": "score",
+      "kind": "music",
+      "src": "assets/audio/the-human-side-03-plans-change-score.mp3",
+      "startSec": 0,
+      "endSec": 28,
+      "volume": 0.22,
+      "fadeInSec": 0.3,
+      "fadeOutSec": 1
+    }
+  ],
+  "kind": "video",
+  "seriesId": "the-human-side",
+  "season": 1,
+  "episodeNumber": 3,
+  "templateVersion": "1.1",
+  "productionStatus": "review",
+  "thumbnailUrl": "assets/the-human-side/the-human-side-03-plans-change.svg"
+}

@@ -1,0 +1,220 @@
+{
+  "schemaVersion": "1.0",
+  "id": "the-human-side-04-boundaries",
+  "slug": "the-human-side-04-boundaries",
+  "title": "The Human Side 04 — People Pleaser vs Boundary Setter",
+  "description": "Original fictional everyday situation contrasting two possible responses. Inspired by cognitive appraisal theory (https://dictionary.apa.org/appraisal-theory). Not a diagnosis or universal personality distinction.",
+  "category": "Shorts & Reels",
+  "author": "OpenMotion Studio",
+  "source": "template",
+  "createdAt": "2026-11-27",
+  "updatedAt": "2026-11-27",
+  "githubPath": "projects/the-human-side-04-boundaries/project.json",
+  "format": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "brandKit": {
+    "brandName": "THE HUMAN SIDE",
+    "primaryColor": "#C5A8D0",
+    "accentColor": "#E6D8ED",
+    "backgroundColor": "#C5A8D0",
+    "surfaceColor": "#E6D8ED",
+    "textColor": "#191619",
+    "mutedColor": "#806D87",
+    "fontFamily": "system-ui"
+  },
+  "scenes": [
+    {
+      "id": "ths-04-1",
+      "name": "Shared situation",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "One more favour?",
+      "caption": "Same request. Different response.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "shot:message",
+          "episode:04",
+          "message:Could you help me tonight?",
+          "pose-a:phone",
+          "pose-b:phone",
+          "face-a:surprise",
+          "face-b:neutral",
+          "cover-title:SAYING YES|OR SETTING LIMITS?",
+          "cover-hook:One more favour?",
+          "cover-pose-a:crossed",
+          "cover-pose-b:relief",
+          "cover-face-a:worry",
+          "cover-face-b:relief"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "Two people get the same request for help tonight."
+      }
+    },
+    {
+      "id": "ths-04-2",
+      "name": "Response A",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Sure... I guess.",
+      "caption": "One agrees despite feeling overloaded.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "worried",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "shot:worry",
+          "episode:04",
+          "label-a:I should say yes.",
+          "pose-a:crossed",
+          "face-a:worry"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "One says yes immediately, even though their evening is already full."
+      }
+    },
+    {
+      "id": "ths-04-3",
+      "name": "Response B",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Not tonight, sorry.",
+      "caption": "Another states a limit.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "relaxed",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "shot:calm",
+          "episode:04",
+          "label-b:Not tonight, sorry.",
+          "pose-b:relief",
+          "face-b:relief"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "The other checks their schedule and offers to help tomorrow instead."
+      }
+    },
+    {
+      "id": "ths-04-4",
+      "name": "Contrast",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Approval or capacity?",
+      "caption": "Different concerns.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "worried",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "shot:contrast",
+          "episode:04",
+          "label-a:I should say yes.",
+          "label-b:Not tonight, sorry.",
+          "pose-a:crossed",
+          "pose-b:relief",
+          "face-a:worry",
+          "face-b:relief"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "Sometimes agreeing feels easier than risking disappointment, even when you need rest."
+      }
+    },
+    {
+      "id": "ths-04-5",
+      "name": "More context",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "A boundary is information.",
+      "caption": "A limit need not mean rejection.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "happy",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "human-side-v1",
+          "shot:reveal",
+          "episode:04",
+          "message:Tomorrow works too. Thanks!",
+          "pose-a:relief",
+          "pose-b:calm",
+          "face-a:relief",
+          "face-b:smile"
+        ],
+        "shirtColor": "#C5A8D0",
+        "highlightColor": "#191619",
+        "narration": "The reply comes back. Tomorrow works too. A clear limit leaves room for another solution."
+      }
+    }
+  ],
+  "captions": [],
+  "audioTracks": [
+    {
+      "id": "voice",
+      "kind": "voiceover",
+      "src": "assets/audio/the-human-side-04-boundaries-voice.mp3",
+      "startSec": 0,
+      "endSec": 28,
+      "volume": 1
+    },
+    {
+      "id": "score",
+      "kind": "music",
+      "src": "assets/audio/the-human-side-04-boundaries-score.mp3",
+      "startSec": 0,
+      "endSec": 28,
+      "volume": 0.22,
+      "fadeInSec": 0.3,
+      "fadeOutSec": 1
+    }
+  ],
+  "kind": "video",
+  "seriesId": "the-human-side",
+  "season": 1,
+  "episodeNumber": 4,
+  "templateVersion": "1.1",
+  "productionStatus": "review",
+  "thumbnailUrl": "assets/the-human-side/the-human-side-04-boundaries.svg"
+}
