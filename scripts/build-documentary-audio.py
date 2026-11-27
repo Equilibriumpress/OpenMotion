@@ -90,7 +90,7 @@ def build(p,work,python,model=MODEL):
     concat(ambfiles,OUT/(slug+"-ambience.mp3"),work,bitrate="96k")
     (OUT/(slug+"-captions.json")).write_text(json.dumps(captions,ensure_ascii=False))
     (OUT/(slug+"-captions.srt")).write_text("".join(f"{i+1}\n{fmt_time(c['startSec'])} --> {fmt_time(c['endSec'])}\n{c['text']}\n\n" for i,c in enumerate(captions)))
-    if any("mind-series-v1" in s.get("doodle",{}).get("extras",[]) for s in p["scenes"]):
+    if needs_effects(p):
         # Original short, quiet cues at reaction beats; no recorded samples.
         expr="+".join(f"0.10*exp(-18*max(0,t-{a}))*sin(2*PI*{hz}*(t-{a}))*between(t,{a},{a+.22})" for a,hz in [(6.5,540),(10.1,310),(14.6,220),(25.5,740),(40.0,490)])
         ff("-f","lavfi","-i",f"aevalsrc={expr.replace(chr(44), chr(92)+chr(44))}:s=48000:d={offset}","-c:a","libmp3lame","-b:a","96k",OUT/(slug+"-effects.mp3"))
@@ -98,8 +98,11 @@ def build(p,work,python,model=MODEL):
 def is_mind(s):
     return "mind-series-v1" in s.get("doodle",{}).get("extras",[])
 
+def needs_effects(p):
+    return any(is_mind(s) for s in p["scenes"]) and any(t.get("src")==f"assets/audio/{p['slug']}-effects.mp3" for t in p.get("audioTracks",[]))
+
 def audio_inputs(p,model):
-    return {"model":model,"scenes":[{"id":s["id"],"duration":s["durationSec"],"world":bool(s.get("worldStory")),"mind":is_mind(s),"chapter":s["worldStory"].get("chapter",s["id"]) if s.get("worldStory") else s["id"] if is_mind(s) else s.get("bucketList",{}).get("documentary",{}).get("chapter",1),"narration":(s.get("worldStory",{}).get("narration") or s.get("bucketList",{}).get("documentary",{}).get("narration") or s.get("doodle",{}).get("narration","")).strip()} for s in p["scenes"]]}
+    return {"model":model,"effects":needs_effects(p),"scenes":[{"id":s["id"],"duration":s["durationSec"],"world":bool(s.get("worldStory")),"mind":is_mind(s),"chapter":s["worldStory"].get("chapter",s["id"]) if s.get("worldStory") else s["id"] if is_mind(s) else s.get("bucketList",{}).get("documentary",{}).get("chapter",1),"narration":(s.get("worldStory",{}).get("narration") or s.get("bucketList",{}).get("documentary",{}).get("narration") or s.get("doodle",{}).get("narration","")).strip()} for s in p["scenes"]]}
 
 def ensure_model(model,base):
     folder=CACHE/"models"
@@ -134,7 +137,7 @@ def main():
         model="nl_NL-mls-medium" if dutch else MODEL
         base="https://huggingface.co/rhasspy/piper-voices/resolve/main/nl/nl_NL/mls/medium/" if dutch else MODEL_BASE
         suffixes=["-voice.mp3","-score.mp3","-ambience.mp3","-captions.json","-captions.srt"]
-        if any(is_mind(s) for s in p["scenes"]): suffixes.append("-effects.mp3")
+        if needs_effects(p): suffixes.append("-effects.mp3")
         cache=MediaCache("audio",p["slug"],__file__,audio_inputs(p,model),[OUT/(p["slug"]+s) for s in suffixes])
         if not cache.restore(): pending.append((p,dutch,model,base,cache))
     if not pending: return

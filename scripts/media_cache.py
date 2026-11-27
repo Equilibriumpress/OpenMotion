@@ -61,6 +61,7 @@ class MediaCache:
             (staging/"stamp.json").write_text(json.dumps({"key":self.key,"files":hashes},sort_keys=True))
             if self.slot.exists(): shutil.rmtree(self.slot)
             staging.rename(self.slot)
+        (CACHE/"media-changed").touch()
         print(f"[cache] BUILT {self.label} ({time.monotonic()-self.start:.2f}s)",flush=True)
 
 def prune(kind,active):

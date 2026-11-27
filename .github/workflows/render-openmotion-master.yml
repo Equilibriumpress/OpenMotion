@@ -26,6 +26,25 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "22"
+      - name: Cache npm downloads
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-openmotion-npm-${{ hashFiles('package.json', 'bun.lock', 'package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-openmotion-npm-
+
+      - name: Restore generated media and speech models
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            .openmotion-cache/media
+            .openmotion-cache/models
+            ~/.cache/pip
+          key: ${{ runner.os }}-openmotion-media-v1-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            ${{ runner.os }}-openmotion-media-v1-
+
       - name: Install dependencies
         run: |
           if [ -f package-lock.json ]; then
@@ -41,6 +60,7 @@ jobs:
       - name: Prepare project assets and Studio bundle
         run: npm run build
         env:
+          OPENMOTION_REQUIRE_FFMPEG: '1'
           VITE_GITHUB_OWNER: ${{ github.repository_owner }}
           VITE_GITHUB_REPO: ${{ github.event.repository.name }}
       - name: Render selected H.264 AAC master
