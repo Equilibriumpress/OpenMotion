@@ -398,6 +398,7 @@ export function normalizeOpenMotionProject(
       catOffice: sc.catOffice && typeof sc.catOffice === 'object'
         ? (sc.catOffice as OpenMotionScene['catOffice']) : undefined,
       worldStory: sc.worldStory && typeof sc.worldStory === 'object' ? (sc.worldStory as OpenMotionScene['worldStory']) : undefined,
+      threeExplainer: sc.threeExplainer && typeof sc.threeExplainer === 'object' ? (sc.threeExplainer as OpenMotionScene['threeExplainer']) : undefined,
       fullBleed: typeof sc.fullBleed === 'boolean' ? sc.fullBleed : undefined,
     };
   });
