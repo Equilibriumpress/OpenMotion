@@ -33,8 +33,9 @@ for(const slug of ['01-same-situation','02-no-text-back','03-plans-change','04-b
  }
  labels=[];renderHumanSideCover(c,1080,1920,p.scenes[0],p.brandKit);
  assert.equal(depth,0);assert(title.every(v=>labels.includes(v)),slug+' PNG cover missing');
- for(const s of p.scenes)for(let k=0;k<Math.ceil(s.durationSec*6);k++){
-  renderHumanSide(c,540,960,s,k/6,p.brandKit);assert.equal(depth,0,slug+' '+s.name);frames++;
+ const rate=p.templateVersion==='2.2'?30:6;
+ for(const s of p.scenes)for(let k=0;k<Math.ceil(s.durationSec*rate);k++){
+  renderHumanSide(c,540,960,s,k/rate,p.brandKit);assert.equal(depth,0,slug+' '+s.name);frames++;
  }
 }
 console.log('Human Side Canvas regression:',frames,'scene samples and all ten covers passed.');
