@@ -32,6 +32,8 @@ function writePoster(p){
   const localImage=s=>typeof s==='string'&&/^(?:assets|thumbnails)\/(?:[a-zA-Z0-9_-]+\/)*[a-zA-Z0-9_.-]+\.(?:png|jpe?g|webp|svg)$/i.test(s)&&fs.existsSync(path.join(rootDir,'public',s));
   const cover=[p.thumbnailUrl,...(p.scenes??[]).map(s=>s.imageUrl)].find(localImage);
   if(cover){p.thumbnailUrl=cover;return;}
+  // Explicit, credited Commons cover of a Bucket List episode, not an unrelated graphic.
+  if(p.seriesId==='my-bucket-list' && typeof p.thumbnailUrl==='string' && /^https:\/\/thumb\.wikimedia\.org\/wikipedia\/commons\/thumb\//.test(p.thumbnailUrl) && p.scenes?.some(s=>s.bucketList?.cover&&s.imageUrl===p.thumbnailUrl))return;
   const kit=p.brandKit??{};
   const color=(s,fallback)=>typeof s==='string'&&/^#[a-fA-F0-9]{3,8}$/.test(s)?s:fallback;
   const bg=color(kit.backgroundColor,'#142333'),fg=color(kit.textColor,'#ffffff'),accent=color(kit.accentColor,'#93c5fd');
