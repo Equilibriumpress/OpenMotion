@@ -96,6 +96,7 @@ function title(c:C,s:OpenMotionScene,t:number){
 }
 export function renderMindSeries(c:C,width:number,height:number,scene:OpenMotionScene,time:number){
  const t=Math.max(0,Math.min(time,scene.durationSec)),d=scene.doodle!,shot=d.extras?.[1]??'hook',shirt=d.shirtColor??'#518D89';
+ if(shot==='inside-your-mind'){renderInsideYourMind(c,width,height,scene,t);return;}
  const cool=shot==='switch'?ease(t/.9):shot==='wash'?1-ease(t/.8):d.palette==='shower'?1:0;
  c.save();c.scale(width/W,height/H);paper(c,cool);
  text(c,'INSIDE THE ADHD MIND  /  01',270,72,16,'#79685B');title(c,scene,t);
@@ -114,5 +115,48 @@ export function renderMindSeries(c:C,width:number,height:number,scene:OpenMotion
   battery(c,157,464,.83);battery(c,383,464,.18);drawMindPerson(c,270,747,.75,t,mood,override??'point',shirt,false,speaking);
  }else if(shot==='wash'){kitchen(c,true,t);drawMindPerson(c,310,747,1.12,t,mood,'wash',shirt,false,speaking);text(c,'My choice.',160,415,28,'#648D75');}
  else drawMindPerson(c,270,747,1.3,t,mood,override??'idle',shirt,false,speaking);
+ c.restore();
+}
+
+/** Inside Your Mind: SVG path geometry, deterministic Canvas playback and export.
+ * Each limb is transformed independently. No asynchronous SVG/image loading. */
+const IYM_PATHS={
+ torso:'M -2 -168 C -75 -167 -83 -70 -25 -63 C 53 -46 79 -81 65 -131 Q 52 -170 -2 -168 Z',
+ face:'M -43 -28 C -62 4 -43 44 -4 45 C 40 47 61 17 48 -18 Q 17 -48 -43 -28 Z',
+ hair:'M -47 -10 Q -62 -31 -35 -42 Q -36 -55 -10 -45 Q 8 -61 26 -43 Q 56 -45 51 -11 Q 28 -29 14 -27 Q -4 -14 -21 -28 Q -35 -18 -47 -10 Z',
+ altHair:'M -47 -8 C -64 -56 48 -65 53 -16 Q 30 -29 15 -26 Q -19 -8 -47 -8 Z'
+};
+function svgShape(c:C,path:string,fill:string,w=3.5){const p=new Path2D(path);c.fillStyle=fill;c.fill(p);c.strokeStyle=INK;c.lineWidth=w;c.lineJoin='round';c.stroke(p);return p;}
+function iymPerson(c:C,x:number,y:number,s:number,t:number,mood:string,gesture:MindGesture,shirt:string,other=false){
+ c.save();c.translate(x,y);c.scale(s,s);const tense=['worried','overwhelmed','confused','annoyed'].includes(mood),walk=gesture==='walk',step=walk?Math.sin(t*7):0,bob=gesture==='slump'?11:Math.sin(t*2)*1.5;
+ oval(c,0,4,50,5,'rgba(73,57,47,.09)',0);
+ for(const side of [-1,1]){const xx=side*20+side*step*21;line(c,[side*21,-73,side*21,-36,xx,0,xx+side*12,0],4);}
+ c.translate(0,bob);c.rotate(gesture==='slump'?-.07:0);
+ for(const side of [-1,1]){let hx=side*73,hy=-83;if(gesture==='point'&&side===1){hx=102;hy=-155;}if(gesture==='shrug'||gesture==='open'){hx=side*93;hy=-144+3*Math.sin(t*3);}if(gesture==='slump'){hx=side*59;hy=-53;}if(walk)hx+=side*step*16;
+ shape(c,()=>{c.moveTo(side*47,-134);c.quadraticCurveTo(side*81,-115,hx,hy);},undefined,4);oval(c,hx,hy,7,8,SKIN,2.4);}
+ const body=svgShape(c,IYM_PATHS.torso,shirt);c.save();c.clip(body);for(const yy of [-130,-105])shape(c,()=>{c.moveTo(-76,yy);c.quadraticCurveTo(0,yy+12,76,yy);},undefined,10,other?'#D8C8DF':GOLD);c.restore();
+ c.save();c.translate(0,-201);c.rotate(tense?-.06:0);svgShape(c,IYM_PATHS.face,SKIN);svgShape(c,other?IYM_PATHS.altHair:IYM_PATHS.hair,other?'#835C43':'#47362D',3.3);
+ const blink=(t+(other?1.9:.7))%3.6>3.42;
+ for(const side of [-1,1]){const ex=side*18;shape(c,()=>{c.moveTo(ex-10,-9);c.quadraticCurveTo(ex,-16+(tense?side*4:0),ex+10,-9);},undefined,2.5);
+ if(blink)line(c,[ex-8,6,ex+8,6],2.7);else{oval(c,ex,6,10,11,'#FFF9F1',2.4);oval(c,ex+(other?-2:1),7,4.2,5.1,INK,0);}oval(c,side*33,22,6,3,'#EAAE97',0);}
+ shape(c,()=>{c.moveTo(-12,29);c.quadraticCurveTo(0,tense?19:42,12,29);},undefined,2.8);
+ c.restore();c.restore();
+}
+function iymCard(c:C,label:string,x:number,y:number,w=184,h=62,accent=false){box(c,x-w/2,y-h/2,w,h,13,accent?'#D4E5DC':'#FBF5E9',2.4);text(c,label,x,y,22,accent?'#426D60':INK);}
+function iymDesk(c:C,t:number,open:boolean){box(c,293,586,175,15,4,'#C6B397',2.5);line(c,[310,601,310,747],4);line(c,[451,601,451,747],4);if(open){box(c,326,500,108,76,8,'#DCE8EB',2.5);box(c,316,575,128,9,3,'#A7B7B6',2);}else{box(c,316,571,128,12,4,'#A7B7B6',2.5);}if(open&&t>.6)text(c,'✓',380,537,27,'#648D75');}
+function renderInsideYourMind(c:C,width:number,height:number,scene:OpenMotionScene,t:number){
+ const d=scene.doodle!,a=d.extras??[],shot=a[2]??'focus',number=a[3]??'01',labels=(a[4]??'').split('|').filter(Boolean),shirt=d.shirtColor??'#518D89';
+ const warm=['focus','resolve','pair-calm','desk-open','reframe'].includes(shot);
+ c.save();c.scale(width/W,height/H);paper(c,warm?0:.72);text(c,'INSIDE YOUR MIND  /  '+number,252,65,16,'#79685B');title(c,scene,t);
+ line(c,[38,747,480,747],2,'#9D8F7F');
+ const hero=(x=252,s=1.35,g:MindGesture='idle',m=d.mood)=>iymPerson(c,x,747,s,t,m,g,shirt);
+ const card=(label:string,x:number,y:number,w=184,active=false)=>iymCard(c,label,x,y,w,62,active);
+ if(shot==='desk'||shot==='desk-open'){const open=shot==='desk-open'&&t>.7;iymDesk(c,t,open);hero(153,1.18,open?'point':'slump');if(labels[0])card(labels[0],266,375,236,open);}
+ else if(shot==='pair'||shot==='pair-calm'){hero(145,1.12,shot==='pair'?'shrug':'idle');iymPerson(c,360,747,1.08,t+.4,shot==='pair-calm'?'relaxed':'focused','idle','#9D89AE',true);if(labels[0])bubble(c,[labels[0]],254,365,254,73);}
+ else if(shot==='loop'){hero(252,1.22,'slump');const n=Math.max(1,labels.length);labels.forEach((v,i)=>{const a=-Math.PI/2+i*Math.PI*2/n+t*.23;const x=252+Math.cos(a)*125,y=426+Math.sin(a)*67;card(v,x,y,Math.min(186,Math.max(112,v.length*11)));});}
+ else if(shot==='choices'||shot==='thoughts'){hero(252,.93,'shrug');labels.slice(0,6).forEach((v,i)=>{const u=ease((t-i*.25)/.45);c.save();c.globalAlpha=u;card(v,148+(i%2)*208,350+Math.floor(i/2)*76,190);c.restore();});}
+ else if(shot==='flash'){hero(252,.95,'slump');c.save();c.translate(252,411);c.rotate(-.045+Math.sin(t*3)*.008);box(c,-145,-102,290,204,13,'#FBF5E9',3);iymPerson(c,-62,82,.6,t,'surprised','shrug',shirt);iymPerson(c,64,82,.56,t,'focused','idle','#9D89AE',true);if(labels[0])text(c,labels[0],0,-80,20,RED);c.restore();}
+ else if(shot==='focus'||shot==='resolve'||shot==='reframe'){hero(252,1.26,'open');if(labels[0])card(labels[0],252,371,280,true);}
+ else {hero(252,1.35,'point');if(labels[0])card(labels[0],252,367,264);}
  c.restore();
 }

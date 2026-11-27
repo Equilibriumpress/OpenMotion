@@ -1,0 +1,185 @@
+{
+  "schemaVersion": "1.0",
+  "id": "short-inside-your-mind-04-embarrassing-moments",
+  "slug": "inside-your-mind-04-embarrassing-moments",
+  "title": "Inside Your Mind 04 — Why You Remember Embarrassing Moments",
+  "description": "Original short animated psychology explainer. Source: https://pubmed.ncbi.nlm.nih.gov/19421427/",
+  "category": "Shorts & Reels",
+  "author": "OpenMotion Studio",
+  "source": "template",
+  "createdAt": "2026-11-27",
+  "updatedAt": "2026-11-27",
+  "githubPath": "projects/inside-your-mind-04-embarrassing-moments/project.json",
+  "format": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "brandKit": {
+    "brandName": "INSIDE YOUR MIND",
+    "primaryColor": "#518D89",
+    "accentColor": "#B94D41",
+    "backgroundColor": "#EFE3D0",
+    "surfaceColor": "#DCE8EB",
+    "textColor": "#49392F",
+    "mutedColor": "#79685B",
+    "fontFamily": "Kalam"
+  },
+  "scenes": [
+    {
+      "id": "iym-04-1",
+      "name": "Hook",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Forgot your password, but remember waving at a stranger by mistake?",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "shower",
+        "mood": "surprised",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "inside-your-mind",
+          "flash",
+          "04",
+          "Oops!"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "Forgot your password, but remember waving at a stranger by mistake?"
+      }
+    },
+    {
+      "id": "iym-04-2",
+      "name": "Recognition",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Emotional experiences often leave particularly vivid memories.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "shower",
+        "mood": "worried",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "inside-your-mind",
+          "flash",
+          "04",
+          "The awkward moment"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "Emotional experiences often leave particularly vivid memories."
+      }
+    },
+    {
+      "id": "iym-04-3",
+      "name": "Explanation",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Emotion strengthens some details, but vivid memories are not necessarily accurate.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "shower",
+        "mood": "overwhelmed",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "inside-your-mind",
+          "loop",
+          "04",
+          "My face|Their reaction|My words"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "Emotion strengthens some details, but vivid memories are not necessarily accurate."
+      }
+    },
+    {
+      "id": "iym-04-4",
+      "name": "Reframe",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Remembering an awkward event doesn't mean others remember the same details.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "focused",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "inside-your-mind",
+          "reframe",
+          "04",
+          "Memory isn't a recording"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "Remembering an awkward event doesn't mean others remember the same details."
+      }
+    },
+    {
+      "id": "iym-04-5",
+      "name": "Payoff",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Next time the memory returns, try treating yourself like a friend.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "relieved",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "inside-your-mind",
+          "resolve",
+          "04",
+          "Be kind to yourself"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "Next time the memory returns, try treating yourself like a friend."
+      }
+    }
+  ],
+  "captions": [],
+  "audioTracks": [
+    {
+      "id": "voice",
+      "kind": "voiceover",
+      "src": "assets/audio/inside-your-mind-04-embarrassing-moments-voice.mp3",
+      "startSec": 0,
+      "endSec": 28,
+      "volume": 1
+    },
+    {
+      "id": "score",
+      "kind": "music",
+      "src": "assets/audio/inside-your-mind-04-embarrassing-moments-score.mp3",
+      "startSec": 0,
+      "endSec": 28,
+      "volume": 0.22,
+      "fadeInSec": 0.3,
+      "fadeOutSec": 1
+    }
+  ]
+}

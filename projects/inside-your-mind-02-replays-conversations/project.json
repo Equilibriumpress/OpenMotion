@@ -1,0 +1,185 @@
+{
+  "schemaVersion": "1.0",
+  "id": "short-inside-your-mind-02-replays-conversations",
+  "slug": "inside-your-mind-02-replays-conversations",
+  "title": "Inside Your Mind 02 — Why Your Brain Replays Conversations",
+  "description": "Original short animated psychology explainer. Source: https://pubmed.ncbi.nlm.nih.gov/38518572/",
+  "category": "Shorts & Reels",
+  "author": "OpenMotion Studio",
+  "source": "template",
+  "createdAt": "2026-11-27",
+  "updatedAt": "2026-11-27",
+  "githubPath": "projects/inside-your-mind-02-replays-conversations/project.json",
+  "format": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "brandKit": {
+    "brandName": "INSIDE YOUR MIND",
+    "primaryColor": "#518D89",
+    "accentColor": "#B94D41",
+    "backgroundColor": "#EFE3D0",
+    "surfaceColor": "#DCE8EB",
+    "textColor": "#49392F",
+    "mutedColor": "#79685B",
+    "fontFamily": "Kalam"
+  },
+  "scenes": [
+    {
+      "id": "iym-02-1",
+      "name": "Hook",
+      "durationSec": 4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Ever replay a conversation long after everyone has gone home?",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "shower",
+        "mood": "confused",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "inside-your-mind",
+          "pair",
+          "02",
+          "See you later!"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "Ever replay a conversation long after everyone has gone home?"
+      }
+    },
+    {
+      "id": "iym-02-2",
+      "name": "Recognition",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "You remember one sentence, then wonder how the other person heard you.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "shower",
+        "mood": "worried",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "inside-your-mind",
+          "loop",
+          "02",
+          "Too much?|Too quiet?|Awkward?"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "You remember one sentence, then wonder how the other person heard you."
+      }
+    },
+    {
+      "id": "iym-02-3",
+      "name": "Explanation",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Psychologists call this kind of repeated review post-event rumination.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "shower",
+        "mood": "overwhelmed",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "inside-your-mind",
+          "thoughts",
+          "02",
+          "What did I say?|What did they think?"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "Psychologists call this kind of repeated review post-event rumination."
+      }
+    },
+    {
+      "id": "iym-02-4",
+      "name": "Reframe",
+      "durationSec": 6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Research links negative post-event rumination with social anxiety. Replaying doesn't prove anything went wrong.",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "focused",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "inside-your-mind",
+          "reframe",
+          "02",
+          "A thought, not a fact"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "Research links negative post-event rumination with social anxiety. Replaying doesn't prove anything went wrong."
+      }
+    },
+    {
+      "id": "iym-02-5",
+      "name": "Payoff",
+      "durationSec": 7,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Ask yourself: what do I know, and what am I only guessing?",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "relieved",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "inside-your-mind",
+          "resolve",
+          "02",
+          "Facts vs. guesses"
+        ],
+        "shirtColor": "#518D89",
+        "highlightColor": "#B94D41",
+        "narration": "Ask yourself: what do I know, and what am I only guessing?"
+      }
+    }
+  ],
+  "captions": [],
+  "audioTracks": [
+    {
+      "id": "voice",
+      "kind": "voiceover",
+      "src": "assets/audio/inside-your-mind-02-replays-conversations-voice.mp3",
+      "startSec": 0,
+      "endSec": 29,
+      "volume": 1
+    },
+    {
+      "id": "score",
+      "kind": "music",
+      "src": "assets/audio/inside-your-mind-02-replays-conversations-score.mp3",
+      "startSec": 0,
+      "endSec": 29,
+      "volume": 0.22,
+      "fadeInSec": 0.3,
+      "fadeOutSec": 1
+    }
+  ]
+}
