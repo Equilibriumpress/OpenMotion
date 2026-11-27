@@ -7,16 +7,17 @@ const GOLD = '#D9B77A';
 const clamp = (v:number) => Math.max(0,Math.min(1,v));
 const smooth = (v:number) => {const t=clamp(v);return t*t*(3-2*t);};
 
-function fitPhoto(ctx:CanvasRenderingContext2D,img:HTMLImageElement,w:number,h:number,t:number,focusX=.5,mode:'crater'|'trail'|'view'|'coast'='crater'){
+function fitPhoto(ctx:CanvasRenderingContext2D,img:HTMLImageElement,w:number,h:number,t:number,focusX=.5,mode:'crater'|'trail'|'view'|'coast'|'pan'='crater'){
   const progress=smooth(t),scale=Math.max(w/img.naturalWidth,h/img.naturalHeight);
   // Different camera intentions per shot: slow reveal, walking momentum,
   // long scenic hold, then a gentle pullback before the mapped outro.
   const zoom=mode==='crater' ? 1.10-.065*progress
     : mode==='trail' ? 1.055+.16*progress
     : mode==='view' ? 1.065+.025*progress
+    : mode==='pan' ? 1.08
     : 1.12-.07*progress;
   const imageW=img.naturalWidth*scale*zoom,imageH=img.naturalHeight*scale*zoom;
-  const drift=mode==='view'?.008:mode==='trail'?.022:.016;
+  const drift=mode==='pan'?.075:mode==='view'?.008:mode==='trail'?.022:.016;
   const pan=w*drift*(2*progress-1)*(mode==='view'?-1:1);
   const x=Math.max(w-imageW,Math.min(0,w*.5-focusX*imageW+pan));
   const y=Math.max(h-imageH,Math.min(0,(h-imageH)/2+h*(mode==='trail'?.025:.008)*(2*progress-1)));
@@ -139,12 +140,25 @@ function zoomScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMoti
   footer(ctx,w,h,scene);
 }
 
+/** Low-opacity elongated haze, anchored to the photographic cloud band. No invented depth map. */
+function atmosphere(ctx:CanvasRenderingContext2D,w:number,h:number,t:number,kind:'cloud'|'mist'){
+  const cloud=kind==='cloud';
+  ctx.save();
+  for(let i=0;i<5;i++){
+    const x=w*((i*.37+.09+t*(cloud?.12:.20)*(i%2?1:-1))%1.35-.12);
+    const y=h*((cloud?.33:.58)+(i%3)*.045+Math.sin(t*2+i)*.008);
+    ctx.save();ctx.translate(x,y);ctx.scale(w*(.48+i*.055),h*(cloud?.045:.06));
+    const g=ctx.createRadialGradient(0,0,0,0,0,1);g.addColorStop(0,cloud?'rgba(234,239,243,.14)':'rgba(220,235,229,.13)');g.addColorStop(.5,'rgba(226,234,232,.065)');g.addColorStop(1,'rgba(226,234,232,0)');
+    ctx.fillStyle=g;ctx.fillRect(-1,-1,2,2);ctx.restore();
+  }
+  ctx.restore();
+}
 function photoScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMotionScene,time:number,project:OpenMotionProject,getPhoto:(url:string)=>HTMLImageElement|null,layer:'image'|'text'){
   const d=scene.bucketList!,t=clamp(time/Math.max(.01,scene.durationSec)),s=w/1080;
   if(layer==='image'){
     const img=scene.imageUrl?getPhoto(scene.imageUrl):null;
     if(img){
-      const mode=d.chapter==='outro'?'coast':d.reasonNumber===2?'trail':d.reasonNumber===3?'view':'crater';
+      const mode=d.photoMotion==='push'?'trail':d.photoMotion==='pan'?'pan':d.photoMotion==='pull'?'coast':d.chapter==='outro'?'coast':d.reasonNumber===2?'trail':d.reasonNumber===3?'view':'crater';
       ctx.save();
       // Mild grade is shared by all four photographs. The different shots
       // keep their local detail while matching contrast and saturation.
@@ -154,6 +168,7 @@ function photoScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMot
       ctx.save();
       ctx.fillStyle='#102F31';ctx.globalAlpha=.045;ctx.fillRect(0,0,w,h);
       ctx.restore();
+      if(d.atmosphere)atmosphere(ctx,w,h,t,d.atmosphere);
     }else fallbackPhoto(ctx,w,h);
     if(d.chapter==='outro'&&!d.directorsCut){
       const frame=getBucketListCanvas(project),reveal=bucketListOutroReveal(scene,time);
@@ -197,7 +212,7 @@ function photoScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMot
   ctx.font='800 '+Math.round((d.chapter==='outro'?112:88)*s)+'px "Bricolage Grotesque",sans-serif';ctx.fillStyle='#FFF9EE';visible.forEach((str,i)=>ctx.fillText(str,70*s,titleY+i*100*s,w-250*s));
   ctx.fillStyle='#E9E6D8';
   ctx.font='500 '+Math.round(36*s)+'px "Plus Jakarta Sans",sans-serif';
-  const copy=d.chapter==='outro'?d.region.toUpperCase()+'  /  '+d.country.toUpperCase():d.reasonCopy??'';
+  const copy=d.chapter==='outro'?(d.reasonCopy??d.region.toUpperCase()+'  /  '+d.country.toUpperCase()):d.reasonCopy??'';
   ctx.fillText(copy,74*s,h-340*s,w-250*s);
   if(d.chapter==='outro'){
     ctx.font='700 '+Math.round(27*s)+'px "Plus Jakarta Sans",sans-serif';
@@ -212,7 +227,7 @@ function coverScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMot
   const shade=ctx.createLinearGradient(0,0,0,h);shade.addColorStop(0,'rgba(8,23,31,.68)');shade.addColorStop(.4,'rgba(8,23,31,.05)');shade.addColorStop(1,'rgba(8,23,31,.92)');ctx.fillStyle=shade;ctx.fillRect(0,0,w,h);
   ctx.textAlign='left';ctx.fillStyle=GOLD;ctx.font='700 '+Math.round(34*s)+'px "Plus Jakarta Sans",sans-serif';ctx.fillText('MY BUCKET LIST  /  '+String(d.episode).padStart(3,'0'),76*s,240*s,w-250*s);
   ctx.fillStyle=PAPER;ctx.font='800 '+Math.round(124*s)+'px "Bricolage Grotesque",sans-serif';ctx.fillText(d.destination.toUpperCase(),70*s,h-500*s,w-250*s);
-  ctx.fillStyle=GOLD;ctx.font='600 '+Math.round(36*s)+'px "Plus Jakarta Sans",sans-serif';ctx.fillText(d.region.toUpperCase()+'  /  '+d.country.toUpperCase(),76*s,h-402*s,w-250*s);footer(ctx,w,h,scene);
+  ctx.fillStyle=GOLD;ctx.font='600 '+Math.round(36*s)+'px "Plus Jakarta Sans",sans-serif';ctx.fillText(d.reasonCopy??d.region.toUpperCase()+'  /  '+d.country.toUpperCase(),76*s,h-402*s,w-250*s);footer(ctx,w,h,scene);
 }
 export function renderBucketListScene(
  ctx:CanvasRenderingContext2D,w:number,h:number,
