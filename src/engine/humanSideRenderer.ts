@@ -335,12 +335,24 @@ function storyPhone(c:C,p:Palette,x:number,y:number,t:number,lit=true,scale=1){
  if(lit){for(let i=0;i<3;i++){const dy=-25+i*18+(Math.sin(t*5)*3);rounded(c,-13,dy,26,12,3,p,'#FFFFFF');}}
  ellipse(c,0,35,2.4,2.4,p.ink);c.restore();
 }
+function seatedActor(c:C,p:Palette,get:StoryGet,t:number,mood:Face,resting:boolean){
+ const breath=Math.sin(t*2.15)*2.2,lean=resting?-12:-1,headX=244+lean,headY=185+breath;
+ const hipX=255,hipY=305;
+ ellipse(c,292,370,74,7,p.shadow);
+ curve(c,()=>{c.moveTo(hipX,hipY);c.quadraticCurveTo(295,302,316,320);c.quadraticCurveTo(323,344,323,369);c.lineTo(339,369);
+  c.moveTo(hipX,hipY);c.quadraticCurveTo(281,308,291,326);c.lineTo(292,368);c.lineTo(306,368);},p.ink,5.2);
+ curve(c,()=>{c.moveTo(headX,headY+42);c.quadraticCurveTo(239,267,hipX,hipY);},p.ink,5.5);
+ const ax=resting?214:280,ay=resting?294:263;
+ curve(c,()=>{c.moveTo(headX,headY+49);c.quadraticCurveTo(216,260,ax,ay);c.moveTo(headX,headY+49);c.quadraticCurveTo(288,252,297,306);},p.ink,4.7);
+ hand(c,ax,ay,-1,false,p);hand(c,297,306,1,false,p);
+ c.save();c.translate(headX,headY);c.rotate(resting?-.12:.05);c.scale(1.02,1.02);
+ drawFace(c,face(get('face-a'),mood),t,p,.7);c.restore();
+}
 function restStory(c:C,p:Palette,get:StoryGet,beat:number,t:number,cover:boolean){
  const settle=smooth(t/1.1),release=beat>=3?smooth(t/1.6):0;
  storyChair(c,p,264,370);
  const mood:Face=beat===0?'neutral':beat===1?'worry':beat===2?'sad':'relief';
- // Sitting is drawn using the deeply bent rig, with the chair behind it.
- storyActor(c,p,270,337,.91,t,get,beat<3?'kneel':'calm',mood);
+ seatedActor(c,p,get,t,mood,beat>=3);
  if(beat===1||beat===2||cover){
   const words=get('prop-tasks','EMAIL|LAUNDRY|ONE MORE THING').split('|').slice(0,4);
   words.forEach((v,i)=>{
@@ -374,7 +386,7 @@ function maskStory(c:C,p:Palette,get:StoryGet,beat:number,t:number,cover:boolean
 }
 function loopStory(c:C,p:Palette,get:StoryGet,beat:number,t:number,cover:boolean){
  const repeat=beat===0||beat===1||beat===2;
- const progress=repeat?(t%1.6)/1.6:smooth(t/1.6);
+ const progress=repeat?(t%1.6)/1.6:beat===4?1:smooth(t/1.6);
  const cx=270,cy=192,rad=151;
  if(repeat||cover){
   const angle=cover?-.65:t*1.9;
@@ -386,6 +398,7 @@ function loopStory(c:C,p:Palette,get:StoryGet,beat:number,t:number,cover:boolean
   c.save();c.translate(ax,ay);c.rotate(a+Math.PI/2);stroke(c,p.ink,'M -16 -12 L 0 0 L -16 12',5);c.restore();
   storyActor(c,p,270,333,.91,t,get,beat===2?'think':'phone',beat===2?'confused':'worry');
   clock(c,426,110,33,t*.8,p);storyPhone(c,p,112,211,t,true,.9);
+  if(beat!==2){const swipe=smooth(progress);c.save();c.globalAlpha=Math.sin(Math.PI*progress);curve(c,()=>{c.moveTo(138,241-38*swipe);c.lineTo(138,217-38*swipe);},p.ink,3);c.restore();}
   if(!cover)storyCard(c,p,270,31,get('prop-title','JUST ONE MORE'),220);
  }else{
   const x=mix(180,405,progress);
@@ -399,8 +412,10 @@ function loadStory(c:C,p:Palette,get:StoryGet,beat:number,t:number,cover:boolean
  const words=get('prop-tasks','WORK|FAMILY|ERRANDS|FAVOURS').split('|').slice(0,5);
  const count=cover?words.length:beat===0?1:beat===1?Math.min(words.length,1+Math.floor(t/.85)):beat===2?words.length:beat===3?words.length:Math.max(1,words.length-2);
  const transfer=beat===3?smooth((t-.35)/1.7):beat===4?1:0;
- const heroX=beat>=3?182:235,heroScale=beat===2?.86:.95;
- storyActor(c,p,heroX,370,heroScale,t,get,beat===2?'kneel':beat===1?'lean':beat>=3?'relief':'point',beat===2?'sad':beat===1?'worry':'neutral');
+ const heroX=beat>=3?182:235,heroScale=beat===2 ? .86 : .95;
+ const pose=beat===2?'kneel':beat===1?(t<1.6?'point':t<3.2?'lean':'panic'):beat>=3?'relief':'point';
+ const mood=beat===2?'sad':beat===1?'worry':beat>=3?'relief':'neutral';
+ storyActor(c,p,heroX,370,heroScale,t,get,pose,mood);
  if(beat>=3)storyActor(c,p,414,370,.85,t,get,'point','smile','b',2);
  for(let i=0;i<count;i++){
   const u=cover||beat!==1?1:smooth((t-i*.85)/.38);
