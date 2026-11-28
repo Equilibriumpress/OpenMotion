@@ -3,7 +3,7 @@ import type { OpenMotionScene } from '../types/openmotion';
 // An illustrative Atlantic journey, not a live network trace.
 type C=CanvasRenderingContext2D;
 type P=[number,number];
-const ink='#243538',teal='#253E43',light='#FFF9EF',rust='#B94F36',sand='#E9D4BD',muted='#766E61',water='#DCE5DD',sea='#537D80';
+const ink='#243538',teal='#253E43',light='#FFF9EF',rust='#B94F36',sand='#E9D4BD',muted='#766E61',water='#DCE5DD';
 const clamp=(x:number)=>Math.max(0,Math.min(1,x));
 const ease=(x:number)=>{const a=clamp(x);return a*a*(3-2*a);};
 const mix=(a:number,b:number,q:number)=>a+(b-a)*q;
@@ -71,8 +71,8 @@ function fiber(c:C,t:number,u:number){
  show(c,q,()=>txt(c,'Light carries the data',256,565,24,rust));
 }
 function signature(c:C,u:number){show(c,u,()=>{line(c,[42,583],[470,583],'#C9BBA7',1);rect(c,45,598,26*ease(u),6,rust,2);txt(c,'SIMPLY EXPLAINED',190,609,17,teal,800,230);});}
-export function renderInternetDiagram(c:C,s:OpenMotionScene,t:number){
- const shot=s.doodle?.extras?.find(x=>x.startsWith('shot:'))?.slice(5),u=clamp(t/Math.max(.001,s.durationSec));
+function drawStage(c:C,shot:string|undefined,t:number,duration:number){
+ const u=clamp(t/Math.max(.001,duration));
  switch(shot){
  case 'cover':
   txt(c,'SIMPLY EXPLAINED',256,78,15,muted,700);txt(c,'HOW THE',256,160,52,ink,850);txt(c,'INTERNET',256,221,56,ink,850);txt(c,'WORKS',256,282,59,rust,850);
@@ -106,6 +106,30 @@ export function renderInternetDiagram(c:C,s:OpenMotionScene,t:number){
   txt(c,'Message received',256,110,34,ink,800);
   phone(c,256,345,.9+.09*ease(u),true,(u-.28)/.32);
   for(let i=0;i<3;i++){const q=ease((u-i*.065)/.43);if(q<.999)packet(c,mix(65+i*30,244,q),mix(232+i*30,365,q),i%2?teal:rust,.85);}
-  signature(c,(t-(s.durationSec-.95))/.35);break;
+  signature(c,(t-(duration-.95))/.35);break;
  }
+}
+
+// Adjacent illustrations share a deterministic travelling camera transition.
+// The upper illustration moves independently of Alex and the caption row.
+// The previous composition is held at its final frame, then translated out
+// as the next enters, with a vertical dive for the ocean and a push-in for fiber.
+const sequence=[['cover',.8],['hook',6.6],['packets',5.5],['routers',5.7],['ocean',6.4],['cable',4.7],['light',5.7],['received',7.6]] as const;
+export function renderInternetDiagram(c:C,s:OpenMotionScene,t:number){
+ const shot=s.doodle?.extras?.find(x=>x.startsWith('shot:'))?.slice(5);
+ const i=sequence.findIndex(x=>x[0]===shot),length=.30;
+ if(i<2||t>=length){drawStage(c,shot,t,s.durationSec);return;}
+ const q=ease(t/length),previous=sequence[i-1];
+ const vertical=shot==='cable',push=shot==='light';
+ c.save();c.beginPath();c.rect(0,0,512,635);c.clip();
+ if(push){
+  c.save();camera(c,256,354,1+q*.17,()=>drawStage(c,previous[0],previous[1]-1/30,previous[1]));c.restore();
+  c.save();c.globalAlpha=q;c.fillStyle='#F5EDDF';c.fillRect(0,0,512,635);
+  camera(c,256,350,.90+.10*q,()=>drawStage(c,shot,t,s.durationSec));c.restore();
+ }else{
+  const dx=vertical?0:512,dy=vertical?635:0;
+  c.save();c.translate(-dx*q,-dy*q);drawStage(c,previous[0],previous[1]-1/30,previous[1]);c.restore();
+  c.save();c.translate(dx*(1-q),dy*(1-q));drawStage(c,shot,t,s.durationSec);c.restore();
+ }
+ c.restore();
 }
