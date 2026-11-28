@@ -37,7 +37,7 @@ export function PresenterLab({projects,onUpdateProject,initialCustom=false,initi
  const source=projects.find(p=>p.slug===SLUG&&['2.0','2.6','2.7','3.0','3.1'].includes(p.templateVersion??''));
  const [overrides,setOverrides]=useState<Record<string,AlexPerformance>>({});
  const [selectedScene,setSelectedScene]=useState('');
- const selected=source?.scenes.find(s=>s.id===selectedScene)??source?.scenes[1]??source?.scenes[0];
+ const selected=source?.scenes.find(s=>s.id===selectedScene)??source?.scenes[0];
  const settings=selected?(overrides[selected.id]??performanceFor(selected)):DEFAULT_PERFORMANCE;
  const [cartoon,setCartoon]=useState<CartoonId>('jenny');
  const [preset,setPreset]=useState<CharacterPreset>(()=>source?characterFromScene(source.scenes.find(s=>s.doodle?.narration?.trim())??source.scenes[0])??DEFAULT_CHARACTER:DEFAULT_CHARACTER),[saved,setSaved]=useState(savedPresets),[message,setMessage]=useState('');
@@ -46,11 +46,13 @@ export function PresenterLab({projects,onUpdateProject,initialCustom=false,initi
  const [mode,setMode]=useState<Mode>(initialPerformance?'performance':initialCartoon?'cartoon':initialCustom?'custom':'performance'),[ready,setReady]=useState(false),[error,setError]=useState(''),[progress,setProgress]=useState<RenderProgressState|null>(null),[busy,setBusy]=useState(false),[time,setTime]=useState(0),[playing,setPlaying]=useState(false),[loadAttempt,setLoadAttempt]=useState(0);
  const canvas=useRef<HTMLCanvasElement>(null),audio=useRef<HTMLAudioElement>(null),cancel=useRef<AbortController|null>(null),resultUrl=useRef<string|null>(null);
  const variant=useMemo(()=>source?makeVariant(source,mode,preset,cartoon,overrides):null,[source,mode,preset,cartoon,overrides]);
- const changePerformance=(part:Partial<AlexPerformance>)=>{if(!selected)return;audio.current?.pause();setOverrides(o=>({...o,[selected.id]:sanitizePerformance({...settings,...part})}));setProgress(null);setMessage('');if(resultUrl.current){URL.revokeObjectURL(resultUrl.current);resultUrl.current=null;}};
+ const changePerformance=(part:Partial<AlexPerformance>)=>{if(!selected)return;audio.current?.pause();
+ let offset=0;for(const scene of source?.scenes??[]){if(scene.id===selected.id){const t=audio.current?.currentTime??0;if(t<offset||t>=offset+scene.durationSec){if(audio.current)audio.current.currentTime=offset+Math.min(.6,scene.durationSec/2);}break;}offset+=scene.durationSec;}
+ setOverrides(o=>({...o,[selected.id]:sanitizePerformance({...settings,...part})}));setProgress(null);setMessage('');if(resultUrl.current){URL.revokeObjectURL(resultUrl.current);resultUrl.current=null;}};
  const seekScene=(id:string)=>{setSelectedScene(id);audio.current?.pause();let offset=0;for(const scene of source?.scenes??[]){if(scene.id===id){if(audio.current)audio.current.currentTime=offset+Math.min(.6,scene.durationSec/2);setTime(offset+Math.min(.6,scene.durationSec/2));break;}offset+=scene.durationSec;}};
  const duration=variant?getProjectDurationSec(variant):0;
  const voice=source?.audioTracks?.find(t=>t.kind==='voiceover'&&t.src);
- const energyAvailable=!!source?.scenes.some(s=>s.doodle?.extras?.some(x=>x.startsWith('host-energy:')));
+ const energyAvailable=!!source&&source.scenes.filter(s=>s.doodle?.narration?.trim()).every(s=>s.doodle?.extras?.some(x=>x.startsWith('host-energy:'))&&s.doodle?.extras?.some(x=>x.startsWith('host-mouth:')));
  useEffect(()=>{
   let alive=true;setError('');if(mode==='cartoon'){setReady(cartoonReady(cartoon));void prepareCartoon(cartoon).then(()=>{if(alive)setReady(true);}).catch(e=>{if(alive)setError(e instanceof Error?e.message:String(e));});return()=>{alive=false;};}
   const is3D=mode==='rocketbox'||mode==='custom',config=mode==='custom'?preset:null;setReady(!is3D||rocketboxReady(config));
