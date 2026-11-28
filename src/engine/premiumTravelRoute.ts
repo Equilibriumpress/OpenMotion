@@ -25,22 +25,27 @@ async function getRoadGeometry(scenes:OpenMotionScene[]) {
   if(stops.length<2)throw new Error('At least two road-trip stops are required.');
   if(base.roadMatched&&base.route.geometry.coordinates.length>20)return;
   // Limited one-time routing of the edited waypoints. No fabricated straight-line fallback.
-  const path=stops.map(s=>s.lon+','+s.lat).join(';');
+  const waypoints:[number,number][]=[];const stopIndices:number[]=[];
+  stops.forEach((s,i)=>{stopIndices.push(waypoints.length);waypoints.push([s.lon,s.lat]);for(const group of base.routeVia??[])if(group.afterStop===i)waypoints.push(...group.coordinates);});
+  if(base.closeLoop)waypoints.push([stops[0].lon,stops[0].lat]);
+  const path=waypoints.map(([lon,lat])=>lon+','+lat).join(';');
   const res=await fetch(ROUTER+path+'?overview=full&geometries=geojson&steps=false');
   if(!res.ok)throw new Error('Routing service unavailable ('+res.status+')');
   const result=await res.json() as {code?:string;routes?:{geometry:{coordinates:[number,number][];type:string};legs:{distance:number}[]}[]};
   const route=result.routes?.[0];
   if(result.code!=='Ok'||!route||route.geometry.type!=='LineString'||route.geometry.coordinates.length<20)throw new Error('No valid road-matched route available.');
+  if(base.closeLoop){const c=route.geometry.coordinates,first=c[0],last=c[c.length-1];if(Math.hypot(first[0]-last[0],first[1]-last[1])>.02)throw Error('Closed route did not return to start');}
   const total=route.legs.reduce((a,b)=>a+b.distance,0);
-  if(total<=0||route.legs.length!==stops.length-1)throw new Error('Incomplete driving route.');
-  const fractions=[0];let distance=0;
-  for(const leg of route.legs){distance+=leg.distance;fractions.push(clamp(distance/total));}
+  if(total<=0||route.legs.length!==waypoints.length-1)throw new Error('Incomplete driving route.');
+  const waypointFractions=[0];let distance=0;
+  for(const leg of route.legs){distance+=leg.distance;waypointFractions.push(clamp(distance/total));}
+  const fractions=stopIndices.map(i=>waypointFractions[i]);
   for(const scene of scenes){
     const pr=scene.premiumTravel!;
     pr.route={type:'Feature',geometry:{type:'LineString',coordinates:route.geometry.coordinates},properties:{source:'OSRM driving / OpenStreetMap',roadMatched:true,distanceKm:Math.round(total/1000)}};
     pr.roadMatched=true;
     if(pr.chapter==='opening'){pr.routeProgressFrom=0;pr.routeProgressTo=Math.min(.045,fractions[1]);}
-    else if(pr.chapter==='finale'){pr.routeProgressFrom=0;pr.routeProgressTo=1;}
+    else if(pr.chapter==='finale'){pr.routeProgressFrom=pr.closeLoop&&!pr.mapIntro?fractions[fractions.length-1]:0;pr.routeProgressTo=1;}
     else if(pr.chapter==='photo'){pr.routeProgressFrom=0;pr.routeProgressTo=0;}
     else {const idx=Math.max(1,Math.min(fractions.length-1,pr.focusStopIndex));pr.routeProgressFrom=fractions[idx-1];pr.routeProgressTo=fractions[idx];}
   }
@@ -55,7 +60,7 @@ export function preparePremiumTravelProject(project:OpenMotionProject):Promise<v
   const job=(async()=>{
     await getRoadGeometry(scenes);
     const signature=scenes.some(s=>(s.premiumTravel?.editorialRevision??0)>=9),route=scenes[0].premiumTravel!;
-    const elevationJob=signature?loadSignatureElevation(route.route.geometry.coordinates,route.stops.map(s=>[s.lon,s.lat] as [number,number])):Promise.resolve(null);
+    const elevationJob=signature?loadSignatureElevation(route.route.geometry.coordinates,route.stops.map(s=>[s.lon,s.lat] as [number,number]),route.closeLoop?9:11):Promise.resolve(null);
     const { Map: MapLibreConstructor, setWorkerUrl } = await import('maplibre-gl');
     setWorkerUrl(workerUrl);
     const div=document.createElement('div');
@@ -102,7 +107,8 @@ export function preparePremiumTravelProject(project:OpenMotionProject):Promise<v
         for(let i=1;i<path.length;i++){total+=Math.hypot(path[i].x-path[i-1].x,path[i].y-path[i-1].y);distances.push(total);}
         // Use the same projected arclength as animation, so the vehicle arrives
         // exactly at each pin rather than finishing short of the destination.
-        const stopFractions=stops.map(point=>{
+        const stopFractions=stops.map((point,index)=>{
+          if(p.closeLoop&&index===0)return 0;
           let nearest=0,best=Number.POSITIVE_INFINITY;
           for(let j=0;j<path.length;j++){
             const d=(path[j].x-point.x)**2+(path[j].y-point.y)**2;
@@ -114,7 +120,7 @@ export function preparePremiumTravelProject(project:OpenMotionProject):Promise<v
           const i=Math.max(1,Math.min(stops.length-1,p.focusStopIndex));
           p.routeProgressFrom=stopFractions[i-1];
           p.routeProgressTo=stopFractions[i];
-        }
+        }else if(p.closeLoop&&p.chapter==='finale'&&!p.mapIntro){p.routeProgressFrom=stopFractions[stopFractions.length-1];p.routeProgressTo=1;}
         stages.set(scene,{image,path,stops,distances,total});
       }
     }finally{map?.remove();div.remove();}
@@ -265,7 +271,7 @@ function signatureCompass(ctx:CanvasRenderingContext2D,w:number,s:number){
  ctx.save();ctx.translate(w-76*s,310*s);ctx.strokeStyle='#36564D';ctx.fillStyle='#36564D';ctx.lineWidth=2*s;ctx.beginPath();ctx.arc(0,0,28*s,0,Math.PI*2);ctx.stroke();ctx.beginPath();ctx.moveTo(0,-19*s);ctx.lineTo(-7*s,9*s);ctx.lineTo(0,4*s);ctx.lineTo(7*s,9*s);ctx.closePath();ctx.fill();ctx.font='700 '+(20*s)+'px sans-serif';ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.fillText('N',0,-38*s);ctx.restore();
 }
 function signatureFinale(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMotionScene,stage:Stage,time:number){
- const p=scene.premiumTravel!,s=w/WIDTH,m=70*s,alpha=ease((time-1.10)/.48);if(alpha<=0)return;ctx.save();ctx.globalAlpha*=alpha;
+ const p=scene.premiumTravel!,s=w/WIDTH,m=70*s,alpha=ease((time-(p.closeLoop?1.70:1.10))/.48);if(alpha<=0)return;ctx.save();ctx.globalAlpha*=alpha;
  ctx.fillStyle='#173D37';ctx.fillRect(0,0,w,h);ctx.save();ctx.globalAlpha*=.13;ctx.drawImage(stage.image,0,0,w,h);ctx.restore();
  ctx.strokeStyle='rgba(226,196,143,.48)';ctx.lineWidth=2*s;ctx.strokeRect(m,125*s,w-2*m-70*s,h-350*s);
  ctx.textAlign='left';ctx.textBaseline='alphabetic';ctx.fillStyle='#E2C48F';ctx.font='700 '+(26*s)+'px sans-serif';ctx.fillText(p.seriesTitle??'THE OPEN ROAD COLLECTION',m+28*s,205*s,w-2*m-110*s);
@@ -340,7 +346,8 @@ function travelCamera(scene:OpenMotionScene,stage:Stage,w:number,h:number,time:n
   const p=scene.premiumTravel!,s=w/WIDTH,t=clamp(time/Math.max(.1,scene.durationSec));
   const driving=p.chapter==='drive',finishing=p.chapter==='finale';
   const r7=(p.editorialRevision??0)>=7;
-  const fraction=finishing?1:lerp(p.routeProgressFrom,p.routeProgressTo,smoother((t-.025)/.86));
+  const closing=Boolean(p.closeLoop&&finishing&&!p.mapIntro);
+  const fraction=closing?lerp(p.routeProgressFrom,1,smoother(time/1.65)):finishing?1:lerp(p.routeProgressFrom,p.routeProgressTo,smoother((t-.025)/.86));
   const car=sample(stage,fraction);
 
   // Lead the moving dot gently through bends and return to the destination
@@ -351,7 +358,7 @@ function travelCamera(scene:OpenMotionScene,stage:Stage,w:number,h:number,time:n
   const start=stage.stops[Math.max(0,p.focusStopIndex-1)]??roadFocus;
   const end=stage.stops[Math.max(0,p.focusStopIndex)]??roadFocus;
   if(r7&&driving){const u=ease(t/.18),v=ease((t-.72)/.28);roadFocus.x=lerp(lerp(start.x,roadFocus.x,u),end.x,v);roadFocus.y=lerp(lerp(start.y,roadFocus.y,u),end.y,v);}
-  const reveal=p.mapIntro?1:smoother(t/.62);
+  const reveal=p.mapIntro?1:closing?smoother(time/.9):smoother(t/.62);
   const lastStop=stage.stops[stage.stops.length-1];
   const cameraFocus=finishing
     ? {x:lerp(lastStop.x,WIDTH/2,reveal),y:lerp(lastStop.y,HEIGHT/2,reveal)}
@@ -397,7 +404,7 @@ function drawMapScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenM
     ctx.font='800 '+(19*s)+'px "Plus Jakarta Sans",sans-serif';
     ctx.fillText(String(i+1),x,y+1*s);
   });
-  if(!finishing){
+  if(!finishing||(p.closeLoop&&!p.mapIntro&&time<1.65)){
     // The standard premium reel uses a clear route position dot.
     // A smaller 2D camper remains available for user experimentation.
     if(p.markerStyle==='camper') {
@@ -446,7 +453,7 @@ function drawMapScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenM
   lower.addColorStop(0,'rgba(11,34,32,0)');lower.addColorStop(1,'rgba(12,43,37,.92)');
   ctx.fillStyle=lower;ctx.fillRect(0,h-760*s,w,760*s);
   ctx.fillStyle='#E5C48B';ctx.font='700 '+(27*s)+'px "Plus Jakarta Sans",sans-serif';
-  ctx.fillText(finishing?(p.mapIntro?'THE JOURNEY':'ROUTE COMPLETE'):'NEXT STOP',m,h-525*s);
+  ctx.fillText(finishing?(p.mapIntro?'THE JOURNEY':p.closeLoop&&fraction<.999?'CLOSING THE LOOP':'ROUTE COMPLETE'):'NEXT STOP',m,h-525*s);
   ctx.fillStyle='#FFFFFF';
   const name=p.editorial?scene.headline:(finishing?'THE OPEN ROAD':p.stops[p.focusStopIndex]?.name??'HIGHLANDS');
   ctx.font='400 '+(finishing?83:92)*s+'px Georgia,serif';
