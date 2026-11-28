@@ -1,8 +1,10 @@
 import type { OpenMotionProject, RenderProgressState } from '../types/openmotion';
 import { getProjectDurationSec } from '../types/openmotion';
+export const BUNDLE_REVISION=String(import.meta.env.VITE_OPENMOTION_BUILD_REVISION??'local');
 export const RENDERER_REVISION='simply-explained-3.3-final';
 export function assertFinalTimeline(p:OpenMotionProject){
  if(p.seriesId!=='simply-explained'||p.templateVersion!=='3.3')return;
+ if(BUNDLE_REVISION!=='local'&&p.buildRevision!==BUNDLE_REVISION)throw Error('Studio en project zijn van verschillende publicatiebuilds. Herlaad de pagina.');
  const duration=getProjectDurationSec(p);
  const required=['simply-explained-v1','simply-explained-v11','simply-explained-v2','alex-26','alex-27-layout','alex-performance-v1','alex-quality-v1','alex-final-v1'];
  if(!p.scenes.every(s=>required.every(k=>s.doodle?.extras?.includes(k))))throw Error('Project 3.3 en renderermarkers komen niet overeen. Herlaad de gepubliceerde aflevering.');
