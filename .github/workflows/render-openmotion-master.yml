@@ -56,7 +56,7 @@ jobs:
         env:
           WORLD_RENDER_PROJECT: ${{ inputs.project }}
         run: |
-          node --input-type=module -e 'import fs from "node:fs"; const s=process.env.WORLD_RENDER_PROJECT; if(!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(s)) throw Error("Invalid project slug"); const p=JSON.parse(fs.readFileSync("projects/"+s+"/project.json","utf8")); if(p.slug!==s || !p.scenes.some(x=>x.worldStory || x.catOffice || x.premiumTravel || x.bucketList?.documentary?.series==="places-worth-exploring" || (p.seriesId==="the-human-side" && x.doodle?.extras?.includes("human-side-v1")))) throw Error("Unsupported master project");'
+          node --input-type=module -e 'import fs from "node:fs"; const s=process.env.WORLD_RENDER_PROJECT; if(!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(s)) throw Error("Invalid project slug"); const p=JSON.parse(fs.readFileSync("projects/"+s+"/project.json","utf8")); if(p.slug!==s || !Array.isArray(p.scenes) || !p.scenes.length) throw Error("Unsupported master project");'
       - name: Prepare project assets and Studio bundle
         run: npm run build
         env:

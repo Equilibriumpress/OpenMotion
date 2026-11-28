@@ -15,7 +15,7 @@ import {beginBucketListExport,captureBucketListExportFrame,endBucketListExport} 
 
 async function probeAacEncoder(): Promise<AudioEncoderConfig | null> {
   if (typeof AudioEncoder === 'undefined' || typeof AudioData === 'undefined') return null;
-  const config: AudioEncoderConfig = {codec:'mp4a.40.2', sampleRate:48000, numberOfChannels:2, bitrate:128000};
+  const config: AudioEncoderConfig = {codec:'mp4a.40.2', sampleRate:48000, numberOfChannels:2, bitrate:192000};
   try { return (await AudioEncoder.isConfigSupported(config)).supported ? config : null; }
   catch { return null; }
 }
@@ -70,6 +70,7 @@ async function pickSupportedH264Config(
       bitrate,
       framerate: fps,
       avc: { format: 'avc' },
+      latencyMode:'quality',
     };
     try {
       const support = await VideoEncoder.isConfigSupported(config);
@@ -88,7 +89,7 @@ async function pickSupportedH264Config(
  * resolution. Inspect the encoded file before giving it a download filename.
  * Never promise 1080×1920 when the actual stream is 512×910.
  */
-async function actualVideoSize(blob: Blob): Promise<{ width: number; height: number } | null> {
+async function actualVideoSize(blob: Blob): Promise<{ width: number; height: number; duration:number } | null> {
   const video = document.createElement('video');
   const url = URL.createObjectURL(blob);
   video.preload = 'metadata';
@@ -97,7 +98,7 @@ async function actualVideoSize(blob: Blob): Promise<{ width: number; height: num
   try {
     return await new Promise(resolve => {
       let done = false;
-      const finish = (value: { width: number; height: number } | null) => {
+      const finish = (value: { width: number; height: number; duration:number } | null) => {
         if (done) return;
         done = true;
         clearTimeout(timeout);
@@ -105,7 +106,7 @@ async function actualVideoSize(blob: Blob): Promise<{ width: number; height: num
       };
       const timeout = setTimeout(() => finish(null), 7000);
       video.onloadedmetadata = () =>
-        finish(video.videoWidth && video.videoHeight ? {width: video.videoWidth, height: video.videoHeight} : null);
+        finish(video.videoWidth && video.videoHeight ? {width: video.videoWidth, height: video.videoHeight,duration:video.duration} : null);
       video.onerror = () => finish(null);
       video.src = url;
       video.load();
@@ -266,13 +267,12 @@ export async function exportProjectToMp4(
   const durationSec = Math.max(0.5, getProjectDurationSec(project));
   const totalFrames = Math.max(1, Math.ceil(durationSec * fps));
   const bitrate = Math.round(options.bitrateMbps * 1_000_000);
-  const strictTravel=isTravelDocumentary(project);
-  const strictHuman=project.seriesId==='the-human-side';
-  const strictError='Deze browser ondersteunt geen betrouwbare H.264/AAC-export op de gekozen resolutie en framerate. Gebruik de handmatige GitHub-master voor dit project.';
-  if((strictTravel||strictHuman) && !project.audioTracks?.some(t=>t.kind==='voiceover'&&t.src?.trim()))throw new Error('Voice-over ontbreekt in het project. Open de gepubliceerde Studio opnieuw.');
-  const travelVideoConfig=strictTravel?await pickSupportedH264Config(width,height,fps,bitrate):null;
-  if(strictTravel&&(!travelVideoConfig||!await probeAacEncoder()))throw new Error(strictError);
-
+  const publication=options.mode!=='draft';
+  const strictTravel=isTravelDocumentary(project),strictHuman=project.seriesId==='the-human-side';
+  if((strictTravel||strictHuman)&&!project.audioTracks?.some(t=>t.kind==='voiceover'&&t.src?.trim()))throw Error('Voice-over ontbreekt in het project.');
+  const h264Config=await pickSupportedH264Config(width,height,fps,bitrate),audioConfig=await probeAacEncoder();
+  if(publication&&(!h264Config||!audioConfig))throw Error('Publicatiemaster niet beschikbaar: H.264 '+(h264Config?'OK':'niet ondersteund')+', AAC 192 kbps '+(audioConfig?'OK':'niet ondersteund')+'. Gebruik de handmatige GitHub-master of kies expliciet concept.');
+  if(signal?.aborted)throw Error('Export geannuleerd.');
   const canvas = document.createElement('canvas');
   canvas.width = width;
   canvas.height = height;
@@ -287,33 +287,17 @@ export async function exportProjectToMp4(
   }
   await preloadProjectImages(project);
   assertTravelMediaReady(project);
-  const mixedAudio = await mixProjectAudio(project, durationSec);
-  const audioConfig = mixedAudio ? await probeAacEncoder() : null;
-
-  if(strictTravel&&(!mixedAudio||!audioConfig))throw new Error(strictError);
-  let h264Config = travelVideoConfig ?? await pickSupportedH264Config(width, height, fps, bitrate);
-  let encoderNote = '';
-  // A browser may decline 1080×1920 while supporting 720×1280 H.264
-  // with AAC. Prefer that encoded-and-muxed result to the Safari
-  // MediaRecorder fallback observed to shrink exports to 512×910.
-  if(!strictTravel && !strictHuman && !h264Config && audioConfig && Math.max(width,height)>1280) {
-    const factor=1280/Math.max(width,height);
-    const w=Math.max(2,Math.floor(width*factor/2)*2);
-    const h=Math.max(2,Math.floor(height*factor/2)*2);
-    const supported=await pickSupportedH264Config(w,h,fps,Math.min(bitrate,6_000_000));
-    if(supported){
-      width=w;height=h;canvas.width=w;canvas.height=h;
-      h264Config=supported;
-      encoderNote=' · 720p AAC-fallback: browser ondersteunt geen 1080p WebCodecs';
-    }
-  }
-
+  const mixedAudio=await mixProjectAudio(project,durationSec);
+  if(publication&&!mixedAudio)throw Error('Publicatiemaster vereist een audiomix.');
+  const separateAudio=mixedAudio&&!audioConfig?mixedAudio:null;
+  const encoderNote=publication?' · Publication Master':' · CONCEPT';
   const isBucketList=project.scenes.some(scene=>scene.layout==='bucket-list-zoom');
   if(isBucketList)await beginBucketListExport(project,signal);
   try{
-    if (h264Config && (!mixedAudio || audioConfig)) {
+    if (h264Config) {
       return await encodeWithWebCodecsMp4({
-        mixedAudio,
+        mixedAudio:audioConfig?mixedAudio:null,
+        separateAudio,publication,
         audioConfig,
         canvas,
         ctx,
@@ -330,7 +314,7 @@ export async function exportProjectToMp4(
       });
     }
 
-    if(strictTravel)throw new Error(strictError);
+    if(publication)throw Error('Publicatiemaster vereist WebCodecs.');
     return await encodeWithMediaRecorderFallback({
       mixedAudio,
       canvas,
@@ -352,6 +336,8 @@ export async function exportProjectToMp4(
 
 async function encodeWithWebCodecsMp4(params: {
   mixedAudio: AudioBuffer | null;
+  separateAudio:AudioBuffer|null;
+  publication:boolean;
   audioConfig: AudioEncoderConfig | null;
   canvas: HTMLCanvasElement;
   ctx: CanvasRenderingContext2D;
@@ -376,6 +362,7 @@ async function encodeWithWebCodecsMp4(params: {
     totalFrames,
     h264Config,
     mixedAudio,
+    separateAudio,publication,
     audioConfig,
     encoderNote,
     startedAt,
@@ -407,12 +394,9 @@ async function encodeWithWebCodecsMp4(params: {
     },
   });
 
-  encoder.configure(h264Config);
-  if (mixedAudio && audioConfig) await encodeAacAudio(mixedAudio, audioConfig, muxer);
-
-  const frameDurationUs = Math.round(1_000_000 / fps);
-
   try {
+    encoder.configure(h264Config);
+    if(mixedAudio&&audioConfig)await encodeAacAudio(mixedAudio,audioConfig,muxer);
     for (let frameIdx = 0; frameIdx < totalFrames; frameIdx++) {
       if (signal?.aborted) {
         encoder.close();
@@ -427,8 +411,8 @@ async function encodeWithWebCodecsMp4(params: {
       renderOpenMotionFrame(ctx, project, timeSec, width, height);
 
       const videoFrame = new VideoFrame(canvas, {
-        timestamp: frameIdx * frameDurationUs,
-        duration: frameDurationUs,
+        timestamp: Math.round(frameIdx*1000000/fps),
+        duration: Math.round((frameIdx+1)*1000000/fps)-Math.round(frameIdx*1000000/fps),
       });
 
       const keyFrame = frameIdx % (fps * 2) === 0;
@@ -436,9 +420,7 @@ async function encodeWithWebCodecsMp4(params: {
       videoFrame.close();
 
       // Backpressure guard so memory stays low even at 1080p60
-      if (encoder.encodeQueueSize > 8) {
-        await new Promise((resolve) => setTimeout(resolve, 4));
-      }
+      while(encoder.encodeQueueSize>8){if(signal?.aborted)throw Error('Export geannuleerd.');if(encoderError)throw encoderError;await new Promise(resolve=>setTimeout(resolve,4));}
 
       if (frameIdx % 3 === 0 || frameIdx === totalFrames - 1) {
         onProgress({
@@ -464,6 +446,7 @@ async function encodeWithWebCodecsMp4(params: {
     });
 
     await encoder.flush();
+    if(encoderError)throw encoderError;
     encoder.close();
     muxer.finalize();
 
@@ -471,11 +454,12 @@ async function encodeWithWebCodecsMp4(params: {
     const actual=await actualVideoSize(mp4Blob);
     const measuredFps=await actualMp4FrameRate(mp4Blob);
     const audioTrack=mixedAudio?await containsMp4AudioTrack(mp4Blob):null;
-    if((isTravelDocumentary(project)||project.seriesId==='the-human-side')&&(!actual||actual.width!==width||actual.height!==height||measuredFps===null||Math.abs(measuredFps-fps)>.05||audioTrack!==true))throw new Error('Mastercontrole mislukt: resolutie, framerate of AAC-audiospoor niet bevestigd. Gebruik de handmatige GitHub-master.');
+    const valid=!!actual&&actual.width===width&&actual.height===height&&Number.isFinite(actual.duration)&&Math.abs(actual.duration-totalFrames/fps)<.15&&measuredFps!==null&&Math.abs(measuredFps-fps)<.05&&audioTrack===true;
+    if(publication&&!valid)throw Error('Mastercontrole mislukt: resolutie, framerate, duur of AAC-spoor wijkt af. Gebruik de handmatige GitHub-master.');
     const verified=measuredFps===null?' · framerate niet geverifieerd':' · gemeten '+measuredFps+' fps';
     const inspected = describeOutput(actual,width,height,`WebCodecs H.264 (${h264Config.codec})`+encoderNote+verified+(audioTrack===true?' · audiotrack gecontroleerd':''));
     const outputUrl = URL.createObjectURL(mp4Blob);
-    const fileName = `${project.slug}-${actual?inspected.w+'x'+inspected.h:'res-onbekend'}-${measuredFps===null?'fps-onbekend':measuredFps+'fps'}.mp4`;
+    const fileName = `${project.slug}${publication?'':'-concept'}-${actual?inspected.w+'x'+inspected.h:'res-onbekend'}-${measuredFps===null?'fps-onbekend':measuredFps+'fps'}.mp4`;
 
     const finalState: RenderProgressState = {
       phase: 'done',
@@ -486,6 +470,9 @@ async function encodeWithWebCodecsMp4(params: {
       encoderLabel: inspected.encoderLabel,
       outputUrl,
       fileName,
+      publicationVerified:publication&&valid,
+      audioSidecarUrl:separateAudio?URL.createObjectURL(pcmWav(separateAudio)):undefined,
+      audioSidecarName:separateAudio?project.slug+'-soundtrack.wav':undefined,
       fileSizeBytes: mp4Blob.size,
       elapsedMs: Math.round(performance.now() - startedAt),
     };
@@ -643,13 +630,10 @@ async function encodeWithMediaRecorderFallback(params: {
       ? ' · LET OP: feitelijk '+measuredFps+' fps (gevraagd '+fps+')'
       : ' · framerate gecontroleerd: '+measuredFps+' fps';
   const actual=await actualVideoSize(blob);
-  if(project.seriesId==='the-human-side'&&(!isMp4||!actual||actual.width!==width||actual.height!==height||audioTrackFound!==true||measuredFps===null||Math.abs(measuredFps-fps)>.5)){
-    throw new Error('The Human Side: export afgekeurd. De browser leverde geen MP4 met de gekozen resolutie, framerate en audiospoor. Gebruik de handmatige GitHub-masterexport.');
-  }
   const inspected = describeOutput(actual,width,height,`MediaRecorder (${chosenMime})`+audioStatus+fpsStatus);
   const outputUrl = URL.createObjectURL(blob);
   const fpsLabel=measuredFps===null?'fps-onbekend':measuredFps+'fps';
-  const fileName = `${project.slug}-${inspected.w}x${inspected.h}-${fpsLabel}.${container}`;
+  const fileName = `${project.slug}-concept-${inspected.w}x${inspected.h}-${fpsLabel}.${container}`;
 
   // Safari sometimes omits the music track even when input tracks exist.
   // Supply an accurately timed WAV as a separate editing fallback.
@@ -661,7 +645,8 @@ async function encodeWithMediaRecorderFallback(params: {
     totalFrames,
     percent: 100,
     container,
-    encoderLabel: inspected.encoderLabel,
+    encoderLabel:'CONCEPT · '+inspected.encoderLabel,
+    publicationVerified:false,
     outputUrl,
     fileName,
     audioSidecarUrl,
@@ -671,4 +656,10 @@ async function encodeWithMediaRecorderFallback(params: {
   };
   onProgress(finalState);
   return finalState;
+}
+
+export async function diagnoseExport(project:OpenMotionProject,options:RenderExportOptions){
+ const {width,height}=getFormatDimensions(project.format,options.resolution);
+ const video=await pickSupportedH264Config(width,height,options.fps,options.bitrateMbps*1000000),audio=await probeAacEncoder();
+ return {video:video?.codec??null,audio:audio?.codec??null,width,height,fps:options.fps};
 }

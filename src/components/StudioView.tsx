@@ -21,14 +21,9 @@ import {
   Volume2,
   VolumeX,
 } from 'lucide-react';
-import { createParallaxAudio } from '../engine/parallaxCinemaAudio';
-import { DocumentaryAudioEngine } from '../engine/ambientAudio';
-import { projectAssetUrl } from '../engine/projectAudio';
-import { createPremiumTravelAudio } from '../engine/premiumTravelAudio';
-import { createDoodleExplainerAudio } from '../engine/doodleExplainerAudio';
-import { createBucketListAudio } from '../engine/bucketListAudio';
+import { projectAssetUrl, mixProjectAudio } from '../engine/projectAudio';
 import { ShortsMediaEditor } from './ShortsMediaEditor';
-import { exportProjectToMp4, formatFileSize } from '../engine/mp4Exporter';
+import { exportProjectToMp4, formatFileSize, diagnoseExport } from '../engine/mp4Exporter';
 import { isTravelDocumentary } from '../engine/travelProject';
 import {
   buildTemplateRemixPrompt,
@@ -84,14 +79,15 @@ export function StudioView({
   const [inspectorTab, setInspectorTab] = useState<InspectorTab>('export');
   const [selectedSceneIdx, setSelectedSceneIdx] = useState(0);
 
-  const audioEngineRef = useRef<DocumentaryAudioEngine | null>(null);
-  const premiumAudioRef = useRef<{ context: AudioContext; source: AudioBufferSourceNode } | null>(null);
-  const audioPlayersRef = useRef<{ id:string; audio:HTMLAudioElement; start:number; end?:number; volume:number; fadeIn:number; fadeOut:number }[]>([]);
-
+  const previewAudioRef=useRef<{context:AudioContext;source:AudioBufferSourceNode;buffer:AudioBuffer;offset:number;started:number}|null>(null);
+  const timeRef=useRef(0);timeRef.current=currentTime;
+  const [audioError,setAudioError]=useState('');
+  const [diagnostic,setDiagnostic]=useState('');
   const [exportOptions, setExportOptions] = useState<RenderExportOptions>({
     resolution: '1080p',
     fps: project.fps === 60 ? 60 : 30,
-    bitrateMbps: 8,
+    bitrateMbps: project.fps===60?20:12,
+    mode:'publication',
   });
   const [renderState, setRenderState] = useState<RenderProgressState>(INITIAL_RENDER_STATE);
   const [renderedSignature,setRenderedSignature]=useState<string|null>(null);
@@ -114,12 +110,8 @@ export function StudioView({
   const totalDuration = Math.max(0.5, getProjectDurationSec(project));
   const totalFrames = Math.max(1, Math.round(totalDuration * project.fps));
   const currentFrame = Math.min(totalFrames, Math.floor(currentTime * project.fps) + 1);
-  const isParallaxCinema = project.scenes.some(scene => scene.layout === 'parallax-cinema');
-  const isPremiumTravel = project.scenes.some(scene => scene.layout === 'premium-travel-route');
-  const isDoodleExplainer = project.scenes.some(scene => scene.layout === 'doodle-explainer');
-  const isBucketList = project.scenes.some(scene => scene.layout === 'bucket-list-zoom');
 
-  useEffect(()=>{setExportOptions(o=>({...o,resolution:'1080p',fps:project.fps===60?60:30}));},[project.id,project.fps]);
+  useEffect(()=>{setExportOptions(o=>({...o,resolution:'1080p',fps:project.fps===60?60:30,bitrateMbps:project.fps===60?20:12,mode:'publication'}));},[project.id,project.fps]);
 
   // Sync JSON editor when project switches
   useEffect(() => {
@@ -141,91 +133,31 @@ export function StudioView({
     return ()=>{if(url)URL.revokeObjectURL(url);};
   },[renderState.audioSidecarUrl]);
 
-  // Independent preview sources use the same timeline as the offline MP4 audio mixer.
-  useEffect(() => {
-    const players = (project.audioTracks ?? []).filter(t=>t.src?.trim()).map(t=>({
-      id:t.id,audio:new Audio(projectAssetUrl(t.src)),start:Math.max(0,t.startSec),end:t.endSec,
-      volume:Math.max(0,Math.min(1,t.volume??1)),fadeIn:t.fadeInSec??0,fadeOut:t.fadeOutSec??0
-    }));
-    audioPlayersRef.current=players;
-    return ()=>{players.forEach(p=>{p.audio.pause();p.audio.removeAttribute('src');});audioPlayersRef.current=[];};
-  },[project.audioTracks]);
-
+  // Preview and export share the same offline mix.
   useEffect(()=>{
-    for(const p of audioPlayersRef.current){
-      const local=currentTime-p.start;
-      const max=p.end===undefined ? Number.POSITIVE_INFINITY : Math.max(0,p.end-p.start);
-      if(!audioEnabled||!isPlaying||local<0||local>=max){p.audio.pause();continue;}
-      if(Number.isFinite(p.audio.duration)&&local>=p.audio.duration){p.audio.pause();continue;}
-      if(Math.abs(p.audio.currentTime-local)>.3) {try{p.audio.currentTime=local;}catch{/* metadata pending */}}
-      const fadeIn=p.fadeIn>0 ? Math.min(1,local/p.fadeIn):1;
-      const fadeOut=p.fadeOut>0 && Number.isFinite(max) ? Math.min(1,(max-local)/p.fadeOut):1;
-      p.audio.volume=Math.max(0,Math.min(1,p.volume*fadeIn*fadeOut));
-      if(p.audio.paused)void p.audio.play().catch(()=>{});
-    }
-  },[currentTime,isPlaying,audioEnabled,project.audioTracks]);
-
-
-  // Match the procedural film score between the live preview and the MP4.
-  // Unlike the previous preview-only ambience, this is the exported soundtrack.
-  useEffect(() => {
-    const needsMusic = (isParallaxCinema || isPremiumTravel || isDoodleExplainer || isBucketList) && !(project.audioTracks?.length) && audioEnabled && isPlaying;
-    if (!needsMusic) return;
-
-    const context = new AudioContext();
-    let cancelled = false;
-    let source: AudioBufferSourceNode | null = null;
-    void context.resume().then(() => isParallaxCinema ? createParallaxAudio(totalDuration,project.scenes.some(scene=>scene.parallax?.variant==='living-travel-poster')?'living-travel-poster':'window-seat') : isBucketList ? createBucketListAudio(totalDuration) : isDoodleExplainer ? createDoodleExplainerAudio(totalDuration) : createPremiumTravelAudio(totalDuration)).then(buffer => {
-      if (cancelled) return;
-      source = context.createBufferSource();
-      source.buffer = buffer;
-      source.loop = true;
-      source.connect(context.destination);
-      source.start(0, currentTime % buffer.duration);
-      premiumAudioRef.current = { context, source };
-    }).catch(error => {
-      console.warn('Premium preview soundtrack unavailable:', error);
-    });
-    return () => {
-      cancelled = true;
-      if (source) { try { source.stop(); } catch { /* Already stopped */ } source.disconnect(); }
-      if (premiumAudioRef.current?.context === context) premiumAudioRef.current = null;
-      void context.close().catch(() => {});
-    };
-    // The audio source follows the video clock from the moment playback begins.
-    // Seeking while paused restarts it at the new timeline position.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isParallaxCinema, isPremiumTravel, isDoodleExplainer, isBucketList, audioEnabled, isPlaying, project, totalDuration]);
-
-  // Synchronize subtle documentary audio soundtrack & city ambience with playback
-  useEffect(() => {
-    if (!audioEngineRef.current) {
-      audioEngineRef.current = new DocumentaryAudioEngine();
-    }
-    const engine = audioEngineRef.current;
-    if (audioEnabled && isPlaying && !isParallaxCinema && !isPremiumTravel && !isDoodleExplainer && !isBucketList && !(project.audioTracks?.length)) {
-      engine.start(currentTime);
-    } else {
-      engine.stop();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [audioEnabled, isPlaying, isParallaxCinema, isPremiumTravel, isDoodleExplainer, isBucketList, project.audioTracks]);
-
-  useEffect(() => {
-    if (audioEnabled && isPlaying && !isParallaxCinema && !isPremiumTravel && !isDoodleExplainer && !isBucketList && !(project.audioTracks?.length)) {
-      audioEngineRef.current?.syncTime(currentTime);
-    }
-  }, [audioEnabled, isPlaying, isParallaxCinema, isPremiumTravel, isDoodleExplainer, isBucketList, currentTime, project.audioTracks]);
-
-  useEffect(() => {
-    return () => {
-      audioEngineRef.current?.dispose();
-      audioEngineRef.current = null;
-    };
-  }, []);
+    if(!audioEnabled||!isPlaying)return;
+    const context=new AudioContext();let cancelled=false;setAudioError('');
+    void context.resume().then(()=>mixProjectAudio(project,totalDuration)).then(buffer=>{
+      if(cancelled||!buffer)return;
+      const source=context.createBufferSource();source.buffer=buffer;source.connect(context.destination);
+      const offset=Math.min(buffer.duration-.001,Math.max(0,timeRef.current));source.start(0,offset);
+      previewAudioRef.current={context,source,buffer,offset,started:context.currentTime};
+    }).catch(error=>{if(!cancelled)setAudioError(String(error));});
+    return ()=>{cancelled=true;const active=previewAudioRef.current;if(active?.context===context){try{active.source.stop();}catch{}active.source.disconnect();previewAudioRef.current=null;}void context.close().catch(()=>{});};
+  },[project,totalDuration,audioEnabled,isPlaying]);
+  useEffect(()=>{
+    const active=previewAudioRef.current;if(!active||!isPlaying||!audioEnabled)return;
+    const expected=active.offset+active.context.currentTime-active.started;
+    if(Math.abs(expected-currentTime)<.35)return;
+    try{active.source.stop();}catch{}active.source.disconnect();
+    const source=active.context.createBufferSource();source.buffer=active.buffer;source.connect(active.context.destination);
+    const offset=Math.min(active.buffer.duration-.001,Math.max(0,currentTime));source.start(0,offset);
+    previewAudioRef.current={...active,source,offset,started:active.context.currentTime};
+  },[currentTime,isPlaying,audioEnabled]);
+  useEffect(()=>{setDiagnostic('');},[project.id,project.format,exportOptions.resolution,exportOptions.fps,exportOptions.mode]);
 
   const handleStartMp4Export = async (options:RenderExportOptions=exportOptions) => {
-    if (renderState.phase === 'rendering' || renderState.phase === 'muxing') return;
+    if (abortRef.current || renderState.phase === 'rendering' || renderState.phase === 'muxing') return;
 
     setRenderedSignature(null);
     setInspectorTab('export');
@@ -816,7 +748,7 @@ export function StudioView({
                           <button
                             key={fpsVal}
                             type="button"
-                            onClick={() => setExportOptions((o) => ({ ...o, fps: fpsVal }))}
+                            onClick={() => setExportOptions((o) => ({ ...o, fps: fpsVal, bitrateMbps:fpsVal===60?20:12 }))}
                             className={`py-1.5 text-xs font-medium rounded-md transition-colors ${
                               exportOptions.fps === fpsVal
                                 ? 'bg-white text-slate-900 shadow-xs'
@@ -830,6 +762,17 @@ export function StudioView({
                     </div>
                   </div>
 
+                  <div className="space-y-2 border rounded-lg p-3 text-xs">
+                    <label className="font-semibold">Exportprofiel</label>
+                    <div className="grid grid-cols-2 gap-2">
+                      {(['publication','draft'] as const).map(mode=><button key={mode} type="button" disabled={isRendering} onClick={()=>setExportOptions(o=>({...o,mode}))} className={'p-2 rounded border '+((exportOptions.mode??'publication')===mode?'bg-blue-100 border-blue-500':'bg-white')}>{mode==='publication'?'Publicatiemaster':'Concept'}</button>)}
+                    </div>
+                    <p>{exportOptions.mode==='draft'?'Concept mag afwijken; ontbrekend AAC levert indien mogelijk een losse WAV.':'Publicatie vereist geverifieerde H.264/AAC, resolutie, fps en duur.'}</p>
+                    <button type="button" className="underline" disabled={isRendering} onClick={async()=>{setDiagnostic('Controleren…');try{const d=await diagnoseExport(project,exportOptions);setDiagnostic(d.width+'×'+d.height+' · '+d.fps+' fps · H.264 '+(d.video??'niet beschikbaar')+' · AAC '+(d.audio??'niet beschikbaar'));}catch(error){setDiagnostic(String(error));}}}>Controleer browsercapaciteiten</button>
+                    {diagnostic&&<p role="status">{diagnostic}</p>}
+                    {audioError&&<p role="alert" className="text-red-700">{audioError}</p>}
+                    <a className="block underline text-blue-700" href={`https://github.com/${encodeURIComponent(repoConfig.owner)}/${encodeURIComponent(repoConfig.repo)}/actions/workflows/render-openmotion-master.yml`} target="_blank" rel="noreferrer">Handmatige GitHub-master · {project.slug}</a>
+                  </div>
                   {/* Output specification readout */}
                   <dl className="grid grid-cols-2 gap-y-2 text-xs pt-3 border-t border-slate-100 font-mono tabular-nums">
                     <dt className="text-slate-500">Output pixels</dt>
@@ -841,7 +784,8 @@ export function StudioView({
                       {Math.ceil(totalDuration * exportOptions.fps)}
                     </dd>
                     <dt className="text-slate-500">Container / Codec</dt>
-                    <dd className="text-right text-slate-900">MP4 · H.264 AVC</dd>
+                    <dd className="text-right text-slate-900">MP4 · H.264 / AAC</dd>
+                    <dt className="text-slate-500">Video / audio</dt><dd className="text-right">{exportOptions.bitrateMbps} Mbps / 192 kbps</dd>
                   </dl>
 
                   {/* Primary Render / Cancel Button */}
@@ -884,7 +828,7 @@ export function StudioView({
                       className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
                     >
                       <Download className="w-4 h-4" />
-                      <span>Genereer H.264 MP4</span>
+                      <span>{exportOptions.mode==='draft'?'Render concept':'Render publicatiemaster'}</span>
                     </button>
                   )}
 
@@ -900,7 +844,7 @@ export function StudioView({
                     <div className="space-y-3 pt-4 border-t border-slate-200">
                       <div className="flex items-center justify-between text-xs">
                         <span className="font-semibold text-emerald-700">
-                          MP4 gereed voor download
+                          {renderState.publicationVerified?'Publicatiemaster geverifieerd':'Concept gereed voor download'}
                         </span>
                         <span className="font-mono tabular-nums text-slate-500">
                           {formatFileSize(renderState.fileSizeBytes ?? 0)} ·{' '}
@@ -941,7 +885,7 @@ export function StudioView({
                   {project.format==='9:16'&&<YouTubePublicationKit key={project.id} project={project}
                     renderState={renderState} renderMatches={renderedSignature===projectSignature}
                     projectSignature={projectSignature} rendering={isRendering}
-                    onRender={()=>{const options:RenderExportOptions={...exportOptions,resolution:'1080p',fps:project.fps===60?60:30};setExportOptions(options);void handleStartMp4Export(options);}}/>}
+                    onRender={()=>{const options:RenderExportOptions={...exportOptions,resolution:'1080p',fps:project.fps===60?60:30,bitrateMbps:project.fps===60?20:12,mode:'publication'};setExportOptions(options);void handleStartMp4Export(options);}}/>}
 
                   {/* Optional Pre-rendered GitHub Pages URL */}
                   {project.prebuiltMp4Url && (
