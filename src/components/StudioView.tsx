@@ -1,3 +1,4 @@
+import { ExportFrameComparison } from './ExportFrameComparison';
 import { rendererLabel, downloadVerifiedZip, BUNDLE_REVISION } from '../engine/exportProvenance';
 import { YouTubePublicationKit } from './YouTubePublicationKit';
 import { hasSongCover, renderSongCover } from '../engine/songExplainerRenderer';
@@ -873,6 +874,7 @@ export function StudioView({
                         <Download className="w-4 h-4" />
                         <span>Download {renderState.fileName}</span>
                       </button>
+                      {renderState.verification&&renderedSignature===projectSignature&&project.templateVersion==='3.3'&&<ExportFrameComparison key={renderState.outputUrl} project={project} result={renderState}/>}
                       {renderState.verification&&<div className="space-y-2 rounded-lg border border-slate-200 p-3 text-xs">
                        <p>Origineel gemeten: {renderState.verification.width} × {renderState.verification.height} · {renderState.verification.fps} fps · {renderState.verification.actualDurationSec.toFixed(2)} s · template {renderState.verification.templateVersion}</p>
                        <p className="break-all font-mono text-slate-500">SHA-256 {renderState.verification.sha256}</p>
