@@ -326,7 +326,7 @@ export async function exportProjectToMp4(
   }
   if(project.scenes.some(s=>s.doodle?.extras?.includes('presenter-lab-rocketbox'))){
     if(!project.audioTracks?.some(t=>t.kind==='voiceover'&&t.src?.trim()))throw Error('Voice-over ontbreekt voor de 3D-presentator.');
-    if(project.scenes.some(s=>s.doodle?.extras?.includes('presenter-lab-rocketbox')&&s.doodle.narration?.trim()&&!s.doodle.extras.some(x=>x.startsWith('host-energy:'))))throw Error('Spreekdata ontbreken voor de 3D-presentator. Open de gepubliceerde Studio.');
+    if(project.scenes.some(s=>s.doodle?.extras?.includes('presenter-lab-rocketbox')&&s.doodle?.narration?.trim()&&!s.doodle?.extras?.some(x=>x.startsWith('host-energy:'))))throw Error('Spreekdata ontbreken voor de 3D-presentator. Open de gepubliceerde Studio.');
   }
   await preloadProjectImages(project);
   assertTravelMediaReady(project);
