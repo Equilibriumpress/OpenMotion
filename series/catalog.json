@@ -367,7 +367,7 @@
       "id": "premium-travel-routes",
       "title": "Premium Travel Routes",
       "description": "Roadtrips met geanimeerde kaarten en fotostops",
-      "activeVersion": "3.0",
+      "activeVersion": "4.0",
       "versions": [
         {
           "version": "1.0",
@@ -442,6 +442,25 @@
             "surfaceColor": "#173D37",
             "textColor": "#F8F7EF",
             "mutedColor": "#AFC9BE",
+            "fontFamily": "Georgia"
+          }
+        },
+        {
+          "version": "4.0",
+          "format": "9:16",
+          "fps": 60,
+          "durationSec": 40,
+          "referenceProject": "premium-travel-routes-003-iceland-ring-road",
+          "templatePath": "series/premium-travel-routes/template-v4.0.json",
+          "instructions": "Cinematic Hybrid R10: behoud rustige foto's, R9-kaarten, hoogteprofiel en Signature End Card. Kies per stop één foto of echte gelicentieerde video. Video wordt vóór rendering in verticale atlaspagina's op 15 fps voorbereid. Gebruik de vaste scene-tijd, één uitsnede, originele soundtrack en correcte bronvermelding. Ontbrekende video valt terug op dezelfde bestemmingsfoto; toon status. Geen gegenereerde beelden. Controleer feitelijke video en export.",
+          "brandKit": {
+            "brandName": "ICELAND / THE OPEN ROAD",
+            "primaryColor": "#AE674A",
+            "accentColor": "#E2C48F",
+            "backgroundColor": "#E7E8DE",
+            "surfaceColor": "#22383B",
+            "textColor": "#F8F7EF",
+            "mutedColor": "#9DBBC6",
             "fontFamily": "Georgia"
           }
         }

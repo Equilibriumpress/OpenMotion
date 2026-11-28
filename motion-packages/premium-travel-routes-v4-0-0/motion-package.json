@@ -1,0 +1,48 @@
+{
+  "specVersion": "0.2",
+  "name": "premium-travel-routes-v4-0-0",
+  "version": "4.0.0",
+  "description": "Knowledge-only Cinematic Hybrid Edition R10 recipe for native template 4.0.",
+  "license": "LicenseRef-All-Rights-Reserved",
+  "licenseFile": "LICENSE",
+  "motion": "MOTION.md",
+  "design": {
+    "path": "DESIGN.md",
+    "format": "markdown"
+  },
+  "skill": "SKILL.md",
+  "files": [
+    {
+      "path": "MOTION.md",
+      "role": "motion",
+      "sha256": "fe07d103b0a52da9e5f8431ddb2a14c104d85d79a70e6d4d561bbd20242ec126"
+    },
+    {
+      "path": "DESIGN.md",
+      "role": "design",
+      "sha256": "46a7f144ee99a816ab844f0fa777339460d61dc1f0d6814f1371a9df654c0dfb"
+    },
+    {
+      "path": "SKILL.md",
+      "role": "skill",
+      "sha256": "be39443d881d28a22e0303c1a9df5f0d56a6f0d3aa64ca253436a15d0d0f43d2"
+    },
+    {
+      "path": "LICENSE",
+      "role": "license",
+      "sha256": "77126b8b220cfac6afb206ac1484b448156d218699e1ec32afbfbf8942bbda81"
+    }
+  ],
+  "tags": [
+    "series",
+    "knowledge-only"
+  ],
+  "extensions": {
+    "nl.equilibriumpress": {
+      "seriesId": "premium-travel-routes",
+      "templateVersion": "4.0",
+      "sourceRevision": "7eb4413042df5d420bc15603cede6014bf10675c",
+      "status": "source-derived-not-render-verified"
+    }
+  }
+}

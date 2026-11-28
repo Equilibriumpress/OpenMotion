@@ -31,3 +31,16 @@ Approximate access points; live OSRM must calculate the closed road route. Added
 - https://www.visiticeland.com/article/the-ring-road/
 - https://umferdin.is/en
 - https://safetravel.is/
+
+## R10 licensed footage
+
+| Destination | Timeline | Original resolution | Author | License | Source |
+|---|---|---|---|---|---|
+| Seljalandsfoss | Video | 3840 × 2160 | Giles Laurent · gileslaurent.com | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | [Original source](https://commons.wikimedia.org/wiki/File:203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm) |
+| Reynisfjara | Video | 1920 × 1080 | Alexander Grebenkov | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) | [Original source](https://commons.wikimedia.org/wiki/File:Windy_day_at_Reynisfjara_beach_in_Iceland.webm) |
+| Fjaðrárgljúfur | Photo; optional video | 608 × 1080 | Alexander Grebenkov | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) | [Original source](https://commons.wikimedia.org/wiki/File:Waterfall_in_Fja%C3%B0r%C3%A1rglj%C3%BAfur_canyon.webm) |
+| Jökulsárlón | Video | 1280 × 720 | Jason Eppink | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/) | [Original source](https://commons.wikimedia.org/wiki/File:Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm) |
+| Hverir | Video | 1280 × 720 | Jason Eppink | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/) | [Original source](https://commons.wikimedia.org/wiki/File:Fumarole_at_Hverir%2C_Iceland.webm) |
+| Goðafoss | Photo; optional video | 1920 × 1080 | Alexander Grebenkov | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) | [Original source](https://commons.wikimedia.org/wiki/File:Go%C3%B0afoss_waterfall_in_Northern_Iceland.webm) |
+
+Original footage is fetched in the browser, decoded, trimmed, cropped to 9:16, sampled at 15 fps, and muted. For the AV1 Seljalandsfoss file the completed Wikimedia VP9 1080p transcode is preferred; Jökulsárlón uses the completed VP9 720p transcode first. Original files are alternatives. Wikimedia source pages and licenses checked; transcode URL conventions and actual decode/crop remain to be tested. No downloaded binaries committed. CC BY-SA 4.0 applies to the adapted Seljalandsfoss clip; comply with its attribution and ShareAlike requirements when distributing adaptations. Existing photo credits remain applicable to fallback frames. All six video sources are documented, but only four are active by default.

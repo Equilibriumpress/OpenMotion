@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { preloadProjectImages, subscribeImageLoaded, notifyImageRefresh } from '../engine/imageCache';
 import { renderOpenMotionFrame } from '../engine/openMotionRenderer';
+import {requestedPremiumClip,premiumClipState} from '../engine/premiumTravelClips';
 import {seekBucketListPreview,subscribeBucketListMap,disposeBucketListProject} from '../engine/bucketListCamera';
 import { OpenMotionProject, getProjectDurationSec } from '../types/openmotion';
 
@@ -24,6 +25,10 @@ export function CanvasPreview({
   const failedRef=useRef(false);
   const lastPaint=useRef<number|null>(null);
   const [renderError,setRenderError]=useState<string|null>(null);
+  const [,setMediaRevision]=useState(0);
+  const videoShots=project.scenes.filter(s=>requestedPremiumClip(s));
+  const ready=videoShots.filter(s=>premiumClipState(s)?.status==='ready').length;
+  const fallback=videoShots.filter(s=>premiumClipState(s)?.status==='fallback');
   const internalWidth=Math.max(320,Math.round(project.width*renderScale));
   const internalHeight=Math.max(320,Math.round(project.height*renderScale));
   // Limit only the interactive cinematic preview. Offline MP4 still uses project fps.
@@ -64,7 +69,7 @@ export function CanvasPreview({
   useEffect(()=>{
     lastPaint.current=null;
     paint(timeRef.current,true);
-    const refresh=()=>{paint(timeRef.current,true);};
+    const refresh=()=>{paint(timeRef.current,true);setMediaRevision(n=>n+1);};
     const unsubscribeImages=subscribeImageLoaded(refresh);
     const unsubscribeMap=subscribeBucketListMap(refresh);
     return()=>{unsubscribeImages();unsubscribeMap();};
@@ -98,6 +103,7 @@ export function CanvasPreview({
     <div className="relative flex h-full w-full items-center justify-center">
       <canvas ref={canvasRef} width={internalWidth} height={internalHeight}
         className={className} aria-label={`Live preview van ${project.title}`}/>
+      {videoShots.length>0&&<div role="status" className="absolute top-1 left-1 max-w-[90%] rounded bg-slate-950/85 px-2 py-1 text-[10px] text-white">Video: {ready}/{videoShots.length} gereed{ready+fallback.length<videoShots.length?' · voorbereiden…':''}{fallback.length>0?' · fotofallback: '+fallback.map(s=>s.headline).join(', '):''}</div>}
       {renderError&&<div role="alert" className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-slate-950/95 p-4 text-center text-sm text-white">
         <p>Preview gestopt door een renderfout.</p><p className="break-all text-xs text-slate-300">{renderError}</p>
         <button type="button" className="rounded border border-slate-400 px-3 py-2" onClick={()=>{failedRef.current=false;lastPaint.current=null;setRenderError(null);paint(timeRef.current,true);}}>Probeer frame opnieuw</button>
