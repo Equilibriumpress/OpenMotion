@@ -318,13 +318,13 @@ function renderCinematicJourney(ctx:CanvasRenderingContext2D,w:number,h:number,p
   const scene=project.scenes[index],previous=project.scenes[index-1],next=project.scenes[index+1];
   const lead=journeyOverlap(previous,scene),tail=journeyOverlap(scene,next);
   const time=lead+local*(scene.durationSec-lead)/scene.durationSec;
-  if(!next||tail<=0||local<scene.durationSec-tail){renderPremiumTravelScene(ctx,w,h,scene,time,getCachedPhoto);return;}
+  if(!next||tail<=0||local<scene.durationSec-tail){renderPremiumTravelScene(ctx,w,h,scene,time,getCachedPhoto,1,local);return;}
   const u=Math.max(0,Math.min(1,(local-scene.durationSec+tail)/tail)),v=journeyEase(u);
   const incomingTime=u*tail;
-  renderPremiumTravelScene(ctx,w,h,scene,time,getCachedPhoto,1-journeyEase(u*2));
+  renderPremiumTravelScene(ctx,w,h,scene,time,getCachedPhoto,1-journeyEase(u*2),local);
   journeyLayer??=document.createElement('canvas');if(journeyLayer.width!==w||journeyLayer.height!==h){journeyLayer.width=w;journeyLayer.height=h;}
   const layer=journeyLayer.getContext('2d');if(!layer)return;
-  layer.clearRect(0,0,w,h);renderPremiumTravelScene(layer,w,h,next,incomingTime,getCachedPhoto,journeyEase((u-.5)*2));
+  layer.clearRect(0,0,w,h);renderPremiumTravelScene(layer,w,h,next,incomingTime,getCachedPhoto,journeyEase((u-.5)*2),local-scene.durationSec);
   const fromPhoto=journeyPhoto(scene),toPhoto=journeyPhoto(next);
   ctx.save();
   if(!fromPhoto&&toPhoto){

@@ -238,20 +238,21 @@ function labelLines(ctx:CanvasRenderingContext2D,text:string,x:number,y:number,w
   if(line)lines.push(line);
   lines.slice(0,maxLines).forEach((v,i)=>ctx.fillText(v,x,y+i*lineHeight,width));
 }
-function photoScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMotionScene,time:number,getPhoto:(url:string)=>HTMLImageElement|null,titleWeight=1){
+function photoScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMotionScene,time:number,getPhoto:(url:string)=>HTMLImageElement|null,titleWeight=1,captionTime=time){
   const p=scene.premiumTravel!,t=clamp(time/Math.max(.1,scene.durationSec)),s=w/WIDTH;
   const index=!p.editorial&&p.chapter==='opening'?0:Math.max(0,Math.min(p.stops.length-1,p.focusStopIndex));
   const stop=p.stops[index];
   const alternate=p.chapter==='opening'&&p.openingPhoto?p.openingPhoto:stop.secondaryPhoto;
-  const useAlternate=!!alternate&&((p.chapter==='opening'&&!!p.openingPhoto)||p.openingSecondary||(p.editorial&&p.chapter==='photo'&&t>=.52));
+  const slow=(p.editorialRevision??0)>=8&&p.chapter==='photo';
+  const useAlternate=!!alternate&&!slow&&((p.chapter==='opening'&&!!p.openingPhoto)||p.openingSecondary||(p.editorial&&p.chapter==='photo'&&t>=.52));
   const r7=(p.editorialRevision??0)>=7;
   const primary=getPhoto(stop.photoUrl);
   const secondary=alternate?getPhoto(alternate.photoUrl):null;
   const alternateImage=(useAlternate||(r7&&!primary))?secondary:null;
   const photo=alternateImage?alternate!:stop;
   const img=alternateImage||primary;
-  const shotTime=p.chapter==='photo'&&alternate?clamp(useAlternate?(t-.52)/.48:t/.52):t;
-  if(r7&&p.chapter==='photo'&&primary&&secondary&&alternate&&Math.abs(time-scene.durationSec*.52)<.15){
+  const shotTime=!slow&&p.chapter==='photo'&&alternate?clamp(useAlternate?(t-.52)/.48:t/.52):t;
+  if(r7&&!slow&&p.chapter==='photo'&&primary&&secondary&&alternate&&Math.abs(time-scene.durationSec*.52)<.15){
     const u=smoother((time-scene.durationSec*.52+.15)/.30);
     ctx.save();ctx.filter='saturate(.91) contrast(1.035) brightness(.99)';
     editorialPhoto(ctx,primary,w,h,clamp(t/.52),stop.photoFocus,stop.photoFit,.065);
@@ -259,19 +260,20 @@ function photoScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMot
     editorialPhoto(ctx,secondary,w,h,clamp((t-.52)/.48),alternate.photoFocus,alternate.photoFit,.065);
     ctx.restore();ctx.restore();
   }else if(img){
-    if(p.editorial){ctx.save();if((p.editorialRevision??0)>=6)ctx.filter='saturate(.91) contrast(1.035) brightness(.99)';editorialPhoto(ctx,img,w,h,r7&&(!primary||!secondary)?t:shotTime,photo.photoFocus,photo.photoFit,r7?(p.chapter==='opening'?.105:.065):.035);ctx.restore();}
+    if(p.editorial){ctx.save();if((p.editorialRevision??0)>=6)ctx.filter='saturate(.91) contrast(1.035) brightness(.99)';editorialPhoto(ctx,img,w,h,r7&&(!primary||!secondary)?t:shotTime,photo.photoFocus,photo.photoFit,slow?.035:r7?(p.chapter==='opening'?.105:.065):.035);ctx.restore();}
     else cover(ctx,img,0,0,w,h,t);
   }else if(r7){ctx.fillStyle='#173D37';ctx.fillRect(0,0,w,h);ctx.fillStyle='#fff';ctx.font=`${34*s}px sans-serif`;ctx.textAlign='center';ctx.fillText('Photo unavailable',w/2,h/2);}else scenicFallback(ctx,w,h);
   // A title fades in after the image appears and fades out before the next
   // shot. The underlying photo stays visible during the cross-dissolve.
-  const titleIn=r7?ease((time-.06)/.32):(p.editorialRevision??0)>=6?(.75+.25*ease(time/.16)):p.editorial?ease((time-.06)/.22):ease((time-.18)/.42);
+  const titleIn=slow?ease((captionTime-.4)/.30):r7?ease((time-.06)/.32):(p.editorialRevision??0)>=6?(.75+.25*ease(time/.16)):p.editorial?ease((time-.06)/.22):ease((time-.18)/.42);
   const titleOut=r7?1-ease((time-(scene.durationSec-.25))/.25):(p.editorialRevision??0)>=6?1:1-ease((time-(scene.durationSec-.42))/.42);
-  ctx.save();ctx.globalAlpha*=titleIn*titleOut*titleWeight;
+  ctx.save();if(!slow)ctx.globalAlpha*=titleIn*titleOut*titleWeight;
   const gradient=ctx.createLinearGradient(0,h*.22,0,h);
   gradient.addColorStop(0,'rgba(9,29,29,0)');
   gradient.addColorStop(.38,'rgba(9,29,29,.20)');
   gradient.addColorStop(1,'rgba(7,25,26,.94)');
   ctx.fillStyle=gradient;ctx.fillRect(0,0,w,h);
+  if(slow)ctx.globalAlpha*=titleIn*titleOut*titleWeight;
   ctx.fillStyle='#F8F4E8';ctx.textAlign='left';
   ctx.font='700 '+(29*s)+'px "Plus Jakarta Sans",sans-serif';
   ctx.fillText(p.seriesTitle??'SCOTLAND  /  THE OPEN ROAD',66*s,164*s,w-220*s);
@@ -284,8 +286,9 @@ function photoScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMot
   headline.split('\n').forEach((line,i)=>{ctx.save();if(r7&&p.chapter==='opening'){const amount=ease((time-.12-i*.18)/.42);const baseline=h-(575-i*96)*s;ctx.beginPath();ctx.rect(60*s,baseline-100*s,(w-210*s)*amount,125*s);ctx.clip();}ctx.fillText(line,66*s,h-(575-i*96)*s,w-220*s);ctx.restore();});
   ctx.font='500 '+(38*s)+'px "Plus Jakarta Sans",sans-serif';
   ctx.fillStyle='#F3F3E9';
-  const tagline=p.chapter==='opening'?'EDINBURGH TO THE ISLE OF SKYE':(alternateImage&&alternate?.label?alternate.label:stop.note);
-  labelLines(ctx,tagline,70*s,h-410*s,w-230*s,49*s,2);
+  const tagline=p.chapter==='opening'?'EDINBURGH TO THE ISLE OF SKYE':slow?stop.note:(alternateImage&&alternate?.label?alternate.label:stop.note);
+  ctx.save();if(slow)ctx.globalAlpha*=ease((captionTime-.9)/.25);
+  labelLines(ctx,tagline,70*s,h-410*s,w-230*s,49*s,2);ctx.restore();
   if(r7){ctx.restore();ctx.save();ctx.fillStyle='rgba(12,35,32,.75)';ctx.fillRect(62*s,h-290*s,w-205*s,38*s);}
   ctx.font='500 '+(19*s)+'px "Plus Jakarta Sans",sans-serif';ctx.fillStyle='#DAE1DB';
   ctx.fillText(img?'PHOTO  '+photo.photoAuthor+'  ·  '+photo.photoLicense+'  ·  CROPPED':'ILLUSTRATED LANDSCAPE / PHOTO UNAVAILABLE',70*s,h-265*s,w-220*s);
@@ -413,10 +416,10 @@ function drawMapScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenM
   ctx.textAlign='center';ctx.font='500 '+(21*s)+'px "Plus Jakarta Sans",sans-serif';ctx.fillStyle='#244C44';
   ctx.fillText(p.relief?'Map: OpenFreeMap / OpenMapTiles · © OpenStreetMap · Terrain: Mapzen / AWS':'Map: OpenFreeMap / OpenMapTiles · © OpenStreetMap contributors',w/2,h-24*s,w-54*s);
 }
-export function renderPremiumTravelScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMotionScene,time:number,getPhoto:(url:string)=>HTMLImageElement|null,titleWeight=1):void{
+export function renderPremiumTravelScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMotionScene,time:number,getPhoto:(url:string)=>HTMLImageElement|null,titleWeight=1,captionTime=time):void{
   const p=scene.premiumTravel!;
   ctx.save();
-  if(p.chapter==='opening'||p.chapter==='photo')photoScene(ctx,w,h,scene,time,getPhoto,titleWeight);
+  if(p.chapter==='opening'||p.chapter==='photo')photoScene(ctx,w,h,scene,time,getPhoto,titleWeight,captionTime);
   else drawMapScene(ctx,w,h,scene,time,titleWeight);
   // Frame boundaries are blended in the shared OpenMotion renderer.
   // Never darken this shot at its start or end.
