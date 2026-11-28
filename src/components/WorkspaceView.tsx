@@ -40,6 +40,23 @@ function SeriesCover({series}:{series:SeriesDefinition}) {
 function Poster({project, compact=false}:{project:OpenMotionProject;compact?:boolean}) {
   const kit=project.brandKit;
   const [failed,setFailed]=useState(false);
+  const travel=project.scenes.find(s=>s.premiumTravel)?.premiumTravel;
+  const region=travel?.regionTitle;
+  const hero=region==='SCOTLAND'?travel?.stops.find(s=>/skye|portree/i.test(s.name))??travel?.stops[1]:region==='DOLOMITES'?travel?.stops[2]:region==='ICELAND'?travel?.stops.find(s=>s.name==='Jökulsárlón'):undefined;
+  const [heroFailed,setHeroFailed]=useState(false);
+  const title=region==='SCOTLAND'?['SCOTLAND','ROAD TRIP']:region==='DOLOMITES'?['DOLOMITES','ROAD TRIP']:["ICELAND’S","RING ROAD"];
+  const subtitle=region==='SCOTLAND'?'Highlands · Castles · Skye':region==='DOLOMITES'?'Passes · Peaks · Alpine lakes':'Waterfalls · Black sand · Ice';
+  const episode=region==='SCOTLAND'?'001':region==='DOLOMITES'?'002':'003';
+  if(hero&&!heroFailed)return <div className={`relative overflow-hidden rounded-lg bg-slate-900 text-white ${compact?'w-20 h-14 shrink-0':'aspect-video'}`} title={hero.photoAuthor+' · '+hero.photoLicense+' · '+hero.photoSourceUrl+' · cropped'}>
+    <img src={hero.photoUrl} alt={hero.label??hero.name} loading="lazy" decoding="async" onError={()=>setHeroFailed(true)} className="absolute inset-0 w-full h-full object-cover" style={{objectPosition:`${(hero.photoFocus?.[0]??.5)*100}% ${(hero.photoFocus?.[1]??.5)*100}%`}}/>
+    <div className="absolute inset-0" style={{background:'linear-gradient(90deg, rgba(10,28,29,.93),rgba(10,28,29,.54) 52%,rgba(10,28,29,.04) 100%),linear-gradient(0deg,rgba(10,28,29,.8),transparent 25%)'}}/>
+    <div className={`absolute inset-0 flex flex-col justify-center ${compact?'px-1.5':'px-[6%] py-[4%]'}`}>
+      {!compact&&<span className="text-[9px] sm:text-[10px] tracking-[.15em] font-semibold text-[#E2C48F]">THE OPEN ROAD COLLECTION · {episode}</span>}
+      <span className={`font-serif leading-[.98] tracking-tight ${compact?'text-[10px]':'text-2xl sm:text-3xl'}`}>{title[0]}<br/>{title[1]}</span>
+      {!compact&&<span className="mt-1 text-[10px] sm:text-xs text-[#E2C48F]">{subtitle}</span>}
+    </div>
+    {!compact&&<span className="absolute bottom-1 right-2 max-w-[90%] text-right text-[8px] leading-tight text-white/90">{hero.photoAuthor} · {hero.photoLicense} · cropped</span>}
+  </div>;
   return <div className={`relative overflow-hidden rounded-lg ${compact?'w-20 h-14 shrink-0':'aspect-video'} flex items-center justify-center`} style={{backgroundColor:kit?.backgroundColor??'#142333',color:kit?.textColor??'#ffffff'}}>
     {project.thumbnailUrl && !failed ? <img loading="lazy" decoding="async" alt="" src={project.thumbnailUrl} onError={()=>setFailed(true)} className="w-full h-full object-cover"/> :
       <div className="relative w-full h-full flex flex-col justify-end p-3 sm:p-4 overflow-hidden">
