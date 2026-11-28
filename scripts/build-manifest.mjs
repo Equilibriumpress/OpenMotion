@@ -125,7 +125,7 @@ function prepareProject(p) {
           for(let i=0;i<words.length;i+=chunkSize){
             const startSec=c.startSec+(c.endSec-c.startSec)*i/words.length;
             const endSec=c.startSec+(c.endSec-c.startSec)*Math.min(words.length,i+chunkSize)/words.length;
-            if(endSec>startSec)parts.push({text:words.slice(i,i+chunkSize).join(' '),startSec,endSec,style:clean?'karaoke':'minimal',position:clean ? .765 : .79,fontSizePx:clean?52:48,...(clean?{color:'#F4B89A'}:{})});
+            if(endSec>startSec)parts.push({text:words.slice(i,i+chunkSize).join(' '),startSec,endSec,style:clean?'karaoke':'minimal',position:p.templateVersion==='2.7'?720/910:clean ? .765 : .79,fontSizePx:clean?52:48,...(clean?{color:'#F4B89A'}:{})});
           }
           return parts;
         });
