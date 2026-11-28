@@ -84,7 +84,15 @@ export function renderRocketboxPresenter(c:CanvasRenderingContext2D,s:OpenMotion
  }
  const r=rig,energy=cue(s,'host-energy'),shapes=cue(s,'host-mouth'),f=clamp(t*30,0,Math.max(0,energy.length-1)),i=Math.floor(f),frac=f-i;
  const a=energy.length?((Number(energy[i])||0)*(1-frac)+(Number(energy[Math.min(i+1,energy.length-1)])||0)*frac)/9:0;
- const v=shapes.length?clamp(Number(shapes[Math.min(i,shapes.length-1)])||0,0,7):0;
+ // Symmetric, time-local smoothing (no mutable playback history).
+ const weights=Array(8).fill(0) as number[];
+ for(let d=-2;d<=2;d++){
+  const k=Math.max(0,Math.min(shapes.length-1,i+d)),v=shapes.length?clamp(Number(shapes[k])||0,0,7):0;
+  const w=Math.max(0,3-Math.abs(d-frac));weights[v]+=w;
+ }
+ const sum=weights.reduce((n,x)=>n+x,0)||1;for(let n=0;n<8;n++)weights[n]/=sum;
+ const closure=shapes.length?Number(shapes[Math.min(i,shapes.length-1)])===0:true;
+ if(closure){weights.fill(0);weights[0]=1;}
  const blinks=cue(s,'host-blinks').split(',').filter(Boolean).map(Number);
  const blink=blinks.reduce((n,b)=>Math.max(n,1-clamp(Math.abs(t-b)/.10)),0);
  const shot=cue(s,'shot'),look=shot==='cover'||shot==='limits'?0:Math.sin(Math.PI*clamp(t/Math.max(.001,s.durationSec)))*.12;
@@ -94,9 +102,9 @@ export function renderRocketboxPresenter(c:CanvasRenderingContext2D,s:OpenMotion
   if(/eyeblink(left|right)$|blink_[lr]$|(?:leyeclose|reyeclose)_h$/.test(m.name))x=blink;
   else if(/browinnerup$|(?:lbrowup|rbrowup)_h$/.test(m.name))x=shot==='limits'?.08:.18;
   else if(/mouthsmile(left|right)$/.test(m.name))x=shot==='cover'?.16:.07;
-  else if(/jawopen$|mouthopen_h$/.test(m.name))x=v===0?0:a*.22;
-  else if(v===0&&mouthPatterns[0].test(m.name))x=a>.08?.65:0;
-  else if(v>0&&mouthPatterns[v].test(m.name))x=a*.78;
+  else if(/jawopen$|mouthopen_h$/.test(m.name))x=a*.14*(1-weights[0]);
+  else if(mouthPatterns[0].test(m.name))x=a>.08?.7*weights[0]:0;
+  else for(let v=1;v<8;v++)if(mouthPatterns[v].test(m.name))x=Math.max(x,a*weights[v]*(v===1?.52:.85));
   m.weights[m.index]=x;
  }
  const scale=Math.max(1,c.getTransform().a),w=Math.ceil(160*scale),h=Math.ceil(198*scale);
