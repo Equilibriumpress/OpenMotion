@@ -71,7 +71,7 @@ export function renderSimplyExplained(c:C,width:number,height:number,scene:OpenM
   txt(c,'Illustrative token split',42,540,15,muted,500);host(c,392,575,.57,t,speaking,.5);break;
  case 'prediction': {
   heading(c,'04 / THE MODEL','What comes','next?');
-  const stepDuration=quality?scene.durationSec/3:4,step=Math.min(2,Math.floor(t/stepDuration)),phase=t-step*stepDuration;
+  const step=Math.min(2,Math.floor(t/4)),phase=t-step*4;
   const prompts=['The sky is','The sky is blue','The sky is blue today'];
   const choices=[['blue','clear','dark'],['today','.','above'],['.','and','because']];
   const values=[[.62,.24,.14],[.46,.36,.18],[.71,.19,.10]][step];
@@ -82,7 +82,7 @@ export function renderSimplyExplained(c:C,width:number,height:number,scene:OpenM
  case 'response':
   heading(c,'05 / GENERATION','One step at','a time');
   chat(c,42,300,428,286);txt(c,'Why is the sky blue?',65,366,24,ink,700);
-  const count=Math.max(0,Math.min(9,Math.floor((t-.4)/(quality?scene.durationSec*.077:.55))+1));
+  const count=Math.max(0,Math.min(9,Math.floor((t-.6)/.55)+1));
   txt(c,['Sunlight',' scatters',' in',' the',' atmosphere.'].slice(0,Math.min(count,5)).join(''),65,430,22,ink,650,'left',390);
   txt(c,['Blue',' light',' scatters',' more.'].slice(0,Math.max(0,count-5)).join(''),65,478,22,ink,650,'left',390);
   host(c,393,579,.55,t,speaking,.45);break;
@@ -141,7 +141,7 @@ function renderCleanEditorial(c:C,scene:OpenMotionScene,t:number){
   editorialCard(c,58,200,396,350);
   box(c,81,226,350,68,'#E9D4BD',10);txt(c,'Why is the sky blue?',99,268,24,ink,650,'left',315);
   reveal(c,(t-(quality?.65:.9))/.7,()=>{box(c,81,318,350,154,'#DCE5DD',12);txt(c,'Sunlight scatters…',100,361,24,ink,700);for(let i=0;i<3;i++){box(c,100,384+i*22,(i===2?140:284-i*24)*ease((t-1.6-i*.3)/.55),6,'#A7B9AC',3);}});
-  if(quality)reveal(c,(beat-.68)/.17,()=>{box(c,100,475,312,35,'#253E43',9);txt(c,'Generated response',256,499,16,light,650,'center',285);});
+  if(quality)reveal(c,(beat-.68)/.17,()=>{line(c,100,493,412,493,'#C9BBA7',1);oval(c,100+312*ease((beat-.68)/.25),493,4,4,rust);});
   break;
  case 'training':
   cleanTitle(c,'Training');
@@ -158,7 +158,7 @@ function renderCleanEditorial(c:C,scene:OpenMotionScene,t:number){
   reveal(c,(t-2.6)/.6,()=>txt(c,strict?'Example tokens':'Tokens',256,543,32,rust,800,'center'));
   if(quality&&beat>.46){const index=Math.min(4,Math.floor((beat-.46)/.10)),xs=[42,126,218,285,395],ws=[77,85,60,103,49];c.save();c.globalAlpha=.6*ease((beat-.46)/.07);c.strokeStyle=rust;c.lineWidth=2;c.beginPath();c.roundRect(xs[index]-3,412,ws[index]+6,74,12);c.stroke();c.restore();}break;
  case 'prediction': {
-  const step=Math.min(2,Math.floor(t/4)),phase=t-step*4;
+  const stepDuration=quality?scene.durationSec/3:4,step=Math.min(2,Math.floor(t/stepDuration)),phase=t-step*stepDuration;
   const prompts=strict?['The sky','The sky is','The sky is blue']:['The sky is','The sky is blue','The sky is blue today'];
   const choices=strict?[['is','looks','was'],['blue','clear','dark'],['.','and','because']]:[['blue','clear','dark'],['today','.','above'],['.','and','because']];
   const values=[[.62,.24,.14],[.46,.36,.18],[.71,.19,.10]][step];
@@ -168,7 +168,7 @@ function renderCleanEditorial(c:C,scene:OpenMotionScene,t:number){
   reveal(c,(phase-(quality?stepDuration*.51:2.1))/.4,()=>{box(c,42,548,428,58,'#DCE5DD',10);txt(c,strict?prompts[step]+(choices[step][0]==='.'?'':' ')+choices[step][0]:choices[step][0],256,586,28,teal,800,'center',400);});txt(c,'Example probabilities',256,635,13,muted,500,'center');break;}
  case 'response': {
   editorialCard(c,42,190,428,358);box(c,62,211,388,65,sand,12);txt(c,'Why is the sky blue?',256,253,23,ink,700,'center');
-  const count=Math.max(0,Math.min(9,Math.floor((t-.6)/.55)+1));
+  const count=Math.max(0,Math.min(9,Math.floor((t-.4)/(quality?scene.durationSec*.077:.55))+1));
   const first=['Sunlight',' scatters',' in',' the',' atmosphere.'].slice(0,Math.min(count,5)).join('');
   const second=['Blue',' light',' scatters',' more.'].slice(0,Math.max(0,count-5)).join('');
   txt(c,first,66,350,24,ink,650,'left',383);
