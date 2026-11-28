@@ -1,3 +1,4 @@
+import { EDITORIAL_LAYOUT, EDITORIAL_LAYOUT_MARKER } from './simplyExplainedLayout';
 import type { OpenMotionScene } from '../types/openmotion';
 
 /** Original 2D rig. Every pose is evaluated from scene time, never from playback state. */
@@ -131,7 +132,13 @@ function renderBody26(c:C,scene:OpenMotionScene,t:number,p:Pose,keys:Key[],blink
   lift:clamp((late.tilt-p.tilt)*12+(late.arm-p.arm)*5+breath*.8,-3.5,3.5),
   turn:late.yaw*9
  };
- c.save();c.translate(82,699);c.scale(.88,.88);
+ c.save();
+ if(scene.doodle?.extras?.includes(EDITORIAL_LAYOUT_MARKER)){
+  const h=EDITORIAL_LAYOUT.host;
+  // Absolute safe region: never let hair, elbows or hands enter caption space.
+  c.beginPath();c.rect(h.left,h.top,h.right-h.left,h.bottom-h.top);c.clip();
+  c.translate(h.anchorX,h.anchorY);c.scale(h.scale,h.scale);
+ }else{c.translate(82,699);c.scale(.88,.88);}
  // Pivot at the waist, leaving the bottom anchor stable while shoulders follow head and arm.
  c.translate(0,124);c.rotate(bodyTilt*.14+sway*.018);c.transform(1-bodyYaw*.10,0,bodyYaw*.11,1+breath*.023,0,0);c.translate(0,-124);
  const lift=shoulderLift+breath*1.2,shift=bodyYaw*5;
