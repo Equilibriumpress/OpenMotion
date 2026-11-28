@@ -1,3 +1,4 @@
+import { ExportFrameComparison } from './ExportFrameComparison';
 import { rendererLabel, downloadVerifiedZip, BUNDLE_REVISION } from '../engine/exportProvenance';
 import { EMOTIONS, DEFAULT_PERFORMANCE, PERFORMANCE_MARKER, performanceFor, sanitizePerformance, withPerformance, type AlexPerformance } from '../engine/alexPerformance';
 import { CARTOONS, CARTOON_MARKER, applyCartoon, cartoonReady, prepareCartoon, type CartoonId } from '../engine/cartoonPresenter';
@@ -136,6 +137,7 @@ export function PresenterLab({projects,onUpdateProject,initialCustom=false,initi
     <div className="border-t pt-4"><h3 className="font-semibold">MP4-proef</h3><p className="mt-1 text-xs text-slate-500">1080 × 1920 · 30 fps · H.264/AAC. Alleen een experiment, geen automatische publicatie.</p>
     <div className="mt-3 flex flex-wrap gap-2"><button disabled={!ready||!voice||busy||((mode==='rocketbox'||mode==='custom'||mode==='cartoon'||mode==='performance')&&!energyAvailable)} className="rounded-lg border px-3 py-2 text-sm disabled:opacity-40" onClick={render}>Render proef-MP4</button>{busy&&<button className="rounded-lg border px-3 py-2 text-sm" onClick={()=>cancel.current?.abort()}>Stop</button>}</div>
     {progress&&<p role="status" className="mt-2 text-xs">{progress.phase} · {Math.round(progress.percent)}% · {progress.encoderLabel}</p>}
+    {progress?.verification&&variant?.templateVersion==='3.3'&&<ExportFrameComparison key={progress.outputUrl} project={variant} result={progress}/>}
     {progress?.verification&&<div className="space-y-2 text-xs"><p>{progress.verification.width} × {progress.verification.height} · {progress.verification.fps} fps · {progress.verification.actualDurationSec.toFixed(2)} s · template {progress.verification.templateVersion}</p><button className="rounded border px-3 py-2" onClick={()=>void downloadVerifiedZip(progress).catch(e=>setError(String(e)))}>Download origineel + exportbewijs (ZIP)</button></div>}
     {progress?.outputUrl&&<a href={progress.outputUrl} download={progress.fileName} className="mt-2 inline-block text-sm font-semibold text-teal-700 underline">Download proefbestand</a>}
     </div>
