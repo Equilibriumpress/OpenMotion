@@ -60,7 +60,7 @@ export async function prepareRocketbox(preset?:CharacterPreset|null):Promise<voi
    const morphs:Morph[]=[];const bones:THREE.Bone[]=[];
    model.traverse(o=>{
     if(o instanceof THREE.Bone&&/^(?:mixamorig[:_])?head$/i.test(o.name))bones.push(o);
-    if(o instanceof THREE.Mesh){o.frustumCulled=false;}
+    if(o instanceof THREE.Mesh){o.frustumCulled=false;if(preset)o.material=Array.isArray(o.material)?o.material.map(m=>m.clone()):o.material.clone();}
     if(o instanceof THREE.Mesh&&o.morphTargetDictionary&&o.morphTargetInfluences){
      for(const [name,index] of Object.entries(o.morphTargetDictionary))morphs.push({weights:o.morphTargetInfluences,index,name:name.toLowerCase()});
     }
