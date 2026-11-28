@@ -34,6 +34,7 @@ async function build(scene:OpenMotionScene,clip:PremiumTravelClip,url:string,wid
  const length=Number(response.headers.get('content-length')??0);if(length>25*1024*1024)throw Error('Footage exceeds 25 MB');
  const blob=await response.blob();if(!blob.size||blob.size>25*1024*1024)throw Error('Invalid footage size');
  const objectUrl=URL.createObjectURL(blob),video=document.createElement('video');video.muted=true;video.playsInline=true;video.preload='auto';
+ video.style.cssText='position:fixed;left:-10000px;top:0;width:1px;height:1px;opacity:0;pointer-events:none';document.body.appendChild(video);
  const pages:HTMLCanvasElement[]=[];
  try{
   await wait(video,'loadeddata',signal,()=>{video.src=objectUrl;video.load();});
@@ -55,7 +56,7 @@ async function build(scene:OpenMotionScene,clip:PremiumTravelClip,url:string,wid
   }
   return {pages,width,height,frames,fps:FPS,clip};
  }catch(e){for(const page of pages){page.width=1;page.height=1;}throw e;}
- finally{video.pause();video.removeAttribute('src');video.load();URL.revokeObjectURL(objectUrl);}
+ finally{video.pause();video.removeAttribute('src');video.load();video.remove();URL.revokeObjectURL(objectUrl);}
 }
 export function preparePremiumClips(project:OpenMotionProject,refresh:()=>void):Promise<void>{
  const existing=jobs.get(project);if(existing)return existing;

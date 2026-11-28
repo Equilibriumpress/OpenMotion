@@ -3,7 +3,7 @@
   "id": "premium-travel-routes-003-iceland-ring-road",
   "slug": "premium-travel-routes-003-iceland-ring-road",
   "title": "Iceland’s Ring Road",
-  "description": "The Open Road Collection · 003. Signature Extended Edition: six scenic stops on Iceland's Ring Road, real photographs, Nordic soundscape and closed-loop cartography. One main photo per destination.",
+  "description": "The Open Road Collection · 003. Cinematic Hybrid Edition R10: four real footage sequences, two photo stops, closed-loop maps and Nordic soundscape. Footage is prepared in the browser, with licensed photo fallback.",
   "category": "Shorts & Reels",
   "author": "OpenMotion Studio",
   "source": "github",
@@ -78,7 +78,22 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/7/7e/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm.1080p.vp9.webm",
+              "alternateUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7e/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm",
+              "author": "Giles Laurent · gileslaurent.com",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+              "sourceWidth": 3840,
+              "sourceHeight": 2160,
+              "startSec": 0.4,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Reynisfjara",
@@ -120,7 +135,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Windy_day_at_Reynisfjara_beach_in_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8b/Windy_day_at_Reynisfjara_beach_in_Iceland.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 1920,
+              "sourceHeight": 1080,
+              "startSec": 0.7,
+              "focus": [
+                0.52,
+                0.5
+              ]
+            }
           },
           {
             "name": "Fjaðrárgljúfur",
@@ -162,7 +191,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Waterfall_in_Fja%C3%B0r%C3%A1rglj%C3%BAfur_canyon.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fd/Waterfall_in_Fja%C3%B0r%C3%A1rglj%C3%BAfur_canyon.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 608,
+              "sourceHeight": 1080,
+              "startSec": 1,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Jökulsárlón",
@@ -204,7 +247,22 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/d/d1/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm.720p.vp9.webm",
+              "alternateUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm",
+              "author": "Jason Eppink",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+              "sourceWidth": 1280,
+              "sourceHeight": 720,
+              "startSec": 2,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Hverir",
@@ -246,7 +304,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fumarole_at_Hverir%2C_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Fumarole_at_Hverir%2C_Iceland.webm",
+              "author": "Jason Eppink",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+              "sourceWidth": 1280,
+              "sourceHeight": 720,
+              "startSec": 2,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Goðafoss",
@@ -288,7 +360,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Go%C3%B0afoss_waterfall_in_Northern_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Go%C3%B0afoss_waterfall_in_Northern_Iceland.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 1920,
+              "sourceHeight": 1080,
+              "startSec": 1,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           }
         ],
         "route": {
@@ -346,7 +432,7 @@
         "seriesTitle": "THE OPEN ROAD COLLECTION · 003",
         "regionTitle": "ICELAND",
         "mapIntro": false,
-        "editorialRevision": 9,
+        "editorialRevision": 10,
         "relief": true,
         "openingPhoto": {
           "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Road_No_1_winding_through_the_Icelandic_highlands_(16443714336).jpg/3840px-Road_No_1_winding_through_the_Icelandic_highlands_(16443714336).jpg",
@@ -456,7 +542,22 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/7/7e/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm.1080p.vp9.webm",
+              "alternateUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7e/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm",
+              "author": "Giles Laurent · gileslaurent.com",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+              "sourceWidth": 3840,
+              "sourceHeight": 2160,
+              "startSec": 0.4,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Reynisfjara",
@@ -498,7 +599,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Windy_day_at_Reynisfjara_beach_in_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8b/Windy_day_at_Reynisfjara_beach_in_Iceland.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 1920,
+              "sourceHeight": 1080,
+              "startSec": 0.7,
+              "focus": [
+                0.52,
+                0.5
+              ]
+            }
           },
           {
             "name": "Fjaðrárgljúfur",
@@ -540,7 +655,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Waterfall_in_Fja%C3%B0r%C3%A1rglj%C3%BAfur_canyon.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fd/Waterfall_in_Fja%C3%B0r%C3%A1rglj%C3%BAfur_canyon.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 608,
+              "sourceHeight": 1080,
+              "startSec": 1,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Jökulsárlón",
@@ -582,7 +711,22 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/d/d1/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm.720p.vp9.webm",
+              "alternateUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm",
+              "author": "Jason Eppink",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+              "sourceWidth": 1280,
+              "sourceHeight": 720,
+              "startSec": 2,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Hverir",
@@ -624,7 +768,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fumarole_at_Hverir%2C_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Fumarole_at_Hverir%2C_Iceland.webm",
+              "author": "Jason Eppink",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+              "sourceWidth": 1280,
+              "sourceHeight": 720,
+              "startSec": 2,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Goðafoss",
@@ -666,7 +824,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Go%C3%B0afoss_waterfall_in_Northern_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Go%C3%B0afoss_waterfall_in_Northern_Iceland.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 1920,
+              "sourceHeight": 1080,
+              "startSec": 1,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           }
         ],
         "route": {
@@ -724,7 +896,7 @@
         "seriesTitle": "THE OPEN ROAD COLLECTION · 003",
         "regionTitle": "ICELAND",
         "mapIntro": true,
-        "editorialRevision": 9,
+        "editorialRevision": 10,
         "relief": true,
         "openingSubtitle": "ROUTE 1 · AROUND THE ISLAND",
         "closeLoop": true,
@@ -821,7 +993,22 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/7/7e/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm.1080p.vp9.webm",
+              "alternateUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7e/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm",
+              "author": "Giles Laurent · gileslaurent.com",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+              "sourceWidth": 3840,
+              "sourceHeight": 2160,
+              "startSec": 0.4,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Reynisfjara",
@@ -863,7 +1050,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Windy_day_at_Reynisfjara_beach_in_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8b/Windy_day_at_Reynisfjara_beach_in_Iceland.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 1920,
+              "sourceHeight": 1080,
+              "startSec": 0.7,
+              "focus": [
+                0.52,
+                0.5
+              ]
+            }
           },
           {
             "name": "Fjaðrárgljúfur",
@@ -905,7 +1106,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Waterfall_in_Fja%C3%B0r%C3%A1rglj%C3%BAfur_canyon.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fd/Waterfall_in_Fja%C3%B0r%C3%A1rglj%C3%BAfur_canyon.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 608,
+              "sourceHeight": 1080,
+              "startSec": 1,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Jökulsárlón",
@@ -947,7 +1162,22 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/d/d1/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm.720p.vp9.webm",
+              "alternateUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm",
+              "author": "Jason Eppink",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+              "sourceWidth": 1280,
+              "sourceHeight": 720,
+              "startSec": 2,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Hverir",
@@ -989,7 +1219,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fumarole_at_Hverir%2C_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Fumarole_at_Hverir%2C_Iceland.webm",
+              "author": "Jason Eppink",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+              "sourceWidth": 1280,
+              "sourceHeight": 720,
+              "startSec": 2,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Goðafoss",
@@ -1031,7 +1275,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Go%C3%B0afoss_waterfall_in_Northern_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Go%C3%B0afoss_waterfall_in_Northern_Iceland.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 1920,
+              "sourceHeight": 1080,
+              "startSec": 1,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           }
         ],
         "route": {
@@ -1089,7 +1347,7 @@
         "seriesTitle": "THE OPEN ROAD COLLECTION · 003",
         "regionTitle": "ICELAND",
         "mapIntro": false,
-        "editorialRevision": 9,
+        "editorialRevision": 10,
         "relief": true,
         "openingSubtitle": "ROUTE 1 · AROUND THE ISLAND",
         "closeLoop": true,
@@ -1134,7 +1392,8 @@
           }
         ],
         "signatureAtmosphere": "water",
-        "signatureDepth": false
+        "signatureDepth": false,
+        "mediaMode": "video"
       }
     },
     {
@@ -1188,7 +1447,22 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/7/7e/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm.1080p.vp9.webm",
+              "alternateUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7e/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm",
+              "author": "Giles Laurent · gileslaurent.com",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+              "sourceWidth": 3840,
+              "sourceHeight": 2160,
+              "startSec": 0.4,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Reynisfjara",
@@ -1230,7 +1504,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Windy_day_at_Reynisfjara_beach_in_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8b/Windy_day_at_Reynisfjara_beach_in_Iceland.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 1920,
+              "sourceHeight": 1080,
+              "startSec": 0.7,
+              "focus": [
+                0.52,
+                0.5
+              ]
+            }
           },
           {
             "name": "Fjaðrárgljúfur",
@@ -1272,7 +1560,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Waterfall_in_Fja%C3%B0r%C3%A1rglj%C3%BAfur_canyon.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fd/Waterfall_in_Fja%C3%B0r%C3%A1rglj%C3%BAfur_canyon.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 608,
+              "sourceHeight": 1080,
+              "startSec": 1,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Jökulsárlón",
@@ -1314,7 +1616,22 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/d/d1/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm.720p.vp9.webm",
+              "alternateUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm",
+              "author": "Jason Eppink",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+              "sourceWidth": 1280,
+              "sourceHeight": 720,
+              "startSec": 2,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Hverir",
@@ -1356,7 +1673,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fumarole_at_Hverir%2C_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Fumarole_at_Hverir%2C_Iceland.webm",
+              "author": "Jason Eppink",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+              "sourceWidth": 1280,
+              "sourceHeight": 720,
+              "startSec": 2,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Goðafoss",
@@ -1398,7 +1729,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Go%C3%B0afoss_waterfall_in_Northern_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Go%C3%B0afoss_waterfall_in_Northern_Iceland.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 1920,
+              "sourceHeight": 1080,
+              "startSec": 1,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           }
         ],
         "route": {
@@ -1456,7 +1801,7 @@
         "seriesTitle": "THE OPEN ROAD COLLECTION · 003",
         "regionTitle": "ICELAND",
         "mapIntro": false,
-        "editorialRevision": 9,
+        "editorialRevision": 10,
         "relief": true,
         "openingSubtitle": "ROUTE 1 · AROUND THE ISLAND",
         "closeLoop": true,
@@ -1553,7 +1898,22 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/7/7e/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm.1080p.vp9.webm",
+              "alternateUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7e/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm",
+              "author": "Giles Laurent · gileslaurent.com",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+              "sourceWidth": 3840,
+              "sourceHeight": 2160,
+              "startSec": 0.4,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Reynisfjara",
@@ -1595,7 +1955,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Windy_day_at_Reynisfjara_beach_in_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8b/Windy_day_at_Reynisfjara_beach_in_Iceland.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 1920,
+              "sourceHeight": 1080,
+              "startSec": 0.7,
+              "focus": [
+                0.52,
+                0.5
+              ]
+            }
           },
           {
             "name": "Fjaðrárgljúfur",
@@ -1637,7 +2011,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Waterfall_in_Fja%C3%B0r%C3%A1rglj%C3%BAfur_canyon.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fd/Waterfall_in_Fja%C3%B0r%C3%A1rglj%C3%BAfur_canyon.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 608,
+              "sourceHeight": 1080,
+              "startSec": 1,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Jökulsárlón",
@@ -1679,7 +2067,22 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/d/d1/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm.720p.vp9.webm",
+              "alternateUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm",
+              "author": "Jason Eppink",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+              "sourceWidth": 1280,
+              "sourceHeight": 720,
+              "startSec": 2,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Hverir",
@@ -1721,7 +2124,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fumarole_at_Hverir%2C_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Fumarole_at_Hverir%2C_Iceland.webm",
+              "author": "Jason Eppink",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+              "sourceWidth": 1280,
+              "sourceHeight": 720,
+              "startSec": 2,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Goðafoss",
@@ -1763,7 +2180,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Go%C3%B0afoss_waterfall_in_Northern_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Go%C3%B0afoss_waterfall_in_Northern_Iceland.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 1920,
+              "sourceHeight": 1080,
+              "startSec": 1,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           }
         ],
         "route": {
@@ -1821,7 +2252,7 @@
         "seriesTitle": "THE OPEN ROAD COLLECTION · 003",
         "regionTitle": "ICELAND",
         "mapIntro": false,
-        "editorialRevision": 9,
+        "editorialRevision": 10,
         "relief": true,
         "openingSubtitle": "ROUTE 1 · AROUND THE ISLAND",
         "closeLoop": true,
@@ -1866,7 +2297,8 @@
           }
         ],
         "signatureAtmosphere": "haze",
-        "signatureDepth": true
+        "signatureDepth": true,
+        "mediaMode": "video"
       }
     },
     {
@@ -1920,7 +2352,22 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/7/7e/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm.1080p.vp9.webm",
+              "alternateUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7e/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm",
+              "author": "Giles Laurent · gileslaurent.com",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+              "sourceWidth": 3840,
+              "sourceHeight": 2160,
+              "startSec": 0.4,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Reynisfjara",
@@ -1962,7 +2409,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Windy_day_at_Reynisfjara_beach_in_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8b/Windy_day_at_Reynisfjara_beach_in_Iceland.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 1920,
+              "sourceHeight": 1080,
+              "startSec": 0.7,
+              "focus": [
+                0.52,
+                0.5
+              ]
+            }
           },
           {
             "name": "Fjaðrárgljúfur",
@@ -2004,7 +2465,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Waterfall_in_Fja%C3%B0r%C3%A1rglj%C3%BAfur_canyon.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fd/Waterfall_in_Fja%C3%B0r%C3%A1rglj%C3%BAfur_canyon.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 608,
+              "sourceHeight": 1080,
+              "startSec": 1,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Jökulsárlón",
@@ -2046,7 +2521,22 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/d/d1/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm.720p.vp9.webm",
+              "alternateUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm",
+              "author": "Jason Eppink",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+              "sourceWidth": 1280,
+              "sourceHeight": 720,
+              "startSec": 2,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Hverir",
@@ -2088,7 +2578,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fumarole_at_Hverir%2C_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Fumarole_at_Hverir%2C_Iceland.webm",
+              "author": "Jason Eppink",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+              "sourceWidth": 1280,
+              "sourceHeight": 720,
+              "startSec": 2,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Goðafoss",
@@ -2130,7 +2634,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Go%C3%B0afoss_waterfall_in_Northern_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Go%C3%B0afoss_waterfall_in_Northern_Iceland.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 1920,
+              "sourceHeight": 1080,
+              "startSec": 1,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           }
         ],
         "route": {
@@ -2188,7 +2706,7 @@
         "seriesTitle": "THE OPEN ROAD COLLECTION · 003",
         "regionTitle": "ICELAND",
         "mapIntro": false,
-        "editorialRevision": 9,
+        "editorialRevision": 10,
         "relief": true,
         "openingSubtitle": "ROUTE 1 · AROUND THE ISLAND",
         "closeLoop": true,
@@ -2285,7 +2803,22 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/7/7e/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm.1080p.vp9.webm",
+              "alternateUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7e/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm",
+              "author": "Giles Laurent · gileslaurent.com",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+              "sourceWidth": 3840,
+              "sourceHeight": 2160,
+              "startSec": 0.4,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Reynisfjara",
@@ -2327,7 +2860,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Windy_day_at_Reynisfjara_beach_in_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8b/Windy_day_at_Reynisfjara_beach_in_Iceland.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 1920,
+              "sourceHeight": 1080,
+              "startSec": 0.7,
+              "focus": [
+                0.52,
+                0.5
+              ]
+            }
           },
           {
             "name": "Fjaðrárgljúfur",
@@ -2369,7 +2916,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Waterfall_in_Fja%C3%B0r%C3%A1rglj%C3%BAfur_canyon.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fd/Waterfall_in_Fja%C3%B0r%C3%A1rglj%C3%BAfur_canyon.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 608,
+              "sourceHeight": 1080,
+              "startSec": 1,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Jökulsárlón",
@@ -2411,7 +2972,22 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/d/d1/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm.720p.vp9.webm",
+              "alternateUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm",
+              "author": "Jason Eppink",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+              "sourceWidth": 1280,
+              "sourceHeight": 720,
+              "startSec": 2,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Hverir",
@@ -2453,7 +3029,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fumarole_at_Hverir%2C_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Fumarole_at_Hverir%2C_Iceland.webm",
+              "author": "Jason Eppink",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+              "sourceWidth": 1280,
+              "sourceHeight": 720,
+              "startSec": 2,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Goðafoss",
@@ -2495,7 +3085,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Go%C3%B0afoss_waterfall_in_Northern_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Go%C3%B0afoss_waterfall_in_Northern_Iceland.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 1920,
+              "sourceHeight": 1080,
+              "startSec": 1,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           }
         ],
         "route": {
@@ -2553,7 +3157,7 @@
         "seriesTitle": "THE OPEN ROAD COLLECTION · 003",
         "regionTitle": "ICELAND",
         "mapIntro": false,
-        "editorialRevision": 9,
+        "editorialRevision": 10,
         "relief": true,
         "openingSubtitle": "ROUTE 1 · AROUND THE ISLAND",
         "closeLoop": true,
@@ -2598,7 +3202,8 @@
           }
         ],
         "signatureAtmosphere": "haze",
-        "signatureDepth": true
+        "signatureDepth": true,
+        "mediaMode": "photo"
       }
     },
     {
@@ -2652,7 +3257,22 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/7/7e/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm.1080p.vp9.webm",
+              "alternateUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7e/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm",
+              "author": "Giles Laurent · gileslaurent.com",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+              "sourceWidth": 3840,
+              "sourceHeight": 2160,
+              "startSec": 0.4,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Reynisfjara",
@@ -2694,7 +3314,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Windy_day_at_Reynisfjara_beach_in_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8b/Windy_day_at_Reynisfjara_beach_in_Iceland.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 1920,
+              "sourceHeight": 1080,
+              "startSec": 0.7,
+              "focus": [
+                0.52,
+                0.5
+              ]
+            }
           },
           {
             "name": "Fjaðrárgljúfur",
@@ -2736,7 +3370,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Waterfall_in_Fja%C3%B0r%C3%A1rglj%C3%BAfur_canyon.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fd/Waterfall_in_Fja%C3%B0r%C3%A1rglj%C3%BAfur_canyon.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 608,
+              "sourceHeight": 1080,
+              "startSec": 1,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Jökulsárlón",
@@ -2778,7 +3426,22 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/d/d1/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm.720p.vp9.webm",
+              "alternateUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm",
+              "author": "Jason Eppink",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+              "sourceWidth": 1280,
+              "sourceHeight": 720,
+              "startSec": 2,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Hverir",
@@ -2820,7 +3483,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fumarole_at_Hverir%2C_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Fumarole_at_Hverir%2C_Iceland.webm",
+              "author": "Jason Eppink",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+              "sourceWidth": 1280,
+              "sourceHeight": 720,
+              "startSec": 2,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Goðafoss",
@@ -2862,7 +3539,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Go%C3%B0afoss_waterfall_in_Northern_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Go%C3%B0afoss_waterfall_in_Northern_Iceland.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 1920,
+              "sourceHeight": 1080,
+              "startSec": 1,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           }
         ],
         "route": {
@@ -2920,7 +3611,7 @@
         "seriesTitle": "THE OPEN ROAD COLLECTION · 003",
         "regionTitle": "ICELAND",
         "mapIntro": false,
-        "editorialRevision": 9,
+        "editorialRevision": 10,
         "relief": true,
         "openingSubtitle": "ROUTE 1 · AROUND THE ISLAND",
         "closeLoop": true,
@@ -3017,7 +3708,22 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/7/7e/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm.1080p.vp9.webm",
+              "alternateUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7e/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm",
+              "author": "Giles Laurent · gileslaurent.com",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+              "sourceWidth": 3840,
+              "sourceHeight": 2160,
+              "startSec": 0.4,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Reynisfjara",
@@ -3059,7 +3765,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Windy_day_at_Reynisfjara_beach_in_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8b/Windy_day_at_Reynisfjara_beach_in_Iceland.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 1920,
+              "sourceHeight": 1080,
+              "startSec": 0.7,
+              "focus": [
+                0.52,
+                0.5
+              ]
+            }
           },
           {
             "name": "Fjaðrárgljúfur",
@@ -3101,7 +3821,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Waterfall_in_Fja%C3%B0r%C3%A1rglj%C3%BAfur_canyon.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fd/Waterfall_in_Fja%C3%B0r%C3%A1rglj%C3%BAfur_canyon.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 608,
+              "sourceHeight": 1080,
+              "startSec": 1,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Jökulsárlón",
@@ -3143,7 +3877,22 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/d/d1/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm.720p.vp9.webm",
+              "alternateUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm",
+              "author": "Jason Eppink",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+              "sourceWidth": 1280,
+              "sourceHeight": 720,
+              "startSec": 2,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Hverir",
@@ -3185,7 +3934,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fumarole_at_Hverir%2C_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Fumarole_at_Hverir%2C_Iceland.webm",
+              "author": "Jason Eppink",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+              "sourceWidth": 1280,
+              "sourceHeight": 720,
+              "startSec": 2,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Goðafoss",
@@ -3227,7 +3990,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Go%C3%B0afoss_waterfall_in_Northern_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Go%C3%B0afoss_waterfall_in_Northern_Iceland.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 1920,
+              "sourceHeight": 1080,
+              "startSec": 1,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           }
         ],
         "route": {
@@ -3285,7 +4062,7 @@
         "seriesTitle": "THE OPEN ROAD COLLECTION · 003",
         "regionTitle": "ICELAND",
         "mapIntro": false,
-        "editorialRevision": 9,
+        "editorialRevision": 10,
         "relief": true,
         "openingSubtitle": "ROUTE 1 · AROUND THE ISLAND",
         "closeLoop": true,
@@ -3330,7 +4107,8 @@
           }
         ],
         "signatureAtmosphere": "water",
-        "signatureDepth": false
+        "signatureDepth": false,
+        "mediaMode": "video"
       }
     },
     {
@@ -3384,7 +4162,22 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/7/7e/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm.1080p.vp9.webm",
+              "alternateUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7e/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm",
+              "author": "Giles Laurent · gileslaurent.com",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+              "sourceWidth": 3840,
+              "sourceHeight": 2160,
+              "startSec": 0.4,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Reynisfjara",
@@ -3426,7 +4219,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Windy_day_at_Reynisfjara_beach_in_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8b/Windy_day_at_Reynisfjara_beach_in_Iceland.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 1920,
+              "sourceHeight": 1080,
+              "startSec": 0.7,
+              "focus": [
+                0.52,
+                0.5
+              ]
+            }
           },
           {
             "name": "Fjaðrárgljúfur",
@@ -3468,7 +4275,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Waterfall_in_Fja%C3%B0r%C3%A1rglj%C3%BAfur_canyon.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fd/Waterfall_in_Fja%C3%B0r%C3%A1rglj%C3%BAfur_canyon.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 608,
+              "sourceHeight": 1080,
+              "startSec": 1,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Jökulsárlón",
@@ -3510,7 +4331,22 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/d/d1/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm.720p.vp9.webm",
+              "alternateUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm",
+              "author": "Jason Eppink",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+              "sourceWidth": 1280,
+              "sourceHeight": 720,
+              "startSec": 2,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Hverir",
@@ -3552,7 +4388,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fumarole_at_Hverir%2C_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Fumarole_at_Hverir%2C_Iceland.webm",
+              "author": "Jason Eppink",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+              "sourceWidth": 1280,
+              "sourceHeight": 720,
+              "startSec": 2,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Goðafoss",
@@ -3594,7 +4444,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Go%C3%B0afoss_waterfall_in_Northern_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Go%C3%B0afoss_waterfall_in_Northern_Iceland.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 1920,
+              "sourceHeight": 1080,
+              "startSec": 1,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           }
         ],
         "route": {
@@ -3652,7 +4516,7 @@
         "seriesTitle": "THE OPEN ROAD COLLECTION · 003",
         "regionTitle": "ICELAND",
         "mapIntro": false,
-        "editorialRevision": 9,
+        "editorialRevision": 10,
         "relief": true,
         "openingSubtitle": "ROUTE 1 · AROUND THE ISLAND",
         "closeLoop": true,
@@ -3749,7 +4613,22 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/7/7e/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm.1080p.vp9.webm",
+              "alternateUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7e/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm",
+              "author": "Giles Laurent · gileslaurent.com",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+              "sourceWidth": 3840,
+              "sourceHeight": 2160,
+              "startSec": 0.4,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Reynisfjara",
@@ -3791,7 +4670,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Windy_day_at_Reynisfjara_beach_in_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8b/Windy_day_at_Reynisfjara_beach_in_Iceland.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 1920,
+              "sourceHeight": 1080,
+              "startSec": 0.7,
+              "focus": [
+                0.52,
+                0.5
+              ]
+            }
           },
           {
             "name": "Fjaðrárgljúfur",
@@ -3833,7 +4726,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Waterfall_in_Fja%C3%B0r%C3%A1rglj%C3%BAfur_canyon.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fd/Waterfall_in_Fja%C3%B0r%C3%A1rglj%C3%BAfur_canyon.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 608,
+              "sourceHeight": 1080,
+              "startSec": 1,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Jökulsárlón",
@@ -3875,7 +4782,22 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/d/d1/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm.720p.vp9.webm",
+              "alternateUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm",
+              "author": "Jason Eppink",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+              "sourceWidth": 1280,
+              "sourceHeight": 720,
+              "startSec": 2,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Hverir",
@@ -3917,7 +4839,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fumarole_at_Hverir%2C_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Fumarole_at_Hverir%2C_Iceland.webm",
+              "author": "Jason Eppink",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+              "sourceWidth": 1280,
+              "sourceHeight": 720,
+              "startSec": 2,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Goðafoss",
@@ -3959,7 +4895,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Go%C3%B0afoss_waterfall_in_Northern_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Go%C3%B0afoss_waterfall_in_Northern_Iceland.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 1920,
+              "sourceHeight": 1080,
+              "startSec": 1,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           }
         ],
         "route": {
@@ -4017,7 +4967,7 @@
         "seriesTitle": "THE OPEN ROAD COLLECTION · 003",
         "regionTitle": "ICELAND",
         "mapIntro": false,
-        "editorialRevision": 9,
+        "editorialRevision": 10,
         "relief": true,
         "openingSubtitle": "ROUTE 1 · AROUND THE ISLAND",
         "closeLoop": true,
@@ -4062,7 +5012,8 @@
           }
         ],
         "signatureAtmosphere": "haze",
-        "signatureDepth": false
+        "signatureDepth": false,
+        "mediaMode": "video"
       }
     },
     {
@@ -4116,7 +5067,22 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/7/7e/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm.1080p.vp9.webm",
+              "alternateUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7e/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm",
+              "author": "Giles Laurent · gileslaurent.com",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+              "sourceWidth": 3840,
+              "sourceHeight": 2160,
+              "startSec": 0.4,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Reynisfjara",
@@ -4158,7 +5124,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Windy_day_at_Reynisfjara_beach_in_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8b/Windy_day_at_Reynisfjara_beach_in_Iceland.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 1920,
+              "sourceHeight": 1080,
+              "startSec": 0.7,
+              "focus": [
+                0.52,
+                0.5
+              ]
+            }
           },
           {
             "name": "Fjaðrárgljúfur",
@@ -4200,7 +5180,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Waterfall_in_Fja%C3%B0r%C3%A1rglj%C3%BAfur_canyon.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fd/Waterfall_in_Fja%C3%B0r%C3%A1rglj%C3%BAfur_canyon.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 608,
+              "sourceHeight": 1080,
+              "startSec": 1,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Jökulsárlón",
@@ -4242,7 +5236,22 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/d/d1/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm.720p.vp9.webm",
+              "alternateUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm",
+              "author": "Jason Eppink",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+              "sourceWidth": 1280,
+              "sourceHeight": 720,
+              "startSec": 2,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Hverir",
@@ -4284,7 +5293,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fumarole_at_Hverir%2C_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Fumarole_at_Hverir%2C_Iceland.webm",
+              "author": "Jason Eppink",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+              "sourceWidth": 1280,
+              "sourceHeight": 720,
+              "startSec": 2,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Goðafoss",
@@ -4326,7 +5349,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Go%C3%B0afoss_waterfall_in_Northern_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Go%C3%B0afoss_waterfall_in_Northern_Iceland.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 1920,
+              "sourceHeight": 1080,
+              "startSec": 1,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           }
         ],
         "route": {
@@ -4384,7 +5421,7 @@
         "seriesTitle": "THE OPEN ROAD COLLECTION · 003",
         "regionTitle": "ICELAND",
         "mapIntro": false,
-        "editorialRevision": 9,
+        "editorialRevision": 10,
         "relief": true,
         "openingSubtitle": "ROUTE 1 · AROUND THE ISLAND",
         "closeLoop": true,
@@ -4481,7 +5518,22 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/7/7e/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm.1080p.vp9.webm",
+              "alternateUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7e/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm",
+              "author": "Giles Laurent · gileslaurent.com",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+              "sourceWidth": 3840,
+              "sourceHeight": 2160,
+              "startSec": 0.4,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Reynisfjara",
@@ -4523,7 +5575,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Windy_day_at_Reynisfjara_beach_in_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8b/Windy_day_at_Reynisfjara_beach_in_Iceland.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 1920,
+              "sourceHeight": 1080,
+              "startSec": 0.7,
+              "focus": [
+                0.52,
+                0.5
+              ]
+            }
           },
           {
             "name": "Fjaðrárgljúfur",
@@ -4565,7 +5631,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Waterfall_in_Fja%C3%B0r%C3%A1rglj%C3%BAfur_canyon.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fd/Waterfall_in_Fja%C3%B0r%C3%A1rglj%C3%BAfur_canyon.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 608,
+              "sourceHeight": 1080,
+              "startSec": 1,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Jökulsárlón",
@@ -4607,7 +5687,22 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/d/d1/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm.720p.vp9.webm",
+              "alternateUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm",
+              "author": "Jason Eppink",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+              "sourceWidth": 1280,
+              "sourceHeight": 720,
+              "startSec": 2,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Hverir",
@@ -4649,7 +5744,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fumarole_at_Hverir%2C_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Fumarole_at_Hverir%2C_Iceland.webm",
+              "author": "Jason Eppink",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+              "sourceWidth": 1280,
+              "sourceHeight": 720,
+              "startSec": 2,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Goðafoss",
@@ -4691,7 +5800,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Go%C3%B0afoss_waterfall_in_Northern_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Go%C3%B0afoss_waterfall_in_Northern_Iceland.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 1920,
+              "sourceHeight": 1080,
+              "startSec": 1,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           }
         ],
         "route": {
@@ -4749,7 +5872,7 @@
         "seriesTitle": "THE OPEN ROAD COLLECTION · 003",
         "regionTitle": "ICELAND",
         "mapIntro": false,
-        "editorialRevision": 9,
+        "editorialRevision": 10,
         "relief": true,
         "openingSubtitle": "ROUTE 1 · AROUND THE ISLAND",
         "closeLoop": true,
@@ -4794,7 +5917,8 @@
           }
         ],
         "signatureAtmosphere": "water",
-        "signatureDepth": false
+        "signatureDepth": false,
+        "mediaMode": "photo"
       }
     },
     {
@@ -4848,7 +5972,22 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/7/7e/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm.1080p.vp9.webm",
+              "alternateUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7e/203_Seljalandsfoss_long_exposure_timelapse_Video_by_Giles_Laurent.webm",
+              "author": "Giles Laurent · gileslaurent.com",
+              "license": "CC BY-SA 4.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+              "sourceWidth": 3840,
+              "sourceHeight": 2160,
+              "startSec": 0.4,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Reynisfjara",
@@ -4890,7 +6029,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Windy_day_at_Reynisfjara_beach_in_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8b/Windy_day_at_Reynisfjara_beach_in_Iceland.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 1920,
+              "sourceHeight": 1080,
+              "startSec": 0.7,
+              "focus": [
+                0.52,
+                0.5
+              ]
+            }
           },
           {
             "name": "Fjaðrárgljúfur",
@@ -4932,7 +6085,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Waterfall_in_Fja%C3%B0r%C3%A1rglj%C3%BAfur_canyon.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fd/Waterfall_in_Fja%C3%B0r%C3%A1rglj%C3%BAfur_canyon.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 608,
+              "sourceHeight": 1080,
+              "startSec": 1,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Jökulsárlón",
@@ -4974,7 +6141,22 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/d/d1/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm.720p.vp9.webm",
+              "alternateUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Brei%C3%B0armerkurj%C3%B6kull_glacier_lagoon.webm",
+              "author": "Jason Eppink",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+              "sourceWidth": 1280,
+              "sourceHeight": 720,
+              "startSec": 2,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Hverir",
@@ -5016,7 +6198,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fumarole_at_Hverir%2C_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Fumarole_at_Hverir%2C_Iceland.webm",
+              "author": "Jason Eppink",
+              "license": "CC BY 2.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+              "sourceWidth": 1280,
+              "sourceHeight": 720,
+              "startSec": 2,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           },
           {
             "name": "Goðafoss",
@@ -5058,7 +6254,21 @@
                 ],
                 "photoFit": "cover"
               }
-            ]
+            ],
+            "videoClip": {
+              "sourceUrl": "https://commons.wikimedia.org/wiki/File:Go%C3%B0afoss_waterfall_in_Northern_Iceland.webm",
+              "videoUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Go%C3%B0afoss_waterfall_in_Northern_Iceland.webm",
+              "author": "Alexander Grebenkov",
+              "license": "CC BY 3.0",
+              "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+              "sourceWidth": 1920,
+              "sourceHeight": 1080,
+              "startSec": 1,
+              "focus": [
+                0.5,
+                0.5
+              ]
+            }
           }
         ],
         "route": {
@@ -5117,7 +6327,7 @@
         "regionTitle": "ICELAND",
         "mapIntro": false,
         "cta": "SAVE THIS ROAD TRIP",
-        "editorialRevision": 9,
+        "editorialRevision": 10,
         "relief": true,
         "openingSubtitle": "ROUTE 1 · AROUND THE ISLAND",
         "closeLoop": true,
@@ -5168,8 +6378,8 @@
   "seriesId": "premium-travel-routes",
   "season": 1,
   "episodeNumber": 3,
-  "templateVersion": "3.0",
+  "templateVersion": "4.0",
   "productionStatus": "review",
   "thumbnailUrl": "thumbnails/premium-travel-routes-003-iceland-ring-road.svg",
-  "mediaRevision": "iceland-extended-six-stops-20261128"
+  "mediaRevision": "iceland-hybrid-r10-20261128"
 }
