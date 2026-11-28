@@ -1,0 +1,41 @@
+{
+  "version": "1.0",
+  "format": "9:16",
+  "fps": 60,
+  "durationSec": 22,
+  "referenceProject": "living-travel-posters-001-switzerland",
+  "templatePath": "series/living-travel-posters/template-v1.0.json",
+  "instructions": "Use existing parallax-cinema layout with parallax.variant living-travel-poster. One uninterrupted 22-second scene: 0–2 print, 2–5 awaken, 5–10 enter, 10–17 journey, 17–21 return, 21–22 hold. Original layered vector art, no AI imagery, no external footage. For a different destination create its own scene artwork and matching static cover before publishing. Use 1080×1920, 60fps, no narration, original procedural sound. Verify opening/end matching, typography safe zones, sound and exported MP4 in Studio. No automatic server rendering.",
+  "brandKit": {
+    "brandName": "LIVING TRAVEL POSTERS",
+    "primaryColor": "#254f4a",
+    "accentColor": "#b74432",
+    "backgroundColor": "#efe2bf",
+    "surfaceColor": "#638a83",
+    "textColor": "#f8edcf",
+    "mutedColor": "#c1aa7e",
+    "fontFamily": "Georgia"
+  },
+  "seriesId": "living-travel-posters",
+  "exampleScenes": [
+    {
+      "id": "alpine-poster",
+      "name": "01 / Print · Awakening · Journey · Return",
+      "durationSec": 22,
+      "layout": "parallax-cinema",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "SWITZERLAND",
+      "subheadline": "THE ALPINE EXPRESS",
+      "fullBleed": true,
+      "parallax": {
+        "shot": "cover",
+        "variant": "living-travel-poster",
+        "episode": 1,
+        "speed": 1
+      }
+    }
+  ],
+  "exampleCaptionStyle": null,
+  "exampleAudioTracks": []
+}

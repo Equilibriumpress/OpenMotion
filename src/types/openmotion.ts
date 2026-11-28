@@ -523,6 +523,7 @@ export interface SceneThreeExplainer {
   terrain?: { cols: number; rows: number; heights: number[] };
 }
 export interface SceneParallaxCinema {
+  variant?: 'living-travel-poster';
   shot: 'cover' | 'boarding' | 'fields' | 'fuji' | 'blossom' | 'station' | 'outro';
   speed?: number;
   episode?: number;

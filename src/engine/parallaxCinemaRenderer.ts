@@ -1,4 +1,5 @@
 import type { OpenMotionScene } from '../types/openmotion';
+import { renderLivingTravelPoster } from './livingTravelPoster';
 // Original deterministic 2.5D artwork. No assets, network, randomness or wall clock.
 type C = CanvasRenderingContext2D;
 const W=540,H=960,TAU=Math.PI*2;
@@ -46,6 +47,7 @@ function cabin(c:C,t:number,amount:number){c.save();c.translate(0,Math.sin(t*5)*
  c.restore();}
 function petals(c:C,t:number){for(let i=0;i<45;i++){const x=wrap(rand(i+90)*820-t*(55+rand(i+3)*75),820)-140;const y=160+wrap(rand(i+150)*650+t*(13+rand(i+18)*16),570);c.save();c.translate(x,y);c.rotate(t*(.4+rand(i))+i);c.globalAlpha=.35+rand(i+8)*.55;ellipse(c,0,0,3+rand(i)*5,2+rand(i+1)*2,'#f7c4c6');c.restore();}}
 export function renderParallaxCinema(c:C,w:number,h:number,s:OpenMotionScene,local:number,time:number){
+ if(s.parallax?.variant==='living-travel-poster'){renderLivingTravelPoster(c,w,h,s,local);return;}
  const shot=s.parallax?.shot??'fields';const u=clamp(local/Math.max(.5,s.durationSec));const speed=Math.max(0,Math.min(2,s.parallax?.speed??1));c.save();const scale=Math.max(w/W,h/H);c.translate((w-W*scale)/2,(h-H*scale)/2);c.scale(scale,scale);
  landscape(c,time,speed,shot);if(shot==='cover'||shot==='boarding'){rail(c,time);train(c,shot==='cover'?220+ease(u)*100:-230+ease(u)*790,841);if(shot==='boarding'){const a=ease((u-.35)/.65);if(a>.005)cabin(c,time,a);}}else{if(shot==='blossom')petals(c,time);cabin(c,time,1);}
  // Screen-space lighting and vignette. No postprocessing pass or image readback.
