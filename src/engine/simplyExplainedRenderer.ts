@@ -1,3 +1,4 @@
+import { renderInternetDiagram } from './simplyExplainedInternet';
 import { renderGpsDiagram } from './simplyExplainedGps';
 import { EDITORIAL_LAYOUT, EDITORIAL_LAYOUT_MARKER, QUALITY_LAYOUT, QUALITY_MARKER } from './simplyExplainedLayout';
 import { cartoonId, renderCartoon } from './cartoonPresenter';
@@ -97,15 +98,21 @@ export function renderSimplyExplained(c:C,width:number,height:number,scene:OpenM
 }
 
 /** Editorial 1.1 — fixed female host, one visual idea per scene, no page chrome. */
-function alexV11(c:C,t:number,speaking:boolean){
- c.save();c.translate(82,699);c.scale(.88,.88);
+function alexV11(c:C,t:number,speaking:boolean,scene?:OpenMotionScene){
+ const flat=!!scene?.doodle?.extras?.includes('alex-flat-v1');
+ const energy=scene?.doodle?.extras?.find(x=>x.startsWith('host-energy:'))?.slice(12)??'';
+ const sample=Number(energy[Math.min(energy.length-1,Math.floor(t*30))]??0)/9;
+ const u=clamp(t/Math.max(.001,scene?.durationSec??1)),gesture=flat?ease((u-.12)/.20)*(1-ease((u-.65)/.25)):1;
+ c.save();
+ if(flat){const h=QUALITY_LAYOUT.host;c.beginPath();c.rect(h.left,h.top,h.right-h.left,h.bottom-h.top);c.clip();c.translate(h.anchorX,h.anchorY);c.scale(h.scale,h.scale);}
+ else{c.translate(82,699);c.scale(.88,.88);}
  // Hair behind shoulders, softly tailored jacket, original asymmetric bob.
  path(c,'M-49 -20 Q-65 -74 -31 -89 Q8 -110 42 -82 Q62 -66 53 -12 L62 39 Q44 58 22 48 L-33 47 Q-66 39 -56 12Z','#49352F');
  path(c,'M-68 113 Q-69 53 -34 37 L-19 28 H19 L34 37 Q68 50 68 113 V124 H-68Z',teal);
  path(c,'M-25 34 L0 60 25 34 15 124 H-15Z',light);
  path(c,'M-34 40 L-19 74 -31 87 M34 40 L19 74 31 87','none','#587478',2);
  // A small articulated presenting gesture, never into caption territory.
- c.save();c.translate(47,62);c.rotate(-.53-.15*Math.sin(t*2.1));box(c,-11,-5,22,44,teal,10);c.translate(0,35);c.rotate(-1.02-.12*Math.sin(t*2.1));box(c,-10,-3,20,30,teal,9);oval(c,0,31,9,13,'#DFA77E');line(c,-3,26,-3,34,'#A66D52',1);c.restore();
+ c.save();c.translate(47,62);c.rotate(flat?-.12-.41*gesture:-.53-.15*Math.sin(t*2.1));box(c,-11,-5,22,44,teal,10);c.translate(0,35);c.rotate(flat?-.23-.79*gesture:-1.02-.12*Math.sin(t*2.1));box(c,-10,-3,20,30,teal,9);oval(c,0,31,9,13,'#DFA77E');line(c,-3,26,-3,34,'#A66D52',1);c.restore();
  box(c,-13,15,26,34,'#CE906D',8);
  oval(c,0,-23,41,52,'#E7B18D');
  path(c,'M-41 -21 Q-53 -73 -20 -86 Q18 -101 41 -67 Q53 -49 40 -17 L32 -45 Q7 -49 -6 -68 Q-18 -45 -37 -34Z','#49352F');
@@ -117,7 +124,7 @@ function alexV11(c:C,t:number,speaking:boolean){
  for(const x of [-19,19]){path(c,'M'+(x-8)+' -23 Q'+x+' -28 '+(x+8)+' -23','none','#49352F',1.8);if(!blink)oval(c,x,-22,3.2,3.7,ink);else line(c,x-7,-23,x+7,-23,ink,1.8);}
  path(c,'M0 -20 L-3 -7 H3','none','#AD7457',1.5);
  oval(c,-25,-7,7,3,'#D99A82');oval(c,25,-7,7,3,'#D99A82');
- const mouth=speaking?2+5*Math.abs(Math.sin(t*14)*Math.sin(t*5.4)):0;
+ const mouth=flat?(speaking&&sample>.08?2+5*sample:0):speaking?2+5*Math.abs(Math.sin(t*14)*Math.sin(t*5.4)):0;
  if(mouth>2){oval(c,0,9,9,mouth,'#8E4B47');line(c,-4,7,4,7,light,1.2);}else path(c,'M-9 8 Q0 16 9 8','none','#92544C',2);
  c.restore();
 }
@@ -132,7 +139,8 @@ function renderCleanEditorial(c:C,scene:OpenMotionScene,t:number){
  // Isolate diagram drawing from the host and subtitle row.
  c.save();if(strict){c.beginPath();c.rect(0,0,W,quality?QUALITY_LAYOUT.graphic.bottom:EDITORIAL_LAYOUT.graphic.bottom);c.clip();}
  if(quality){c.translate(256,0);c.scale(1+.012*ease(beat),.965+.008*ease(beat));c.translate(-256,0);}
- if(extras.includes('simply-explained-gps-v1'))renderGpsDiagram(c,scene,t);
+ if(extras.includes('simply-explained-internet-v1'))renderInternetDiagram(c,scene,t);
+ else if(extras.includes('simply-explained-gps-v1'))renderGpsDiagram(c,scene,t);
  else switch(shot){
  case 'cover':
   txt(c,'SIMPLY EXPLAINED',256,104,15,muted,700,'center');
@@ -190,6 +198,7 @@ function renderCleanEditorial(c:C,scene:OpenMotionScene,t:number){
  c.restore();
  if(cartoonId(scene))renderCartoon(c,scene,t);
  else if(extras.includes(ROCKETBOX_MARKER))renderRocketboxPresenter(c,scene,t);
+ else if(extras.includes('alex-flat-v1'))alexV11(c,t,speaking,scene);
  else if(extras.includes('simply-explained-v2'))renderAlexPresenter(c,scene,t);
  else alexV11(c,t,speaking);
 }

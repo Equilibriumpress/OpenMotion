@@ -75,3 +75,16 @@ Fact-check sources:
 - GPS.gov: https://www.gps.gov/trilateration
 
 Structural checks and simulated Canvas calls across all 1170 frame times passed. Actual audio synthesis, browser rendering, deployment and full-resolution MP4 review remain outstanding. Episode 01 and the existing series template are unchanged.
+
+
+## Episode 03 — How the Internet Really Works
+
+Project: `projects/simply-explained-003-how-the-internet-really-works/project.json`. Eight scenes, planned 43 seconds / 1290 frames at 30 fps, 1080×1920 target. Uses unchanged final template 3.3, the same English voice pipeline, and a per-project presenter variant: `alex-flat-v1` selects the original female 1.1 artwork, without the 2.5D face or body rig. It preserves the enlarged lower-left anchor and independent caption safe zone from 3.3. Mouth openness follows generated audio energy; simple articulated arm motion and blinking remain. The `simply-explained-v2` marker is retained solely for the existing speech metadata pipeline; explicit flat dispatch takes priority. Final-template validation accepts either the existing performance rig or the explicit flat variant. Export still requires generated speech data and Full HD verification.
+
+The new `simply-explained-internet-v1` graphics dispatch animates a phone message, packets, routers and a messaging service, an illustrative Atlantic route, underwater cable, protective layers, light pulses and reconstructed message. Original vectors only. Short upper-graphics transitions join adjacent illustrations, including a vertical dive and a fiber close-up; this is a stylized editorial journey, not a geographically accurate continuous camera flythrough or live packet trace. The previous composition is held during the 0.3-second scene transition; its authored duration is recorded in the module's sequence. No host or caption camera movement. Script avoids guaranteeing a subsecond delivery time and explicitly mentions servers.
+
+Fact-check sources:
+- Cloudflare Learning Center: https://www.cloudflare.com/en-gb/learning/network-layer/how-does-the-internet-work/
+- CFR Education: https://www.cfr.org/education/learn/reading/how-does-cyberspace-work
+
+Structural checks and simulated Canvas calls at all 1290 frame times passed, using synthetic speech energy. Actual generated speech, browser compilation/rendering, Pages deployment and exported MP4 remain unverified. Earlier episodes and frozen template files are unchanged. No new dependencies or extra test Actions.
