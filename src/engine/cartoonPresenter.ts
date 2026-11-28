@@ -24,7 +24,8 @@ export function applyCartoon(p:OpenMotionProject,id:CartoonId):OpenMotionProject
  return {...p,scenes:p.scenes.map(s=>s.doodle?{...s,doodle:{...s.doodle,extras:[...(s.doodle.extras??[]).filter(x=>x!=='presenter-lab-rocketbox'&&x!==CARTOON_MARKER&&!x.startsWith('character-preset:')&&!x.startsWith('cartoon-avatar:')),CARTOON_MARKER,'cartoon-avatar:'+id]}}:s)};
 }
 type Bind={mesh:THREE.Mesh;index:number;weight:number};
-type Rig={id:CartoonId;renderer:THREE.WebGLRenderer;stage:THREE.Scene;camera:THREE.PerspectiveCamera;model:THREE.Object3D;groups:Map<string,Bind[]>;head:THREE.Object3D;headBase:THREE.Quaternion;faceMeshes:THREE.Mesh[]};
+type Arm={upper:THREE.Object3D;lower:THREE.Object3D;hand:THREE.Object3D;upperBase:THREE.Quaternion;lowerBase:THREE.Quaternion;side:number};
+type Rig={arms:Arm[];id:CartoonId;renderer:THREE.WebGLRenderer;stage:THREE.Scene;camera:THREE.PerspectiveCamera;model:THREE.Object3D;groups:Map<string,Bind[]>;head:THREE.Object3D;headBase:THREE.Quaternion;faceMeshes:THREE.Mesh[]};
 let rig:Rig|undefined,loading:Promise<void>|undefined,error='';
 const clamp=(x:number,a=0,b=1)=>Math.max(a,Math.min(b,x));
 export function cartoonReady(id:CartoonId){return rig?.id===id;}
@@ -78,18 +79,30 @@ export async function prepareCartoon(id:CartoonId):Promise<void>{
    const headNode=vrm.humanoid?.humanBones?.find((x:{bone:string})=>x.bone==='head')?.node;
    if(!Number.isInteger(headNode))throw Error('Hoofdbot ontbreekt.');
    const head=await asset.parser.getDependency('node',headNode) as THREE.Object3D;
+   const arms:Arm[]=[];
+   for(const side of ['left','right']){
+    const ids=['UpperArm','LowerArm','Hand'].map(part=>vrm.humanoid?.humanBones?.find((x:{bone:string})=>x.bone===side+part)?.node);
+    if(!ids.every(Number.isInteger))continue;
+    const [upper,lower,hand]=await Promise.all(ids.map(n=>asset.parser.getDependency('node',n))) as THREE.Object3D[];
+    arms.push({upper,lower,hand,upperBase:upper.quaternion.clone(),lowerBase:lower.quaternion.clone(),side:side==='left'?1:-1});
+   }
    model.updateMatrixWorld(true);
    const bounds=new THREE.Box3().setFromObject(model),size=bounds.getSize(new THREE.Vector3()),pos=head.getWorldPosition(new THREE.Vector3());
    if(!Number.isFinite(size.y)||size.y<=.01)throw Error('Ongeldige VRM geometrie.');
    // Frame bust rather than T-pose arms; adapt to stylized head proportions.
-   const height=size.y*.38,target=pos.clone().add(new THREE.Vector3(0,size.y*.035,0));
+   const faceBox=new THREE.Box3(),vertex=new THREE.Vector3();
+   for(const k of ['blink','a'])for(const bind of groups.get(k)??[]){
+    const delta=bind.mesh.geometry.morphAttributes.position?.[bind.index];if(!delta)continue;
+    for(let i=0;i<delta.count;i++){if(Math.abs(delta.getX(i))+Math.abs(delta.getY(i))+Math.abs(delta.getZ(i))>1e-4)faceBox.expandByPoint(bind.mesh.localToWorld(bind.mesh.getVertexPosition(i,vertex)));}
+   }
+   const height=size.y*.40,target=faceBox.isEmpty()?pos.clone().add(new THREE.Vector3(0,size.y*.055,0)):faceBox.getCenter(new THREE.Vector3()).add(new THREE.Vector3(0,-size.y*.025,0));
    const camera=new THREE.PerspectiveCamera(26,160/198,Math.max(.001,size.y*.002),size.y*100);
    camera.position.copy(target).add(new THREE.Vector3(0,size.y*.008,height/(2*Math.tan(THREE.MathUtils.degToRad(13)))+size.z*.16));camera.lookAt(target);camera.updateProjectionMatrix();
    renderer=new THREE.WebGLRenderer({alpha:true,antialias:true,preserveDrawingBuffer:true});renderer.setPixelRatio(1);renderer.setClearColor(0,0);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.NoToneMapping;
    stage.add(new THREE.HemisphereLight('#FFF4E4','#6B7886',2.2));
    const key=new THREE.DirectionalLight('#FFF3E5',1.8);key.position.copy(target).add(new THREE.Vector3(-size.y,size.y,size.y*2));stage.add(key);
    const rim=new THREE.DirectionalLight('#DDEBFF',.8);rim.position.copy(target).add(new THREE.Vector3(size.y,size.y*.2,-size.y));stage.add(rim);
-   rig={id,renderer,stage,camera,model,groups,head,headBase:head.quaternion.clone(),faceMeshes};
+   rig={id,renderer,stage,camera,model,groups,head,headBase:head.quaternion.clone(),faceMeshes,arms};
   }catch(e){renderer?.dispose();error=e instanceof Error?e.message:String(e);throw e;}
  })().finally(()=>{loading=undefined;});
  return loading;
@@ -98,6 +111,32 @@ function cue(s:OpenMotionScene,k:string){return s.doodle?.extras?.find(x=>x.star
 function add(r:Rig,name:string,v:number){
  for(const b of r.groups.get(name)??[]){const a=b.mesh.morphTargetInfluences!;a[b.index]=clamp(a[b.index]+v*b.weight);}
 }
+// Aim the segment in world space rather than assuming a particular bone's local axis.
+function aimSegment(bone:THREE.Object3D,child:THREE.Object3D,target:THREE.Vector3){
+ if(!bone.parent)return;
+ bone.updateWorldMatrix(true,true);
+ const start=bone.getWorldPosition(new THREE.Vector3()),end=child.getWorldPosition(new THREE.Vector3());
+ const dir=end.sub(start);if(dir.lengthSq()<1e-8)return;
+ const q=new THREE.Quaternion().setFromUnitVectors(dir.normalize(),target.normalize());
+ const world=bone.getWorldQuaternion(new THREE.Quaternion()).premultiply(q);
+ const parent=bone.parent.getWorldQuaternion(new THREE.Quaternion()).invert();
+ bone.quaternion.copy(parent.multiply(world));bone.updateWorldMatrix(true,true);
+}
+function poseArms(r:Rig,shot:string,u:number){
+ for(const arm of r.arms){
+  arm.upper.quaternion.copy(arm.upperBase);arm.lower.quaternion.copy(arm.lowerBase);
+ }
+ r.model.updateMatrixWorld(true);
+ // Small presentation gesture on the screen-right arm; no T-pose.
+ for(const arm of r.arms){
+  const origin=arm.upper.getWorldPosition(new THREE.Vector3()),root=r.head.getWorldPosition(new THREE.Vector3());
+  const side=Math.sign(origin.x-root.x)||arm.side;
+  const gesture=side>0&&shot!=='cover'&&shot!=='limits'?Math.sin(Math.PI*u)*(.65+.2*Math.sin(u*Math.PI*4)):0;
+  aimSegment(arm.upper,arm.lower,new THREE.Vector3(side*(.15+gesture*.45),-1,.10+gesture*.25));
+  aimSegment(arm.lower,arm.hand,new THREE.Vector3(side*(.12+gesture*.28),-1+gesture*1.35,.20+gesture*.55));
+ }
+}
+
 const shapes=['','a','i','o','u','e','i','a'];
 export function renderCartoon(c:CanvasRenderingContext2D,s:OpenMotionScene,t:number){
  const id=cartoonId(s);
@@ -111,6 +150,7 @@ export function renderCartoon(c:CanvasRenderingContext2D,s:OpenMotionScene,t:num
  const shot=cue(s,'shot'),u=clamp(t/Math.max(.001,s.durationSec)),look=shot==='cover'||shot==='limits'?0:Math.sin(Math.PI*u)*.16;
  const q=new THREE.Quaternion().setFromEuler(new THREE.Euler(.025*Math.sin(t*2.1),look,.035*Math.sin(t*1.35)));
  r.head.quaternion.copy(r.headBase).multiply(q);
+ poseArms(r,shot,u);
  const current=Number(mouth[Math.min(i,Math.max(0,mouth.length-1))])||0;
  if(a>.06&&current>0){
   let total=0;const w:Record<string,number>={};
