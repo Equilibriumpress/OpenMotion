@@ -17,3 +17,7 @@ Official help:
 - https://support.google.com/youtube/answer/10343433
 - https://support.google.com/youtube/answer/1722171
 - https://support.google.com/youtube/answer/57404
+
+## TikTok post captions
+
+The same panel includes an editable TikTok post caption, separate from timed video subtitles. All ten Human Side episodes have a short English proposal tailored to the story; other portrait projects use their own title as a starting point. Captions default to plain text without hashtags. Use Copy TikTok-caption and paste into TikTok when uploading. Reset the TikTok proposal independently or edit and save locally in the browser. Existing saved YouTube metadata is retained and gains a default TikTok caption on loading if the field is absent. Both ZIP variants include tiktok-caption.txt and the tiktokCaption field in youtube-metadata.json. The video itself, rendering, and verification are unchanged. Upload remains manual. The 2200-character editor cap is a local drafting choice, not a claim about TikTok's current platform limit.
