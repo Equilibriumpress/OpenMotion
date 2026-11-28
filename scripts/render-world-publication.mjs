@@ -44,6 +44,7 @@ try {
       await page.goto('http://127.0.0.1:4179/world-render-preview.html');
       await page.evaluate(async ({p,width,height})=>{
         const {renderOpenMotionFrame}=await import('/src/engine/openMotionRenderer.ts');
+        const {assertFinalTimeline}=await import('/src/engine/exportProvenance.ts');assertFinalTimeline(p);
         const c=document.querySelector('canvas');c.width=width;c.height=height;
         const ctx=c.getContext('2d',{alpha:false});
         await document.fonts.ready;
