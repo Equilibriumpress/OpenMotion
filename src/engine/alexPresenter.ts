@@ -26,18 +26,23 @@ function pose(keys:Key[],u:number):Pose{
  return {yaw:clamp(q(1),-1,1),tilt:clamp(q(2),-1,1),gazeX:clamp(q(3),-1,1),gazeY:clamp(q(4),-1,1),brow:clamp(q(5),-1,1),smile:clamp(q(6),-1,1),arm:clamp(q(7)),gesture:clamp(q(8))};
 }
 /** A controlled, deliberately stylized 2.5D face: yaw changes both silhouette and feature placement. */
-function face(c:C,p:Pose,blink:number,amp:number,viseme:number){
+type HairMotion={sweep:number;lift:number;turn:number};
+const STILL_HAIR:HairMotion={sweep:0,lift:0,turn:0};
+function face(c:C,p:Pose,blink:number,amp:number,viseme:number,h:HairMotion=STILL_HAIR){
  const yaw=p.yaw,shift=yaw*13,near=1+.20*yaw,far=1-.28*yaw;
  c.save();c.translate(0,-1);c.rotate(p.tilt*.10);
- path(c,'M-45 16 Q-64 -4 -59 -49 Q-58 -84 -26 -92 Q7 -109 37 -84 Q59 -66 56 -26 L59 42 Q46 54 28 45 L-33 48 Q-61 36 -52 17Z',hair);
- path(c,'M-51 -34 Q-54 -70 -31 -84 Q-9 -98 17 -91 Q-12 -83 -33 -52 Q-42 -38 -51 -34Z','#654B40');
- path(c,'M45 -65 Q59 -37 47 20 L52 40 Q41 48 34 40 L37 -25Z','#3E2D2A');
+ // Hair roots stay on the skull; only the loose ends and side volumes deform.
+ const sw=h.sweep,li=h.lift,turn=h.turn;
+ path(c,`M-45 16 Q-64 -4 -59 -49 Q-58 -84 -26 -92 Q7 -109 37 -84 Q59 -66 56 -26 Q${58+sw*.65} 12 ${59+sw} ${42+li} Q${46+sw} ${54+li} ${28+sw*.7} ${45+li*.7} L${-33+sw*.7} ${48-li*.35} Q${-61+sw} ${36-li*.5} -52 17Z`,hair);
+ path(c,`M-51 -34 Q-54 -70 -31 -84 Q-9 -98 17 -91 Q-12 -83 -33 -52 Q${-42+sw*.25} -38 -51 -34Z`,'#654B40');
+ path(c,`M45 -65 Q59 -37 ${47+sw*.45} 20 L${52+sw*.8} ${40+li} Q${41+sw*.8} ${48+li} ${34+sw*.5} ${40+li*.6} L37 -25Z`,'#3E2D2A');
  oval(c,-39+shift*.2,-10,6*far,10,shadow);oval(c,39+shift*.2,-10,6*near,10,skin);
  const sx=shift;
  path(c,'M'+(-39+sx*.3)+' -43 Q'+(-35+sx)+' -77 '+sx+' -76 Q'+(38+sx*.4)+' -72 '+(42+sx*.25)+' -39 Q'+(43+sx*.15)+' -13 '+(31+sx*.5)+' 7 Q'+(14+sx)+' 32 '+sx+' 31 Q'+(-18+sx)+' 28 '+(-32+sx*.5)+' 5 Q'+(-42+sx*.3)+' -16 '+(-39+sx*.3)+' -43Z',skin);
  path(c,'M'+(26+sx*.5)+' -55 Q'+(42+sx*.25)+' -39 '+(37+sx*.2)+' -12 Q'+(29+sx*.5)+' 16 '+sx+' 31 Q'+(18+sx)+' 10 '+(24+sx)+' -8Z','#D99F80');
- path(c,'M-41 -27 Q-51 -69 -23 -86 Q4 -103 33 -83 Q52 -69 44 -34 L35 -47 Q11 -50 -5 -72 Q-17 -49 -38 -35Z',hair);
- path(c,'M-33 -67 Q-18 -86 1 -87 M10 -86 Q29 -81 37 -66','none','#826052',1.8);
+ // Front fringe follows the face yaw, with delayed tips rather than a detached hair cap.
+ path(c,`M${-41+turn*.22} -27 Q-51 -69 -23 -86 Q4 -103 33 -83 Q52 -69 ${44+turn*.3+sw*.25} ${-34+li*.25} L${35+turn*.48} -47 Q${11+turn*.55} -50 ${-5+turn*.45} -72 Q${-17+turn*.5} -49 ${-38+turn*.38+sw*.22} ${-35-li*.18}Z`,hair);
+ path(c,`M-33 -67 Q-18 -86 1 -87 M10 -86 Q29 -81 ${37+turn*.2} -66`,'none','#826052',1.8);
  oval(c,-40+shift*.25,1,3.2,3.2,'#CA9A54');oval(c,40+shift*.25,1,3.2,3.2,'#CA9A54');
  // Asymmetric eye scales, eyelids and a shared gaze target.
  for(const side of [-1,1]){
@@ -66,13 +71,13 @@ function mouth(c:C,x:number,y:number,amp:number,v:number,smile:number){
  c.restore();
 }
 // Shoulder/elbow/wrist chain; silhouette hand with fingers, rather than a detached oval.
-function arm(c:C,p:Pose,side:number){
+function arm(c:C,p:Pose,side:number,chain?:{shoulder:number;elbow:number;wrist:number;rootX:number;rootY:number}){
  const raised=side>0?p.arm:0,gesture=p.gesture;
- c.save();c.translate(side*45,52);
- c.rotate(side*(-.12-raised*.82));path(c,'M-12 -7 Q0 -11 12 -5 L13 41 Q0 49 -12 41Z',jacket);
- path(c,'M-8 7 L-5 37','none','#537075',1.5);c.translate(0,39);c.rotate(side*(-.23-raised*1.36));
+ c.save();c.translate(side*45+(chain?.rootX??0),52+(chain?.rootY??0));
+ c.rotate(side*(-.12-(chain?.shoulder??raised)*.82));path(c,'M-12 -7 Q0 -11 12 -5 L13 41 Q0 49 -12 41Z',jacket);
+ path(c,'M-8 7 L-5 37','none','#537075',1.5);c.translate(0,39);c.rotate(side*(-.23-(chain?.elbow??raised)*1.36));
  path(c,'M-11 -7 Q0 -11 11 -7 L10 29 Q0 33 -10 29Z',jacket);
- path(c,'M-9 23 L9 23 L9 29 L-9 29Z','#4E686A');c.translate(0,29);c.rotate(side*(raised*.22));
+ path(c,'M-9 23 L9 23 L9 29 L-9 29Z','#4E686A');c.translate(0,29);c.rotate(side*((chain?.wrist??raised)*.22));
  if(side>0&&gesture>.72){
   path(c,'M-7 0 L-8 12 Q-6 20 1 19 L6 15 L7 3 L7 -8 Q5 -11 3 -8 L1 5 L-2 2 L-5 0Z',skin,shadow,.7);
   path(c,'M-4 9 Q0 6 3 10','none',shadow,.8);
@@ -91,6 +96,7 @@ export function renderAlexPresenter(c:C,scene:OpenMotionScene,t:number){
  const a=d.energy.length?mix(Number(d.energy[i])||0,Number(d.energy[j])||0,sample-i)/9:0;
  const v=d.mouth.length?Number(d.mouth[Math.min(i,d.mouth.length-1)])||0:0;
  let blink=0;for(const b of d.blink)blink=Math.max(blink,1-clamp(Math.abs(t-b)/.10));
+ if(scene.doodle?.extras?.includes('alex-26')){renderBody26(c,scene,t,p,d.keys,blink,a,v);return;}
  c.save();c.translate(82,699);c.scale(.88,.88);c.translate(0,Math.sin(t*2)*.7);
  // The lower-left silhouette and head remain in a fixed safe region.
  path(c,'M-66 105 Q-65 61 -37 43 L-18 29 H18 L37 43 Q65 62 66 105 V124 H-66Z',jacket);
@@ -102,5 +108,50 @@ export function renderAlexPresenter(c:C,scene:OpenMotionScene,t:number){
  path(c,'M-10 21 L10 21 L12 33 Q0 43 -12 33Z',skin);
  arm(c,p,-1);arm(c,p,1);
  face(c,p,blink,a,v);
+ c.restore();
+}
+
+/** AX-26: deterministic secondary motion sampled from the authored pose curve.
+ * No frame history: scrubbing and publication rendering evaluate the same geometry.
+ */
+function renderBody26(c:C,scene:OpenMotionScene,t:number,p:Pose,keys:Key[],blink:number,a:number,v:number){
+ const duration=Math.max(.001,scene.durationSec);
+ const at=(lag:number)=>pose(keys,clamp((t-lag)/duration));
+ const b=at(.08),neck=at(.035),late=at(.14),earlier=at(.24);
+ const shot=scene.doodle?.extras?.find(x=>x.startsWith('shot:'))?.slice(5);
+ const calm=shot==='limits'?.65:shot==='cover'?.55:1;
+ // Fade idle oscillation at cuts; authored keyframes still control the pose.
+ const edge=smooth(t/.35)*smooth((duration-t)/.35);
+ const breath=Math.sin(t*Math.PI*2/4.1)*edge*calm;
+ const sway=Math.sin(t*Math.PI*2/6.2)*edge*calm;
+ const bodyYaw=b.yaw*.30,bodyTilt=b.tilt*.30-b.arm*.12;
+ const shoulderLift=b.arm*5.4,headX=p.yaw*6.2,headY=-breath*1.5-neck.arm*1.2;
+ const hairMotion:HairMotion={
+  sweep:clamp((late.yaw-p.yaw)*38+(earlier.yaw-late.yaw)*12+(late.tilt-p.tilt)*15+sway*1.4,-6,6),
+  lift:clamp((late.tilt-p.tilt)*12+(late.arm-p.arm)*5+breath*.8,-3.5,3.5),
+  turn:late.yaw*9
+ };
+ c.save();c.translate(82,699);c.scale(.88,.88);
+ // Pivot at the waist, leaving the bottom anchor stable while shoulders follow head and arm.
+ c.translate(0,124);c.rotate(bodyTilt*.14+sway*.018);c.transform(1-bodyYaw*.10,0,bodyYaw*.11,1+breath*.023,0,0);c.translate(0,-124);
+ const lift=shoulderLift+breath*1.2,shift=bodyYaw*5;
+ // Continuous jacket silhouette includes both moving shoulder sockets.
+ path(c,`M-66 105 Q-65 ${61-breath} ${-37+shift} ${43+lift*.28} L${-18+shift} ${29-breath} H${18+shift} L${37+shift} ${43-lift} Q65 ${62-lift} 66 105 V124 H-66Z`,jacket);
+ path(c,`M-64 92 Q-56 ${58+lift*.25} ${-36+shift} ${43+lift*.28} L${-20+shift} ${37-breath} L-19 124 H-66Z`,'#304D52');
+ path(c,`M${38+shift} ${43-lift} Q65 ${62-lift} 66 105 V124 H49 L47 75Z`,'#1D3438');
+ const shirt=bodyYaw*4,fold=breath*1.5+late.arm*1.5;
+ path(c,`M${-24+shirt} ${34-breath} L${shirt} ${58+fold} ${24+shirt} ${34-breath-lift*.45} L${15+shirt*.4} 124 H-15Z`,light);
+ path(c,`M${-36+shift} ${43+lift*.28} L${-20+shirt} ${74+fold} -31 ${87+fold*.5} -25 124 M${36+shift} ${43-lift} L${20+shirt} ${74-lift*.4+fold} 31 ${87+fold} 25 124`,'none','#678083',1.4);
+ path(c,`M-52 ${83+fold} Q-44 ${88+fold} -38 99 M53 ${77-lift*.55} Q46 ${85+fold} 43 97`,'none','#466269',1.05);
+ // Arm roots follow the jacket; elbow and wrist follow with 60/160 ms offsets from the shoulder.
+ for(const side of [-1,1]){
+  const support=b.arm*.12;
+  const shoulder=side>0?b.arm:support,elbow=side>0?late.arm:support*.6,wrist=side>0?earlier.arm:0;
+  arm(c,p,side,{shoulder,elbow,wrist,rootX:shift*.65,rootY:side>0?-lift:lift*.28});
+ }
+ // Neck connects moving shoulders to the actual translated head; no gap at the collar.
+ path(c,`M${headX-13} ${18+headY} Q${headX-12} ${28+headY} ${shirt-19} ${38-breath} Q${shirt} ${51+fold*.3} ${shirt+19} ${38-breath} Q${headX+12} ${28+headY} ${headX+13} ${18+headY}Z`,shadow);
+ path(c,`M${headX-10} ${21+headY} L${headX+10} ${21+headY} L${shirt+12} ${33-breath} Q${shirt} 43 ${shirt-12} ${33-breath}Z`,skin);
+ c.save();c.translate(headX,headY);c.rotate(-bodyTilt*.045);face(c,p,blink,a,v,hairMotion);c.restore();
  c.restore();
 }
