@@ -654,7 +654,7 @@
       "id": "living-travel-posters",
       "title": "Living Travel Posters",
       "description": "Vintage-inspired travel illustrations brought to life with procedural parallax and original sound.",
-      "activeVersion": "2.0",
+      "activeVersion": "3.0",
       "versions": [
         {
           "version": "1.0",
@@ -683,6 +683,25 @@
           "referenceProject": "living-travel-posters-001-switzerland",
           "templatePath": "series/living-travel-posters/template-v2.0.json",
           "instructions": "Poster Cinema 2.0: design the static print first, using original reference-informed vector paths, signature vehicle or architecture, coherent directional shading, destination-specific type, ink texture, and matching opening thumbnail. Use existing parallax-cinema layout, parallax.variant living-travel-poster, posterVersion 2.0 and destination-specific art and audio. Keep 22 seconds (2s opening, 3s awakening, 5s entry, 7s journey, 4s return, 1s hold), 1080x1920, 60fps, no voice. Do not copy previous scenery to new destinations. Inspect poster at phone size, 6 timeline samples, seam, and MP4 audio before approval. No AI imagery, external footage, new renderer, or extra Actions.",
+          "brandKit": {
+            "brandName": "LIVING TRAVEL POSTERS",
+            "primaryColor": "#254f4a",
+            "accentColor": "#b74432",
+            "backgroundColor": "#efe2bf",
+            "surfaceColor": "#638a83",
+            "textColor": "#f8edcf",
+            "mutedColor": "#c1aa7e",
+            "fontFamily": "Georgia"
+          }
+        },
+        {
+          "version": "3.0",
+          "format": "9:16",
+          "fps": 60,
+          "durationSec": 22,
+          "referenceProject": "living-travel-posters-001-switzerland",
+          "templatePath": "series/living-travel-posters/template-v3.0.json",
+          "instructions": "Poster Cinema 3.0 Master Edition: create a destination-specific static print first, with original vector lettering, hand-designed silhouette and signature object, directional light and material-specific texture. Use original vector contours and gradients, perspective planes, coherent occlusion, water/mist/particle masks, deterministic motion and bounded resolution-aware Canvas caching. Use existing parallax-cinema layout, parallax.variant living-travel-poster, posterVersion 3.0, destination-specific MasterArt and original audio. 22s, 1080x1920, 60fps, no narration. Author and inspect the new destination preset before registration; do not silently reuse the Swiss artwork. Compare SVG opening and actual video frames at 0,3,7,12,17,21.5 and export MP4 before approval. No AI imagery, external footage, new rendering backend, dependencies or extra Actions.",
           "brandKit": {
             "brandName": "LIVING TRAVEL POSTERS",
             "primaryColor": "#254f4a",
