@@ -1,3 +1,4 @@
+import { rendererLabel, downloadVerifiedZip } from '../engine/exportProvenance';
 import { EMOTIONS, DEFAULT_PERFORMANCE, PERFORMANCE_MARKER, performanceFor, sanitizePerformance, withPerformance, type AlexPerformance } from '../engine/alexPerformance';
 import { CARTOONS, CARTOON_MARKER, applyCartoon, cartoonReady, prepareCartoon, type CartoonId } from '../engine/cartoonPresenter';
 import { PEOPLE, TOPS, MOVES, EXPRESSIONS, DEFAULT_CHARACTER, sanitizeCharacter, characterFromScene, applyCharacter, characterThumb, type CharacterPreset } from '../engine/characterPresets';
@@ -98,6 +99,7 @@ export function PresenterLab({projects,onUpdateProject,initialCustom=false,initi
    </div>
    <div className="space-y-4 rounded-xl border bg-white p-4">
     <div><h2 className="font-semibold">{MODES.find(m=>m.id===mode)?.name}</h2><p className="mt-1 text-sm text-slate-600">De preview gebruikt alleen de originele voice-over. De MP4-proef gebruikt ook de bestaande muziekmix.</p></div>
+    {variant&&<p className="text-xs text-teal-800">Template {variant.templateVersion} · {rendererLabel(variant)} · build {variant.buildRevision?.slice(0,8)??'lokaal'} · {duration.toFixed(2)} s</p>}
     {mode==='performance'&&selected&&<div className="space-y-4 rounded-xl bg-slate-50 p-4">
      <h3 className="text-sm font-semibold">Regie per scène</h3>
      <label className="block text-xs font-medium">Scène<select disabled={busy} className="mt-1 block w-full rounded border p-2 text-sm" value={selected.id} onChange={e=>seekScene(e.target.value)}>{source?.scenes.map((s,i)=><option key={s.id} value={s.id}>{i+1}. {s.name}</option>)}</select></label>
@@ -134,6 +136,7 @@ export function PresenterLab({projects,onUpdateProject,initialCustom=false,initi
     <div className="border-t pt-4"><h3 className="font-semibold">MP4-proef</h3><p className="mt-1 text-xs text-slate-500">1080 × 1920 · 30 fps · H.264/AAC. Alleen een experiment, geen automatische publicatie.</p>
     <div className="mt-3 flex flex-wrap gap-2"><button disabled={!ready||!voice||busy||((mode==='rocketbox'||mode==='custom'||mode==='cartoon'||mode==='performance')&&!energyAvailable)} className="rounded-lg border px-3 py-2 text-sm disabled:opacity-40" onClick={render}>Render proef-MP4</button>{busy&&<button className="rounded-lg border px-3 py-2 text-sm" onClick={()=>cancel.current?.abort()}>Stop</button>}</div>
     {progress&&<p role="status" className="mt-2 text-xs">{progress.phase} · {Math.round(progress.percent)}% · {progress.encoderLabel}</p>}
+    {progress?.verification&&<div className="space-y-2 text-xs"><p>{progress.verification.width} × {progress.verification.height} · {progress.verification.fps} fps · {progress.verification.actualDurationSec.toFixed(2)} s · template {progress.verification.templateVersion}</p><button className="rounded border px-3 py-2" onClick={()=>void downloadVerifiedZip(progress).catch(e=>setError(String(e)))}>Download origineel + exportbewijs (ZIP)</button></div>}
     {progress?.outputUrl&&<a href={progress.outputUrl} download={progress.fileName} className="mt-2 inline-block text-sm font-semibold text-teal-700 underline">Download proefbestand</a>}
     </div>
     {error&&<p role="alert" className="break-words rounded-lg bg-amber-50 p-3 text-sm text-amber-900">{error}</p>}
