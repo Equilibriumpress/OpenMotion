@@ -54,6 +54,7 @@ export function episodePrompt(s: SeriesDefinition, projects: OpenMotionProject[]
     'Maak een nieuwe OpenMotion-aflevering voor '+s.title+'. Onderwerp: [vul onderwerp in].',
     'Lees eerst https://github.com/'+repo+'/blob/main/docs/SERIES_WORKFLOW.md en series/catalog.json.',
     'Lees '+t.templatePath+' (versie '+t.version+'). '+(t.referenceProject ? 'Bestudeer projects/'+t.referenceProject+'/project.json als referentie.' : 'Deze serie heeft nog geen goedgekeurd voorbeeld. Ontwikkel een proefaflevering.'),
+    'Lees docs/MOTION_WORKFLOW.md en motion-packages/index.json. Selecteer de package voor exact deze serie en templateversie. Lees MOTION.md, DESIGN.md en SKILL.md. Bij ontbrekende package: gebruik native template en meld het. Maak een shotplan met tijd, camera, overgang, audio en leesmoment. Leg review van de werkelijke MP4 vast; geen claims zonder playback.',
     t.instructions,
     'Gebruik deze productie-instellingen: '+JSON.stringify({format:t.format,fps:t.fps,durationSec:t.durationSec,brandKit:t.brandKit}),
     'Controleer de actuele projecten en het vrije afleveringsnummer vóór commit. Voeg aan project.json toe: '+JSON.stringify({kind:'video',seriesId:s.id,season:ep.season,episodeNumber:ep.episodeNumber,templateVersion:t.version,productionStatus:'review'}),
@@ -61,5 +62,5 @@ export function episodePrompt(s: SeriesDefinition, projects: OpenMotionProject[]
   ].join('\n\n');
 }
 export function newSeriesPrompt(repo:string) {
-  return 'Maak in '+repo+' een nieuwe OpenMotion-serie. Lees docs/SERIES_WORKFLOW.md en series/catalog.json. Voeg een unieke serie-ID, titel, beschrijving, versie 1.0, templatePath, formaat, fps, richtduur, huisstijl en productie-instructies toe. Maak een versiegebonden template in series/<id>/template-v1.0.json en registreer de eerste aflevering onder projects/<slug>/project.json met seriesId, season, episodeNumber, templateVersion en kind. Bestaande projecten en workflow behouden. Onderwerp: [vul in].';
+  return 'Maak in '+repo+' een nieuwe OpenMotion-serie. Lees docs/SERIES_WORKFLOW.md en series/catalog.json. Voeg een unieke serie-ID, titel, beschrijving, versie 1.0, templatePath, formaat, fps, richtduur, huisstijl en productie-instructies toe. Maak een versiegebonden template in series/<id>/template-v1.0.json en registreer de eerste aflevering onder projects/<slug>/project.json met seriesId, season, episodeNumber, templateVersion en kind. Maak ook een versiegebonden knowledge-only Motion Package volgens docs/MOTION_WORKFLOW.md en registreer die in motion-packages/index.json. Bestaande projecten en workflow behouden. Onderwerp: [vul in].';
 }

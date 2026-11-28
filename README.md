@@ -104,3 +104,7 @@ Open `#character-studio` to customize one of 20 licensed Rocketbox models, modul
 ## Cartoon Cinema
 
 Open `#cartoon-cinema` to compare three stylized CC0 Polygonal Mind 3D characters with the existing Alex and Rocketbox presenter. Uses the same pilot timeline and manual MP4 exporter. See [Cartoon Cinema](docs/cartoon-cinema.md) for sources, VRM support and outstanding runtime checks.
+
+## Motion Library
+
+Open `#motion-library` voor versiegebonden Motion Packages, bronverwijzingen, reviewprompt en hash-gecontroleerde ZIP-download. Zie [Motion workflow](docs/MOTION_WORKFLOW.md). Geen nieuwe renderer of exportpipeline.

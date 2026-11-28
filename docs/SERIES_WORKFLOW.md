@@ -67,3 +67,7 @@ gebruikt nooit meer de eerste aflevering als cover. Maak bij elke nieuwe serie
 representatieve cover-art in de eigen huisstijl, onafhankelijk van een specifieke
 aflevering. Bewaar coverbestanden direct in GitHub; geen video-rendering, nieuwe
 media-downloads of aparte buildstappen nodig. Afleveringsthumbnails zijn apart.
+
+## Motion Package
+
+Lees [MOTION_WORKFLOW.md](MOTION_WORKFLOW.md). Gebruik de versiegebonden knowledge-only package voor regie en review. Native template JSON blijft uitvoeringsbron. Registreer een nieuwe package bij een nieuwe templateversie. Bestaande versies blijven intact.
