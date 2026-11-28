@@ -1,3 +1,4 @@
+import { EDITORIAL_LAYOUT } from './simplyExplainedLayout';
 import { OpenMotionProject, TimedCaption, TimedCaptionWord } from '../types/openmotion';
 
 /**
@@ -26,11 +27,16 @@ export function renderTimedCaptions(
       }));
 
   const scale = width / 1080;
-  const editorial = project.seriesId === 'simply-explained' && (project.templateVersion === '1.1' || project.templateVersion === '2.0' || project.templateVersion === '2.6' || project.templateVersion === '3.0');
-  const centerX = width * (editorial ? .60 : .5);
-  const maxWidth = width * (editorial ? .42 : .80);
+  const editorial = project.seriesId === 'simply-explained' && (project.templateVersion === '1.1' || project.templateVersion === '2.0' || project.templateVersion === '2.6' || project.templateVersion === '2.7' || project.templateVersion === '3.0');
+  const strict = project.seriesId === 'simply-explained' && project.templateVersion === '2.7';
+  const zone=EDITORIAL_LAYOUT.caption;
+  const sx=width/EDITORIAL_LAYOUT.width,sy=height/EDITORIAL_LAYOUT.height;
+  const padX=(editorial||strict?14:25)*scale,padY=(editorial||strict?11:19)*scale;
+  const centerX = strict ? (zone.left+zone.right)*sx/2 : width * (editorial ? .60 : .5);
+  const maxWidth = strict ? (zone.right-zone.left)*sx-2*padX-6*scale : width * (editorial ? .42 : .80);
   let fontPx = Math.max(20 * scale, Math.min(82 * scale, (caption.fontSizePx ?? 49) * scale));
   ctx.save();
+  if(strict){ctx.beginPath();ctx.rect(zone.left*sx,zone.top*sy,(zone.right-zone.left)*sx,(zone.bottom-zone.top)*sy);ctx.clip();}
   ctx.textAlign = 'left';
   ctx.textBaseline = 'middle';
   const setFont = () => {
@@ -38,12 +44,14 @@ export function renderTimedCaptions(
   };
   setFont();
 
+  // Match the exact per-word advance used for painting, including spaces.
+  const measure=(line:TimedCaptionWord[])=>line.reduce((n,w,i)=>n+ctx.measureText(w.text).width+(i?ctx.measureText(' ').width:0),0);
   const wrap = (): TimedCaptionWord[][] => {
     const lines: TimedCaptionWord[][] = [];
     let line: TimedCaptionWord[] = [];
     for (const word of words) {
       const next = line.length ? line.map(item => item.text).join(' ') + ' ' + word.text : word.text;
-      if (line.length && ctx.measureText(next).width > maxWidth) {
+      if (line.length && (strict?measure([...line,word]):ctx.measureText(next).width) > maxWidth) {
         lines.push(line);
         line = [word];
       } else {
@@ -60,14 +68,20 @@ export function renderTimedCaptions(
     setFont();
     lines = wrap();
   }
+  if(strict){
+    const availableHeight=2*Math.min(zone.centerY-zone.top,zone.bottom-zone.centerY)*sy-2*padY-6*scale;
+    // Fit long single words as well as multi-line cues. Do not truncate words.
+    while((lines.length*fontPx*1.38>availableHeight||lines.some(line=>measure(line)>maxWidth))&&fontPx>scale){
+      fontPx*=.94;setFont();lines=wrap();
+    }
+  }
   const lineHeight = fontPx * 1.38;
-  const position = editorial ? .765 : Math.max(.23, Math.min(.78, caption.position ?? .76));
+  const position = strict ? zone.centerY/EDITORIAL_LAYOUT.height : editorial ? .765 : Math.max(.23, Math.min(.78, caption.position ?? .76));
   const totalHeight = lines.length * lineHeight;
   const top = height * position - totalHeight / 2;
-  const maxLineWidth = Math.max(...lines.map(line => ctx.measureText(line.map(w => w.text).join(' ')).width));
+  const maxLineWidth = Math.max(...lines.map(line => strict?measure(line):ctx.measureText(line.map(w => w.text).join(' ')).width));
   if (caption.style !== 'minimal') {
     ctx.fillStyle = 'rgba(12, 28, 32, .83)';
-    const padX = (editorial ? 14 : 25) * scale, padY = (editorial ? 11 : 19) * scale;
     ctx.beginPath();
     ctx.roundRect(
       centerX - maxLineWidth / 2 - padX,
@@ -80,7 +94,7 @@ export function renderTimedCaptions(
   }
   lines.forEach((line, i) => {
     const text = line.map(item => item.text).join(' ');
-    let x = centerX - ctx.measureText(text).width / 2;
+    let x = centerX - (strict?measure(line):ctx.measureText(text).width) / 2;
     const y = top + (i + .5) * lineHeight;
     line.forEach((word, j) => {
       const glyph = word.text;
