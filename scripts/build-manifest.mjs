@@ -116,13 +116,15 @@ function prepareProject(p) {
         p.captions=cues.map(c=>({...c,startSec:Math.max(.85,c.startSec),position:cinematic ? .75 : .78,fontSizePx:cinematic?43:45})).filter(c=>c.endSec>c.startSec);
       }
       if(p.scenes.some(s=>s.doodle?.extras?.includes('simply-explained-v1'))){
+        const clean=p.templateVersion==='1.1';
+        const chunkSize=clean?3:5;
         p.captions=cues.flatMap(c=>{
           const words=String(c.text??'').trim().split(/\s+/).filter(Boolean);
           const parts=[];
-          for(let i=0;i<words.length;i+=5){
+          for(let i=0;i<words.length;i+=chunkSize){
             const startSec=c.startSec+(c.endSec-c.startSec)*i/words.length;
-            const endSec=c.startSec+(c.endSec-c.startSec)*Math.min(words.length,i+5)/words.length;
-            if(endSec>startSec)parts.push({text:words.slice(i,i+5).join(' '),startSec,endSec,style:'minimal',position:.79,fontSizePx:48});
+            const endSec=c.startSec+(c.endSec-c.startSec)*Math.min(words.length,i+chunkSize)/words.length;
+            if(endSec>startSec)parts.push({text:words.slice(i,i+chunkSize).join(' '),startSec,endSec,style:clean?'karaoke':'minimal',position:clean ? .765 : .79,fontSizePx:clean?52:48,...(clean?{color:'#F4B89A'}:{})});
           }
           return parts;
         });

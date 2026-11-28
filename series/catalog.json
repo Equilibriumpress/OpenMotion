@@ -704,8 +704,8 @@
     {
       "id": "simply-explained",
       "title": "Simply Explained",
-      "description": "Original animated editorial explainers with recurring presenter Alex.",
-      "activeVersion": "1.0",
+      "description": "Clean animated editorial explainers with recurring female presenter Alex.",
+      "activeVersion": "1.1",
       "versions": [
         {
           "version": "1.0",
@@ -725,12 +725,31 @@
             "mutedColor": "#766E61",
             "fontFamily": "system-ui"
           }
+        },
+        {
+          "version": "1.1",
+          "format": "9:16",
+          "fps": 30,
+          "durationSec": 56,
+          "referenceProject": "simply-explained-001-how-ai-actually-works",
+          "templatePath": "series/simply-explained/template-v1.1.json",
+          "instructions": "Clean Editorial 1.1: original female Alex with warm brown asymmetric bob, teal jacket, cream shirt, subtle earrings, always anchored lower-left across every shot including prediction and cover. One central illustration per beat, no repeated masthead, chapter numbers, footer, name tag or redundant labels. One short heading only where needed; preserve explanatory text within diagrams and label example probabilities. Use doodle-explainer, mind-series-v1, simply-explained-v1, simply-explained-v11, shot:cover/hook/training/tokens/prediction/response/limits. Keep the existing English voice and score; three-word compact karaoke captions in dark pill to the right of Alex. Original Canvas/SVG only, no generated images, new engines or extra test Actions. Verify rendered frames, actual audio and MP4 size before approval.",
+          "brandKit": {
+            "brandName": "SIMPLY EXPLAINED",
+            "primaryColor": "#253E43",
+            "accentColor": "#B94F36",
+            "backgroundColor": "#F5EDDF",
+            "surfaceColor": "#FFF9EF",
+            "textColor": "#243538",
+            "mutedColor": "#766E61",
+            "fontFamily": "system-ui"
+          }
         }
       ],
       "episodes": [],
       "cover": {
         "imageUrl": "series-covers/simply-explained.svg",
-        "alt": "Simply Explained with Alex"
+        "alt": "Simply Explained with female presenter Alex"
       }
     }
   ],

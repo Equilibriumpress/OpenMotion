@@ -45,7 +45,8 @@
           "mind-series-v1",
           "simply-explained-v1",
           "shot:cover",
-          "episode:01"
+          "episode:01",
+          "simply-explained-v11"
         ],
         "shirtColor": "#253E43",
         "highlightColor": "#B94F36",
@@ -72,7 +73,8 @@
           "mind-series-v1",
           "simply-explained-v1",
           "shot:hook",
-          "episode:01"
+          "episode:01",
+          "simply-explained-v11"
         ],
         "shirtColor": "#253E43",
         "highlightColor": "#B94F36",
@@ -99,7 +101,8 @@
           "mind-series-v1",
           "simply-explained-v1",
           "shot:training",
-          "episode:01"
+          "episode:01",
+          "simply-explained-v11"
         ],
         "shirtColor": "#253E43",
         "highlightColor": "#B94F36",
@@ -126,7 +129,8 @@
           "mind-series-v1",
           "simply-explained-v1",
           "shot:tokens",
-          "episode:01"
+          "episode:01",
+          "simply-explained-v11"
         ],
         "shirtColor": "#253E43",
         "highlightColor": "#B94F36",
@@ -153,7 +157,8 @@
           "mind-series-v1",
           "simply-explained-v1",
           "shot:prediction",
-          "episode:01"
+          "episode:01",
+          "simply-explained-v11"
         ],
         "shirtColor": "#253E43",
         "highlightColor": "#B94F36",
@@ -180,7 +185,8 @@
           "mind-series-v1",
           "simply-explained-v1",
           "shot:response",
-          "episode:01"
+          "episode:01",
+          "simply-explained-v11"
         ],
         "shirtColor": "#253E43",
         "highlightColor": "#B94F36",
@@ -207,7 +213,8 @@
           "mind-series-v1",
           "simply-explained-v1",
           "shot:limits",
-          "episode:01"
+          "episode:01",
+          "simply-explained-v11"
         ],
         "shirtColor": "#253E43",
         "highlightColor": "#B94F36",
@@ -217,196 +224,355 @@
   ],
   "captions": [
     {
-      "text": "Ask a chatbot a question,",
+      "text": "Ask a chatbot",
       "startSec": 1.5,
-      "endSec": 4.018,
-      "style": "minimal",
-      "position": 0.79,
-      "fontSizePx": 48
+      "endSec": 3.011,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
     },
     {
-      "text": "and an answer appears. What's",
-      "startSec": 4.018,
-      "endSec": 6.536,
-      "style": "minimal",
-      "position": 0.79,
-      "fontSizePx": 48
+      "text": "a question, and",
+      "startSec": 3.011,
+      "endSec": 4.521,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
     },
     {
-      "text": "happening behind the screen?",
-      "startSec": 6.536,
+      "text": "an answer appears.",
+      "startSec": 4.521,
+      "endSec": 6.032,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
+    },
+    {
+      "text": "What's happening behind",
+      "startSec": 6.032,
+      "endSec": 7.543,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
+    },
+    {
+      "text": "the screen?",
+      "startSec": 7.543,
       "endSec": 8.55,
-      "style": "minimal",
-      "position": 0.79,
-      "fontSizePx": 48
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
     },
     {
-      "text": "Before you ask anything, the",
+      "text": "Before you ask",
       "startSec": 9.3,
-      "endSec": 11.592,
-      "style": "minimal",
-      "position": 0.79,
-      "fontSizePx": 48
+      "endSec": 10.675,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
     },
     {
-      "text": "model trains on many examples",
-      "startSec": 11.592,
-      "endSec": 13.883,
-      "style": "minimal",
-      "position": 0.79,
-      "fontSizePx": 48
+      "text": "anything, the model",
+      "startSec": 10.675,
+      "endSec": 12.05,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
     },
     {
-      "text": "of text. Training adjusts billions",
-      "startSec": 13.883,
+      "text": "trains on many",
+      "startSec": 12.05,
+      "endSec": 13.425,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
+    },
+    {
+      "text": "examples of text.",
+      "startSec": 13.425,
+      "endSec": 14.8,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
+    },
+    {
+      "text": "Training adjusts billions",
+      "startSec": 14.8,
       "endSec": 16.175,
-      "style": "minimal",
-      "position": 0.79,
-      "fontSizePx": 48
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
     },
     {
       "text": "of numerical parameters.",
       "startSec": 16.175,
       "endSec": 17.55,
-      "style": "minimal",
-      "position": 0.79,
-      "fontSizePx": 48
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
     },
     {
-      "text": "Your prompt is split into",
+      "text": "Your prompt is",
       "startSec": 18.3,
-      "endSec": 20.363,
-      "style": "minimal",
-      "position": 0.79,
-      "fontSizePx": 48
+      "endSec": 19.538,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
     },
     {
-      "text": "small pieces called tokens. The",
-      "startSec": 20.363,
-      "endSec": 22.425,
-      "style": "minimal",
-      "position": 0.79,
-      "fontSizePx": 48
+      "text": "split into small",
+      "startSec": 19.538,
+      "endSec": 20.775,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
     },
     {
-      "text": "model uses their context to",
-      "startSec": 22.425,
+      "text": "pieces called tokens.",
+      "startSec": 20.775,
+      "endSec": 22.012,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
+    },
+    {
+      "text": "The model uses",
+      "startSec": 22.012,
+      "endSec": 23.25,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
+    },
+    {
+      "text": "their context to",
+      "startSec": 23.25,
       "endSec": 24.488,
-      "style": "minimal",
-      "position": 0.79,
-      "fontSizePx": 48
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
     },
     {
-      "text": "calculate what might come next.",
+      "text": "calculate what might",
       "startSec": 24.488,
+      "endSec": 25.725,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
+    },
+    {
+      "text": "come next.",
+      "startSec": 25.725,
       "endSec": 26.55,
-      "style": "minimal",
-      "position": 0.79,
-      "fontSizePx": 48
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
     },
     {
-      "text": "The model assigns probabilities to",
+      "text": "The model assigns",
       "startSec": 27.3,
-      "endSec": 30.113,
-      "style": "minimal",
-      "position": 0.79,
-      "fontSizePx": 48
+      "endSec": 28.988,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
     },
     {
-      "text": "possible next tokens. It selects",
-      "startSec": 30.113,
-      "endSec": 32.925,
-      "style": "minimal",
-      "position": 0.79,
-      "fontSizePx": 48
+      "text": "probabilities to possible",
+      "startSec": 28.988,
+      "endSec": 30.675,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
     },
     {
-      "text": "one, adds it to the",
-      "startSec": 32.925,
+      "text": "next tokens. It",
+      "startSec": 30.675,
+      "endSec": 32.362,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
+    },
+    {
+      "text": "selects one, adds",
+      "startSec": 32.362,
+      "endSec": 34.05,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
+    },
+    {
+      "text": "it to the",
+      "startSec": 34.05,
       "endSec": 35.737,
-      "style": "minimal",
-      "position": 0.79,
-      "fontSizePx": 48
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
     },
     {
-      "text": "text, and repeats the process.",
+      "text": "text, and repeats",
       "startSec": 35.737,
+      "endSec": 37.425,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
+    },
+    {
+      "text": "the process.",
+      "startSec": 37.425,
       "endSec": 38.55,
-      "style": "minimal",
-      "position": 0.79,
-      "fontSizePx": 48
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
     },
     {
-      "text": "Step by step, those predictions",
+      "text": "Step by step,",
       "startSec": 39.3,
-      "endSec": 41.264,
-      "style": "minimal",
-      "position": 0.79,
-      "fontSizePx": 48
+      "endSec": 40.479,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
     },
     {
-      "text": "form an answer. Training and",
-      "startSec": 41.264,
-      "endSec": 43.229,
-      "style": "minimal",
-      "position": 0.79,
-      "fontSizePx": 48
+      "text": "those predictions form",
+      "startSec": 40.479,
+      "endSec": 41.657,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
     },
     {
-      "text": "further tuning help the model",
-      "startSec": 43.229,
+      "text": "an answer. Training",
+      "startSec": 41.657,
+      "endSec": 42.836,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
+    },
+    {
+      "text": "and further tuning",
+      "startSec": 42.836,
+      "endSec": 44.014,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
+    },
+    {
+      "text": "help the model",
+      "startSec": 44.014,
       "endSec": 45.193,
-      "style": "minimal",
-      "position": 0.79,
-      "fontSizePx": 48
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
     },
     {
-      "text": "follow instructions and produce useful",
+      "text": "follow instructions and",
       "startSec": 45.193,
-      "endSec": 47.157,
-      "style": "minimal",
-      "position": 0.79,
-      "fontSizePx": 48
+      "endSec": 46.371,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
     },
     {
-      "text": "responses.",
-      "startSec": 47.157,
+      "text": "produce useful responses.",
+      "startSec": 46.371,
       "endSec": 47.55,
-      "style": "minimal",
-      "position": 0.79,
-      "fontSizePx": 48
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
     },
     {
-      "text": "But a convincing answer is",
+      "text": "But a convincing",
       "startSec": 48.3,
-      "endSec": 50.208,
-      "style": "minimal",
-      "position": 0.79,
-      "fontSizePx": 48
+      "endSec": 49.445,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
     },
     {
-      "text": "not proof of accuracy. Check",
-      "startSec": 50.208,
-      "endSec": 52.116,
-      "style": "minimal",
-      "position": 0.79,
-      "fontSizePx": 48
+      "text": "answer is not",
+      "startSec": 49.445,
+      "endSec": 50.589,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
     },
     {
-      "text": "important facts. Prediction is not",
-      "startSec": 52.116,
+      "text": "proof of accuracy.",
+      "startSec": 50.589,
+      "endSec": 51.734,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
+    },
+    {
+      "text": "Check important facts.",
+      "startSec": 51.734,
+      "endSec": 52.879,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
+    },
+    {
+      "text": "Prediction is not",
+      "startSec": 52.879,
       "endSec": 54.024,
-      "style": "minimal",
-      "position": 0.79,
-      "fontSizePx": 48
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
     },
     {
-      "text": "the same as verification.",
+      "text": "the same as",
       "startSec": 54.024,
+      "endSec": 55.168,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
+    },
+    {
+      "text": "verification.",
+      "startSec": 55.168,
       "endSec": 55.55,
-      "style": "minimal",
-      "position": 0.79,
-      "fontSizePx": 48
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.765,
+      "fontSizePx": 52
     }
   ],
   "audioTracks": [
@@ -433,7 +599,7 @@
   "seriesId": "simply-explained",
   "season": 1,
   "episodeNumber": 1,
-  "templateVersion": "1.0",
+  "templateVersion": "1.1",
   "productionStatus": "review",
   "thumbnailUrl": "assets/simply-explained/simply-explained-001-how-ai-actually-works.svg"
 }
