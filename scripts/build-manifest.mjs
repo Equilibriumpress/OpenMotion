@@ -277,7 +277,7 @@ for(const p of projects){
     for(const track of p.audioTracks??[]){const file=path.join(rootDir,'public',track.src);if(fs.existsSync(file))digest.update(fs.readFileSync(file));}
     p.mediaRevision=digest.digest('hex').slice(0,20);
     if(p.templateVersion==='3.3'){
-      if(!p.scenes.every(s=>['alex-quality-v1','alex-final-v1','alex-performance-v1','alex-27-layout','simply-explained-v2','simply-explained-v11'].every(k=>s.doodle?.extras?.includes(k))))throw Error('Simply Explained 3.3 renderer markers incomplete: '+p.slug);
+      if(!p.scenes.every(s=>['alex-quality-v1','alex-final-v1','alex-27-layout','simply-explained-v2','simply-explained-v11'].every(k=>s.doodle?.extras?.includes(k))&&(s.doodle?.extras?.includes('alex-flat-v1')||s.doodle?.extras?.includes('alex-performance-v1'))))throw Error('Simply Explained 3.3 renderer markers incomplete: '+p.slug);
       const duration=p.scenes.reduce((n,s)=>n+s.durationSec,0);
       if(ci&&(!p.audioTracks?.some(t=>t.kind==='voiceover'&&Math.abs((t.endSec??0)-duration)<.034)||p.captions?.some(c=>c.startSec<0||c.endSec>duration+.001)))throw Error('Simply Explained timeline/audio mismatch: '+p.slug);
     }
