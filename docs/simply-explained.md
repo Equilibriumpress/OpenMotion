@@ -61,3 +61,17 @@ The submitted 3.2 MP4 independently probes as 512×910, 1302 frames, 43.411667 s
 Final template 3.3 adds alex-final-v1, retains alex-quality-v1 and the larger 3.2 host and caption region. Percentages fade in at the end of bar growth; Simply Explained signature appears during the final 0.95 s without extending the shot. Manifest stamps its actual GitHub commit and audio content hash; Vite exposes its own build commit. Pages waits for the manifest before opening the pilot and checks both build revisions. Relative audio requests include the content hash. Publication guard checks required markers, timeline, cue boundaries, exact pilot duration and Full HD 30 fps target. Studio labels project and renderer versions and refuses downloads of stale rendered signatures. Both preview and export call renderOpenMotionFrame; a new on-demand comparison decodes a real MP4 frame and renders the same timestamp for visual inspection and indicative RGB difference (not a universal pass/fail metric). 
 
 After a successful browser master render, the versioned filename and measured resolution, duration, fps, bytes, decoded audio verification, project fingerprint, build revisions and MP4 SHA-256 are available. The ZIP download contains the byte-identical verified MP4 and export-verification.json. Share the ZIP as a file, rather than via photo/video sharing. The ZIP and checksum identify transport changes, but cannot prove where an earlier upload was resized. Actual new browser render and original MP4 verification remain outstanding; do not mark production approved yet. No additional dependencies or test Actions. 
+
+
+## Episode 02 — How GPS Knows Where You Are
+
+Project: `projects/simply-explained-002-how-gps-knows-where-you-are/project.json`. Uses unchanged template 3.3 and original Alex, with episode-specific `simply-explained-gps-v1` graphics dispatch. Seven scenes, planned 39.0 seconds (1170 frames at 30 fps), 1080×1920 target. Normal documentary audio build generates the same English Piper voice and chapter-based audio/caption estimates; authored durations are provisional until new audio and MP4 inspection. No new synthesizer or dependencies.
+
+The vector globe uses an illustrative orthographic projection and original simplified coastline polygons, not geographic navigation data. Signal pulses are illustrative, not time-accurate. Three distance circles share a common point in the labeled 2D example; four satellite signals solve the usual 3D position and receiver clock offset. Zoom moves occur within scenes with editorial cuts between phone and globe; this is not a continuous geographic map flythrough.
+
+Fact-check sources:
+- ESA: https://www.esa.int/Applications/Satellite_navigation/How_existing_satellite_navigation_systems_work
+- ESA: https://www.esa.int/articles/about-us/directorates/resilience-navigation-and-connectivity/navigation/about-satellite-navigation
+- GPS.gov: https://www.gps.gov/trilateration
+
+Structural checks and simulated Canvas calls across all 1170 frame times passed. Actual audio synthesis, browser rendering, deployment and full-resolution MP4 review remain outstanding. Episode 01 and the existing series template are unchanged.
