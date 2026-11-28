@@ -1,3 +1,4 @@
+import { CARTOONS, CARTOON_MARKER, applyCartoon, cartoonReady, prepareCartoon, type CartoonId } from '../engine/cartoonPresenter';
 import { PEOPLE, TOPS, MOVES, EXPRESSIONS, DEFAULT_CHARACTER, sanitizeCharacter, characterFromScene, applyCharacter, characterThumb, type CharacterPreset } from '../engine/characterPresets';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { renderOpenMotionFrame } from '../engine/openMotionRenderer';
@@ -7,18 +8,20 @@ import { prepareRocketbox, rocketboxReady, ROCKETBOX_MARKER } from '../engine/ro
 import { getProjectDurationSec, type OpenMotionProject, type RenderProgressState } from '../types/openmotion';
 
 const SLUG='simply-explained-001-how-ai-actually-works';
-type Mode='flat'|'rig'|'rocketbox'|'custom';
+type Mode='flat'|'rig'|'rocketbox'|'custom'|'cartoon';
 const MODES:{id:Mode;name:string;desc:string}[]=[
  {id:'flat',name:'Alex 2D',desc:'Versie 1.1 · oorspronkelijke vrouwelijke illustratie'},
  {id:'rig',name:'Alex 2.5D',desc:'Versie 2.0 · afzonderlijke ogen, armen en gezichtsbeweging'},
  {id:'rocketbox',name:'Rocketbox 3D',desc:'Business female 04 · bestaande proef'},
- {id:'custom',name:'Character Studio',desc:'20 Rocketbox-personages, kleding, expressie en beweging'}
+ {id:'custom',name:'Character Studio',desc:'20 Rocketbox-personages, kleding, expressie en beweging'},
+ {id:'cartoon',name:'Cartoon Cinema',desc:'Gestileerde 3D-personages met mondvormen'}
 ];
-function makeVariant(p:OpenMotionProject,mode:Mode,preset:CharacterPreset):OpenMotionProject{
+function makeVariant(p:OpenMotionProject,mode:Mode,preset:CharacterPreset,cartoon:CartoonId):OpenMotionProject{
+ if(mode==='cartoon')return applyCartoon({...p,id:'presenter-lab-cartoon-'+cartoon,slug:'presenter-lab-cartoon-'+cartoon,title:'Cartoon Cinema · '+cartoon,kind:'experiment',productionStatus:'review'},cartoon);
  if(mode==='custom')return applyCharacter({...p,id:'presenter-lab-custom',slug:'presenter-lab-custom',title:'Character Studio · '+preset.name,kind:'experiment',productionStatus:'review'},preset);
  return {...p,id:'presenter-lab-'+mode,slug:'presenter-lab-'+mode,title:'Presenter Lab · '+MODES.find(m=>m.id===mode)!.name,kind:'experiment',productionStatus:'review',scenes:p.scenes.map(s=>{
   if(!s.doodle)return s;
-  const extras=(s.doodle.extras??[]).filter(x=>x!==ROCKETBOX_MARKER&&!x.startsWith('character-preset:')&&(mode!=='flat'||x!=='simply-explained-v2'));
+  const extras=(s.doodle.extras??[]).filter(x=>x!==ROCKETBOX_MARKER&&x!==CARTOON_MARKER&&!x.startsWith('cartoon-avatar:')&&!x.startsWith('character-preset:')&&(mode!=='flat'||x!=='simply-explained-v2'));
   if(mode==='rocketbox')extras.push(ROCKETBOX_MARKER);
   return {...s,doodle:{...s.doodle,extras}};
  })};
@@ -28,20 +31,22 @@ function savedPresets():CharacterPreset[]{try{const x=JSON.parse(localStorage.ge
 function downloadJson(value:unknown,name:string){const url=URL.createObjectURL(new Blob([JSON.stringify(value,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 export function PresenterLab({projects,onUpdateProject,initialCustom=false}:{projects:OpenMotionProject[];onUpdateProject?:(p:OpenMotionProject)=>void;initialCustom?:boolean}){
  const source=projects.find(p=>p.slug===SLUG&&['2.0','3.0'].includes(p.templateVersion??''));
+ const [cartoon,setCartoon]=useState<CartoonId>('jenny');
  const [preset,setPreset]=useState<CharacterPreset>(()=>source?characterFromScene(source.scenes.find(s=>s.doodle?.narration?.trim())??source.scenes[0])??DEFAULT_CHARACTER:DEFAULT_CHARACTER),[saved,setSaved]=useState(savedPresets),[message,setMessage]=useState('');
  const change=(x:Partial<CharacterPreset>)=>{audio.current?.pause();setPreset(p=>sanitizeCharacter({...p,...x}));setMessage('');setProgress(null);if(resultUrl.current){URL.revokeObjectURL(resultUrl.current);resultUrl.current=null;}};
  const save=()=>{const next=[...saved.filter(x=>x.name!==preset.name),preset];try{localStorage.setItem(STORAGE,JSON.stringify(next));setSaved(next);setMessage('Personage opgeslagen in deze browser.');}catch{setMessage('Opslag mislukt. Download de preset als JSON.');}};
  const [mode,setMode]=useState<Mode>(initialCustom?'custom':'rig'),[ready,setReady]=useState(false),[error,setError]=useState(''),[progress,setProgress]=useState<RenderProgressState|null>(null),[busy,setBusy]=useState(false),[time,setTime]=useState(0),[playing,setPlaying]=useState(false),[loadAttempt,setLoadAttempt]=useState(0);
  const canvas=useRef<HTMLCanvasElement>(null),audio=useRef<HTMLAudioElement>(null),cancel=useRef<AbortController|null>(null),resultUrl=useRef<string|null>(null);
- const variant=useMemo(()=>source?makeVariant(source,mode,preset):null,[source,mode,preset]);
+ const variant=useMemo(()=>source?makeVariant(source,mode,preset,cartoon):null,[source,mode,preset,cartoon]);
  const duration=variant?getProjectDurationSec(variant):0;
  const voice=source?.audioTracks?.find(t=>t.kind==='voiceover'&&t.src);
  const energyAvailable=!!source?.scenes.some(s=>s.doodle?.extras?.some(x=>x.startsWith('host-energy:')));
  useEffect(()=>{
-  let alive=true;setError('');const is3D=mode==='rocketbox'||mode==='custom',config=mode==='custom'?preset:null;setReady(!is3D||rocketboxReady(config));
+  let alive=true;setError('');if(mode==='cartoon'){setReady(cartoonReady(cartoon));void prepareCartoon(cartoon).then(()=>{if(alive)setReady(true);}).catch(e=>{if(alive)setError(e instanceof Error?e.message:String(e));});return()=>{alive=false;};}
+  const is3D=mode==='rocketbox'||mode==='custom',config=mode==='custom'?preset:null;setReady(!is3D||rocketboxReady(config));
   if(is3D)void prepareRocketbox(config).then(()=>{if(alive)setReady(true);}).catch(e=>{if(alive)setError(e instanceof Error?e.message:String(e));});
   return()=>{alive=false;};
- },[mode,loadAttempt,preset.person]);
+ },[mode,loadAttempt,preset.person,cartoon]);
  useEffect(()=>{
   let raf=0,lastPaint=-1;
   if(!variant||!ready)return;
@@ -60,7 +65,7 @@ export function PresenterLab({projects,onUpdateProject,initialCustom=false}:{pro
  const play=async()=>{if(!audio.current||!ready)return;try{if(audio.current.paused){if(audio.current.ended)audio.current.currentTime=0;await audio.current.play();}else audio.current.pause();}catch(e){setError(e instanceof Error?e.message:String(e));}};
  const render=async()=>{
   if(!variant||!voice||!ready||busy)return;
-  if((mode==='rocketbox'||mode==='custom')&&!energyAvailable){setError('Gegenereerde spreekdata ontbreken. Open de gepubliceerde versie van Studio.');return;}
+  if((mode==='rocketbox'||mode==='custom'||mode==='cartoon')&&!energyAvailable){setError('Gegenereerde spreekdata ontbreken. Open de gepubliceerde versie van Studio.');return;}
   audio.current?.pause();setError('');setProgress(null);setBusy(true);
   if(resultUrl.current){URL.revokeObjectURL(resultUrl.current);resultUrl.current=null;}
   const ac=new AbortController();cancel.current=ac;
@@ -72,7 +77,7 @@ export function PresenterLab({projects,onUpdateProject,initialCustom=false}:{pro
  };
  return <section className="space-y-5">
   <header><p className="text-xs font-semibold tracking-widest text-slate-500 uppercase">Experiment / Presenter Lab</p><h1 className="mt-2 text-3xl font-semibold tracking-tight">Welke presentator werkt het best?</h1><p className="mt-2 max-w-3xl text-sm text-slate-600">Vergelijk dezelfde 56 seconden, dezelfde voice-over, infographics en ondertiteling. Alleen de presentator wisselt. De editor verandert de aflevering alleen wanneer je de preset toepast.</p></header>
-  <div className="grid gap-3 sm:grid-cols-4">{MODES.map(m=><button type="button" disabled={busy} key={m.id} onClick={()=>choose(m.id)} aria-pressed={mode===m.id} className={'rounded-xl border p-4 text-left '+(mode===m.id?'border-teal-700 bg-teal-50':'border-slate-200 bg-white')}><div className="font-semibold">{m.name}</div><div className="mt-1 text-xs text-slate-600">{m.desc}</div></button>)}</div>
+  <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-5">{MODES.map(m=><button type="button" disabled={busy} key={m.id} onClick={()=>choose(m.id)} aria-pressed={mode===m.id} className={'rounded-xl border p-4 text-left '+(mode===m.id?'border-teal-700 bg-teal-50':'border-slate-200 bg-white')}><div className="font-semibold">{m.name}</div><div className="mt-1 text-xs text-slate-600">{m.desc}</div></button>)}</div>
   {!source?<p role="status" className="rounded-xl border bg-white p-4 text-sm">De pilot ontbreekt nog in de geladen bibliotheek. Open de gepubliceerde Studio nadat de Pages-build is voltooid.</p>:<div className="grid gap-5 lg:grid-cols-[minmax(240px,360px)_1fr]">
    <div className="relative mx-auto w-full max-w-[360px] overflow-hidden rounded-xl border border-slate-200 bg-[#F5EDDF]">
     <canvas ref={canvas} width={540} height={960} className="block h-auto w-full" aria-label="Vergelijkende video-preview"/>
@@ -92,12 +97,13 @@ export function PresenterLab({projects,onUpdateProject,initialCustom=false}:{pro
       {message&&<p role="status" className="text-xs text-teal-800">{message}</p>}
       <p className="text-xs text-slate-500">Kapsel en gezicht komen van het gekozen model. De kleding is verwisselbaar; er is geen vrije gezichtssculptor. De beweging wordt per frame uit een bestaande clip gelezen.</p>
     </div>}
+    {mode==='cartoon'&&<div className="space-y-3 rounded-xl bg-slate-50 p-3"><h3 className="text-sm font-semibold">Cartoon Cinema 1.0</h3><div className="grid grid-cols-3 gap-2">{CARTOONS.map(item=><button type="button" disabled={busy} key={item.id} aria-pressed={cartoon===item.id} onClick={()=>{audio.current?.pause();setReady(cartoonReady(item.id));setCartoon(item.id);setProgress(null);if(resultUrl.current){URL.revokeObjectURL(resultUrl.current);resultUrl.current=null;}}} className={'overflow-hidden rounded-lg border p-1 text-center text-xs '+(cartoon===item.id?'border-teal-700 bg-teal-50':'border-slate-200 bg-white')}><img loading="lazy" src={item.thumb} alt="" className="aspect-square w-full object-contain"/><span className="block p-1">{item.name}</span></button>)}</div><p className="text-xs text-slate-600">Bestaande CC0-personages van Polygonal Mind. De vijf VRM-mondvormen volgen de stem; hoofdbewegingen, knipperen en expressies volgen de scène. Geen volledig nieuwe character rig.</p><p className="text-xs text-slate-600">Dezelfde pilot en vaste positie linksonder. Exporteer eerst een proef-MP4. De huidige serieversie blijft ongewijzigd.</p><a className="text-xs underline" href="https://github.com/ToxSam/open-source-avatars" target="_blank" rel="noreferrer">Modelbron en licentie</a></div>}
     <audio ref={audio} src={voice?projectAssetUrl(voice.src):undefined} preload="metadata" onPlay={()=>setPlaying(true)} onPause={()=>setPlaying(false)} onEnded={()=>setPlaying(false)} onError={()=>setError('Voice-over kon niet worden geladen.')}/>
     <div className="flex items-center gap-3"><button disabled={!ready||!voice||busy} className="rounded-lg bg-slate-900 px-4 py-2 text-sm text-white disabled:opacity-40" onClick={play}>{playing?'Pauze':'Afspelen'}</button><span className="text-xs tabular-nums text-slate-600">{time.toFixed(1)} / {duration.toFixed(1)} s</span></div>
     <input aria-label="Videotijd" type="range" min={0} max={Math.max(0,duration-.001)} step={1/30} value={time} disabled={!ready||!voice||busy} className="w-full" onChange={e=>{if(audio.current){audio.current.currentTime=Number(e.target.value);setTime(Number(e.target.value));}}}/>
     {!voice&&<p className="text-sm text-amber-800">De voice-over ontbreekt. Afspelen en export zijn geblokkeerd.</p>}
     {mode==='rocketbox'&&<p className="text-sm text-slate-600">De echte Rocketbox-avatar wordt via een vastgezette pakketversie geladen. Mondvormen volgen de bestaande, geschatte visemes en audio-envelope. Deze mode gebruikt geen live klok, zodat frames in willekeurige volgorde kunnen worden gerenderd.</p>}
-    {(mode==='rocketbox'||mode==='custom')&&!energyAvailable&&<p className="text-sm text-amber-800">Spreekdata ontbreken. Export is geblokkeerd.</p>}
+    {(mode==='rocketbox'||mode==='custom'||mode==='cartoon')&&!energyAvailable&&<p className="text-sm text-amber-800">Spreekdata ontbreken. Export is geblokkeerd.</p>}
     <div className="border-t pt-4"><h3 className="font-semibold">MP4-proef</h3><p className="mt-1 text-xs text-slate-500">1080 × 1920 · 30 fps · H.264/AAC. Alleen een experiment, geen automatische publicatie.</p>
     <div className="mt-3 flex flex-wrap gap-2"><button disabled={!ready||!voice||busy||(mode==='rocketbox'&&!energyAvailable)} className="rounded-lg border px-3 py-2 text-sm disabled:opacity-40" onClick={render}>Render proef-MP4</button>{busy&&<button className="rounded-lg border px-3 py-2 text-sm" onClick={()=>cancel.current?.abort()}>Stop</button>}</div>
     {progress&&<p role="status" className="mt-2 text-xs">{progress.phase} · {Math.round(progress.percent)}% · {progress.encoderLabel}</p>}
