@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "1.0",
+  "id": "om-living-travel-posters-002-amalfi",
+  "slug": "living-travel-posters-002-amalfi",
+  "title": "Amalfi Coast · An Italian Summer",
+  "description": "An original vintage-inspired Italian coastal poster comes to life: a terraced cliff village, tiled church dome, sailboats, waves, a classic scooter, lemon branches and striped parasols. An original plucked-string and coastal soundscape accompanies the continuous camera loop. Fictional coastal composition inspired by the Amalfi Coast, not a reconstruction of a specific historical poster.",
+  "category": "Shorts & Reels",
+  "author": "OpenMotion Studio",
+  "source": "github",
+  "createdAt": "2026-11-28",
+  "updatedAt": "2026-11-28",
+  "githubPath": "projects/living-travel-posters-002-amalfi/project.json",
+  "format": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 60,
+  "brandKit": {
+    "brandName": "LIVING TRAVEL POSTERS",
+    "primaryColor": "#244f49",
+    "accentColor": "#c14f3d",
+    "backgroundColor": "#efe2bf",
+    "surfaceColor": "#287f8c",
+    "textColor": "#f8edcf",
+    "mutedColor": "#d9bf8d",
+    "fontFamily": "Georgia"
+  },
+  "scenes": [
+    {
+      "id": "amalfi-poster",
+      "name": "01 / Print · Awakening · Journey · Return",
+      "durationSec": 22,
+      "layout": "parallax-cinema",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "AMALFI COAST",
+      "subheadline": "AN ITALIAN SUMMER",
+      "fullBleed": true,
+      "parallax": {
+        "shot": "cover",
+        "variant": "living-travel-poster",
+        "episode": 2,
+        "speed": 1,
+        "destination": "amalfi"
+      }
+    }
+  ],
+  "captions": [],
+  "audioTracks": [],
+  "kind": "video",
+  "seriesId": "living-travel-posters",
+  "season": 1,
+  "episodeNumber": 2,
+  "templateVersion": "1.0",
+  "productionStatus": "review",
+  "thumbnailUrl": "thumbnails/living-travel-posters-002-amalfi.svg"
+}
