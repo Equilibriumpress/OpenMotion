@@ -105,6 +105,13 @@
       "templateVersion": "3.0",
       "folder": "motion-packages/premium-travel-routes-v3-0-0",
       "name": "premium-travel-routes-v3-0-0"
+    },
+    {
+      "seriesId": "premium-travel-routes",
+      "title": "Premium Travel Routes",
+      "templateVersion": "4.0",
+      "folder": "motion-packages/premium-travel-routes-v4-0-0",
+      "name": "premium-travel-routes-v4-0-0"
     }
   ],
   "profiles": [
