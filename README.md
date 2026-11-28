@@ -96,3 +96,7 @@ De manifestgenerator maakt lichte statische SVG-titelkaarten zonder video-render
 ## Presenter Lab
 
 Vergelijk de bestaande Alex 2D, Alex 2.5D en een echte Rocketbox 3D-avatar via `#presenter-lab`. De pilot blijft ongewijzigd. De afzonderlijke neurale test gebruikt de originele Talking Avatar SDK. Zie [Presenter Lab](docs/presenter-lab.md) voor licenties, exportbeperkingen en controlepunten.
+
+## Character Studio
+
+Open `#character-studio` to customize one of 20 licensed Rocketbox models, modular outfits, fabric tints, expressions and motion clips. Presets are local or exportable as JSON. Simply Explained template 3.0 has a default Alex preset. See [Character Studio](docs/character-studio.md) for asset provenance, limitations and export verification.
