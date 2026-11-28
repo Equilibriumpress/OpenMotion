@@ -669,7 +669,7 @@ export interface RenderProgressState {
   encoderLabel: string;
   outputUrl?: string;
   publicationVerified?: boolean;
-  verification?: {projectSlug:string;templateVersion:string;renderer:string;buildRevision:string;mediaRevision:string;timelineSec:number;actualDurationSec:number;width:number;height:number;fps:number;bytes:number;sha256:string;projectSha256:string;audioVerified:boolean};
+  verification?: {projectSlug:string;templateVersion:string;renderer:string;buildRevision:string;rendererBuildRevision:string;mediaRevision:string;timelineSec:number;actualDurationSec:number;width:number;height:number;fps:number;bytes:number;sha256:string;projectSha256:string;audioVerified:boolean};
   fileName?: string;
   /** Standalone soundtrack when Safari fails to mux a browser MP4 audio track. */
   audioSidecarUrl?: string;
