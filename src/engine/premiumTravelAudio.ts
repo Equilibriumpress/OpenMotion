@@ -2,7 +2,7 @@
  * Original, royalty-free ambient road-trip score synthesized in Web Audio.
  * The same deterministic buffer serves both preview and MP4 audio mixing.
  */
-const cache = new Map<number, Promise<AudioBuffer>>();
+const cache = new Map<string, Promise<AudioBuffer>>();
 const rate = 48000;
 const chords = [
   { start: 0, end: 8, notes: [146.83, 220.00, 349.23] },
@@ -11,7 +11,7 @@ const chords = [
   { start: 23, end: 30, notes: [146.83, 220.00, 349.23] },
 ];
 const cuts = [0,3,5,7.5,10,13.5,16,19.5,22,26.5];
-async function synthesize(durationSec: number): Promise<AudioBuffer> {
+async function synthesize(durationSec: number, cues:readonly number[]): Promise<AudioBuffer> {
   const context = new OfflineAudioContext(2, Math.ceil(durationSec * rate), rate);
   const master = context.createGain();
   master.gain.setValueAtTime(0, 0);
@@ -66,7 +66,7 @@ async function synthesize(durationSec: number): Promise<AudioBuffer> {
   const noise = context.createBuffer(1, frameCount, rate);
   const samples = noise.getChannelData(0);
   for (let i = 0; i < samples.length; i++) samples[i] = random() * 2 - 1;
-  for (const at of cuts) {
+  for (const at of cues) {
     if (at >= durationSec) continue;
     const src = context.createBufferSource();
     src.buffer = noise;
@@ -81,11 +81,11 @@ async function synthesize(durationSec: number): Promise<AudioBuffer> {
   }
   return context.startRendering();
 }
-export function createPremiumTravelAudio(durationSec: number): Promise<AudioBuffer> {
-  const key = Math.round(durationSec * 100) / 100;
+export function createPremiumTravelAudio(durationSec: number, cues:readonly number[]=cuts): Promise<AudioBuffer> {
+  const key = JSON.stringify([Math.round(durationSec * 100) / 100,cues]);
   const existing = cache.get(key);
   if (existing) return existing;
-  const promise = synthesize(durationSec).catch(error => { cache.delete(key); throw error; });
+  const promise = synthesize(durationSec,cues).catch(error => { cache.delete(key); throw error; });
   cache.set(key, promise);
   return promise;
 }

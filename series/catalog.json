@@ -367,7 +367,7 @@
       "id": "premium-travel-routes",
       "title": "Premium Travel Routes",
       "description": "Roadtrips met geanimeerde kaarten en fotostops",
-      "activeVersion": "1.0",
+      "activeVersion": "2.0",
       "versions": [
         {
           "version": "1.0",
@@ -387,6 +387,25 @@
             "mutedColor": "#AFC9BE",
             "fontFamily": "Georgia"
           }
+        },
+        {
+          "version": "2.0",
+          "format": "9:16",
+          "fps": 60,
+          "durationSec": 30,
+          "referenceProject": "short-scotland-road-trip",
+          "templatePath": "series/premium-travel-routes/template-v2.0.json",
+          "instructions": "Gebruik Cinematic Journey R7: echte routegeometrie, geprojecteerde locatiemaskers, overlappende frametijd, gelicentieerde foto's, onafhankelijke titels en gecontroleerde media.",
+          "brandKit": {
+            "brandName": "SCOTLAND / THE OPEN ROAD",
+            "primaryColor": "#AE674A",
+            "accentColor": "#E2C48F",
+            "backgroundColor": "#E7E8DE",
+            "surfaceColor": "#173D37",
+            "textColor": "#F8F7EF",
+            "mutedColor": "#AFC9BE",
+            "fontFamily": "Georgia"
+          }
         }
       ],
       "episodes": [
@@ -394,7 +413,7 @@
           "slug": "short-scotland-road-trip",
           "season": 1,
           "episodeNumber": 1,
-          "templateVersion": "1.0"
+          "templateVersion": "2.0"
         }
       ],
       "cover": {

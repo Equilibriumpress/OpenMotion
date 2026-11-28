@@ -2,7 +2,7 @@ import { humanSideCoverDuration } from './humanSideRenderer';
 import { renderCatOffice } from './catOfficeRenderer';
 import { renderGeoRouteReel, renderWhiteboardScience } from './shortsRenderer';
 import { renderDoodleExplainerScene } from './doodleExplainerRenderer';
-import { renderPremiumTravelScene, getPremiumError } from './premiumTravelRoute';
+import { renderPremiumTravelScene, getPremiumError, premiumTravelAnchor } from './premiumTravelRoute';
 import { renderBucketListScene } from './bucketListRenderer';
 import { getBucketListMapError } from './bucketListCamera';
 import { renderWorldStory } from './worldStoryRenderer';
@@ -304,6 +304,42 @@ function animateMetricNumber(rawValue: string, progress: number): string {
   return `${prefix}${current.toFixed(decimals)}${suffix}`;
 }
 
+// R7: transition occupies the outgoing shot's tail. Incoming time continues
+// from the exact lead-in at the boundary, with no frozen/replayed frames.
+const journeyEase=(x:number)=>{const u=Math.max(0,Math.min(1,x));return u*u*u*(u*(u*6-15)+10);};
+const journeyPhoto=(s:OpenMotionScene)=>s.premiumTravel?.chapter==='photo'||s.premiumTravel?.chapter==='opening';
+function journeyOverlap(a:OpenMotionScene|undefined,b:OpenMotionScene|undefined):number{
+  if(!a?.premiumTravel||!b?.premiumTravel||(a.premiumTravel.editorialRevision??0)<7||(b.premiumTravel.editorialRevision??0)<7||b.transition!=='fade')return 0;
+  const target=b.premiumTravel.chapter==='finale'?(b.premiumTravel.mapIntro?.6:.8):journeyPhoto(b)?.7:.5;
+  return Math.min(target,a.durationSec*.38,b.durationSec*.38);
+}
+let journeyLayer:HTMLCanvasElement|undefined;
+function renderCinematicJourney(ctx:CanvasRenderingContext2D,w:number,h:number,project:OpenMotionProject,index:number,local:number){
+  const scene=project.scenes[index],previous=project.scenes[index-1],next=project.scenes[index+1];
+  const lead=journeyOverlap(previous,scene),tail=journeyOverlap(scene,next);
+  const time=lead+local*(scene.durationSec-lead)/scene.durationSec;
+  if(!next||tail<=0||local<scene.durationSec-tail){renderPremiumTravelScene(ctx,w,h,scene,time,getCachedPhoto);return;}
+  const u=Math.max(0,Math.min(1,(local-scene.durationSec+tail)/tail)),v=journeyEase(u);
+  const incomingTime=u*tail;
+  renderPremiumTravelScene(ctx,w,h,scene,time,getCachedPhoto,1-journeyEase(u*2));
+  journeyLayer??=document.createElement('canvas');if(journeyLayer.width!==w||journeyLayer.height!==h){journeyLayer.width=w;journeyLayer.height=h;}
+  const layer=journeyLayer.getContext('2d');if(!layer)return;
+  layer.clearRect(0,0,w,h);renderPremiumTravelScene(layer,w,h,next,incomingTime,getCachedPhoto,journeyEase((u-.5)*2));
+  const fromPhoto=journeyPhoto(scene),toPhoto=journeyPhoto(next);
+  ctx.save();
+  if(!fromPhoto&&toPhoto){
+    const center=premiumTravelAnchor(scene,w,h,time,next.premiumTravel!.focusStopIndex);
+    const radius=Math.hypot(Math.max(center.x,w-center.x),Math.max(center.y,h-center.y))*v;
+    ctx.beginPath();ctx.arc(center.x,center.y,radius,0,Math.PI*2);ctx.clip();ctx.drawImage(journeyLayer,0,0);
+  }else if(fromPhoto&&!toPhoto&&!next.premiumTravel!.mapIntro){
+    const stopIndex=scene.premiumTravel!.focusStopIndex;
+    const center=premiumTravelAnchor(next,w,h,incomingTime,stopIndex);
+    const radius=Math.hypot(Math.max(center.x,w-center.x),Math.max(center.y,h-center.y))*(1-v);
+    ctx.beginPath();ctx.rect(0,0,w,h);ctx.arc(center.x,center.y,radius,0,Math.PI*2);ctx.clip('evenodd');ctx.drawImage(journeyLayer,0,0);
+  }else{ctx.globalAlpha=v;ctx.drawImage(journeyLayer,0,0);}
+  ctx.restore();
+}
+
 export function renderOpenMotionFrame(
   ctx: CanvasRenderingContext2D,
   project: OpenMotionProject,
@@ -372,7 +408,9 @@ export function renderOpenMotionFrame(
     const dissolveSec=prior?.layout==='premium-travel-route'&&prior.premiumTravel&&scene.transition==='fade'
       ? Math.min(scene.premiumTravel.editorial ? .24 : .7,scene.durationSec*.28,prior.durationSec*.28)
       : 0;
-    if((scene.premiumTravel.editorialRevision??0)>=6){
+    if((scene.premiumTravel.editorialRevision??0)>=7){
+      renderCinematicJourney(ctx,w,h,project,sceneIndex,localTime);
+    } else if((scene.premiumTravel.editorialRevision??0)>=6){
       renderPremiumTravelScene(ctx,w,h,scene,localTime,getCachedPhoto);
     } else if(prior?.premiumTravel && scene.premiumTravel.editorial && dissolveSec>0 && localTime<dissolveSec){
       // Sequential fade through a neutral colour: no route marks over photos.
