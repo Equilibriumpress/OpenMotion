@@ -4,7 +4,7 @@ import type { OpenMotionScene } from '../types/openmotion';
  */
 type C=CanvasRenderingContext2D;
 type P=[number,number];
-const ink='#243538',teal='#253E43',paper='#F5EDDF',light='#FFF9EF',rust='#B94F36',sand='#E9D4BD',muted='#766E61',blue='#397CA7',green='#9CB19D',water='#DCE5DD';
+const ink='#243538',teal='#253E43',light='#FFF9EF',rust='#B94F36',sand='#E9D4BD',muted='#766E61',blue='#397CA7',green='#9CB19D',water='#DCE5DD';
 const clamp=(v:number)=>Math.max(0,Math.min(1,v));
 const ease=(v:number)=>{const a=clamp(v);return a*a*(3-2*a);};
 const mix=(a:number,b:number,u:number)=>a+(b-a)*u;
@@ -52,7 +52,7 @@ function map(c:C,x:number,y:number,w:number,h:number,t:number){
 function phone(c:C,x:number,y:number,s:number,t:number){c.save();c.translate(x,y);c.scale(s,s);rect(c,-112,-181,224,362,ink,23);map(c,-102,-166,204,330,t);rect(c,-34,-174,68,10,ink,5);rect(c,-28,166,56,4,light,2);c.restore();}
 function title(c:C,s:string){txt(c,s,256,110,34,ink,800);}
 function signature(c:C,u:number){show(c,u,()=>{line(c,[42,583],[470,583],'#C9BBA7',1);rect(c,45,598,26*ease(u),6,rust,2);c.font='800 17px system-ui,sans-serif';c.textAlign='left';c.fillStyle=teal;c.fillText('SIMPLY EXPLAINED',83,609,370);});}
-const target:P=[257,366],centers:P[]=[[120,265],[392,270],[258,475]],colors=[rust,blue,teal];
+const target:P=[257,366],centers:P[]=[[166,278],[348,278],[258,475]],colors=[rust,blue,teal];
 function ranges(c:C,u:number){
  for(let i=0;i<3;i++){const a=centers[i],r=Math.hypot(a[0]-target[0],a[1]-target[1]),q=ease((u-i*.20)/.22);if(q<=0)continue;
  c.save();c.globalAlpha=q;c.beginPath();c.arc(...a,r,0,Math.PI*2*q);c.strokeStyle=colors[i];c.lineWidth=2.6;c.stroke();disk(c,...a,8,colors[i],light,2);c.restore();}
@@ -76,7 +76,7 @@ export function renderGpsDiagram(c:C,scene:OpenMotionScene,t:number){
   pulse(c,[a[0]+15,a[1]+24],[b[0]-28,b[1]-40],t*.6);show(c,(u-.22)/.2,()=>{rect(c,46,325,158,56,light,8);txt(c,'Sent',125,360,25,ink);});
   show(c,(u-.48)/.2,()=>{rect(c,283,535,182,52,light,8);txt(c,'Received',374,568,24,ink);});break;}
  case 'prediction':
-  title(c,'Estimate distance');txt(c,'Simplified 2D example',256,156,18,muted,500);ranges(c,u);show(c,(u-.74)/.2,()=>txt(c,'One possible location',256,615,23,blue,700));break;
+  title(c,'Estimate distance');txt(c,'Simplified 2D example',256,156,18,muted,500);ranges(c,u);show(c,(u-.74)/.2,()=>txt(c,'Common intersection',256,615,23,blue,700));break;
  case 'response': {
   title(c,'Four satellite signals');const sats:P[]=[[80,230],[431,236],[94,451],[416,464]];const q=ease(u/.30);globe(c,256,353,96+9*q,35+u*15);
   for(let i=0;i<4;i++){const a=sats[i];show(c,(u-i*.15)/.17,()=>{satellite(c,...a,.73,(i%2?.28:-.28));pulse(c,[a[0],a[1]+16],[256,353],t*.7+i*.22);});}
