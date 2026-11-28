@@ -21,3 +21,16 @@ Official help:
 ## TikTok post captions
 
 The same panel includes an editable TikTok post caption, separate from timed video subtitles. All ten Human Side episodes have a short English proposal tailored to the story; other portrait projects use their own title as a starting point. Captions default to plain text without hashtags. Use Copy TikTok-caption and paste into TikTok when uploading. Reset the TikTok proposal independently or edit and save locally in the browser. Existing saved YouTube metadata is retained and gains a default TikTok caption on loading if the field is absent. Both ZIP variants include tiktok-caption.txt and the tiktokCaption field in youtube-metadata.json. The video itself, rendering, and verification are unchanged. Upload remains manual. The 2200-character editor cap is a local drafting choice, not a claim about TikTok's current platform limit.
+
+
+## Search-focused publication metadata (SEO)
+
+The ten Human Side episodes each have an editorial primary search phrase, four related keywords, a search-focused TikTok caption, a distinct conversation-focused TikTok caption and revised YouTube title/description/tags. The primary phrase appears naturally in the title, opening description and search-focused caption. The episode 08 phrase is "how to stop endless scrolling" rather than "doomscrolling" because the story does not depict negative news.
+
+Studio exposes the search term and related keywords as editable planning fields. Copy either TikTok variant, or use the existing YouTube copy controls. Changing the keyword fields does not automatically rewrite the other text. "Pas SEO-voorstel toe" restores the proposed metadata while keeping sources. Existing untouched legacy defaults upgrade automatically; individually edited fields and source entries are preserved. Other vertical projects retain their existing title-based defaults, with empty editable keyword fields.
+
+Both ZIP modes retain existing filenames and add tiktok-interaction-caption.txt and seo-keywords.txt. The existing tiktok-caption.txt contains the search-focused draft by default; youtube-metadata.json includes both variants and the keyword brief. All remain plain text without default hashtags. No change to scenes, audio, timed subtitles, renderer or publication master verification.
+
+These are editorial relevance proposals, not measured search volumes, trends, ranking predictions or guaranteed results. Use Creator Search Insights and YouTube Analytics to validate demand and refine wording. Official guidance: https://support.tiktok.com/nl/using-tiktok/exploring-videos/how-tiktok-recommends-content and https://support.google.com/youtube/answer/12948449. YouTube title, thumbnail and description are more important than tags for discovery (https://support.google.com/youtube/answer/146402).
+
+QA: all ten actual project files were checked against the metadata helper for primary phrase alignment, four related terms, distinct variants, title/description/tag length and non-destructive migration. Generic fallback and ZIP/copy integration anchors checked. No extra test Actions or new dependencies. Actual browser interaction and ZIP creation remain unverified.
