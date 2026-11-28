@@ -1,3 +1,4 @@
+import { BUNDLE_REVISION } from './engine/exportProvenance';
 import { PresenterLab } from './components/PresenterLab';
 import { useEffect, useRef, useState } from 'react';
 import { ChatGptWorkflowView } from './components/ChatGptWorkflowView';
@@ -266,7 +267,9 @@ export default function App() {
   const pilotSlug='simply-explained-001-how-ai-actually-works';
   const presenterRoute=['alex-performance','presenter-lab','character-studio','cartoon-cinema'].includes(activeTab);
   const pilotRoute=activeTab==='studio'&&(activeProject.slug===pilotSlug||initialRoute.requestedSlug===pilotSlug||pendingDeepLinkSlugRef.current===pilotSlug);
-  const waitForPublished=onPages&&(pilotRoute||presenterRoute)&&manifestStatus!=='ready';
+  const publishedPilot=projects.find(p=>p.slug===pilotSlug);
+  const pilotBuildMismatch=manifestStatus==='ready'&&(!publishedPilot||publishedPilot.templateVersion!=='3.3'||(BUNDLE_REVISION!=='local'&&publishedPilot.buildRevision!==BUNDLE_REVISION));
+  const waitForPublished=onPages&&(pilotRoute||presenterRoute)&&(manifestStatus!=='ready'||pilotBuildMismatch);
   const navItems = [
     {id:'dashboard',label:'Dashboard',icon:LayoutDashboard},
     {id:'series',label:'Series',icon:Layers},
@@ -306,7 +309,7 @@ export default function App() {
         </aside>
         <main className="flex-1 min-w-0 w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           {isWorkspace&&<WorkspaceView key={activeTab} tab={activeTab as WorkspaceTab} projects={projects} repoConfig={repoConfig} selectedSeriesId={selectedSeriesId} onSeries={openSeries} onNavigate={navigate} onOpenStudio={handleOpenStudio} onNewEpisode={newEpisode} onNewProject={()=>navigate('chatgpt')} onSync={handleSyncGitHub} isSyncing={isSyncing} syncMessage={syncMessage}/>}
-          {waitForPublished&&<div role="status" className="rounded-xl border bg-white p-5 text-sm">{manifestStatus==='loading'?'Actuele publicatie laden…':'De actuele publicatie is niet bereikbaar. Oude lokale kopieën worden niet voor export geopend.'}{manifestStatus==='unavailable'&&<button className="ml-3 underline" onClick={()=>window.location.reload()}>Opnieuw laden</button>}</div>}
+          {waitForPublished&&<div role="status" className="rounded-xl border bg-white p-5 text-sm">{manifestStatus==='loading'?'Actuele publicatie laden…':'De project- en rendererversie zijn niet actueel of niet bereikbaar. Herlaad de Studio; oude kopieën worden niet voor export geopend.'}{manifestStatus!=='loading'&&<button className="ml-3 underline" onClick={()=>window.location.reload()}>Opnieuw laden</button>}</div>}
           {!waitForPublished&&activeTab==='studio'&&activeProject&&<StudioView key={activeProject.id+':'+(activeProject.templateVersion??'')+':'+(activeProject.buildRevision??'')} project={activeProject} repoConfig={repoConfig} autoStartExport={autoStartExport} onConsumeAutoStart={()=>setAutoStartExport(false)} onUpdateProject={handleUpdateProject} onBackToLibrary={backFromStudio}/>}
           {activeTab==='chatgpt'&&<ChatGptWorkflowView key={workflowSeries?.id??'standalone'} repoConfig={repoConfig} onAddProject={handleAddProject} series={workflowSeries} projects={projects}/>}
           {!waitForPublished&&(activeTab==='presenter-lab'||activeTab==='character-studio'||activeTab==='cartoon-cinema'||activeTab==='alex-performance')&&<PresenterLab key={activeTab} projects={projects} onUpdateProject={handleUpdateProject} initialCustom={activeTab==='character-studio'} initialCartoon={activeTab==='cartoon-cinema'} initialPerformance={activeTab==='alex-performance'}/>}
