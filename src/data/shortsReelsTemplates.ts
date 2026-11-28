@@ -695,7 +695,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
     "id": "short-scotland-road-trip",
     "slug": "short-scotland-road-trip",
     "title": "Premium Travel Route Reel — Scotland / The Open Road",
-    "description": "R7 Cinematic Journey: geographic reveals, continuous route camera, matched photo transitions, independent titles and synchronized original score.",
+    "description": "R8 Slow Cinema: one photograph per destination, short fixed captions, relaxed camera motion and R7 geographic reveals.",
     "category": "Shorts & Reels",
     "author": "OpenMotion Studio",
     "source": "template",
@@ -734,7 +734,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Edinburgh",
               "lat": 55.9486,
               "lon": -3.1999,
-              "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
+              "note": "A historic castle above the city.",
               "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Edinburgh_Castle_from_Princes_Street_%282026%29.jpg/1280px-Edinburgh_Castle_from_Princes_Street_%282026%29.jpg",
               "photoAuthor": "LibKat17",
               "photoLicense": "CC BY 4.0",
@@ -761,7 +761,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Glen Coe",
               "lat": 56.681,
               "lon": -5.004,
-              "note": "Drive past dramatic mountain walls and a glacial Highland valley.",
+              "note": "A dramatic Highland valley.",
               "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Glencoe%2C_Scotland.jpg/1280px-Glencoe%2C_Scotland.jpg",
               "photoAuthor": "Saadtowheed",
               "photoLicense": "CC BY-SA 4.0",
@@ -788,7 +788,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Eilean Donan",
               "lat": 57.2743,
               "lon": -5.5168,
-              "note": "A celebrated island castle stands where three sea lochs meet.",
+              "note": "A castle where three lochs meet.",
               "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/20210818_Eilean_Donan_Castle_causeway-9470.jpg/1365px-20210818_Eilean_Donan_Castle_causeway-9470.jpg",
               "photoAuthor": "Balon Greyjoy",
               "photoLicense": "CC BY-SA 3.0",
@@ -816,28 +816,29 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Portree",
               "lat": 57.4129,
               "lon": -6.1945,
-              "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
-              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
-              "photoAuthor": "Bewahrerderwerte",
-              "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg",
+              "note": "Wild landscapes of the Isle of Skye.",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg/1280px-Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
+              "photoAuthor": "Squirrel1113",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
               "photoFocus": [
                 0.5,
                 0.5
               ],
               "photoFit": "cover",
               "secondaryPhoto": {
-                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg/1280px-Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
-                "photoAuthor": "Squirrel1113",
-                "photoLicense": "CC BY 4.0",
-                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
-                "label": "The Quiraing · Isle of Skye",
+                "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
+                "photoAuthor": "Bewahrerderwerte",
+                "photoLicense": "CC BY-SA 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg",
                 "photoFocus": [
                   0.5,
                   0.5
                 ],
-                "photoFit": "cover"
-              }
+                "photoFit": "cover",
+                "label": "Portree harbour"
+              },
+              "label": "The Quiraing · Isle of Skye"
             }
           ],
           "route": {
@@ -883,7 +884,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "seriesTitle": "THE OPEN ROAD COLLECTION · 001",
           "regionTitle": "SCOTLAND",
           "mapIntro": false,
-          "editorialRevision": 7,
+          "editorialRevision": 8,
           "relief": true,
           "openingPhoto": {
             "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg/1280px-A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
@@ -914,7 +915,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Edinburgh",
               "lat": 55.9486,
               "lon": -3.1999,
-              "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
+              "note": "A historic castle above the city.",
               "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Edinburgh_Castle_from_Princes_Street_%282026%29.jpg/1280px-Edinburgh_Castle_from_Princes_Street_%282026%29.jpg",
               "photoAuthor": "LibKat17",
               "photoLicense": "CC BY 4.0",
@@ -941,7 +942,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Glen Coe",
               "lat": 56.681,
               "lon": -5.004,
-              "note": "Drive past dramatic mountain walls and a glacial Highland valley.",
+              "note": "A dramatic Highland valley.",
               "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Glencoe%2C_Scotland.jpg/1280px-Glencoe%2C_Scotland.jpg",
               "photoAuthor": "Saadtowheed",
               "photoLicense": "CC BY-SA 4.0",
@@ -968,7 +969,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Eilean Donan",
               "lat": 57.2743,
               "lon": -5.5168,
-              "note": "A celebrated island castle stands where three sea lochs meet.",
+              "note": "A castle where three lochs meet.",
               "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/20210818_Eilean_Donan_Castle_causeway-9470.jpg/1365px-20210818_Eilean_Donan_Castle_causeway-9470.jpg",
               "photoAuthor": "Balon Greyjoy",
               "photoLicense": "CC BY-SA 3.0",
@@ -996,28 +997,29 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Portree",
               "lat": 57.4129,
               "lon": -6.1945,
-              "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
-              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
-              "photoAuthor": "Bewahrerderwerte",
-              "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg",
+              "note": "Wild landscapes of the Isle of Skye.",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg/1280px-Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
+              "photoAuthor": "Squirrel1113",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
               "photoFocus": [
                 0.5,
                 0.5
               ],
               "photoFit": "cover",
               "secondaryPhoto": {
-                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg/1280px-Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
-                "photoAuthor": "Squirrel1113",
-                "photoLicense": "CC BY 4.0",
-                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
-                "label": "The Quiraing · Isle of Skye",
+                "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
+                "photoAuthor": "Bewahrerderwerte",
+                "photoLicense": "CC BY-SA 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg",
                 "photoFocus": [
                   0.5,
                   0.5
                 ],
-                "photoFit": "cover"
-              }
+                "photoFit": "cover",
+                "label": "Portree harbour"
+              },
+              "label": "The Quiraing · Isle of Skye"
             }
           ],
           "route": {
@@ -1063,7 +1065,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "seriesTitle": "THE OPEN ROAD COLLECTION · 001",
           "regionTitle": "SCOTLAND",
           "mapIntro": true,
-          "editorialRevision": 7,
+          "editorialRevision": 8,
           "relief": true
         }
       },
@@ -1082,7 +1084,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Edinburgh",
               "lat": 55.9486,
               "lon": -3.1999,
-              "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
+              "note": "A historic castle above the city.",
               "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Edinburgh_Castle_from_Princes_Street_%282026%29.jpg/1280px-Edinburgh_Castle_from_Princes_Street_%282026%29.jpg",
               "photoAuthor": "LibKat17",
               "photoLicense": "CC BY 4.0",
@@ -1109,7 +1111,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Glen Coe",
               "lat": 56.681,
               "lon": -5.004,
-              "note": "Drive past dramatic mountain walls and a glacial Highland valley.",
+              "note": "A dramatic Highland valley.",
               "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Glencoe%2C_Scotland.jpg/1280px-Glencoe%2C_Scotland.jpg",
               "photoAuthor": "Saadtowheed",
               "photoLicense": "CC BY-SA 4.0",
@@ -1136,7 +1138,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Eilean Donan",
               "lat": 57.2743,
               "lon": -5.5168,
-              "note": "A celebrated island castle stands where three sea lochs meet.",
+              "note": "A castle where three lochs meet.",
               "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/20210818_Eilean_Donan_Castle_causeway-9470.jpg/1365px-20210818_Eilean_Donan_Castle_causeway-9470.jpg",
               "photoAuthor": "Balon Greyjoy",
               "photoLicense": "CC BY-SA 3.0",
@@ -1164,28 +1166,29 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Portree",
               "lat": 57.4129,
               "lon": -6.1945,
-              "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
-              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
-              "photoAuthor": "Bewahrerderwerte",
-              "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg",
+              "note": "Wild landscapes of the Isle of Skye.",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg/1280px-Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
+              "photoAuthor": "Squirrel1113",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
               "photoFocus": [
                 0.5,
                 0.5
               ],
               "photoFit": "cover",
               "secondaryPhoto": {
-                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg/1280px-Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
-                "photoAuthor": "Squirrel1113",
-                "photoLicense": "CC BY 4.0",
-                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
-                "label": "The Quiraing · Isle of Skye",
+                "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
+                "photoAuthor": "Bewahrerderwerte",
+                "photoLicense": "CC BY-SA 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg",
                 "photoFocus": [
                   0.5,
                   0.5
                 ],
-                "photoFit": "cover"
-              }
+                "photoFit": "cover",
+                "label": "Portree harbour"
+              },
+              "label": "The Quiraing · Isle of Skye"
             }
           ],
           "route": {
@@ -1231,7 +1234,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "seriesTitle": "THE OPEN ROAD COLLECTION · 001",
           "regionTitle": "SCOTLAND",
           "mapIntro": false,
-          "editorialRevision": 7,
+          "editorialRevision": 8,
           "relief": true
         }
       },
@@ -1250,7 +1253,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Edinburgh",
               "lat": 55.9486,
               "lon": -3.1999,
-              "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
+              "note": "A historic castle above the city.",
               "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Edinburgh_Castle_from_Princes_Street_%282026%29.jpg/1280px-Edinburgh_Castle_from_Princes_Street_%282026%29.jpg",
               "photoAuthor": "LibKat17",
               "photoLicense": "CC BY 4.0",
@@ -1277,7 +1280,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Glen Coe",
               "lat": 56.681,
               "lon": -5.004,
-              "note": "Drive past dramatic mountain walls and a glacial Highland valley.",
+              "note": "A dramatic Highland valley.",
               "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Glencoe%2C_Scotland.jpg/1280px-Glencoe%2C_Scotland.jpg",
               "photoAuthor": "Saadtowheed",
               "photoLicense": "CC BY-SA 4.0",
@@ -1304,7 +1307,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Eilean Donan",
               "lat": 57.2743,
               "lon": -5.5168,
-              "note": "A celebrated island castle stands where three sea lochs meet.",
+              "note": "A castle where three lochs meet.",
               "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/20210818_Eilean_Donan_Castle_causeway-9470.jpg/1365px-20210818_Eilean_Donan_Castle_causeway-9470.jpg",
               "photoAuthor": "Balon Greyjoy",
               "photoLicense": "CC BY-SA 3.0",
@@ -1332,28 +1335,29 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Portree",
               "lat": 57.4129,
               "lon": -6.1945,
-              "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
-              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
-              "photoAuthor": "Bewahrerderwerte",
-              "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg",
+              "note": "Wild landscapes of the Isle of Skye.",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg/1280px-Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
+              "photoAuthor": "Squirrel1113",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
               "photoFocus": [
                 0.5,
                 0.5
               ],
               "photoFit": "cover",
               "secondaryPhoto": {
-                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg/1280px-Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
-                "photoAuthor": "Squirrel1113",
-                "photoLicense": "CC BY 4.0",
-                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
-                "label": "The Quiraing · Isle of Skye",
+                "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
+                "photoAuthor": "Bewahrerderwerte",
+                "photoLicense": "CC BY-SA 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg",
                 "photoFocus": [
                   0.5,
                   0.5
                 ],
-                "photoFit": "cover"
-              }
+                "photoFit": "cover",
+                "label": "Portree harbour"
+              },
+              "label": "The Quiraing · Isle of Skye"
             }
           ],
           "route": {
@@ -1399,7 +1403,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "seriesTitle": "THE OPEN ROAD COLLECTION · 001",
           "regionTitle": "SCOTLAND",
           "mapIntro": false,
-          "editorialRevision": 7,
+          "editorialRevision": 8,
           "relief": true
         }
       },
@@ -1418,7 +1422,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Edinburgh",
               "lat": 55.9486,
               "lon": -3.1999,
-              "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
+              "note": "A historic castle above the city.",
               "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Edinburgh_Castle_from_Princes_Street_%282026%29.jpg/1280px-Edinburgh_Castle_from_Princes_Street_%282026%29.jpg",
               "photoAuthor": "LibKat17",
               "photoLicense": "CC BY 4.0",
@@ -1445,7 +1449,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Glen Coe",
               "lat": 56.681,
               "lon": -5.004,
-              "note": "Drive past dramatic mountain walls and a glacial Highland valley.",
+              "note": "A dramatic Highland valley.",
               "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Glencoe%2C_Scotland.jpg/1280px-Glencoe%2C_Scotland.jpg",
               "photoAuthor": "Saadtowheed",
               "photoLicense": "CC BY-SA 4.0",
@@ -1472,7 +1476,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Eilean Donan",
               "lat": 57.2743,
               "lon": -5.5168,
-              "note": "A celebrated island castle stands where three sea lochs meet.",
+              "note": "A castle where three lochs meet.",
               "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/20210818_Eilean_Donan_Castle_causeway-9470.jpg/1365px-20210818_Eilean_Donan_Castle_causeway-9470.jpg",
               "photoAuthor": "Balon Greyjoy",
               "photoLicense": "CC BY-SA 3.0",
@@ -1500,28 +1504,29 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Portree",
               "lat": 57.4129,
               "lon": -6.1945,
-              "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
-              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
-              "photoAuthor": "Bewahrerderwerte",
-              "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg",
+              "note": "Wild landscapes of the Isle of Skye.",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg/1280px-Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
+              "photoAuthor": "Squirrel1113",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
               "photoFocus": [
                 0.5,
                 0.5
               ],
               "photoFit": "cover",
               "secondaryPhoto": {
-                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg/1280px-Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
-                "photoAuthor": "Squirrel1113",
-                "photoLicense": "CC BY 4.0",
-                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
-                "label": "The Quiraing · Isle of Skye",
+                "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
+                "photoAuthor": "Bewahrerderwerte",
+                "photoLicense": "CC BY-SA 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg",
                 "photoFocus": [
                   0.5,
                   0.5
                 ],
-                "photoFit": "cover"
-              }
+                "photoFit": "cover",
+                "label": "Portree harbour"
+              },
+              "label": "The Quiraing · Isle of Skye"
             }
           ],
           "route": {
@@ -1567,7 +1572,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "seriesTitle": "THE OPEN ROAD COLLECTION · 001",
           "regionTitle": "SCOTLAND",
           "mapIntro": false,
-          "editorialRevision": 7,
+          "editorialRevision": 8,
           "relief": true
         }
       },
@@ -1586,7 +1591,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Edinburgh",
               "lat": 55.9486,
               "lon": -3.1999,
-              "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
+              "note": "A historic castle above the city.",
               "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Edinburgh_Castle_from_Princes_Street_%282026%29.jpg/1280px-Edinburgh_Castle_from_Princes_Street_%282026%29.jpg",
               "photoAuthor": "LibKat17",
               "photoLicense": "CC BY 4.0",
@@ -1613,7 +1618,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Glen Coe",
               "lat": 56.681,
               "lon": -5.004,
-              "note": "Drive past dramatic mountain walls and a glacial Highland valley.",
+              "note": "A dramatic Highland valley.",
               "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Glencoe%2C_Scotland.jpg/1280px-Glencoe%2C_Scotland.jpg",
               "photoAuthor": "Saadtowheed",
               "photoLicense": "CC BY-SA 4.0",
@@ -1640,7 +1645,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Eilean Donan",
               "lat": 57.2743,
               "lon": -5.5168,
-              "note": "A celebrated island castle stands where three sea lochs meet.",
+              "note": "A castle where three lochs meet.",
               "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/20210818_Eilean_Donan_Castle_causeway-9470.jpg/1365px-20210818_Eilean_Donan_Castle_causeway-9470.jpg",
               "photoAuthor": "Balon Greyjoy",
               "photoLicense": "CC BY-SA 3.0",
@@ -1668,28 +1673,29 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Portree",
               "lat": 57.4129,
               "lon": -6.1945,
-              "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
-              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
-              "photoAuthor": "Bewahrerderwerte",
-              "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg",
+              "note": "Wild landscapes of the Isle of Skye.",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg/1280px-Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
+              "photoAuthor": "Squirrel1113",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
               "photoFocus": [
                 0.5,
                 0.5
               ],
               "photoFit": "cover",
               "secondaryPhoto": {
-                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg/1280px-Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
-                "photoAuthor": "Squirrel1113",
-                "photoLicense": "CC BY 4.0",
-                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
-                "label": "The Quiraing · Isle of Skye",
+                "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
+                "photoAuthor": "Bewahrerderwerte",
+                "photoLicense": "CC BY-SA 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg",
                 "photoFocus": [
                   0.5,
                   0.5
                 ],
-                "photoFit": "cover"
-              }
+                "photoFit": "cover",
+                "label": "Portree harbour"
+              },
+              "label": "The Quiraing · Isle of Skye"
             }
           ],
           "route": {
@@ -1735,7 +1741,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "seriesTitle": "THE OPEN ROAD COLLECTION · 001",
           "regionTitle": "SCOTLAND",
           "mapIntro": false,
-          "editorialRevision": 7,
+          "editorialRevision": 8,
           "relief": true
         }
       },
@@ -1754,7 +1760,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Edinburgh",
               "lat": 55.9486,
               "lon": -3.1999,
-              "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
+              "note": "A historic castle above the city.",
               "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Edinburgh_Castle_from_Princes_Street_%282026%29.jpg/1280px-Edinburgh_Castle_from_Princes_Street_%282026%29.jpg",
               "photoAuthor": "LibKat17",
               "photoLicense": "CC BY 4.0",
@@ -1781,7 +1787,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Glen Coe",
               "lat": 56.681,
               "lon": -5.004,
-              "note": "Drive past dramatic mountain walls and a glacial Highland valley.",
+              "note": "A dramatic Highland valley.",
               "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Glencoe%2C_Scotland.jpg/1280px-Glencoe%2C_Scotland.jpg",
               "photoAuthor": "Saadtowheed",
               "photoLicense": "CC BY-SA 4.0",
@@ -1808,7 +1814,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Eilean Donan",
               "lat": 57.2743,
               "lon": -5.5168,
-              "note": "A celebrated island castle stands where three sea lochs meet.",
+              "note": "A castle where three lochs meet.",
               "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/20210818_Eilean_Donan_Castle_causeway-9470.jpg/1365px-20210818_Eilean_Donan_Castle_causeway-9470.jpg",
               "photoAuthor": "Balon Greyjoy",
               "photoLicense": "CC BY-SA 3.0",
@@ -1836,28 +1842,29 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Portree",
               "lat": 57.4129,
               "lon": -6.1945,
-              "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
-              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
-              "photoAuthor": "Bewahrerderwerte",
-              "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg",
+              "note": "Wild landscapes of the Isle of Skye.",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg/1280px-Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
+              "photoAuthor": "Squirrel1113",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
               "photoFocus": [
                 0.5,
                 0.5
               ],
               "photoFit": "cover",
               "secondaryPhoto": {
-                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg/1280px-Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
-                "photoAuthor": "Squirrel1113",
-                "photoLicense": "CC BY 4.0",
-                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
-                "label": "The Quiraing · Isle of Skye",
+                "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
+                "photoAuthor": "Bewahrerderwerte",
+                "photoLicense": "CC BY-SA 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg",
                 "photoFocus": [
                   0.5,
                   0.5
                 ],
-                "photoFit": "cover"
-              }
+                "photoFit": "cover",
+                "label": "Portree harbour"
+              },
+              "label": "The Quiraing · Isle of Skye"
             }
           ],
           "route": {
@@ -1903,7 +1910,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "seriesTitle": "THE OPEN ROAD COLLECTION · 001",
           "regionTitle": "SCOTLAND",
           "mapIntro": false,
-          "editorialRevision": 7,
+          "editorialRevision": 8,
           "relief": true
         }
       },
@@ -1922,7 +1929,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Edinburgh",
               "lat": 55.9486,
               "lon": -3.1999,
-              "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
+              "note": "A historic castle above the city.",
               "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Edinburgh_Castle_from_Princes_Street_%282026%29.jpg/1280px-Edinburgh_Castle_from_Princes_Street_%282026%29.jpg",
               "photoAuthor": "LibKat17",
               "photoLicense": "CC BY 4.0",
@@ -1949,7 +1956,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Glen Coe",
               "lat": 56.681,
               "lon": -5.004,
-              "note": "Drive past dramatic mountain walls and a glacial Highland valley.",
+              "note": "A dramatic Highland valley.",
               "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Glencoe%2C_Scotland.jpg/1280px-Glencoe%2C_Scotland.jpg",
               "photoAuthor": "Saadtowheed",
               "photoLicense": "CC BY-SA 4.0",
@@ -1976,7 +1983,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Eilean Donan",
               "lat": 57.2743,
               "lon": -5.5168,
-              "note": "A celebrated island castle stands where three sea lochs meet.",
+              "note": "A castle where three lochs meet.",
               "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/20210818_Eilean_Donan_Castle_causeway-9470.jpg/1365px-20210818_Eilean_Donan_Castle_causeway-9470.jpg",
               "photoAuthor": "Balon Greyjoy",
               "photoLicense": "CC BY-SA 3.0",
@@ -2004,28 +2011,29 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Portree",
               "lat": 57.4129,
               "lon": -6.1945,
-              "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
-              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
-              "photoAuthor": "Bewahrerderwerte",
-              "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg",
+              "note": "Wild landscapes of the Isle of Skye.",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg/1280px-Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
+              "photoAuthor": "Squirrel1113",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
               "photoFocus": [
                 0.5,
                 0.5
               ],
               "photoFit": "cover",
               "secondaryPhoto": {
-                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg/1280px-Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
-                "photoAuthor": "Squirrel1113",
-                "photoLicense": "CC BY 4.0",
-                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
-                "label": "The Quiraing · Isle of Skye",
+                "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
+                "photoAuthor": "Bewahrerderwerte",
+                "photoLicense": "CC BY-SA 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg",
                 "photoFocus": [
                   0.5,
                   0.5
                 ],
-                "photoFit": "cover"
-              }
+                "photoFit": "cover",
+                "label": "Portree harbour"
+              },
+              "label": "The Quiraing · Isle of Skye"
             }
           ],
           "route": {
@@ -2071,7 +2079,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "seriesTitle": "THE OPEN ROAD COLLECTION · 001",
           "regionTitle": "SCOTLAND",
           "mapIntro": false,
-          "editorialRevision": 7,
+          "editorialRevision": 8,
           "relief": true
         }
       },
@@ -2090,7 +2098,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Edinburgh",
               "lat": 55.9486,
               "lon": -3.1999,
-              "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
+              "note": "A historic castle above the city.",
               "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Edinburgh_Castle_from_Princes_Street_%282026%29.jpg/1280px-Edinburgh_Castle_from_Princes_Street_%282026%29.jpg",
               "photoAuthor": "LibKat17",
               "photoLicense": "CC BY 4.0",
@@ -2117,7 +2125,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Glen Coe",
               "lat": 56.681,
               "lon": -5.004,
-              "note": "Drive past dramatic mountain walls and a glacial Highland valley.",
+              "note": "A dramatic Highland valley.",
               "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Glencoe%2C_Scotland.jpg/1280px-Glencoe%2C_Scotland.jpg",
               "photoAuthor": "Saadtowheed",
               "photoLicense": "CC BY-SA 4.0",
@@ -2144,7 +2152,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Eilean Donan",
               "lat": 57.2743,
               "lon": -5.5168,
-              "note": "A celebrated island castle stands where three sea lochs meet.",
+              "note": "A castle where three lochs meet.",
               "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/20210818_Eilean_Donan_Castle_causeway-9470.jpg/1365px-20210818_Eilean_Donan_Castle_causeway-9470.jpg",
               "photoAuthor": "Balon Greyjoy",
               "photoLicense": "CC BY-SA 3.0",
@@ -2172,28 +2180,29 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Portree",
               "lat": 57.4129,
               "lon": -6.1945,
-              "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
-              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
-              "photoAuthor": "Bewahrerderwerte",
-              "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg",
+              "note": "Wild landscapes of the Isle of Skye.",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg/1280px-Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
+              "photoAuthor": "Squirrel1113",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
               "photoFocus": [
                 0.5,
                 0.5
               ],
               "photoFit": "cover",
               "secondaryPhoto": {
-                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg/1280px-Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
-                "photoAuthor": "Squirrel1113",
-                "photoLicense": "CC BY 4.0",
-                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
-                "label": "The Quiraing · Isle of Skye",
+                "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
+                "photoAuthor": "Bewahrerderwerte",
+                "photoLicense": "CC BY-SA 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg",
                 "photoFocus": [
                   0.5,
                   0.5
                 ],
-                "photoFit": "cover"
-              }
+                "photoFit": "cover",
+                "label": "Portree harbour"
+              },
+              "label": "The Quiraing · Isle of Skye"
             }
           ],
           "route": {
@@ -2239,7 +2248,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "seriesTitle": "THE OPEN ROAD COLLECTION · 001",
           "regionTitle": "SCOTLAND",
           "mapIntro": false,
-          "editorialRevision": 7,
+          "editorialRevision": 8,
           "relief": true
         }
       },
@@ -2258,7 +2267,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Edinburgh",
               "lat": 55.9486,
               "lon": -3.1999,
-              "note": "Begin beneath Edinburgh Castle, where the Old Town rises above the city.",
+              "note": "A historic castle above the city.",
               "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Edinburgh_Castle_from_Princes_Street_%282026%29.jpg/1280px-Edinburgh_Castle_from_Princes_Street_%282026%29.jpg",
               "photoAuthor": "LibKat17",
               "photoLicense": "CC BY 4.0",
@@ -2285,7 +2294,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Glen Coe",
               "lat": 56.681,
               "lon": -5.004,
-              "note": "Drive past dramatic mountain walls and a glacial Highland valley.",
+              "note": "A dramatic Highland valley.",
               "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Glencoe%2C_Scotland.jpg/1280px-Glencoe%2C_Scotland.jpg",
               "photoAuthor": "Saadtowheed",
               "photoLicense": "CC BY-SA 4.0",
@@ -2312,7 +2321,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Eilean Donan",
               "lat": 57.2743,
               "lon": -5.5168,
-              "note": "A celebrated island castle stands where three sea lochs meet.",
+              "note": "A castle where three lochs meet.",
               "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/20210818_Eilean_Donan_Castle_causeway-9470.jpg/1365px-20210818_Eilean_Donan_Castle_causeway-9470.jpg",
               "photoAuthor": "Balon Greyjoy",
               "photoLicense": "CC BY-SA 3.0",
@@ -2340,28 +2349,29 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
               "name": "Portree",
               "lat": 57.4129,
               "lon": -6.1945,
-              "note": "Finish in Skye's colourful harbour town, surrounded by island scenery.",
-              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
-              "photoAuthor": "Bewahrerderwerte",
-              "photoLicense": "CC BY-SA 4.0",
-              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg",
+              "note": "Wild landscapes of the Isle of Skye.",
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg/1280px-Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
+              "photoAuthor": "Squirrel1113",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
               "photoFocus": [
                 0.5,
                 0.5
               ],
               "photoFit": "cover",
               "secondaryPhoto": {
-                "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg/1280px-Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
-                "photoAuthor": "Squirrel1113",
-                "photoLicense": "CC BY 4.0",
-                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Quiraing%2C_Isle_of_Skye%2C_Scotland.jpg",
-                "label": "The Quiraing · Isle of Skye",
+                "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2018_07_15_Schottland_%2884%29.jpg/1280px-2018_07_15_Schottland_%2884%29.jpg",
+                "photoAuthor": "Bewahrerderwerte",
+                "photoLicense": "CC BY-SA 4.0",
+                "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:2018_07_15_Schottland_(84).jpg",
                 "photoFocus": [
                   0.5,
                   0.5
                 ],
-                "photoFit": "cover"
-              }
+                "photoFit": "cover",
+                "label": "Portree harbour"
+              },
+              "label": "The Quiraing · Isle of Skye"
             }
           ],
           "route": {
@@ -2408,7 +2418,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "regionTitle": "SCOTLAND",
           "mapIntro": false,
           "cta": "SAVE THIS ROAD TRIP",
-          "editorialRevision": 7,
+          "editorialRevision": 8,
           "relief": true
         }
       }
