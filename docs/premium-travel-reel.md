@@ -174,3 +174,7 @@ New photo sources (cropped and color graded):
 - Stone walls above the loch: Dakotsmom229, CC BY-SA 3.0, https://commons.wikimedia.org/wiki/File:2012_Eilean_Donan_Castle.JPG
 
 Manual master also checks opening-photo decoding and exact H.264/AAC codecs and frame count (1800). No master run or device playback is asserted by this source revision. Standard Pages build does not render MP4.
+
+## R7 — Cinematic Journey (PTR-21–30)
+
+Series template 2.0 retains version 1.0 (R6). All ten scenes total 30 seconds; 1080 × 1920 / 60 fps remains requested. Geographic reveals use the same projected stop and camera transform as the map. The overlap uses the outgoing shot's tail and carries incoming time across the boundary. Photo pairs use a 0.30 s directional wipe; missing primary/secondary images reuse an available photograph from the same stop. Both missing blocks publication export. The opening push, route tracking, finale pulses, independent title weights and audio cues are deterministic. True photographic parallax requires separately prepared depth layers and is not included; use focal pan/zoom instead. Map snapshots remain 2D and the camera is clamped to their bounds. No new dependencies or workflows. Browser rendering and actual output require visual review.

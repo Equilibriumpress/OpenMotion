@@ -695,12 +695,12 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
     "id": "short-scotland-road-trip",
     "slug": "short-scotland-road-trip",
     "title": "Premium Travel Route Reel — Scotland / The Open Road",
-    "description": "R6 editorial director's cut: direct cuts, genuine shaded relief, independent opening image, two portrait castle photographs, legible destination labels and original score.",
+    "description": "R7 Cinematic Journey: geographic reveals, continuous route camera, matched photo transitions, independent titles and synchronized original score.",
     "category": "Shorts & Reels",
     "author": "OpenMotion Studio",
     "source": "template",
     "createdAt": "2026-11-24",
-    "updatedAt": "2026-11-27",
+    "updatedAt": "2026-11-28",
     "githubPath": "projects/short-scotland-road-trip/project.json",
     "format": "9:16",
     "width": 1080,
@@ -883,7 +883,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "seriesTitle": "THE OPEN ROAD COLLECTION · 001",
           "regionTitle": "SCOTLAND",
           "mapIntro": false,
-          "editorialRevision": 6,
+          "editorialRevision": 7,
           "relief": true,
           "openingPhoto": {
             "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg/1280px-A82_heading_to_the_Pass_of_Glencoe_-_geograph.org.uk_-_7710150.jpg",
@@ -1063,7 +1063,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "seriesTitle": "THE OPEN ROAD COLLECTION · 001",
           "regionTitle": "SCOTLAND",
           "mapIntro": true,
-          "editorialRevision": 6,
+          "editorialRevision": 7,
           "relief": true
         }
       },
@@ -1231,7 +1231,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "seriesTitle": "THE OPEN ROAD COLLECTION · 001",
           "regionTitle": "SCOTLAND",
           "mapIntro": false,
-          "editorialRevision": 6,
+          "editorialRevision": 7,
           "relief": true
         }
       },
@@ -1399,7 +1399,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "seriesTitle": "THE OPEN ROAD COLLECTION · 001",
           "regionTitle": "SCOTLAND",
           "mapIntro": false,
-          "editorialRevision": 6,
+          "editorialRevision": 7,
           "relief": true
         }
       },
@@ -1567,7 +1567,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "seriesTitle": "THE OPEN ROAD COLLECTION · 001",
           "regionTitle": "SCOTLAND",
           "mapIntro": false,
-          "editorialRevision": 6,
+          "editorialRevision": 7,
           "relief": true
         }
       },
@@ -1735,7 +1735,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "seriesTitle": "THE OPEN ROAD COLLECTION · 001",
           "regionTitle": "SCOTLAND",
           "mapIntro": false,
-          "editorialRevision": 6,
+          "editorialRevision": 7,
           "relief": true
         }
       },
@@ -1903,7 +1903,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "seriesTitle": "THE OPEN ROAD COLLECTION · 001",
           "regionTitle": "SCOTLAND",
           "mapIntro": false,
-          "editorialRevision": 6,
+          "editorialRevision": 7,
           "relief": true
         }
       },
@@ -2071,7 +2071,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "seriesTitle": "THE OPEN ROAD COLLECTION · 001",
           "regionTitle": "SCOTLAND",
           "mapIntro": false,
-          "editorialRevision": 6,
+          "editorialRevision": 7,
           "relief": true
         }
       },
@@ -2239,7 +2239,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "seriesTitle": "THE OPEN ROAD COLLECTION · 001",
           "regionTitle": "SCOTLAND",
           "mapIntro": false,
-          "editorialRevision": 6,
+          "editorialRevision": 7,
           "relief": true
         }
       },
@@ -2408,7 +2408,7 @@ export const SHORTS_REELS_TEMPLATES: OpenMotionProject[] = [
           "regionTitle": "SCOTLAND",
           "mapIntro": false,
           "cta": "SAVE THIS ROAD TRIP",
-          "editorialRevision": 6,
+          "editorialRevision": 7,
           "relief": true
         }
       }

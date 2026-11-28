@@ -156,6 +156,11 @@ export async function preloadProjectImages(project: OpenMotionProject): Promise<
 
 /** Fail before exporting a travel master with missing images or broken atlases. */
 export function assertTravelMediaReady(project: OpenMotionProject): void {
+  for(const scene of project.scenes){
+    const p=scene.premiumTravel;if(!p||(p.editorialRevision??0)<7||(p.chapter!=='photo'&&p.chapter!=='opening'))continue;
+    const stop=p.stops[p.focusStopIndex];const alt=p.chapter==='opening'&&p.openingPhoto?p.openingPhoto:stop?.secondaryPhoto;
+    if(!getCachedPhoto(stop?.photoUrl)&&!getCachedPhoto(alt?.photoUrl))throw new Error('Bestemmingsfoto ontbreekt: '+scene.name+'. Controleer de Wikimedia-bronnen voor export.');
+  }
   if(!isTravelDocumentary(project))return;
   for(const scene of project.scenes){
     if(scene.bucketList?.documentary?.mode==='map')continue;
