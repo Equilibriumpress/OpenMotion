@@ -9,7 +9,7 @@ import { createBucketListAudio } from './bucketListAudio';
 export function projectAssetUrl(src: string, revision?:string): string {
   if (/^(https?:|blob:|data:)/i.test(src)) return src;
   const base = new URL(import.meta.env.BASE_URL || './', document.baseURI);
-  return new URL(src.replace(/^\/+/, ''), base).href;
+  const url=new URL(src.replace(/^\/+/, ''), base);if(revision)url.searchParams.set('v',revision);return url.href;
 }
 
 /** Decode and mix project tracks to a deterministic 48kHz stereo timeline. */
