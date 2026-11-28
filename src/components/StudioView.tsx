@@ -1,6 +1,7 @@
+import { YouTubePublicationKit } from './YouTubePublicationKit';
 import { hasSongCover, renderSongCover } from '../engine/songExplainerRenderer';
 import { hasHumanSideCover, renderHumanSideCover, isHumanSideV2 } from '../engine/humanSideRenderer';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   ArrowLeft,
   Check,
@@ -93,6 +94,9 @@ export function StudioView({
     bitrateMbps: 8,
   });
   const [renderState, setRenderState] = useState<RenderProgressState>(INITIAL_RENDER_STATE);
+  const [renderedSignature,setRenderedSignature]=useState<string|null>(null);
+  const projectSignature=useMemo(()=>JSON.stringify([project.id,project.format,project.width,project.height,project.fps,project.brandKit,project.scenes,project.captions,project.audioTracks,project.documentaryTerrain]),[project]);
+
   const abortRef = useRef<AbortController | null>(null);
 
   const [jsonDraft, setJsonDraft] = useState(() => JSON.stringify(project, null, 2));
@@ -220,9 +224,10 @@ export function StudioView({
     };
   }, []);
 
-  const handleStartMp4Export = async () => {
+  const handleStartMp4Export = async (options:RenderExportOptions=exportOptions) => {
     if (renderState.phase === 'rendering' || renderState.phase === 'muxing') return;
 
+    setRenderedSignature(null);
     setInspectorTab('export');
     setIsPlaying(false);
     const controller = new AbortController();
@@ -231,7 +236,7 @@ export function StudioView({
     setRenderState({
       phase: 'rendering',
       currentFrame: 0,
-      totalFrames: Math.ceil(totalDuration * exportOptions.fps),
+      totalFrames: Math.ceil(totalDuration * options.fps),
       percent: 1,
       container: 'mp4',
       encoderLabel: 'Initialiseren van H.264 encoder...',
@@ -240,16 +245,17 @@ export function StudioView({
     try {
       const result = await exportProjectToMp4(
         project,
-        exportOptions,
+        options,
         (progress) => setRenderState(progress),
         controller.signal
       );
       setRenderState(result);
+      if(result.phase==='done'&&result.outputUrl)setRenderedSignature(projectSignature);
     } catch (err) {
       setRenderState({
         phase: 'error',
         currentFrame: 0,
-        totalFrames: Math.ceil(totalDuration * exportOptions.fps),
+        totalFrames: Math.ceil(totalDuration * options.fps),
         percent: 0,
         container: 'mp4',
         encoderLabel: 'WebCodecs H.264',
@@ -456,7 +462,7 @@ export function StudioView({
           </button>
           <button
             type="button"
-            onClick={handleStartMp4Export}
+            onClick={()=>void handleStartMp4Export()}
             disabled={isRendering}
             className="inline-flex items-center gap-2 px-4 py-2 text-xs font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 whitespace-nowrap shrink-0"
           >
@@ -874,7 +880,7 @@ export function StudioView({
                   ) : (
                     <button
                       type="button"
-                      onClick={handleStartMp4Export}
+                      onClick={()=>void handleStartMp4Export()}
                       className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
                     >
                       <Download className="w-4 h-4" />
@@ -931,6 +937,11 @@ export function StudioView({
                       )}
                     </div>
                   )}
+
+                  {project.format==='9:16'&&<YouTubePublicationKit key={project.id} project={project}
+                    renderState={renderState} renderMatches={renderedSignature===projectSignature}
+                    projectSignature={projectSignature} rendering={isRendering}
+                    onRender={()=>{const options:RenderExportOptions={...exportOptions,resolution:'1080p',fps:project.fps===60?60:30};setExportOptions(options);void handleStartMp4Export(options);}}/>}
 
                   {/* Optional Pre-rendered GitHub Pages URL */}
                   {project.prebuiltMp4Url && (
