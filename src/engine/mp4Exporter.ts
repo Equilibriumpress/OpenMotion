@@ -20,16 +20,30 @@ async function probeAacEncoder(): Promise<AudioEncoderConfig | null> {
   catch { return null; }
 }
 
-async function encodeAacAudio(audio:AudioBuffer, config:AudioEncoderConfig, muxer:Muxer<ArrayBufferTarget>):Promise<void> {
+// WebKit bug 302253: some Safari versions return an entire ES descriptor
+// instead of the AAC AudioSpecificConfig. For our fixed AAC-LC 48kHz stereo
+// contract, the standards-compliant two-byte ASC is 0x11 0x90.
+// Never apply this to another AAC profile, sample rate or channel count.
+async function encodeAacAudio(audio:AudioBuffer, config:AudioEncoderConfig, muxer:Muxer<ArrayBufferTarget>,signal?:AbortSignal):Promise<void> {
+  if(config.codec!=='mp4a.40.2'||config.sampleRate!==48000||config.numberOfChannels!==2||audio.sampleRate!==48000||audio.numberOfChannels!==2)throw Error('AAC-export vereist 48 kHz stereo AAC-LC.');
   let failure: Error | null = null;
+  let chunks=0;
   const encoder = new AudioEncoder({
-    output: (chunk,meta) => muxer.addAudioChunk(chunk,meta),
+    output: (chunk,meta) => {
+      try{
+        const reported=meta?.decoderConfig;
+        if(reported&&(reported.sampleRate!==48000||reported.numberOfChannels!==2))throw Error('AAC encoder wijzigde de audio-indeling.');
+        const corrected=chunks===0||reported?{...meta,decoderConfig:{...reported,codec:'mp4a.40.2',sampleRate:48000,numberOfChannels:2,description:new Uint8Array([0x11,0x90])}}:meta;
+        muxer.addAudioChunk(chunk,corrected);chunks++;
+      }catch(error){failure=error instanceof Error?error:new Error(String(error));}
+    },
     error: error => {failure = error instanceof Error ? error : new Error(String(error));},
   });
-  encoder.configure(config);
   try {
+    encoder.configure(config);
     const blockSize=1024;
     for(let start=0;start<audio.length;start+=blockSize){
+      if(signal?.aborted)throw Error('Export geannuleerd.');
       if(failure) throw failure;
       const frames=Math.min(blockSize,audio.length-start);
       const samples=new Float32Array(frames*2);
@@ -37,11 +51,36 @@ async function encodeAacAudio(audio:AudioBuffer, config:AudioEncoderConfig, muxe
       samples.set(audio.getChannelData(1).subarray(start,start+frames),frames);
       const packet=new AudioData({format:'f32-planar',sampleRate:48000,numberOfFrames:frames,numberOfChannels:2,timestamp:Math.round(start*1000000/48000),data:samples});
       encoder.encode(packet);packet.close();
-      if(encoder.encodeQueueSize>12) await encoder.flush();
+      while(encoder.encodeQueueSize>24){if(signal?.aborted)throw Error('Export geannuleerd.');if(failure)throw failure;await new Promise(resolve=>setTimeout(resolve,4));}
     }
     await encoder.flush();
     if(failure) throw failure;
+    if(!chunks)throw Error('AAC encoder heeft geen audiopakketten geproduceerd.');
   } finally { if(encoder.state!=='closed')encoder.close(); }
+}
+
+function audioSignalLevels(audio:AudioBuffer){
+  let peak=0,sum=0,count=0;
+  for(let c=0;c<audio.numberOfChannels;c++)for(const value of audio.getChannelData(c)){
+    if(!Number.isFinite(value))throw Error('Ongeldige gedecodeerde audiosamples.');
+    peak=Math.max(peak,Math.abs(value));sum+=value*value;count++;
+  }
+  return {peak,rms:Math.sqrt(sum/Math.max(1,count))};
+}
+/** Decode the actual completed MP4, not the input mix or the track header. */
+async function verifyEncodedAudio(blob:Blob,source:AudioBuffer):Promise<string>{
+  let decoded:AudioBuffer;
+  try{
+    const context=new OfflineAudioContext(2,1,48000);
+    decoded=await context.decodeAudioData(await blob.arrayBuffer());
+  }catch{
+    throw Error('Mastercontrole: AAC-spoor aanwezig maar de MP4-audio kan niet worden gedecodeerd. Gebruik de handmatige GitHub-master.');
+  }
+  const input=audioSignalLevels(source),output=audioSignalLevels(decoded);
+  if(decoded.numberOfChannels!==2||Math.abs(decoded.duration-source.duration)>.25||output.peak<.0001||output.rms<Math.max(.00001,input.rms*.05)){
+    throw Error('Mastercontrole: gedecodeerde MP4-audio is stil, sterk verzwakt of heeft een onjuiste duur/indeling.');
+  }
+  return ' · AAC gedecodeerd · RMS '+(20*Math.log10(output.rms)).toFixed(1)+' dBFS';
 }
 
 const H264_CODEC_CANDIDATES = [
@@ -396,7 +435,7 @@ async function encodeWithWebCodecsMp4(params: {
 
   try {
     encoder.configure(h264Config);
-    if(mixedAudio&&audioConfig)await encodeAacAudio(mixedAudio,audioConfig,muxer);
+    if(mixedAudio&&audioConfig)await encodeAacAudio(mixedAudio,audioConfig,muxer,signal);
     for (let frameIdx = 0; frameIdx < totalFrames; frameIdx++) {
       if (signal?.aborted) {
         encoder.close();
@@ -456,8 +495,10 @@ async function encodeWithWebCodecsMp4(params: {
     const audioTrack=mixedAudio?await containsMp4AudioTrack(mp4Blob):null;
     const valid=!!actual&&actual.width===width&&actual.height===height&&Number.isFinite(actual.duration)&&Math.abs(actual.duration-totalFrames/fps)<.15&&measuredFps!==null&&Math.abs(measuredFps-fps)<.05&&audioTrack===true;
     if(publication&&!valid)throw Error('Mastercontrole mislukt: resolutie, framerate, duur of AAC-spoor wijkt af. Gebruik de handmatige GitHub-master.');
+    const audioVerification=publication&&mixedAudio?await verifyEncodedAudio(mp4Blob,mixedAudio):'';
+    if(signal?.aborted)throw Error('Export geannuleerd.');
     const verified=measuredFps===null?' · framerate niet geverifieerd':' · gemeten '+measuredFps+' fps';
-    const inspected = describeOutput(actual,width,height,`WebCodecs H.264 (${h264Config.codec})`+encoderNote+verified+(audioTrack===true?' · audiotrack gecontroleerd':''));
+    const inspected = describeOutput(actual,width,height,`WebCodecs H.264 (${h264Config.codec})`+encoderNote+verified+(audioTrack===true?' · audiotrack aanwezig':'')+audioVerification);
     const outputUrl = URL.createObjectURL(mp4Blob);
     const fileName = `${project.slug}${publication?'':'-concept'}-${actual?inspected.w+'x'+inspected.h:'res-onbekend'}-${measuredFps===null?'fps-onbekend':measuredFps+'fps'}.mp4`;
 
