@@ -280,8 +280,8 @@ function signatureFinale(ctx:CanvasRenderingContext2D,w:number,h:number,scene:Op
  const bw=w-2*m-190*s,bh=630*s,k=Math.min(bw/Math.max(1,maxX-minX),bh/Math.max(1,maxY-minY)),ox=m+55*s+(bw-(maxX-minX)*k)/2-minX*k,oy=445*s+(bh-(maxY-minY)*k)/2-minY*k;
  ctx.beginPath();pts.forEach((q,i)=>i?ctx.lineTo(ox+q.x*k,oy+q.y*k):ctx.moveTo(ox+q.x*k,oy+q.y*k));ctx.strokeStyle='#E2C48F';ctx.lineWidth=5*s;ctx.lineJoin='round';ctx.lineCap='round';ctx.stroke();
  stage.stops.forEach((q,i)=>{const x=ox+q.x*k,y=oy+q.y*k;ctx.beginPath();ctx.arc(x,y,17*s,0,Math.PI*2);ctx.fillStyle='#AE674A';ctx.fill();ctx.strokeStyle='#F8F7EF';ctx.lineWidth=2*s;ctx.stroke();ctx.fillStyle='#fff';ctx.font='700 '+(20*s)+'px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(String(i+1),x,y);});
- ctx.textAlign='left';ctx.textBaseline='alphabetic';ctx.font='500 '+(28*s)+'px sans-serif';ctx.fillStyle='#F8F7EF';p.stops.forEach((stop,i)=>ctx.fillText(String(i+1).padStart(2,'0')+'  '+stop.name,m+28*s+(i%2)*380*s,1165*s+Math.floor(i/2)*58*s,365*s));
- signatureProfile(ctx,elevations.get(scene),m+28*s,1350*s,w-2*m-130*s,116*s,s,1);ctx.fillStyle='#E2C48F';ctx.font='700 '+(39*s)+'px sans-serif';ctx.fillText(p.cta??'SAVE THIS ROAD TRIP',m+28*s,h-265*s,w-2*m-110*s);ctx.restore();
+ ctx.textAlign='left';ctx.textBaseline='alphabetic';ctx.font='500 '+(28*s)+'px sans-serif';ctx.fillStyle='#F8F7EF';p.stops.forEach((stop,i)=>ctx.fillText(String(i+1).padStart(2,'0')+'  '+stop.name,m+28*s+(i%2)*380*s,1165*s+Math.floor(i/2)*(p.stops.length>4?48:58)*s,365*s));
+ signatureProfile(ctx,elevations.get(scene),m+28*s,(p.stops.length>4?1390:1350)*s,w-2*m-130*s,(p.stops.length>4?88:116)*s,s,1);ctx.fillStyle='#E2C48F';ctx.font='700 '+(39*s)+'px sans-serif';ctx.fillText(p.cta??'SAVE THIS ROAD TRIP',m+28*s,h-265*s,w-2*m-110*s);ctx.restore();
 }
 function photoScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMotionScene,time:number,getPhoto:(url:string)=>HTMLImageElement|null,titleWeight=1,captionTime=time){
   const p=scene.premiumTravel!,t=clamp(time/Math.max(.1,scene.durationSec)),s=w/WIDTH;

@@ -387,6 +387,8 @@ export interface PremiumTravelStop extends PremiumTravelPhoto {
   photoLicense: string;
   photoSourceUrl: string;
   secondaryPhoto?: PremiumTravelPhoto;
+  /** Editorial archive, not automatically shown or preloaded. */
+  archivePhotos?: PremiumTravelPhoto[];
 }
 export interface ScenePremiumTravelRoute {
   stops: PremiumTravelStop[];

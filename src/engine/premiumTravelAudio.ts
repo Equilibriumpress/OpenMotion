@@ -38,7 +38,9 @@ async function synthesize(durationSec: number, cues:readonly number[],alpine:boo
   lowpass.Q.value = .6;
   lowpass.connect(master);
 
-  for (const chord of nordic ? nordicChords : alpine ? alpineChords : chords) {
+  const scoreScale=nordic?durationSec/30:1;
+  for (const baseChord of nordic ? nordicChords : alpine ? alpineChords : chords) {
+    const chord={...baseChord,start:baseChord.start*scoreScale,end:baseChord.end*scoreScale};
     if (chord.start >= durationSec) continue;
     const end = Math.min(chord.end, durationSec);
     for (let i = 0; i < chord.notes.length; i++) {
