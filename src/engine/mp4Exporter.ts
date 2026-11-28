@@ -121,7 +121,7 @@ async function actualVideoSize(blob: Blob): Promise<{ width: number; height: num
  * Safari MediaRecorder has been seen to silently drop the Web Audio track.
  * This is a post-encode check, not an assumption based on the input stream.
  */
-async function containsMp4AudioTrack(blob:Blob):Promise<boolean|null>{
+export async function containsMp4AudioTrack(blob:Blob):Promise<boolean|null>{
   if(!blob.type.startsWith('video/mp4'))return null;
   const read=async(start:number,end:number)=>new Uint8Array(await blob.slice(start,end).arrayBuffer());
   const chunk=2*1024*1024;
@@ -144,7 +144,7 @@ async function containsMp4AudioTrack(blob:Blob):Promise<boolean|null>{
  * FPS. Safari has been observed recording 30 fps when captureStream(60) was
  * requested. A missing or fragmented sample table yields null, not a guess.
  */
-async function actualMp4FrameRate(blob:Blob):Promise<number|null>{
+export async function actualMp4FrameRate(blob:Blob):Promise<number|null>{
   if(!blob.type.startsWith('video/mp4'))return null;
   const extent=2*1024*1024;
   const parts=[new Uint8Array(await blob.slice(0,Math.min(blob.size,extent)).arrayBuffer())];
