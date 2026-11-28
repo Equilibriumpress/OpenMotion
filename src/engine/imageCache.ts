@@ -1,3 +1,4 @@
+import { cartoonId, hasCartoon, prepareCartoon } from './cartoonPresenter';
 import { characterFromScene, characterModel } from './characterPresets';
 import { hasRocketbox, prepareRocketbox } from './rocketboxPresenter';
 import {isTravelDocumentary,isTravelClip,matchingTravelAtlas} from './travelProject';
@@ -114,6 +115,7 @@ export function getCachedPhoto(url?: string): HTMLImageElement | null {
  * WebCodecs MP4 frame rendering or when opening Studio).
  */
 export async function preloadProjectImages(project: OpenMotionProject): Promise<void> {
+  if(hasCartoon(project)){const ids=new Set(project.scenes.map(cartoonId).filter(x=>x!==null));if(ids.size!==1||hasRocketbox(project))throw Error('Gebruik één soort 3D-presentator per video.');await prepareCartoon([...ids][0]!);notifyImageRefresh();}
   if(hasRocketbox(project)){const scenes=project.scenes.filter(s=>s.doodle?.extras?.includes('presenter-lab-rocketbox'));const preset=characterFromScene(scenes[0]);const key=preset?characterModel(preset):'';if(scenes.some(s=>{const p=characterFromScene(s);return (p?characterModel(p):'')!==key;}))throw Error('Gebruik één basispersonage per video.');await prepareRocketbox(preset);notifyImageRefresh();}
   const urls = new Set<string>();
   for (const scene of project.scenes) {

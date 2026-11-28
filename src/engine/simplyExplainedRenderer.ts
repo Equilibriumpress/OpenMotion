@@ -1,3 +1,4 @@
+import { cartoonId, renderCartoon } from './cartoonPresenter';
 import { renderRocketboxPresenter, ROCKETBOX_MARKER } from './rocketboxPresenter';
 import { renderAlexPresenter } from './alexPresenter';
 import type { OpenMotionScene, OpenMotionBrandKit } from '../types/openmotion';
@@ -162,7 +163,8 @@ function renderCleanEditorial(c:C,scene:OpenMotionScene,t:number){
   reveal(c,(t-1)/.6,()=>{oval(c,382,417,41,41,rust);txt(c,'?',382,432,45,light,800,'center');});
   reveal(c,(t-3)/.6,()=>{path(c,'M154 528 L174 548 211 505','none',teal,8);txt(c,'Check the facts',225,540,27,ink,750);});break;
  }
- if(extras.includes(ROCKETBOX_MARKER))renderRocketboxPresenter(c,scene,t);
+ if(cartoonId(scene))renderCartoon(c,scene,t);
+ else if(extras.includes(ROCKETBOX_MARKER))renderRocketboxPresenter(c,scene,t);
  else if(extras.includes('simply-explained-v2'))renderAlexPresenter(c,scene,t);
  else alexV11(c,t,speaking);
 }

@@ -100,3 +100,7 @@ Vergelijk de bestaande Alex 2D, Alex 2.5D en een echte Rocketbox 3D-avatar via `
 ## Character Studio
 
 Open `#character-studio` to customize one of 20 licensed Rocketbox models, modular outfits, fabric tints, expressions and motion clips. Presets are local or exportable as JSON. Simply Explained template 3.0 has a default Alex preset. See [Character Studio](docs/character-studio.md) for asset provenance, limitations and export verification.
+
+## Cartoon Cinema
+
+Open `#cartoon-cinema` to compare three stylized CC0 Polygonal Mind 3D characters with the existing Alex and Rocketbox presenter. Uses the same pilot timeline and manual MP4 exporter. See [Cartoon Cinema](docs/cartoon-cinema.md) for sources, VRM support and outstanding runtime checks.
