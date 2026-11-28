@@ -195,3 +195,13 @@ export class DocumentaryAudioEngine {
     }
   }
 }
+
+/** Deterministic version of the original documentary score. */
+export async function renderDocumentaryAudio(seconds:number):Promise<AudioBuffer>{
+ const ctx=new OfflineAudioContext(2,Math.ceil(seconds*48000),48000),master=ctx.createGain();master.gain.value=.35;master.connect(ctx.destination);
+ for(let base=0;base<seconds;base+=30)for(let i=0;i<DOCUMENTARY_CHORDS.length;i++){
+  const step=DOCUMENTARY_CHORDS[i],start=base+step.timeSec,span=i+1<DOCUMENTARY_CHORDS.length?DOCUMENTARY_CHORDS[i+1].timeSec-step.timeSec+.8:4.5;
+  step.notesHz.forEach((freq,j)=>{const at=start+j*.11;if(at>=seconds)return;const osc=ctx.createOscillator(),gain=ctx.createGain(),filter=ctx.createBiquadFilter();osc.type=j===0?'triangle':'sine';osc.frequency.value=freq;filter.type='lowpass';filter.frequency.value=j<2?620:1250;const peak=j===0?.13:j===step.notesHz.length-1?.055:.075;gain.gain.setValueAtTime(.0001,at);gain.gain.exponentialRampToValueAtTime(peak,at+.95);gain.gain.exponentialRampToValueAtTime(peak*.52,at+span*.65);gain.gain.exponentialRampToValueAtTime(.0001,at+span);osc.connect(filter);filter.connect(gain);gain.connect(master);osc.start(at);osc.stop(at+span+.15);});
+ }
+ return ctx.startRendering();
+}

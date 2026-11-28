@@ -653,6 +653,7 @@ export interface RenderExportOptions {
   resolution: '720p' | '1080p';
   fps: 30 | 60;
   bitrateMbps: number;
+  mode?: 'publication' | 'draft';
 }
 
 export interface RenderProgressState {
@@ -663,6 +664,7 @@ export interface RenderProgressState {
   container: 'mp4' | 'webm';
   encoderLabel: string;
   outputUrl?: string;
+  publicationVerified?: boolean;
   fileName?: string;
   /** Standalone soundtrack when Safari fails to mux a browser MP4 audio track. */
   audioSidecarUrl?: string;

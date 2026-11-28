@@ -85,7 +85,7 @@ export function YouTubePublicationKit({project,renderState,renderMatches,project
  const [storageFailed,setStorageFailed]=useState(false);
  const duration=getProjectDurationSec(project);
  const eligible=project.format==='9:16'&&duration>0&&duration<=180;
- const hasExport=renderMatches&&renderState.phase==='done'&&renderState.container==='mp4'&&!!renderState.outputUrl&&!renderState.audioSidecarUrl;
+ const hasExport=renderMatches&&renderState.publicationVerified===true&&renderState.phase==='done'&&renderState.container==='mp4'&&!!renderState.outputUrl&&!renderState.audioSidecarUrl;
  const selected=external?.signature===projectSignature?external:null;
  const videoAvailable=!!selected||hasExport;
  const allChecked=publicationChecks.every(([id])=>checks[id]);

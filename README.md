@@ -7,7 +7,7 @@ Een volledig statische, GitHub Pages-klare **OpenMotion** videobibliotheek (geï
 1. **ChatGPT genereert een video-project** als JSON volgens het OpenMotion-schema (`projects/<slug>/project.json`) — gebruik de ingebouwde **ChatGPT Workflow** of klik op **Remix Prompt** bij een van de 34 templates.
 2. **Commit naar GitHub** onder `projects/<slug>/project.json`.
 3. **Automatische GitHub Pages deploy**: de meegeleverde workflow `.github/workflows/openmotion-pages.yml` indexeert alle `projects/*/project.json` in `public/projects/manifest.json`, bouwt de statische app met relatieve paden (`base: './'`) en publiceert direct op GitHub Pages.
-4. **Directe H.264 MP4-output op GitHub Pages**: elke bezoeker rendert 720p/1080p (30 of 60 fps) `.mp4`-bestanden 100% client-side via **WebCodecs (`VideoEncoder`) + `mp4-muxer`** (met automatische `MediaRecorder`-fallback).
+4. **Directe H.264 MP4-output op GitHub Pages**: elke bezoeker rendert 720p/1080p (30 of 60 fps) `.mp4`-bestanden 100% client-side via **WebCodecs (`VideoEncoder`) + `mp4-muxer`** (publicatiemaster zonder automatische kwaliteitsverlaging; MediaRecorder uitsluitend in expliciete conceptmodus).
 
 ## Publicatie en optionele serverrender
 
@@ -17,8 +17,7 @@ Gebruik **Render MP4** in Studio voor de browserexport.
 
 Voor een servermaster met H.264/AAC (bijvoorbeeld als Safari geen betrouwbare
 AAC-export ondersteunt): ga naar GitHub Actions → **Render OpenMotion MP4
-(manual)** → Run workflow. Vul één project-slug in. Ondersteund: Cat Office,
-Hoe werkt de wereld?, Places Worth Exploring en Premium Travel Route Reel. Download de MP4 uit de artifacts
+(manual)** → Run workflow. Vul één project-slug in. Ondersteund: alle opgeslagen projecten met de bestaande renderer. Download de MP4 uit de artifacts
 van die handmatige run (30 dagen bewaard). De handmatige workflow publiceert de
 website niet en rendert geen andere video's. Normale Pages-deploys bevatten
 geen vooraf gerenderde MP4-bestanden meer; bewaar gewenste masters lokaal.
@@ -59,7 +58,7 @@ Eight 1080×1920 examples live in **Shorts & Reels**. Open a card in Studio to e
 - Import SRT caption files. Karaoke uses even word timing unless each word has explicit `startSec/endSec` metadata in JSON.
 - Add audio tracks pointing to files in `public/assets/` (e.g. `assets/audio/voice.mp3`) or permitted CORS sources. Adjust volume, clip timing and fades in Studio.
 - The H.264 exporter adds AAC where WebCodecs audio encoding is supported. On other browsers, MediaRecorder chooses MP4 or WebM according to actual availability. Audio encoding and Safari compatibility require device testing.
-- The optional procedural documentary soundtrack is a preview aid and is **not** embedded unless supplied as an audio track.
+- Preview, browser export and manual master use the same offline audio mix. Publication requires supported H.264/AAC, verified dimensions, frame timing, duration and an audio track. Draft export may provide a separate WAV.
 
 Full usage notes: [Shorts & Reels guide](docs/shorts-reels.md).
 

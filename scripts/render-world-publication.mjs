@@ -10,9 +10,9 @@ if(!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
 }
 const root=process.cwd(),dist=path.join(root,'dist'),manifestPath=path.join(dist,'projects','manifest.json');
 const manifest=JSON.parse(fs.readFileSync(manifestPath,'utf8'));
-const projects=manifest.projects.filter(p=>p.slug===slug && p.scenes.some(s=>s.worldStory || s.catOffice || s.premiumTravel || s.bucketList?.documentary?.series==='places-worth-exploring' || (p.seriesId==='the-human-side' && s.doodle?.extras?.includes('human-side-v1'))));
+const projects=manifest.projects.filter(p=>p.slug===slug);
 if(projects.length!==1)throw Error('No unique supported master project: '+slug);
-const needsMap=projects[0].scenes.some(s=>s.premiumTravel || (s.bucketList?.documentary?.series==='places-worth-exploring' && s.bucketList?.chapter==='zoom'));
+const needsMap=projects[0].scenes.some(s=>s.premiumTravel || s.layout==='bucket-list-zoom' || s.layout.startsWith('three-') || s.layout==='doodle-explainer' || s.layout==='parallax-cinema');
 const { chromium }=await import('playwright');
 const { createServer }=await import('vite');
 const tmp=path.join(root,'world-render-preview.html');
@@ -35,18 +35,10 @@ try {
     const target=path.join(dist,'renders',p.slug+'.mp4'),silent=target+'.video.mp4',score=target+'.score.wav';
     let page,encoder;
     try{
-      const travel=p.scenes.some(s=>s.bucketList?.documentary?.series==='places-worth-exploring');
-      const premium=p.scenes.some(s=>s.premiumTravel);
-      const human=p.seriesId==='the-human-side';
-      const duration=p.scenes.reduce((sum,s)=>sum+s.durationSec,0),fps=(travel||premium||human)?p.fps:60,width=(travel||premium||human)?p.width:1080,height=(travel||premium||human)?p.height:1920;
-      const tracks=(p.audioTracks??[]).filter(t=>fs.existsSync(path.join(dist,t.src)));
-      const isCat=p.scenes.some(s=>s.catOffice);
-      const isTravel=p.scenes.some(s=>s.bucketList?.documentary?.series==='places-worth-exploring');
-      if(human&&(!tracks.some(t=>t.kind==='voiceover')||tracks.length!==(p.audioTracks??[]).length))throw Error('Human Side soundtrack assets missing');
-      if(isCat){
-        if(!tracks.length)throw Error('Cat soundtrack missing.');
-        for(const id of ['oliver','boss','luna','bob']) if(!fs.existsSync(path.join(dist,'assets','cat-office',id+'.jpg')))throw Error('Cat photo missing: '+id);
-      }else if(!premium&&!tracks.some(t=>t.kind==='voiceover'))throw Error('No narration available; not publishing a silent master.');
+      const duration=p.scenes.reduce((sum,s)=>sum+s.durationSec,0),fps=p.fps===60?60:30;
+      const [width,height]=p.format==='9:16'?[1080,1920]:p.format==='1:1'?[1080,1080]:[1920,1080];
+      if(!(duration>0))throw Error('Invalid project duration');
+      if((p.seriesId==='the-human-side'||p.scenes.some(s=>s.bucketList?.documentary?.series==='places-worth-exploring'))&&!p.audioTracks?.some(t=>t.kind==='voiceover'&&t.src?.trim()))throw Error('Voice-over missing');
       page=await browser.newPage({viewport:{width,height}});
       await page.goto('http://127.0.0.1:4179/world-render-preview.html');
       await page.evaluate(async ({p,width,height})=>{
@@ -54,13 +46,15 @@ try {
         const c=document.querySelector('canvas');c.width=width;c.height=height;
         const ctx=c.getContext('2d',{alpha:false});
         await document.fonts.ready;
+        const {preloadProjectImages:preload,assertTravelMediaReady}=await import('/src/engine/imageCache.ts');
+        await preload(p);assertTravelMediaReady(p);
         if(p.scenes.some(s=>s.catOffice)){
           const {preloadProjectImages,getCachedPhoto}=await import('/src/engine/imageCache.ts');
           const {projectAssetUrl}=await import('/src/engine/projectAudio.ts');
           await preloadProjectImages(p);
           for(const id of ['oliver','boss','luna','bob']) if(!getCachedPhoto(projectAssetUrl('assets/cat-office/'+id+'.jpg')))throw Error('Photo did not decode: '+id);
         }
-        const isTravel=p.scenes.some(s=>s.bucketList?.documentary?.series==='places-worth-exploring');
+        const isTravel=p.scenes.some(s=>s.layout==='bucket-list-zoom');
         let capture;
         if(isTravel){
           const {preloadProjectImages,getCachedPhoto}=await import('/src/engine/imageCache.ts');
@@ -85,7 +79,7 @@ try {
         if(!capture){
           window.renderWorldFrames=(start,count,fps)=>Array.from({length:count},(_,i)=>{
             renderOpenMotionFrame(ctx,p,(start+i)/fps,width,height);
-            return c.toDataURL('image/jpeg',.94).split(',')[1];
+            return c.toDataURL('image/png').split(',')[1];
           });
           return;
         }
@@ -95,12 +89,12 @@ try {
             const t=(start+i)/fps;
             if(capture)await capture(p,t);
             renderOpenMotionFrame(ctx,p,t,width,height);
-            out.push(c.toDataURL('image/jpeg',.94).split(',')[1]);
+            out.push(c.toDataURL('image/png').split(',')[1]);
           }
           return out;
         };
       },{p,width,height});
-      if(premium||human){
+      {
         const wav=await page.evaluate(async ({p,duration})=>{
           const {mixProjectAudio}=await import('/src/engine/projectAudio.ts');
           const audio=await mixProjectAudio(p,duration);
@@ -119,8 +113,8 @@ try {
         },{p,duration});
         fs.writeFileSync(score,Buffer.from(wav,'base64'));
       }
-      const frames=Math.round(duration*fps);
-      encoder=spawn('ffmpeg',['-hide_banner','-loglevel','error','-y','-f','image2pipe','-framerate',String(fps),'-vcodec','mjpeg','-i','pipe:0','-an','-c:v','libx264','-preset','fast','-crf','19','-pix_fmt','yuv420p','-movflags','+faststart',silent],{stdio:['pipe','inherit','inherit']});
+      const frames=Math.ceil(duration*fps);
+      encoder=spawn('ffmpeg',['-hide_banner','-loglevel','error','-y','-f','image2pipe','-framerate',String(fps),'-vcodec','png','-i','pipe:0','-an','-c:v','libx264','-preset','fast','-crf','17','-pix_fmt','yuv420p','-movflags','+faststart',silent],{stdio:['pipe','inherit','inherit']});
       const done=new Promise((resolve,reject)=>{encoder.once('error',reject);encoder.once('close',code=>code===0?resolve():reject(Error('video encoding failed '+code)));});
       // Prevent unhandled rejection while feeding frames.
       done.catch(()=>{});
@@ -130,18 +124,11 @@ try {
         if(n%480===0)console.log('[world-render]',p.slug,n,'/',frames);
       }
       encoder.stdin.end();await done;
-      if(premium||human){
-        run('ffmpeg',['-hide_banner','-loglevel','error','-y','-i',silent,'-i',score,'-map','0:v:0','-map','1:a:0','-c:v','copy','-c:a','aac','-b:a','192k','-t',String(duration),'-movflags','+faststart',target]);
-      }else{
-      const inputs=tracks.flatMap(t=>['-i',path.join(dist,t.src)]);
-      const filters=tracks.map((t,i)=>'['+(i+1)+':a]volume='+Math.max(0,Math.min(1,t.volume??1))+'[a'+i+']');
-      const mix=tracks.map((_,i)=>'[a'+i+']').join('')+'amix=inputs='+tracks.length+':normalize=0,alimiter=limit=0.95,apad[a]';
-      run('ffmpeg',['-hide_banner','-loglevel','error','-y','-i',silent,...inputs,'-filter_complex',filters.concat(mix).join(';'),'-map','0:v:0','-map','[a]','-c:v','copy','-c:a','aac','-b:a','192k','-t',String(duration),'-movflags','+faststart',target]);
-      }
+      run('ffmpeg',['-hide_banner','-loglevel','error','-y','-i',silent,'-i',score,'-map','0:v:0','-map','1:a:0','-c:v','copy','-c:a','aac','-b:a','192k','-ar','48000','-ac','2','-movflags','+faststart',target]);
       const probe=spawnSync('ffprobe',['-v','error','-show_streams','-show_format','-of','json',target],{encoding:'utf8'});
       if(probe.status!==0)throw Error('ffprobe failed');
       const info=JSON.parse(probe.stdout),v=info.streams.find(s=>s.codec_type==='video'),a=info.streams.find(s=>s.codec_type==='audio');
-      if(v?.codec_name!=='h264'||v?.width!==width||v?.height!==height||v?.avg_frame_rate!==fps+'/1'||a?.codec_name!=='aac'||((premium||human)&&Number(v?.nb_frames)!==frames)||Math.abs(Number(info.format.duration)-duration)>.15)throw Error('Output does not match requested resolution / fps / audio / duration');
+      if(v?.codec_name!=='h264'||v?.width!==width||v?.height!==height||v?.avg_frame_rate!==fps+'/1'||a?.codec_name!=='aac'||Number(v?.nb_frames)!==frames||Number(a?.sample_rate)!==48000||a?.channels!==2||Math.abs(Number(info.format.duration)-duration)>.15)throw Error('Output does not match requested resolution / fps / audio / duration');
       p.prebuiltMp4Url='renders/'+p.slug+'.mp4';
       fs.writeFileSync(manifestPath,JSON.stringify(manifest,null,2));
       console.log('[world-render] verified master:',p.slug,width,height,fps,duration,a.codec_name);
