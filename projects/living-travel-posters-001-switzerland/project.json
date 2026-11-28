@@ -3,7 +3,7 @@
   "id": "om-living-travel-posters-001-switzerland",
   "slug": "living-travel-posters-001-switzerland",
   "title": "Switzerland · The Alpine Express",
-  "description": "A remastered vintage-inspired Swiss railway poster with an electric RhB-inspired red locomotive, stone viaduct, detailed mountain contours, forest and waterfall. Original illustration, not a reconstruction of a specific route.",
+  "description": "A Master Edition vintage-inspired Swiss railway poster with an electric RhB-inspired red locomotive, stone viaduct, detailed mountain contours, forest and waterfall. Original illustration, not a reconstruction of a specific route.",
   "category": "Shorts & Reels",
   "author": "OpenMotion Studio",
   "source": "github",
@@ -40,7 +40,7 @@
         "variant": "living-travel-poster",
         "episode": 1,
         "speed": 1,
-        "posterVersion": "2.0"
+        "posterVersion": "3.0"
       }
     }
   ],
@@ -50,7 +50,7 @@
   "seriesId": "living-travel-posters",
   "season": 1,
   "episodeNumber": 1,
-  "templateVersion": "2.0",
+  "templateVersion": "3.0",
   "productionStatus": "review",
   "thumbnailUrl": "thumbnails/living-travel-posters-001-switzerland.svg"
 }

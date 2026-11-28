@@ -3,7 +3,7 @@
   "id": "om-living-travel-posters-002-amalfi",
   "slug": "living-travel-posters-002-amalfi",
   "title": "Amalfi Coast · An Italian Summer",
-  "description": "A remastered vintage-inspired Positano composition with terraced pastel houses, perspective façades, shutters, balconies, the Santa Maria Assunta-inspired majolica dome, a classic scooter, sailboats and coastal vegetation. Original illustration, not a geographic reconstruction.",
+  "description": "A Master Edition vintage-inspired Positano composition with terraced pastel houses, perspective façades, shutters, balconies, the Santa Maria Assunta-inspired majolica dome, a classic scooter, sailboats and coastal vegetation. Original illustration, not a geographic reconstruction.",
   "category": "Shorts & Reels",
   "author": "OpenMotion Studio",
   "source": "github",
@@ -41,7 +41,7 @@
         "episode": 2,
         "speed": 1,
         "destination": "amalfi",
-        "posterVersion": "2.0"
+        "posterVersion": "3.0"
       }
     }
   ],
@@ -51,7 +51,7 @@
   "seriesId": "living-travel-posters",
   "season": 1,
   "episodeNumber": 2,
-  "templateVersion": "2.0",
+  "templateVersion": "3.0",
   "productionStatus": "review",
   "thumbnailUrl": "thumbnails/living-travel-posters-002-amalfi.svg"
 }

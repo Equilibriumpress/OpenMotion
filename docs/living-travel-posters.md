@@ -26,3 +26,9 @@ References for visual identity (not copied artwork): Japan House London https://
 Quality gate: compare static poster and first/last frames, inspect signature object silhouettes at mobile size, check camera cropping and occlusion at 3, 7, 12, 17 seconds, check actual export resolution, frame rate and AAC. Structural checks are not a substitute for playback/MP4 review. Keep productionStatus review until verified.
 
 Swiss remaster: curved rail profile, masonry arch stones and individually oriented coach/locomotive groups follow the same curve as the static thumbnail. The stylised bridge is Landwasser-inspired rather than an exact engineering reconstruction.
+
+## Poster Cinema 3.0 / Master Edition
+
+Distinct art direction: Alpine Art Deco (Swiss), Mediterranean lithograph (Amalfi), Shin-hanga-inspired woodblock (Japan). All three projects select posterVersion 3.0; earlier templates and runtime paths remain available. Original vector title glyphs, directional color gradients, independent texture patterns for stone, water, sky, vegetation and plaster, explicitly clipped material marks, perspective signature objects and animated reflected light bands. The vehicle projection uses individually drawn roof, side and front planes plus subtle affine foreshortening; it is 2.5D, not a 3D model. Static scene layers are cached at preview/export-specific density under a 40 MiB allocation limit; remaining layers use vector fallback. No new dependencies, renderer backend or workflow changes.
+
+Quality gate: compare opening SVG and 0/21.5s, inspect 3/7/12/17s for silhouette, cropping and continuity, export actual 1080x1920 60fps MP4 and inspect H.264/AAC. Source checks alone do not satisfy the visual gate. Keep review status until playback and actual output are verified. Fictional geographically inspired illustrations, not engineering or geographic reconstructions.

@@ -1,0 +1,42 @@
+{
+  "version": "3.0",
+  "format": "9:16",
+  "fps": 60,
+  "durationSec": 22,
+  "referenceProject": "living-travel-posters-001-switzerland",
+  "templatePath": "series/living-travel-posters/template-v3.0.json",
+  "instructions": "Poster Cinema 3.0 Master Edition: create a destination-specific static print first, with original vector lettering, hand-designed silhouette and signature object, directional light and material-specific texture. Use original vector contours and gradients, perspective planes, coherent occlusion, water/mist/particle masks, deterministic motion and bounded resolution-aware Canvas caching. Use existing parallax-cinema layout, parallax.variant living-travel-poster, posterVersion 3.0, destination-specific MasterArt and original audio. 22s, 1080x1920, 60fps, no narration. Author and inspect the new destination preset before registration; do not silently reuse the Swiss artwork. Compare SVG opening and actual video frames at 0,3,7,12,17,21.5 and export MP4 before approval. No AI imagery, external footage, new rendering backend, dependencies or extra Actions.",
+  "brandKit": {
+    "brandName": "LIVING TRAVEL POSTERS",
+    "primaryColor": "#254f4a",
+    "accentColor": "#b74432",
+    "backgroundColor": "#efe2bf",
+    "surfaceColor": "#638a83",
+    "textColor": "#f8edcf",
+    "mutedColor": "#c1aa7e",
+    "fontFamily": "Georgia"
+  },
+  "seriesId": "living-travel-posters",
+  "exampleScenes": [
+    {
+      "id": "alpine-poster",
+      "name": "01 / Print · Awakening · Journey · Return",
+      "durationSec": 22,
+      "layout": "parallax-cinema",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "SWITZERLAND",
+      "subheadline": "THE ALPINE EXPRESS",
+      "fullBleed": true,
+      "parallax": {
+        "shot": "cover",
+        "variant": "living-travel-poster",
+        "episode": 1,
+        "speed": 1,
+        "posterVersion": "3.0"
+      }
+    }
+  ],
+  "exampleCaptionStyle": null,
+  "exampleAudioTracks": []
+}
