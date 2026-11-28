@@ -117,7 +117,7 @@ function prepareProject(p) {
         p.captions=cues.map(c=>({...c,startSec:Math.max(.85,c.startSec),position:cinematic ? .75 : .78,fontSizePx:cinematic?43:45})).filter(c=>c.endSec>c.startSec);
       }
       if(p.scenes.some(s=>s.doodle?.extras?.includes('simply-explained-v1'))){
-        const clean=p.templateVersion==='1.1'||p.templateVersion==='2.0'||p.templateVersion==='2.6'||p.templateVersion==='2.7'||p.templateVersion==='3.0'||p.templateVersion==='3.1'||p.templateVersion==='3.2';
+        const clean=p.templateVersion==='1.1'||p.templateVersion==='2.0'||p.templateVersion==='2.6'||p.templateVersion==='2.7'||p.templateVersion==='3.0'||p.templateVersion==='3.1'||p.templateVersion==='3.2'||p.templateVersion==='3.3';
         const chunkSize=clean?3:5;
         p.captions=cues.flatMap(c=>{
           const words=String(c.text??'').trim().split(/\s+/).filter(Boolean);
@@ -125,7 +125,7 @@ function prepareProject(p) {
           for(let i=0;i<words.length;i+=chunkSize){
             const startSec=c.startSec+(c.endSec-c.startSec)*i/words.length;
             const endSec=c.startSec+(c.endSec-c.startSec)*Math.min(words.length,i+chunkSize)/words.length;
-            if(endSec>startSec)parts.push({text:words.slice(i,i+chunkSize).join(' '),startSec,endSec,style:clean?'karaoke':'minimal',position:p.templateVersion==='3.2'?755/910:(p.templateVersion==='2.7'||p.templateVersion==='3.1')?720/910:clean ? .765 : .79,fontSizePx:clean?52:48,...(clean?{color:'#F4B89A'}:{})});
+            if(endSec>startSec)parts.push({text:words.slice(i,i+chunkSize).join(' '),startSec,endSec,style:clean?'karaoke':'minimal',position:(p.templateVersion==='3.2'||p.templateVersion==='3.3')?755/910:(p.templateVersion==='2.7'||p.templateVersion==='3.1')?720/910:clean ? .765 : .79,fontSizePx:clean?52:48,...(clean?{color:'#F4B89A'}:{})});
           }
           return parts;
         });
@@ -270,6 +270,17 @@ for(const p of projects){
     const key=p.seriesId+'/'+p.season+'/'+p.episodeNumber;
     if(occupied.has(key))throw Error('Duplicate episode '+key);
     occupied.add(key);
+  }
+  if(p.seriesId==='simply-explained'){
+    p.buildRevision=process.env.GITHUB_SHA??'local';
+    const digest=createHash('sha256');
+    for(const track of p.audioTracks??[]){const file=path.join(rootDir,'public',track.src);if(fs.existsSync(file))digest.update(fs.readFileSync(file));}
+    p.mediaRevision=digest.digest('hex').slice(0,20);
+    if(p.templateVersion==='3.3'){
+      if(!p.scenes.every(s=>['alex-quality-v1','alex-final-v1','alex-performance-v1','alex-27-layout','simply-explained-v2','simply-explained-v11'].every(k=>s.doodle?.extras?.includes(k))))throw Error('Simply Explained 3.3 renderer markers incomplete: '+p.slug);
+      const duration=p.scenes.reduce((n,s)=>n+s.durationSec,0);
+      if(ci&&(!p.audioTracks?.some(t=>t.kind==='voiceover'&&Math.abs((t.endSec??0)-duration)<.034)||p.captions?.some(c=>c.startSec<0||c.endSec>duration+.001)))throw Error('Simply Explained timeline/audio mismatch: '+p.slug);
+    }
   }
   writePoster(p);
 }
