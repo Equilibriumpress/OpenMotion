@@ -700,6 +700,38 @@
         "imageUrl": "series-covers/living-travel-posters.svg",
         "alt": "Living Travel Posters series cover"
       }
+    },
+    {
+      "id": "simply-explained",
+      "title": "Simply Explained",
+      "description": "Original animated editorial explainers with recurring presenter Alex.",
+      "activeVersion": "1.0",
+      "versions": [
+        {
+          "version": "1.0",
+          "format": "9:16",
+          "fps": 30,
+          "durationSec": 56,
+          "referenceProject": "simply-explained-001-how-ai-actually-works",
+          "templatePath": "series/simply-explained/template-v1.0.json",
+          "instructions": "Editorial Explainer: use original procedural Alex host (dark teal overshirt, warm skin, dark swept hair, round glasses), cream paper and rust accent. Use doodle-explainer and markers mind-series-v1, simply-explained-v1, shot:cover/hook/training/tokens/prediction/response/limits. These pilot diagrams are topic-specific; design new diagram shots in the same Canvas module for future topics. Keep a 1.2s selectable cover, English Piper narration, captions with measured scene-duration estimates, quiet original score and a separate matching illustrated thumbnail. No generated imagery, external footage, new rendering engine or extra test Actions. Verify preview, sound and publication MP4 before approval.",
+          "brandKit": {
+            "brandName": "SIMPLY EXPLAINED",
+            "primaryColor": "#253E43",
+            "accentColor": "#B94F36",
+            "backgroundColor": "#F5EDDF",
+            "surfaceColor": "#FFF9EF",
+            "textColor": "#243538",
+            "mutedColor": "#766E61",
+            "fontFamily": "system-ui"
+          }
+        }
+      ],
+      "episodes": [],
+      "cover": {
+        "imageUrl": "series-covers/simply-explained.svg",
+        "alt": "Simply Explained with Alex"
+      }
     }
   ],
   "standaloneVideos": [
