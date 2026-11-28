@@ -5,6 +5,7 @@ export type YouTubeMetadata = {
   description: string;
   tags: string;
   sources: string;
+  tiktokCaption: string;
 };
 
 const human: Record<string, [string,string,string]> = {
@@ -20,20 +21,41 @@ const human: Record<string, [string,string,string]> = {
  '10-lonely-in-a-crowd':['Lonely in a Room Full of People','A crowded room is not always a place of connection. A short story about feeling understood.','loneliness, belonging, social connection'],
 };
 
+// Post captions, distinct from timed subtitles rendered into the video.
+export const TIKTOK_CAPTION_DRAFT_LIMIT=2200;
+const tiktokHuman: Record<string,string> = {
+ '01-same-situation':'“We need to talk.” Four words, two completely different reactions. What goes through your mind?',
+ '02-no-text-back':'Sent. Seen. Still no reply. Do you keep checking your phone, or put it away?',
+ '03-plans-change':'Dinner is cancelled. Does the rest of your evening suddenly feel off?',
+ '04-boundaries':'One more favour when your day is already full. Saying no does not mean you stop caring.',
+ '05-criticism':'Someone asks you to change your work. Why does the feedback sometimes feel so personal?',
+ '06-resting-guilt':'Finally, a moment to rest. So why are you thinking about everything you still need to do?',
+ '07-smile-we-hide-behind':'“I’m fine.” Sometimes a smile tells only part of the story.',
+ '08-same-mistakes':'Five more minutes of scrolling. Suddenly, ninety minutes have passed. Sound familiar?',
+ '09-being-strong':'When you are always the one helping, who helps you? Asking for support matters too.',
+ '10-lonely-in-a-crowd':'A room full of people, yet you still feel lonely. Connection is more than being surrounded.',
+};
+export function defaultTikTokCaption(p:OpenMotionProject):string {
+ const entry=p.seriesId==='the-human-side'?tiktokHuman[p.slug.replace(/^the-human-side-/,'')]:undefined;
+ // Use the existing title for other series rather than inventing claims or a language.
+ return (entry??p.title).trim().slice(0,TIKTOK_CAPTION_DRAFT_LIMIT);
+}
+
 export function defaultYouTubeMetadata(p: OpenMotionProject): YouTubeMetadata {
  const entry=p.seriesId==='the-human-side'?human[p.slug.replace(/^the-human-side-/,'')]:undefined;
  const links=Array.from(new Set((p.description.match(/https?:\/\/[^\s<>"']+/g)??[]).map(v=>v.replace(/[.,;:)\]]+$/,''))));
  const title=(entry?.[0]??p.title).slice(0,100);
  return {title,description:(entry?entry[1]+'\n\nThe Human Side · Episode '+String(p.episodeNumber??'').padStart(2,'0')+'\nAn original animated story about everyday human experiences. Not a diagnosis.':p.description).slice(0,5000),
  tags:entry?'The Human Side, animated short, '+entry[2]:'animated video, '+(p.category??''),
- sources:links.join('\n')};
+ sources:links.join('\n'),tiktokCaption:defaultTikTokCaption(p)};
 }
 export function normalizeYouTubeMetadata(value:unknown, fallback:YouTubeMetadata):YouTubeMetadata {
  const v=value&&typeof value==='object'?value as Partial<YouTubeMetadata>:{};
  return {title:typeof v.title==='string'?v.title.slice(0,100):fallback.title,
  description:typeof v.description==='string'?v.description.slice(0,5000):fallback.description,
  tags:typeof v.tags==='string'?v.tags.slice(0,500):fallback.tags,
- sources:typeof v.sources==='string'?v.sources.slice(0,12000):fallback.sources};
+ sources:typeof v.sources==='string'?v.sources.slice(0,12000):fallback.sources,
+ tiktokCaption:typeof v.tiktokCaption==='string'?v.tiktokCaption.slice(0,TIKTOK_CAPTION_DRAFT_LIMIT):fallback.tiktokCaption};
 }
 export function publicationDescription(m:YouTubeMetadata):string {
  return [m.description.trim(),m.sources.trim()?'Sources / further reading:\n'+m.sources.trim():''].filter(Boolean).join('\n\n');
