@@ -53,7 +53,7 @@ function water(c:C,a:MasterArt,l:MasterLayer,t:number,awake:number){
  c.restore();
 }
 export function renderPosterCinemaMaster(c:C,w:number,h:number,s:OpenMotionScene,local:number){
- const d:MasterDestination=s.parallax?.destination==='japan'?'japan':s.parallax?.destination==='amalfi'?'amalfi':'switzerland',a=MASTER_ART[d],t=22*clamp(local/Math.max(.5,s.durationSec)),q=smooth((t-2)/19),phase=TAU*q;
+ const d:MasterDestination=s.parallax?.destination==='japan'?'japan':s.parallax?.destination==='amalfi'?'amalfi':'switzerland',a=MASTER_ART[d],t=22*clamp(local/Math.max(.5,s.durationSec)),q=smooth((t-2)/19),phase=q===1?0:TAU*q;
  const awake=smooth((t-2)/2)*(1-smooth((t-19)/2)),push=smooth((t-4)/6)*(1-smooth((t-17)/4));
  const zoom=1+.48*push,m=MASTER_MOTION[d],heroX=m.left+wrap(m.start-m.left+m.range*progress(t),m.range);const track=d==='amalfi'?0:Math.max(-24,Math.min(175,(heroX-m.start)*1.25));const follow=(1-smooth((t-14)/2.5))*smooth((t-4)/4);const pan=push*((d==='amalfi'?18:0)+10*Math.sin(phase)-track*follow);
  const fx=d==='amalfi'?205:d==='japan'?300:285,fy=d==='japan'?635:d==='amalfi'?565:535;
