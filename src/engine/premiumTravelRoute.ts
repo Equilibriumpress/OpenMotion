@@ -34,6 +34,7 @@ async function getRoadGeometry(scenes:OpenMotionScene[]) {
   const result=await res.json() as {code?:string;routes?:{geometry:{coordinates:[number,number][];type:string};legs:{distance:number}[]}[]};
   const route=result.routes?.[0];
   if(result.code!=='Ok'||!route||route.geometry.type!=='LineString'||route.geometry.coordinates.length<20)throw new Error('No valid road-matched route available.');
+  if(base.closeLoop){const c=route.geometry.coordinates,first=c[0],last=c[c.length-1];if(Math.hypot(first[0]-last[0],first[1]-last[1])>.02)throw Error('Closed route did not return to start');}
   const total=route.legs.reduce((a,b)=>a+b.distance,0);
   if(total<=0||route.legs.length!==waypoints.length-1)throw new Error('Incomplete driving route.');
   const waypointFractions=[0];let distance=0;
@@ -59,7 +60,7 @@ export function preparePremiumTravelProject(project:OpenMotionProject):Promise<v
   const job=(async()=>{
     await getRoadGeometry(scenes);
     const signature=scenes.some(s=>(s.premiumTravel?.editorialRevision??0)>=9),route=scenes[0].premiumTravel!;
-    const elevationJob=signature?loadSignatureElevation(route.route.geometry.coordinates,route.stops.map(s=>[s.lon,s.lat] as [number,number])):Promise.resolve(null);
+    const elevationJob=signature?loadSignatureElevation(route.route.geometry.coordinates,route.stops.map(s=>[s.lon,s.lat] as [number,number]),route.closeLoop?9:11):Promise.resolve(null);
     const { Map: MapLibreConstructor, setWorkerUrl } = await import('maplibre-gl');
     setWorkerUrl(workerUrl);
     const div=document.createElement('div');
@@ -357,7 +358,7 @@ function travelCamera(scene:OpenMotionScene,stage:Stage,w:number,h:number,time:n
   const start=stage.stops[Math.max(0,p.focusStopIndex-1)]??roadFocus;
   const end=stage.stops[Math.max(0,p.focusStopIndex)]??roadFocus;
   if(r7&&driving){const u=ease(t/.18),v=ease((t-.72)/.28);roadFocus.x=lerp(lerp(start.x,roadFocus.x,u),end.x,v);roadFocus.y=lerp(lerp(start.y,roadFocus.y,u),end.y,v);}
-  const reveal=p.mapIntro?1:smoother(t/.62);
+  const reveal=p.mapIntro?1:closing?smoother(time/.9):smoother(t/.62);
   const lastStop=stage.stops[stage.stops.length-1];
   const cameraFocus=finishing
     ? {x:lerp(lastStop.x,WIDTH/2,reveal),y:lerp(lastStop.y,HEIGHT/2,reveal)}
