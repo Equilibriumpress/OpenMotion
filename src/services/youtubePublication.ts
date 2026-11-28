@@ -9,6 +9,7 @@ export type YouTubeMetadata = {
   primaryKeyword: string;
   secondaryKeywords: string;
   tiktokInteractionCaption: string;
+  hashtags: string;
 };
 
 const human: Record<string, [string,string,string]> = {
@@ -50,10 +51,10 @@ function legacyYouTubeMetadata(p: OpenMotionProject): YouTubeMetadata {
  const title=(entry?.[0]??p.title).slice(0,100);
  return {title,description:(entry?entry[1]+'\n\nThe Human Side · Episode '+String(p.episodeNumber??'').padStart(2,'0')+'\nAn original animated story about everyday human experiences. Not a diagnosis.':p.description).slice(0,5000),
  tags:entry?'The Human Side, animated short, '+entry[2]:'animated video, '+(p.category??''),
- sources:links.join('\n'),tiktokCaption:legacyTikTokCaption(p),primaryKeyword:'',secondaryKeywords:'',tiktokInteractionCaption:legacyTikTokCaption(p)};
+ sources:links.join('\n'),tiktokCaption:legacyTikTokCaption(p),primaryKeyword:'',secondaryKeywords:'',tiktokInteractionCaption:legacyTikTokCaption(p),hashtags:''};
 }
 // Editorial keyword hypotheses, not measured search volumes or guaranteed rankings.
-const humanSeo: Record<string, Omit<YouTubeMetadata,'tags'|'sources'>> = {
+const humanSeo: Record<string, Omit<YouTubeMetadata,'tags'|'sources'|'hashtags'>> = {
   "01-same-situation": {
     "primaryKeyword": "overthinking messages",
     "secondaryKeywords": "cognitive appraisal, text message anxiety, emotional reactions, uncertainty",
@@ -135,6 +136,44 @@ const humanSeo: Record<string, Omit<YouTubeMetadata,'tags'|'sources'>> = {
     "tiktokInteractionCaption": "Have you ever felt lonely in a room full of people?"
   }
 };
+const humanHashtags: Record<string,string> = {
+  "01-same-situation": "#TheHumanSide #Psychology #Overthinking #Emotions #Mindset",
+  "02-no-text-back": "#TheHumanSide #Psychology #TextingAnxiety #Overthinking #Relationships",
+  "03-plans-change": "#TheHumanSide #Psychology #Anxiety #Change #EmotionalRegulation",
+  "04-boundaries": "#TheHumanSide #Psychology #PeoplePleasing #Boundaries #SelfWorth",
+  "05-criticism": "#TheHumanSide #Psychology #Criticism #SelfEsteem #PersonalGrowth",
+  "06-resting-guilt": "#TheHumanSide #Psychology #RestGuilt #ProductivityGuilt #SelfCompassion",
+  "07-smile-we-hide-behind": "#TheHumanSide #Psychology #EmotionalMasking #MentalHealth #Emotions",
+  "08-same-mistakes": "#TheHumanSide #Psychology #PhoneAddiction #Habits #ScreenTime",
+  "09-being-strong": "#TheHumanSide #Psychology #EmotionalExhaustion #Stress #SelfCare",
+  "10-lonely-in-a-crowd": "#TheHumanSide #Psychology #Loneliness #Belonging #HumanConnection"
+};
+export function defaultHashtags(p:OpenMotionProject):string {
+ return p.seriesId==='the-human-side'?humanHashtags[p.slug.replace(/^the-human-side-/,'')]??'':'';
+}
+// Accept whitespace/comma separated tokens, optional #, Unicode letters and digits.
+// Preserve case for display and deduplicate case-insensitively.
+export function publicationHashtags(value:string):string[] {
+ const seen=new Set<string>();
+ return value.split(/[\s,]+/u).map(v=>v.replace(/^#+/,'')).filter(v=>{
+  const key=v.toLowerCase();
+  if(!/^[\p{L}\p{M}\p{N}_]+$/u.test(v)||!/[\p{L}\p{N}]/u.test(v)||seen.has(key))return false;
+  seen.add(key);return true;
+ }).map(v=>'#'+v).slice(0,5);
+}
+export function youtubeHashtags(m:YouTubeMetadata):string[] {
+ const tags=publicationHashtags(m.hashtags);
+ // Prefer the series and specific topics over the broad Psychology tag.
+ return [...tags.filter(v=>v.toLowerCase()!=='#psychology'),...tags.filter(v=>v.toLowerCase()==='#psychology')].slice(0,3);
+}
+function appendHashtags(body:string,tags:string[]):string {
+ const trimmed=body.trim();
+ const existing=new Set((trimmed.match(/#[\p{L}\p{M}\p{N}_]+/gu)??[]).map(v=>v.toLowerCase()));
+ return [trimmed,tags.filter(v=>!existing.has(v.toLowerCase())).join(' ')].filter(Boolean).join('\n\n');
+}
+export function publicationTikTokCaption(m:YouTubeMetadata,interaction=false):string {
+ return appendHashtags(interaction?m.tiktokInteractionCaption:m.tiktokCaption,publicationHashtags(m.hashtags));
+}
 function seoEntry(p:OpenMotionProject){return p.seriesId==='the-human-side'?humanSeo[p.slug.replace(/^the-human-side-/,'')]:undefined;}
 export function defaultTikTokCaption(p:OpenMotionProject):string {
  return seoEntry(p)?.tiktokCaption??legacyTikTokCaption(p);
@@ -142,7 +181,7 @@ export function defaultTikTokCaption(p:OpenMotionProject):string {
 export function defaultYouTubeMetadata(p:OpenMotionProject):YouTubeMetadata {
  const old=legacyYouTubeMetadata(p),seo=seoEntry(p);
  if(!seo)return old;
- return {...old,...seo,description:seo.description+'\n\nThe Human Side · Episode '+String(p.episodeNumber??'').padStart(2,'0')+'\nAn original animated story about everyday human experiences. Not a diagnosis.',tags:'The Human Side, animated short, '+seo.primaryKeyword+', '+seo.secondaryKeywords};
+ return {...old,...seo,hashtags:defaultHashtags(p),description:seo.description+'\n\nThe Human Side · Episode '+String(p.episodeNumber??'').padStart(2,'0')+'\nAn original animated story about everyday human experiences. Not a diagnosis.',tags:'The Human Side, animated short, '+seo.primaryKeyword+', '+seo.secondaryKeywords};
 }
 // Migrate untouched v1 defaults automatically; never replace user-written text.
 export function migrateYouTubeMetadata(p:OpenMotionProject,value:unknown):YouTubeMetadata {
@@ -165,10 +204,11 @@ export function normalizeYouTubeMetadata(value:unknown, fallback:YouTubeMetadata
  tiktokCaption:typeof v.tiktokCaption==='string'?v.tiktokCaption.slice(0,TIKTOK_CAPTION_DRAFT_LIMIT):fallback.tiktokCaption,
  primaryKeyword:typeof v.primaryKeyword==='string'?v.primaryKeyword.slice(0,160):fallback.primaryKeyword,
  secondaryKeywords:typeof v.secondaryKeywords==='string'?v.secondaryKeywords.slice(0,500):fallback.secondaryKeywords,
- tiktokInteractionCaption:typeof v.tiktokInteractionCaption==='string'?v.tiktokInteractionCaption.slice(0,TIKTOK_CAPTION_DRAFT_LIMIT):fallback.tiktokInteractionCaption};
+ tiktokInteractionCaption:typeof v.tiktokInteractionCaption==='string'?v.tiktokInteractionCaption.slice(0,TIKTOK_CAPTION_DRAFT_LIMIT):fallback.tiktokInteractionCaption,
+ hashtags:typeof v.hashtags==='string'?v.hashtags.slice(0,500):fallback.hashtags};
 }
 export function publicationDescription(m:YouTubeMetadata):string {
- return [m.description.trim(),m.sources.trim()?'Sources / further reading:\n'+m.sources.trim():''].filter(Boolean).join('\n\n');
+ return appendHashtags([m.description.trim(),m.sources.trim()?'Sources / further reading:\n'+m.sources.trim():''].filter(Boolean).join('\n\n'),youtubeHashtags(m));
 }
 export function publicationSlug(slug:string):string {
  return slug.replace(/[^a-zA-Z0-9_-]+/g,'-').replace(/^-+|-+$/g,'')||'video';
