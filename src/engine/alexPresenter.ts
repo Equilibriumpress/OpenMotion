@@ -125,15 +125,15 @@ function renderBody26(c:C,scene:OpenMotionScene,t:number,p:Pose,keys:Key[],blink
  const breath=Math.sin(t*Math.PI*2/4.1)*edge*calm;
  const sway=Math.sin(t*Math.PI*2/6.2)*edge*calm;
  const bodyYaw=b.yaw*.30,bodyTilt=b.tilt*.30-b.arm*.12;
- const shoulderLift=b.arm*3.4,headX=p.yaw*5.2,headY=-breath*1.1-neck.arm*.8;
+ const shoulderLift=b.arm*5.4,headX=p.yaw*6.2,headY=-breath*1.5-neck.arm*1.2;
  const hairMotion:HairMotion={
-  sweep:clamp((late.yaw-p.yaw)*24+(earlier.yaw-late.yaw)*8+(late.tilt-p.tilt)*11+sway*.8,-6,6),
+  sweep:clamp((late.yaw-p.yaw)*38+(earlier.yaw-late.yaw)*12+(late.tilt-p.tilt)*15+sway*1.4,-6,6),
   lift:clamp((late.tilt-p.tilt)*12+(late.arm-p.arm)*5+breath*.8,-3.5,3.5),
   turn:late.yaw*9
  };
  c.save();c.translate(82,699);c.scale(.88,.88);
  // Pivot at the waist, leaving the bottom anchor stable while shoulders follow head and arm.
- c.translate(0,124);c.rotate(bodyTilt*.10+sway*.012);c.transform(1-bodyYaw*.07,0,bodyYaw*.07,1+breath*.018,0,0);c.translate(0,-124);
+ c.translate(0,124);c.rotate(bodyTilt*.14+sway*.018);c.transform(1-bodyYaw*.10,0,bodyYaw*.11,1+breath*.023,0,0);c.translate(0,-124);
  const lift=shoulderLift+breath*1.2,shift=bodyYaw*5;
  // Continuous jacket silhouette includes both moving shoulder sockets.
  path(c,`M-66 105 Q-65 ${61-breath} ${-37+shift} ${43+lift*.28} L${-18+shift} ${29-breath} H${18+shift} L${37+shift} ${43-lift} Q65 ${62-lift} 66 105 V124 H-66Z`,jacket);
@@ -143,9 +143,9 @@ function renderBody26(c:C,scene:OpenMotionScene,t:number,p:Pose,keys:Key[],blink
  path(c,`M${-24+shirt} ${34-breath} L${shirt} ${58+fold} ${24+shirt} ${34-breath-lift*.45} L${15+shirt*.4} 124 H-15Z`,light);
  path(c,`M${-36+shift} ${43+lift*.28} L${-20+shirt} ${74+fold} -31 ${87+fold*.5} -25 124 M${36+shift} ${43-lift} L${20+shirt} ${74-lift*.4+fold} 31 ${87+fold} 25 124`,'none','#678083',1.4);
  path(c,`M-52 ${83+fold} Q-44 ${88+fold} -38 99 M53 ${77-lift*.55} Q46 ${85+fold} 43 97`,'none','#466269',1.05);
- // Arm roots follow the jacket; elbow and wrist follow with 70/140 ms offsets.
+ // Arm roots follow the jacket; elbow and wrist follow with 60/160 ms offsets from the shoulder.
  for(const side of [-1,1]){
-  const support=side<0?b.arm*.12:1;
+  const support=b.arm*.12;
   const shoulder=side>0?b.arm:support,elbow=side>0?late.arm:support*.6,wrist=side>0?earlier.arm:0;
   arm(c,p,side,{shoulder,elbow,wrist,rootX:shift*.65,rootY:side>0?-lift:lift*.28});
  }
