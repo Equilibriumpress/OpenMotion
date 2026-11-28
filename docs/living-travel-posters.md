@@ -24,3 +24,5 @@ Episodes 001–003 have been migrated to template 2.0. The v1.0 template and vec
 References for visual identity (not copied artwork): Japan House London https://www.japanhouselondon.uk/read-and-watch/shinkansen/ (1964 ivory-blue Series 0 bullet nose); Italia.it https://www.italia.it/en/campania/salerno/positano (terraced village, stairs and majolica dome); RhB-inspired electric locomotive and Alpine bridge are stylised, not engineering drawings. Japan landscape is a fictional composition, not a railway route map. Switzerland v2 uses electric rail sound instead of a steam whistle.
 
 Quality gate: compare static poster and first/last frames, inspect signature object silhouettes at mobile size, check camera cropping and occlusion at 3, 7, 12, 17 seconds, check actual export resolution, frame rate and AAC. Structural checks are not a substitute for playback/MP4 review. Keep productionStatus review until verified.
+
+Swiss remaster: curved rail profile, masonry arch stones and individually oriented coach/locomotive groups follow the same curve as the static thumbnail. The stylised bridge is Landwasser-inspired rather than an exact engineering reconstruction.

@@ -15,7 +15,7 @@ let texture:HTMLCanvasElement|undefined;
 function resetFor(d:PosterDestination){if(activeDestination===d)return;for(const e of cache.values()){e.canvas.width=0;e.canvas.height=0;}cache.clear();paths.clear();activeDestination=d;}
 const bounds:Record<string,[number,number,number,number]>={
  'terraced village':[-100,240,470,510],
- 'stone viaduct':[-110,490,760,410],
+ 'stone viaduct':[-110,490,760,450],
  'foreground firs and meadow':[-110,580,760,530],
  'village and waterfall bank':[-100,450,740,260],
 };
@@ -51,13 +51,16 @@ function title(c:C,s:OpenMotionScene,d:PosterDestination,a:number){const m=POSTE
  line(c,43,180,497,180,'#f8edcf',.7);line(c,43,865,497,865,'#f8edcf',.7);
  lettering(c,m.foot,900,15,'#f8edcf',3,'Arial, sans-serif');lettering(c,'A VINTAGE-INSPIRED ILLUSTRATED JOURNEY',920,8,'#f8edcf',1.3,'Arial, sans-serif',400);c.restore();
 }
+const SWISS_TRAIN_GROUPS=[{"anchor":-197,"count":17},{"anchor":-121,"count":17},{"anchor":-25,"count":25}] as const;
+const swissRail=(x:number)=>675-.16*(x-295)+.00016*(x-295)*(x-295);
+function swissTrain(c:C,shapes:PosterShape[]|undefined,x:number){if(!shapes)return;let offset=0;for(const g of SWISS_TRAIN_GROUPS){const px=x+g.anchor;c.save();c.translate(px,swissRail(px));c.rotate(Math.atan(-.16+.00032*(px-295)));c.translate(-g.anchor,0);draw(c,shapes.slice(offset,offset+g.count));c.restore();offset+=g.count;}}
 export function renderPosterCinemaPremium(c:C,w:number,h:number,s:OpenMotionScene,local:number){
  const d:PosterDestination=s.parallax?.destination==='japan'?'japan':s.parallax?.destination==='amalfi'?'amalfi':'switzerland',a=POSTER_ART[d];resetFor(d);
  const t=22*clamp(local/Math.max(.5,s.durationSec)),q=smooth((t-2)/19),phase=TAU*q;
  const awake=smooth((t-2)/2)*(1-smooth((t-19)/2));
  const push=smooth((t-5)/5)*(1-smooth((t-17)/4));
  const zoom=1+.64*push,inset=18*(1-push),pan=push*(d==='amalfi'?32:15)+12*Math.sin(phase)*push;
- const focusX=d==='amalfi'?195:270,focusY=d==='japan'?595:575;
+ const focusX=d==='amalfi'?195:270,focusY=d==='japan'?635:575;
  c.save();const scale=Math.max(w/540,h/960);c.translate((w-540*scale)/2,(h-960*scale)/2);c.scale(scale,scale);
  c.fillStyle=PAPER;c.fillRect(0,0,540,960);
  c.save();c.beginPath();c.rect(inset,inset,540-2*inset,960-2*inset);c.clip();
@@ -71,7 +74,7 @@ export function renderPosterCinemaPremium(c:C,w:number,h:number,s:OpenMotionScen
    if(d==='amalfi'&&l.name==='sea'){const x=365+82*Math.sin(phase),y=650+3*Math.sin(phase*5);place(c,a.boat,x,y,1,awake*.045*Math.sin(phase*5));place(c,a.boat,470-34*Math.sin(phase),555+2*Math.sin(phase*4),.53,-awake*.06*Math.sin(phase*4));if(awake>0){c.save();c.globalAlpha=awake*.65;line(c,x-32,y+9,x-56,y+12,'#d7e4c4',1.4);c.restore();}}
   }
   if(l.name==='village and waterfall bank'&&awake>0){c.save();c.globalAlpha=awake*.65;for(let i=0;i<9;i++){const y=537+wrap(i*17+phase*51,111),x=y<583?387:387-(y-583)*.36;line(c,x,y,x-1,y+7,'#f6edce',1.5);}c.restore();}
-  if(l.name==='stone viaduct'){const x=-310+wrap(605+q*1400,1400),y=690-.22*x;place(c,a.train,x,y,1,-Math.atan(.22));}
+  if(l.name==='stone viaduct'){const x=-310+wrap(605+q*1400,1400);swissTrain(c,a.train,x);}
   if(l.name==='railway'){const x=-360+wrap(695+q*1450,1450),y=826-.075*x;place(c,a.train,x,y,1,-Math.atan(.075));}
   if(l.name==='coastal road'){const x=-160+wrap(395+q*1100,1100),y=816+17*Math.sin((x-235)/540*Math.PI);place(c,a.scooter,x,y,1,awake*.025*Math.cos(phase*8));}
   if(l.name==='terrace and lemon branches'){place(c,a.leaves,awake*2*Math.sin(phase*5),awake*2*Math.cos(phase*5));place(c,a.parasol,430,900,1.4,awake*.025*Math.sin(phase*6));place(c,a.parasol,345,916,.9,awake*.04*Math.sin(phase*6+1));}
