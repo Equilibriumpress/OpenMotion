@@ -1,0 +1,48 @@
+{
+  "specVersion": "0.2",
+  "name": "why-things-work-v1-0-0",
+  "version": "1.0.0",
+  "description": "Knowledge-only production recipe for Why Things Work, native template 1.0.",
+  "license": "LicenseRef-All-Rights-Reserved",
+  "licenseFile": "LICENSE",
+  "motion": "MOTION.md",
+  "design": {
+    "path": "DESIGN.md",
+    "format": "markdown"
+  },
+  "skill": "SKILL.md",
+  "files": [
+    {
+      "path": "MOTION.md",
+      "role": "motion",
+      "sha256": "228fb837bcf4cd3091b5e3113f0efcd16ceff56abc5d859ea0e79947c76bf44a"
+    },
+    {
+      "path": "DESIGN.md",
+      "role": "design",
+      "sha256": "0f362a0a562a8ee45e1f246a8f8ed8de52660d22c7214167aede8152bfb5bde2"
+    },
+    {
+      "path": "SKILL.md",
+      "role": "skill",
+      "sha256": "dfc357594e46a3756b0567b8494c89982fb94e1b5d14474b5581b2004f41a847"
+    },
+    {
+      "path": "LICENSE",
+      "role": "license",
+      "sha256": "77126b8b220cfac6afb206ac1484b448156d218699e1ec32afbfbf8942bbda81"
+    }
+  ],
+  "tags": [
+    "series",
+    "knowledge-only"
+  ],
+  "extensions": {
+    "nl.equilibriumpress": {
+      "seriesId": "why-things-work",
+      "templateVersion": "1.0",
+      "sourceRevision": "41cfb4b0c4b1b55c52f30c80cf8c5882bbe8eab4",
+      "status": "source-derived-not-render-verified"
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "specVersion": "0.2",
+  "name": "hoe-werkt-de-wereld-v1-0-0",
+  "version": "1.0.0",
+  "description": "Knowledge-only production recipe for Hoe werkt de wereld?, native template 1.0.",
+  "license": "LicenseRef-All-Rights-Reserved",
+  "licenseFile": "LICENSE",
+  "motion": "MOTION.md",
+  "design": {
+    "path": "DESIGN.md",
+    "format": "markdown"
+  },
+  "skill": "SKILL.md",
+  "files": [
+    {
+      "path": "MOTION.md",
+      "role": "motion",
+      "sha256": "bfb2d370c81bcb0456227c6a973cdd2892450d29529f44889f9efb05ffcecef4"
+    },
+    {
+      "path": "DESIGN.md",
+      "role": "design",
+      "sha256": "cfb7b3a2fa51cb08509dd16bcd4c2525ad04538e2a78c82763831854dbceb167"
+    },
+    {
+      "path": "SKILL.md",
+      "role": "skill",
+      "sha256": "f7a69a374c0b2603d41c3ee5946105d55e4a23533f2dd494f5b7779405a1ae51"
+    },
+    {
+      "path": "LICENSE",
+      "role": "license",
+      "sha256": "77126b8b220cfac6afb206ac1484b448156d218699e1ec32afbfbf8942bbda81"
+    }
+  ],
+  "tags": [
+    "series",
+    "knowledge-only"
+  ],
+  "extensions": {
+    "nl.equilibriumpress": {
+      "seriesId": "hoe-werkt-de-wereld",
+      "templateVersion": "1.0",
+      "sourceRevision": "41cfb4b0c4b1b55c52f30c80cf8c5882bbe8eab4",
+      "status": "source-derived-not-render-verified"
+    }
+  }
+}

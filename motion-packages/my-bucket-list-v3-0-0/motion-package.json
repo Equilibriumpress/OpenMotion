@@ -1,0 +1,48 @@
+{
+  "specVersion": "0.2",
+  "name": "my-bucket-list-v3-0-0",
+  "version": "3.0.0",
+  "description": "Knowledge-only production recipe for My Bucket List, native template 3.0.",
+  "license": "LicenseRef-All-Rights-Reserved",
+  "licenseFile": "LICENSE",
+  "motion": "MOTION.md",
+  "design": {
+    "path": "DESIGN.md",
+    "format": "markdown"
+  },
+  "skill": "SKILL.md",
+  "files": [
+    {
+      "path": "MOTION.md",
+      "role": "motion",
+      "sha256": "236bacb144e7eadecc1f77c27743e48d97c1c6d6c6fd6247f8f1b38d8a3a8c8a"
+    },
+    {
+      "path": "DESIGN.md",
+      "role": "design",
+      "sha256": "8a05a3f8153c9a04f37512a530b6da8de2429dc030ae5017eeb28bede46b3b46"
+    },
+    {
+      "path": "SKILL.md",
+      "role": "skill",
+      "sha256": "4112a4e94e37c1ce8b2560cc32ae18389dc2d1298a91feda82109ced3a76de34"
+    },
+    {
+      "path": "LICENSE",
+      "role": "license",
+      "sha256": "77126b8b220cfac6afb206ac1484b448156d218699e1ec32afbfbf8942bbda81"
+    }
+  ],
+  "tags": [
+    "series",
+    "knowledge-only"
+  ],
+  "extensions": {
+    "nl.equilibriumpress": {
+      "seriesId": "my-bucket-list",
+      "templateVersion": "3.0",
+      "sourceRevision": "41cfb4b0c4b1b55c52f30c80cf8c5882bbe8eab4",
+      "status": "source-derived-not-render-verified"
+    }
+  }
+}

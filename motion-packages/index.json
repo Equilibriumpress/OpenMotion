@@ -1,0 +1,104 @@
+{
+  "specVersion": "0.2",
+  "packages": [
+    {
+      "seriesId": "inside-your-mind",
+      "title": "Inside Your Mind",
+      "templateVersion": "1.0",
+      "folder": "motion-packages/inside-your-mind-v1-0-0",
+      "name": "inside-your-mind-v1-0-0"
+    },
+    {
+      "seriesId": "inside-adhd-mind",
+      "title": "Inside the ADHD Mind",
+      "templateVersion": "1.0",
+      "folder": "motion-packages/inside-adhd-mind-v1-0-0",
+      "name": "inside-adhd-mind-v1-0-0"
+    },
+    {
+      "seriesId": "why-things-work",
+      "title": "Why Things Work",
+      "templateVersion": "1.0",
+      "folder": "motion-packages/why-things-work-v1-0-0",
+      "name": "why-things-work-v1-0-0"
+    },
+    {
+      "seriesId": "my-bucket-list",
+      "title": "My Bucket List",
+      "templateVersion": "3.0",
+      "folder": "motion-packages/my-bucket-list-v3-0-0",
+      "name": "my-bucket-list-v3-0-0"
+    },
+    {
+      "seriesId": "places-worth-exploring",
+      "title": "Places Worth Exploring",
+      "templateVersion": "1.0",
+      "folder": "motion-packages/places-worth-exploring-v1-0-0",
+      "name": "places-worth-exploring-v1-0-0"
+    },
+    {
+      "seriesId": "geographical-stories",
+      "title": "Geographical Stories",
+      "templateVersion": "1.0",
+      "folder": "motion-packages/geographical-stories-v1-0-0",
+      "name": "geographical-stories-v1-0-0"
+    },
+    {
+      "seriesId": "hoe-werkt-de-wereld",
+      "title": "Hoe werkt de wereld?",
+      "templateVersion": "1.0",
+      "folder": "motion-packages/hoe-werkt-de-wereld-v1-0-0",
+      "name": "hoe-werkt-de-wereld-v1-0-0"
+    },
+    {
+      "seriesId": "cat-office",
+      "title": "The Cat Office",
+      "templateVersion": "1.0",
+      "folder": "motion-packages/cat-office-v1-0-0",
+      "name": "cat-office-v1-0-0"
+    },
+    {
+      "seriesId": "premium-travel-routes",
+      "title": "Premium Travel Routes",
+      "templateVersion": "2.1",
+      "folder": "motion-packages/premium-travel-routes-v2-1-0",
+      "name": "premium-travel-routes-v2-1-0"
+    },
+    {
+      "seriesId": "the-human-side",
+      "title": "The Human Side",
+      "templateVersion": "2.3",
+      "folder": "motion-packages/the-human-side-v2-3-0",
+      "name": "the-human-side-v2-3-0"
+    },
+    {
+      "seriesId": "the-song-explained",
+      "title": "The Song Explained",
+      "templateVersion": "3.0",
+      "folder": "motion-packages/the-song-explained-v3-0-0",
+      "name": "the-song-explained-v3-0-0"
+    },
+    {
+      "seriesId": "window-seat",
+      "title": "Window Seat",
+      "templateVersion": "1.0",
+      "folder": "motion-packages/window-seat-v1-0-0",
+      "name": "window-seat-v1-0-0"
+    },
+    {
+      "seriesId": "living-travel-posters",
+      "title": "Living Travel Posters",
+      "templateVersion": "3.0",
+      "folder": "motion-packages/living-travel-posters-v3-0-0",
+      "name": "living-travel-posters-v3-0-0"
+    },
+    {
+      "seriesId": "simply-explained",
+      "title": "Simply Explained",
+      "templateVersion": "3.3",
+      "folder": "motion-packages/simply-explained-v3-3-0",
+      "name": "simply-explained-v3-3-0"
+    }
+  ],
+  "profiles": []
+}

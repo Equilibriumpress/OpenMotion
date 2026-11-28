@@ -1,0 +1,48 @@
+{
+  "specVersion": "0.2",
+  "name": "premium-travel-routes-v2-1-0",
+  "version": "2.1.0",
+  "description": "Knowledge-only production recipe for Premium Travel Routes, native template 2.1.",
+  "license": "LicenseRef-All-Rights-Reserved",
+  "licenseFile": "LICENSE",
+  "motion": "MOTION.md",
+  "design": {
+    "path": "DESIGN.md",
+    "format": "markdown"
+  },
+  "skill": "SKILL.md",
+  "files": [
+    {
+      "path": "MOTION.md",
+      "role": "motion",
+      "sha256": "8e6c45ec5ccffe7ea6857cfd46b0f39ab162db6e4e4e5da980984abafa60bd0c"
+    },
+    {
+      "path": "DESIGN.md",
+      "role": "design",
+      "sha256": "37f1d1cac42a004af03682f4aacd9708adc60dd01ecda308befef9b7170ec573"
+    },
+    {
+      "path": "SKILL.md",
+      "role": "skill",
+      "sha256": "f8f0cc44f721ca6f0040cef483bf909b37f85d8a4f971728d576a490e21ee292"
+    },
+    {
+      "path": "LICENSE",
+      "role": "license",
+      "sha256": "77126b8b220cfac6afb206ac1484b448156d218699e1ec32afbfbf8942bbda81"
+    }
+  ],
+  "tags": [
+    "series",
+    "knowledge-only"
+  ],
+  "extensions": {
+    "nl.equilibriumpress": {
+      "seriesId": "premium-travel-routes",
+      "templateVersion": "2.1",
+      "sourceRevision": "41cfb4b0c4b1b55c52f30c80cf8c5882bbe8eab4",
+      "status": "source-derived-not-render-verified"
+    }
+  }
+}

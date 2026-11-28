@@ -1,0 +1,48 @@
+{
+  "specVersion": "0.2",
+  "name": "inside-your-mind-v1-0-0",
+  "version": "1.0.0",
+  "description": "Knowledge-only production recipe for Inside Your Mind, native template 1.0.",
+  "license": "LicenseRef-All-Rights-Reserved",
+  "licenseFile": "LICENSE",
+  "motion": "MOTION.md",
+  "design": {
+    "path": "DESIGN.md",
+    "format": "markdown"
+  },
+  "skill": "SKILL.md",
+  "files": [
+    {
+      "path": "MOTION.md",
+      "role": "motion",
+      "sha256": "ba5204c8e543d583b98ec088101aed673c9e79d6df24fa9e689bd597155551ec"
+    },
+    {
+      "path": "DESIGN.md",
+      "role": "design",
+      "sha256": "d40ea0b8d0f6495f76bc01cb22f83524e8aaafdc6f7f71dfb62c361ce8edbab1"
+    },
+    {
+      "path": "SKILL.md",
+      "role": "skill",
+      "sha256": "fe21facfb0184d2326da84975f0218144519f4826d4757060662ceb27a726703"
+    },
+    {
+      "path": "LICENSE",
+      "role": "license",
+      "sha256": "77126b8b220cfac6afb206ac1484b448156d218699e1ec32afbfbf8942bbda81"
+    }
+  ],
+  "tags": [
+    "series",
+    "knowledge-only"
+  ],
+  "extensions": {
+    "nl.equilibriumpress": {
+      "seriesId": "inside-your-mind",
+      "templateVersion": "1.0",
+      "sourceRevision": "41cfb4b0c4b1b55c52f30c80cf8c5882bbe8eab4",
+      "status": "source-derived-not-render-verified"
+    }
+  }
+}

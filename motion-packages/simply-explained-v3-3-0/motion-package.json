@@ -1,0 +1,48 @@
+{
+  "specVersion": "0.2",
+  "name": "simply-explained-v3-3-0",
+  "version": "3.3.0",
+  "description": "Knowledge-only production recipe for Simply Explained, native template 3.3.",
+  "license": "LicenseRef-All-Rights-Reserved",
+  "licenseFile": "LICENSE",
+  "motion": "MOTION.md",
+  "design": {
+    "path": "DESIGN.md",
+    "format": "markdown"
+  },
+  "skill": "SKILL.md",
+  "files": [
+    {
+      "path": "MOTION.md",
+      "role": "motion",
+      "sha256": "9322538b4d3e37627b592681bbe85703ca61efa09b82ad39e89ae46154652a93"
+    },
+    {
+      "path": "DESIGN.md",
+      "role": "design",
+      "sha256": "ca157b7ea55790608bc744d0defb90d3a54ee644dfdc04b696036413864e8c9f"
+    },
+    {
+      "path": "SKILL.md",
+      "role": "skill",
+      "sha256": "98405945542ebae77e614776e6e604cc8be04e3927eba5a1617d87b225e341c0"
+    },
+    {
+      "path": "LICENSE",
+      "role": "license",
+      "sha256": "77126b8b220cfac6afb206ac1484b448156d218699e1ec32afbfbf8942bbda81"
+    }
+  ],
+  "tags": [
+    "series",
+    "knowledge-only"
+  ],
+  "extensions": {
+    "nl.equilibriumpress": {
+      "seriesId": "simply-explained",
+      "templateVersion": "3.3",
+      "sourceRevision": "41cfb4b0c4b1b55c52f30c80cf8c5882bbe8eab4",
+      "status": "source-derived-not-render-verified"
+    }
+  }
+}
