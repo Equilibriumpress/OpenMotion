@@ -724,7 +724,7 @@
       "id": "simply-explained",
       "title": "Simply Explained",
       "description": "Clean animated editorial explainers with recurring female presenter Alex.",
-      "activeVersion": "3.1",
+      "activeVersion": "3.2",
       "versions": [
         {
           "version": "1.0",
@@ -848,6 +848,25 @@
           "referenceProject": "simply-explained-001-how-ai-actually-works",
           "templatePath": "series/simply-explained/template-v3.1.json",
           "instructions": "Character Cinema 2.0. Preserve female Alex, brown bob, teal jacket, cream shirt, gold studs, fixed lower-left anchor and clean editorial compositions. Use layout doodle-explainer, markers mind-series-v1, simply-explained-v1, simply-explained-v11 and simply-explained-v2. Direct each shot with host-keys: JSON arrays [normalized time,yaw,tilt,gazeX,gazeY,brow,smile,arm,gesture], start 0 and end 1, strictly increasing times, yaw/tilt/gaze/brow/smile -1..1 and arm/gesture 0..1. Gesture 0 resting, .5 open palm, .9 pointing. host-blinks: comma-separated local seconds. Interpolate poses smoothly, match gaze and gesture to central graphic, return to camera when addressing viewer. Existing manifest reads the final voice MP3 and derives 30 Hz mouth energy plus approximate text-driven visemes. No phoneme alignment, no external imagery, no new engine. Keep three-word captions beside host and static illustrated covers. Render and inspect actual export before approval. Alex 2.6 is the active illustrated presenter: retain marker alex-26 in every shot, omit Rocketbox/cartoon markers and character-preset. The waist-pivoted torso follows the head pose with a small delay; shoulder, elbow and wrist are sampled at staggered times. Hair tips and front fringe deform with delayed head movement and idle breathing. Keep the original palette, hairstyle, facial identity and lower-left anchor. Body secondary motion is derived from existing host-keys, not a new physics engine. Prefer neutral, compatible boundary poses. Do not select template 3.0 unless explicitly requested. Layout 2.7: also include marker alex-27-layout in every shot. Reserve the complete bottom-left region for Alex, anchor the waist at the bottom edge. Use shared simplyExplainedLayout.ts: diagrams end at logical y=652, presenter x=0–192/y=674–910, captions x=202–432/y=658–784. Include caption pill padding and animated hand reach in safe regions. The subtitle renderer wraps and shrinks to fit the dedicated right-hand zone. Preserve the right-side and bottom UI margins. Use the same safe composition in preview and export. Keep the diagrams simple and the prediction example explicitly illustrative. Use template 2.7 for new episodes. Alex Performance 3.1 (illustrated; 3.0 remains the historical Rocketbox version). Add alex-performance-v1 and alex-performance:<JSON> to each scene. Regie fields: emotion authored|curious|explain|enthusiastic|thoughtful|warning|closing; motion and hair in 0..1; look authored|viewer|graphic. Use different expressiveness per scene and a return to neutral at cuts. Direct eyes toward the graphic then back to the viewer. Continuous fingers, smoothed speech shapes, additional hair deformation, face and clothing shading all use the existing Canvas renderer. Retain alex-26 and alex-27-layout, fixed bottom-left safe region and separate subtitle zone. Mouth timing remains estimated from existing text and audio envelope; do not claim exact phoneme alignment. Review actual browser and MP4 before approval.",
+          "brandKit": {
+            "brandName": "SIMPLY EXPLAINED",
+            "primaryColor": "#253E43",
+            "accentColor": "#B94F36",
+            "backgroundColor": "#F5EDDF",
+            "surfaceColor": "#FFF9EF",
+            "textColor": "#243538",
+            "mutedColor": "#766E61",
+            "fontFamily": "system-ui"
+          }
+        },
+        {
+          "version": "3.2",
+          "format": "9:16",
+          "fps": 30,
+          "durationSec": 41,
+          "referenceProject": "simply-explained-001-how-ai-actually-works",
+          "templatePath": "series/simply-explained/template-v3.2.json",
+          "instructions": "Simply Explained 3.2: illustrated Alex, never an external 3D avatar. Use existing original vector character, all established 3.1 markers (mind-series-v1, simply-explained-v1, simply-explained-v11, simply-explained-v2, alex-26, alex-27-layout, alex-performance-v1, alex-performance:<JSON>), and alex-quality-v1. The new shared QUALITY_LAYOUT enlarges Alex 28% at the lower-left edge, with independent caption zone x248–448, y686–824 in the 512×910 coordinate system. Three matching face contour poses are interpolated continuously; hair follows yaw and the existing secondary motion. Hand silhouette uses grouped fingers. Regie uses normalized host-keys and existing performance presets. Match gaze to the upper illustration. Aim for 39–42 seconds for this pilot structure; set each chapter duration from measured narration with approximately 0.3s lead and 0.45s tail, avoid long empty tails. Audio generation and final cue derivation remain the existing pipeline. Diagram actions follow normalized scene time so they finish before the cut. For this pilot, keep all narration and illustrative examples unchanged. Captions are short karaoke phrases, fitted within their own zone. Use original Canvas/SVG only, no generated images, new dependencies or extra test Actions. Publication target 1080×1920, H.264/AAC, 30 fps. Actual exported MP4 and timing require review.",
           "brandKit": {
             "brandName": "SIMPLY EXPLAINED",
             "primaryColor": "#253E43",
