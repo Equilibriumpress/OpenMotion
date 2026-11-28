@@ -197,7 +197,7 @@ export function normalizeOpenMotionProject(
       id: typeof sc.id === 'string' && sc.id ? sc.id : `scene-${index + 1}`,
       name: typeof sc.name === 'string' && sc.name ? sc.name : `Scène ${index + 1}`,
       durationSec:
-        typeof sc.durationSec === 'number' && sc.durationSec >= 1 && sc.durationSec <= 30
+        typeof sc.durationSec === 'number' && Number.isFinite(sc.durationSec) && sc.durationSec >= .5 && sc.durationSec <= 30
           ? sc.durationSec
           : 3.2,
       layout,
@@ -420,6 +420,8 @@ export function normalizeOpenMotionProject(
     season: typeof obj.season === 'number' && Number.isInteger(obj.season) && obj.season > 0 ? obj.season : undefined,
     episodeNumber: typeof obj.episodeNumber === 'number' && Number.isInteger(obj.episodeNumber) && obj.episodeNumber > 0 ? obj.episodeNumber : undefined,
     templateVersion: typeof obj.templateVersion === 'string' ? obj.templateVersion : undefined,
+    buildRevision: typeof obj.buildRevision === 'string' ? obj.buildRevision : undefined,
+    mediaRevision: typeof obj.mediaRevision === 'string' ? obj.mediaRevision : undefined,
     productionStatus: ['concept','script','production','review','approved','exported','published'].includes(String(obj.productionStatus)) ? obj.productionStatus as OpenMotionProject['productionStatus'] : undefined,
     thumbnailUrl: typeof obj.thumbnailUrl === 'string' && /^(?:assets|thumbnails)\/(?:[a-zA-Z0-9_-]+\/)*[a-zA-Z0-9_.-]+\.(?:png|jpe?g|webp|svg)$/i.test(obj.thumbnailUrl) ? obj.thumbnailUrl : undefined,
     id: typeof obj.id === 'string' && obj.id ? obj.id : `om-${slugBase}-${Date.now().toString(36)}`,

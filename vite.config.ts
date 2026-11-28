@@ -7,6 +7,7 @@ import {defineConfig} from 'vite';
 export default defineConfig(() => {
   return {
     base: './',
+    define: {'import.meta.env.VITE_OPENMOTION_BUILD_REVISION':JSON.stringify(process.env.GITHUB_SHA??'local')},
     plugins: [
       react(),
       tailwindcss(),

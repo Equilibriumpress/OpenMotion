@@ -1,3 +1,5 @@
+import { ExportFrameComparison } from './ExportFrameComparison';
+import { rendererLabel, downloadVerifiedZip, BUNDLE_REVISION } from '../engine/exportProvenance';
 import { YouTubePublicationKit } from './YouTubePublicationKit';
 import { hasSongCover, renderSongCover } from '../engine/songExplainerRenderer';
 import { hasHumanSideCover, renderHumanSideCover, isHumanSideV2 } from '../engine/humanSideRenderer';
@@ -91,7 +93,7 @@ export function StudioView({
   });
   const [renderState, setRenderState] = useState<RenderProgressState>(INITIAL_RENDER_STATE);
   const [renderedSignature,setRenderedSignature]=useState<string|null>(null);
-  const projectSignature=useMemo(()=>JSON.stringify([project.id,project.format,project.width,project.height,project.fps,project.brandKit,project.scenes,project.captions,project.audioTracks,project.documentaryTerrain]),[project]);
+  const projectSignature=useMemo(()=>JSON.stringify([project.id,project.templateVersion,project.buildRevision,project.mediaRevision,project.format,project.width,project.height,project.fps,project.brandKit,project.scenes,project.captions,project.audioTracks,project.documentaryTerrain]),[project]);
 
   const abortRef = useRef<AbortController | null>(null);
 
@@ -211,7 +213,7 @@ export function StudioView({
   };
 
   const handleDownloadMp4 = () => {
-    if (!renderState.outputUrl || !renderState.fileName) return;
+    if (!renderState.outputUrl || !renderState.fileName || renderedSignature!==projectSignature) return;
     const a = document.createElement('a');
     a.href = renderState.outputUrl;
     a.download = renderState.fileName;
@@ -359,6 +361,7 @@ export function StudioView({
               {project.githubPath} · {project.format} · {project.width}×{project.height} ·{' '}
               {totalDuration.toFixed(1)}s
             </p>
+            {project.seriesId==='simply-explained'&&<p className="text-xs text-teal-800">Template {project.templateVersion??'onbekend'} · {rendererLabel(project)} · projectbuild {project.buildRevision?.slice(0,8)??'lokaal'} · rendererbuild {BUNDLE_REVISION.slice(0,8)}</p>}
           </div>
         </div>
 
@@ -865,11 +868,19 @@ export function StudioView({
                       <button
                         type="button"
                         onClick={handleDownloadMp4}
+                        disabled={renderedSignature!==projectSignature}
                         className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-medium text-white bg-slate-900 rounded-lg hover:bg-slate-800 transition-colors"
                       >
                         <Download className="w-4 h-4" />
                         <span>Download {renderState.fileName}</span>
                       </button>
+                      {renderState.verification&&renderedSignature===projectSignature&&project.templateVersion==='3.3'&&<ExportFrameComparison key={renderState.outputUrl} project={project} result={renderState}/>}
+                      {renderState.verification&&<div className="space-y-2 rounded-lg border border-slate-200 p-3 text-xs">
+                       <p>Origineel gemeten: {renderState.verification.width} × {renderState.verification.height} · {renderState.verification.fps} fps · {renderState.verification.actualDurationSec.toFixed(2)} s · template {renderState.verification.templateVersion}</p>
+                       <p className="break-all font-mono text-slate-500">SHA-256 {renderState.verification.sha256}</p>
+                       <button type="button" disabled={renderedSignature!==projectSignature} onClick={()=>void downloadVerifiedZip(renderState).catch(e=>setDiagnostic(String(e)))} className="w-full rounded-lg border px-3 py-2 font-semibold">Download originele MP4 + exportbewijs (ZIP)</button>
+                       {renderedSignature!==projectSignature&&<p>Project gewijzigd. Render opnieuw.</p>}
+                      </div>}
                       {renderState.audioSidecarUrl && (
                         <div className="space-y-2 rounded-lg border border-amber-300 bg-amber-50 p-3">
                           <p className="text-xs text-amber-900">Safari kon de audiotrack niet betrouwbaar in de video opnemen. Download het originele geluid apart als WAV om dit in je video-editor aan de MP4 toe te voegen.</p>
@@ -1056,13 +1067,13 @@ export function StudioView({
                       <label className="block text-xs text-slate-600 mb-1">Duur (seconden)</label>
                       <input
                         type="number"
-                        min={1}
+                        min={.5}
                         max={20}
                         step={0.2}
                         value={activeScene.durationSec}
                         onChange={(e) =>
                           updateActiveScene({
-                            durationSec: Math.max(1, parseFloat(e.target.value) || 2),
+                            durationSec: Math.max(.5, parseFloat(e.target.value) || 2),
                           })
                         }
                         className="w-full px-3 py-1.5 text-sm font-mono tabular-nums border border-slate-200 rounded-lg"

@@ -6,10 +6,10 @@ import { createDoodleExplainerAudio } from './doodleExplainerAudio';
 import { createBucketListAudio } from './bucketListAudio';
 
 /** Resolve repository asset paths relative to the deployed Vite Pages base. */
-export function projectAssetUrl(src: string): string {
+export function projectAssetUrl(src: string, revision?:string): string {
   if (/^(https?:|blob:|data:)/i.test(src)) return src;
   const base = new URL(import.meta.env.BASE_URL || './', document.baseURI);
-  return new URL(src.replace(/^\/+/, ''), base).href;
+  const url=new URL(src.replace(/^\/+/, ''), base);if(revision)url.searchParams.set('v',revision);return url.href;
 }
 
 /** Decode and mix project tracks to a deterministic 48kHz stereo timeline. */
@@ -40,7 +40,7 @@ async function renderProjectAudio(project: OpenMotionProject, durationSec: numbe
   const offline = new OfflineAudioContext(2, frames, rate);
   {
     for (const track of tracks) {
-      const response = await fetch(projectAssetUrl(track.src));
+      const response = await fetch(projectAssetUrl(track.src,project.mediaRevision));
       if (!response.ok) throw new Error(`Audio file not found: ${track.src} (${response.status})`);
       const decoded = await offline.decodeAudioData(await response.arrayBuffer());
       const start = Math.max(0,track.startSec || 0);

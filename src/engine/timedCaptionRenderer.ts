@@ -27,9 +27,9 @@ export function renderTimedCaptions(
       }));
 
   const scale = width / 1080;
-  const editorial = project.seriesId === 'simply-explained' && (project.templateVersion === '1.1' || project.templateVersion === '2.0' || project.templateVersion === '2.6' || project.templateVersion === '2.7' || project.templateVersion === '3.0' || (project.templateVersion === '3.1' || project.templateVersion === '3.2'));
-  const strict = project.seriesId === 'simply-explained' && (project.templateVersion === '2.7' || (project.templateVersion === '3.1' || project.templateVersion === '3.2'));
-  const zone=project.templateVersion==='3.2'?QUALITY_LAYOUT.caption:EDITORIAL_LAYOUT.caption;
+  const editorial = project.seriesId === 'simply-explained' && (project.templateVersion === '1.1' || project.templateVersion === '2.0' || project.templateVersion === '2.6' || project.templateVersion === '2.7' || project.templateVersion === '3.0' || (project.templateVersion === '3.1' || (project.templateVersion === '3.2' || project.templateVersion === '3.3')));
+  const strict = project.seriesId === 'simply-explained' && (project.templateVersion === '2.7' || (project.templateVersion === '3.1' || (project.templateVersion === '3.2' || project.templateVersion === '3.3')));
+  const zone=(project.templateVersion==='3.2'||project.templateVersion==='3.3')?QUALITY_LAYOUT.caption:EDITORIAL_LAYOUT.caption;
   const sx=width/EDITORIAL_LAYOUT.width,sy=height/EDITORIAL_LAYOUT.height;
   const padX=(editorial||strict?14:25)*scale,padY=(editorial||strict?11:19)*scale;
   const centerX = strict ? (zone.left+zone.right)*sx/2 : width * (editorial ? .60 : .5);

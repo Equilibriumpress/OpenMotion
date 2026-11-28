@@ -54,7 +54,8 @@
           "alex-27-layout",
           "alex-performance-v1",
           "alex-performance:{\"emotion\":\"closing\",\"motion\":0.35,\"hair\":0.45,\"look\":\"viewer\"}",
-          "alex-quality-v1"
+          "alex-quality-v1",
+          "alex-final-v1"
         ],
         "shirtColor": "#253E43",
         "highlightColor": "#B94F36",
@@ -90,7 +91,8 @@
           "alex-27-layout",
           "alex-performance-v1",
           "alex-performance:{\"emotion\":\"curious\",\"motion\":0.65,\"hair\":0.62,\"look\":\"authored\"}",
-          "alex-quality-v1"
+          "alex-quality-v1",
+          "alex-final-v1"
         ],
         "shirtColor": "#253E43",
         "highlightColor": "#B94F36",
@@ -126,7 +128,8 @@
           "alex-27-layout",
           "alex-performance-v1",
           "alex-performance:{\"emotion\":\"explain\",\"motion\":0.68,\"hair\":0.6,\"look\":\"authored\"}",
-          "alex-quality-v1"
+          "alex-quality-v1",
+          "alex-final-v1"
         ],
         "shirtColor": "#253E43",
         "highlightColor": "#B94F36",
@@ -162,7 +165,8 @@
           "alex-27-layout",
           "alex-performance-v1",
           "alex-performance:{\"emotion\":\"thoughtful\",\"motion\":0.64,\"hair\":0.58,\"look\":\"authored\"}",
-          "alex-quality-v1"
+          "alex-quality-v1",
+          "alex-final-v1"
         ],
         "shirtColor": "#253E43",
         "highlightColor": "#B94F36",
@@ -198,7 +202,8 @@
           "alex-27-layout",
           "alex-performance-v1",
           "alex-performance:{\"emotion\":\"enthusiastic\",\"motion\":0.78,\"hair\":0.68,\"look\":\"authored\"}",
-          "alex-quality-v1"
+          "alex-quality-v1",
+          "alex-final-v1"
         ],
         "shirtColor": "#253E43",
         "highlightColor": "#B94F36",
@@ -234,7 +239,8 @@
           "alex-27-layout",
           "alex-performance-v1",
           "alex-performance:{\"emotion\":\"explain\",\"motion\":0.58,\"hair\":0.52,\"look\":\"authored\"}",
-          "alex-quality-v1"
+          "alex-quality-v1",
+          "alex-final-v1"
         ],
         "shirtColor": "#253E43",
         "highlightColor": "#B94F36",
@@ -270,7 +276,8 @@
           "alex-27-layout",
           "alex-performance-v1",
           "alex-performance:{\"emotion\":\"warning\",\"motion\":0.46,\"hair\":0.48,\"look\":\"authored\"}",
-          "alex-quality-v1"
+          "alex-quality-v1",
+          "alex-final-v1"
         ],
         "shirtColor": "#253E43",
         "highlightColor": "#B94F36",
@@ -655,7 +662,7 @@
   "seriesId": "simply-explained",
   "season": 1,
   "episodeNumber": 1,
-  "templateVersion": "3.2",
+  "templateVersion": "3.3",
   "productionStatus": "review",
   "thumbnailUrl": "assets/simply-explained/simply-explained-001-how-ai-actually-works.svg"
 }
