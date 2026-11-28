@@ -127,7 +127,7 @@ function renderCleanEditorial(c:C,scene:OpenMotionScene,t:number){
  c.fillStyle=paper;c.fillRect(0,0,W,H);
  const speaking=shot!=='cover'&&t>.3&&t<Math.min(scene.durationSec-.45,Number(get('speech-end')??scene.durationSec));
  const strict=extras.includes(EDITORIAL_LAYOUT_MARKER),quality=extras.includes(QUALITY_MARKER);
- const beat=quality?t/Math.max(.001,scene.durationSec):0;
+ const beat=quality?t/Math.max(.001,scene.durationSec):0,final=extras.includes('alex-final-v1');
  // Isolate diagram drawing from the host and subtitle row.
  c.save();if(strict){c.beginPath();c.rect(0,0,W,quality?QUALITY_LAYOUT.graphic.bottom:EDITORIAL_LAYOUT.graphic.bottom);c.clip();}
  if(quality){c.translate(256,0);c.scale(1+.012*ease(beat),.965+.008*ease(beat));c.translate(-256,0);}
@@ -164,7 +164,7 @@ function renderCleanEditorial(c:C,scene:OpenMotionScene,t:number){
   const values=[[.62,.24,.14],[.46,.36,.18],[.71,.19,.10]][step];
   if(strict)cleanTitle(c,'Predict the next token',112);
   editorialCard(c,42,177,428,77);txt(c,prompts[step],256,226,28,ink,750,'center',398);
-  choices[step].forEach((word,i)=>{const y=307+i*76;txt(c,word,45,y+25,23,ink,700);box(c,157,y,236,36,'#E7DDCF',6);box(c,157,y,Math.max(1,236*values[i]*ease(phase/.65)),36,i===0?rust:teal,6);txt(c,Math.round(values[i]*100)+'%',466,y+26,22,ink,700,'right');});
+  choices[step].forEach((word,i)=>{const y=307+i*76;txt(c,word,45,y+25,23,ink,700);box(c,157,y,236,36,'#E7DDCF',6);box(c,157,y,Math.max(1,236*values[i]*ease(phase/.65)),36,i===0?rust:teal,6);if(final){reveal(c,(phase-.58)/.20,()=>txt(c,Math.round(values[i]*100)+'%',466,y+26,22,ink,700,'right'));}else txt(c,Math.round(values[i]*100)+'%',466,y+26,22,ink,700,'right');});
   reveal(c,(phase-Math.min(2.1,stepDuration*.51))/.4,()=>{box(c,42,548,428,58,'#DCE5DD',10);txt(c,strict?prompts[step]+(choices[step][0]==='.'?'':' ')+choices[step][0]:choices[step][0],256,586,28,teal,800,'center',400);});txt(c,'Example probabilities',256,635,13,muted,500,'center');break;}
  case 'response': {
   editorialCard(c,42,190,428,358);box(c,62,211,388,65,sand,12);txt(c,'Why is the sky blue?',256,253,23,ink,700,'center');
@@ -182,7 +182,8 @@ function renderCleanEditorial(c:C,scene:OpenMotionScene,t:number){
   cleanTitle(c,'Fluent ≠ factual');
   editorialCard(c,77,231,358,236);box(c,99,256,314,42,'#DCE5DD',8);for(let i=0;i<3;i++)box(c,99,323+i*26,235-i*17,7,'#C9BBA7',3);
   reveal(c,(t-1)/.6,()=>{oval(c,382,417,41,41,rust);txt(c,'?',382,432,45,light,800,'center');});
-  reveal(c,(t-(quality?scene.durationSec*.43:3))/.6,()=>{path(c,'M154 528 L174 548 211 505','none',teal,8);txt(c,'Check the facts',225,540,27,ink,750,'left',240);});break;
+  reveal(c,(t-(quality?scene.durationSec*.43:3))/.6,()=>{path(c,'M154 528 L174 548 211 505','none',teal,8);txt(c,'Check the facts',225,540,27,ink,750,'left',240);});
+  if(final){const end=scene.durationSec,stamp=ease((t-(end-.95))/.35);c.save();c.globalAlpha=stamp;line(c,42,583,470,583,'#C9BBA7',1);box(c,45,598,26*stamp,6,rust,2);txt(c,'SIMPLY EXPLAINED',83,609,17,teal,800,'left',370);c.restore();}break;
  }
  c.restore();
  if(cartoonId(scene))renderCartoon(c,scene,t);
