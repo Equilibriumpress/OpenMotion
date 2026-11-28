@@ -92,3 +92,7 @@ archief hebben afzonderlijke weergaven. De bestaande #studio/<slug>-links blijve
 Een serie heeft een vaste ID, genummerde afleveringen, een huisstijl en versiegebonden
 productietemplate. Zie [SERIES_WORKFLOW.md](docs/SERIES_WORKFLOW.md).
 De manifestgenerator maakt lichte statische SVG-titelkaarten zonder video-rendering.
+
+## Presenter Lab
+
+Vergelijk de bestaande Alex 2D, Alex 2.5D en een echte Rocketbox 3D-avatar via `#presenter-lab`. De pilot blijft ongewijzigd. De afzonderlijke neurale test gebruikt de originele Talking Avatar SDK. Zie [Presenter Lab](docs/presenter-lab.md) voor licenties, exportbeperkingen en controlepunten.

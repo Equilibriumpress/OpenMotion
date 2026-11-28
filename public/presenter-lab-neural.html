@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Presenter Lab · neurale avatar</title>
+<style>body{margin:0;background:#f8fafc;color:#243538;font:16px system-ui,sans-serif}main{max-width:740px;margin:auto;padding:24px}a{color:#17665f}h1{font-size:clamp(24px,5vw,36px);line-height:1.1}p{line-height:1.55}.stage{position:relative;width:min(100%,340px);aspect-ratio:9/16;background:#f5eddf;border:1px solid #d5c7b5;border-radius:12px;overflow:hidden;margin:20px auto}.question{position:absolute;left:8%;top:19%;width:84%;font-size:clamp(20px,5vw,26px);font-weight:750;text-align:center}.example{position:absolute;left:8%;top:35%;width:84%;text-align:center;background:#fff9ef;padding:14px 0;border-radius:12px;font-weight:650}.avatar{position:absolute;left:2.5%;bottom:11%;width:34%;height:25%;overflow:hidden}button{font:inherit;border:1px solid #cbd5e1;border-radius:8px;background:#243538;color:white;padding:10px 14px;cursor:pointer}button:disabled{opacity:.45;cursor:default}.controls{display:flex;flex-wrap:wrap;gap:8px}.muted{font-size:13px;color:#52646a}#status{min-height:1.5em}input{max-width:100%}button:focus-visible,a:focus-visible{outline:3px solid #b94f36;outline-offset:3px}</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/","three/examples/jsm/":"https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/","@interviewflowai/talking-avatar":"https://cdn.jsdelivr.net/npm/@interviewflowai/talking-avatar@0.3.0/dist/index.js"}}</script></head>
+<body><main><a href="./#presenter-lab">← Presenter Lab</a><h1>Neurale avatarproef</h1><p>De originele Talking Avatar SDK met de vrouwelijke Microsoft Rocketbox-avatar. Vergelijk de mondbewegingen met Alex, met dezelfde voice-over.</p>
+<div class="stage"><div class="question">How AI Actually Works</div><div class="example">The sky is blue.</div><div class="avatar" id="avatar"></div></div>
+<div class="controls"><button id="load">Laad 3D-avatar</button><button id="speak" disabled>Speel pilotvoice-over</button><button id="stop" disabled>Stop</button></div><p id="status" role="status">Het externe model wordt pas geladen wanneer je op de knop drukt.</p><label>Of gebruik een lokaal audiobestand: <input id="audiofile" type="file" accept="audio/*" disabled></label>
+<p class="muted">Live experiment. De SDK analyseert het geluid lokaal en speelt het zelf af. Deze pagina gebruikt een statische voorbeeldcompositie, geen gesynchroniseerde infographics of MP4-export. De avatar en het neurale model worden via jsDelivr geladen. De SDK gebruikt geen betaalde API.</p>
+<p class="muted">© 2026 InterviewFlowAI, SDK en model onder MIT. Avatar © 2020 Microsoft, Rocketbox Business female 04, MIT. <a href="https://github.com/InterviewFlowAI/talking-avatar/blob/master/LICENSE">SDK-licentie</a> · <a href="https://github.com/InterviewFlowAI/talking-avatar/blob/master/avatars/LICENSE">Avatarlicentie</a> · <a href="https://github.com/InterviewFlowAI/talking-avatar">Bron</a></p></main>
+<script type="module">
+const el=id=>document.getElementById(id);let avatar=null,busy=false;
+const status=s=>el('status').textContent=s;
+const sync=()=>{el('speak').disabled=!avatar||busy;el('audiofile').disabled=!avatar||busy;el('stop').disabled=!avatar||!busy;};
+el('load').onclick=async()=>{el('load').disabled=true;status('Avatar laden…');try{
+ const {TalkingAvatar}=await import('@interviewflowai/talking-avatar');
+ avatar=new TalkingAvatar({container:el('avatar'),onError:e=>status('Avatarfout: '+String(e?.message??e))});
+ await avatar.ready;status('Avatar geladen. Start de voice-over.');sync();
+}catch(e){avatar?.dispose();avatar=null;el('load').disabled=false;status('Laden mislukt: '+String(e?.message??e));sync();}};
+async function speak(input){if(!avatar||busy)return;busy=true;sync();status('Audio analyseren en afspelen…');try{await avatar.speak(input);status('Afspelen voltooid of gestopt.');}catch(e){status('Afspelen mislukt: '+String(e?.message??e));}finally{busy=false;sync();}}
+el('speak').onclick=()=>speak(new URL('./assets/audio/simply-explained-001-how-ai-actually-works-voice.mp3',document.baseURI).href);
+el('audiofile').onchange=()=>{const f=el('audiofile').files?.[0];if(f)void speak(f);};
+el('stop').onclick=()=>avatar?.stopSpeaking();
+window.addEventListener('pagehide',()=>{avatar?.dispose();avatar=null;});
+</script></body></html>

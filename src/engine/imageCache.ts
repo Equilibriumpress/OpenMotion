@@ -1,3 +1,4 @@
+import { hasRocketbox, prepareRocketbox } from './rocketboxPresenter';
 import {isTravelDocumentary,isTravelClip,matchingTravelAtlas} from './travelProject';
 import { OpenMotionProject } from '../types/openmotion';
 import { CAT_OFFICE_ASSETS } from './catOfficeAssets';
@@ -112,6 +113,7 @@ export function getCachedPhoto(url?: string): HTMLImageElement | null {
  * WebCodecs MP4 frame rendering or when opening Studio).
  */
 export async function preloadProjectImages(project: OpenMotionProject): Promise<void> {
+  if(hasRocketbox(project)){await prepareRocketbox();notifyImageRefresh();}
   const urls = new Set<string>();
   for (const scene of project.scenes) {
     for (const stop of scene.premiumTravel?.stops ?? []) { urls.add(stop.photoUrl); if(stop.secondaryPhoto?.photoUrl) urls.add(stop.secondaryPhoto.photoUrl); }
