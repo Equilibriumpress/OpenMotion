@@ -3,7 +3,7 @@
   "id": "om-living-travel-posters-003-japan",
   "slug": "living-travel-posters-003-japan",
   "title": "Japan · Beneath Mount Fuji",
-  "description": "An original vintage-inspired Japanese travel poster comes to life: snow-capped Mount Fuji, drifting mist, a spring lake, a passing cream-and-red railway train and foreground cherry blossoms with falling petals. Original plucked-string and wind-inspired soundscape, no narration. Fictional landscape composition inspired by the Fuji Five Lakes region, not a reconstruction of a specific historical print.",
+  "description": "A remastered Japanese travel print with a 1964 Series 0 Shinkansen-inspired ivory-and-blue train, Mount Fuji, lake reflections, mist and drifting cherry petals. Original fictional landscape, not a geographically accurate railway alignment.",
   "category": "Shorts & Reels",
   "author": "OpenMotion Studio",
   "source": "github",
@@ -40,7 +40,8 @@
         "variant": "living-travel-poster",
         "episode": 3,
         "speed": 1,
-        "destination": "japan"
+        "destination": "japan",
+        "posterVersion": "2.0"
       }
     }
   ],
@@ -50,7 +51,7 @@
   "seriesId": "living-travel-posters",
   "season": 1,
   "episodeNumber": 3,
-  "templateVersion": "1.0",
+  "templateVersion": "2.0",
   "productionStatus": "review",
   "thumbnailUrl": "thumbnails/living-travel-posters-003-japan.svg"
 }
