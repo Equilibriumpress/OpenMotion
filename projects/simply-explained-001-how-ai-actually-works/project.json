@@ -1,0 +1,439 @@
+{
+  "schemaVersion": "1.0",
+  "id": "simply-explained-001-how-ai-actually-works",
+  "slug": "simply-explained-001-how-ai-actually-works",
+  "title": "Simply Explained 01 — How AI Actually Works",
+  "description": "A visual introduction to text-generating language models: training, tokenization, conditional next-token probabilities, generation and verification. Illustrative probabilities, not measured model output.",
+  "category": "Shorts & Reels",
+  "author": "OpenMotion Studio",
+  "source": "template",
+  "createdAt": "2026-11-28",
+  "updatedAt": "2026-11-28",
+  "githubPath": "projects/simply-explained-001-how-ai-actually-works/project.json",
+  "format": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "brandKit": {
+    "brandName": "SIMPLY EXPLAINED",
+    "primaryColor": "#253E43",
+    "accentColor": "#B94F36",
+    "backgroundColor": "#F5EDDF",
+    "surfaceColor": "#FFF9EF",
+    "textColor": "#243538",
+    "mutedColor": "#766E61",
+    "fontFamily": "system-ui"
+  },
+  "scenes": [
+    {
+      "id": "se-01-cover",
+      "name": "How AI actually works",
+      "durationSec": 1.2,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "How AI actually works",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "neutral",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "simply-explained-v1",
+          "shot:cover",
+          "episode:01"
+        ],
+        "shirtColor": "#253E43",
+        "highlightColor": "#B94F36",
+        "narration": ""
+      }
+    },
+    {
+      "id": "se-01-hook",
+      "name": "A fluent answer",
+      "durationSec": 7.8,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "A fluent answer",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "neutral",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "simply-explained-v1",
+          "shot:hook",
+          "episode:01"
+        ],
+        "shirtColor": "#253E43",
+        "highlightColor": "#B94F36",
+        "narration": "Ask a chatbot a question, and an answer appears. What's happening behind the screen?"
+      }
+    },
+    {
+      "id": "se-01-training",
+      "name": "Learn from examples",
+      "durationSec": 9,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Learn from examples",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "neutral",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "simply-explained-v1",
+          "shot:training",
+          "episode:01"
+        ],
+        "shirtColor": "#253E43",
+        "highlightColor": "#B94F36",
+        "narration": "Before you ask anything, the model trains on many examples of text. Training adjusts billions of numerical parameters."
+      }
+    },
+    {
+      "id": "se-01-tokens",
+      "name": "Break text into tokens",
+      "durationSec": 9,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Break text into tokens",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "neutral",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "simply-explained-v1",
+          "shot:tokens",
+          "episode:01"
+        ],
+        "shirtColor": "#253E43",
+        "highlightColor": "#B94F36",
+        "narration": "Your prompt is split into small pieces called tokens. The model uses their context to calculate what might come next."
+      }
+    },
+    {
+      "id": "se-01-prediction",
+      "name": "Predict the next token",
+      "durationSec": 12,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Predict the next token",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "neutral",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "simply-explained-v1",
+          "shot:prediction",
+          "episode:01"
+        ],
+        "shirtColor": "#253E43",
+        "highlightColor": "#B94F36",
+        "narration": "The model assigns probabilities to possible next tokens. It selects one, adds it to the text, and repeats the process."
+      }
+    },
+    {
+      "id": "se-01-response",
+      "name": "Build an answer",
+      "durationSec": 9,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Build an answer",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "neutral",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "simply-explained-v1",
+          "shot:response",
+          "episode:01"
+        ],
+        "shirtColor": "#253E43",
+        "highlightColor": "#B94F36",
+        "narration": "Step by step, those predictions form an answer. Training and further tuning help the model follow instructions and produce useful responses."
+      }
+    },
+    {
+      "id": "se-01-limits",
+      "name": "Fluent does not mean true",
+      "durationSec": 8,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Fluent does not mean true",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "neutral",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "simply-explained-v1",
+          "shot:limits",
+          "episode:01"
+        ],
+        "shirtColor": "#253E43",
+        "highlightColor": "#B94F36",
+        "narration": "But a convincing answer is not proof of accuracy. Check important facts. Prediction is not the same as verification."
+      }
+    }
+  ],
+  "captions": [
+    {
+      "text": "Ask a chatbot a question,",
+      "startSec": 1.5,
+      "endSec": 4.018,
+      "style": "minimal",
+      "position": 0.79,
+      "fontSizePx": 48
+    },
+    {
+      "text": "and an answer appears. What's",
+      "startSec": 4.018,
+      "endSec": 6.536,
+      "style": "minimal",
+      "position": 0.79,
+      "fontSizePx": 48
+    },
+    {
+      "text": "happening behind the screen?",
+      "startSec": 6.536,
+      "endSec": 8.55,
+      "style": "minimal",
+      "position": 0.79,
+      "fontSizePx": 48
+    },
+    {
+      "text": "Before you ask anything, the",
+      "startSec": 9.3,
+      "endSec": 11.592,
+      "style": "minimal",
+      "position": 0.79,
+      "fontSizePx": 48
+    },
+    {
+      "text": "model trains on many examples",
+      "startSec": 11.592,
+      "endSec": 13.883,
+      "style": "minimal",
+      "position": 0.79,
+      "fontSizePx": 48
+    },
+    {
+      "text": "of text. Training adjusts billions",
+      "startSec": 13.883,
+      "endSec": 16.175,
+      "style": "minimal",
+      "position": 0.79,
+      "fontSizePx": 48
+    },
+    {
+      "text": "of numerical parameters.",
+      "startSec": 16.175,
+      "endSec": 17.55,
+      "style": "minimal",
+      "position": 0.79,
+      "fontSizePx": 48
+    },
+    {
+      "text": "Your prompt is split into",
+      "startSec": 18.3,
+      "endSec": 20.363,
+      "style": "minimal",
+      "position": 0.79,
+      "fontSizePx": 48
+    },
+    {
+      "text": "small pieces called tokens. The",
+      "startSec": 20.363,
+      "endSec": 22.425,
+      "style": "minimal",
+      "position": 0.79,
+      "fontSizePx": 48
+    },
+    {
+      "text": "model uses their context to",
+      "startSec": 22.425,
+      "endSec": 24.488,
+      "style": "minimal",
+      "position": 0.79,
+      "fontSizePx": 48
+    },
+    {
+      "text": "calculate what might come next.",
+      "startSec": 24.488,
+      "endSec": 26.55,
+      "style": "minimal",
+      "position": 0.79,
+      "fontSizePx": 48
+    },
+    {
+      "text": "The model assigns probabilities to",
+      "startSec": 27.3,
+      "endSec": 30.113,
+      "style": "minimal",
+      "position": 0.79,
+      "fontSizePx": 48
+    },
+    {
+      "text": "possible next tokens. It selects",
+      "startSec": 30.113,
+      "endSec": 32.925,
+      "style": "minimal",
+      "position": 0.79,
+      "fontSizePx": 48
+    },
+    {
+      "text": "one, adds it to the",
+      "startSec": 32.925,
+      "endSec": 35.737,
+      "style": "minimal",
+      "position": 0.79,
+      "fontSizePx": 48
+    },
+    {
+      "text": "text, and repeats the process.",
+      "startSec": 35.737,
+      "endSec": 38.55,
+      "style": "minimal",
+      "position": 0.79,
+      "fontSizePx": 48
+    },
+    {
+      "text": "Step by step, those predictions",
+      "startSec": 39.3,
+      "endSec": 41.264,
+      "style": "minimal",
+      "position": 0.79,
+      "fontSizePx": 48
+    },
+    {
+      "text": "form an answer. Training and",
+      "startSec": 41.264,
+      "endSec": 43.229,
+      "style": "minimal",
+      "position": 0.79,
+      "fontSizePx": 48
+    },
+    {
+      "text": "further tuning help the model",
+      "startSec": 43.229,
+      "endSec": 45.193,
+      "style": "minimal",
+      "position": 0.79,
+      "fontSizePx": 48
+    },
+    {
+      "text": "follow instructions and produce useful",
+      "startSec": 45.193,
+      "endSec": 47.157,
+      "style": "minimal",
+      "position": 0.79,
+      "fontSizePx": 48
+    },
+    {
+      "text": "responses.",
+      "startSec": 47.157,
+      "endSec": 47.55,
+      "style": "minimal",
+      "position": 0.79,
+      "fontSizePx": 48
+    },
+    {
+      "text": "But a convincing answer is",
+      "startSec": 48.3,
+      "endSec": 50.208,
+      "style": "minimal",
+      "position": 0.79,
+      "fontSizePx": 48
+    },
+    {
+      "text": "not proof of accuracy. Check",
+      "startSec": 50.208,
+      "endSec": 52.116,
+      "style": "minimal",
+      "position": 0.79,
+      "fontSizePx": 48
+    },
+    {
+      "text": "important facts. Prediction is not",
+      "startSec": 52.116,
+      "endSec": 54.024,
+      "style": "minimal",
+      "position": 0.79,
+      "fontSizePx": 48
+    },
+    {
+      "text": "the same as verification.",
+      "startSec": 54.024,
+      "endSec": 55.55,
+      "style": "minimal",
+      "position": 0.79,
+      "fontSizePx": 48
+    }
+  ],
+  "audioTracks": [
+    {
+      "id": "voice",
+      "kind": "voiceover",
+      "src": "assets/audio/simply-explained-001-how-ai-actually-works-voice.mp3",
+      "startSec": 0,
+      "endSec": 56,
+      "volume": 1
+    },
+    {
+      "id": "score",
+      "kind": "music",
+      "src": "assets/audio/simply-explained-001-how-ai-actually-works-score.mp3",
+      "startSec": 0,
+      "endSec": 56,
+      "volume": 0.1,
+      "fadeInSec": 0.3,
+      "fadeOutSec": 1
+    }
+  ],
+  "kind": "video",
+  "seriesId": "simply-explained",
+  "season": 1,
+  "episodeNumber": 1,
+  "templateVersion": "1.0",
+  "productionStatus": "review",
+  "thumbnailUrl": "assets/simply-explained/simply-explained-001-how-ai-actually-works.svg"
+}
