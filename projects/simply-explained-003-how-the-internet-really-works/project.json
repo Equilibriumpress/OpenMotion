@@ -1,0 +1,627 @@
+{
+  "schemaVersion": "1.0",
+  "id": "simply-explained-003-how-the-internet-really-works",
+  "slug": "simply-explained-003-how-the-internet-really-works",
+  "title": "Simply Explained 03 — How the Internet Really Works",
+  "description": "Follow an illustrative message journey through packets, routers, servers, Atlantic fiber-optic cables and the receiving device. Original flat Alex 2D and editorial vector animation.",
+  "category": "Shorts & Reels",
+  "author": "OpenMotion Studio",
+  "source": "template",
+  "createdAt": "2026-11-28",
+  "updatedAt": "2026-11-28",
+  "githubPath": "projects/simply-explained-003-how-the-internet-really-works/project.json",
+  "format": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "brandKit": {
+    "brandName": "SIMPLY EXPLAINED",
+    "primaryColor": "#253E43",
+    "accentColor": "#B94F36",
+    "backgroundColor": "#F5EDDF",
+    "surfaceColor": "#FFF9EF",
+    "textColor": "#243538",
+    "mutedColor": "#766E61",
+    "fontFamily": "system-ui"
+  },
+  "scenes": [
+    {
+      "id": "se-03-cover",
+      "name": "How the internet really works",
+      "durationSec": 0.8,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "How the internet really works",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "relaxed",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "simply-explained-v1",
+          "simply-explained-v11",
+          "simply-explained-v2",
+          "alex-27-layout",
+          "alex-quality-v1",
+          "alex-final-v1",
+          "alex-flat-v1",
+          "simply-explained-internet-v1",
+          "episode:03",
+          "shot:cover"
+        ],
+        "shirtColor": "#253E43",
+        "highlightColor": "#B94F36",
+        "narration": ""
+      }
+    },
+    {
+      "id": "se-03-hook",
+      "name": "Send a message",
+      "durationSec": 6.6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Send a message",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "relaxed",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "simply-explained-v1",
+          "simply-explained-v11",
+          "simply-explained-v2",
+          "alex-27-layout",
+          "alex-quality-v1",
+          "alex-final-v1",
+          "alex-flat-v1",
+          "simply-explained-internet-v1",
+          "episode:03",
+          "shot:hook"
+        ],
+        "shirtColor": "#253E43",
+        "highlightColor": "#B94F36",
+        "narration": "You send a message to someone on the other side of the world. A moment later, their phone lights up."
+      }
+    },
+    {
+      "id": "se-03-packets",
+      "name": "Data packets",
+      "durationSec": 5.5,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Data packets",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "relaxed",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "simply-explained-v1",
+          "simply-explained-v11",
+          "simply-explained-v2",
+          "alex-27-layout",
+          "alex-quality-v1",
+          "alex-final-v1",
+          "alex-flat-v1",
+          "simply-explained-internet-v1",
+          "episode:03",
+          "shot:packets"
+        ],
+        "shirtColor": "#253E43",
+        "highlightColor": "#B94F36",
+        "narration": "Your message travels through the internet in small units called packets."
+      }
+    },
+    {
+      "id": "se-03-routers",
+      "name": "Through the network",
+      "durationSec": 5.7,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Through the network",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "relaxed",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "simply-explained-v1",
+          "simply-explained-v11",
+          "simply-explained-v2",
+          "alex-27-layout",
+          "alex-quality-v1",
+          "alex-final-v1",
+          "alex-flat-v1",
+          "simply-explained-internet-v1",
+          "episode:03",
+          "shot:routers"
+        ],
+        "shirtColor": "#253E43",
+        "highlightColor": "#B94F36",
+        "narration": "Routers forward these packets through connected networks, often via the messaging service's servers."
+      }
+    },
+    {
+      "id": "se-03-ocean",
+      "name": "Across oceans",
+      "durationSec": 6.4,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Across oceans",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "relaxed",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "simply-explained-v1",
+          "simply-explained-v11",
+          "simply-explained-v2",
+          "alex-27-layout",
+          "alex-quality-v1",
+          "alex-final-v1",
+          "alex-flat-v1",
+          "simply-explained-internet-v1",
+          "episode:03",
+          "shot:ocean"
+        ],
+        "shirtColor": "#253E43",
+        "highlightColor": "#B94F36",
+        "narration": "Across oceans, much of this data travels through underwater fiber-optic cables."
+      }
+    },
+    {
+      "id": "se-03-cable",
+      "name": "Underwater fiber optics",
+      "durationSec": 4.7,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Underwater fiber optics",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "relaxed",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "simply-explained-v1",
+          "simply-explained-v11",
+          "simply-explained-v2",
+          "alex-27-layout",
+          "alex-quality-v1",
+          "alex-final-v1",
+          "alex-flat-v1",
+          "simply-explained-internet-v1",
+          "episode:03",
+          "shot:cable"
+        ],
+        "shirtColor": "#253E43",
+        "highlightColor": "#B94F36",
+        "narration": "Beneath the ocean, protective layers surround thin glass fibers."
+      }
+    },
+    {
+      "id": "se-03-light",
+      "name": "Travelling as light",
+      "durationSec": 5.7,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Travelling as light",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "relaxed",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "simply-explained-v1",
+          "simply-explained-v11",
+          "simply-explained-v2",
+          "alex-27-layout",
+          "alex-quality-v1",
+          "alex-final-v1",
+          "alex-flat-v1",
+          "simply-explained-internet-v1",
+          "episode:03",
+          "shot:light"
+        ],
+        "shirtColor": "#253E43",
+        "highlightColor": "#B94F36",
+        "narration": "Inside these cables, information moves as pulses of light."
+      }
+    },
+    {
+      "id": "se-03-received",
+      "name": "Message received",
+      "durationSec": 7.6,
+      "layout": "doodle-explainer",
+      "transition": "fade",
+      "backdrop": "dot-matrix",
+      "headline": "Message received",
+      "caption": "",
+      "fullBleed": true,
+      "doodle": {
+        "setting": "standing",
+        "palette": "cream",
+        "mood": "relaxed",
+        "pose": "neutral",
+        "emphasis": [],
+        "extras": [
+          "mind-series-v1",
+          "simply-explained-v1",
+          "simply-explained-v11",
+          "simply-explained-v2",
+          "alex-27-layout",
+          "alex-quality-v1",
+          "alex-final-v1",
+          "alex-flat-v1",
+          "simply-explained-internet-v1",
+          "episode:03",
+          "shot:received"
+        ],
+        "shirtColor": "#253E43",
+        "highlightColor": "#B94F36",
+        "narration": "At the destination, the app reconstructs your message from the received data. From your screen to theirs, in moments."
+      }
+    }
+  ],
+  "captions": [
+    {
+      "text": "You send a",
+      "startSec": 1.1,
+      "endSec": 1.978,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.8296703296703297,
+      "fontSizePx": 52
+    },
+    {
+      "text": "message to someone",
+      "startSec": 1.978,
+      "endSec": 2.855,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.8296703296703297,
+      "fontSizePx": 52
+    },
+    {
+      "text": "on the other",
+      "startSec": 2.855,
+      "endSec": 3.732,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.8296703296703297,
+      "fontSizePx": 52
+    },
+    {
+      "text": "side of the",
+      "startSec": 3.732,
+      "endSec": 4.61,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.8296703296703297,
+      "fontSizePx": 52
+    },
+    {
+      "text": "world. A moment",
+      "startSec": 4.61,
+      "endSec": 5.488,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.8296703296703297,
+      "fontSizePx": 52
+    },
+    {
+      "text": "later, their phone",
+      "startSec": 5.488,
+      "endSec": 6.365,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.8296703296703297,
+      "fontSizePx": 52
+    },
+    {
+      "text": "lights up.",
+      "startSec": 6.365,
+      "endSec": 6.95,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.8296703296703297,
+      "fontSizePx": 52
+    },
+    {
+      "text": "Your message travels",
+      "startSec": 7.7,
+      "endSec": 8.995,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.8296703296703297,
+      "fontSizePx": 52
+    },
+    {
+      "text": "through the internet",
+      "startSec": 8.995,
+      "endSec": 10.291,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.8296703296703297,
+      "fontSizePx": 52
+    },
+    {
+      "text": "in small units",
+      "startSec": 10.291,
+      "endSec": 11.586,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.8296703296703297,
+      "fontSizePx": 52
+    },
+    {
+      "text": "called packets.",
+      "startSec": 11.586,
+      "endSec": 12.45,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.8296703296703297,
+      "fontSizePx": 52
+    },
+    {
+      "text": "Routers forward these",
+      "startSec": 13.2,
+      "endSec": 14.342,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.8296703296703297,
+      "fontSizePx": 52
+    },
+    {
+      "text": "packets through connected",
+      "startSec": 14.342,
+      "endSec": 15.485,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.8296703296703297,
+      "fontSizePx": 52
+    },
+    {
+      "text": "networks, often via",
+      "startSec": 15.485,
+      "endSec": 16.627,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.8296703296703297,
+      "fontSizePx": 52
+    },
+    {
+      "text": "the messaging service's",
+      "startSec": 16.627,
+      "endSec": 17.769,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.8296703296703297,
+      "fontSizePx": 52
+    },
+    {
+      "text": "servers.",
+      "startSec": 17.769,
+      "endSec": 18.15,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.8296703296703297,
+      "fontSizePx": 52
+    },
+    {
+      "text": "Across oceans, much",
+      "startSec": 18.9,
+      "endSec": 20.441,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.8296703296703297,
+      "fontSizePx": 52
+    },
+    {
+      "text": "of this data",
+      "startSec": 20.441,
+      "endSec": 21.982,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.8296703296703297,
+      "fontSizePx": 52
+    },
+    {
+      "text": "travels through underwater",
+      "startSec": 21.982,
+      "endSec": 23.523,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.8296703296703297,
+      "fontSizePx": 52
+    },
+    {
+      "text": "fiber-optic cables.",
+      "startSec": 23.523,
+      "endSec": 24.55,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.8296703296703297,
+      "fontSizePx": 52
+    },
+    {
+      "text": "Beneath the ocean,",
+      "startSec": 25.3,
+      "endSec": 26.617,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.8296703296703297,
+      "fontSizePx": 52
+    },
+    {
+      "text": "protective layers surround",
+      "startSec": 26.617,
+      "endSec": 27.933,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.8296703296703297,
+      "fontSizePx": 52
+    },
+    {
+      "text": "thin glass fibers.",
+      "startSec": 27.933,
+      "endSec": 29.25,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.8296703296703297,
+      "fontSizePx": 52
+    },
+    {
+      "text": "Inside these cables,",
+      "startSec": 30,
+      "endSec": 31.65,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.8296703296703297,
+      "fontSizePx": 52
+    },
+    {
+      "text": "information moves as",
+      "startSec": 31.65,
+      "endSec": 33.3,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.8296703296703297,
+      "fontSizePx": 52
+    },
+    {
+      "text": "pulses of light.",
+      "startSec": 33.3,
+      "endSec": 34.95,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.8296703296703297,
+      "fontSizePx": 52
+    },
+    {
+      "text": "At the destination,",
+      "startSec": 35.7,
+      "endSec": 36.782,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.8296703296703297,
+      "fontSizePx": 52
+    },
+    {
+      "text": "the app reconstructs",
+      "startSec": 36.782,
+      "endSec": 37.863,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.8296703296703297,
+      "fontSizePx": 52
+    },
+    {
+      "text": "your message from",
+      "startSec": 37.863,
+      "endSec": 38.945,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.8296703296703297,
+      "fontSizePx": 52
+    },
+    {
+      "text": "the received data.",
+      "startSec": 38.945,
+      "endSec": 40.026,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.8296703296703297,
+      "fontSizePx": 52
+    },
+    {
+      "text": "From your screen",
+      "startSec": 40.026,
+      "endSec": 41.108,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.8296703296703297,
+      "fontSizePx": 52
+    },
+    {
+      "text": "to theirs, in",
+      "startSec": 41.108,
+      "endSec": 42.189,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.8296703296703297,
+      "fontSizePx": 52
+    },
+    {
+      "text": "moments.",
+      "startSec": 42.189,
+      "endSec": 42.55,
+      "style": "karaoke",
+      "color": "#F4B89A",
+      "position": 0.8296703296703297,
+      "fontSizePx": 52
+    }
+  ],
+  "audioTracks": [
+    {
+      "id": "voice",
+      "kind": "voiceover",
+      "src": "assets/audio/simply-explained-003-how-the-internet-really-works-voice.mp3",
+      "startSec": 0,
+      "endSec": 43,
+      "volume": 1
+    },
+    {
+      "id": "score",
+      "kind": "music",
+      "src": "assets/audio/simply-explained-003-how-the-internet-really-works-score.mp3",
+      "startSec": 0,
+      "endSec": 43,
+      "volume": 0.1,
+      "fadeInSec": 0.3,
+      "fadeOutSec": 1
+    }
+  ],
+  "kind": "video",
+  "seriesId": "simply-explained",
+  "season": 1,
+  "episodeNumber": 3,
+  "templateVersion": "3.3",
+  "productionStatus": "review",
+  "thumbnailUrl": "assets/simply-explained/simply-explained-003-how-the-internet-really-works.svg"
+}
