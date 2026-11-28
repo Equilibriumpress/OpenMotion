@@ -1,5 +1,6 @@
 import type { OpenMotionScene } from '../types/openmotion';
 import { renderLivingTravelAmalfi } from './livingTravelAmalfi';
+import { renderLivingTravelJapan } from './livingTravelJapan';
 // Original vector artwork in the existing Canvas 2D pipeline.
 type C=CanvasRenderingContext2D;
 type Shape={d:string;f:string;s?:string;w?:number};
@@ -23,6 +24,7 @@ function motion(t:number){
  return 1;
 }
 export function renderLivingTravelPoster(c:C,w:number,h:number,s:OpenMotionScene,local:number){
+ if(s.parallax?.destination==='japan'){renderLivingTravelJapan(c,w,h,s,local);return;}
  if(s.parallax?.destination==='amalfi'){renderLivingTravelAmalfi(c,w,h,s,local);return;}
  const t=22*clamp(local/Math.max(.5,s.durationSec)), phase=motion(t);
  const awake=smooth((t-2)/2)*(1-smooth((t-19)/2));
