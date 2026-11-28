@@ -176,7 +176,7 @@ function renderCleanEditorial(c:C,scene:OpenMotionScene,t:number){
   cleanTitle(c,'Fluent ≠ factual');
   editorialCard(c,77,231,358,236);box(c,99,256,314,42,'#DCE5DD',8);for(let i=0;i<3;i++)box(c,99,323+i*26,235-i*17,7,'#C9BBA7',3);
   reveal(c,(t-1)/.6,()=>{oval(c,382,417,41,41,rust);txt(c,'?',382,432,45,light,800,'center');});
-  reveal(c,(t-3)/.6,()=>{path(c,'M154 528 L174 548 211 505','none',teal,8);txt(c,'Check the facts',225,540,27,ink,750);});break;
+  reveal(c,(t-3)/.6,()=>{path(c,'M154 528 L174 548 211 505','none',teal,8);txt(c,'Check the facts',225,540,27,ink,750,'left',240);});break;
  }
  c.restore();
  if(cartoonId(scene))renderCartoon(c,scene,t);
