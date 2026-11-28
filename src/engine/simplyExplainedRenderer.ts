@@ -1,3 +1,4 @@
+import { renderGpsDiagram } from './simplyExplainedGps';
 import { EDITORIAL_LAYOUT, EDITORIAL_LAYOUT_MARKER, QUALITY_LAYOUT, QUALITY_MARKER } from './simplyExplainedLayout';
 import { cartoonId, renderCartoon } from './cartoonPresenter';
 import { renderRocketboxPresenter, ROCKETBOX_MARKER } from './rocketboxPresenter';
@@ -131,7 +132,8 @@ function renderCleanEditorial(c:C,scene:OpenMotionScene,t:number){
  // Isolate diagram drawing from the host and subtitle row.
  c.save();if(strict){c.beginPath();c.rect(0,0,W,quality?QUALITY_LAYOUT.graphic.bottom:EDITORIAL_LAYOUT.graphic.bottom);c.clip();}
  if(quality){c.translate(256,0);c.scale(1+.012*ease(beat),.965+.008*ease(beat));c.translate(-256,0);}
- switch(shot){
+ if(extras.includes('simply-explained-gps-v1'))renderGpsDiagram(c,scene,t);
+ else switch(shot){
  case 'cover':
   txt(c,'SIMPLY EXPLAINED',256,104,15,muted,700,'center');
   txt(c,'HOW AI',42,205,64,ink,850);txt(c,'ACTUALLY',42,272,64,ink,850);txt(c,'WORKS',42,339,64,rust,850);
