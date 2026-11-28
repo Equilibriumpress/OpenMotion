@@ -15,7 +15,7 @@ import {
 } from './services/githubService';
 import { GitHubRepoConfig, OpenMotionProject } from './types/openmotion';
 
-type AppTab = WorkspaceTab | 'studio' | 'chatgpt' | 'github' | 'presenter-lab';
+type AppTab = WorkspaceTab | 'studio' | 'chatgpt' | 'github' | 'presenter-lab' | 'character-studio';
 
 const STORAGE_PROJECTS_KEY = 'openmotion_library_projects_v1';
 const STORAGE_REPO_KEY = 'openmotion_github_config_v1';
@@ -69,6 +69,7 @@ function parseHashRoute(projects: OpenMotionProject[]): {
   }
   if (raw === 'chatgpt') return { tab: 'chatgpt' };
   if(raw.startsWith('chatgpt/'))return {tab:'chatgpt',seriesId:seriesById(raw.slice('chatgpt/'.length))?.id};
+  if (raw === 'character-studio') return { tab: 'character-studio' };
   if (raw === 'presenter-lab') return { tab: 'presenter-lab' };
   if (raw === 'github') return { tab: 'github' };
   if (raw === 'studio') return { tab: 'studio' };
@@ -264,9 +265,10 @@ export default function App() {
     {id:'archive',label:'Archief',icon:Archive},
     {id:'chatgpt',label:'ChatGPT Workflow',icon:MessageSquare},
     {id:'presenter-lab',label:'Presenter Lab',icon:Film},
+    {id:'character-studio',label:'Character Studio',icon:Film},
     {id:'github',label:'Instellingen & GitHub',icon:Settings},
   ] as const;
-  const isWorkspace = activeTab !== 'studio' && activeTab !== 'chatgpt' && activeTab !== 'github' && activeTab !== 'presenter-lab';
+  const isWorkspace = activeTab !== 'studio' && activeTab !== 'chatgpt' && activeTab !== 'github' && activeTab !== 'presenter-lab' && activeTab !== 'character-studio';
   const backFromStudio=()=>{
     if(returnTabRef.current==='series'||(initialRoute.tab==='studio'&&episodeInfo(activeProject))){
       openSeries(returnSeriesRef.current??episodeInfo(activeProject)?.seriesId??null);
@@ -294,7 +296,7 @@ export default function App() {
           {isWorkspace&&<WorkspaceView key={activeTab} tab={activeTab as WorkspaceTab} projects={projects} repoConfig={repoConfig} selectedSeriesId={selectedSeriesId} onSeries={openSeries} onNavigate={navigate} onOpenStudio={handleOpenStudio} onNewEpisode={newEpisode} onNewProject={()=>navigate('chatgpt')} onSync={handleSyncGitHub} isSyncing={isSyncing} syncMessage={syncMessage}/>}
           {activeTab==='studio'&&activeProject&&<StudioView key={activeProject.id} project={activeProject} repoConfig={repoConfig} autoStartExport={autoStartExport} onConsumeAutoStart={()=>setAutoStartExport(false)} onUpdateProject={handleUpdateProject} onBackToLibrary={backFromStudio}/>}
           {activeTab==='chatgpt'&&<ChatGptWorkflowView key={workflowSeries?.id??'standalone'} repoConfig={repoConfig} onAddProject={handleAddProject} series={workflowSeries} projects={projects}/>}
-          {activeTab==='presenter-lab'&&<PresenterLab projects={projects}/>}
+          {(activeTab==='presenter-lab'||activeTab==='character-studio')&&<PresenterLab key={activeTab} projects={projects} onUpdateProject={handleUpdateProject} initialCustom={activeTab==='character-studio'}/>}
           {activeTab==='github'&&<GitHubPagesView repoConfig={repoConfig} projects={projects} isSyncing={isSyncing} syncMessage={syncMessage} onUpdateConfig={setRepoConfig} onSyncGitHub={handleSyncGitHub}/>}
         </main>
       </div>

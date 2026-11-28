@@ -1,3 +1,4 @@
+import { characterFromScene, characterModel } from './characterPresets';
 import { hasRocketbox, prepareRocketbox } from './rocketboxPresenter';
 import {isTravelDocumentary,isTravelClip,matchingTravelAtlas} from './travelProject';
 import { OpenMotionProject } from '../types/openmotion';
@@ -113,7 +114,7 @@ export function getCachedPhoto(url?: string): HTMLImageElement | null {
  * WebCodecs MP4 frame rendering or when opening Studio).
  */
 export async function preloadProjectImages(project: OpenMotionProject): Promise<void> {
-  if(hasRocketbox(project)){await prepareRocketbox();notifyImageRefresh();}
+  if(hasRocketbox(project)){const scenes=project.scenes.filter(s=>s.doodle?.extras?.includes('presenter-lab-rocketbox'));const preset=characterFromScene(scenes[0]);const key=preset?characterModel(preset):'';if(scenes.some(s=>{const p=characterFromScene(s);return (p?characterModel(p):'')!==key;}))throw Error('Gebruik één basispersonage per video.');await prepareRocketbox(preset);notifyImageRefresh();}
   const urls = new Set<string>();
   for (const scene of project.scenes) {
     for (const stop of scene.premiumTravel?.stops ?? []) { urls.add(stop.photoUrl); if(stop.secondaryPhoto?.photoUrl) urls.add(stop.secondaryPhoto.photoUrl); }
