@@ -11,7 +11,7 @@ const SLUG='simply-explained-001-how-ai-actually-works';
 type Mode='flat'|'rig'|'rocketbox'|'custom'|'cartoon';
 const MODES:{id:Mode;name:string;desc:string}[]=[
  {id:'flat',name:'Alex 2D',desc:'Versie 1.1 · oorspronkelijke vrouwelijke illustratie'},
- {id:'rig',name:'Alex 2.5D',desc:'Versie 2.6 · gekoppelde romp, haar, kleding en gebaren'},
+ {id:'rig',name:'Alex 2.5D',desc:'Versie 2.7 · gekoppelde romp, haar en vaste hoekpositie'},
  {id:'rocketbox',name:'Rocketbox 3D',desc:'Business female 04 · bestaande proef'},
  {id:'custom',name:'Character Studio',desc:'20 Rocketbox-personages, kleding, expressie en beweging'},
  {id:'cartoon',name:'Cartoon Cinema',desc:'Gestileerde 3D-personages met mondvormen'}
@@ -31,7 +31,7 @@ const STORAGE='openmotion.characterPresets.v1';
 function savedPresets():CharacterPreset[]{try{const x=JSON.parse(localStorage.getItem(STORAGE)??'[]');return Array.isArray(x)?x.map(sanitizeCharacter):[];}catch{return [];}}
 function downloadJson(value:unknown,name:string){const url=URL.createObjectURL(new Blob([JSON.stringify(value,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 export function PresenterLab({projects,onUpdateProject,initialCustom=false,initialCartoon=false}:{projects:OpenMotionProject[];onUpdateProject?:(p:OpenMotionProject)=>void;initialCustom?:boolean;initialCartoon?:boolean}){
- const source=projects.find(p=>p.slug===SLUG&&['2.0','2.6','3.0'].includes(p.templateVersion??''));
+ const source=projects.find(p=>p.slug===SLUG&&['2.0','2.6','2.7','3.0'].includes(p.templateVersion??''));
  const [cartoon,setCartoon]=useState<CartoonId>('jenny');
  const [preset,setPreset]=useState<CharacterPreset>(()=>source?characterFromScene(source.scenes.find(s=>s.doodle?.narration?.trim())??source.scenes[0])??DEFAULT_CHARACTER:DEFAULT_CHARACTER),[saved,setSaved]=useState(savedPresets),[message,setMessage]=useState('');
  const change=(x:Partial<CharacterPreset>)=>{audio.current?.pause();setPreset(p=>sanitizeCharacter({...p,...x}));setMessage('');setProgress(null);if(resultUrl.current){URL.revokeObjectURL(resultUrl.current);resultUrl.current=null;}};

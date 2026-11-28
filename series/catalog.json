@@ -705,7 +705,7 @@
       "id": "simply-explained",
       "title": "Simply Explained",
       "description": "Clean animated editorial explainers with recurring female presenter Alex.",
-      "activeVersion": "2.6",
+      "activeVersion": "2.7",
       "versions": [
         {
           "version": "1.0",
@@ -791,6 +791,25 @@
           "referenceProject": "simply-explained-001-how-ai-actually-works",
           "templatePath": "series/simply-explained/template-v2.6.json",
           "instructions": "Character Cinema 2.0. Preserve female Alex, brown bob, teal jacket, cream shirt, gold studs, fixed lower-left anchor and clean editorial compositions. Use layout doodle-explainer, markers mind-series-v1, simply-explained-v1, simply-explained-v11 and simply-explained-v2. Direct each shot with host-keys: JSON arrays [normalized time,yaw,tilt,gazeX,gazeY,brow,smile,arm,gesture], start 0 and end 1, strictly increasing times, yaw/tilt/gaze/brow/smile -1..1 and arm/gesture 0..1. Gesture 0 resting, .5 open palm, .9 pointing. host-blinks: comma-separated local seconds. Interpolate poses smoothly, match gaze and gesture to central graphic, return to camera when addressing viewer. Existing manifest reads the final voice MP3 and derives 30 Hz mouth energy plus approximate text-driven visemes. No phoneme alignment, no external imagery, no new engine. Keep three-word captions beside host and static illustrated covers. Render and inspect actual export before approval. Alex 2.6 is the active illustrated presenter: retain marker alex-26 in every shot, omit Rocketbox/cartoon markers and character-preset. The waist-pivoted torso follows the head pose with a small delay; shoulder, elbow and wrist are sampled at staggered times. Hair tips and front fringe deform with delayed head movement and idle breathing. Keep the original palette, hairstyle, facial identity and lower-left anchor. Body secondary motion is derived from existing host-keys, not a new physics engine. Prefer neutral, compatible boundary poses. Do not select template 3.0 unless explicitly requested.",
+          "brandKit": {
+            "brandName": "SIMPLY EXPLAINED",
+            "primaryColor": "#253E43",
+            "accentColor": "#B94F36",
+            "backgroundColor": "#F5EDDF",
+            "surfaceColor": "#FFF9EF",
+            "textColor": "#243538",
+            "mutedColor": "#766E61",
+            "fontFamily": "system-ui"
+          }
+        },
+        {
+          "version": "2.7",
+          "format": "9:16",
+          "fps": 30,
+          "durationSec": 56,
+          "referenceProject": "simply-explained-001-how-ai-actually-works",
+          "templatePath": "series/simply-explained/template-v2.7.json",
+          "instructions": "Character Cinema 2.0. Preserve female Alex, brown bob, teal jacket, cream shirt, gold studs, fixed lower-left anchor and clean editorial compositions. Use layout doodle-explainer, markers mind-series-v1, simply-explained-v1, simply-explained-v11 and simply-explained-v2. Direct each shot with host-keys: JSON arrays [normalized time,yaw,tilt,gazeX,gazeY,brow,smile,arm,gesture], start 0 and end 1, strictly increasing times, yaw/tilt/gaze/brow/smile -1..1 and arm/gesture 0..1. Gesture 0 resting, .5 open palm, .9 pointing. host-blinks: comma-separated local seconds. Interpolate poses smoothly, match gaze and gesture to central graphic, return to camera when addressing viewer. Existing manifest reads the final voice MP3 and derives 30 Hz mouth energy plus approximate text-driven visemes. No phoneme alignment, no external imagery, no new engine. Keep three-word captions beside host and static illustrated covers. Render and inspect actual export before approval. Alex 2.6 is the active illustrated presenter: retain marker alex-26 in every shot, omit Rocketbox/cartoon markers and character-preset. The waist-pivoted torso follows the head pose with a small delay; shoulder, elbow and wrist are sampled at staggered times. Hair tips and front fringe deform with delayed head movement and idle breathing. Keep the original palette, hairstyle, facial identity and lower-left anchor. Body secondary motion is derived from existing host-keys, not a new physics engine. Prefer neutral, compatible boundary poses. Do not select template 3.0 unless explicitly requested. Layout 2.7: also include marker alex-27-layout in every shot. Reserve the complete bottom-left region for Alex, anchor the waist at the bottom edge. Use shared simplyExplainedLayout.ts: diagrams end at logical y=652, presenter x=0–192/y=674–910, captions x=202–432/y=658–784. Include caption pill padding and animated hand reach in safe regions. The subtitle renderer wraps and shrinks to fit the dedicated right-hand zone. Preserve the right-side and bottom UI margins. Use the same safe composition in preview and export. Keep the diagrams simple and the prediction example explicitly illustrative. Use template 2.7 for new episodes.",
           "brandKit": {
             "brandName": "SIMPLY EXPLAINED",
             "primaryColor": "#253E43",
