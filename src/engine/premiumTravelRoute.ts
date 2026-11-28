@@ -2,6 +2,7 @@ import type { OpenMotionProject, OpenMotionScene } from '../types/openmotion';
 import type { Map as MapLibreMap } from 'maplibre-gl';
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
 import 'maplibre-gl/dist/maplibre-gl.css';
+import {loadSignatureElevation,type SignatureElevation} from './premiumTravelElevation';
 
 const STYLE = 'https://tiles.openfreemap.org/styles/bright';
 const ROUTER = 'https://router.project-osrm.org/route/v1/driving/';
@@ -13,6 +14,7 @@ const lerp = (a:number,b:number,t:number) => a+(b-a)*t;
 interface Pt {x:number;y:number}
 interface Stage { image:HTMLCanvasElement; path:Pt[]; stops:Pt[]; distances:number[]; total:number }
 const stages = new WeakMap<OpenMotionScene,Stage>();
+const elevations=new WeakMap<OpenMotionScene,SignatureElevation>();
 const pending = new WeakMap<OpenMotionProject,Promise<void>>();
 const errors = new WeakMap<OpenMotionProject,string>();
 export function getPremiumError(project:OpenMotionProject):string|undefined{return errors.get(project);}
@@ -52,6 +54,8 @@ export function preparePremiumTravelProject(project:OpenMotionProject):Promise<v
   const existing=pending.get(project);if(existing)return existing;
   const job=(async()=>{
     await getRoadGeometry(scenes);
+    const signature=scenes.some(s=>(s.premiumTravel?.editorialRevision??0)>=9),route=scenes[0].premiumTravel!;
+    const elevationJob=signature?loadSignatureElevation(route.route.geometry.coordinates,route.stops.map(s=>[s.lon,s.lat] as [number,number])):Promise.resolve(null);
     const { Map: MapLibreConstructor, setWorkerUrl } = await import('maplibre-gl');
     setWorkerUrl(workerUrl);
     const div=document.createElement('div');
@@ -74,7 +78,7 @@ export function preparePremiumTravelProject(project:OpenMotionProject):Promise<v
         map.addSource('ptr-terrain',{type:'raster-dem',tiles:['https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png'],tileSize:256,maxzoom:15,encoding:'terrarium',attribution:'Mapzen Terrain Tiles / AWS Open Data'});
         const layers=map.getStyle().layers??[];
         const before=layers.find(layer=>layer.type==='line'||layer.type==='symbol')?.id;
-        map.addLayer({id:'ptr-hillshade',type:'hillshade',source:'ptr-terrain',paint:{'hillshade-exaggeration':.42,'hillshade-shadow-color':'#526455','hillshade-highlight-color':'#fff4d9','hillshade-accent-color':'#a3aa91'}},before);
+        map.addLayer({id:'ptr-hillshade',type:'hillshade',source:'ptr-terrain',paint:{'hillshade-exaggeration':signature ? .55 : .42,'hillshade-shadow-color':'#526455','hillshade-highlight-color':'#fff4d9','hillshade-accent-color':'#a3aa91'}},before);
         for(const layer of layers){
           const sourceLayer='source-layer' in layer?String(layer['source-layer']):'';
           if(layer.type==='fill'&&sourceLayer==='water')map.setPaintProperty(layer.id,'fill-color','#a8c4cc');
@@ -114,6 +118,7 @@ export function preparePremiumTravelProject(project:OpenMotionProject):Promise<v
         stages.set(scene,{image,path,stops,distances,total});
       }
     }finally{map?.remove();div.remove();}
+    const elevation=await elevationJob;if(elevation)for(const scene of scenes)elevations.set(scene,elevation);
   })().catch(e=>{errors.set(project,String(e));throw e;});
   pending.set(project,job);return job;
 }
@@ -238,6 +243,40 @@ function labelLines(ctx:CanvasRenderingContext2D,text:string,x:number,y:number,w
   if(line)lines.push(line);
   lines.slice(0,maxLines).forEach((v,i)=>ctx.fillText(v,x,y+i*lineHeight,width));
 }
+// Feathered optical foreground treatment, not a segmented 3D reconstruction.
+let signatureForeground:HTMLCanvasElement|undefined;
+function signatureOptics(ctx:CanvasRenderingContext2D,img:HTMLImageElement,w:number,h:number,t:number,focus:[number,number]|undefined,fit:'cover'|'contain'|undefined,mode:'light'|'haze'|'water'|undefined,depth:boolean){
+ if(fit==='contain')return;
+ if(depth){signatureForeground??=document.createElement('canvas');const layer=signatureForeground;if(layer.width!==w||layer.height!==h){layer.width=w;layer.height=h;}
+ const c=layer.getContext('2d');if(c){c.clearRect(0,0,w,h);editorialPhoto(c,img,w,h,t,focus,fit,.048);c.save();c.globalCompositeOperation='destination-in';const mask=c.createLinearGradient(0,h*.50,0,h*.80);mask.addColorStop(0,'rgba(0,0,0,0)');mask.addColorStop(1,'rgba(0,0,0,1)');c.fillStyle=mask;c.fillRect(0,0,w,h);c.restore();ctx.save();ctx.globalAlpha*=.22;ctx.drawImage(layer,0,0);ctx.restore();}}
+ if(!mode)return;ctx.save();const x=w*(.28+.38*t),y=h*(mode==='water'?.74:mode==='haze'?.32:.16);
+ const glow=ctx.createRadialGradient(x,y,0,x,y,w*.70);glow.addColorStop(0,mode==='haze'?'rgba(216,229,224,.075)':mode==='water'?'rgba(170,220,218,.055)':'rgba(255,224,177,.065)');glow.addColorStop(1,'rgba(255,255,255,0)');ctx.fillStyle=glow;ctx.fillRect(0,0,w,h);ctx.restore();
+}
+function signatureProfile(ctx:CanvasRenderingContext2D,p:SignatureElevation|undefined,x:number,y:number,w:number,h:number,s:number,fraction:number){
+ if(!p||p.values.length<2)return;const v=p.values,min=Math.floor(Math.min(...v)/100)*100,max=Math.max(min+100,Math.ceil(Math.max(...v)/100)*100);
+ const px=(i:number)=>x+i/(v.length-1)*w,py=(a:number)=>y+h-(a-min)/(max-min)*h;
+ ctx.save();ctx.textAlign='left';ctx.textBaseline='alphabetic';ctx.font='600 '+(19*s)+'px sans-serif';ctx.fillStyle='#DCE7DE';ctx.fillText('ROUTE ELEVATION · DEM EST.',x,y-15*s,w*.70);ctx.textAlign='right';ctx.fillText(max+' m',x+w,y-15*s);
+ const grad=ctx.createLinearGradient(0,y,0,y+h);grad.addColorStop(0,'rgba(174,199,177,.45)');grad.addColorStop(1,'rgba(174,199,177,.04)');
+ ctx.beginPath();v.forEach((a,i)=>i?ctx.lineTo(px(i),py(a)):ctx.moveTo(px(i),py(a)));ctx.lineTo(x+w,y+h);ctx.lineTo(x,y+h);ctx.closePath();ctx.fillStyle=grad;ctx.fill();
+ ctx.beginPath();v.forEach((a,i)=>i?ctx.lineTo(px(i),py(a)):ctx.moveTo(px(i),py(a)));ctx.strokeStyle='#C8DEC9';ctx.lineWidth=2.5*s;ctx.stroke();
+ const i=clamp(fraction)*(v.length-1),lo=Math.floor(i),hi=Math.min(v.length-1,lo+1),xx=px(i),yy=py(lerp(v[lo],v[hi],i-lo));ctx.strokeStyle='rgba(226,196,143,.55)';ctx.lineWidth=s;ctx.beginPath();ctx.moveTo(xx,yy);ctx.lineTo(xx,y+h);ctx.stroke();ctx.fillStyle='#E2C48F';ctx.beginPath();ctx.arc(xx,yy,7*s,0,Math.PI*2);ctx.fill();ctx.textAlign='left';ctx.fillStyle='#DCE7DE';ctx.fillText(min+' m',x,y+h+24*s);ctx.restore();
+}
+function signatureCompass(ctx:CanvasRenderingContext2D,w:number,s:number){
+ ctx.save();ctx.translate(w-76*s,310*s);ctx.strokeStyle='#36564D';ctx.fillStyle='#36564D';ctx.lineWidth=2*s;ctx.beginPath();ctx.arc(0,0,28*s,0,Math.PI*2);ctx.stroke();ctx.beginPath();ctx.moveTo(0,-19*s);ctx.lineTo(-7*s,9*s);ctx.lineTo(0,4*s);ctx.lineTo(7*s,9*s);ctx.closePath();ctx.fill();ctx.font='700 '+(20*s)+'px sans-serif';ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.fillText('N',0,-38*s);ctx.restore();
+}
+function signatureFinale(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMotionScene,stage:Stage,time:number){
+ const p=scene.premiumTravel!,s=w/WIDTH,m=70*s,alpha=ease((time-1.10)/.48);if(alpha<=0)return;ctx.save();ctx.globalAlpha*=alpha;
+ ctx.fillStyle='#173D37';ctx.fillRect(0,0,w,h);ctx.save();ctx.globalAlpha*=.13;ctx.drawImage(stage.image,0,0,w,h);ctx.restore();
+ ctx.strokeStyle='rgba(226,196,143,.48)';ctx.lineWidth=2*s;ctx.strokeRect(m,125*s,w-2*m-70*s,h-350*s);
+ ctx.textAlign='left';ctx.textBaseline='alphabetic';ctx.fillStyle='#E2C48F';ctx.font='700 '+(26*s)+'px sans-serif';ctx.fillText(p.seriesTitle??'THE OPEN ROAD COLLECTION',m+28*s,205*s,w-2*m-110*s);
+ ctx.fillStyle='#F8F7EF';ctx.font='400 '+(90*s)+'px Georgia,serif';ctx.fillText(p.regionTitle??'THE OPEN ROAD',m+28*s,340*s,w-2*m-110*s);
+ const pts=stage.path;let minX=Infinity,minY=Infinity,maxX=-Infinity,maxY=-Infinity;for(const q of [...pts,...stage.stops]){minX=Math.min(minX,q.x);maxX=Math.max(maxX,q.x);minY=Math.min(minY,q.y);maxY=Math.max(maxY,q.y);}
+ const bw=w-2*m-190*s,bh=630*s,k=Math.min(bw/Math.max(1,maxX-minX),bh/Math.max(1,maxY-minY)),ox=m+55*s+(bw-(maxX-minX)*k)/2-minX*k,oy=445*s+(bh-(maxY-minY)*k)/2-minY*k;
+ ctx.beginPath();pts.forEach((q,i)=>i?ctx.lineTo(ox+q.x*k,oy+q.y*k):ctx.moveTo(ox+q.x*k,oy+q.y*k));ctx.strokeStyle='#E2C48F';ctx.lineWidth=5*s;ctx.lineJoin='round';ctx.lineCap='round';ctx.stroke();
+ stage.stops.forEach((q,i)=>{const x=ox+q.x*k,y=oy+q.y*k;ctx.beginPath();ctx.arc(x,y,17*s,0,Math.PI*2);ctx.fillStyle='#AE674A';ctx.fill();ctx.strokeStyle='#F8F7EF';ctx.lineWidth=2*s;ctx.stroke();ctx.fillStyle='#fff';ctx.font='700 '+(20*s)+'px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(String(i+1),x,y);});
+ ctx.textAlign='left';ctx.textBaseline='alphabetic';ctx.font='500 '+(28*s)+'px sans-serif';ctx.fillStyle='#F8F7EF';p.stops.forEach((stop,i)=>ctx.fillText(String(i+1).padStart(2,'0')+'  '+stop.name,m+28*s+(i%2)*380*s,1165*s+Math.floor(i/2)*58*s,365*s));
+ signatureProfile(ctx,elevations.get(scene),m+28*s,1350*s,w-2*m-130*s,116*s,s,1);ctx.fillStyle='#E2C48F';ctx.font='700 '+(39*s)+'px sans-serif';ctx.fillText(p.cta??'SAVE THIS ROAD TRIP',m+28*s,h-265*s,w-2*m-110*s);ctx.restore();
+}
 function photoScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMotionScene,time:number,getPhoto:(url:string)=>HTMLImageElement|null,titleWeight=1,captionTime=time){
   const p=scene.premiumTravel!,t=clamp(time/Math.max(.1,scene.durationSec)),s=w/WIDTH;
   const index=!p.editorial&&p.chapter==='opening'?0:Math.max(0,Math.min(p.stops.length-1,p.focusStopIndex));
@@ -260,8 +299,9 @@ function photoScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMot
     editorialPhoto(ctx,secondary,w,h,clamp((t-.52)/.48),alternate.photoFocus,alternate.photoFit,.065);
     ctx.restore();ctx.restore();
   }else if(img){
-    if(p.editorial){ctx.save();if((p.editorialRevision??0)>=6)ctx.filter='saturate(.91) contrast(1.035) brightness(.99)';editorialPhoto(ctx,img,w,h,r7&&(!primary||!secondary)?t:shotTime,photo.photoFocus,photo.photoFit,slow?.035:r7?(p.chapter==='opening'?.105:.065):.035);ctx.restore();}
+    if(p.editorial){ctx.save();if((p.editorialRevision??0)>=6)ctx.filter=p.regionTitle==='DOLOMITES'&&(p.editorialRevision??0)>=9?'saturate(.96) contrast(1.045) brightness(1.015) sepia(.035)':'saturate(.91) contrast(1.035) brightness(.99)';editorialPhoto(ctx,img,w,h,r7&&(!primary||!secondary)?t:shotTime,photo.photoFocus,photo.photoFit,slow?.035:r7?(p.chapter==='opening'?.105:.065):.035);ctx.restore();}
     else cover(ctx,img,0,0,w,h,t);
+    if((p.editorialRevision??0)>=9)signatureOptics(ctx,img,w,h,t,photo.photoFocus,photo.photoFit,p.signatureAtmosphere,Boolean(p.signatureDepth));
   }else if(r7){ctx.fillStyle='#173D37';ctx.fillRect(0,0,w,h);ctx.fillStyle='#fff';ctx.font=`${34*s}px sans-serif`;ctx.textAlign='center';ctx.fillText('Photo unavailable',w/2,h/2);}else scenicFallback(ctx,w,h);
   // A title fades in after the image appears and fades out before the next
   // shot. The underlying photo stays visible during the cross-dissolve.
@@ -279,7 +319,9 @@ function photoScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMot
   ctx.fillText(p.seriesTitle??'SCOTLAND  /  THE OPEN ROAD',66*s,164*s,w-220*s);
   ctx.fillStyle='#E0C99C';ctx.font='700 '+(25*s)+'px "Plus Jakarta Sans",sans-serif';
   const lead=p.chapter==='opening'?'A JOURNEY BEGINS':'STOP '+String(index+1).padStart(2,'0')+' / '+String(p.stops.length).padStart(2,'0');
-  ctx.fillText(p.chapter==='opening'?(p.regionTitle??lead):lead,66*s,h-700*s,w-220*s);
+  const elevation=(p.editorialRevision??0)>=9?elevations.get(scene)?.stops[index]:undefined;
+  const micro=p.chapter==='photo'&&(p.editorialRevision??0)>=9?(elevation!==undefined?' · ~'+(Math.round(elevation/10)*10)+' m':' · '+Math.abs(stop.lat).toFixed(2)+'° '+(stop.lat>=0?'N':'S')):'';
+  ctx.fillText(p.chapter==='opening'?(p.regionTitle??lead):lead+micro,66*s,h-700*s,w-220*s);
   ctx.fillStyle='#FFFFFF';
   const headline=p.editorial?scene.headline:(p.chapter==='opening'?'FROM CITY\nTO HIGHLANDS':stop.name.toUpperCase());
   ctx.font='400 '+(p.chapter==='opening'?85:104)*s+'px Georgia,serif';
@@ -383,6 +425,7 @@ function drawMapScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenM
     }
     ctx.restore();
   }
+  if((p.editorialRevision??0)>=9)signatureCompass(ctx,w,s);
   // Scene titles are eased independently of the cartographic layer so two
   // captions do not stack over one another during an incoming cross-fade.
   const r7=(p.editorialRevision??0)>=7;
@@ -409,9 +452,12 @@ function drawMapScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenM
   ctx.font='400 '+(finishing?83:92)*s+'px Georgia,serif';
   ctx.fillText(name,m,h-415*s,w-200*s);
   ctx.fillStyle='#E6F0E8';ctx.font='500 '+(30*s)+'px "Plus Jakarta Sans",sans-serif';
-  ctx.fillText(finishing?p.stops.map(stop=>stop.name).join(' · '):'ON THE ROAD',m,h-340*s,w-200*s);
+  const profile=(p.editorialRevision??0)>=9?elevations.get(scene):undefined;
+  if(!finishing&&profile)signatureProfile(ctx,profile,m,h-312*s,w-220*s,105*s,s,fraction);
+  else ctx.fillText(finishing?p.stops.map(stop=>stop.name).join(' · '):'ON THE ROAD',m,h-340*s,w-200*s);
   if(finishing&&p.cta){ctx.fillStyle='#E5C48B';ctx.font='700 '+(50*s)+'px sans-serif';ctx.fillText(p.cta,m,h-240*s,w-200*s);}
   ctx.restore();
+  if((p.editorialRevision??0)>=9&&finishing&&!p.mapIntro)signatureFinale(ctx,w,h,scene,stage,time);
   ctx.fillStyle='rgba(251,250,245,.93)';ctx.fillRect(0,h-61*s,w,61*s);
   ctx.textAlign='center';ctx.font='500 '+(21*s)+'px "Plus Jakarta Sans",sans-serif';ctx.fillStyle='#244C44';
   ctx.fillText(p.relief?'Map: OpenFreeMap / OpenMapTiles · © OpenStreetMap · Terrain: Mapzen / AWS':'Map: OpenFreeMap / OpenMapTiles · © OpenStreetMap contributors',w/2,h-24*s,w-54*s);

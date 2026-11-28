@@ -17,7 +17,7 @@ const alpineChords = [
   { start: 23, end: 30, notes: [130.81,196.00,329.63] },
 ];
 const cuts = [0,3,5,7.5,10,13.5,16,19.5,22,26.5];
-async function synthesize(durationSec: number, cues:readonly number[],alpine:boolean): Promise<AudioBuffer> {
+async function synthesize(durationSec: number, cues:readonly number[],alpine:boolean,ambience:readonly {start:number;end:number;kind:'wind'|'water'}[]): Promise<AudioBuffer> {
   const context = new OfflineAudioContext(2, Math.ceil(durationSec * rate), rate);
   const master = context.createGain();
   master.gain.setValueAtTime(0, 0);
@@ -85,13 +85,21 @@ async function synthesize(durationSec: number, cues:readonly number[],alpine:boo
     src.connect(high);high.connect(gain);gain.connect(master);
     src.start(at);src.stop(at + .62);
   }
+  // Original quiet filtered noise beds, not field recordings.
+  for(const bed of ambience){const start=Math.max(0,bed.start),end=Math.min(durationSec,bed.end);if(end-start<.8)continue;
+    const buffer=context.createBuffer(1,Math.ceil((end-start)*rate),rate),data=buffer.getChannelData(0);let state=0;
+    for(let i=0;i<data.length;i++){state=.92*state+.08*(random()*2-1);data[i]=state*(.72+.28*Math.sin(i/rate*(bed.kind==='water'?3.4:1.2)));}
+    const src=context.createBufferSource();src.buffer=buffer;const filter=context.createBiquadFilter();filter.type='lowpass';filter.frequency.value=bed.kind==='water'?1250:550;
+    const gain=context.createGain(),level=bed.kind==='water'?.15:.12;gain.gain.setValueAtTime(0,start);gain.gain.linearRampToValueAtTime(level,start+.35);gain.gain.setValueAtTime(level,end-.35);gain.gain.linearRampToValueAtTime(0,end);
+    src.connect(filter);filter.connect(gain);gain.connect(master);src.start(start);src.stop(end);
+  }
   return context.startRendering();
 }
-export function createPremiumTravelAudio(durationSec: number, cues:readonly number[]=cuts,alpine=false): Promise<AudioBuffer> {
-  const key = JSON.stringify([Math.round(durationSec * 100) / 100,cues,alpine]);
+export function createPremiumTravelAudio(durationSec: number, cues:readonly number[]=cuts,alpine=false,ambience:readonly {start:number;end:number;kind:'wind'|'water'}[]=[]): Promise<AudioBuffer> {
+  const key = JSON.stringify([Math.round(durationSec * 100) / 100,cues,alpine,ambience]);
   const existing = cache.get(key);
   if (existing) return existing;
-  const promise = synthesize(durationSec,cues,alpine).catch(error => { cache.delete(key); throw error; });
+  const promise = synthesize(durationSec,cues,alpine,ambience).catch(error => { cache.delete(key); throw error; });
   cache.set(key, promise);
   return promise;
 }
