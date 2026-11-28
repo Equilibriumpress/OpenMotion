@@ -26,7 +26,9 @@ export function renderTimedCaptions(
       }));
 
   const scale = width / 1080;
-  const maxWidth = width * .80;
+  const editorial = project.seriesId === 'simply-explained' && project.templateVersion === '1.1';
+  const centerX = width * (editorial ? .59 : .5);
+  const maxWidth = width * (editorial ? .46 : .80);
   let fontPx = Math.max(20 * scale, Math.min(82 * scale, (caption.fontSizePx ?? 49) * scale));
   ctx.save();
   ctx.textAlign = 'left';
@@ -59,16 +61,16 @@ export function renderTimedCaptions(
     lines = wrap();
   }
   const lineHeight = fontPx * 1.38;
-  const position = Math.max(.23, Math.min(.78, caption.position ?? .76));
+  const position = editorial ? .765 : Math.max(.23, Math.min(.78, caption.position ?? .76));
   const totalHeight = lines.length * lineHeight;
   const top = height * position - totalHeight / 2;
   const maxLineWidth = Math.max(...lines.map(line => ctx.measureText(line.map(w => w.text).join(' ')).width));
   if (caption.style !== 'minimal') {
     ctx.fillStyle = 'rgba(12, 28, 32, .83)';
-    const padX = 25 * scale, padY = 19 * scale;
+    const padX = (editorial ? 14 : 25) * scale, padY = (editorial ? 11 : 19) * scale;
     ctx.beginPath();
     ctx.roundRect(
-      width / 2 - maxLineWidth / 2 - padX,
+      centerX - maxLineWidth / 2 - padX,
       top - padY,
       maxLineWidth + padX * 2,
       totalHeight + padY * 2,
@@ -78,7 +80,7 @@ export function renderTimedCaptions(
   }
   lines.forEach((line, i) => {
     const text = line.map(item => item.text).join(' ');
-    let x = width / 2 - ctx.measureText(text).width / 2;
+    let x = centerX - ctx.measureText(text).width / 2;
     const y = top + (i + .5) * lineHeight;
     line.forEach((word, j) => {
       const glyph = word.text;
