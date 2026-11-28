@@ -27,8 +27,8 @@ export function renderTimedCaptions(
       }));
 
   const scale = width / 1080;
-  const editorial = project.seriesId === 'simply-explained' && (project.templateVersion === '1.1' || project.templateVersion === '2.0' || project.templateVersion === '2.6' || project.templateVersion === '2.7' || project.templateVersion === '3.0');
-  const strict = project.seriesId === 'simply-explained' && project.templateVersion === '2.7';
+  const editorial = project.seriesId === 'simply-explained' && (project.templateVersion === '1.1' || project.templateVersion === '2.0' || project.templateVersion === '2.6' || project.templateVersion === '2.7' || project.templateVersion === '3.0' || project.templateVersion === '3.1');
+  const strict = project.seriesId === 'simply-explained' && (project.templateVersion === '2.7' || project.templateVersion === '3.1');
   const zone=EDITORIAL_LAYOUT.caption;
   const sx=width/EDITORIAL_LAYOUT.width,sy=height/EDITORIAL_LAYOUT.height;
   const padX=(editorial||strict?14:25)*scale,padY=(editorial||strict?11:19)*scale;

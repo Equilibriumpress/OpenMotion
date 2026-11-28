@@ -39,7 +39,7 @@ try {
       const [width,height]=p.format==='9:16'?[1080,1920]:p.format==='1:1'?[1080,1080]:[1920,1080];
       if(!(duration>0))throw Error('Invalid project duration');
       if((p.seriesId==='the-human-side'||p.scenes.some(s=>s.bucketList?.documentary?.series==='places-worth-exploring'))&&!p.audioTracks?.some(t=>t.kind==='voiceover'&&t.src?.trim()))throw Error('Voice-over missing');
-      if(p.scenes.some(s=>(s.doodle?.extras?.includes('presenter-lab-rocketbox')||s.doodle?.extras?.includes('cartoon-cinema-v1')))){if(!p.audioTracks?.some(t=>t.kind==='voiceover'&&t.src?.trim()))throw Error('3D presenter voice-over missing');if(p.scenes.some(s=>(s.doodle?.extras?.includes('presenter-lab-rocketbox')||s.doodle?.extras?.includes('cartoon-cinema-v1'))&&s.doodle?.narration?.trim()&&!s.doodle?.extras?.some(x=>x.startsWith('host-energy:'))))throw Error('3D presenter speech data missing');}
+      if(p.scenes.some(s=>(s.doodle?.extras?.includes('presenter-lab-rocketbox')||s.doodle?.extras?.includes('cartoon-cinema-v1')||s.doodle?.extras?.includes('alex-performance-v1')))){if(!p.audioTracks?.some(t=>t.kind==='voiceover'&&t.src?.trim()))throw Error('3D presenter voice-over missing');if(p.scenes.some(s=>(s.doodle?.extras?.includes('presenter-lab-rocketbox')||s.doodle?.extras?.includes('cartoon-cinema-v1')||s.doodle?.extras?.includes('alex-performance-v1'))&&s.doodle?.narration?.trim()&&(!s.doodle?.extras?.some(x=>x.startsWith('host-energy:'))||!s.doodle?.extras?.some(x=>x.startsWith('host-mouth:')))))throw Error('3D presenter speech data missing');}
       page=await browser.newPage({viewport:{width,height}});
       await page.goto('http://127.0.0.1:4179/world-render-preview.html');
       await page.evaluate(async ({p,width,height})=>{
