@@ -41,7 +41,7 @@ function heading(c:C,k:string,a:string,b:string){txt(c,k,42,158,14,rust,750);txt
 function chat(c:C,x:number,y:number,w:number,h:number){box(c,x,y,w,h,light,16,'#C9BBA7');box(c,x+15,y+15,w-30,24,teal,6);[0,1,2].forEach(i=>oval(c,x+26+i*10,y+27,2.4,2.4,light));}
 export function renderSimplyExplained(c:C,width:number,height:number,scene:OpenMotionScene,localTime:number,_brand:OpenMotionBrandKit):void{
  const extras=scene.doodle?.extras??[],get=(k:string)=>extras.find(v=>v.startsWith(k+':'))?.slice(k.length+1),shot=get('shot')??'hook',episode=get('episode')??'01',t=Math.max(0,Math.min(scene.durationSec,localTime)),speaking=t>.3&&t<Math.min(scene.durationSec-.45,Number(get('speech-end')??scene.durationSec));
- c.save();c.scale(width/W,height/H);frame(c,episode);
+ c.save();c.scale(width/W,height/H);if(extras.includes('simply-explained-v11')){renderCleanEditorial(c,scene,t);c.restore();return;}frame(c,episode);
  switch(shot){
  case 'cover':
   txt(c,'HOW AI',42,220,65,ink,800);txt(c,'ACTUALLY',42,285,65,ink,800);txt(c,'WORKS',42,350,65,ink,800);
@@ -89,4 +89,76 @@ export function renderSimplyExplained(c:C,width:number,height:number,scene:OpenM
   host(c,125,555,.67,t,speaking,.6);txt(c,'Prediction ≠ verification',210,608,18,ink,750,'left',258);break;
  }
  c.restore();
+}
+
+/** Editorial 1.1 — fixed female host, one visual idea per scene, no page chrome. */
+function alexV11(c:C,t:number,speaking:boolean){
+ c.save();c.translate(82,699);c.scale(.88,.88);
+ // Hair behind shoulders, softly tailored jacket, original asymmetric bob.
+ path(c,'M-49 -20 Q-65 -74 -31 -89 Q8 -110 42 -82 Q62 -66 53 -12 L62 39 Q44 58 22 48 L-33 47 Q-66 39 -56 12Z','#49352F');
+ path(c,'M-68 113 Q-69 53 -34 37 L-19 28 H19 L34 37 Q68 50 68 113 V124 H-68Z',teal);
+ path(c,'M-25 34 L0 60 25 34 15 124 H-15Z',light);
+ path(c,'M-34 40 L-19 74 -31 87 M34 40 L19 74 31 87','none','#587478',2);
+ // A small articulated presenting gesture, never into caption territory.
+ c.save();c.translate(47,62);c.rotate(-.53-.15*Math.sin(t*2.1));box(c,-11,-5,22,44,teal,10);c.translate(0,35);c.rotate(-1.02-.12*Math.sin(t*2.1));box(c,-10,-3,20,30,teal,9);oval(c,0,31,9,13,'#DFA77E');line(c,-3,26,-3,34,'#A66D52',1);c.restore();
+ box(c,-13,15,26,34,'#CE906D',8);
+ oval(c,0,-23,41,52,'#E7B18D');
+ path(c,'M-41 -21 Q-53 -73 -20 -86 Q18 -101 41 -67 Q53 -49 40 -17 L32 -45 Q7 -49 -6 -68 Q-18 -45 -37 -34Z','#49352F');
+ path(c,'M-33 -63 Q-20 -82 1 -82 M18 -83 Q41 -70 43 -49','none','#775146',2);
+ oval(c,-39,-9,6,9,'#E7B18D');oval(c,39,-9,6,9,'#E7B18D');
+ oval(c,-39,1,3,3,'#CE9C59');oval(c,39,1,3,3,'#CE9C59');
+ path(c,'M-29 -35 Q-21 -40 -12 -36 M12 -36 Q21 -40 29 -35','none','#49352F',2);
+ const blink=t%4.6>4.4&&t%4.6<4.56;
+ for(const x of [-19,19]){path(c,'M'+(x-8)+' -23 Q'+x+' -28 '+(x+8)+' -23','none','#49352F',1.8);if(!blink)oval(c,x,-22,3.2,3.7,ink);else line(c,x-7,-23,x+7,-23,ink,1.8);}
+ path(c,'M0 -20 L-3 -7 H3','none','#AD7457',1.5);
+ oval(c,-25,-7,7,3,'#D99A82');oval(c,25,-7,7,3,'#D99A82');
+ const mouth=speaking?2+5*Math.abs(Math.sin(t*14)*Math.sin(t*5.4)):0;
+ if(mouth>2){oval(c,0,9,9,mouth,'#8E4B47');line(c,-4,7,4,7,light,1.2);}else path(c,'M-9 8 Q0 16 9 8','none','#92544C',2);
+ c.restore();
+}
+function editorialCard(c:C,x:number,y:number,w:number,h:number){c.save();c.shadowColor='rgba(65,49,32,.12)';c.shadowBlur=15;c.shadowOffsetY=6;box(c,x,y,w,h,light,13);c.restore();}
+function cleanTitle(c:C,s:string,y=158){txt(c,s,256,y,34,ink,800,'center',426);}
+function renderCleanEditorial(c:C,scene:OpenMotionScene,t:number){
+ const extras=scene.doodle?.extras??[],get=(k:string)=>extras.find(v=>v.startsWith(k+':'))?.slice(k.length+1),shot=get('shot')??'hook';
+ c.fillStyle=paper;c.fillRect(0,0,W,H);
+ const speaking=shot!=='cover'&&t>.3&&t<Math.min(scene.durationSec-.45,Number(get('speech-end')??scene.durationSec));
+ switch(shot){
+ case 'cover':
+  txt(c,'SIMPLY EXPLAINED',256,104,15,muted,700,'center');
+  txt(c,'HOW AI',42,205,64,ink,850);txt(c,'ACTUALLY',42,272,64,ink,850);txt(c,'WORKS',42,339,64,rust,850);
+  network(c,257,493,t);break;
+ case 'hook':
+  editorialCard(c,58,200,396,350);
+  box(c,81,226,350,68,'#E9D4BD',10);txt(c,'Why is the sky blue?',99,268,24,ink,650,'left',315);
+  reveal(c,(t-.9)/.7,()=>{box(c,81,318,350,154,'#DCE5DD',12);txt(c,'Sunlight scatters…',100,361,24,ink,700);for(let i=0;i<3;i++){box(c,100,384+i*22,(i===2?140:284-i*24)*ease((t-1.6-i*.3)/.55),6,'#A7B9AC',3);}});
+  break;
+ case 'training':
+  cleanTitle(c,'Training');
+  for(let i=0;i<12;i++){const x=43+(i%3)*65,y=222+Math.floor(i/3)*63;reveal(c,(t-i*.12)/.5,()=>{editorialCard(c,x,y,55,47);for(let j=0;j<3;j++)box(c,x+8,y+10+j*10,26+(i+j)%3*5,3,'#A99A86',1);});}
+  arrow(c,246,337,284,337);network(c,374,337,t);
+  reveal(c,(t-3)/.8,()=>{for(let i=0;i<5;i++){let x=313+i*29;line(c,x,464,x,516,'#BCA891',3);oval(c,x,480+22*Math.sin(t*.8+i),6,6,i%2?teal:rust);}});
+  break;
+ case 'tokens':
+  editorialCard(c,42,224,428,82);txt(c,'The sky is blue.',256,276,36,ink,750,'center');
+  arrow(c,256,331,256,383);
+  ['The','sky','is','blue','.'].forEach((word,i)=>{const x=[42,126,218,285,395][i],w=[77,85,60,103,49][i];reveal(c,(t-1-i*.34)/.5,()=>{box(c,x,415,w,68,i%2?sand:'#DCE5DD',10);txt(c,word,x+w/2,459,27,ink,750,'center',w-8);});});
+  reveal(c,(t-2.6)/.6,()=>txt(c,'Tokens',256,543,32,rust,800,'center'));break;
+ case 'prediction': {
+  const step=Math.min(2,Math.floor(t/4)),phase=t-step*4,prompts=['The sky is','The sky is blue','The sky is blue today'],choices=[['blue','clear','dark'],['today','.','above'],['.','and','because']],values=[[.62,.24,.14],[.46,.36,.18],[.71,.19,.10]][step];
+  editorialCard(c,42,177,428,77);txt(c,prompts[step],256,226,28,ink,750,'center',398);
+  choices[step].forEach((word,i)=>{const y=307+i*76;txt(c,word,45,y+25,23,ink,700);box(c,157,y,236,36,'#E7DDCF',6);box(c,157,y,Math.max(1,236*values[i]*ease(phase/.65)),36,i===0?rust:teal,6);txt(c,Math.round(values[i]*100)+'%',466,y+26,22,ink,700,'right');});
+  reveal(c,(phase-2.1)/.4,()=>{box(c,42,548,428,58,'#DCE5DD',10);txt(c,choices[step][0],256,586,28,teal,800,'center');});txt(c,'Example probabilities',256,635,13,muted,500,'center');break;}
+ case 'response': {
+  editorialCard(c,42,190,428,358);box(c,62,211,388,65,sand,12);txt(c,'Why is the sky blue?',256,253,23,ink,700,'center');
+  const count=Math.max(0,Math.min(9,Math.floor((t-.6)/.55)+1));
+  txt(c,['Sunlight',' scatters',' in',' the',' atmosphere.'].slice(0,Math.min(count,5)).join(''),66,350,24,ink,650,'left',383);
+  txt(c,['Blue',' light',' scatters',' more.'].slice(0,Math.max(0,count-5)).join(''),66,398,24,ink,650,'left',383);
+  if(count<9)box(c,68,438,3,29,t%1<.5?rust:light,1);break;}
+ case 'limits':
+  cleanTitle(c,'Fluent ≠ factual');
+  editorialCard(c,77,231,358,236);box(c,99,256,314,42,'#DCE5DD',8);for(let i=0;i<3;i++)box(c,99,323+i*26,235-i*17,7,'#C9BBA7',3);
+  reveal(c,(t-1)/.6,()=>{oval(c,382,417,41,41,rust);txt(c,'?',382,432,45,light,800,'center');});
+  reveal(c,(t-3)/.6,()=>{path(c,'M154 528 L174 548 211 505','none',teal,8);txt(c,'Check the facts',225,540,27,ink,750);});break;
+ }
+ alexV11(c,t,speaking);
 }
