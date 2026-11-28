@@ -22,7 +22,7 @@ async function sha256(bytes:BufferSource){
  return Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))).map(x=>x.toString(16).padStart(2,'0')).join('');
 }
 export async function makeReceipt(p:OpenMotionProject,blob:Blob,actual:{width:number;height:number;duration:number},fps:number):Promise<NonNullable<RenderProgressState['verification']>>{
- return {projectSlug:p.slug,templateVersion:p.templateVersion??'onbekend',renderer:rendererLabel(p),buildRevision:p.buildRevision??'local',mediaRevision:p.mediaRevision??'unknown',timelineSec:getProjectDurationSec(p),actualDurationSec:actual.duration,width:actual.width,height:actual.height,fps,bytes:blob.size,sha256:await sha256(await blob.arrayBuffer()),projectSha256:await sha256(new TextEncoder().encode(JSON.stringify(p))),audioVerified:true};
+ return {projectSlug:p.slug,templateVersion:p.templateVersion??'onbekend',renderer:rendererLabel(p),buildRevision:p.buildRevision??'local',rendererBuildRevision:BUNDLE_REVISION,mediaRevision:p.mediaRevision??'unknown',timelineSec:getProjectDurationSec(p),actualDurationSec:actual.duration,width:actual.width,height:actual.height,fps,bytes:blob.size,sha256:await sha256(await blob.arrayBuffer()),projectSha256:await sha256(new TextEncoder().encode(JSON.stringify(p))),audioVerified:true};
 }
 export async function downloadVerifiedZip(state:RenderProgressState){
  if(!state.publicationVerified||!state.verification||!state.outputUrl||!state.fileName)throw Error('Geen geverifieerd origineel beschikbaar.');
