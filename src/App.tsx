@@ -109,6 +109,7 @@ export default function App() {
     initialRoute.requestedSlug && !initialRoute.projectId ? initialRoute.requestedSlug : null
   );
   const [autoStartExport, setAutoStartExport] = useState(false);
+  const [publishedPilotVersion,setPublishedPilotVersion]=useState<{version?:string;build?:string}|null>(null);
   const [manifestStatus,setManifestStatus]=useState<'loading'|'ready'|'unavailable'>('loading');
   const onPages=typeof window!=='undefined'&&window.location.hostname.endsWith('.github.io');
 
@@ -175,7 +176,7 @@ export default function App() {
           const parsed = normalizeOpenMotionProject(item);
           if (parsed.project) normalized.push(parsed.project);
         }
-        if(!cancelled)setManifestStatus(normalized.length?'ready':'unavailable');
+        if(!cancelled){const pilot=normalized.find(p=>p.slug==='simply-explained-001-how-ai-actually-works');setPublishedPilotVersion(pilot?{version:pilot.templateVersion,build:pilot.buildRevision}:null);setManifestStatus(normalized.length?'ready':'unavailable');}
         if (!cancelled && normalized.length > 0) {
           setProjects((prev) => {
             const bySlug = new Map(prev.map((p) => [p.slug, p]));
@@ -267,8 +268,7 @@ export default function App() {
   const pilotSlug='simply-explained-001-how-ai-actually-works';
   const presenterRoute=['alex-performance','presenter-lab','character-studio','cartoon-cinema'].includes(activeTab);
   const pilotRoute=activeTab==='studio'&&(activeProject.slug===pilotSlug||initialRoute.requestedSlug===pilotSlug||pendingDeepLinkSlugRef.current===pilotSlug);
-  const publishedPilot=projects.find(p=>p.slug===pilotSlug);
-  const pilotBuildMismatch=manifestStatus==='ready'&&(!publishedPilot||publishedPilot.templateVersion!=='3.3'||(BUNDLE_REVISION!=='local'&&publishedPilot.buildRevision!==BUNDLE_REVISION));
+  const pilotBuildMismatch=manifestStatus==='ready'&&(!publishedPilotVersion||!publishedPilotVersion.version||(BUNDLE_REVISION!=='local'&&publishedPilotVersion.build!==BUNDLE_REVISION));
   const waitForPublished=onPages&&(pilotRoute||presenterRoute)&&(manifestStatus!=='ready'||pilotBuildMismatch);
   const navItems = [
     {id:'dashboard',label:'Dashboard',icon:LayoutDashboard},
