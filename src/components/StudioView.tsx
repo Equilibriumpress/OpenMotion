@@ -175,7 +175,7 @@ export function StudioView({
     const context = new AudioContext();
     let cancelled = false;
     let source: AudioBufferSourceNode | null = null;
-    void context.resume().then(() => isParallaxCinema ? createParallaxAudio(totalDuration) : isBucketList ? createBucketListAudio(totalDuration) : isDoodleExplainer ? createDoodleExplainerAudio(totalDuration) : createPremiumTravelAudio(totalDuration)).then(buffer => {
+    void context.resume().then(() => isParallaxCinema ? createParallaxAudio(totalDuration,project.scenes.some(scene=>scene.parallax?.variant==='living-travel-poster')?'living-travel-poster':'window-seat') : isBucketList ? createBucketListAudio(totalDuration) : isDoodleExplainer ? createDoodleExplainerAudio(totalDuration) : createPremiumTravelAudio(totalDuration)).then(buffer => {
       if (cancelled) return;
       source = context.createBufferSource();
       source.buffer = buffer;

@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "1.0",
+  "id": "om-living-travel-posters-001-switzerland",
+  "slug": "living-travel-posters-001-switzerland",
+  "title": "Switzerland · The Alpine Express",
+  "description": "An original vintage-inspired Swiss railway poster comes to life. A red train crosses a stone viaduct through a layered alpine landscape, with a waterfall, birds, moving clouds and an original instrumental soundscape. Returns to the opening print. Fictional alpine composition, not a reconstruction of a specific historical poster or route.",
+  "category": "Shorts & Reels",
+  "author": "OpenMotion Studio",
+  "source": "github",
+  "createdAt": "2026-11-28",
+  "updatedAt": "2026-11-28",
+  "githubPath": "projects/living-travel-posters-001-switzerland/project.json",
+  "format": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 60,
+  "brandKit": {
+    "brandName": "LIVING TRAVEL POSTERS",
+    "primaryColor": "#254f4a",
+    "accentColor": "#b74432",
+    "backgroundColor": "#efe2bf",
+    "surfaceColor": "#638a83",
+    "textColor": "#f8edcf",
+    "mutedColor": "#c1aa7e",
+    "fontFamily": "Georgia"
+  },
+  "scenes": [
+    {
+      "id": "alpine-poster",
+      "name": "01 / Print · Awakening · Journey · Return",
+      "durationSec": 22,
+      "layout": "parallax-cinema",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "SWITZERLAND",
+      "subheadline": "THE ALPINE EXPRESS",
+      "fullBleed": true,
+      "parallax": {
+        "shot": "cover",
+        "variant": "living-travel-poster",
+        "episode": 1,
+        "speed": 1
+      }
+    }
+  ],
+  "captions": [],
+  "audioTracks": [],
+  "kind": "video",
+  "seriesId": "living-travel-posters",
+  "season": 1,
+  "episodeNumber": 1,
+  "templateVersion": "1.0",
+  "productionStatus": "review",
+  "thumbnailUrl": "thumbnails/living-travel-posters-001-switzerland.svg"
+}
