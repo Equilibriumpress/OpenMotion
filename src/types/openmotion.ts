@@ -377,7 +377,21 @@ export interface PremiumTravelPhoto {
   photoFocus?: [number, number];
   photoFit?: 'cover' | 'contain';
 }
+export interface PremiumTravelClip {
+  sourceUrl: string;
+  videoUrl: string;
+  alternateUrl?: string;
+  author: string;
+  license: string;
+  licenseUrl: string;
+  sourceWidth: number;
+  sourceHeight: number;
+  startSec: number;
+  /** Normalized focal position within the original footage. */
+  focus?: [number, number];
+}
 export interface PremiumTravelStop extends PremiumTravelPhoto {
+  videoClip?: PremiumTravelClip;
   name: string;
   lat: number;
   lon: number;
@@ -409,6 +423,8 @@ export interface ScenePremiumTravelRoute {
   openingSecondary?: boolean;
   openingPhoto?: PremiumTravelPhoto;
   openingSubtitle?: string;
+  /** A photo scene may opt into its destination's real video. */
+  mediaMode?: 'photo' | 'video';
   closeLoop?: boolean;
   routeVia?: {afterStop:number;coordinates:[number,number][] }[];
   signatureAtmosphere?: 'light' | 'haze' | 'water';

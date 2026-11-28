@@ -3,6 +3,7 @@ import type { Map as MapLibreMap } from 'maplibre-gl';
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import {loadSignatureElevation,type SignatureElevation} from './premiumTravelElevation';
+import {drawPremiumClip} from './premiumTravelClips';
 
 const STYLE = 'https://tiles.openfreemap.org/styles/bright';
 const ROUTER = 'https://router.project-osrm.org/route/v1/driving/';
@@ -297,7 +298,9 @@ function photoScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMot
   const photo=alternateImage?alternate!:stop;
   const img=alternateImage||primary;
   const shotTime=!slow&&p.chapter==='photo'&&alternate?clamp(useAlternate?(t-.52)/.48:t/.52):t;
-  if(r7&&!slow&&p.chapter==='photo'&&primary&&secondary&&alternate&&Math.abs(time-scene.durationSec*.52)<.15){
+  const footage=drawPremiumClip(ctx,scene,time,w,h);
+  if(footage){ /* Fixed atlas frame; title and gradient use the original timeline. */ }
+  else if(r7&&!slow&&p.chapter==='photo'&&primary&&secondary&&alternate&&Math.abs(time-scene.durationSec*.52)<.15){
     const u=smoother((time-scene.durationSec*.52+.15)/.30);
     ctx.save();ctx.filter=p.regionTitle==='DOLOMITES'?'saturate(.96) contrast(1.045) brightness(1.015) sepia(.035)':'saturate(.91) contrast(1.035) brightness(.99)';
     editorialPhoto(ctx,primary,w,h,clamp(t/.52),stop.photoFocus,stop.photoFit,.065);
@@ -339,7 +342,7 @@ function photoScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMot
   labelLines(ctx,tagline,70*s,h-410*s,w-230*s,49*s,2);ctx.restore();
   if(r7){ctx.restore();ctx.save();ctx.fillStyle='rgba(12,35,32,.75)';ctx.fillRect(62*s,h-290*s,w-205*s,38*s);}
   ctx.font='500 '+(19*s)+'px "Plus Jakarta Sans",sans-serif';ctx.fillStyle='#DAE1DB';
-  ctx.fillText(img?'PHOTO  '+photo.photoAuthor+'  ·  '+photo.photoLicense+'  ·  CROPPED':'ILLUSTRATED LANDSCAPE / PHOTO UNAVAILABLE',70*s,h-265*s,w-220*s);
+  ctx.fillText(footage?'FOOTAGE  '+footage.author+'  ·  '+footage.license+'  ·  CROPPED / MUTED':img?'PHOTO  '+photo.photoAuthor+'  ·  '+photo.photoLicense+'  ·  CROPPED':'ILLUSTRATED LANDSCAPE / PHOTO UNAVAILABLE',70*s,h-265*s,w-220*s);
   ctx.restore();
 }
 function travelCamera(scene:OpenMotionScene,stage:Stage,w:number,h:number,time:number){

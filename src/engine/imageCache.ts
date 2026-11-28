@@ -6,6 +6,7 @@ import { OpenMotionProject } from '../types/openmotion';
 import { CAT_OFFICE_ASSETS } from './catOfficeAssets';
 import { projectAssetUrl } from './projectAudio';
 import { preparePremiumTravelProject } from './premiumTravelRoute';
+import {preparePremiumClips,premiumClipReady} from './premiumTravelClips';
 import { prepareBucketListProject } from './bucketListCamera';
 
 interface CacheEntry {
@@ -129,7 +130,8 @@ export async function preloadProjectImages(project: OpenMotionProject): Promise<
   if (project.scenes.some(scene => scene.catOffice)) for (const src of CAT_OFFICE_ASSETS) urls.add(projectAssetUrl(src));
   const hasPremium = project.scenes.some(scene => scene.premiumTravel);
   const hasBucketList = project.scenes.some(scene => scene.layout === 'bucket-list-zoom');
-  if (hasPremium) await preparePremiumTravelProject(project);
+  const clips=hasPremium?preparePremiumClips(project,notifyImageRefresh):Promise.resolve();
+  if (hasPremium) await Promise.all([preparePremiumTravelProject(project),clips]);
   if (hasBucketList) await prepareBucketListProject(project);
   if (urls.size === 0) { if (hasPremium || hasBucketList) notifyImageRefresh(); return; }
 
@@ -159,7 +161,7 @@ export function assertTravelMediaReady(project: OpenMotionProject): void {
   for(const scene of project.scenes){
     const p=scene.premiumTravel;if(!p||(p.editorialRevision??0)<7||(p.chapter!=='photo'&&p.chapter!=='opening'))continue;
     const stop=p.stops[p.focusStopIndex];const alt=p.chapter==='opening'&&p.openingPhoto?p.openingPhoto:stop?.secondaryPhoto;
-    if(!getCachedPhoto(stop?.photoUrl)&&!getCachedPhoto(alt?.photoUrl))throw new Error('Bestemmingsfoto ontbreekt: '+scene.name+'. Controleer de Wikimedia-bronnen voor export.');
+    if(!premiumClipReady(scene)&&!getCachedPhoto(stop?.photoUrl)&&!getCachedPhoto(alt?.photoUrl))throw new Error('Bestemmingsfoto ontbreekt: '+scene.name+'. Controleer de Wikimedia-bronnen voor export.');
   }
   if(!isTravelDocumentary(project))return;
   for(const scene of project.scenes){
