@@ -16,3 +16,13 @@ Set parallax.destination to amalfi, retaining variant living-travel-poster and e
 
 ## Episode 003 / Japan
 Set parallax.destination to japan with the existing living-travel-poster variant and episode 3. Seven landscape/foreground depth groups plus the separate railway layer, original stylised Mount Fuji, mist, lake reflection, spring village, passing cream-and-red train, cherry branches and drifting petals. Dedicated pentatonic-inspired plucked-string soundtrack, wind and railway ambience selected by the shared preview/export mixer. Frozen template and earlier episodes remain unchanged. Review in Studio at 0, 3, 7, 12, 17 and 21.5 seconds before approving.
+
+## Poster Cinema 2.0 — premium art direction
+
+Episodes 001–003 have been migrated to template 2.0. The v1.0 template and vector renderer remain available; the v2.0 scenes select posterVersion 2.0. The data-driven art library and static SVG thumbnails use the same shapes and print design. Directional tonal planes, perspective architecture, destination-specific type and a repeatable ink/hatch tile replace the uniform v1.0 treatment. Complex static layers are cached at 3x in a destination-local cache; switching destinations releases the backing canvases. Motion, particles and hero objects remain live vectors. No dependencies or workflows changed.
+
+References for visual identity (not copied artwork): Japan House London https://www.japanhouselondon.uk/read-and-watch/shinkansen/ (1964 ivory-blue Series 0 bullet nose); Italia.it https://www.italia.it/en/campania/salerno/positano (terraced village, stairs and majolica dome); RhB-inspired electric locomotive and Alpine bridge are stylised, not engineering drawings. Japan landscape is a fictional composition, not a railway route map. Switzerland v2 uses electric rail sound instead of a steam whistle.
+
+Quality gate: compare static poster and first/last frames, inspect signature object silhouettes at mobile size, check camera cropping and occlusion at 3, 7, 12, 17 seconds, check actual export resolution, frame rate and AAC. Structural checks are not a substitute for playback/MP4 review. Keep productionStatus review until verified.
+
+Swiss remaster: curved rail profile, masonry arch stones and individually oriented coach/locomotive groups follow the same curve as the static thumbnail. The stylised bridge is Landwasser-inspired rather than an exact engineering reconstruction.
