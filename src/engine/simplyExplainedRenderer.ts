@@ -1,3 +1,4 @@
+import { EDITORIAL_LAYOUT, EDITORIAL_LAYOUT_MARKER } from './simplyExplainedLayout';
 import { cartoonId, renderCartoon } from './cartoonPresenter';
 import { renderRocketboxPresenter, ROCKETBOX_MARKER } from './rocketboxPresenter';
 import { renderAlexPresenter } from './alexPresenter';
@@ -125,12 +126,16 @@ function renderCleanEditorial(c:C,scene:OpenMotionScene,t:number){
  const extras=scene.doodle?.extras??[],get=(k:string)=>extras.find(v=>v.startsWith(k+':'))?.slice(k.length+1),shot=get('shot')??'hook';
  c.fillStyle=paper;c.fillRect(0,0,W,H);
  const speaking=shot!=='cover'&&t>.3&&t<Math.min(scene.durationSec-.45,Number(get('speech-end')??scene.durationSec));
+ const strict=extras.includes(EDITORIAL_LAYOUT_MARKER);
+ // Isolate diagram drawing from the host and subtitle row.
+ c.save();if(strict){c.beginPath();c.rect(0,0,W,EDITORIAL_LAYOUT.graphic.bottom);c.clip();}
  switch(shot){
  case 'cover':
   txt(c,'SIMPLY EXPLAINED',256,104,15,muted,700,'center');
   txt(c,'HOW AI',42,205,64,ink,850);txt(c,'ACTUALLY',42,272,64,ink,850);txt(c,'WORKS',42,339,64,rust,850);
   network(c,257,493,t);break;
  case 'hook':
+  if(strict)cleanTitle(c,'From question to answer',146);
   editorialCard(c,58,200,396,350);
   box(c,81,226,350,68,'#E9D4BD',10);txt(c,'Why is the sky blue?',99,268,24,ink,650,'left',315);
   reveal(c,(t-.9)/.7,()=>{box(c,81,318,350,154,'#DCE5DD',12);txt(c,'Sunlight scatters…',100,361,24,ink,700);for(let i=0;i<3;i++){box(c,100,384+i*22,(i===2?140:284-i*24)*ease((t-1.6-i*.3)/.55),6,'#A7B9AC',3);}});
@@ -138,31 +143,42 @@ function renderCleanEditorial(c:C,scene:OpenMotionScene,t:number){
  case 'training':
   cleanTitle(c,'Training');
   for(let i=0;i<12;i++){const x=43+(i%3)*65,y=222+Math.floor(i/3)*63;reveal(c,(t-i*.12)/.5,()=>{editorialCard(c,x,y,55,47);for(let j=0;j<3;j++)box(c,x+8,y+10+j*10,26+(i+j)%3*5,3,'#A99A86',1);});}
-  arrow(c,246,337,284,337);network(c,374,337,t);
+  if(strict){reveal(c,(t-1.2)/.7,()=>{arrow(c,246,337,284,337);network(c,374,337,t);});}
+  else{arrow(c,246,337,284,337);network(c,374,337,t);}
   reveal(c,(t-3)/.8,()=>{for(let i=0;i<5;i++){let x=313+i*29;line(c,x,464,x,516,'#BCA891',3);oval(c,x,480+22*Math.sin(t*.8+i),6,6,i%2?teal:rust);}});
   break;
  case 'tokens':
   editorialCard(c,42,224,428,82);txt(c,'The sky is blue.',256,276,36,ink,750,'center');
   arrow(c,256,331,256,383);
   ['The','sky','is','blue','.'].forEach((word,i)=>{const x=[42,126,218,285,395][i],w=[77,85,60,103,49][i];reveal(c,(t-1-i*.34)/.5,()=>{box(c,x,415,w,68,i%2?sand:'#DCE5DD',10);txt(c,word,x+w/2,459,27,ink,750,'center',w-8);});});
-  reveal(c,(t-2.6)/.6,()=>txt(c,'Tokens',256,543,32,rust,800,'center'));break;
+  reveal(c,(t-2.6)/.6,()=>txt(c,strict?'Example tokens':'Tokens',256,543,32,rust,800,'center'));break;
  case 'prediction': {
-  const step=Math.min(2,Math.floor(t/4)),phase=t-step*4,prompts=['The sky is','The sky is blue','The sky is blue today'],choices=[['blue','clear','dark'],['today','.','above'],['.','and','because']],values=[[.62,.24,.14],[.46,.36,.18],[.71,.19,.10]][step];
+  const step=Math.min(2,Math.floor(t/4)),phase=t-step*4;
+  const prompts=strict?['The sky','The sky is','The sky is blue']:['The sky is','The sky is blue','The sky is blue today'];
+  const choices=strict?[['is','looks','was'],['blue','clear','dark'],['.','and','because']]:[['blue','clear','dark'],['today','.','above'],['.','and','because']];
+  const values=[[.62,.24,.14],[.46,.36,.18],[.71,.19,.10]][step];
+  if(strict)cleanTitle(c,'Predict the next token',112);
   editorialCard(c,42,177,428,77);txt(c,prompts[step],256,226,28,ink,750,'center',398);
   choices[step].forEach((word,i)=>{const y=307+i*76;txt(c,word,45,y+25,23,ink,700);box(c,157,y,236,36,'#E7DDCF',6);box(c,157,y,Math.max(1,236*values[i]*ease(phase/.65)),36,i===0?rust:teal,6);txt(c,Math.round(values[i]*100)+'%',466,y+26,22,ink,700,'right');});
-  reveal(c,(phase-2.1)/.4,()=>{box(c,42,548,428,58,'#DCE5DD',10);txt(c,choices[step][0],256,586,28,teal,800,'center');});txt(c,'Example probabilities',256,635,13,muted,500,'center');break;}
+  reveal(c,(phase-2.1)/.4,()=>{box(c,42,548,428,58,'#DCE5DD',10);txt(c,strict?prompts[step]+(choices[step][0]==='.'?'':' ')+choices[step][0]:choices[step][0],256,586,28,teal,800,'center',400);});txt(c,'Example probabilities',256,635,13,muted,500,'center');break;}
  case 'response': {
   editorialCard(c,42,190,428,358);box(c,62,211,388,65,sand,12);txt(c,'Why is the sky blue?',256,253,23,ink,700,'center');
   const count=Math.max(0,Math.min(9,Math.floor((t-.6)/.55)+1));
-  txt(c,['Sunlight',' scatters',' in',' the',' atmosphere.'].slice(0,Math.min(count,5)).join(''),66,350,24,ink,650,'left',383);
-  txt(c,['Blue',' light',' scatters',' more.'].slice(0,Math.max(0,count-5)).join(''),66,398,24,ink,650,'left',383);
-  if(count<9)box(c,68,438,3,29,t%1<.5?rust:light,1);break;}
+  const first=['Sunlight',' scatters',' in',' the',' atmosphere.'].slice(0,Math.min(count,5)).join('');
+  const second=['Blue',' light',' scatters',' more.'].slice(0,Math.max(0,count-5)).join('');
+  txt(c,first,66,350,24,ink,650,'left',383);
+  txt(c,second,66,398,24,ink,650,'left',383);
+  if(count<9){
+    const cursorX=strict?66+Math.min(383,c.measureText(count<5?first:second).width)+4:68;
+    box(c,Math.min(451,cursorX),strict?(count<5?327:375):438,3,29,t%1<.5?rust:light,1);
+  }break;}
  case 'limits':
   cleanTitle(c,'Fluent ≠ factual');
   editorialCard(c,77,231,358,236);box(c,99,256,314,42,'#DCE5DD',8);for(let i=0;i<3;i++)box(c,99,323+i*26,235-i*17,7,'#C9BBA7',3);
   reveal(c,(t-1)/.6,()=>{oval(c,382,417,41,41,rust);txt(c,'?',382,432,45,light,800,'center');});
   reveal(c,(t-3)/.6,()=>{path(c,'M154 528 L174 548 211 505','none',teal,8);txt(c,'Check the facts',225,540,27,ink,750);});break;
  }
+ c.restore();
  if(cartoonId(scene))renderCartoon(c,scene,t);
  else if(extras.includes(ROCKETBOX_MARKER))renderRocketboxPresenter(c,scene,t);
  else if(extras.includes('simply-explained-v2'))renderAlexPresenter(c,scene,t);
