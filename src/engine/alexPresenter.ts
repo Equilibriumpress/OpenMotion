@@ -31,7 +31,7 @@ function pose(keys:Key[],u:number):Pose{
 type HairMotion={sweep:number;lift:number;turn:number};
 const STILL_HAIR:HairMotion={sweep:0,lift:0,turn:0};
 function face(c:C,p:Pose,blink:number,amp:number,viseme:number,h:HairMotion=STILL_HAIR,performance?:AlexPerformance,speech?:SpeechShape){
- const yaw=p.yaw,shift=yaw*(performance?16:13),near=1+.20*yaw,far=1-(performance ? .38 : .28)*yaw;
+ const yaw=p.yaw,shift=yaw*(performance?16:13),near=performance?1+.16*Math.max(0,yaw)-.31*Math.max(0,-yaw):1+.20*yaw,far=performance?1+.16*Math.max(0,-yaw)-.31*Math.max(0,yaw):1-.28*yaw;
  const detail=performance?expressionDetail(performance):undefined;
  c.save();c.translate(0,-1);c.rotate(p.tilt*.10);
  // Hair roots stay on the skull; only the loose ends and side volumes deform.
@@ -99,8 +99,8 @@ function performanceHand(c:C,gesture:number){
   const fingerOpen=i===1?Math.max(open,point):open*(1-point);
   const x=-6+i*3,rootY=i===0?10:14,tipX=x+spread[i]*fingerOpen*.65;
   const tipY=rootY+length[i]*(.23+.6*fingerOpen);
-  const endY=i===1?mix(tipY,-9,point):tipY;
-  const endX=i===1?mix(tipX,5,point):tipX;
+  const endY=i===1?mix(tipY,30,point):tipY;
+  const endX=i===1?mix(tipX,-3,point):tipX;
   c.beginPath();c.moveTo(x,rootY);c.quadraticCurveTo(x+(endX-x)*.7,rootY+(endY-rootY)*.45,endX,endY);
   c.lineCap='round';c.lineWidth=4.5;c.strokeStyle=shadow;c.stroke();c.lineWidth=3.4;c.strokeStyle=skin;c.stroke();
  }
