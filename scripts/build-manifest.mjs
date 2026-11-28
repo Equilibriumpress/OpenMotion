@@ -1,3 +1,4 @@
+import { attachPresenterSpeech } from './presenter-speech.mjs';
 import { prepareHumanSideSound } from './human-side-sound.mjs';
 import { prepareSongSound } from './song-cinematic-sound.mjs';
 import fs from 'fs';
@@ -116,7 +117,7 @@ function prepareProject(p) {
         p.captions=cues.map(c=>({...c,startSec:Math.max(.85,c.startSec),position:cinematic ? .75 : .78,fontSizePx:cinematic?43:45})).filter(c=>c.endSec>c.startSec);
       }
       if(p.scenes.some(s=>s.doodle?.extras?.includes('simply-explained-v1'))){
-        const clean=p.templateVersion==='1.1';
+        const clean=p.templateVersion==='1.1'||p.templateVersion==='2.0';
         const chunkSize=clean?3:5;
         p.captions=cues.flatMap(c=>{
           const words=String(c.text??'').trim().split(/\s+/).filter(Boolean);
@@ -145,6 +146,7 @@ function prepareProject(p) {
           return parts;
         });
       }
+      attachPresenterSpeech(p,rootDir,cues);
       let offset=0;
       for(const s of p.scenes){
         const end=offset+s.durationSec;

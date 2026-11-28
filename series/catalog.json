@@ -705,7 +705,7 @@
       "id": "simply-explained",
       "title": "Simply Explained",
       "description": "Clean animated editorial explainers with recurring female presenter Alex.",
-      "activeVersion": "1.1",
+      "activeVersion": "2.0",
       "versions": [
         {
           "version": "1.0",
@@ -734,6 +734,25 @@
           "referenceProject": "simply-explained-001-how-ai-actually-works",
           "templatePath": "series/simply-explained/template-v1.1.json",
           "instructions": "Clean Editorial 1.1: original female Alex with warm brown asymmetric bob, teal jacket, cream shirt, subtle earrings, always anchored lower-left across every shot including prediction and cover. One central illustration per beat, no repeated masthead, chapter numbers, footer, name tag or redundant labels. One short heading only where needed; preserve explanatory text within diagrams and label example probabilities. Use doodle-explainer, mind-series-v1, simply-explained-v1, simply-explained-v11, shot:cover/hook/training/tokens/prediction/response/limits. Keep the existing English voice and score; three-word compact karaoke captions in dark pill to the right of Alex. Original Canvas/SVG only, no generated images, new engines or extra test Actions. Verify rendered frames, actual audio and MP4 size before approval.",
+          "brandKit": {
+            "brandName": "SIMPLY EXPLAINED",
+            "primaryColor": "#253E43",
+            "accentColor": "#B94F36",
+            "backgroundColor": "#F5EDDF",
+            "surfaceColor": "#FFF9EF",
+            "textColor": "#243538",
+            "mutedColor": "#766E61",
+            "fontFamily": "system-ui"
+          }
+        },
+        {
+          "version": "2.0",
+          "format": "9:16",
+          "fps": 30,
+          "durationSec": 56,
+          "referenceProject": "simply-explained-001-how-ai-actually-works",
+          "templatePath": "series/simply-explained/template-v2.0.json",
+          "instructions": "Character Cinema 2.0. Preserve female Alex, brown bob, teal jacket, cream shirt, gold studs, fixed lower-left anchor and clean editorial compositions. Use layout doodle-explainer, markers mind-series-v1, simply-explained-v1, simply-explained-v11 and simply-explained-v2. Direct each shot with host-keys: JSON arrays [normalized time,yaw,tilt,gazeX,gazeY,brow,smile,arm,gesture], start 0 and end 1, strictly increasing times, yaw/tilt/gaze/brow/smile -1..1 and arm/gesture 0..1. Gesture 0 resting, .5 open palm, .9 pointing. host-blinks: comma-separated local seconds. Interpolate poses smoothly, match gaze and gesture to central graphic, return to camera when addressing viewer. Existing manifest reads the final voice MP3 and derives 30 Hz mouth energy plus approximate text-driven visemes. No phoneme alignment, no external imagery, no new engine. Keep three-word captions beside host and static illustrated covers. Render and inspect actual export before approval.",
           "brandKit": {
             "brandName": "SIMPLY EXPLAINED",
             "primaryColor": "#253E43",

@@ -26,7 +26,7 @@ export function renderTimedCaptions(
       }));
 
   const scale = width / 1080;
-  const editorial = project.seriesId === 'simply-explained' && project.templateVersion === '1.1';
+  const editorial = project.seriesId === 'simply-explained' && (project.templateVersion === '1.1' || project.templateVersion === '2.0');
   const centerX = width * (editorial ? .60 : .5);
   const maxWidth = width * (editorial ? .42 : .80);
   let fontPx = Math.max(20 * scale, Math.min(82 * scale, (caption.fontSizePx ?? 49) * scale));

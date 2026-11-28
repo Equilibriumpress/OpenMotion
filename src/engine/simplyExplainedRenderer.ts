@@ -1,3 +1,4 @@
+import { renderAlexPresenter } from './alexPresenter';
 import type { OpenMotionScene, OpenMotionBrandKit } from '../types/openmotion';
 
 // Original editorial character and diagrams, rendered by the existing Canvas pipeline.
@@ -160,5 +161,6 @@ function renderCleanEditorial(c:C,scene:OpenMotionScene,t:number){
   reveal(c,(t-1)/.6,()=>{oval(c,382,417,41,41,rust);txt(c,'?',382,432,45,light,800,'center');});
   reveal(c,(t-3)/.6,()=>{path(c,'M154 528 L174 548 211 505','none',teal,8);txt(c,'Check the facts',225,540,27,ink,750);});break;
  }
- alexV11(c,t,speaking);
+ if(extras.includes('simply-explained-v2'))renderAlexPresenter(c,scene,t);
+ else alexV11(c,t,speaking);
 }
