@@ -108,6 +108,8 @@ export default function App() {
     initialRoute.requestedSlug && !initialRoute.projectId ? initialRoute.requestedSlug : null
   );
   const [autoStartExport, setAutoStartExport] = useState(false);
+  const [manifestStatus,setManifestStatus]=useState<'loading'|'ready'|'unavailable'>('loading');
+  const onPages=typeof window!=='undefined'&&window.location.hostname.endsWith('.github.io');
 
   const [repoConfig, setRepoConfig] = useState<GitHubRepoConfig>(loadSavedRepoConfig);
   const [isSyncing, setIsSyncing] = useState(false);
@@ -164,14 +166,15 @@ export default function App() {
     async function loadStaticPagesManifest() {
       try {
         const res = await fetch('./projects/manifest.json', { cache: 'no-store' });
-        if (!res.ok) return;
+        if (!res.ok) throw Error('Manifest niet bereikbaar');
         const data = (await res.json()) as { projects?: unknown[] };
-        if (!Array.isArray(data.projects) || data.projects.length === 0) return;
+        if (!Array.isArray(data.projects) || data.projects.length === 0) throw Error('Manifest ontbreekt');
         const normalized: OpenMotionProject[] = [];
         for (const item of data.projects) {
           const parsed = normalizeOpenMotionProject(item);
           if (parsed.project) normalized.push(parsed.project);
         }
+        if(!cancelled)setManifestStatus(normalized.length?'ready':'unavailable');
         if (!cancelled && normalized.length > 0) {
           setProjects((prev) => {
             const bySlug = new Map(prev.map((p) => [p.slug, p]));
@@ -189,7 +192,8 @@ export default function App() {
           }
         }
       } catch {
-        // Not deployed with a static manifest yet — use local library
+        if(!cancelled)setManifestStatus('unavailable');
+        // Other local projects remain available.
       } finally {
         pendingDeepLinkSlugRef.current = null;
       }
@@ -259,6 +263,10 @@ export default function App() {
     }
   };
 
+  const pilotSlug='simply-explained-001-how-ai-actually-works';
+  const presenterRoute=['alex-performance','presenter-lab','character-studio','cartoon-cinema'].includes(activeTab);
+  const pilotRoute=activeTab==='studio'&&(activeProject.slug===pilotSlug||initialRoute.requestedSlug===pilotSlug||pendingDeepLinkSlugRef.current===pilotSlug);
+  const waitForPublished=onPages&&(pilotRoute||presenterRoute)&&manifestStatus!=='ready';
   const navItems = [
     {id:'dashboard',label:'Dashboard',icon:LayoutDashboard},
     {id:'series',label:'Series',icon:Layers},
@@ -298,9 +306,10 @@ export default function App() {
         </aside>
         <main className="flex-1 min-w-0 w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           {isWorkspace&&<WorkspaceView key={activeTab} tab={activeTab as WorkspaceTab} projects={projects} repoConfig={repoConfig} selectedSeriesId={selectedSeriesId} onSeries={openSeries} onNavigate={navigate} onOpenStudio={handleOpenStudio} onNewEpisode={newEpisode} onNewProject={()=>navigate('chatgpt')} onSync={handleSyncGitHub} isSyncing={isSyncing} syncMessage={syncMessage}/>}
-          {activeTab==='studio'&&activeProject&&<StudioView key={activeProject.id} project={activeProject} repoConfig={repoConfig} autoStartExport={autoStartExport} onConsumeAutoStart={()=>setAutoStartExport(false)} onUpdateProject={handleUpdateProject} onBackToLibrary={backFromStudio}/>}
+          {waitForPublished&&<div role="status" className="rounded-xl border bg-white p-5 text-sm">{manifestStatus==='loading'?'Actuele publicatie laden…':'De actuele publicatie is niet bereikbaar. Oude lokale kopieën worden niet voor export geopend.'}{manifestStatus==='unavailable'&&<button className="ml-3 underline" onClick={()=>window.location.reload()}>Opnieuw laden</button>}</div>}
+          {!waitForPublished&&activeTab==='studio'&&activeProject&&<StudioView key={activeProject.id+':'+(activeProject.templateVersion??'')+':'+(activeProject.buildRevision??'')} project={activeProject} repoConfig={repoConfig} autoStartExport={autoStartExport} onConsumeAutoStart={()=>setAutoStartExport(false)} onUpdateProject={handleUpdateProject} onBackToLibrary={backFromStudio}/>}
           {activeTab==='chatgpt'&&<ChatGptWorkflowView key={workflowSeries?.id??'standalone'} repoConfig={repoConfig} onAddProject={handleAddProject} series={workflowSeries} projects={projects}/>}
-          {(activeTab==='presenter-lab'||activeTab==='character-studio'||activeTab==='cartoon-cinema'||activeTab==='alex-performance')&&<PresenterLab key={activeTab} projects={projects} onUpdateProject={handleUpdateProject} initialCustom={activeTab==='character-studio'} initialCartoon={activeTab==='cartoon-cinema'} initialPerformance={activeTab==='alex-performance'}/>}
+          {!waitForPublished&&(activeTab==='presenter-lab'||activeTab==='character-studio'||activeTab==='cartoon-cinema'||activeTab==='alex-performance')&&<PresenterLab key={activeTab} projects={projects} onUpdateProject={handleUpdateProject} initialCustom={activeTab==='character-studio'} initialCartoon={activeTab==='cartoon-cinema'} initialPerformance={activeTab==='alex-performance'}/>}
           {activeTab==='github'&&<GitHubPagesView repoConfig={repoConfig} projects={projects} isSyncing={isSyncing} syncMessage={syncMessage} onUpdateConfig={setRepoConfig} onSyncGitHub={handleSyncGitHub}/>}
         </main>
       </div>
