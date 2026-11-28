@@ -1,3 +1,4 @@
+import { assertFinalTimeline, makeReceipt } from './exportProvenance';
 import { ArrayBufferTarget, Muxer } from 'mp4-muxer';
 import {
   OpenMotionProject,
@@ -297,6 +298,7 @@ export async function exportProjectToMp4(
   onProgress: (state: RenderProgressState) => void,
   signal?: AbortSignal
 ): Promise<RenderProgressState> {
+  assertFinalTimeline(project);
   const startedAt = performance.now();
   const dims = getFormatDimensions(project.format, options.resolution);
   // H.264 requires even dimensions
@@ -307,6 +309,7 @@ export async function exportProjectToMp4(
   const totalFrames = Math.max(1, Math.ceil(durationSec * fps));
   const bitrate = Math.round(options.bitrateMbps * 1_000_000);
   const publication=options.mode!=='draft';
+  if(publication&&project.seriesId==='simply-explained'&&project.templateVersion==='3.3'&&(width!==1080||height!==1920||fps!==30))throw Error('Simply Explained 3.3 vereist 1080×1920 en 30 fps voor publicatie.');
   const strictTravel=isTravelDocumentary(project),strictHuman=project.seriesId==='the-human-side';
   if((strictTravel||strictHuman)&&!project.audioTracks?.some(t=>t.kind==='voiceover'&&t.src?.trim()))throw Error('Voice-over ontbreekt in het project.');
   const h264Config=await pickSupportedH264Config(width,height,fps,bitrate),audioConfig=await probeAacEncoder();
@@ -503,8 +506,9 @@ async function encodeWithWebCodecsMp4(params: {
     if(signal?.aborted)throw Error('Export geannuleerd.');
     const verified=measuredFps===null?' · framerate niet geverifieerd':' · gemeten '+measuredFps+' fps';
     const inspected = describeOutput(actual,width,height,`WebCodecs H.264 (${h264Config.codec})`+encoderNote+verified+(audioTrack===true?' · audiotrack aanwezig':'')+audioVerification);
+    const verification=publication&&valid&&actual&&measuredFps!==null&&project.seriesId==='simply-explained'?await makeReceipt(project,mp4Blob,actual,measuredFps):undefined;
     const outputUrl = URL.createObjectURL(mp4Blob);
-    const fileName = `${project.slug}${publication?'':'-concept'}-${actual?inspected.w+'x'+inspected.h:'res-onbekend'}-${measuredFps===null?'fps-onbekend':measuredFps+'fps'}.mp4`;
+    const fileName = `${project.slug}${project.seriesId==='simply-explained'&&project.templateVersion?'-v'+project.templateVersion:''}${publication?'':'-concept'}-${actual?inspected.w+'x'+inspected.h:'res-onbekend'}-${measuredFps===null?'fps-onbekend':measuredFps+'fps'}.mp4`;
 
     const finalState: RenderProgressState = {
       phase: 'done',
@@ -516,6 +520,7 @@ async function encodeWithWebCodecsMp4(params: {
       outputUrl,
       fileName,
       publicationVerified:publication&&valid,
+      verification,
       audioSidecarUrl:separateAudio?URL.createObjectURL(pcmWav(separateAudio)):undefined,
       audioSidecarName:separateAudio?project.slug+'-soundtrack.wav':undefined,
       fileSizeBytes: mp4Blob.size,
