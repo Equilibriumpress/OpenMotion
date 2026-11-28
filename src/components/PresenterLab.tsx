@@ -13,18 +13,18 @@ type Mode='flat'|'rig'|'performance'|'rocketbox'|'custom'|'cartoon';
 const MODES:{id:Mode;name:string;desc:string}[]=[
  {id:'flat',name:'Alex 2D',desc:'Versie 1.1 · oorspronkelijke vrouwelijke illustratie'},
  {id:'rig',name:'Alex 2.5D',desc:'Versie 2.7 · eerdere illustratie'},
- {id:'performance',name:'Alex Performance',desc:'Versie 3.1 · expressie, vloeiende spraak en gebaren'},
+ {id:'performance',name:'Alex Performance',desc:'Versie 3.2 · grotere Alex en kortere timing'},
  {id:'rocketbox',name:'Rocketbox 3D',desc:'Business female 04 · bestaande proef'},
  {id:'custom',name:'Character Studio',desc:'20 Rocketbox-personages, kleding, expressie en beweging'},
  {id:'cartoon',name:'Cartoon Cinema',desc:'Gestileerde 3D-personages met mondvormen'}
 ];
 function makeVariant(p:OpenMotionProject,mode:Mode,preset:CharacterPreset,cartoon:CartoonId,overrides:Record<string,AlexPerformance>):OpenMotionProject{
- if(mode==='performance')return {...p,id:'presenter-lab-performance',slug:'presenter-lab-performance',title:'Alex Performance',templateVersion:'3.1',kind:'experiment',productionStatus:'review',scenes:p.scenes.map(s=>withPerformance(s,overrides[s.id]??performanceFor(s)))};
- if(mode==='cartoon')return applyCartoon({...p,id:'presenter-lab-cartoon-'+cartoon,slug:'presenter-lab-cartoon-'+cartoon,title:'Cartoon Cinema · '+cartoon,kind:'experiment',productionStatus:'review'},cartoon);
- if(mode==='custom')return applyCharacter({...p,id:'presenter-lab-custom',slug:'presenter-lab-custom',title:'Character Studio · '+preset.name,kind:'experiment',productionStatus:'review'},preset);
- return {...p,templateVersion:mode==='rig'?'2.7':mode==='flat'?'1.1':p.templateVersion,id:'presenter-lab-'+mode,slug:'presenter-lab-'+mode,title:'Presenter Lab · '+MODES.find(m=>m.id===mode)!.name,kind:'experiment',productionStatus:'review',scenes:p.scenes.map(s=>{
+ if(mode==='performance')return {...p,id:'presenter-lab-performance',slug:'presenter-lab-performance',title:'Alex Performance',templateVersion:p.templateVersion==='3.2'?'3.2':'3.1',kind:'experiment',productionStatus:'review',scenes:p.scenes.map(s=>withPerformance(s,overrides[s.id]??performanceFor(s)))};
+ if(mode==='cartoon')return applyCartoon({...p,templateVersion:'3.0',scenes:p.scenes.map(s=>s.doodle?{...s,doodle:{...s.doodle,extras:s.doodle.extras?.filter(x=>x!=='alex-quality-v1'&&x!==PERFORMANCE_MARKER)}}:s),id:'presenter-lab-cartoon-'+cartoon,slug:'presenter-lab-cartoon-'+cartoon,title:'Cartoon Cinema · '+cartoon,kind:'experiment',productionStatus:'review'},cartoon);
+ if(mode==='custom')return applyCharacter({...p,templateVersion:'3.0',scenes:p.scenes.map(s=>s.doodle?{...s,doodle:{...s.doodle,extras:s.doodle.extras?.filter(x=>x!=='alex-quality-v1'&&x!==PERFORMANCE_MARKER)}}:s),id:'presenter-lab-custom',slug:'presenter-lab-custom',title:'Character Studio · '+preset.name,kind:'experiment',productionStatus:'review'},preset);
+ return {...p,templateVersion:mode==='rig'?'2.7':mode==='flat'?'1.1':'3.0',id:'presenter-lab-'+mode,slug:'presenter-lab-'+mode,title:'Presenter Lab · '+MODES.find(m=>m.id===mode)!.name,kind:'experiment',productionStatus:'review',scenes:p.scenes.map(s=>{
   if(!s.doodle)return s;
-  const extras=(s.doodle.extras??[]).filter(x=>x!==PERFORMANCE_MARKER&&!x.startsWith('alex-performance:')&&x!==ROCKETBOX_MARKER&&x!==CARTOON_MARKER&&!x.startsWith('cartoon-avatar:')&&!x.startsWith('character-preset:')&&(mode!=='flat'||x!=='simply-explained-v2'));
+  const extras=(s.doodle.extras??[]).filter(x=>x!=='alex-quality-v1'&&x!==PERFORMANCE_MARKER&&!x.startsWith('alex-performance:')&&x!==ROCKETBOX_MARKER&&x!==CARTOON_MARKER&&!x.startsWith('cartoon-avatar:')&&!x.startsWith('character-preset:')&&(mode!=='flat'||x!=='simply-explained-v2'));
   if(mode==='rig'&&!extras.includes('alex-26'))extras.push('alex-26');
   if(mode==='rocketbox')extras.push(ROCKETBOX_MARKER);
   return {...s,doodle:{...s.doodle,extras}};
@@ -34,7 +34,7 @@ const STORAGE='openmotion.characterPresets.v1';
 function savedPresets():CharacterPreset[]{try{const x=JSON.parse(localStorage.getItem(STORAGE)??'[]');return Array.isArray(x)?x.map(sanitizeCharacter):[];}catch{return [];}}
 function downloadJson(value:unknown,name:string){const url=URL.createObjectURL(new Blob([JSON.stringify(value,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 export function PresenterLab({projects,onUpdateProject,initialCustom=false,initialCartoon=false,initialPerformance=false}:{projects:OpenMotionProject[];onUpdateProject?:(p:OpenMotionProject)=>void;initialCustom?:boolean;initialCartoon?:boolean;initialPerformance?:boolean}){
- const source=projects.find(p=>p.slug===SLUG&&['2.0','2.6','2.7','3.0','3.1'].includes(p.templateVersion??''));
+ const source=projects.find(p=>p.slug===SLUG&&['2.0','2.6','2.7','3.0','3.1','3.2'].includes(p.templateVersion??''));
  const [overrides,setOverrides]=useState<Record<string,AlexPerformance>>({});
  const [selectedScene,setSelectedScene]=useState('');
  const selected=source?.scenes.find(s=>s.id===selectedScene)??source?.scenes[0];
@@ -84,11 +84,12 @@ export function PresenterLab({projects,onUpdateProject,initialCustom=false,initi
   try{
    const output=await exportProjectToMp4(variant,{resolution:'1080p',fps:30,bitrateMbps:12,mode:'publication'},setProgress,ac.signal);
    if(ac.signal.aborted){if(output.outputUrl)URL.revokeObjectURL(output.outputUrl);return;}
+   if(!output.publicationVerified){if(output.outputUrl)URL.revokeObjectURL(output.outputUrl);throw Error('Geen gecontroleerde Full HD-publicatiemaster.');}
    if(output.outputUrl)resultUrl.current=output.outputUrl;setProgress(output);
   }catch(e){setError(e instanceof Error?e.message:String(e));}finally{cancel.current=null;setBusy(false);}
  };
  return <section className="space-y-5">
-  <header><p className="text-xs font-semibold tracking-widest text-slate-500 uppercase">Experiment / Presenter Lab</p><h1 className="mt-2 text-3xl font-semibold tracking-tight">{mode==='performance'?'Alex Performance Studio':'Welke presentator werkt het best?'}</h1><p className="mt-2 max-w-3xl text-sm text-slate-600">Vergelijk dezelfde 56 seconden, dezelfde voice-over, infographics en ondertiteling. Alleen de presentator wisselt. De editor verandert de aflevering alleen wanneer je de preset toepast.</p></header>
+  <header><p className="text-xs font-semibold tracking-widest text-slate-500 uppercase">Experiment / Presenter Lab</p><h1 className="mt-2 text-3xl font-semibold tracking-tight">{mode==='performance'?'Alex Performance Studio':'Welke presentator werkt het best?'}</h1><p className="mt-2 max-w-3xl text-sm text-slate-600">Vergelijk dezelfde {Math.round(duration)} seconden, dezelfde voice-over, infographics en ondertiteling. Alleen de presentator wisselt. De editor verandert de aflevering alleen wanneer je de preset toepast.</p></header>
   <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">{MODES.map(m=><button type="button" disabled={busy} key={m.id} onClick={()=>choose(m.id)} aria-pressed={mode===m.id} className={'rounded-xl border p-4 text-left '+(mode===m.id?'border-teal-700 bg-teal-50':'border-slate-200 bg-white')}><div className="font-semibold">{m.name}</div><div className="mt-1 text-xs text-slate-600">{m.desc}</div></button>)}</div>
   {!source?<p role="status" className="rounded-xl border bg-white p-4 text-sm">De pilot ontbreekt nog in de geladen bibliotheek. Open de gepubliceerde Studio nadat de Pages-build is voltooid.</p>:<div className="grid gap-5 lg:grid-cols-[minmax(240px,360px)_1fr]">
    <div className="relative mx-auto w-full max-w-[360px] overflow-hidden rounded-xl border border-slate-200 bg-[#F5EDDF]">
@@ -106,8 +107,8 @@ export function PresenterLab({projects,onUpdateProject,initialCustom=false,initi
      <label className="block text-xs font-medium">Kijkrichting<select disabled={busy} className="mt-1 block w-full rounded border p-2 text-sm" value={settings.look} onChange={e=>changePerformance({look:e.target.value as AlexPerformance['look']})}><option value="authored">Volgens keyframes</option><option value="viewer">Kijker</option><option value="graphic">Illustratie</option></select></label>
      <div className="flex flex-wrap gap-2"><button disabled={busy} className="rounded border bg-white px-3 py-2 text-xs" onClick={()=>{audio.current?.pause();setOverrides(o=>{const n={...o};delete n[selected.id];return n;});setProgress(null);setMessage('Scène teruggezet naar de oorspronkelijke regie.');}}>Herstel scène</button><button disabled={busy} className="rounded border bg-white px-3 py-2 text-xs" onClick={()=>{if(source)downloadJson(Object.fromEntries(source.scenes.map(s=>[s.id,overrides[s.id]??performanceFor(s)])),'alex-performance.json');}}>Regie JSON</button>
      <label className="cursor-pointer rounded border bg-white px-3 py-2 text-xs">Regie importeren<input disabled={busy} type="file" accept=".json,application/json" className="sr-only" onChange={async e=>{const file=e.target.files?.[0];e.target.value='';if(!file||!source)return;try{const input=JSON.parse(await file.text());if(!input||typeof input!=='object'||Array.isArray(input))throw Error();audio.current?.pause();setOverrides(Object.fromEntries(source.scenes.filter(s=>Object.prototype.hasOwnProperty.call(input,s.id)).map(s=>[s.id,sanitizePerformance(input[s.id])])));setProgress(null);setMessage('Regie geladen.');}catch{setMessage('Ongeldige regie-JSON.');}}}/></label>
-     <button disabled={busy||!source||!variant} className="rounded border bg-white px-3 py-2 text-xs" onClick={()=>{if(source&&variant){const project={...source,templateVersion:'3.1',scenes:variant.scenes.map(s=>s.doodle?{...s,doodle:{...s.doodle,extras:s.doodle.extras?.filter(x=>!/^host-(energy|mouth|speech-mode):|^speech-end:/.test(x))}}:s)};downloadJson(project,'project.json');}}}>Project-JSON</button>
-     <button disabled={busy||!source||!onUpdateProject||!variant} className="rounded bg-teal-800 px-3 py-2 text-xs text-white disabled:opacity-40" onClick={()=>{if(source&&variant){onUpdateProject?.({...source,templateVersion:'3.1',scenes:variant.scenes});setMessage('Regie lokaal toegepast. Gebruik Project-JSON voor duurzame opslag in GitHub.');}}}>Toepassen op pilot</button></div>
+     <button disabled={busy||!source||!variant} className="rounded border bg-white px-3 py-2 text-xs" onClick={()=>{if(source&&variant){const project={...source,templateVersion:variant.templateVersion,scenes:variant.scenes.map(s=>s.doodle?{...s,doodle:{...s.doodle,extras:s.doodle.extras?.filter(x=>!/^host-(energy|mouth|speech-mode):|^speech-end:/.test(x))}}:s)};downloadJson(project,'project.json');}}}>Project-JSON</button>
+     <button disabled={busy||!source||!onUpdateProject||!variant} className="rounded bg-teal-800 px-3 py-2 text-xs text-white disabled:opacity-40" onClick={()=>{if(source&&variant){onUpdateProject?.({...source,templateVersion:variant.templateVersion,scenes:variant.scenes});setMessage('Regie lokaal toegepast. Gebruik Project-JSON voor duurzame opslag in GitHub.');}}}>Toepassen op pilot</button></div>
      {message&&<p role="status" className="text-xs text-teal-800">{message}</p>}
      <p className="text-xs text-slate-600">De regie gebruikt de echte video, met dezelfde voice-over en veilige hoekpositie. De spreekvormen blijven een benadering op basis van audio en tekst, geen fonetische transcriptie.</p>
     </div>}
