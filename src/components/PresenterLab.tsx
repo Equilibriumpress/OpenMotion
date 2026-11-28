@@ -1,4 +1,4 @@
-import { rendererLabel, downloadVerifiedZip } from '../engine/exportProvenance';
+import { rendererLabel, downloadVerifiedZip, BUNDLE_REVISION } from '../engine/exportProvenance';
 import { EMOTIONS, DEFAULT_PERFORMANCE, PERFORMANCE_MARKER, performanceFor, sanitizePerformance, withPerformance, type AlexPerformance } from '../engine/alexPerformance';
 import { CARTOONS, CARTOON_MARKER, applyCartoon, cartoonReady, prepareCartoon, type CartoonId } from '../engine/cartoonPresenter';
 import { PEOPLE, TOPS, MOVES, EXPRESSIONS, DEFAULT_CHARACTER, sanitizeCharacter, characterFromScene, applyCharacter, characterThumb, type CharacterPreset } from '../engine/characterPresets';
@@ -99,7 +99,7 @@ export function PresenterLab({projects,onUpdateProject,initialCustom=false,initi
    </div>
    <div className="space-y-4 rounded-xl border bg-white p-4">
     <div><h2 className="font-semibold">{MODES.find(m=>m.id===mode)?.name}</h2><p className="mt-1 text-sm text-slate-600">De preview gebruikt alleen de originele voice-over. De MP4-proef gebruikt ook de bestaande muziekmix.</p></div>
-    {variant&&<p className="text-xs text-teal-800">Template {variant.templateVersion} · {rendererLabel(variant)} · build {variant.buildRevision?.slice(0,8)??'lokaal'} · {duration.toFixed(2)} s</p>}
+    {variant&&<p className="text-xs text-teal-800">Template {variant.templateVersion} · {rendererLabel(variant)} · projectbuild {variant.buildRevision?.slice(0,8)??'lokaal'} · rendererbuild {BUNDLE_REVISION.slice(0,8)} · {duration.toFixed(2)} s</p>}
     {mode==='performance'&&selected&&<div className="space-y-4 rounded-xl bg-slate-50 p-4">
      <h3 className="text-sm font-semibold">Regie per scène</h3>
      <label className="block text-xs font-medium">Scène<select disabled={busy} className="mt-1 block w-full rounded border p-2 text-sm" value={selected.id} onChange={e=>seekScene(e.target.value)}>{source?.scenes.map((s,i)=><option key={s.id} value={s.id}>{i+1}. {s.name}</option>)}</select></label>
