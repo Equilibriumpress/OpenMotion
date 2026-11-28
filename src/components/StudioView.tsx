@@ -1071,7 +1071,7 @@ export function StudioView({
                         value={activeScene.durationSec}
                         onChange={(e) =>
                           updateActiveScene({
-                            durationSec: Math.max(1, parseFloat(e.target.value) || 2),
+                            durationSec: Math.max(.5, parseFloat(e.target.value) || 2),
                           })
                         }
                         className="w-full px-3 py-1.5 text-sm font-mono tabular-nums border border-slate-200 rounded-lg"
