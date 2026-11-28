@@ -164,7 +164,7 @@ function renderCleanEditorial(c:C,scene:OpenMotionScene,t:number){
   const values=[[.62,.24,.14],[.46,.36,.18],[.71,.19,.10]][step];
   if(strict)cleanTitle(c,'Predict the next token',112);
   editorialCard(c,42,177,428,77);txt(c,prompts[step],256,226,28,ink,750,'center',398);
-  choices[step].forEach((word,i)=>{const y=307+i*76;txt(c,word,45,y+25,23,ink,700);box(c,157,y,236,36,'#E7DDCF',6);box(c,157,y,Math.max(1,236*values[i]*ease(phase/.65)),36,i===0?rust:teal,6);if(final){reveal(c,(phase-.58)/.20,()=>txt(c,Math.round(values[i]*100)+'%',466,y+26,22,ink,700,'right'));}else txt(c,Math.round(values[i]*100)+'%',466,y+26,22,ink,700,'right');});
+  choices[step].forEach((word,i)=>{const y=307+i*76;txt(c,word,45,y+25,23,ink,700);box(c,157,y,236,36,'#E7DDCF',6);box(c,157,y,Math.max(1,236*values[i]*ease(phase/.65)),36,i===0?rust:teal,6);if(final){reveal(c,(phase-.65)/.20,()=>txt(c,Math.round(values[i]*100)+'%',466,y+26,22,ink,700,'right'));}else txt(c,Math.round(values[i]*100)+'%',466,y+26,22,ink,700,'right');});
   reveal(c,(phase-Math.min(2.1,stepDuration*.51))/.4,()=>{box(c,42,548,428,58,'#DCE5DD',10);txt(c,strict?prompts[step]+(choices[step][0]==='.'?'':' ')+choices[step][0]:choices[step][0],256,586,28,teal,800,'center',400);});txt(c,'Example probabilities',256,635,13,muted,500,'center');break;}
  case 'response': {
   editorialCard(c,42,190,428,358);box(c,62,211,388,65,sand,12);txt(c,'Why is the sky blue?',256,253,23,ink,700,'center');
