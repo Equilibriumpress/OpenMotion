@@ -5,7 +5,7 @@ import { getProjectDurationSec } from '../types/openmotion';
 import { containsMp4AudioTrack, actualMp4FrameRate } from '../engine/mp4Exporter';
 import { hasHumanSideCover, renderHumanSideCover } from '../engine/humanSideRenderer';
 import { hasSongCover, renderSongCover } from '../engine/songExplainerRenderer';
-import { defaultYouTubeMetadata, migrateYouTubeMetadata, publicationDescription, publicationSlug, publicationChecks, publicationHelp, defaultTikTokCaption, TIKTOK_CAPTION_DRAFT_LIMIT } from '../services/youtubePublication';
+import { defaultYouTubeMetadata, migrateYouTubeMetadata, publicationDescription, publicationSlug, publicationChecks, publicationHelp, defaultTikTokCaption, TIKTOK_CAPTION_DRAFT_LIMIT, defaultHashtags, publicationHashtags, youtubeHashtags, publicationTikTokCaption } from '../services/youtubePublication';
 import type { YouTubeMetadata, PublicationCheckId } from '../services/youtubePublication';
 
 type Props={
@@ -90,7 +90,10 @@ export function YouTubePublicationKit({project,renderState,renderMatches,project
  const videoAvailable=!!selected||hasExport;
  const allChecked=publicationChecks.every(([id])=>checks[id]);
  const description=publicationDescription(metadata);
- const valid=metadata.title.trim().length>0&&metadata.title.length<=100&&description.length<=5000&&metadata.tags.length<=500;
+ const tiktokCaption=publicationTikTokCaption(metadata),interactionCaption=publicationTikTokCaption(metadata,true);
+ const tiktokHashtags=publicationHashtags(metadata.hashtags),youtubeTags=youtubeHashtags(metadata);
+ const captionsFit=tiktokCaption.length<=TIKTOK_CAPTION_DRAFT_LIMIT&&interactionCaption.length<=TIKTOK_CAPTION_DRAFT_LIMIT;
+ const valid=metadata.title.trim().length>0&&metadata.title.length<=100&&description.length<=5000&&metadata.tags.length<=500&&captionsFit;
  const hasCover=hasHumanSideCover(project.scenes[0])||hasSongCover(project.scenes[0]);
 
  useEffect(()=>{try{localStorage.setItem(key,JSON.stringify(metadata));setStorageFailed(false);}catch{setStorageFailed(true);}},[key,metadata]);
@@ -125,10 +128,11 @@ export function YouTubePublicationKit({project,renderState,renderMatches,project
    zip.file('description.txt',description);
    zip.file('tags.txt',metadata.tags);
    zip.file('sources.txt',metadata.sources);
-   zip.file('tiktok-caption.txt',metadata.tiktokCaption.trim());
-   zip.file('tiktok-interaction-caption.txt',metadata.tiktokInteractionCaption.trim());
+   zip.file('tiktok-caption.txt',tiktokCaption);
+   zip.file('tiktok-interaction-caption.txt',interactionCaption);
+   zip.file('hashtags.txt',['TikTok: '+tiktokHashtags.join(' '),'YouTube: '+youtubeTags.join(' ')].join('\n'));
    zip.file('seo-keywords.txt',['Primary search term: '+metadata.primaryKeyword.trim(),'Related keywords: '+metadata.secondaryKeywords.trim(),'Editorial suggestions; search volume not verified.'].join('\n'));
-   const report={project:project.slug,title:metadata.title,description,tiktokCaption:metadata.tiktokCaption.trim(),tiktokInteractionCaption:metadata.tiktokInteractionCaption.trim(),primaryKeyword:metadata.primaryKeyword.trim(),secondaryKeywords:metadata.secondaryKeywords.split(',').map(s=>s.trim()).filter(Boolean),keywordResearchStatus:'editorial suggestions, volume not verified',tags:metadata.tags.split(',').map(s=>s.trim()).filter(Boolean),sources:metadata.sources.split('\n').filter(Boolean),language:project.seriesId==='the-human-side'?'en':null,coverFrameSeconds:full?coverTime:cover?0.3:null,packageType:full?'video-and-metadata':'metadata-only',video:inspection?{width:inspection.width,height:inspection.height,fps:inspection.fps,duration:inspection.duration,audioTrackPresent:inspection.audio,source:selected?'imported master':'current studio export',codecVerification:'Not checked by this kit'}:null,review:full?checks:{},createdAt:new Date().toISOString()};
+   const report={project:project.slug,title:metadata.title,description,tiktokCaption,tiktokInteractionCaption:interactionCaption,tiktokHashtags,youtubeHashtags:youtubeTags,primaryKeyword:metadata.primaryKeyword.trim(),secondaryKeywords:metadata.secondaryKeywords.split(',').map(s=>s.trim()).filter(Boolean),keywordResearchStatus:'editorial suggestions, volume not verified',tags:metadata.tags.split(',').map(s=>s.trim()).filter(Boolean),sources:metadata.sources.split('\n').filter(Boolean),language:project.seriesId==='the-human-side'?'en':null,coverFrameSeconds:full?coverTime:cover?0.3:null,packageType:full?'video-and-metadata':'metadata-only',video:inspection?{width:inspection.width,height:inspection.height,fps:inspection.fps,duration:inspection.duration,audioTrackPresent:inspection.audio,source:selected?'imported master':'current studio export',codecVerification:'Not checked by this kit'}:null,review:full?checks:{},createdAt:new Date().toISOString()};
    zip.file('youtube-metadata.json',JSON.stringify(report,null,2));
    zip.file('publication-checklist.txt',[
     'YouTube / TikTok Publication Kit — '+project.title,
@@ -146,6 +150,8 @@ export function YouTubePublicationKit({project,renderState,renderMatches,project
     'TikTok: upload the same reviewed MP4, choose tiktok-caption.txt (search-focused) or tiktok-interaction-caption.txt (conversation-focused), select the cover frame and review platform-specific settings before posting.',
     'Primary search term: '+metadata.primaryKeyword.trim(),
     'Related keywords: '+metadata.secondaryKeywords.trim(),
+    'TikTok hashtags: '+tiktokHashtags.join(' '),
+    'YouTube hashtags: '+youtubeTags.join(' '),
     'Validate search demand in TikTok Creator Search Insights and YouTube Analytics before changing your strategy. Keywords are editorial suggestions, not measured volume.',
     'Help: '+publicationHelp.upload+'\n'+publicationHelp.cover+'\n'+publicationHelp.encoding
    ].join('\n'));
@@ -163,16 +169,25 @@ export function YouTubePublicationKit({project,renderState,renderMatches,project
   <div className="flex items-center justify-between gap-2 text-xs"><span className="font-medium text-slate-700">Metadata</span><button type="button" disabled={busy} className="underline text-red-800" onClick={()=>{setMetadata(defaultYouTubeMetadata(project));setChecks(c=>({...c,facts:false,rights:false}));}}>Herstel voorstel</button></div>
   <div className="space-y-2 rounded-lg border border-slate-200 bg-white/70 p-3">
    <div className="flex items-center justify-between gap-2"><h4 className="text-xs font-semibold">SEO · zoekintentie</h4>
-    <button type="button" disabled={busy} className="text-xs underline text-red-800" onClick={()=>{const next=defaultYouTubeMetadata(project);setMetadata(m=>({...next,sources:m.sources}));setChecks(c=>({...c,facts:false,rights:false}));setMessage('SEO-voorstel toegepast. Bronnen behouden.');}}>Pas SEO-voorstel toe</button>
+    <button type="button" disabled={busy} className="text-xs underline text-red-800" onClick={()=>{const next=defaultYouTubeMetadata(project);setMetadata(m=>({...next,sources:m.sources,hashtags:m.hashtags}));setChecks(c=>({...c,facts:false,rights:false}));setMessage('SEO-voorstel toegepast. Bronnen en hashtags behouden.');}}>Pas SEO-voorstel toe</button>
    </div>
    <label className="block space-y-1 text-xs text-slate-700">Primaire zoekterm<input className={style} maxLength={160} disabled={busy} value={metadata.primaryKeyword} onChange={e=>update('primaryKeyword',e.target.value)}/></label>
    <label className="block space-y-1 text-xs text-slate-700">Aanvullende zoekwoorden (komma's)<textarea className={style} rows={2} maxLength={500} disabled={busy} value={metadata.secondaryKeywords} onChange={e=>update('secondaryKeywords',e.target.value)}/></label>
    <p className="text-[11px] text-slate-600">Inhoudelijke zoektermvoorstellen, geen gemeten zoekvolume. Controleer in Creator Search Insights en YouTube Analytics. Pas de teksten handmatig aan als je zoekterm verandert.</p>
   </div>
+  <div className="space-y-2 rounded-lg border border-slate-200 bg-white/70 p-3">
+   <div className="flex items-center justify-between gap-2"><h4 className="text-xs font-semibold">Hashtags</h4>
+    <button type="button" disabled={busy} className="text-xs underline text-red-800" onClick={()=>update('hashtags',defaultHashtags(project))}>Herstel hashtags</button>
+   </div>
+   <label className="block space-y-1 text-xs text-slate-700">Hashtags (maximaal vijf, gescheiden door spaties of komma's)<textarea className={style} rows={2} maxLength={500} disabled={busy} value={metadata.hashtags} onChange={e=>update('hashtags',e.target.value)}/></label>
+   <p className="text-[11px] text-slate-600">TikTok: {tiktokHashtags.join(' ')||'Geen hashtags'}</p>
+   <p className="text-[11px] text-slate-600">YouTube: {youtubeTags.join(' ')||'Geen hashtags'}</p>
+   <p className="text-[11px] text-slate-600">De eerste vijf geldige unieke hashtags worden aan beide TikTok-teksten toegevoegd. YouTube krijgt maximaal drie, met voorrang voor specifieke onderwerpen. Bestaande hashtags in je eigen tekst worden behouden en niet dubbel toegevoegd. Laat het veld leeg om automatische toevoeging uit te zetten.</p>
+  </div>
   <label className="block space-y-1 text-xs text-slate-700">Titel ({metadata.title.length}/100)<input className={style} maxLength={100} disabled={busy} value={metadata.title} onChange={e=>update('title',e.target.value)}/></label>
   <button type="button" onClick={()=>void copy('Titel',metadata.title)} className="text-xs underline text-red-800">Kopieer titel</button>
-  <label className="block space-y-1 text-xs text-slate-700">Beschrijving ({description.length}/5000 inclusief bronnen)<textarea className={style} rows={5} maxLength={5000} disabled={busy} value={metadata.description} onChange={e=>update('description',e.target.value)}/></label>
-  <button type="button" onClick={()=>void copy('Beschrijving',description)} className="text-xs underline text-red-800">Kopieer beschrijving met bronnen</button>
+  <label className="block space-y-1 text-xs text-slate-700">Beschrijving ({description.length}/5000 inclusief bronnen en hashtags)<textarea className={style} rows={5} maxLength={5000} disabled={busy} value={metadata.description} onChange={e=>update('description',e.target.value)}/></label>
+  <button type="button" onClick={()=>void copy('Beschrijving',description)} className="text-xs underline text-red-800">Kopieer beschrijving met bronnen en hashtags</button>
   <label className="block space-y-1 text-xs text-slate-700">Zoekwoorden, gescheiden door komma's ({metadata.tags.length}/500)<textarea className={style} rows={2} maxLength={500} disabled={busy} value={metadata.tags} onChange={e=>update('tags',e.target.value)}/></label>
   <button type="button" onClick={()=>void copy('Zoekwoorden',metadata.tags)} className="text-xs underline text-red-800">Kopieer zoekwoorden</button>
   <label className="block space-y-1 text-xs text-slate-700">Bronnen / verdere lectuur (optioneel)<textarea className={style} rows={3} disabled={busy} value={metadata.sources} onChange={e=>update('sources',e.target.value)}/></label>
@@ -182,16 +197,16 @@ export function YouTubePublicationKit({project,renderState,renderMatches,project
     <button type="button" disabled={busy} className="underline text-red-800" onClick={()=>update('tiktokCaption',defaultTikTokCaption(project))}>Herstel voorstel</button>
    </div>
    <p className="text-xs text-slate-600">Zoekgerichte tekst voor je TikTok-post, niet de ondertiteling in de video.</p>
-   <label className="block space-y-1 text-xs text-slate-700">Caption ({metadata.tiktokCaption.length} tekens)<textarea className={style} rows={3} maxLength={TIKTOK_CAPTION_DRAFT_LIMIT} disabled={busy} value={metadata.tiktokCaption} onChange={e=>update('tiktokCaption',e.target.value)}/></label>
-   <button type="button" disabled={!metadata.tiktokCaption.trim()} onClick={()=>void copy('TikTok-caption',metadata.tiktokCaption.trim())} className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-800 disabled:opacity-40">Kopieer TikTok-caption</button>
+   <label className="block space-y-1 text-xs text-slate-700">Caption ({tiktokCaption.length} tekens inclusief hashtags)<textarea className={style} rows={3} maxLength={TIKTOK_CAPTION_DRAFT_LIMIT} disabled={busy} value={metadata.tiktokCaption} onChange={e=>update('tiktokCaption',e.target.value)}/></label>
+   <button type="button" disabled={!metadata.tiktokCaption.trim()||tiktokCaption.length>TIKTOK_CAPTION_DRAFT_LIMIT} onClick={()=>void copy('TikTok-caption',tiktokCaption)} className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-800 disabled:opacity-40">Kopieer TikTok-caption met hashtags</button>
    <div className="border-t border-slate-200 pt-2 space-y-2">
     <div className="flex items-center justify-between gap-2 text-xs"><h4 className="font-semibold">TikTok-caption · interactie</h4><button type="button" disabled={busy} className="underline text-red-800" onClick={()=>update('tiktokInteractionCaption',defaultYouTubeMetadata(project).tiktokInteractionCaption)}>Herstel alternatief</button></div>
-    <label className="block space-y-1 text-xs text-slate-700">Alternatief ({metadata.tiktokInteractionCaption.length} tekens)<textarea className={style} rows={3} maxLength={TIKTOK_CAPTION_DRAFT_LIMIT} disabled={busy} value={metadata.tiktokInteractionCaption} onChange={e=>update('tiktokInteractionCaption',e.target.value)}/></label>
-    <button type="button" disabled={!metadata.tiktokInteractionCaption.trim()} onClick={()=>void copy('TikTok-interactiecaption',metadata.tiktokInteractionCaption.trim())} className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-800 disabled:opacity-40">Kopieer interactiecaption</button>
+    <label className="block space-y-1 text-xs text-slate-700">Alternatief ({interactionCaption.length} tekens inclusief hashtags)<textarea className={style} rows={3} maxLength={TIKTOK_CAPTION_DRAFT_LIMIT} disabled={busy} value={metadata.tiktokInteractionCaption} onChange={e=>update('tiktokInteractionCaption',e.target.value)}/></label>
+    <button type="button" disabled={!metadata.tiktokInteractionCaption.trim()||interactionCaption.length>TIKTOK_CAPTION_DRAFT_LIMIT} onClick={()=>void copy('TikTok-interactiecaption',interactionCaption)} className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-800 disabled:opacity-40">Kopieer interactiecaption met hashtags</button>
    </div>
   </div>
   <p className="text-[11px] text-slate-500">{storageFailed?'Browseropslag niet beschikbaar. Exporteer je wijzigingen.':'Metadata wordt lokaal in deze browser bewaard.'} Bronnen worden overgenomen uit bestaande projectgegevens en zijn niet automatisch geverifieerd.</p>
-  {!valid&&<p role="alert" className="text-xs text-red-800">Vul een titel in en houd de beschrijving inclusief bronnen binnen 5000 tekens.</p>}
+  {!valid&&<p role="alert" className="text-xs text-red-800">Vul een titel in, houd de beschrijving inclusief bronnen en hashtags binnen 5000 tekens en beide TikTok-teksten inclusief hashtags binnen 2200 tekens.</p>}
   {!eligible&&<p role="alert" className="text-xs text-red-800">Een Short mag maximaal drie minuten duren.</p>}
   <div className="space-y-2 border-t border-red-100 pt-3">
    <h4 className="text-xs font-semibold">Definitieve MP4 en thumbnail</h4>
