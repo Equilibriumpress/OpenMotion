@@ -125,7 +125,7 @@ export function YouTubePublicationKit({project,renderState,renderMatches,project
    zip.file('description.txt',description);
    zip.file('tags.txt',metadata.tags);
    zip.file('sources.txt',metadata.sources);
-   const report={project:project.slug,title:metadata.title,description,tags:metadata.tags.split(',').map(s=>s.trim()).filter(Boolean),sources:metadata.sources.split('\n').filter(Boolean),language:'en',coverFrameSeconds:coverTime,packageType:full?'video-and-metadata':'metadata-only',video:inspection?{width:inspection.width,height:inspection.height,fps:inspection.fps,duration:inspection.duration,audioTrackPresent:inspection.audio,source:selected?'imported master':'current studio export',codecVerification:'Not checked by this kit'}:null,review:full?checks:{},createdAt:new Date().toISOString()};
+   const report={project:project.slug,title:metadata.title,description,tags:metadata.tags.split(',').map(s=>s.trim()).filter(Boolean),sources:metadata.sources.split('\n').filter(Boolean),language:project.seriesId==='the-human-side'?'en':null,coverFrameSeconds:full?coverTime:cover?0.3:null,packageType:full?'video-and-metadata':'metadata-only',video:inspection?{width:inspection.width,height:inspection.height,fps:inspection.fps,duration:inspection.duration,audioTrackPresent:inspection.audio,source:selected?'imported master':'current studio export',codecVerification:'Not checked by this kit'}:null,review:full?checks:{},createdAt:new Date().toISOString()};
    zip.file('youtube-metadata.json',JSON.stringify(report,null,2));
    zip.file('publication-checklist.txt',[
     'YouTube Publication Kit — '+project.title,
@@ -134,7 +134,7 @@ export function YouTubePublicationKit({project,renderState,renderMatches,project
     'Title: '+metadata.title.trim(),
     'Description: copy description.txt',
     'Tags: copy tags.txt (optional)',
-    'Cover: choose the frame around '+coverTime+' seconds in the YouTube app. Where custom Shorts thumbnail upload is available, use thumbnail.png.',
+    'Cover: choose the frame around '+(full?coverTime:cover?0.3:coverTime)+' seconds in the YouTube app. Where custom Shorts thumbnail upload is available, use thumbnail.png if included.',
     'Review:',
     ...publicationChecks.map(([id,label])=>(full&&checks[id]?'[x] ':'[ ] ')+label),
     '[ ] Confirm language and audience settings on YouTube',
@@ -153,7 +153,7 @@ export function YouTubePublicationKit({project,renderState,renderMatches,project
  return <section className="space-y-3 rounded-xl border border-red-200 bg-red-50/40 p-3" aria-label="YouTube Publication Kit">
   <div><h3 className="text-sm font-bold text-slate-900">YouTube Publication Kit</h3>
    <p className="mt-1 text-xs text-slate-600">Bewerk metadata, controleer de definitieve video en bundel alles in één ZIP. Geen automatische upload.</p></div>
-  <div className="flex items-center justify-between gap-2 text-xs"><span className="font-medium text-slate-700">Engelse metadata</span><button type="button" disabled={busy} className="underline text-red-800" onClick={()=>{setMetadata(defaultYouTubeMetadata(project));setChecks(c=>({...c,facts:false,rights:false}));}}>Herstel voorstel</button></div>
+  <div className="flex items-center justify-between gap-2 text-xs"><span className="font-medium text-slate-700">Metadata</span><button type="button" disabled={busy} className="underline text-red-800" onClick={()=>{setMetadata(defaultYouTubeMetadata(project));setChecks(c=>({...c,facts:false,rights:false}));}}>Herstel voorstel</button></div>
   <label className="block space-y-1 text-xs text-slate-700">Titel ({metadata.title.length}/100)<input className={style} maxLength={100} disabled={busy} value={metadata.title} onChange={e=>update('title',e.target.value)}/></label>
   <button type="button" onClick={()=>void copy('Titel',metadata.title)} className="text-xs underline text-red-800">Kopieer titel</button>
   <label className="block space-y-1 text-xs text-slate-700">Beschrijving ({description.length}/5000 inclusief bronnen)<textarea className={style} rows={5} maxLength={5000} disabled={busy} value={metadata.description} onChange={e=>update('description',e.target.value)}/></label>
@@ -167,7 +167,7 @@ export function YouTubePublicationKit({project,renderState,renderMatches,project
   <div className="space-y-2 border-t border-red-100 pt-3">
    <h4 className="text-xs font-semibold">Definitieve MP4 en thumbnail</h4>
    <p className="text-xs text-slate-600">{selected?'Geïmporteerde master: '+selected.file.name:hasExport?'Huidige Studio-export beschikbaar.':'Genereer eerst de huidige 1080p MP4, of selecteer een eerder gerenderde GitHub-master.'}</p>
-   {!hasExport&&!selected&&<button type="button" disabled={busy||rendering} onClick={onRender} className="w-full rounded-md border border-slate-300 py-2 text-xs font-semibold disabled:opacity-50">Genereer 1080p MP4</button>}
+   {!selected&&<button type="button" disabled={busy||rendering} onClick={onRender} className="w-full rounded-md border border-slate-300 py-2 text-xs font-semibold disabled:opacity-50">{hasExport?'Genereer nieuwe 1080p MP4':'Genereer 1080p MP4'}</button>}
    <label className="block space-y-1 text-xs text-slate-700">Of voeg een bestaande MP4-master toe<input className="block w-full text-xs" type="file" accept=".mp4,video/mp4" disabled={busy||rendering} onChange={e=>{const file=e.target.files?.[0];setExternal(file?{file,signature:projectSignature}:null);}}/></label>
    {external&&<button type="button" disabled={busy} onClick={()=>setExternal(null)} className="text-xs underline text-red-800">Verwijder geïmporteerde master</button>}
    {selected&&reviewUrl&&<video src={reviewUrl} controls playsInline className="w-full max-h-56 rounded-md bg-black"/>}
