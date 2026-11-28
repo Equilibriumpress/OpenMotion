@@ -406,6 +406,7 @@ export interface ScenePremiumTravelRoute {
   mapIntro?: boolean;
   openingSecondary?: boolean;
   openingPhoto?: PremiumTravelPhoto;
+  openingSubtitle?: string;
   editorialRevision?: number;
   relief?: boolean;
   cta?: string;

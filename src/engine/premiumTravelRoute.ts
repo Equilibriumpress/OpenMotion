@@ -254,7 +254,7 @@ function photoScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMot
   const shotTime=!slow&&p.chapter==='photo'&&alternate?clamp(useAlternate?(t-.52)/.48:t/.52):t;
   if(r7&&!slow&&p.chapter==='photo'&&primary&&secondary&&alternate&&Math.abs(time-scene.durationSec*.52)<.15){
     const u=smoother((time-scene.durationSec*.52+.15)/.30);
-    ctx.save();ctx.filter='saturate(.91) contrast(1.035) brightness(.99)';
+    ctx.save();ctx.filter=p.regionTitle==='DOLOMITES'?'saturate(.96) contrast(1.045) brightness(1.015) sepia(.035)':'saturate(.91) contrast(1.035) brightness(.99)';
     editorialPhoto(ctx,primary,w,h,clamp(t/.52),stop.photoFocus,stop.photoFit,.065);
     ctx.save();ctx.beginPath();ctx.rect(w*(1-u),0,w*u,h);ctx.clip();
     editorialPhoto(ctx,secondary,w,h,clamp((t-.52)/.48),alternate.photoFocus,alternate.photoFit,.065);
@@ -286,7 +286,7 @@ function photoScene(ctx:CanvasRenderingContext2D,w:number,h:number,scene:OpenMot
   headline.split('\n').forEach((line,i)=>{ctx.save();if(r7&&p.chapter==='opening'){const amount=ease((time-.12-i*.18)/.42);const baseline=h-(575-i*96)*s;ctx.beginPath();ctx.rect(60*s,baseline-100*s,(w-210*s)*amount,125*s);ctx.clip();}ctx.fillText(line,66*s,h-(575-i*96)*s,w-220*s);ctx.restore();});
   ctx.font='500 '+(38*s)+'px "Plus Jakarta Sans",sans-serif';
   ctx.fillStyle='#F3F3E9';
-  const tagline=p.chapter==='opening'?'EDINBURGH TO THE ISLE OF SKYE':slow?stop.note:(alternateImage&&alternate?.label?alternate.label:stop.note);
+  const tagline=p.chapter==='opening'?(p.openingSubtitle??'EDINBURGH TO THE ISLE OF SKYE'):slow?stop.note:(alternateImage&&alternate?.label?alternate.label:stop.note);
   ctx.save();if(slow)ctx.globalAlpha*=ease((captionTime-.9)/.25);
   labelLines(ctx,tagline,70*s,h-410*s,w-230*s,49*s,2);ctx.restore();
   if(r7){ctx.restore();ctx.save();ctx.fillStyle='rgba(12,35,32,.75)';ctx.fillRect(62*s,h-290*s,w-205*s,38*s);}

@@ -10,8 +10,14 @@ const chords = [
   { start: 16, end: 23, notes: [130.81, 196.00, 329.63] },
   { start: 23, end: 30, notes: [146.83, 220.00, 349.23] },
 ];
+const alpineChords = [
+  { start: 0, end: 8, notes: [130.81,196.00,293.66] },
+  { start: 8, end: 16, notes: [110.00,164.81,261.63] },
+  { start: 16, end: 23, notes: [146.83,220.00,349.23] },
+  { start: 23, end: 30, notes: [130.81,196.00,329.63] },
+];
 const cuts = [0,3,5,7.5,10,13.5,16,19.5,22,26.5];
-async function synthesize(durationSec: number, cues:readonly number[]): Promise<AudioBuffer> {
+async function synthesize(durationSec: number, cues:readonly number[],alpine:boolean): Promise<AudioBuffer> {
   const context = new OfflineAudioContext(2, Math.ceil(durationSec * rate), rate);
   const master = context.createGain();
   master.gain.setValueAtTime(0, 0);
@@ -22,11 +28,11 @@ async function synthesize(durationSec: number, cues:readonly number[]): Promise<
 
   const lowpass = context.createBiquadFilter();
   lowpass.type = 'lowpass';
-  lowpass.frequency.value = 880;
+  lowpass.frequency.value = alpine ? 1100 : 880;
   lowpass.Q.value = .6;
   lowpass.connect(master);
 
-  for (const chord of chords) {
+  for (const chord of alpine ? alpineChords : chords) {
     if (chord.start >= durationSec) continue;
     const end = Math.min(chord.end, durationSec);
     for (let i = 0; i < chord.notes.length; i++) {
@@ -47,7 +53,7 @@ async function synthesize(durationSec: number, cues:readonly number[]): Promise<
   }
 
   // Low, soft transport rhythm. Entirely procedural, no licensed samples.
-  for (let t = 0; t < durationSec - .2; t += 1.05) {
+  for (let t = 0; t < durationSec - .2; t += alpine ? 1.25 : 1.05) {
     const o = context.createOscillator();
     o.type = 'sine';
     o.frequency.setValueAtTime(86, t);
@@ -81,11 +87,11 @@ async function synthesize(durationSec: number, cues:readonly number[]): Promise<
   }
   return context.startRendering();
 }
-export function createPremiumTravelAudio(durationSec: number, cues:readonly number[]=cuts): Promise<AudioBuffer> {
-  const key = JSON.stringify([Math.round(durationSec * 100) / 100,cues]);
+export function createPremiumTravelAudio(durationSec: number, cues:readonly number[]=cuts,alpine=false): Promise<AudioBuffer> {
+  const key = JSON.stringify([Math.round(durationSec * 100) / 100,cues,alpine]);
   const existing = cache.get(key);
   if (existing) return existing;
-  const promise = synthesize(durationSec,cues).catch(error => { cache.delete(key); throw error; });
+  const promise = synthesize(durationSec,cues,alpine).catch(error => { cache.delete(key); throw error; });
   cache.set(key, promise);
   return promise;
 }

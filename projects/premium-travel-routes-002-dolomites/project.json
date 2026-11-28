@@ -1,0 +1,1771 @@
+{
+  "schemaVersion": "1.0",
+  "id": "premium-travel-routes-002-dolomites",
+  "slug": "premium-travel-routes-002-dolomites",
+  "title": "The Dolomites Road Trip",
+  "description": "The Open Road Collection · 002. A 30-second scenic journey from Ortisei through Passo Gardena and Passo Giau to Lago di Braies, with shaded relief, authentic photography and an original alpine score.",
+  "category": "Shorts & Reels",
+  "author": "OpenMotion Studio",
+  "source": "github",
+  "createdAt": "2026-11-28",
+  "updatedAt": "2026-11-28",
+  "githubPath": "projects/premium-travel-routes-002-dolomites/project.json",
+  "format": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 60,
+  "brandKit": {
+    "brandName": "DOLOMITES / THE OPEN ROAD",
+    "primaryColor": "#AE674A",
+    "accentColor": "#E2C48F",
+    "backgroundColor": "#E7E8DE",
+    "surfaceColor": "#253D32",
+    "textColor": "#F8F7EF",
+    "mutedColor": "#77A9A1",
+    "fontFamily": "Georgia"
+  },
+  "audioTracks": [],
+  "captions": [],
+  "scenes": [
+    {
+      "id": "opening",
+      "name": "01 / Alpine cold open",
+      "durationSec": 3,
+      "layout": "premium-travel-route",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "THE DOLOMITES\nROAD TRIP",
+      "fullBleed": true,
+      "premiumTravel": {
+        "stops": [
+          {
+            "name": "Ortisei",
+            "lat": 46.574966,
+            "lon": 11.671228,
+            "note": "An alpine village beneath towering peaks.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Italy_Ortisei_panorama.JPG/1280px-Italy_Ortisei_panorama.JPG",
+            "photoAuthor": "Pufacz",
+            "photoLicense": "Public domain",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Italy_Ortisei_panorama.JPG",
+            "label": "Ortisei panorama",
+            "photoFocus": [
+              0.48,
+              0.5
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Parish_church_Urtijei.JPG/1280px-Parish_church_Urtijei.JPG",
+              "photoAuthor": "Moroder",
+              "photoLicense": "CC BY 2.5",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Parish_church_Urtijei.JPG",
+              "label": "Ortisei parish church",
+              "photoFocus": [
+                0.5,
+                0.45
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Passo Gardena",
+            "lat": 46.55,
+            "lon": 11.80944,
+            "note": "Hairpin bends through the mountains.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b4/Passo_Gardena_-_Dolomites%2C_Italy_2025.jpg/1280px-Passo_Gardena_-_Dolomites%2C_Italy_2025.jpg",
+            "photoAuthor": "Dmitry Djouce",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Passo_Gardena_-_Dolomites%2C_Italy_2025.jpg",
+            "label": "Gardena Pass",
+            "photoFocus": [
+              0.5,
+              0.54
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/20130702_03_Passo_Gardena_(9230184794).jpg/1280px-20130702_03_Passo_Gardena_(9230184794).jpg",
+              "photoAuthor": "Sjaak Kempe",
+              "photoLicense": "CC BY 2.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:20130702_03_Passo_Gardena_(9230184794).jpg",
+              "label": "Gardena Pass road",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Passo Giau",
+            "lat": 46.4825,
+            "lon": 12.05389,
+            "note": "A road beneath limestone peaks.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/Ra_Gusela_3.jpg/1280px-Ra_Gusela_3.jpg",
+            "photoAuthor": "kallerna",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Ra_Gusela_3.jpg",
+            "label": "Ra Gusela from Giau Pass",
+            "photoFocus": [
+              0.5,
+              0.42
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Passo_Giau_SP638.jpg/1280px-Passo_Giau_SP638.jpg",
+              "photoAuthor": "kallerna",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Passo_Giau_SP638.jpg",
+              "label": "Giau Pass road",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Lago di Braies",
+            "lat": 46.700047,
+            "lon": 12.084711,
+            "note": "Turquoise waters beneath the Alps.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/77/Lake_Lago_di_Braies.jpg/1280px-Lake_Lago_di_Braies.jpg",
+            "photoAuthor": "Maxagace",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Lake_Lago_di_Braies.jpg",
+            "label": "Lake Braies",
+            "photoFocus": [
+              0.5,
+              0.48
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/Lake_of_Braies_in_2024.25.jpg/1280px-Lake_of_Braies_in_2024.25.jpg",
+              "photoAuthor": "CAPTAIN RAJU",
+              "photoLicense": "CC0 1.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Lake_of_Braies_in_2024.25.jpg",
+              "label": "Lake Braies",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          }
+        ],
+        "route": {
+          "type": "Feature",
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                11.671228,
+                46.574966
+              ],
+              [
+                11.80944,
+                46.55
+              ],
+              [
+                12.05389,
+                46.4825
+              ],
+              [
+                12.084711,
+                46.700047
+              ]
+            ]
+          },
+          "properties": {
+            "status": "routing-needed",
+            "source": "Illustrative stop positions, NOT the driving route"
+          }
+        },
+        "chapter": "opening",
+        "focusStopIndex": 1,
+        "mapCenter": [
+          11.91,
+          46.59
+        ],
+        "mapZoom": 8.4,
+        "routeProgressFrom": 0,
+        "routeProgressTo": 1,
+        "roadMatched": false,
+        "markerStyle": "dot",
+        "editorial": true,
+        "seriesTitle": "THE OPEN ROAD COLLECTION · 002",
+        "regionTitle": "DOLOMITES",
+        "mapIntro": false,
+        "editorialRevision": 8,
+        "relief": true,
+        "openingPhoto": {
+          "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/27/SS242_road_makes_a_bend_on_the_way_to_Passo_Sella%2C_Trentino-Alto_Adige%2C_Italy%2C_2025_October.jpg/1280px-SS242_road_makes_a_bend_on_the_way_to_Passo_Sella%2C_Trentino-Alto_Adige%2C_Italy%2C_2025_October.jpg",
+          "photoAuthor": "Simo Räsänen",
+          "photoLicense": "CC BY-SA 4.0",
+          "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:SS242_road_makes_a_bend_on_the_way_to_Passo_Sella%2C_Trentino-Alto_Adige%2C_Italy%2C_2025_October.jpg",
+          "label": "Road to Passo Sella",
+          "photoFocus": [
+            0.5,
+            0.58
+          ],
+          "photoFit": "cover"
+        },
+        "openingSubtitle": "ORTISEI TO LAGO DI BRAIES"
+      }
+    },
+    {
+      "id": "route-intro",
+      "name": "02 / Route introduction",
+      "durationSec": 2,
+      "layout": "premium-travel-route",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "INTO THE ITALIAN ALPS",
+      "fullBleed": true,
+      "premiumTravel": {
+        "stops": [
+          {
+            "name": "Ortisei",
+            "lat": 46.574966,
+            "lon": 11.671228,
+            "note": "An alpine village beneath towering peaks.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Italy_Ortisei_panorama.JPG/1280px-Italy_Ortisei_panorama.JPG",
+            "photoAuthor": "Pufacz",
+            "photoLicense": "Public domain",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Italy_Ortisei_panorama.JPG",
+            "label": "Ortisei panorama",
+            "photoFocus": [
+              0.48,
+              0.5
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Parish_church_Urtijei.JPG/1280px-Parish_church_Urtijei.JPG",
+              "photoAuthor": "Moroder",
+              "photoLicense": "CC BY 2.5",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Parish_church_Urtijei.JPG",
+              "label": "Ortisei parish church",
+              "photoFocus": [
+                0.5,
+                0.45
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Passo Gardena",
+            "lat": 46.55,
+            "lon": 11.80944,
+            "note": "Hairpin bends through the mountains.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b4/Passo_Gardena_-_Dolomites%2C_Italy_2025.jpg/1280px-Passo_Gardena_-_Dolomites%2C_Italy_2025.jpg",
+            "photoAuthor": "Dmitry Djouce",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Passo_Gardena_-_Dolomites%2C_Italy_2025.jpg",
+            "label": "Gardena Pass",
+            "photoFocus": [
+              0.5,
+              0.54
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/20130702_03_Passo_Gardena_(9230184794).jpg/1280px-20130702_03_Passo_Gardena_(9230184794).jpg",
+              "photoAuthor": "Sjaak Kempe",
+              "photoLicense": "CC BY 2.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:20130702_03_Passo_Gardena_(9230184794).jpg",
+              "label": "Gardena Pass road",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Passo Giau",
+            "lat": 46.4825,
+            "lon": 12.05389,
+            "note": "A road beneath limestone peaks.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/Ra_Gusela_3.jpg/1280px-Ra_Gusela_3.jpg",
+            "photoAuthor": "kallerna",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Ra_Gusela_3.jpg",
+            "label": "Ra Gusela from Giau Pass",
+            "photoFocus": [
+              0.5,
+              0.42
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Passo_Giau_SP638.jpg/1280px-Passo_Giau_SP638.jpg",
+              "photoAuthor": "kallerna",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Passo_Giau_SP638.jpg",
+              "label": "Giau Pass road",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Lago di Braies",
+            "lat": 46.700047,
+            "lon": 12.084711,
+            "note": "Turquoise waters beneath the Alps.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/77/Lake_Lago_di_Braies.jpg/1280px-Lake_Lago_di_Braies.jpg",
+            "photoAuthor": "Maxagace",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Lake_Lago_di_Braies.jpg",
+            "label": "Lake Braies",
+            "photoFocus": [
+              0.5,
+              0.48
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/Lake_of_Braies_in_2024.25.jpg/1280px-Lake_of_Braies_in_2024.25.jpg",
+              "photoAuthor": "CAPTAIN RAJU",
+              "photoLicense": "CC0 1.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Lake_of_Braies_in_2024.25.jpg",
+              "label": "Lake Braies",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          }
+        ],
+        "route": {
+          "type": "Feature",
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                11.671228,
+                46.574966
+              ],
+              [
+                11.80944,
+                46.55
+              ],
+              [
+                12.05389,
+                46.4825
+              ],
+              [
+                12.084711,
+                46.700047
+              ]
+            ]
+          },
+          "properties": {
+            "status": "routing-needed",
+            "source": "Illustrative stop positions, NOT the driving route"
+          }
+        },
+        "chapter": "finale",
+        "focusStopIndex": -1,
+        "mapCenter": [
+          11.89,
+          46.59
+        ],
+        "mapZoom": 8.7,
+        "routeProgressFrom": 0,
+        "routeProgressTo": 1,
+        "roadMatched": false,
+        "markerStyle": "dot",
+        "editorial": true,
+        "seriesTitle": "THE OPEN ROAD COLLECTION · 002",
+        "regionTitle": "DOLOMITES",
+        "mapIntro": true,
+        "editorialRevision": 8,
+        "relief": true,
+        "openingSubtitle": "ORTISEI TO LAGO DI BRAIES"
+      }
+    },
+    {
+      "id": "photo-ortisei",
+      "name": "03 / Ortisei",
+      "durationSec": 2.5,
+      "layout": "premium-travel-route",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Ortisei",
+      "fullBleed": true,
+      "premiumTravel": {
+        "stops": [
+          {
+            "name": "Ortisei",
+            "lat": 46.574966,
+            "lon": 11.671228,
+            "note": "An alpine village beneath towering peaks.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Italy_Ortisei_panorama.JPG/1280px-Italy_Ortisei_panorama.JPG",
+            "photoAuthor": "Pufacz",
+            "photoLicense": "Public domain",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Italy_Ortisei_panorama.JPG",
+            "label": "Ortisei panorama",
+            "photoFocus": [
+              0.48,
+              0.5
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Parish_church_Urtijei.JPG/1280px-Parish_church_Urtijei.JPG",
+              "photoAuthor": "Moroder",
+              "photoLicense": "CC BY 2.5",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Parish_church_Urtijei.JPG",
+              "label": "Ortisei parish church",
+              "photoFocus": [
+                0.5,
+                0.45
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Passo Gardena",
+            "lat": 46.55,
+            "lon": 11.80944,
+            "note": "Hairpin bends through the mountains.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b4/Passo_Gardena_-_Dolomites%2C_Italy_2025.jpg/1280px-Passo_Gardena_-_Dolomites%2C_Italy_2025.jpg",
+            "photoAuthor": "Dmitry Djouce",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Passo_Gardena_-_Dolomites%2C_Italy_2025.jpg",
+            "label": "Gardena Pass",
+            "photoFocus": [
+              0.5,
+              0.54
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/20130702_03_Passo_Gardena_(9230184794).jpg/1280px-20130702_03_Passo_Gardena_(9230184794).jpg",
+              "photoAuthor": "Sjaak Kempe",
+              "photoLicense": "CC BY 2.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:20130702_03_Passo_Gardena_(9230184794).jpg",
+              "label": "Gardena Pass road",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Passo Giau",
+            "lat": 46.4825,
+            "lon": 12.05389,
+            "note": "A road beneath limestone peaks.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/Ra_Gusela_3.jpg/1280px-Ra_Gusela_3.jpg",
+            "photoAuthor": "kallerna",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Ra_Gusela_3.jpg",
+            "label": "Ra Gusela from Giau Pass",
+            "photoFocus": [
+              0.5,
+              0.42
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Passo_Giau_SP638.jpg/1280px-Passo_Giau_SP638.jpg",
+              "photoAuthor": "kallerna",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Passo_Giau_SP638.jpg",
+              "label": "Giau Pass road",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Lago di Braies",
+            "lat": 46.700047,
+            "lon": 12.084711,
+            "note": "Turquoise waters beneath the Alps.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/77/Lake_Lago_di_Braies.jpg/1280px-Lake_Lago_di_Braies.jpg",
+            "photoAuthor": "Maxagace",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Lake_Lago_di_Braies.jpg",
+            "label": "Lake Braies",
+            "photoFocus": [
+              0.5,
+              0.48
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/Lake_of_Braies_in_2024.25.jpg/1280px-Lake_of_Braies_in_2024.25.jpg",
+              "photoAuthor": "CAPTAIN RAJU",
+              "photoLicense": "CC0 1.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Lake_of_Braies_in_2024.25.jpg",
+              "label": "Lake Braies",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          }
+        ],
+        "route": {
+          "type": "Feature",
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                11.671228,
+                46.574966
+              ],
+              [
+                11.80944,
+                46.55
+              ],
+              [
+                12.05389,
+                46.4825
+              ],
+              [
+                12.084711,
+                46.700047
+              ]
+            ]
+          },
+          "properties": {
+            "status": "routing-needed",
+            "source": "Illustrative stop positions, NOT the driving route"
+          }
+        },
+        "chapter": "photo",
+        "focusStopIndex": 0,
+        "mapCenter": [
+          11.74,
+          46.56
+        ],
+        "mapZoom": 10,
+        "routeProgressFrom": 0,
+        "routeProgressTo": 1,
+        "roadMatched": false,
+        "markerStyle": "dot",
+        "editorial": true,
+        "seriesTitle": "THE OPEN ROAD COLLECTION · 002",
+        "regionTitle": "DOLOMITES",
+        "mapIntro": false,
+        "editorialRevision": 8,
+        "relief": true,
+        "openingSubtitle": "ORTISEI TO LAGO DI BRAIES"
+      }
+    },
+    {
+      "id": "drive-gardena",
+      "name": "04 / Into the passes",
+      "durationSec": 2.5,
+      "layout": "premium-travel-route",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Passo Gardena",
+      "fullBleed": true,
+      "premiumTravel": {
+        "stops": [
+          {
+            "name": "Ortisei",
+            "lat": 46.574966,
+            "lon": 11.671228,
+            "note": "An alpine village beneath towering peaks.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Italy_Ortisei_panorama.JPG/1280px-Italy_Ortisei_panorama.JPG",
+            "photoAuthor": "Pufacz",
+            "photoLicense": "Public domain",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Italy_Ortisei_panorama.JPG",
+            "label": "Ortisei panorama",
+            "photoFocus": [
+              0.48,
+              0.5
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Parish_church_Urtijei.JPG/1280px-Parish_church_Urtijei.JPG",
+              "photoAuthor": "Moroder",
+              "photoLicense": "CC BY 2.5",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Parish_church_Urtijei.JPG",
+              "label": "Ortisei parish church",
+              "photoFocus": [
+                0.5,
+                0.45
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Passo Gardena",
+            "lat": 46.55,
+            "lon": 11.80944,
+            "note": "Hairpin bends through the mountains.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b4/Passo_Gardena_-_Dolomites%2C_Italy_2025.jpg/1280px-Passo_Gardena_-_Dolomites%2C_Italy_2025.jpg",
+            "photoAuthor": "Dmitry Djouce",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Passo_Gardena_-_Dolomites%2C_Italy_2025.jpg",
+            "label": "Gardena Pass",
+            "photoFocus": [
+              0.5,
+              0.54
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/20130702_03_Passo_Gardena_(9230184794).jpg/1280px-20130702_03_Passo_Gardena_(9230184794).jpg",
+              "photoAuthor": "Sjaak Kempe",
+              "photoLicense": "CC BY 2.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:20130702_03_Passo_Gardena_(9230184794).jpg",
+              "label": "Gardena Pass road",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Passo Giau",
+            "lat": 46.4825,
+            "lon": 12.05389,
+            "note": "A road beneath limestone peaks.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/Ra_Gusela_3.jpg/1280px-Ra_Gusela_3.jpg",
+            "photoAuthor": "kallerna",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Ra_Gusela_3.jpg",
+            "label": "Ra Gusela from Giau Pass",
+            "photoFocus": [
+              0.5,
+              0.42
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Passo_Giau_SP638.jpg/1280px-Passo_Giau_SP638.jpg",
+              "photoAuthor": "kallerna",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Passo_Giau_SP638.jpg",
+              "label": "Giau Pass road",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Lago di Braies",
+            "lat": 46.700047,
+            "lon": 12.084711,
+            "note": "Turquoise waters beneath the Alps.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/77/Lake_Lago_di_Braies.jpg/1280px-Lake_Lago_di_Braies.jpg",
+            "photoAuthor": "Maxagace",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Lake_Lago_di_Braies.jpg",
+            "label": "Lake Braies",
+            "photoFocus": [
+              0.5,
+              0.48
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/Lake_of_Braies_in_2024.25.jpg/1280px-Lake_of_Braies_in_2024.25.jpg",
+              "photoAuthor": "CAPTAIN RAJU",
+              "photoLicense": "CC0 1.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Lake_of_Braies_in_2024.25.jpg",
+              "label": "Lake Braies",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          }
+        ],
+        "route": {
+          "type": "Feature",
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                11.671228,
+                46.574966
+              ],
+              [
+                11.80944,
+                46.55
+              ],
+              [
+                12.05389,
+                46.4825
+              ],
+              [
+                12.084711,
+                46.700047
+              ]
+            ]
+          },
+          "properties": {
+            "status": "routing-needed",
+            "source": "Illustrative stop positions, NOT the driving route"
+          }
+        },
+        "chapter": "drive",
+        "focusStopIndex": 1,
+        "mapCenter": [
+          11.75,
+          46.56
+        ],
+        "mapZoom": 10,
+        "routeProgressFrom": 0,
+        "routeProgressTo": 1,
+        "roadMatched": false,
+        "markerStyle": "dot",
+        "editorial": true,
+        "seriesTitle": "THE OPEN ROAD COLLECTION · 002",
+        "regionTitle": "DOLOMITES",
+        "mapIntro": false,
+        "editorialRevision": 8,
+        "relief": true,
+        "openingSubtitle": "ORTISEI TO LAGO DI BRAIES"
+      }
+    },
+    {
+      "id": "photo-gardena",
+      "name": "05 / Passo Gardena",
+      "durationSec": 3.5,
+      "layout": "premium-travel-route",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Passo Gardena",
+      "fullBleed": true,
+      "premiumTravel": {
+        "stops": [
+          {
+            "name": "Ortisei",
+            "lat": 46.574966,
+            "lon": 11.671228,
+            "note": "An alpine village beneath towering peaks.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Italy_Ortisei_panorama.JPG/1280px-Italy_Ortisei_panorama.JPG",
+            "photoAuthor": "Pufacz",
+            "photoLicense": "Public domain",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Italy_Ortisei_panorama.JPG",
+            "label": "Ortisei panorama",
+            "photoFocus": [
+              0.48,
+              0.5
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Parish_church_Urtijei.JPG/1280px-Parish_church_Urtijei.JPG",
+              "photoAuthor": "Moroder",
+              "photoLicense": "CC BY 2.5",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Parish_church_Urtijei.JPG",
+              "label": "Ortisei parish church",
+              "photoFocus": [
+                0.5,
+                0.45
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Passo Gardena",
+            "lat": 46.55,
+            "lon": 11.80944,
+            "note": "Hairpin bends through the mountains.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b4/Passo_Gardena_-_Dolomites%2C_Italy_2025.jpg/1280px-Passo_Gardena_-_Dolomites%2C_Italy_2025.jpg",
+            "photoAuthor": "Dmitry Djouce",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Passo_Gardena_-_Dolomites%2C_Italy_2025.jpg",
+            "label": "Gardena Pass",
+            "photoFocus": [
+              0.5,
+              0.54
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/20130702_03_Passo_Gardena_(9230184794).jpg/1280px-20130702_03_Passo_Gardena_(9230184794).jpg",
+              "photoAuthor": "Sjaak Kempe",
+              "photoLicense": "CC BY 2.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:20130702_03_Passo_Gardena_(9230184794).jpg",
+              "label": "Gardena Pass road",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Passo Giau",
+            "lat": 46.4825,
+            "lon": 12.05389,
+            "note": "A road beneath limestone peaks.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/Ra_Gusela_3.jpg/1280px-Ra_Gusela_3.jpg",
+            "photoAuthor": "kallerna",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Ra_Gusela_3.jpg",
+            "label": "Ra Gusela from Giau Pass",
+            "photoFocus": [
+              0.5,
+              0.42
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Passo_Giau_SP638.jpg/1280px-Passo_Giau_SP638.jpg",
+              "photoAuthor": "kallerna",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Passo_Giau_SP638.jpg",
+              "label": "Giau Pass road",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Lago di Braies",
+            "lat": 46.700047,
+            "lon": 12.084711,
+            "note": "Turquoise waters beneath the Alps.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/77/Lake_Lago_di_Braies.jpg/1280px-Lake_Lago_di_Braies.jpg",
+            "photoAuthor": "Maxagace",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Lake_Lago_di_Braies.jpg",
+            "label": "Lake Braies",
+            "photoFocus": [
+              0.5,
+              0.48
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/Lake_of_Braies_in_2024.25.jpg/1280px-Lake_of_Braies_in_2024.25.jpg",
+              "photoAuthor": "CAPTAIN RAJU",
+              "photoLicense": "CC0 1.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Lake_of_Braies_in_2024.25.jpg",
+              "label": "Lake Braies",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          }
+        ],
+        "route": {
+          "type": "Feature",
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                11.671228,
+                46.574966
+              ],
+              [
+                11.80944,
+                46.55
+              ],
+              [
+                12.05389,
+                46.4825
+              ],
+              [
+                12.084711,
+                46.700047
+              ]
+            ]
+          },
+          "properties": {
+            "status": "routing-needed",
+            "source": "Illustrative stop positions, NOT the driving route"
+          }
+        },
+        "chapter": "photo",
+        "focusStopIndex": 1,
+        "mapCenter": [
+          11.75,
+          46.56
+        ],
+        "mapZoom": 10,
+        "routeProgressFrom": 0,
+        "routeProgressTo": 1,
+        "roadMatched": false,
+        "markerStyle": "dot",
+        "editorial": true,
+        "seriesTitle": "THE OPEN ROAD COLLECTION · 002",
+        "regionTitle": "DOLOMITES",
+        "mapIntro": false,
+        "editorialRevision": 8,
+        "relief": true,
+        "openingSubtitle": "ORTISEI TO LAGO DI BRAIES"
+      }
+    },
+    {
+      "id": "drive-giau",
+      "name": "06 / To Passo Giau",
+      "durationSec": 2.5,
+      "layout": "premium-travel-route",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Passo Giau",
+      "fullBleed": true,
+      "premiumTravel": {
+        "stops": [
+          {
+            "name": "Ortisei",
+            "lat": 46.574966,
+            "lon": 11.671228,
+            "note": "An alpine village beneath towering peaks.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Italy_Ortisei_panorama.JPG/1280px-Italy_Ortisei_panorama.JPG",
+            "photoAuthor": "Pufacz",
+            "photoLicense": "Public domain",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Italy_Ortisei_panorama.JPG",
+            "label": "Ortisei panorama",
+            "photoFocus": [
+              0.48,
+              0.5
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Parish_church_Urtijei.JPG/1280px-Parish_church_Urtijei.JPG",
+              "photoAuthor": "Moroder",
+              "photoLicense": "CC BY 2.5",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Parish_church_Urtijei.JPG",
+              "label": "Ortisei parish church",
+              "photoFocus": [
+                0.5,
+                0.45
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Passo Gardena",
+            "lat": 46.55,
+            "lon": 11.80944,
+            "note": "Hairpin bends through the mountains.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b4/Passo_Gardena_-_Dolomites%2C_Italy_2025.jpg/1280px-Passo_Gardena_-_Dolomites%2C_Italy_2025.jpg",
+            "photoAuthor": "Dmitry Djouce",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Passo_Gardena_-_Dolomites%2C_Italy_2025.jpg",
+            "label": "Gardena Pass",
+            "photoFocus": [
+              0.5,
+              0.54
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/20130702_03_Passo_Gardena_(9230184794).jpg/1280px-20130702_03_Passo_Gardena_(9230184794).jpg",
+              "photoAuthor": "Sjaak Kempe",
+              "photoLicense": "CC BY 2.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:20130702_03_Passo_Gardena_(9230184794).jpg",
+              "label": "Gardena Pass road",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Passo Giau",
+            "lat": 46.4825,
+            "lon": 12.05389,
+            "note": "A road beneath limestone peaks.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/Ra_Gusela_3.jpg/1280px-Ra_Gusela_3.jpg",
+            "photoAuthor": "kallerna",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Ra_Gusela_3.jpg",
+            "label": "Ra Gusela from Giau Pass",
+            "photoFocus": [
+              0.5,
+              0.42
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Passo_Giau_SP638.jpg/1280px-Passo_Giau_SP638.jpg",
+              "photoAuthor": "kallerna",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Passo_Giau_SP638.jpg",
+              "label": "Giau Pass road",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Lago di Braies",
+            "lat": 46.700047,
+            "lon": 12.084711,
+            "note": "Turquoise waters beneath the Alps.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/77/Lake_Lago_di_Braies.jpg/1280px-Lake_Lago_di_Braies.jpg",
+            "photoAuthor": "Maxagace",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Lake_Lago_di_Braies.jpg",
+            "label": "Lake Braies",
+            "photoFocus": [
+              0.5,
+              0.48
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/Lake_of_Braies_in_2024.25.jpg/1280px-Lake_of_Braies_in_2024.25.jpg",
+              "photoAuthor": "CAPTAIN RAJU",
+              "photoLicense": "CC0 1.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Lake_of_Braies_in_2024.25.jpg",
+              "label": "Lake Braies",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          }
+        ],
+        "route": {
+          "type": "Feature",
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                11.671228,
+                46.574966
+              ],
+              [
+                11.80944,
+                46.55
+              ],
+              [
+                12.05389,
+                46.4825
+              ],
+              [
+                12.084711,
+                46.700047
+              ]
+            ]
+          },
+          "properties": {
+            "status": "routing-needed",
+            "source": "Illustrative stop positions, NOT the driving route"
+          }
+        },
+        "chapter": "drive",
+        "focusStopIndex": 2,
+        "mapCenter": [
+          11.93,
+          46.52
+        ],
+        "mapZoom": 9.2,
+        "routeProgressFrom": 0,
+        "routeProgressTo": 1,
+        "roadMatched": false,
+        "markerStyle": "dot",
+        "editorial": true,
+        "seriesTitle": "THE OPEN ROAD COLLECTION · 002",
+        "regionTitle": "DOLOMITES",
+        "mapIntro": false,
+        "editorialRevision": 8,
+        "relief": true,
+        "openingSubtitle": "ORTISEI TO LAGO DI BRAIES"
+      }
+    },
+    {
+      "id": "photo-giau",
+      "name": "07 / Passo Giau",
+      "durationSec": 3.5,
+      "layout": "premium-travel-route",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Passo Giau",
+      "fullBleed": true,
+      "premiumTravel": {
+        "stops": [
+          {
+            "name": "Ortisei",
+            "lat": 46.574966,
+            "lon": 11.671228,
+            "note": "An alpine village beneath towering peaks.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Italy_Ortisei_panorama.JPG/1280px-Italy_Ortisei_panorama.JPG",
+            "photoAuthor": "Pufacz",
+            "photoLicense": "Public domain",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Italy_Ortisei_panorama.JPG",
+            "label": "Ortisei panorama",
+            "photoFocus": [
+              0.48,
+              0.5
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Parish_church_Urtijei.JPG/1280px-Parish_church_Urtijei.JPG",
+              "photoAuthor": "Moroder",
+              "photoLicense": "CC BY 2.5",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Parish_church_Urtijei.JPG",
+              "label": "Ortisei parish church",
+              "photoFocus": [
+                0.5,
+                0.45
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Passo Gardena",
+            "lat": 46.55,
+            "lon": 11.80944,
+            "note": "Hairpin bends through the mountains.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b4/Passo_Gardena_-_Dolomites%2C_Italy_2025.jpg/1280px-Passo_Gardena_-_Dolomites%2C_Italy_2025.jpg",
+            "photoAuthor": "Dmitry Djouce",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Passo_Gardena_-_Dolomites%2C_Italy_2025.jpg",
+            "label": "Gardena Pass",
+            "photoFocus": [
+              0.5,
+              0.54
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/20130702_03_Passo_Gardena_(9230184794).jpg/1280px-20130702_03_Passo_Gardena_(9230184794).jpg",
+              "photoAuthor": "Sjaak Kempe",
+              "photoLicense": "CC BY 2.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:20130702_03_Passo_Gardena_(9230184794).jpg",
+              "label": "Gardena Pass road",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Passo Giau",
+            "lat": 46.4825,
+            "lon": 12.05389,
+            "note": "A road beneath limestone peaks.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/Ra_Gusela_3.jpg/1280px-Ra_Gusela_3.jpg",
+            "photoAuthor": "kallerna",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Ra_Gusela_3.jpg",
+            "label": "Ra Gusela from Giau Pass",
+            "photoFocus": [
+              0.5,
+              0.42
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Passo_Giau_SP638.jpg/1280px-Passo_Giau_SP638.jpg",
+              "photoAuthor": "kallerna",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Passo_Giau_SP638.jpg",
+              "label": "Giau Pass road",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Lago di Braies",
+            "lat": 46.700047,
+            "lon": 12.084711,
+            "note": "Turquoise waters beneath the Alps.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/77/Lake_Lago_di_Braies.jpg/1280px-Lake_Lago_di_Braies.jpg",
+            "photoAuthor": "Maxagace",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Lake_Lago_di_Braies.jpg",
+            "label": "Lake Braies",
+            "photoFocus": [
+              0.5,
+              0.48
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/Lake_of_Braies_in_2024.25.jpg/1280px-Lake_of_Braies_in_2024.25.jpg",
+              "photoAuthor": "CAPTAIN RAJU",
+              "photoLicense": "CC0 1.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Lake_of_Braies_in_2024.25.jpg",
+              "label": "Lake Braies",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          }
+        ],
+        "route": {
+          "type": "Feature",
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                11.671228,
+                46.574966
+              ],
+              [
+                11.80944,
+                46.55
+              ],
+              [
+                12.05389,
+                46.4825
+              ],
+              [
+                12.084711,
+                46.700047
+              ]
+            ]
+          },
+          "properties": {
+            "status": "routing-needed",
+            "source": "Illustrative stop positions, NOT the driving route"
+          }
+        },
+        "chapter": "photo",
+        "focusStopIndex": 2,
+        "mapCenter": [
+          11.93,
+          46.52
+        ],
+        "mapZoom": 9.2,
+        "routeProgressFrom": 0,
+        "routeProgressTo": 1,
+        "roadMatched": false,
+        "markerStyle": "dot",
+        "editorial": true,
+        "seriesTitle": "THE OPEN ROAD COLLECTION · 002",
+        "regionTitle": "DOLOMITES",
+        "mapIntro": false,
+        "editorialRevision": 8,
+        "relief": true,
+        "openingSubtitle": "ORTISEI TO LAGO DI BRAIES"
+      }
+    },
+    {
+      "id": "drive-braies",
+      "name": "08 / To Lake Braies",
+      "durationSec": 2.5,
+      "layout": "premium-travel-route",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Lago di Braies",
+      "fullBleed": true,
+      "premiumTravel": {
+        "stops": [
+          {
+            "name": "Ortisei",
+            "lat": 46.574966,
+            "lon": 11.671228,
+            "note": "An alpine village beneath towering peaks.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Italy_Ortisei_panorama.JPG/1280px-Italy_Ortisei_panorama.JPG",
+            "photoAuthor": "Pufacz",
+            "photoLicense": "Public domain",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Italy_Ortisei_panorama.JPG",
+            "label": "Ortisei panorama",
+            "photoFocus": [
+              0.48,
+              0.5
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Parish_church_Urtijei.JPG/1280px-Parish_church_Urtijei.JPG",
+              "photoAuthor": "Moroder",
+              "photoLicense": "CC BY 2.5",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Parish_church_Urtijei.JPG",
+              "label": "Ortisei parish church",
+              "photoFocus": [
+                0.5,
+                0.45
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Passo Gardena",
+            "lat": 46.55,
+            "lon": 11.80944,
+            "note": "Hairpin bends through the mountains.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b4/Passo_Gardena_-_Dolomites%2C_Italy_2025.jpg/1280px-Passo_Gardena_-_Dolomites%2C_Italy_2025.jpg",
+            "photoAuthor": "Dmitry Djouce",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Passo_Gardena_-_Dolomites%2C_Italy_2025.jpg",
+            "label": "Gardena Pass",
+            "photoFocus": [
+              0.5,
+              0.54
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/20130702_03_Passo_Gardena_(9230184794).jpg/1280px-20130702_03_Passo_Gardena_(9230184794).jpg",
+              "photoAuthor": "Sjaak Kempe",
+              "photoLicense": "CC BY 2.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:20130702_03_Passo_Gardena_(9230184794).jpg",
+              "label": "Gardena Pass road",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Passo Giau",
+            "lat": 46.4825,
+            "lon": 12.05389,
+            "note": "A road beneath limestone peaks.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/Ra_Gusela_3.jpg/1280px-Ra_Gusela_3.jpg",
+            "photoAuthor": "kallerna",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Ra_Gusela_3.jpg",
+            "label": "Ra Gusela from Giau Pass",
+            "photoFocus": [
+              0.5,
+              0.42
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Passo_Giau_SP638.jpg/1280px-Passo_Giau_SP638.jpg",
+              "photoAuthor": "kallerna",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Passo_Giau_SP638.jpg",
+              "label": "Giau Pass road",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Lago di Braies",
+            "lat": 46.700047,
+            "lon": 12.084711,
+            "note": "Turquoise waters beneath the Alps.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/77/Lake_Lago_di_Braies.jpg/1280px-Lake_Lago_di_Braies.jpg",
+            "photoAuthor": "Maxagace",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Lake_Lago_di_Braies.jpg",
+            "label": "Lake Braies",
+            "photoFocus": [
+              0.5,
+              0.48
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/Lake_of_Braies_in_2024.25.jpg/1280px-Lake_of_Braies_in_2024.25.jpg",
+              "photoAuthor": "CAPTAIN RAJU",
+              "photoLicense": "CC0 1.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Lake_of_Braies_in_2024.25.jpg",
+              "label": "Lake Braies",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          }
+        ],
+        "route": {
+          "type": "Feature",
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                11.671228,
+                46.574966
+              ],
+              [
+                11.80944,
+                46.55
+              ],
+              [
+                12.05389,
+                46.4825
+              ],
+              [
+                12.084711,
+                46.700047
+              ]
+            ]
+          },
+          "properties": {
+            "status": "routing-needed",
+            "source": "Illustrative stop positions, NOT the driving route"
+          }
+        },
+        "chapter": "drive",
+        "focusStopIndex": 3,
+        "mapCenter": [
+          12.11,
+          46.6
+        ],
+        "mapZoom": 9.1,
+        "routeProgressFrom": 0,
+        "routeProgressTo": 1,
+        "roadMatched": false,
+        "markerStyle": "dot",
+        "editorial": true,
+        "seriesTitle": "THE OPEN ROAD COLLECTION · 002",
+        "regionTitle": "DOLOMITES",
+        "mapIntro": false,
+        "editorialRevision": 8,
+        "relief": true,
+        "openingSubtitle": "ORTISEI TO LAGO DI BRAIES"
+      }
+    },
+    {
+      "id": "photo-braies",
+      "name": "09 / Lago di Braies",
+      "durationSec": 4.5,
+      "layout": "premium-travel-route",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Lago di Braies",
+      "fullBleed": true,
+      "premiumTravel": {
+        "stops": [
+          {
+            "name": "Ortisei",
+            "lat": 46.574966,
+            "lon": 11.671228,
+            "note": "An alpine village beneath towering peaks.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Italy_Ortisei_panorama.JPG/1280px-Italy_Ortisei_panorama.JPG",
+            "photoAuthor": "Pufacz",
+            "photoLicense": "Public domain",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Italy_Ortisei_panorama.JPG",
+            "label": "Ortisei panorama",
+            "photoFocus": [
+              0.48,
+              0.5
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Parish_church_Urtijei.JPG/1280px-Parish_church_Urtijei.JPG",
+              "photoAuthor": "Moroder",
+              "photoLicense": "CC BY 2.5",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Parish_church_Urtijei.JPG",
+              "label": "Ortisei parish church",
+              "photoFocus": [
+                0.5,
+                0.45
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Passo Gardena",
+            "lat": 46.55,
+            "lon": 11.80944,
+            "note": "Hairpin bends through the mountains.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b4/Passo_Gardena_-_Dolomites%2C_Italy_2025.jpg/1280px-Passo_Gardena_-_Dolomites%2C_Italy_2025.jpg",
+            "photoAuthor": "Dmitry Djouce",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Passo_Gardena_-_Dolomites%2C_Italy_2025.jpg",
+            "label": "Gardena Pass",
+            "photoFocus": [
+              0.5,
+              0.54
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/20130702_03_Passo_Gardena_(9230184794).jpg/1280px-20130702_03_Passo_Gardena_(9230184794).jpg",
+              "photoAuthor": "Sjaak Kempe",
+              "photoLicense": "CC BY 2.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:20130702_03_Passo_Gardena_(9230184794).jpg",
+              "label": "Gardena Pass road",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Passo Giau",
+            "lat": 46.4825,
+            "lon": 12.05389,
+            "note": "A road beneath limestone peaks.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/Ra_Gusela_3.jpg/1280px-Ra_Gusela_3.jpg",
+            "photoAuthor": "kallerna",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Ra_Gusela_3.jpg",
+            "label": "Ra Gusela from Giau Pass",
+            "photoFocus": [
+              0.5,
+              0.42
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Passo_Giau_SP638.jpg/1280px-Passo_Giau_SP638.jpg",
+              "photoAuthor": "kallerna",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Passo_Giau_SP638.jpg",
+              "label": "Giau Pass road",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Lago di Braies",
+            "lat": 46.700047,
+            "lon": 12.084711,
+            "note": "Turquoise waters beneath the Alps.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/77/Lake_Lago_di_Braies.jpg/1280px-Lake_Lago_di_Braies.jpg",
+            "photoAuthor": "Maxagace",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Lake_Lago_di_Braies.jpg",
+            "label": "Lake Braies",
+            "photoFocus": [
+              0.5,
+              0.48
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/Lake_of_Braies_in_2024.25.jpg/1280px-Lake_of_Braies_in_2024.25.jpg",
+              "photoAuthor": "CAPTAIN RAJU",
+              "photoLicense": "CC0 1.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Lake_of_Braies_in_2024.25.jpg",
+              "label": "Lake Braies",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          }
+        ],
+        "route": {
+          "type": "Feature",
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                11.671228,
+                46.574966
+              ],
+              [
+                11.80944,
+                46.55
+              ],
+              [
+                12.05389,
+                46.4825
+              ],
+              [
+                12.084711,
+                46.700047
+              ]
+            ]
+          },
+          "properties": {
+            "status": "routing-needed",
+            "source": "Illustrative stop positions, NOT the driving route"
+          }
+        },
+        "chapter": "photo",
+        "focusStopIndex": 3,
+        "mapCenter": [
+          12.11,
+          46.6
+        ],
+        "mapZoom": 9.1,
+        "routeProgressFrom": 0,
+        "routeProgressTo": 1,
+        "roadMatched": false,
+        "markerStyle": "dot",
+        "editorial": true,
+        "seriesTitle": "THE OPEN ROAD COLLECTION · 002",
+        "regionTitle": "DOLOMITES",
+        "mapIntro": false,
+        "editorialRevision": 8,
+        "relief": true,
+        "openingSubtitle": "ORTISEI TO LAGO DI BRAIES"
+      }
+    },
+    {
+      "id": "finale",
+      "name": "10 / Save this road trip",
+      "durationSec": 3.5,
+      "layout": "premium-travel-route",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "THE OPEN ROAD",
+      "fullBleed": true,
+      "premiumTravel": {
+        "stops": [
+          {
+            "name": "Ortisei",
+            "lat": 46.574966,
+            "lon": 11.671228,
+            "note": "An alpine village beneath towering peaks.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Italy_Ortisei_panorama.JPG/1280px-Italy_Ortisei_panorama.JPG",
+            "photoAuthor": "Pufacz",
+            "photoLicense": "Public domain",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Italy_Ortisei_panorama.JPG",
+            "label": "Ortisei panorama",
+            "photoFocus": [
+              0.48,
+              0.5
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Parish_church_Urtijei.JPG/1280px-Parish_church_Urtijei.JPG",
+              "photoAuthor": "Moroder",
+              "photoLicense": "CC BY 2.5",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Parish_church_Urtijei.JPG",
+              "label": "Ortisei parish church",
+              "photoFocus": [
+                0.5,
+                0.45
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Passo Gardena",
+            "lat": 46.55,
+            "lon": 11.80944,
+            "note": "Hairpin bends through the mountains.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b4/Passo_Gardena_-_Dolomites%2C_Italy_2025.jpg/1280px-Passo_Gardena_-_Dolomites%2C_Italy_2025.jpg",
+            "photoAuthor": "Dmitry Djouce",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Passo_Gardena_-_Dolomites%2C_Italy_2025.jpg",
+            "label": "Gardena Pass",
+            "photoFocus": [
+              0.5,
+              0.54
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/20130702_03_Passo_Gardena_(9230184794).jpg/1280px-20130702_03_Passo_Gardena_(9230184794).jpg",
+              "photoAuthor": "Sjaak Kempe",
+              "photoLicense": "CC BY 2.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:20130702_03_Passo_Gardena_(9230184794).jpg",
+              "label": "Gardena Pass road",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Passo Giau",
+            "lat": 46.4825,
+            "lon": 12.05389,
+            "note": "A road beneath limestone peaks.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/Ra_Gusela_3.jpg/1280px-Ra_Gusela_3.jpg",
+            "photoAuthor": "kallerna",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Ra_Gusela_3.jpg",
+            "label": "Ra Gusela from Giau Pass",
+            "photoFocus": [
+              0.5,
+              0.42
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Passo_Giau_SP638.jpg/1280px-Passo_Giau_SP638.jpg",
+              "photoAuthor": "kallerna",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Passo_Giau_SP638.jpg",
+              "label": "Giau Pass road",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Lago di Braies",
+            "lat": 46.700047,
+            "lon": 12.084711,
+            "note": "Turquoise waters beneath the Alps.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/77/Lake_Lago_di_Braies.jpg/1280px-Lake_Lago_di_Braies.jpg",
+            "photoAuthor": "Maxagace",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Lake_Lago_di_Braies.jpg",
+            "label": "Lake Braies",
+            "photoFocus": [
+              0.5,
+              0.48
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/Lake_of_Braies_in_2024.25.jpg/1280px-Lake_of_Braies_in_2024.25.jpg",
+              "photoAuthor": "CAPTAIN RAJU",
+              "photoLicense": "CC0 1.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Lake_of_Braies_in_2024.25.jpg",
+              "label": "Lake Braies",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          }
+        ],
+        "route": {
+          "type": "Feature",
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                11.671228,
+                46.574966
+              ],
+              [
+                11.80944,
+                46.55
+              ],
+              [
+                12.05389,
+                46.4825
+              ],
+              [
+                12.084711,
+                46.700047
+              ]
+            ]
+          },
+          "properties": {
+            "status": "routing-needed",
+            "source": "Illustrative stop positions, NOT the driving route"
+          }
+        },
+        "chapter": "finale",
+        "focusStopIndex": -1,
+        "mapCenter": [
+          11.89,
+          46.59
+        ],
+        "mapZoom": 8.7,
+        "routeProgressFrom": 0,
+        "routeProgressTo": 1,
+        "roadMatched": false,
+        "markerStyle": "dot",
+        "editorial": true,
+        "seriesTitle": "THE OPEN ROAD COLLECTION · 002",
+        "regionTitle": "DOLOMITES",
+        "mapIntro": false,
+        "cta": "SAVE THIS ROAD TRIP",
+        "editorialRevision": 8,
+        "relief": true,
+        "openingSubtitle": "ORTISEI TO LAGO DI BRAIES"
+      }
+    }
+  ],
+  "kind": "video",
+  "seriesId": "premium-travel-routes",
+  "season": 1,
+  "episodeNumber": 2,
+  "templateVersion": "2.1",
+  "productionStatus": "review",
+  "thumbnailUrl": "thumbnails/premium-travel-routes-002-dolomites.svg"
+}
