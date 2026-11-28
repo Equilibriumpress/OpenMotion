@@ -3,6 +3,7 @@ import { renderLivingTravelAmalfi } from './livingTravelAmalfi';
 import { renderLivingTravelJapan } from './livingTravelJapan';
 import { renderPosterCinemaPremium } from './posterCinemaPremium';
 import { renderPosterCinemaMaster } from './posterCinemaMaster';
+import { renderAmalfiCollector } from './amalfiCollectorRenderer.mjs';
 // Original vector artwork in the existing Canvas 2D pipeline.
 type C=CanvasRenderingContext2D;
 type Shape={d:string;f:string;s?:string;w?:number};
@@ -26,6 +27,7 @@ function motion(t:number){
  return 1;
 }
 export function renderLivingTravelPoster(c:C,w:number,h:number,s:OpenMotionScene,local:number){
+ if(s.parallax?.posterVersion==='3.0'&&s.parallax.destination==='amalfi'&&s.parallax.posterEdition==='amalfi-collector'){renderAmalfiCollector(c,w,h,s,local);return;}
  if(s.parallax?.posterVersion==='3.0'){renderPosterCinemaMaster(c,w,h,s,local);return;}
  if(s.parallax?.posterVersion==='2.0'){renderPosterCinemaPremium(c,w,h,s,local);return;}
  if(s.parallax?.destination==='japan'){renderLivingTravelJapan(c,w,h,s,local);return;}

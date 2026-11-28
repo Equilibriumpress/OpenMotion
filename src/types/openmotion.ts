@@ -548,6 +548,8 @@ export interface SceneThreeExplainer {
 export interface SceneParallaxCinema {
   variant?: 'living-travel-poster';
   posterVersion?: '2.0' | '3.0';
+  /** Destination-specific art pilot; leaves the frozen template version unchanged. */
+  posterEdition?: 'amalfi-collector';
   destination?: 'amalfi' | 'japan';
   shot: 'cover' | 'boarding' | 'fields' | 'fuji' | 'blossom' | 'station' | 'outro';
   speed?: number;
