@@ -1,4 +1,4 @@
-import { rendererLabel, downloadVerifiedZip } from '../engine/exportProvenance';
+import { rendererLabel, downloadVerifiedZip, BUNDLE_REVISION } from '../engine/exportProvenance';
 import { YouTubePublicationKit } from './YouTubePublicationKit';
 import { hasSongCover, renderSongCover } from '../engine/songExplainerRenderer';
 import { hasHumanSideCover, renderHumanSideCover, isHumanSideV2 } from '../engine/humanSideRenderer';
@@ -360,7 +360,7 @@ export function StudioView({
               {project.githubPath} · {project.format} · {project.width}×{project.height} ·{' '}
               {totalDuration.toFixed(1)}s
             </p>
-            {project.seriesId==='simply-explained'&&<p className="text-xs text-teal-800">Template {project.templateVersion??'onbekend'} · {rendererLabel(project)} · build {project.buildRevision?.slice(0,8)??'lokaal'}</p>}
+            {project.seriesId==='simply-explained'&&<p className="text-xs text-teal-800">Template {project.templateVersion??'onbekend'} · {rendererLabel(project)} · projectbuild {project.buildRevision?.slice(0,8)??'lokaal'} · rendererbuild {BUNDLE_REVISION.slice(0,8)}</p>}
           </div>
         </div>
 
@@ -1065,7 +1065,7 @@ export function StudioView({
                       <label className="block text-xs text-slate-600 mb-1">Duur (seconden)</label>
                       <input
                         type="number"
-                        min={1}
+                        min={.5}
                         max={20}
                         step={0.2}
                         value={activeScene.durationSec}
