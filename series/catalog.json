@@ -367,7 +367,7 @@
       "id": "premium-travel-routes",
       "title": "Premium Travel Routes",
       "description": "Roadtrips met geanimeerde kaarten en fotostops",
-      "activeVersion": "2.1",
+      "activeVersion": "3.0",
       "versions": [
         {
           "version": "1.0",
@@ -425,6 +425,25 @@
             "mutedColor": "#AFC9BE",
             "fontFamily": "Georgia"
           }
+        },
+        {
+          "version": "3.0",
+          "format": "9:16",
+          "fps": 60,
+          "durationSec": 30,
+          "referenceProject": "short-scotland-road-trip",
+          "templatePath": "series/premium-travel-routes/template-v3.0.json",
+          "instructions": "Signature Edition R9. Behoud Slow Cinema R8: één foto per stop, reservebeeld, korte vaste tekst en R7-kaartovergangen. Voeg echte DEM-hoogteprofielen toe wanneer beschikbaar, compacte geografische informatie, subtiele optische sfeer, originele omgevingsaudio en routeposter. Geen gegenereerde beelden of verzonnen hoogtes. Controleer daadwerkelijke MP4.",
+          "brandKit": {
+            "brandName": "SCOTLAND / THE OPEN ROAD",
+            "primaryColor": "#AE674A",
+            "accentColor": "#E2C48F",
+            "backgroundColor": "#E7E8DE",
+            "surfaceColor": "#173D37",
+            "textColor": "#F8F7EF",
+            "mutedColor": "#AFC9BE",
+            "fontFamily": "Georgia"
+          }
         }
       ],
       "episodes": [
@@ -432,7 +451,7 @@
           "slug": "short-scotland-road-trip",
           "season": 1,
           "episodeNumber": 1,
-          "templateVersion": "2.1"
+          "templateVersion": "3.0"
         }
       ],
       "cover": {

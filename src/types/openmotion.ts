@@ -407,6 +407,8 @@ export interface ScenePremiumTravelRoute {
   openingSecondary?: boolean;
   openingPhoto?: PremiumTravelPhoto;
   openingSubtitle?: string;
+  signatureAtmosphere?: 'light' | 'haze' | 'water';
+  signatureDepth?: boolean;
   editorialRevision?: number;
   relief?: boolean;
   cta?: string;

@@ -98,6 +98,13 @@
       "templateVersion": "3.3",
       "folder": "motion-packages/simply-explained-v3-3-0",
       "name": "simply-explained-v3-3-0"
+    },
+    {
+      "seriesId": "premium-travel-routes",
+      "title": "Premium Travel Routes",
+      "templateVersion": "3.0",
+      "folder": "motion-packages/premium-travel-routes-v3-0-0",
+      "name": "premium-travel-routes-v3-0-0"
     }
   ],
   "profiles": [
