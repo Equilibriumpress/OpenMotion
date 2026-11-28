@@ -1,0 +1,48 @@
+{
+  "specVersion": "0.2",
+  "name": "window-seat-v1-0-0",
+  "version": "1.0.0",
+  "description": "Knowledge-only production recipe for Window Seat, native template 1.0.",
+  "license": "LicenseRef-All-Rights-Reserved",
+  "licenseFile": "LICENSE",
+  "motion": "MOTION.md",
+  "design": {
+    "path": "DESIGN.md",
+    "format": "markdown"
+  },
+  "skill": "SKILL.md",
+  "files": [
+    {
+      "path": "MOTION.md",
+      "role": "motion",
+      "sha256": "e5de4cf35944c67c17556190df987299475333620ed486764be52adec4cf8e59"
+    },
+    {
+      "path": "DESIGN.md",
+      "role": "design",
+      "sha256": "1a97cd3c72c8e1577d773e2eea5c06e3a5966839ff7a5ad6d8e186ed6b9fcf75"
+    },
+    {
+      "path": "SKILL.md",
+      "role": "skill",
+      "sha256": "697f3467f4d6474f4fb20451b446b769362a11e1f34c75d2ebe4537fd354e93a"
+    },
+    {
+      "path": "LICENSE",
+      "role": "license",
+      "sha256": "77126b8b220cfac6afb206ac1484b448156d218699e1ec32afbfbf8942bbda81"
+    }
+  ],
+  "tags": [
+    "series",
+    "knowledge-only"
+  ],
+  "extensions": {
+    "nl.equilibriumpress": {
+      "seriesId": "window-seat",
+      "templateVersion": "1.0",
+      "sourceRevision": "41cfb4b0c4b1b55c52f30c80cf8c5882bbe8eab4",
+      "status": "source-derived-not-render-verified"
+    }
+  }
+}

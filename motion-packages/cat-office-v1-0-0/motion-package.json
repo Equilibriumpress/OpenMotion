@@ -1,0 +1,48 @@
+{
+  "specVersion": "0.2",
+  "name": "cat-office-v1-0-0",
+  "version": "1.0.0",
+  "description": "Knowledge-only production recipe for The Cat Office, native template 1.0.",
+  "license": "LicenseRef-All-Rights-Reserved",
+  "licenseFile": "LICENSE",
+  "motion": "MOTION.md",
+  "design": {
+    "path": "DESIGN.md",
+    "format": "markdown"
+  },
+  "skill": "SKILL.md",
+  "files": [
+    {
+      "path": "MOTION.md",
+      "role": "motion",
+      "sha256": "b879c22134c4ad947c242527b047108bafc5734252ab7d1ab1f375ad7bd9cf3f"
+    },
+    {
+      "path": "DESIGN.md",
+      "role": "design",
+      "sha256": "aaf38392d3d3ad26fd83bff67921416b82d117a8023ec1ebef6b30ff36e30433"
+    },
+    {
+      "path": "SKILL.md",
+      "role": "skill",
+      "sha256": "b19762e9a741483ede5c78dc58d2f977e4eaf54d3d0079d48070b1c930f7b55c"
+    },
+    {
+      "path": "LICENSE",
+      "role": "license",
+      "sha256": "77126b8b220cfac6afb206ac1484b448156d218699e1ec32afbfbf8942bbda81"
+    }
+  ],
+  "tags": [
+    "series",
+    "knowledge-only"
+  ],
+  "extensions": {
+    "nl.equilibriumpress": {
+      "seriesId": "cat-office",
+      "templateVersion": "1.0",
+      "sourceRevision": "41cfb4b0c4b1b55c52f30c80cf8c5882bbe8eab4",
+      "status": "source-derived-not-render-verified"
+    }
+  }
+}

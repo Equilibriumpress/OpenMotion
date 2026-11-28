@@ -1,0 +1,165 @@
+{
+  "specVersion": "0.2",
+  "packages": [
+    {
+      "seriesId": "inside-your-mind",
+      "title": "Inside Your Mind",
+      "templateVersion": "1.0",
+      "folder": "motion-packages/inside-your-mind-v1-0-0",
+      "name": "inside-your-mind-v1-0-0"
+    },
+    {
+      "seriesId": "inside-adhd-mind",
+      "title": "Inside the ADHD Mind",
+      "templateVersion": "1.0",
+      "folder": "motion-packages/inside-adhd-mind-v1-0-0",
+      "name": "inside-adhd-mind-v1-0-0"
+    },
+    {
+      "seriesId": "why-things-work",
+      "title": "Why Things Work",
+      "templateVersion": "1.0",
+      "folder": "motion-packages/why-things-work-v1-0-0",
+      "name": "why-things-work-v1-0-0"
+    },
+    {
+      "seriesId": "my-bucket-list",
+      "title": "My Bucket List",
+      "templateVersion": "3.0",
+      "folder": "motion-packages/my-bucket-list-v3-0-0",
+      "name": "my-bucket-list-v3-0-0"
+    },
+    {
+      "seriesId": "places-worth-exploring",
+      "title": "Places Worth Exploring",
+      "templateVersion": "1.0",
+      "folder": "motion-packages/places-worth-exploring-v1-0-0",
+      "name": "places-worth-exploring-v1-0-0"
+    },
+    {
+      "seriesId": "geographical-stories",
+      "title": "Geographical Stories",
+      "templateVersion": "1.0",
+      "folder": "motion-packages/geographical-stories-v1-0-0",
+      "name": "geographical-stories-v1-0-0"
+    },
+    {
+      "seriesId": "hoe-werkt-de-wereld",
+      "title": "Hoe werkt de wereld?",
+      "templateVersion": "1.0",
+      "folder": "motion-packages/hoe-werkt-de-wereld-v1-0-0",
+      "name": "hoe-werkt-de-wereld-v1-0-0"
+    },
+    {
+      "seriesId": "cat-office",
+      "title": "The Cat Office",
+      "templateVersion": "1.0",
+      "folder": "motion-packages/cat-office-v1-0-0",
+      "name": "cat-office-v1-0-0"
+    },
+    {
+      "seriesId": "premium-travel-routes",
+      "title": "Premium Travel Routes",
+      "templateVersion": "2.1",
+      "folder": "motion-packages/premium-travel-routes-v2-1-0",
+      "name": "premium-travel-routes-v2-1-0"
+    },
+    {
+      "seriesId": "the-human-side",
+      "title": "The Human Side",
+      "templateVersion": "2.3",
+      "folder": "motion-packages/the-human-side-v2-3-0",
+      "name": "the-human-side-v2-3-0"
+    },
+    {
+      "seriesId": "the-song-explained",
+      "title": "The Song Explained",
+      "templateVersion": "3.0",
+      "folder": "motion-packages/the-song-explained-v3-0-0",
+      "name": "the-song-explained-v3-0-0"
+    },
+    {
+      "seriesId": "window-seat",
+      "title": "Window Seat",
+      "templateVersion": "1.0",
+      "folder": "motion-packages/window-seat-v1-0-0",
+      "name": "window-seat-v1-0-0"
+    },
+    {
+      "seriesId": "living-travel-posters",
+      "title": "Living Travel Posters",
+      "templateVersion": "3.0",
+      "folder": "motion-packages/living-travel-posters-v3-0-0",
+      "name": "living-travel-posters-v3-0-0"
+    },
+    {
+      "seriesId": "simply-explained",
+      "title": "Simply Explained",
+      "templateVersion": "3.3",
+      "folder": "motion-packages/simply-explained-v3-3-0",
+      "name": "simply-explained-v3-3-0"
+    }
+  ],
+  "profiles": [
+    {
+      "id": "ui-3d-reveal",
+      "title": "3D UI Reveal",
+      "duration": 13,
+      "reference": "https://github.com/nexu-io/openmotion/blob/05a28737dc8e12da3909219b81eda812c99a112e/library/skills/openmotion-design-remix/references/ui-3d-reveal/MOTION_DESIGN.md",
+      "source": "https://github.com/heygen-com/hyperframes/tree/070b964d7b8cd844a893f0abbe8e0b7f1ac6d879/registry/blocks/ui-3d-reveal",
+      "preview": "https://static.heygen.ai/hyperframes-oss/docs/images/catalog/blocks/ui-3d-reveal.mp4",
+      "adaptation": "Projected Canvas cards and existing Three.js camera; keep hierarchy and stagger.",
+      "status": "Reference only; native adaptation proposed, not implemented or rendered."
+    },
+    {
+      "id": "wireframe-portal-title",
+      "title": "Wireframe Portal Title",
+      "duration": 8,
+      "reference": "https://github.com/nexu-io/openmotion/blob/05a28737dc8e12da3909219b81eda812c99a112e/library/skills/openmotion-design-remix/references/wireframe-portal-title/MOTION_DESIGN.md",
+      "source": "https://github.com/heygen-com/hyperframes/tree/070b964d7b8cd844a893f0abbe8e0b7f1ac6d879/registry/blocks/wireframe-portal-title",
+      "preview": "https://static.heygen.ai/hyperframes-oss/docs/images/catalog/blocks/wireframe-portal-title.mp4",
+      "adaptation": "Original SVG/Canvas nested paths, depth and timed title reveal.",
+      "status": "Reference only; native adaptation proposed, not implemented or rendered."
+    },
+    {
+      "id": "code-3d-extrude",
+      "title": "Code 3D Extrude",
+      "duration": 8,
+      "reference": "https://github.com/nexu-io/openmotion/blob/05a28737dc8e12da3909219b81eda812c99a112e/library/skills/openmotion-design-remix/references/code-3d-extrude/MOTION_DESIGN.md",
+      "source": "https://github.com/heygen-com/hyperframes/tree/070b964d7b8cd844a893f0abbe8e0b7f1ac6d879/registry/blocks/code-3d-extrude",
+      "preview": "https://static.heygen.ai/hyperframes-oss/docs/images/catalog/blocks/code-3d-extrude.mp4",
+      "adaptation": "Existing Canvas diagram layers and Three.js depth where already supported.",
+      "status": "Reference only; native adaptation proposed, not implemented or rendered."
+    },
+    {
+      "id": "code-particle-assemble",
+      "title": "Code Particle Assemble",
+      "duration": 8,
+      "reference": "https://github.com/nexu-io/openmotion/blob/05a28737dc8e12da3909219b81eda812c99a112e/library/skills/openmotion-design-remix/references/code-particle-assemble/MOTION_DESIGN.md",
+      "source": "https://github.com/heygen-com/hyperframes/tree/070b964d7b8cd844a893f0abbe8e0b7f1ac6d879/registry/blocks/code-particle-assemble",
+      "preview": "https://static.heygen.ai/hyperframes-oss/docs/images/catalog/blocks/code-particle-assemble.mp4",
+      "adaptation": "Seeded Canvas particles and timed diagram labels; stable per-frame seed.",
+      "status": "Reference only; native adaptation proposed, not implemented or rendered."
+    },
+    {
+      "id": "canopy-part-title",
+      "title": "Canopy Part Title",
+      "duration": 12,
+      "reference": "https://github.com/nexu-io/openmotion/blob/05a28737dc8e12da3909219b81eda812c99a112e/library/skills/openmotion-design-remix/references/canopy-part-title/MOTION_DESIGN.md",
+      "source": "https://github.com/heygen-com/hyperframes/tree/070b964d7b8cd844a893f0abbe8e0b7f1ac6d879/registry/blocks/canopy-part-title",
+      "preview": "https://static.heygen.ai/hyperframes-oss/docs/images/catalog/blocks/canopy-part-title.mp4",
+      "adaptation": "Existing parallax-cinema planes and original vector occlusion masks.",
+      "status": "Reference only; native adaptation proposed, not implemented or rendered."
+    },
+    {
+      "id": "liquid-glass-widgets",
+      "title": "Liquid Glass Widgets",
+      "duration": 8,
+      "reference": "https://github.com/nexu-io/openmotion/blob/05a28737dc8e12da3909219b81eda812c99a112e/library/skills/openmotion-design-remix/references/liquid-glass-widgets/MOTION_DESIGN.md",
+      "source": "https://github.com/heygen-com/hyperframes/tree/070b964d7b8cd844a893f0abbe8e0b7f1ac6d879/registry/blocks/liquid-glass-widgets",
+      "preview": "https://static.heygen.ai/hyperframes-oss/docs/images/catalog/blocks/liquid-glass-widgets.mp4",
+      "adaptation": "Existing Canvas rounded cards, gradients and stagger; no external glass shader.",
+      "status": "Reference only; native adaptation proposed, not implemented or rendered."
+    }
+  ]
+}

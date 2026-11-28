@@ -1,0 +1,48 @@
+{
+  "specVersion": "0.2",
+  "name": "places-worth-exploring-v1-0-0",
+  "version": "1.0.0",
+  "description": "Knowledge-only production recipe for Places Worth Exploring, native template 1.0.",
+  "license": "LicenseRef-All-Rights-Reserved",
+  "licenseFile": "LICENSE",
+  "motion": "MOTION.md",
+  "design": {
+    "path": "DESIGN.md",
+    "format": "markdown"
+  },
+  "skill": "SKILL.md",
+  "files": [
+    {
+      "path": "MOTION.md",
+      "role": "motion",
+      "sha256": "a1a32cd65848e7fde9ff42aae50ddc98f32358a143648fa78dc5e2f6b592612f"
+    },
+    {
+      "path": "DESIGN.md",
+      "role": "design",
+      "sha256": "985f148be071b93cd1297c1cee5f7c704f7219c7e5998970c50d0ac8c5303994"
+    },
+    {
+      "path": "SKILL.md",
+      "role": "skill",
+      "sha256": "58627e1db6b234824d0f4ad1b2444798dc999114fa56c6d075688b411eedd4ad"
+    },
+    {
+      "path": "LICENSE",
+      "role": "license",
+      "sha256": "77126b8b220cfac6afb206ac1484b448156d218699e1ec32afbfbf8942bbda81"
+    }
+  ],
+  "tags": [
+    "series",
+    "knowledge-only"
+  ],
+  "extensions": {
+    "nl.equilibriumpress": {
+      "seriesId": "places-worth-exploring",
+      "templateVersion": "1.0",
+      "sourceRevision": "41cfb4b0c4b1b55c52f30c80cf8c5882bbe8eab4",
+      "status": "source-derived-not-render-verified"
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "specVersion": "0.2",
+  "name": "the-song-explained-v3-0-0",
+  "version": "3.0.0",
+  "description": "Knowledge-only production recipe for The Song Explained, native template 3.0.",
+  "license": "LicenseRef-All-Rights-Reserved",
+  "licenseFile": "LICENSE",
+  "motion": "MOTION.md",
+  "design": {
+    "path": "DESIGN.md",
+    "format": "markdown"
+  },
+  "skill": "SKILL.md",
+  "files": [
+    {
+      "path": "MOTION.md",
+      "role": "motion",
+      "sha256": "b686bfc3ab149f9754ac396b0dfd4f4ba25688344c47d613a92e9f49e46acf13"
+    },
+    {
+      "path": "DESIGN.md",
+      "role": "design",
+      "sha256": "41a936d8cb0b85215d7e7b003903e45bf48b1df2ff062025c10cf9ddaa013db5"
+    },
+    {
+      "path": "SKILL.md",
+      "role": "skill",
+      "sha256": "a1d5941fa0bfaf243d6fc8b3f227a37bf810765901b82b1c18192db5690517e4"
+    },
+    {
+      "path": "LICENSE",
+      "role": "license",
+      "sha256": "77126b8b220cfac6afb206ac1484b448156d218699e1ec32afbfbf8942bbda81"
+    }
+  ],
+  "tags": [
+    "series",
+    "knowledge-only"
+  ],
+  "extensions": {
+    "nl.equilibriumpress": {
+      "seriesId": "the-song-explained",
+      "templateVersion": "3.0",
+      "sourceRevision": "41cfb4b0c4b1b55c52f30c80cf8c5882bbe8eab4",
+      "status": "source-derived-not-render-verified"
+    }
+  }
+}

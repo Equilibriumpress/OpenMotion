@@ -1,0 +1,48 @@
+{
+  "specVersion": "0.2",
+  "name": "the-human-side-v2-3-0",
+  "version": "2.3.0",
+  "description": "Knowledge-only production recipe for The Human Side, native template 2.3.",
+  "license": "LicenseRef-All-Rights-Reserved",
+  "licenseFile": "LICENSE",
+  "motion": "MOTION.md",
+  "design": {
+    "path": "DESIGN.md",
+    "format": "markdown"
+  },
+  "skill": "SKILL.md",
+  "files": [
+    {
+      "path": "MOTION.md",
+      "role": "motion",
+      "sha256": "46e5e6d3d4fed5f85c9fefe02aae29cbe6a53eaa071250c32a6e0f6104099e5c"
+    },
+    {
+      "path": "DESIGN.md",
+      "role": "design",
+      "sha256": "38a3b6261a1cfa92e57501d343284fa27356defca871ce6b4ccba3a7eaa4809e"
+    },
+    {
+      "path": "SKILL.md",
+      "role": "skill",
+      "sha256": "cc3e6092902654ec7320582c8c042ff34e1391dbd8bf8ee0a509ff2e59520f87"
+    },
+    {
+      "path": "LICENSE",
+      "role": "license",
+      "sha256": "77126b8b220cfac6afb206ac1484b448156d218699e1ec32afbfbf8942bbda81"
+    }
+  ],
+  "tags": [
+    "series",
+    "knowledge-only"
+  ],
+  "extensions": {
+    "nl.equilibriumpress": {
+      "seriesId": "the-human-side",
+      "templateVersion": "2.3",
+      "sourceRevision": "41cfb4b0c4b1b55c52f30c80cf8c5882bbe8eab4",
+      "status": "source-derived-not-render-verified"
+    }
+  }
+}
