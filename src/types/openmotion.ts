@@ -524,7 +524,7 @@ export interface SceneThreeExplainer {
 }
 export interface SceneParallaxCinema {
   variant?: 'living-travel-poster';
-  destination?: 'amalfi';
+  destination?: 'amalfi' | 'japan';
   shot: 'cover' | 'boarding' | 'fields' | 'fuji' | 'blossom' | 'station' | 'outro';
   speed?: number;
   episode?: number;

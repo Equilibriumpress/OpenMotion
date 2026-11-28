@@ -1,11 +1,25 @@
 // Original stereo procedural soundtrack, used by both preview and export.
 const cache=new Map<string,Promise<AudioBuffer>>();
-export function createParallaxAudio(seconds:number,variant:'window-seat'|'living-travel-poster'|'living-travel-amalfi'='window-seat'):Promise<AudioBuffer>{
+export function createParallaxAudio(seconds:number,variant:'window-seat'|'living-travel-poster'|'living-travel-amalfi'|'living-travel-japan'='window-seat'):Promise<AudioBuffer>{
  const duration=Math.max(.5,Math.round(seconds*100)/100);
  const key=variant+':'+duration;const old=cache.get(key);if(old)return old;
  const p=Promise.resolve().then(()=>{
  const rate=48000,frames=Math.ceil(rate*duration),b=new AudioBuffer({length:frames,numberOfChannels:2,sampleRate:rate});
  const l=b.getChannelData(0),r=b.getChannelData(1);let seed=621,low=0,wind=0;
+ if(variant==='living-travel-japan'){
+ const pitches=[220,261.63,293.66,349.23,392,440,523.25],pattern=[0,2,4,3,2,1,3,4,6,5,4,2,1,2,3,0];
+ for(let i=0;i<frames;i++){const t=i/rate,q=t/duration*22;seed=(Math.imul(seed,1664525)+1013904223)|0;const white=(seed>>>0)/2147483648-1;low=.978*low+.022*white;wind=.997*wind+.003*white;
+ const fade=Math.max(0,Math.min(1,t/.5,(duration-t)/.8)),move=Math.max(0,Math.min(1,(q-2)/2,(21-q)/3));
+ const beat=t%.56,step=Math.floor(t/.56),f=pitches[pattern[step%16]],env=Math.min(1,beat/.009)*Math.exp(-beat*6);
+ const strings=(Math.sin(2*Math.PI*f*beat)+.30*Math.sin(4*Math.PI*f*beat)+.09*Math.sin(6*Math.PI*f*beat))*.054*env;
+ const b=t%2.24,drone=(Math.sin(2*Math.PI*110*b)+.4*Math.sin(2*Math.PI*164.81*b))*.023*Math.min(1,b/.04)*Math.exp(-b*1.5);
+ const trainEnv=Math.exp(-Math.pow((q-8.8)/2.8,2))*move;const wheels=Math.exp(-(t*4%1)*24)*(white*.032+Math.sin(t*2*Math.PI*83)*.026)*trainEnv;
+ const windTone=(wind*.4+low*.06)*move;const water=(.5+.4*Math.sin(t*1.9))*low*.12*move;
+ const bell=Math.exp(-Math.pow((q-4.2)/.4,2))*(Math.sin(t*2*Math.PI*880)+.2*Math.sin(t*2*Math.PI*1320))*.013;
+ const paper=(Math.exp(-Math.pow((q-2.1)/.25,2))+Math.exp(-Math.pow((q-20.5)/.25,2)))*white*.014;
+ const v=(strings+drone+wheels+windTone+water+bell+paper)*fade;l[i]=v+low*.014*move*fade;r[i]=v-low*.014*move*fade;
+ }return b;
+ }
  if(variant==='living-travel-amalfi'){
  const chords=[[130.81,164.81,196,261.63],[146.83,174.61,220,293.66],[98,123.47,146.83,196],[130.81,164.81,196,261.63]];
  const notes=[0,2,1,3,2,1,2,3];
