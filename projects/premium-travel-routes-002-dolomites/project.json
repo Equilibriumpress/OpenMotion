@@ -3,7 +3,7 @@
   "id": "premium-travel-routes-002-dolomites",
   "slug": "premium-travel-routes-002-dolomites",
   "title": "The Dolomites Road Trip",
-  "description": "The Open Road Collection · 002. A 30-second scenic journey from Ortisei through Passo Gardena and Passo Giau to Lago di Braies, with shaded relief, authentic photography and an original alpine score.",
+  "description": "R9 Open Road Signature Edition: single-photo Slow Cinema, terrain elevation profile, geographic detail, optical atmosphere, original environmental audio and cartographic end card.",
   "category": "Shorts & Reels",
   "author": "OpenMotion Studio",
   "source": "github",
@@ -194,7 +194,7 @@
         "seriesTitle": "THE OPEN ROAD COLLECTION · 002",
         "regionTitle": "DOLOMITES",
         "mapIntro": false,
-        "editorialRevision": 8,
+        "editorialRevision": 9,
         "relief": true,
         "openingPhoto": {
           "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/27/SS242_road_makes_a_bend_on_the_way_to_Passo_Sella%2C_Trentino-Alto_Adige%2C_Italy%2C_2025_October.jpg/1280px-SS242_road_makes_a_bend_on_the_way_to_Passo_Sella%2C_Trentino-Alto_Adige%2C_Italy%2C_2025_October.jpg",
@@ -208,7 +208,8 @@
           ],
           "photoFit": "cover"
         },
-        "openingSubtitle": "ORTISEI TO LAGO DI BRAIES"
+        "openingSubtitle": "ORTISEI TO LAGO DI BRAIES",
+        "signatureAtmosphere": "light"
       }
     },
     {
@@ -378,7 +379,7 @@
         "seriesTitle": "THE OPEN ROAD COLLECTION · 002",
         "regionTitle": "DOLOMITES",
         "mapIntro": true,
-        "editorialRevision": 8,
+        "editorialRevision": 9,
         "relief": true,
         "openingSubtitle": "ORTISEI TO LAGO DI BRAIES"
       }
@@ -550,9 +551,11 @@
         "seriesTitle": "THE OPEN ROAD COLLECTION · 002",
         "regionTitle": "DOLOMITES",
         "mapIntro": false,
-        "editorialRevision": 8,
+        "editorialRevision": 9,
         "relief": true,
-        "openingSubtitle": "ORTISEI TO LAGO DI BRAIES"
+        "openingSubtitle": "ORTISEI TO LAGO DI BRAIES",
+        "signatureAtmosphere": "light",
+        "signatureDepth": false
       }
     },
     {
@@ -722,7 +725,7 @@
         "seriesTitle": "THE OPEN ROAD COLLECTION · 002",
         "regionTitle": "DOLOMITES",
         "mapIntro": false,
-        "editorialRevision": 8,
+        "editorialRevision": 9,
         "relief": true,
         "openingSubtitle": "ORTISEI TO LAGO DI BRAIES"
       }
@@ -894,9 +897,11 @@
         "seriesTitle": "THE OPEN ROAD COLLECTION · 002",
         "regionTitle": "DOLOMITES",
         "mapIntro": false,
-        "editorialRevision": 8,
+        "editorialRevision": 9,
         "relief": true,
-        "openingSubtitle": "ORTISEI TO LAGO DI BRAIES"
+        "openingSubtitle": "ORTISEI TO LAGO DI BRAIES",
+        "signatureAtmosphere": "haze",
+        "signatureDepth": true
       }
     },
     {
@@ -1066,7 +1071,7 @@
         "seriesTitle": "THE OPEN ROAD COLLECTION · 002",
         "regionTitle": "DOLOMITES",
         "mapIntro": false,
-        "editorialRevision": 8,
+        "editorialRevision": 9,
         "relief": true,
         "openingSubtitle": "ORTISEI TO LAGO DI BRAIES"
       }
@@ -1238,9 +1243,11 @@
         "seriesTitle": "THE OPEN ROAD COLLECTION · 002",
         "regionTitle": "DOLOMITES",
         "mapIntro": false,
-        "editorialRevision": 8,
+        "editorialRevision": 9,
         "relief": true,
-        "openingSubtitle": "ORTISEI TO LAGO DI BRAIES"
+        "openingSubtitle": "ORTISEI TO LAGO DI BRAIES",
+        "signatureAtmosphere": "haze",
+        "signatureDepth": false
       }
     },
     {
@@ -1410,7 +1417,7 @@
         "seriesTitle": "THE OPEN ROAD COLLECTION · 002",
         "regionTitle": "DOLOMITES",
         "mapIntro": false,
-        "editorialRevision": 8,
+        "editorialRevision": 9,
         "relief": true,
         "openingSubtitle": "ORTISEI TO LAGO DI BRAIES"
       }
@@ -1582,9 +1589,11 @@
         "seriesTitle": "THE OPEN ROAD COLLECTION · 002",
         "regionTitle": "DOLOMITES",
         "mapIntro": false,
-        "editorialRevision": 8,
+        "editorialRevision": 9,
         "relief": true,
-        "openingSubtitle": "ORTISEI TO LAGO DI BRAIES"
+        "openingSubtitle": "ORTISEI TO LAGO DI BRAIES",
+        "signatureAtmosphere": "water",
+        "signatureDepth": false
       }
     },
     {
@@ -1755,7 +1764,7 @@
         "regionTitle": "DOLOMITES",
         "mapIntro": false,
         "cta": "SAVE THIS ROAD TRIP",
-        "editorialRevision": 8,
+        "editorialRevision": 9,
         "relief": true,
         "openingSubtitle": "ORTISEI TO LAGO DI BRAIES"
       }
@@ -1765,7 +1774,7 @@
   "seriesId": "premium-travel-routes",
   "season": 1,
   "episodeNumber": 2,
-  "templateVersion": "2.1",
+  "templateVersion": "3.0",
   "productionStatus": "review",
   "thumbnailUrl": "thumbnails/premium-travel-routes-002-dolomites.svg"
 }
