@@ -1,0 +1,2270 @@
+{
+  "schemaVersion": "1.0",
+  "id": "premium-travel-routes-003-iceland-ring-road",
+  "slug": "premium-travel-routes-003-iceland-ring-road",
+  "title": "Iceland’s Ring Road",
+  "description": "The Open Road Collection · 003. Four natural landmarks along Iceland's Ring Road, with a closed-loop route, glacial photography, original Nordic soundscape and Signature Edition R9 cartography.",
+  "category": "Shorts & Reels",
+  "author": "OpenMotion Studio",
+  "source": "github",
+  "createdAt": "2026-11-28",
+  "updatedAt": "2026-11-28",
+  "githubPath": "projects/premium-travel-routes-003-iceland-ring-road/project.json",
+  "format": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 60,
+  "brandKit": {
+    "brandName": "ICELAND / THE OPEN ROAD",
+    "primaryColor": "#AE674A",
+    "accentColor": "#E2C48F",
+    "backgroundColor": "#E7E8DE",
+    "surfaceColor": "#22383B",
+    "textColor": "#F8F7EF",
+    "mutedColor": "#9DBBC6",
+    "fontFamily": "Georgia"
+  },
+  "audioTracks": [],
+  "captions": [],
+  "scenes": [
+    {
+      "id": "opening",
+      "name": "01 / Iceland cold open",
+      "durationSec": 3,
+      "layout": "premium-travel-route",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "ICELAND'S\nRING ROAD",
+      "fullBleed": true,
+      "premiumTravel": {
+        "stops": [
+          {
+            "name": "Seljalandsfoss",
+            "lat": 63.61565,
+            "lon": -19.9919,
+            "note": "Water falls from a former sea cliff.",
+            "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1507_3122.jpg/1280px-Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1507_3122.jpg",
+            "photoAuthor": "Jakub Hałun",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1507_3122.jpg",
+            "label": "Seljalandsfoss",
+            "photoFocus": [
+              0.5,
+              0.43
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1504_3112.jpg/3840px-Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1504_3112.jpg",
+              "photoAuthor": "Jakub Hałun",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1504_3112.jpg",
+              "label": "Seljalandsfoss",
+              "photoFocus": [
+                0.5,
+                0.45
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Vík",
+            "lat": 63.4182,
+            "lon": -19.0064,
+            "note": "Black volcanic sand meets the Atlantic.",
+            "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Black_sand_beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.JPG",
+            "photoAuthor": "Beata May",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Black_sand_beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.JPG",
+            "label": "Vík black sand beach",
+            "photoFocus": [
+              0.51,
+              0.49
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/4/42/Black_Sand_Beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.jpg",
+              "photoAuthor": "Claracorcoran1",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Black_Sand_Beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.jpg",
+              "label": "Vík black sand beach",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Jökulsárlón",
+            "lat": 64.0476,
+            "lon": -16.1789,
+            "note": "Icebergs drift through a glacial lagoon.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1544_2213.jpg/3840px-J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1544_2213.jpg",
+            "photoAuthor": "Jakub Hałun",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1544_2213.jpg",
+            "label": "Jökulsárlón",
+            "photoFocus": [
+              0.52,
+              0.47
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/88/J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1542_2187.jpg/3840px-J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1542_2187.jpg",
+              "photoAuthor": "Jakub Hałun",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1542_2187.jpg",
+              "label": "Jökulsárlón",
+              "photoFocus": [
+                0.48,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Goðafoss",
+            "lat": 65.6855,
+            "lon": -17.5488,
+            "note": "A wide waterfall in northern Iceland.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0921_1217.jpg/3840px-Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0921_1217.jpg",
+            "photoAuthor": "Jakub Hałun",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0921_1217.jpg",
+            "label": "Goðafoss",
+            "photoFocus": [
+              0.5,
+              0.46
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0851_1122.jpg/3840px-Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0851_1122.jpg",
+              "photoAuthor": "Jakub Hałun",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0851_1122.jpg",
+              "label": "Goðafoss",
+              "photoFocus": [
+                0.5,
+                0.48
+              ],
+              "photoFit": "cover"
+            }
+          }
+        ],
+        "route": {
+          "type": "Feature",
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                -19.9919,
+                63.61565
+              ],
+              [
+                -19.0064,
+                63.4182
+              ],
+              [
+                -16.1789,
+                64.0476
+              ],
+              [
+                -17.5488,
+                65.6855
+              ],
+              [
+                -19.9919,
+                63.61565
+              ]
+            ]
+          },
+          "properties": {
+            "status": "routing-needed",
+            "source": "Illustrative stops only; OSRM road matching required"
+          }
+        },
+        "chapter": "opening",
+        "focusStopIndex": 1,
+        "mapCenter": [
+          -18.7,
+          64.55
+        ],
+        "mapZoom": 5.15,
+        "routeProgressFrom": 0,
+        "routeProgressTo": 1,
+        "roadMatched": false,
+        "markerStyle": "dot",
+        "editorial": true,
+        "seriesTitle": "THE OPEN ROAD COLLECTION · 003",
+        "regionTitle": "ICELAND",
+        "mapIntro": false,
+        "editorialRevision": 9,
+        "relief": true,
+        "openingPhoto": {
+          "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Road_No_1_winding_through_the_Icelandic_highlands_(16443714336).jpg/3840px-Road_No_1_winding_through_the_Icelandic_highlands_(16443714336).jpg",
+          "photoAuthor": "sergejf",
+          "photoLicense": "CC BY-SA 2.0",
+          "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Road_No_1_winding_through_the_Icelandic_highlands_(16443714336).jpg",
+          "label": "Route 1 across Iceland",
+          "photoFocus": [
+            0.5,
+            0.55
+          ],
+          "photoFit": "cover"
+        },
+        "openingSubtitle": "ROUTE 1 · AROUND THE ISLAND",
+        "closeLoop": true,
+        "routeVia": [
+          {
+            "afterStop": 2,
+            "coordinates": [
+              [
+                -14.012,
+                64.793
+              ],
+              [
+                -14.221,
+                65.034
+              ],
+              [
+                -14.391,
+                65.267
+              ],
+              [
+                -16.914,
+                65.641
+              ]
+            ]
+          },
+          {
+            "afterStop": 3,
+            "coordinates": [
+              [
+                -18.095,
+                65.684
+              ],
+              [
+                -20.288,
+                65.659
+              ],
+              [
+                -21.915,
+                64.542
+              ],
+              [
+                -21.77,
+                64.125
+              ]
+            ]
+          }
+        ],
+        "signatureAtmosphere": "haze"
+      }
+    },
+    {
+      "id": "route-intro",
+      "name": "02 / Around Iceland",
+      "durationSec": 2,
+      "layout": "premium-travel-route",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "AROUND ICELAND",
+      "fullBleed": true,
+      "premiumTravel": {
+        "stops": [
+          {
+            "name": "Seljalandsfoss",
+            "lat": 63.61565,
+            "lon": -19.9919,
+            "note": "Water falls from a former sea cliff.",
+            "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1507_3122.jpg/1280px-Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1507_3122.jpg",
+            "photoAuthor": "Jakub Hałun",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1507_3122.jpg",
+            "label": "Seljalandsfoss",
+            "photoFocus": [
+              0.5,
+              0.43
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1504_3112.jpg/3840px-Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1504_3112.jpg",
+              "photoAuthor": "Jakub Hałun",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1504_3112.jpg",
+              "label": "Seljalandsfoss",
+              "photoFocus": [
+                0.5,
+                0.45
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Vík",
+            "lat": 63.4182,
+            "lon": -19.0064,
+            "note": "Black volcanic sand meets the Atlantic.",
+            "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Black_sand_beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.JPG",
+            "photoAuthor": "Beata May",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Black_sand_beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.JPG",
+            "label": "Vík black sand beach",
+            "photoFocus": [
+              0.51,
+              0.49
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/4/42/Black_Sand_Beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.jpg",
+              "photoAuthor": "Claracorcoran1",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Black_Sand_Beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.jpg",
+              "label": "Vík black sand beach",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Jökulsárlón",
+            "lat": 64.0476,
+            "lon": -16.1789,
+            "note": "Icebergs drift through a glacial lagoon.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1544_2213.jpg/3840px-J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1544_2213.jpg",
+            "photoAuthor": "Jakub Hałun",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1544_2213.jpg",
+            "label": "Jökulsárlón",
+            "photoFocus": [
+              0.52,
+              0.47
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/88/J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1542_2187.jpg/3840px-J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1542_2187.jpg",
+              "photoAuthor": "Jakub Hałun",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1542_2187.jpg",
+              "label": "Jökulsárlón",
+              "photoFocus": [
+                0.48,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Goðafoss",
+            "lat": 65.6855,
+            "lon": -17.5488,
+            "note": "A wide waterfall in northern Iceland.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0921_1217.jpg/3840px-Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0921_1217.jpg",
+            "photoAuthor": "Jakub Hałun",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0921_1217.jpg",
+            "label": "Goðafoss",
+            "photoFocus": [
+              0.5,
+              0.46
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0851_1122.jpg/3840px-Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0851_1122.jpg",
+              "photoAuthor": "Jakub Hałun",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0851_1122.jpg",
+              "label": "Goðafoss",
+              "photoFocus": [
+                0.5,
+                0.48
+              ],
+              "photoFit": "cover"
+            }
+          }
+        ],
+        "route": {
+          "type": "Feature",
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                -19.9919,
+                63.61565
+              ],
+              [
+                -19.0064,
+                63.4182
+              ],
+              [
+                -16.1789,
+                64.0476
+              ],
+              [
+                -17.5488,
+                65.6855
+              ],
+              [
+                -19.9919,
+                63.61565
+              ]
+            ]
+          },
+          "properties": {
+            "status": "routing-needed",
+            "source": "Illustrative stops only; OSRM road matching required"
+          }
+        },
+        "chapter": "finale",
+        "focusStopIndex": -1,
+        "mapCenter": [
+          -18.7,
+          64.45
+        ],
+        "mapZoom": 5.15,
+        "routeProgressFrom": 0,
+        "routeProgressTo": 1,
+        "roadMatched": false,
+        "markerStyle": "dot",
+        "editorial": true,
+        "seriesTitle": "THE OPEN ROAD COLLECTION · 003",
+        "regionTitle": "ICELAND",
+        "mapIntro": true,
+        "editorialRevision": 9,
+        "relief": true,
+        "openingSubtitle": "ROUTE 1 · AROUND THE ISLAND",
+        "closeLoop": true,
+        "routeVia": [
+          {
+            "afterStop": 2,
+            "coordinates": [
+              [
+                -14.012,
+                64.793
+              ],
+              [
+                -14.221,
+                65.034
+              ],
+              [
+                -14.391,
+                65.267
+              ],
+              [
+                -16.914,
+                65.641
+              ]
+            ]
+          },
+          {
+            "afterStop": 3,
+            "coordinates": [
+              [
+                -18.095,
+                65.684
+              ],
+              [
+                -20.288,
+                65.659
+              ],
+              [
+                -21.915,
+                64.542
+              ],
+              [
+                -21.77,
+                64.125
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "photo-seljalandsfoss",
+      "name": "03 / Seljalandsfoss",
+      "durationSec": 2.5,
+      "layout": "premium-travel-route",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Seljalandsfoss",
+      "fullBleed": true,
+      "premiumTravel": {
+        "stops": [
+          {
+            "name": "Seljalandsfoss",
+            "lat": 63.61565,
+            "lon": -19.9919,
+            "note": "Water falls from a former sea cliff.",
+            "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1507_3122.jpg/1280px-Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1507_3122.jpg",
+            "photoAuthor": "Jakub Hałun",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1507_3122.jpg",
+            "label": "Seljalandsfoss",
+            "photoFocus": [
+              0.5,
+              0.43
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1504_3112.jpg/3840px-Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1504_3112.jpg",
+              "photoAuthor": "Jakub Hałun",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1504_3112.jpg",
+              "label": "Seljalandsfoss",
+              "photoFocus": [
+                0.5,
+                0.45
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Vík",
+            "lat": 63.4182,
+            "lon": -19.0064,
+            "note": "Black volcanic sand meets the Atlantic.",
+            "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Black_sand_beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.JPG",
+            "photoAuthor": "Beata May",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Black_sand_beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.JPG",
+            "label": "Vík black sand beach",
+            "photoFocus": [
+              0.51,
+              0.49
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/4/42/Black_Sand_Beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.jpg",
+              "photoAuthor": "Claracorcoran1",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Black_Sand_Beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.jpg",
+              "label": "Vík black sand beach",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Jökulsárlón",
+            "lat": 64.0476,
+            "lon": -16.1789,
+            "note": "Icebergs drift through a glacial lagoon.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1544_2213.jpg/3840px-J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1544_2213.jpg",
+            "photoAuthor": "Jakub Hałun",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1544_2213.jpg",
+            "label": "Jökulsárlón",
+            "photoFocus": [
+              0.52,
+              0.47
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/88/J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1542_2187.jpg/3840px-J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1542_2187.jpg",
+              "photoAuthor": "Jakub Hałun",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1542_2187.jpg",
+              "label": "Jökulsárlón",
+              "photoFocus": [
+                0.48,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Goðafoss",
+            "lat": 65.6855,
+            "lon": -17.5488,
+            "note": "A wide waterfall in northern Iceland.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0921_1217.jpg/3840px-Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0921_1217.jpg",
+            "photoAuthor": "Jakub Hałun",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0921_1217.jpg",
+            "label": "Goðafoss",
+            "photoFocus": [
+              0.5,
+              0.46
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0851_1122.jpg/3840px-Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0851_1122.jpg",
+              "photoAuthor": "Jakub Hałun",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0851_1122.jpg",
+              "label": "Goðafoss",
+              "photoFocus": [
+                0.5,
+                0.48
+              ],
+              "photoFit": "cover"
+            }
+          }
+        ],
+        "route": {
+          "type": "Feature",
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                -19.9919,
+                63.61565
+              ],
+              [
+                -19.0064,
+                63.4182
+              ],
+              [
+                -16.1789,
+                64.0476
+              ],
+              [
+                -17.5488,
+                65.6855
+              ],
+              [
+                -19.9919,
+                63.61565
+              ]
+            ]
+          },
+          "properties": {
+            "status": "routing-needed",
+            "source": "Illustrative stops only; OSRM road matching required"
+          }
+        },
+        "chapter": "photo",
+        "focusStopIndex": 0,
+        "mapCenter": [
+          -19.5,
+          63.5
+        ],
+        "mapZoom": 7.25,
+        "routeProgressFrom": 0,
+        "routeProgressTo": 1,
+        "roadMatched": false,
+        "markerStyle": "dot",
+        "editorial": true,
+        "seriesTitle": "THE OPEN ROAD COLLECTION · 003",
+        "regionTitle": "ICELAND",
+        "mapIntro": false,
+        "editorialRevision": 9,
+        "relief": true,
+        "openingSubtitle": "ROUTE 1 · AROUND THE ISLAND",
+        "closeLoop": true,
+        "routeVia": [
+          {
+            "afterStop": 2,
+            "coordinates": [
+              [
+                -14.012,
+                64.793
+              ],
+              [
+                -14.221,
+                65.034
+              ],
+              [
+                -14.391,
+                65.267
+              ],
+              [
+                -16.914,
+                65.641
+              ]
+            ]
+          },
+          {
+            "afterStop": 3,
+            "coordinates": [
+              [
+                -18.095,
+                65.684
+              ],
+              [
+                -20.288,
+                65.659
+              ],
+              [
+                -21.915,
+                64.542
+              ],
+              [
+                -21.77,
+                64.125
+              ]
+            ]
+          }
+        ],
+        "signatureAtmosphere": "water",
+        "signatureDepth": false
+      }
+    },
+    {
+      "id": "drive-vik",
+      "name": "04 / South coast",
+      "durationSec": 2.5,
+      "layout": "premium-travel-route",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Vík",
+      "fullBleed": true,
+      "premiumTravel": {
+        "stops": [
+          {
+            "name": "Seljalandsfoss",
+            "lat": 63.61565,
+            "lon": -19.9919,
+            "note": "Water falls from a former sea cliff.",
+            "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1507_3122.jpg/1280px-Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1507_3122.jpg",
+            "photoAuthor": "Jakub Hałun",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1507_3122.jpg",
+            "label": "Seljalandsfoss",
+            "photoFocus": [
+              0.5,
+              0.43
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1504_3112.jpg/3840px-Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1504_3112.jpg",
+              "photoAuthor": "Jakub Hałun",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1504_3112.jpg",
+              "label": "Seljalandsfoss",
+              "photoFocus": [
+                0.5,
+                0.45
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Vík",
+            "lat": 63.4182,
+            "lon": -19.0064,
+            "note": "Black volcanic sand meets the Atlantic.",
+            "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Black_sand_beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.JPG",
+            "photoAuthor": "Beata May",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Black_sand_beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.JPG",
+            "label": "Vík black sand beach",
+            "photoFocus": [
+              0.51,
+              0.49
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/4/42/Black_Sand_Beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.jpg",
+              "photoAuthor": "Claracorcoran1",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Black_Sand_Beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.jpg",
+              "label": "Vík black sand beach",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Jökulsárlón",
+            "lat": 64.0476,
+            "lon": -16.1789,
+            "note": "Icebergs drift through a glacial lagoon.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1544_2213.jpg/3840px-J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1544_2213.jpg",
+            "photoAuthor": "Jakub Hałun",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1544_2213.jpg",
+            "label": "Jökulsárlón",
+            "photoFocus": [
+              0.52,
+              0.47
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/88/J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1542_2187.jpg/3840px-J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1542_2187.jpg",
+              "photoAuthor": "Jakub Hałun",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1542_2187.jpg",
+              "label": "Jökulsárlón",
+              "photoFocus": [
+                0.48,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Goðafoss",
+            "lat": 65.6855,
+            "lon": -17.5488,
+            "note": "A wide waterfall in northern Iceland.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0921_1217.jpg/3840px-Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0921_1217.jpg",
+            "photoAuthor": "Jakub Hałun",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0921_1217.jpg",
+            "label": "Goðafoss",
+            "photoFocus": [
+              0.5,
+              0.46
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0851_1122.jpg/3840px-Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0851_1122.jpg",
+              "photoAuthor": "Jakub Hałun",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0851_1122.jpg",
+              "label": "Goðafoss",
+              "photoFocus": [
+                0.5,
+                0.48
+              ],
+              "photoFit": "cover"
+            }
+          }
+        ],
+        "route": {
+          "type": "Feature",
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                -19.9919,
+                63.61565
+              ],
+              [
+                -19.0064,
+                63.4182
+              ],
+              [
+                -16.1789,
+                64.0476
+              ],
+              [
+                -17.5488,
+                65.6855
+              ],
+              [
+                -19.9919,
+                63.61565
+              ]
+            ]
+          },
+          "properties": {
+            "status": "routing-needed",
+            "source": "Illustrative stops only; OSRM road matching required"
+          }
+        },
+        "chapter": "drive",
+        "focusStopIndex": 1,
+        "mapCenter": [
+          -19.5,
+          63.5
+        ],
+        "mapZoom": 7.25,
+        "routeProgressFrom": 0,
+        "routeProgressTo": 1,
+        "roadMatched": false,
+        "markerStyle": "dot",
+        "editorial": true,
+        "seriesTitle": "THE OPEN ROAD COLLECTION · 003",
+        "regionTitle": "ICELAND",
+        "mapIntro": false,
+        "editorialRevision": 9,
+        "relief": true,
+        "openingSubtitle": "ROUTE 1 · AROUND THE ISLAND",
+        "closeLoop": true,
+        "routeVia": [
+          {
+            "afterStop": 2,
+            "coordinates": [
+              [
+                -14.012,
+                64.793
+              ],
+              [
+                -14.221,
+                65.034
+              ],
+              [
+                -14.391,
+                65.267
+              ],
+              [
+                -16.914,
+                65.641
+              ]
+            ]
+          },
+          {
+            "afterStop": 3,
+            "coordinates": [
+              [
+                -18.095,
+                65.684
+              ],
+              [
+                -20.288,
+                65.659
+              ],
+              [
+                -21.915,
+                64.542
+              ],
+              [
+                -21.77,
+                64.125
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "photo-vik",
+      "name": "05 / Vík",
+      "durationSec": 3.5,
+      "layout": "premium-travel-route",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Vík",
+      "fullBleed": true,
+      "premiumTravel": {
+        "stops": [
+          {
+            "name": "Seljalandsfoss",
+            "lat": 63.61565,
+            "lon": -19.9919,
+            "note": "Water falls from a former sea cliff.",
+            "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1507_3122.jpg/1280px-Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1507_3122.jpg",
+            "photoAuthor": "Jakub Hałun",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1507_3122.jpg",
+            "label": "Seljalandsfoss",
+            "photoFocus": [
+              0.5,
+              0.43
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1504_3112.jpg/3840px-Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1504_3112.jpg",
+              "photoAuthor": "Jakub Hałun",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1504_3112.jpg",
+              "label": "Seljalandsfoss",
+              "photoFocus": [
+                0.5,
+                0.45
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Vík",
+            "lat": 63.4182,
+            "lon": -19.0064,
+            "note": "Black volcanic sand meets the Atlantic.",
+            "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Black_sand_beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.JPG",
+            "photoAuthor": "Beata May",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Black_sand_beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.JPG",
+            "label": "Vík black sand beach",
+            "photoFocus": [
+              0.51,
+              0.49
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/4/42/Black_Sand_Beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.jpg",
+              "photoAuthor": "Claracorcoran1",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Black_Sand_Beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.jpg",
+              "label": "Vík black sand beach",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Jökulsárlón",
+            "lat": 64.0476,
+            "lon": -16.1789,
+            "note": "Icebergs drift through a glacial lagoon.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1544_2213.jpg/3840px-J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1544_2213.jpg",
+            "photoAuthor": "Jakub Hałun",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1544_2213.jpg",
+            "label": "Jökulsárlón",
+            "photoFocus": [
+              0.52,
+              0.47
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/88/J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1542_2187.jpg/3840px-J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1542_2187.jpg",
+              "photoAuthor": "Jakub Hałun",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1542_2187.jpg",
+              "label": "Jökulsárlón",
+              "photoFocus": [
+                0.48,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Goðafoss",
+            "lat": 65.6855,
+            "lon": -17.5488,
+            "note": "A wide waterfall in northern Iceland.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0921_1217.jpg/3840px-Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0921_1217.jpg",
+            "photoAuthor": "Jakub Hałun",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0921_1217.jpg",
+            "label": "Goðafoss",
+            "photoFocus": [
+              0.5,
+              0.46
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0851_1122.jpg/3840px-Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0851_1122.jpg",
+              "photoAuthor": "Jakub Hałun",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0851_1122.jpg",
+              "label": "Goðafoss",
+              "photoFocus": [
+                0.5,
+                0.48
+              ],
+              "photoFit": "cover"
+            }
+          }
+        ],
+        "route": {
+          "type": "Feature",
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                -19.9919,
+                63.61565
+              ],
+              [
+                -19.0064,
+                63.4182
+              ],
+              [
+                -16.1789,
+                64.0476
+              ],
+              [
+                -17.5488,
+                65.6855
+              ],
+              [
+                -19.9919,
+                63.61565
+              ]
+            ]
+          },
+          "properties": {
+            "status": "routing-needed",
+            "source": "Illustrative stops only; OSRM road matching required"
+          }
+        },
+        "chapter": "photo",
+        "focusStopIndex": 1,
+        "mapCenter": [
+          -19.5,
+          63.5
+        ],
+        "mapZoom": 7.25,
+        "routeProgressFrom": 0,
+        "routeProgressTo": 1,
+        "roadMatched": false,
+        "markerStyle": "dot",
+        "editorial": true,
+        "seriesTitle": "THE OPEN ROAD COLLECTION · 003",
+        "regionTitle": "ICELAND",
+        "mapIntro": false,
+        "editorialRevision": 9,
+        "relief": true,
+        "openingSubtitle": "ROUTE 1 · AROUND THE ISLAND",
+        "closeLoop": true,
+        "routeVia": [
+          {
+            "afterStop": 2,
+            "coordinates": [
+              [
+                -14.012,
+                64.793
+              ],
+              [
+                -14.221,
+                65.034
+              ],
+              [
+                -14.391,
+                65.267
+              ],
+              [
+                -16.914,
+                65.641
+              ]
+            ]
+          },
+          {
+            "afterStop": 3,
+            "coordinates": [
+              [
+                -18.095,
+                65.684
+              ],
+              [
+                -20.288,
+                65.659
+              ],
+              [
+                -21.915,
+                64.542
+              ],
+              [
+                -21.77,
+                64.125
+              ]
+            ]
+          }
+        ],
+        "signatureAtmosphere": "haze",
+        "signatureDepth": true
+      }
+    },
+    {
+      "id": "drive-jokulsarlon",
+      "name": "06 / Along the glaciers",
+      "durationSec": 2.5,
+      "layout": "premium-travel-route",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Jökulsárlón",
+      "fullBleed": true,
+      "premiumTravel": {
+        "stops": [
+          {
+            "name": "Seljalandsfoss",
+            "lat": 63.61565,
+            "lon": -19.9919,
+            "note": "Water falls from a former sea cliff.",
+            "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1507_3122.jpg/1280px-Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1507_3122.jpg",
+            "photoAuthor": "Jakub Hałun",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1507_3122.jpg",
+            "label": "Seljalandsfoss",
+            "photoFocus": [
+              0.5,
+              0.43
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1504_3112.jpg/3840px-Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1504_3112.jpg",
+              "photoAuthor": "Jakub Hałun",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1504_3112.jpg",
+              "label": "Seljalandsfoss",
+              "photoFocus": [
+                0.5,
+                0.45
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Vík",
+            "lat": 63.4182,
+            "lon": -19.0064,
+            "note": "Black volcanic sand meets the Atlantic.",
+            "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Black_sand_beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.JPG",
+            "photoAuthor": "Beata May",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Black_sand_beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.JPG",
+            "label": "Vík black sand beach",
+            "photoFocus": [
+              0.51,
+              0.49
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/4/42/Black_Sand_Beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.jpg",
+              "photoAuthor": "Claracorcoran1",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Black_Sand_Beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.jpg",
+              "label": "Vík black sand beach",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Jökulsárlón",
+            "lat": 64.0476,
+            "lon": -16.1789,
+            "note": "Icebergs drift through a glacial lagoon.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1544_2213.jpg/3840px-J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1544_2213.jpg",
+            "photoAuthor": "Jakub Hałun",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1544_2213.jpg",
+            "label": "Jökulsárlón",
+            "photoFocus": [
+              0.52,
+              0.47
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/88/J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1542_2187.jpg/3840px-J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1542_2187.jpg",
+              "photoAuthor": "Jakub Hałun",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1542_2187.jpg",
+              "label": "Jökulsárlón",
+              "photoFocus": [
+                0.48,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Goðafoss",
+            "lat": 65.6855,
+            "lon": -17.5488,
+            "note": "A wide waterfall in northern Iceland.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0921_1217.jpg/3840px-Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0921_1217.jpg",
+            "photoAuthor": "Jakub Hałun",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0921_1217.jpg",
+            "label": "Goðafoss",
+            "photoFocus": [
+              0.5,
+              0.46
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0851_1122.jpg/3840px-Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0851_1122.jpg",
+              "photoAuthor": "Jakub Hałun",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0851_1122.jpg",
+              "label": "Goðafoss",
+              "photoFocus": [
+                0.5,
+                0.48
+              ],
+              "photoFit": "cover"
+            }
+          }
+        ],
+        "route": {
+          "type": "Feature",
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                -19.9919,
+                63.61565
+              ],
+              [
+                -19.0064,
+                63.4182
+              ],
+              [
+                -16.1789,
+                64.0476
+              ],
+              [
+                -17.5488,
+                65.6855
+              ],
+              [
+                -19.9919,
+                63.61565
+              ]
+            ]
+          },
+          "properties": {
+            "status": "routing-needed",
+            "source": "Illustrative stops only; OSRM road matching required"
+          }
+        },
+        "chapter": "drive",
+        "focusStopIndex": 2,
+        "mapCenter": [
+          -17.55,
+          63.7
+        ],
+        "mapZoom": 6.1,
+        "routeProgressFrom": 0,
+        "routeProgressTo": 1,
+        "roadMatched": false,
+        "markerStyle": "dot",
+        "editorial": true,
+        "seriesTitle": "THE OPEN ROAD COLLECTION · 003",
+        "regionTitle": "ICELAND",
+        "mapIntro": false,
+        "editorialRevision": 9,
+        "relief": true,
+        "openingSubtitle": "ROUTE 1 · AROUND THE ISLAND",
+        "closeLoop": true,
+        "routeVia": [
+          {
+            "afterStop": 2,
+            "coordinates": [
+              [
+                -14.012,
+                64.793
+              ],
+              [
+                -14.221,
+                65.034
+              ],
+              [
+                -14.391,
+                65.267
+              ],
+              [
+                -16.914,
+                65.641
+              ]
+            ]
+          },
+          {
+            "afterStop": 3,
+            "coordinates": [
+              [
+                -18.095,
+                65.684
+              ],
+              [
+                -20.288,
+                65.659
+              ],
+              [
+                -21.915,
+                64.542
+              ],
+              [
+                -21.77,
+                64.125
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "photo-jokulsarlon",
+      "name": "07 / Jökulsárlón",
+      "durationSec": 3.5,
+      "layout": "premium-travel-route",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Jökulsárlón",
+      "fullBleed": true,
+      "premiumTravel": {
+        "stops": [
+          {
+            "name": "Seljalandsfoss",
+            "lat": 63.61565,
+            "lon": -19.9919,
+            "note": "Water falls from a former sea cliff.",
+            "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1507_3122.jpg/1280px-Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1507_3122.jpg",
+            "photoAuthor": "Jakub Hałun",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1507_3122.jpg",
+            "label": "Seljalandsfoss",
+            "photoFocus": [
+              0.5,
+              0.43
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1504_3112.jpg/3840px-Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1504_3112.jpg",
+              "photoAuthor": "Jakub Hałun",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1504_3112.jpg",
+              "label": "Seljalandsfoss",
+              "photoFocus": [
+                0.5,
+                0.45
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Vík",
+            "lat": 63.4182,
+            "lon": -19.0064,
+            "note": "Black volcanic sand meets the Atlantic.",
+            "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Black_sand_beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.JPG",
+            "photoAuthor": "Beata May",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Black_sand_beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.JPG",
+            "label": "Vík black sand beach",
+            "photoFocus": [
+              0.51,
+              0.49
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/4/42/Black_Sand_Beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.jpg",
+              "photoAuthor": "Claracorcoran1",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Black_Sand_Beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.jpg",
+              "label": "Vík black sand beach",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Jökulsárlón",
+            "lat": 64.0476,
+            "lon": -16.1789,
+            "note": "Icebergs drift through a glacial lagoon.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1544_2213.jpg/3840px-J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1544_2213.jpg",
+            "photoAuthor": "Jakub Hałun",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1544_2213.jpg",
+            "label": "Jökulsárlón",
+            "photoFocus": [
+              0.52,
+              0.47
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/88/J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1542_2187.jpg/3840px-J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1542_2187.jpg",
+              "photoAuthor": "Jakub Hałun",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1542_2187.jpg",
+              "label": "Jökulsárlón",
+              "photoFocus": [
+                0.48,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Goðafoss",
+            "lat": 65.6855,
+            "lon": -17.5488,
+            "note": "A wide waterfall in northern Iceland.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0921_1217.jpg/3840px-Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0921_1217.jpg",
+            "photoAuthor": "Jakub Hałun",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0921_1217.jpg",
+            "label": "Goðafoss",
+            "photoFocus": [
+              0.5,
+              0.46
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0851_1122.jpg/3840px-Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0851_1122.jpg",
+              "photoAuthor": "Jakub Hałun",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0851_1122.jpg",
+              "label": "Goðafoss",
+              "photoFocus": [
+                0.5,
+                0.48
+              ],
+              "photoFit": "cover"
+            }
+          }
+        ],
+        "route": {
+          "type": "Feature",
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                -19.9919,
+                63.61565
+              ],
+              [
+                -19.0064,
+                63.4182
+              ],
+              [
+                -16.1789,
+                64.0476
+              ],
+              [
+                -17.5488,
+                65.6855
+              ],
+              [
+                -19.9919,
+                63.61565
+              ]
+            ]
+          },
+          "properties": {
+            "status": "routing-needed",
+            "source": "Illustrative stops only; OSRM road matching required"
+          }
+        },
+        "chapter": "photo",
+        "focusStopIndex": 2,
+        "mapCenter": [
+          -17.55,
+          63.7
+        ],
+        "mapZoom": 6.1,
+        "routeProgressFrom": 0,
+        "routeProgressTo": 1,
+        "roadMatched": false,
+        "markerStyle": "dot",
+        "editorial": true,
+        "seriesTitle": "THE OPEN ROAD COLLECTION · 003",
+        "regionTitle": "ICELAND",
+        "mapIntro": false,
+        "editorialRevision": 9,
+        "relief": true,
+        "openingSubtitle": "ROUTE 1 · AROUND THE ISLAND",
+        "closeLoop": true,
+        "routeVia": [
+          {
+            "afterStop": 2,
+            "coordinates": [
+              [
+                -14.012,
+                64.793
+              ],
+              [
+                -14.221,
+                65.034
+              ],
+              [
+                -14.391,
+                65.267
+              ],
+              [
+                -16.914,
+                65.641
+              ]
+            ]
+          },
+          {
+            "afterStop": 3,
+            "coordinates": [
+              [
+                -18.095,
+                65.684
+              ],
+              [
+                -20.288,
+                65.659
+              ],
+              [
+                -21.915,
+                64.542
+              ],
+              [
+                -21.77,
+                64.125
+              ]
+            ]
+          }
+        ],
+        "signatureAtmosphere": "water",
+        "signatureDepth": false
+      }
+    },
+    {
+      "id": "drive-godafoss",
+      "name": "08 / East and north",
+      "durationSec": 2.5,
+      "layout": "premium-travel-route",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Goðafoss",
+      "fullBleed": true,
+      "premiumTravel": {
+        "stops": [
+          {
+            "name": "Seljalandsfoss",
+            "lat": 63.61565,
+            "lon": -19.9919,
+            "note": "Water falls from a former sea cliff.",
+            "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1507_3122.jpg/1280px-Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1507_3122.jpg",
+            "photoAuthor": "Jakub Hałun",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1507_3122.jpg",
+            "label": "Seljalandsfoss",
+            "photoFocus": [
+              0.5,
+              0.43
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1504_3112.jpg/3840px-Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1504_3112.jpg",
+              "photoAuthor": "Jakub Hałun",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1504_3112.jpg",
+              "label": "Seljalandsfoss",
+              "photoFocus": [
+                0.5,
+                0.45
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Vík",
+            "lat": 63.4182,
+            "lon": -19.0064,
+            "note": "Black volcanic sand meets the Atlantic.",
+            "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Black_sand_beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.JPG",
+            "photoAuthor": "Beata May",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Black_sand_beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.JPG",
+            "label": "Vík black sand beach",
+            "photoFocus": [
+              0.51,
+              0.49
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/4/42/Black_Sand_Beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.jpg",
+              "photoAuthor": "Claracorcoran1",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Black_Sand_Beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.jpg",
+              "label": "Vík black sand beach",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Jökulsárlón",
+            "lat": 64.0476,
+            "lon": -16.1789,
+            "note": "Icebergs drift through a glacial lagoon.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1544_2213.jpg/3840px-J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1544_2213.jpg",
+            "photoAuthor": "Jakub Hałun",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1544_2213.jpg",
+            "label": "Jökulsárlón",
+            "photoFocus": [
+              0.52,
+              0.47
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/88/J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1542_2187.jpg/3840px-J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1542_2187.jpg",
+              "photoAuthor": "Jakub Hałun",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1542_2187.jpg",
+              "label": "Jökulsárlón",
+              "photoFocus": [
+                0.48,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Goðafoss",
+            "lat": 65.6855,
+            "lon": -17.5488,
+            "note": "A wide waterfall in northern Iceland.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0921_1217.jpg/3840px-Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0921_1217.jpg",
+            "photoAuthor": "Jakub Hałun",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0921_1217.jpg",
+            "label": "Goðafoss",
+            "photoFocus": [
+              0.5,
+              0.46
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0851_1122.jpg/3840px-Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0851_1122.jpg",
+              "photoAuthor": "Jakub Hałun",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0851_1122.jpg",
+              "label": "Goðafoss",
+              "photoFocus": [
+                0.5,
+                0.48
+              ],
+              "photoFit": "cover"
+            }
+          }
+        ],
+        "route": {
+          "type": "Feature",
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                -19.9919,
+                63.61565
+              ],
+              [
+                -19.0064,
+                63.4182
+              ],
+              [
+                -16.1789,
+                64.0476
+              ],
+              [
+                -17.5488,
+                65.6855
+              ],
+              [
+                -19.9919,
+                63.61565
+              ]
+            ]
+          },
+          "properties": {
+            "status": "routing-needed",
+            "source": "Illustrative stops only; OSRM road matching required"
+          }
+        },
+        "chapter": "drive",
+        "focusStopIndex": 3,
+        "mapCenter": [
+          -15.95,
+          64.95
+        ],
+        "mapZoom": 5.95,
+        "routeProgressFrom": 0,
+        "routeProgressTo": 1,
+        "roadMatched": false,
+        "markerStyle": "dot",
+        "editorial": true,
+        "seriesTitle": "THE OPEN ROAD COLLECTION · 003",
+        "regionTitle": "ICELAND",
+        "mapIntro": false,
+        "editorialRevision": 9,
+        "relief": true,
+        "openingSubtitle": "ROUTE 1 · AROUND THE ISLAND",
+        "closeLoop": true,
+        "routeVia": [
+          {
+            "afterStop": 2,
+            "coordinates": [
+              [
+                -14.012,
+                64.793
+              ],
+              [
+                -14.221,
+                65.034
+              ],
+              [
+                -14.391,
+                65.267
+              ],
+              [
+                -16.914,
+                65.641
+              ]
+            ]
+          },
+          {
+            "afterStop": 3,
+            "coordinates": [
+              [
+                -18.095,
+                65.684
+              ],
+              [
+                -20.288,
+                65.659
+              ],
+              [
+                -21.915,
+                64.542
+              ],
+              [
+                -21.77,
+                64.125
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "photo-godafoss",
+      "name": "09 / Goðafoss",
+      "durationSec": 4.5,
+      "layout": "premium-travel-route",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "Goðafoss",
+      "fullBleed": true,
+      "premiumTravel": {
+        "stops": [
+          {
+            "name": "Seljalandsfoss",
+            "lat": 63.61565,
+            "lon": -19.9919,
+            "note": "Water falls from a former sea cliff.",
+            "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1507_3122.jpg/1280px-Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1507_3122.jpg",
+            "photoAuthor": "Jakub Hałun",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1507_3122.jpg",
+            "label": "Seljalandsfoss",
+            "photoFocus": [
+              0.5,
+              0.43
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1504_3112.jpg/3840px-Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1504_3112.jpg",
+              "photoAuthor": "Jakub Hałun",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1504_3112.jpg",
+              "label": "Seljalandsfoss",
+              "photoFocus": [
+                0.5,
+                0.45
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Vík",
+            "lat": 63.4182,
+            "lon": -19.0064,
+            "note": "Black volcanic sand meets the Atlantic.",
+            "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Black_sand_beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.JPG",
+            "photoAuthor": "Beata May",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Black_sand_beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.JPG",
+            "label": "Vík black sand beach",
+            "photoFocus": [
+              0.51,
+              0.49
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/4/42/Black_Sand_Beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.jpg",
+              "photoAuthor": "Claracorcoran1",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Black_Sand_Beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.jpg",
+              "label": "Vík black sand beach",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Jökulsárlón",
+            "lat": 64.0476,
+            "lon": -16.1789,
+            "note": "Icebergs drift through a glacial lagoon.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1544_2213.jpg/3840px-J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1544_2213.jpg",
+            "photoAuthor": "Jakub Hałun",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1544_2213.jpg",
+            "label": "Jökulsárlón",
+            "photoFocus": [
+              0.52,
+              0.47
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/88/J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1542_2187.jpg/3840px-J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1542_2187.jpg",
+              "photoAuthor": "Jakub Hałun",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1542_2187.jpg",
+              "label": "Jökulsárlón",
+              "photoFocus": [
+                0.48,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Goðafoss",
+            "lat": 65.6855,
+            "lon": -17.5488,
+            "note": "A wide waterfall in northern Iceland.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0921_1217.jpg/3840px-Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0921_1217.jpg",
+            "photoAuthor": "Jakub Hałun",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0921_1217.jpg",
+            "label": "Goðafoss",
+            "photoFocus": [
+              0.5,
+              0.46
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0851_1122.jpg/3840px-Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0851_1122.jpg",
+              "photoAuthor": "Jakub Hałun",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0851_1122.jpg",
+              "label": "Goðafoss",
+              "photoFocus": [
+                0.5,
+                0.48
+              ],
+              "photoFit": "cover"
+            }
+          }
+        ],
+        "route": {
+          "type": "Feature",
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                -19.9919,
+                63.61565
+              ],
+              [
+                -19.0064,
+                63.4182
+              ],
+              [
+                -16.1789,
+                64.0476
+              ],
+              [
+                -17.5488,
+                65.6855
+              ],
+              [
+                -19.9919,
+                63.61565
+              ]
+            ]
+          },
+          "properties": {
+            "status": "routing-needed",
+            "source": "Illustrative stops only; OSRM road matching required"
+          }
+        },
+        "chapter": "photo",
+        "focusStopIndex": 3,
+        "mapCenter": [
+          -15.95,
+          64.95
+        ],
+        "mapZoom": 5.95,
+        "routeProgressFrom": 0,
+        "routeProgressTo": 1,
+        "roadMatched": false,
+        "markerStyle": "dot",
+        "editorial": true,
+        "seriesTitle": "THE OPEN ROAD COLLECTION · 003",
+        "regionTitle": "ICELAND",
+        "mapIntro": false,
+        "editorialRevision": 9,
+        "relief": true,
+        "openingSubtitle": "ROUTE 1 · AROUND THE ISLAND",
+        "closeLoop": true,
+        "routeVia": [
+          {
+            "afterStop": 2,
+            "coordinates": [
+              [
+                -14.012,
+                64.793
+              ],
+              [
+                -14.221,
+                65.034
+              ],
+              [
+                -14.391,
+                65.267
+              ],
+              [
+                -16.914,
+                65.641
+              ]
+            ]
+          },
+          {
+            "afterStop": 3,
+            "coordinates": [
+              [
+                -18.095,
+                65.684
+              ],
+              [
+                -20.288,
+                65.659
+              ],
+              [
+                -21.915,
+                64.542
+              ],
+              [
+                -21.77,
+                64.125
+              ]
+            ]
+          }
+        ],
+        "signatureAtmosphere": "water",
+        "signatureDepth": false
+      }
+    },
+    {
+      "id": "finale",
+      "name": "10 / Close the loop",
+      "durationSec": 3.5,
+      "layout": "premium-travel-route",
+      "transition": "fade",
+      "backdrop": "swiss-lines",
+      "headline": "THE OPEN ROAD",
+      "fullBleed": true,
+      "premiumTravel": {
+        "stops": [
+          {
+            "name": "Seljalandsfoss",
+            "lat": 63.61565,
+            "lon": -19.9919,
+            "note": "Water falls from a former sea cliff.",
+            "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1507_3122.jpg/1280px-Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1507_3122.jpg",
+            "photoAuthor": "Jakub Hałun",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1507_3122.jpg",
+            "label": "Seljalandsfoss",
+            "photoFocus": [
+              0.5,
+              0.43
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1504_3112.jpg/3840px-Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1504_3112.jpg",
+              "photoAuthor": "Jakub Hałun",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Seljalandsfoss_Waterfall%2C_Iceland%2C_20240720_1504_3112.jpg",
+              "label": "Seljalandsfoss",
+              "photoFocus": [
+                0.5,
+                0.45
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Vík",
+            "lat": 63.4182,
+            "lon": -19.0064,
+            "note": "Black volcanic sand meets the Atlantic.",
+            "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Black_sand_beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.JPG",
+            "photoAuthor": "Beata May",
+            "photoLicense": "CC BY-SA 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Black_sand_beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.JPG",
+            "label": "Vík black sand beach",
+            "photoFocus": [
+              0.51,
+              0.49
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/4/42/Black_Sand_Beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.jpg",
+              "photoAuthor": "Claracorcoran1",
+              "photoLicense": "CC BY-SA 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Black_Sand_Beach_in_V%C3%ADk_%C3%AD_M%C3%BDrdal%2C_Iceland.jpg",
+              "label": "Vík black sand beach",
+              "photoFocus": [
+                0.5,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Jökulsárlón",
+            "lat": 64.0476,
+            "lon": -16.1789,
+            "note": "Icebergs drift through a glacial lagoon.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1544_2213.jpg/3840px-J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1544_2213.jpg",
+            "photoAuthor": "Jakub Hałun",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1544_2213.jpg",
+            "label": "Jökulsárlón",
+            "photoFocus": [
+              0.52,
+              0.47
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/88/J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1542_2187.jpg/3840px-J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1542_2187.jpg",
+              "photoAuthor": "Jakub Hałun",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon%2C_Iceland%2C_20240718_1542_2187.jpg",
+              "label": "Jökulsárlón",
+              "photoFocus": [
+                0.48,
+                0.5
+              ],
+              "photoFit": "cover"
+            }
+          },
+          {
+            "name": "Goðafoss",
+            "lat": 65.6855,
+            "lon": -17.5488,
+            "note": "A wide waterfall in northern Iceland.",
+            "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0921_1217.jpg/3840px-Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0921_1217.jpg",
+            "photoAuthor": "Jakub Hałun",
+            "photoLicense": "CC BY 4.0",
+            "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0921_1217.jpg",
+            "label": "Goðafoss",
+            "photoFocus": [
+              0.5,
+              0.46
+            ],
+            "photoFit": "cover",
+            "secondaryPhoto": {
+              "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0851_1122.jpg/3840px-Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0851_1122.jpg",
+              "photoAuthor": "Jakub Hałun",
+              "photoLicense": "CC BY 4.0",
+              "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Go%C3%B0afoss_Waterfall%2C_Iceland%2C_20240716_0851_1122.jpg",
+              "label": "Goðafoss",
+              "photoFocus": [
+                0.5,
+                0.48
+              ],
+              "photoFit": "cover"
+            }
+          }
+        ],
+        "route": {
+          "type": "Feature",
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [
+                -19.9919,
+                63.61565
+              ],
+              [
+                -19.0064,
+                63.4182
+              ],
+              [
+                -16.1789,
+                64.0476
+              ],
+              [
+                -17.5488,
+                65.6855
+              ],
+              [
+                -19.9919,
+                63.61565
+              ]
+            ]
+          },
+          "properties": {
+            "status": "routing-needed",
+            "source": "Illustrative stops only; OSRM road matching required"
+          }
+        },
+        "chapter": "finale",
+        "focusStopIndex": -1,
+        "mapCenter": [
+          -18.7,
+          64.45
+        ],
+        "mapZoom": 5.15,
+        "routeProgressFrom": 0,
+        "routeProgressTo": 1,
+        "roadMatched": false,
+        "markerStyle": "dot",
+        "editorial": true,
+        "seriesTitle": "THE OPEN ROAD COLLECTION · 003",
+        "regionTitle": "ICELAND",
+        "mapIntro": false,
+        "cta": "SAVE THIS ROAD TRIP",
+        "editorialRevision": 9,
+        "relief": true,
+        "openingSubtitle": "ROUTE 1 · AROUND THE ISLAND",
+        "closeLoop": true,
+        "routeVia": [
+          {
+            "afterStop": 2,
+            "coordinates": [
+              [
+                -14.012,
+                64.793
+              ],
+              [
+                -14.221,
+                65.034
+              ],
+              [
+                -14.391,
+                65.267
+              ],
+              [
+                -16.914,
+                65.641
+              ]
+            ]
+          },
+          {
+            "afterStop": 3,
+            "coordinates": [
+              [
+                -18.095,
+                65.684
+              ],
+              [
+                -20.288,
+                65.659
+              ],
+              [
+                -21.915,
+                64.542
+              ],
+              [
+                -21.77,
+                64.125
+              ]
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "kind": "video",
+  "seriesId": "premium-travel-routes",
+  "season": 1,
+  "episodeNumber": 3,
+  "templateVersion": "3.0",
+  "productionStatus": "review",
+  "thumbnailUrl": "thumbnails/premium-travel-routes-003-iceland-ring-road.svg"
+}
