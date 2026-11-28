@@ -78,7 +78,9 @@ export function renderSimplyExplained(c:C,width:number,height:number,scene:OpenM
  case 'response':
   heading(c,'05 / GENERATION','One step at','a time');
   chat(c,42,300,428,286);txt(c,'Why is the sky blue?',65,366,24,ink,700);
-  ['Sunlight',' scatters',' in',' the',' atmosphere.',' Blue',' light',' scatters',' more.'].forEach((_,i)=>{if(t<.6+i*.55)return;const row=i<5?0:1;const phrase=(row===0?['Sunlight',' scatters',' in',' the',' atmosphere.']:['Blue',' light',' scatters',' more.']).slice(0,row===0?Math.min(i+1,5):i-4).join('');c.save();txt(c,phrase,65,430+row*48,22,ink,650,'left',390);c.restore();});
+  const count=Math.max(0,Math.min(9,Math.floor((t-.6)/.55)+1));
+  txt(c,['Sunlight',' scatters',' in',' the',' atmosphere.'].slice(0,Math.min(count,5)).join(''),65,430,22,ink,650,'left',390);
+  txt(c,['Blue',' light',' scatters',' more.'].slice(0,Math.max(0,count-5)).join(''),65,478,22,ink,650,'left',390);
   host(c,393,579,.55,t,speaking,.45);break;
  case 'limits':
   heading(c,'06 / THE LIMIT','Fluent does','not mean true');
